@@ -25,11 +25,16 @@ export default function DraggableManager (canvas,changes) {
                 drag.isDragging = true
                 drag.offX = d.x - mouse.x
                 drag.offY = d.y - mouse.y
+                d.pickUp()
             }
         }
     }
     
     canvas.onmouseup = function (event) {
+        if (drag.iDragging !== undefined) {
+            let dragging = draggables[drag.iDragging]
+            dragging.drop()
+        }
         drag = {}
     }
 

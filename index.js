@@ -11,8 +11,10 @@ window.onload = function () {
     let changes = []
     let dm = new DraggableManager(canvas,changes)
     let sq = new Square(10,10,11,11,ctx,pixelRatio,dm)
-    window.requestAnimationFrame(gameLoop);
 
+
+    window.requestAnimationFrame(gameLoop);
+    
     function gameLoop() {
         draw();
         window.requestAnimationFrame(gameLoop);
