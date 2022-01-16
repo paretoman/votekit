@@ -1,4 +1,6 @@
 import getPixelRatio from './screen.js'
+import DraggableManager from './DraggableManager.js'
+import Square from './Square.js'
 
 window.onload = function () {
     let canvas = document.getElementById("a");//document.querySelector("canvas")
@@ -6,23 +8,18 @@ window.onload = function () {
     let pixelRatio = getPixelRatio(ctx)
     canvas.width = 600 * pixelRatio
     canvas.height = 600 * pixelRatio
-    let sq = new Square(10,10,10,10,ctx,pixelRatio)
-    sq.render()
-}
+    let changes = []
+    let dm = new DraggableManager(canvas,changes)
+    let sq = new Square(10,10,11,11,ctx,pixelRatio,dm)
+    window.requestAnimationFrame(gameLoop);
 
-function Square(x,y,w,h,ctx,pixelRatio) {
-    self = this
-    // x y coordinates, width and height, all private variables
-
-    // draggable component
-
-
-    // graphics component
-    self.render = function() {
-        ctx.beginPath()
-        ctx.fillStyle = "black"
-        ctx.rect(x*pixelRatio+.5,y*pixelRatio+.5,w*pixelRatio+.5,h*pixelRatio+.5)
-        ctx.fill()    
+    function gameLoop() {
+        draw();
+        window.requestAnimationFrame(gameLoop);
     }
 
+    function draw() {
+        ctx.clearRect(0,0,600*pixelRatio,600*pixelRatio);
+        sq.render()
+    }
 }
