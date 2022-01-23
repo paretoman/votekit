@@ -9,11 +9,18 @@ export default function Screen(config,w,h) {
     parent.appendChild(self.canvas)
     
     self.ctx = self.canvas.getContext("2d")
+
+    // use scaling for high DPI devices instead of multiplying every time inside draw calls
+    // https://www.html5rocks.com/en/tutorials/canvas/hidpi/
     self.pixelRatio = getPixelRatio(self.ctx)
+
     self.canvas.width = w * self.pixelRatio
     self.canvas.height = h * self.pixelRatio
+
     self.canvas.style.width = w
     self.canvas.style.height = h
+
+    self.ctx.scale(self.pixelRatio,self.pixelRatio)
 
 }
 

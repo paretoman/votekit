@@ -1,6 +1,6 @@
 import TWEEN from './lib/tween.esm.js'
 
-export default function Square(x,y,w,h,ctx,pixelRatio,dragm) {
+export default function Square(x,y,w,h,ctx,dragm) {
     let self = this
     // x y coordinates, width and height, all private variables
     self.x = x
@@ -32,7 +32,7 @@ export default function Square(x,y,w,h,ctx,pixelRatio,dragm) {
         }
         ctx.beginPath()
         ctx.fillStyle = "grey"
-        ctx.rect((self.x-.5*self.w)*pixelRatio-.5,(self.y-.5*self.h)*pixelRatio-.5,self.w*pixelRatio+1,self.h*pixelRatio+1)
+        ctx.rect((self.x-.5*self.w)-.5,(self.y-.5*self.h)-.5,self.w+1,self.h+1)
         ctx.fill()    
     }
 

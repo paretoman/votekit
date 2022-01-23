@@ -10,7 +10,7 @@ export default function sandbox(config) {
     
     let changes = [] // manage dependent calculations because we only want to do calculations if we need to
     let dragm = new DraggableManager( screen.canvas, changes)
-    let sq = new Square(10,10,11,11,screen.ctx,screen.pixelRatio,dragm)
+    let sq = new Square(10,10,11,11,screen.ctx,dragm)
 
 
     window.requestAnimationFrame(gameLoop);
@@ -21,7 +21,7 @@ export default function sandbox(config) {
     }
 
     function draw() {
-        screen.ctx.clearRect(0,0,screen.canvas.width*screen.pixelRatio,screen.canvas.height*screen.pixelRatio);
+        screen.ctx.clearRect(0,0,screen.canvas.width,screen.canvas.height);
         sq.render()
     }
 }
