@@ -6,7 +6,7 @@ import Screen from './Screen.js'
 export default function sandbox(config) {
 
     // make a canvas
-    let screen = new Screen(config,600,600)
+    let screen = new Screen(config.idScript,600,600)
     
     let changes = [] // manage dependent calculations because we only want to do calculations if we need to
     let dragm = new DraggableManager( screen.canvas, changes)

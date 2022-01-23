@@ -1,10 +1,12 @@
 
-export default function Screen(config,w,h) {
+export default function Screen(id,w,h) {
 
     let self = this
     
     self.canvas = document.createElement('canvas')
-    let div = document.getElementById(config.idScript)
+
+    // find id in divs and attach canvas
+    let div = document.getElementById(id)
     let parent = div.parentElement
     parent.appendChild(self.canvas)
     
