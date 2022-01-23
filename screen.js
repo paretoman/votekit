@@ -4,6 +4,7 @@ export default function Screen(id,w,h) {
     let self = this
     
     self.canvas = document.createElement('canvas')
+    self.canvas.setAttribute("class","interactive")
 
     // find id in divs and attach canvas
     let div = document.getElementById(id)
@@ -19,8 +20,8 @@ export default function Screen(id,w,h) {
     self.canvas.width = w * self.pixelRatio
     self.canvas.height = h * self.pixelRatio
 
-    self.canvas.style.width = w
-    self.canvas.style.height = h
+    self.canvas.style.width = w + "px"
+    self.canvas.style.height = h + "px"
 
     self.ctx.scale(self.pixelRatio,self.pixelRatio)
 

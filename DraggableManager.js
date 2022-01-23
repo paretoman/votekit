@@ -8,9 +8,13 @@ export default function DraggableManager (canvas,changes) {
     let draggables = []
 
     // add draggable objects
-    self.newSquare = function (s) {
-        s.isSquare = true
-        draggables.push(s)
+    self.newSquare = function (o) {
+        let p = {isSquare: true} // set properties here so that we don't set properties on the actual object
+        draggables.push({o,p})
+    }
+    self.newHandle = function (o,handleRadius) {
+        let p = {isHandle: true, handleRadius}
+        draggables.push({o,p})
     }
 
     // mouse controls
@@ -23,9 +27,11 @@ export default function DraggableManager (canvas,changes) {
             if (hitTest( d , mouse )) {
                 drag.iDragging = i
                 drag.isDragging = true
-                drag.offX = d.x - mouse.x
-                drag.offY = d.y - mouse.y
-                d.pickUp()
+                drag.offX = d.o.x - mouse.x
+                drag.offY = d.o.y - mouse.y
+                d.o.pickUp()
+                canvas.dataset.cursor = "grabbing" // CSS data attribute
+                break // exit after picking one object
             }
         }
     }
@@ -33,33 +39,45 @@ export default function DraggableManager (canvas,changes) {
     canvas.onmouseup = function (event) {
         if (drag.iDragging !== undefined) {
             let dragging = draggables[drag.iDragging]
-            dragging.drop()
+            dragging.o.drop()
         }
         drag = {}
     }
-
+    
     canvas.onmousemove = function (event) {
+        let mouse = {}
+        mouse.x = event.offsetX
+        mouse.y = event.offsetY
         if (drag.isDragging) { // because the mouse is moving
-            let mouse = {}
-            mouse.x = event.offsetX
-            mouse.y = event.offsetY
             let dragging = draggables[drag.iDragging]
-            dragging.x = mouse.x + drag.offX // updates state.config too
-            dragging.y = mouse.y + drag.offY
+            dragging.o.x = mouse.x + drag.offX // updates state.config too
+            dragging.o.y = mouse.y + drag.offY
             changes.push("draggables")
+        } else {
+            for( const [i,d] of draggables.entries()) { // see if we're hovering over something grabbable because we want the user to see if they can grab something
+                if (hitTest( d , mouse )) {
+                    canvas.dataset.cursor = "grab"
+                    return
+                }
+            }
+            canvas.dataset.cursor = "" // nothing to grab
         }
     }
 
     function hitTest (d,m) {
         // Only drag an object if we're near it.
-        const x = d.x - m.x
-        const y = d.y - m.y
-        if (d.isCircle) {
-            const r = d.r
+        const x = d.o.x - m.x
+        const y = d.o.y - m.y
+        if (d.p.isCircle) {
+            const r = d.o.r
             const hit = x * x + y * y < r * r
             return hit
-        } else if (d.isSquare) {
-            const hit = Math.abs(x) < .5 * d.w && Math.abs(y) < .5 * d.h
+        } else if (d.p.isSquare) {
+            const hit = Math.abs(x) < .5 * d.o.w && Math.abs(y) < .5 * d.o.h
+            return hit
+        } else if (d.p.isHandle) {
+            const r = d.p.handleRadius
+            const hit = x * x + y * y < r * r
             return hit
         }
     }
