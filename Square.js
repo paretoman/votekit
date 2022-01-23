@@ -1,29 +1,31 @@
 import TWEEN from './lib/tween.esm.js'
 
-export default function Square(x,y,w,h,ctx,pixelRatio,dm) {
+export default function Square(x,y,w,h,ctx,pixelRatio,dragm) {
     let self = this
     // x y coordinates, width and height, all private variables
     self.x = x
     self.y = y
-    self.w = w
+    self.w = w // display width, because we're going to make animations with it
     self.h = h
+    self.trueW = w // true width, because we want to return to this width after animating.
+    self.trueH = h
 
     // draggable component
     // register with draggable manager
-    dm.newSquare(self)
+    dragm.newSquare(self)
 
     self.pickUp = function() {
         self.tweenSq = new TWEEN.Tween(self)
-        self.tweenSq.to({w:21,h:21},100)
+        self.tweenSq.to({w:self.trueW+10,h:self.trueH+10},100)
         self.tweenSq.start()
     }
     self.drop = function() {
         self.tweenSq = new TWEEN.Tween(self)
-        self.tweenSq.to({w:11,h:11},100)
+        self.tweenSq.to({w:self.trueW,h:self.trueH},100)
         self.tweenSq.start()
     }
 
-    // graphics component
+    // Graphics component
     self.render = function() {
         if (self.tweenSq) {
             self.tweenSq.update()
