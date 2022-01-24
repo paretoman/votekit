@@ -1,11 +1,13 @@
 
-export default function DraggableManager (canvas,changes) {
+export default function DraggableManager (screen,changes) {
     // Draggable Manager gives draggable behavior to objects on a canvas. If anything changes, an item is added to the "changes" array.
     let self = this
 
     // private variables
     let drag = {}
     let draggables = []
+
+    let canvas = screen.canvas
 
     // add draggable objects
     self.newSquare = function (o) {

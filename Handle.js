@@ -1,13 +1,14 @@
 import TWEEN from './lib/tween.esm.js'
 
-export default function CircleOfVoters(x, y, r ,ctx,dragm) {
+export default function Handle(x, y, screen,dragm) {
     let self = this
 
     self.x = x
     self.y = y
-    self.r = r
     self.handleSize = 10
     self.trueHandleSize = 10
+    
+    let ctx = screen.ctx
 
     dragm.newHandle(self,self.handleSize)
 
@@ -21,17 +22,13 @@ export default function CircleOfVoters(x, y, r ,ctx,dragm) {
         self.tween.to({handleSize:self.trueHandleSize},100)
         self.tween.start()
     }
-    
+
     // Graphics component
     self.render = function() {
         if (self.tween) {
             self.tween.update()
         }
-        // circle
-        ctx.beginPath()
-        ctx.fillStyle = "grey"
-        ctx.arc(self.x, self.y, self.r, 0, 2*3.14159)
-        ctx.fill()    
+        
         // handle
 
         ctx.beginPath()
@@ -39,7 +36,7 @@ export default function CircleOfVoters(x, y, r ,ctx,dragm) {
         ctx.arc(self.x, self.y, self.handleSize, 0, 2*3.14159)
         // let hs = self.handleSize
         // ctx.rect((self.x-.5*hs)-.5,(self.y-.5*hs)-.5,hs+1,hs+1)
-        ctx.fill()   
+        ctx.fill()
+        ctx.stroke()
     }
-
 }

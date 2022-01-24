@@ -1,6 +1,6 @@
 import TWEEN from './lib/tween.esm.js'
 
-export default function Square(x,y,w,h,color,ctx,dragm) {
+export default function Square(x,y,w,h,color,screen,dragm) {
     let self = this
     // x y coordinates, width and height, all private variables
     self.x = x
@@ -10,6 +10,8 @@ export default function Square(x,y,w,h,color,ctx,dragm) {
     self.trueW = w // true width, because we want to return to this width after animating.
     self.trueH = h
     self.color = color
+
+    let ctx = screen.ctx
 
     // draggable component
     // register with draggable manager
@@ -34,7 +36,9 @@ export default function Square(x,y,w,h,color,ctx,dragm) {
         ctx.beginPath()
         ctx.fillStyle = self.color
         ctx.rect((self.x-.5*self.w)-.5,(self.y-.5*self.h)-.5,self.w+1,self.h+1)
-        ctx.fill()    
+        ctx.fill()
+        ctx.stroke()
+
     }
 
 }
