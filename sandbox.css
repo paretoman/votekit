@@ -1,13 +1,16 @@
-canvas.interactive {
+canvas.interactive,
+div.interactive {
     border: solid black 1px;
 }
 
-canvas.interactive[data-cursor=grab]{
+canvas.interactive[data-cursor=grab],
+div.interactive[data-cursor=grab]{
 	cursor: -webkit-grab;
 	cursor: -moz-grab;
 	cursor: grab;
 }
-canvas.interactive[data-cursor=grabbing]{
+canvas.interactive[data-cursor=grabbing],
+div.interactive[data-cursor=grabbing]{
 	cursor: -webkit-grabbing;
 	cursor: -moz-grabbing;
 	cursor: grabbing;

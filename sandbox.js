@@ -1,6 +1,6 @@
 
 import DraggableManager from './DraggableManager.js'
-import Screen from './Screen.js'
+import {Screen,SVGScreen} from './Screen.js'
 import VoterCircle from './VoterCircle.js'
 import VoteManager from './VoteManager.js'
 import Candidate from './Candidate.js'
@@ -8,7 +8,13 @@ import Candidate from './Candidate.js'
 export default function sandbox(config) {
 
     // make a canvas
-    let screen = new Screen(config.idScript,600,600)
+    let outputToSVG = true
+    let screen
+    if (outputToSVG) {
+        screen = new SVGScreen(config.idScript,600,600,outputToSVG)
+    } else {
+        screen = new Screen(app.screenDiv,600,600,outputToSVG)
+    }
     
     let changes = ["init"] // manage dependent calculations because we only want to do calculations if we need to
     
@@ -41,11 +47,15 @@ export default function sandbox(config) {
     }
 
     function draw() {
-        screen.ctx.clearRect(0,0,screen.canvas.width,screen.canvas.height);
+        screen.clear()
         ci.render()
         ci2.render()
         sq.render()
         sq2.render()
         sq3.render()
+        if (outputToSVG) {
+            screen.render()
+        }
     }
+    
 }
