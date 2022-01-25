@@ -7,8 +7,6 @@ export default function Handle(x, y, screen,dragm) {
     self.y = y
     self.handleSize = 10
     self.trueHandleSize = 10
-    
-    let ctx = screen.ctx
 
     dragm.newHandle(self,self.handleSize)
 
@@ -25,6 +23,8 @@ export default function Handle(x, y, screen,dragm) {
 
     // Graphics component
     self.render = function() {
+        let ctx = screen.ctx
+        
         if (self.tween) {
             self.tween.update()
         }

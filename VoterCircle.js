@@ -13,8 +13,6 @@ export default function VoterCircle(x, y, r ,screen,dragm,votem) {
     let handle = new Handle(x, y, screen,dragm)
     self.handle = handle
 
-    let ctx = screen.ctx
-
     votem.newVoterGroup(self)
     
     let voronoiGroup = new VoronoiGroup(votem,self,screen)
@@ -27,6 +25,7 @@ export default function VoterCircle(x, y, r ,screen,dragm,votem) {
     
     // Graphics component
     self.render = function() {
+        let ctx = screen.ctx
         // circle
         if (drawMode === "votes") {
             voronoiGroup.render()

@@ -30,6 +30,8 @@ export default function Square(x,y,w,h,color,screen,dragm) {
 
     // Graphics component
     self.render = function() {
+        let ctx = screen.ctx
+        
         if (self.tweenSq) {
             self.tweenSq.update()
         }

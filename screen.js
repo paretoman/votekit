@@ -1,17 +1,19 @@
 
 
-export  function Screen(id,w,h) {
+export default function Screen(id,w,h,draw) {
 
     let self = this
-    
-    self.canvas = document.createElement('canvas')
-    self.canvas.setAttribute("class","interactive")
 
-    // find id in divs and attach canvas
+    // find id in divs
     let div = document.getElementById(id)
     let parent = div.parentElement
-    parent.appendChild(self.canvas)
     
+    // attach canvas
+    self.canvas = document.createElement('canvas')
+    self.canvas.setAttribute("class","interactive")
+    parent.appendChild(self.canvas)
+
+
     self.ctx = self.canvas.getContext("2d")
 
     // use scaling for high DPI devices instead of multiplying every time inside draw calls
@@ -28,53 +30,70 @@ export  function Screen(id,w,h) {
     self.clear = function() {
         self.ctx.clearRect(0,0,self.canvas.width,self.canvas.height);
     }
-    self.switchToSVG()
+
+    let svgUIDiv = document.createElement('div')
+    parent.appendChild(svgUIDiv)
+    SVGScreen(self,svgUIDiv,w,h,draw)
 }
 
-export function SVGScreen(id,w,h) {
+function SVGScreen(screen,svgUIDiv,w,h,draw) {
+
+    // svg output button
+    let button = document.createElement('button')
+    button.innerText = "Make SVG"
+    button.onclick = makeSVG
+    svgUIDiv.appendChild(button)
+
+    // svg download link
+    let downloadLink = document.createElement('a')
+    downloadLink.innerText = "Download SVG"
+    downloadLink.download = "vote.svg"
+    downloadLink.hidden = true
+    svgUIDiv.appendChild(downloadLink)
+
+    // svg hide button
+    let svgHideButton = document.createElement('button')
+    svgHideButton.innerText = "Hide SVG"
+    svgHideButton.hidden = true
+    svgHideButton.onclick = hideSVG
+    svgUIDiv.appendChild(svgHideButton)
     
-    let self = this
+    // hidden svg output div
+    let svgDiv = document.createElement('div')
+    svgDiv.setAttribute("class","svgDiv")
+    svgDiv.style.width = w + "px"
+    svgDiv.style.height = h + "px"
+    svgDiv.hidden = true
+    svgUIDiv.appendChild(svgDiv)
 
-    var ctx = new C2S(w,h)
-
-    self.ctx = ctx
-
-    self.canvas = document.createElement('div')
-    self.canvas.setAttribute("class","interactive")
-
-    // find id in divs and attach canvas
-    let div = document.getElementById(id)
-    let parent = div.parentElement
-    parent.appendChild(self.canvas)
-
-    let button = document.createElement('a')
-    button.innerText = "SVG"
-    button.download = "vote.svg"
-    parent.appendChild(button)
+    let svgCtx = new C2S(w,h)
     
-    // use scaling for high DPI devices instead of multiplying every time inside draw calls
-    // https://www.html5rocks.com/en/tutorials/canvas/hidpi/
-    self.pixelRatio = getPixelRatio(self.ctx)
+    function makeSVG() {
+        // temporarily swap drawing context, render SVG, then output SVG to div and to a download link
+        let old = screen.ctx
+        screen.ctx = svgCtx
+        draw()
+        outputSVG()
+        screen.ctx = old
+    }
 
-    self.canvas.width = w
-    self.canvas.height = h
-
-    self.canvas.style.width = w + "px"
-    self.canvas.style.height = h + "px"
-
-    // self.ctx.scale(self.pixelRatio,self.pixelRatio)
-    self.render = function() {
-        let svg = ctx.getSerializedSvg(true)
-        self.canvas.innerHTML = svg
+    function outputSVG() {
+        let svg = svgCtx.getSerializedSvg(true)
+        svgDiv.innerHTML = svg
+        svgDiv.hidden = false
+        svgHideButton.hidden = false
+        downloadLink.hidden = false
 
         let url = "data:image/svg+xml;charset=utf-8,"+encodeURIComponent(svg)
-        button.href = url
+        downloadLink.href = url
     }
-    self.clear = function() {
-        self.ctx.clearRect(0,0,self.canvas.width,self.canvas.height);
+
+    function hideSVG() {
+        svgDiv.hidden = true
+        svgHideButton.hidden = true
+        downloadLink.hidden = true
     }
 }
-
 
 function getPixelRatio(context) {
     var backingStore = context.backingStorePixelRatio ||

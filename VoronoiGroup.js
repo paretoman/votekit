@@ -13,8 +13,6 @@ export default function voronoiGroup(votem,voterGroup,screen) {
     let cans
     let voronoi
 
-    let ctx = screen.ctx
-
     self.update = function() {
         cans = votem.getCandidates()
         const points = cans.map(e => [e.square.x,e.square.y] )
@@ -24,6 +22,8 @@ export default function voronoiGroup(votem,voterGroup,screen) {
     
     self.render = function() {
 
+        let ctx = screen.ctx
+
         ctx.save()
 
         // draw circle clip
@@ -32,7 +32,6 @@ export default function voronoiGroup(votem,voterGroup,screen) {
         // https://dustinpfister.github.io/2019/10/08/canvas-clip/
         ctx.beginPath()
         ctx.arc(voterGroup.handle.x, voterGroup.handle.y, voterGroup.r, 0, 2*3.14159)
-        ctx.stroke()
         // ctx.closePath()
         ctx.clip()
 
@@ -44,6 +43,10 @@ export default function voronoiGroup(votem,voterGroup,screen) {
             ctx.fill()
             ctx.stroke()
         }
+        
+        ctx.beginPath()
+        ctx.arc(voterGroup.handle.x, voterGroup.handle.y, voterGroup.r, 0, 2*3.14159)
+        ctx.stroke()
 
         ctx.restore()
     }
