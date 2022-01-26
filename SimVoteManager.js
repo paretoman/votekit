@@ -6,6 +6,7 @@ export default function SimVoteManager(screen) {
     let self = this
 
     self.points = []
+    self.newPoints = []
 
     let votem = new VoteManager(screen)
 
@@ -19,6 +20,8 @@ export default function SimVoteManager(screen) {
         candidateDistributions.push(canDis)
     }
     
+    
+
     self.startSim = function() {
 
         // All the election calculations happen here. 
@@ -27,12 +30,13 @@ export default function SimVoteManager(screen) {
 
         self.points = []
 
+        clearBuffer()
     }
 
     self.addSim = function() {
         // add more points 
 
-        if (self.points.length > 500) return
+        if (self.points.length > 5000) return
         // this limit right now is about graphics rendering.
         // todo: render to a buffer
 
@@ -68,26 +72,60 @@ export default function SimVoteManager(screen) {
             // console.log(winner.square)
 
             // record point
-            self.points.push({ x:winner.square.x , y:winner.square.y })
+            let winPoint = { x:winner.square.x , y:winner.square.y }
+            self.points.push(winPoint)
+            self.newPoints.push(winPoint)
             votem.clearCandidates()
         }
+        renderToBuffer()
+    }
+
+
+    // buffer canvas
+    var canvas2 = document.createElement('canvas')
+    canvas2.width = screen.canvas.width
+    canvas2.height = screen.canvas.height
+    var context2 = canvas2.getContext('2d')
+    
+    function clearBuffer() {
+        context2.clearRect(0,0,canvas2.width,canvas2.height)
+    }
+
+    function renderToBuffer() {
+        let ctx = context2
+        renderPoints(ctx,self.newPoints)
+        self.newPoints = []
     }
 
     self.render = function() {
+        if (screen.noBuffers) {
+            self.noBufferRender()
+        } else {
+            self.bufferRender()
+        }
+    }
+
+    self.bufferRender = function() {
         let ctx = screen.ctx
+        ctx.drawImage(canvas2, 0, 0)
+    }
 
+    // use this if we want to export to an SVG
+    self.noBufferRender = function() {
+        let ctx = screen.ctx
+        renderPoints(ctx,self.points)
+    }
+
+    function renderPoints(ctx,points) {
         ctx.fillStyle = "grey"
-
-        const n = self.points.length
+        const n = points.length
         for (let i = 0; i < n; i++) {
-            const p = self.points[i]
-
+            const p = points[i]
             // dot
             ctx.beginPath()
             ctx.arc(p.x, p.y, 3, 0, 2*3.14159)
             ctx.fill()
         }
     }
-
 
 }

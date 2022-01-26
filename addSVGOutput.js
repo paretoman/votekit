@@ -44,9 +44,11 @@ export default function addSVGOutput(screen, draw) {
         // temporarily swap drawing context, render SVG, then output SVG to div and to a download link
         let old = screen.ctx
         screen.ctx = svgCtx
+        screen.noBuffers = true
         draw()
         outputSVG()
         screen.ctx = old
+        screen.noBuffers = undefined
     }
 
     function outputSVG() {
