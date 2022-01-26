@@ -7,6 +7,7 @@ import SimVoteManager from './SimVoteManager.js'
 import CandidateDistribution from './CandidateDistribution.js'
 
 export default function sandbox(config) {
+    // sandbox for simulation of many 
 
     // make a canvas
     let screen = new Screen(config.idScript,600,600)

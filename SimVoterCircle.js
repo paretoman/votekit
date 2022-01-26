@@ -1,6 +1,7 @@
 import Handle from './Handle.js'
 
 export default function SimVoterCircle(x, y, r ,screen,dragm,votem) {
+    // VoterCircle for simulations of many candidates
     // VoterCircle class with Handle component to take care of dragging.
 
     let self = this

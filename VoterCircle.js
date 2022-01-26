@@ -8,8 +8,6 @@ export default function VoterCircle(x, y, r ,screen,dragm,votem) {
 
     self.r = r
 
-    let drawMode = "votes"
-
     let handle = new Handle(x, y, screen,dragm)
     self.handle = handle
 
@@ -18,25 +16,13 @@ export default function VoterCircle(x, y, r ,screen,dragm,votem) {
     let voronoiGroup = new VoronoiGroup(votem,self,screen)
 
     self.update = function() {
-        if (drawMode === "votes") {
-            voronoiGroup.update()
-        }
+        voronoiGroup.update()
     }
     
     // Graphics component
     self.render = function() {
-        let ctx = screen.ctx
         // circle
-        if (drawMode === "votes") {
-            voronoiGroup.render()
-        } else {
-            ctx.beginPath()
-            ctx.fillStyle = "grey"
-            ctx.arc(handle.x, handle.y, self.r, 0, 2*3.14159)
-            ctx.fill()
-            ctx.stroke()
-        }
-        
+        voronoiGroup.render()
         // handle
         handle.render()
     }

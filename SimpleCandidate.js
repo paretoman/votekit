@@ -1,5 +1,5 @@
 export default function SimpleCandidate(x,y,votem) {
-    // Candidate class on top of square. Candidate adds candidate behavior on top of a draggable square handle.
+    // Candidate used for simulation of sampling candidates from a distribution. Just a single point (x,y) is needed.
     
     let self = this
 

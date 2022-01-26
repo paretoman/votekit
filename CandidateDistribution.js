@@ -2,7 +2,8 @@ import Square from './Square.js'
 import { _drawStrokedColor, _textPercent } from './graphicsUtilities.js'
 
 export default function CandidateDistribution(x,y,r,screen,dragm,votem) {
-    // Candidate class on top of square. Candidate adds candidate behavior on top of a draggable square handle.
+    // This represents a spatial distribution of candidates.
+    // A draggable square handle provides draggable behavior.
     
     let self = this
 

@@ -1,5 +1,6 @@
-
 export default function CandidateDistributionSampler(candidateDistributions) {
+    // Use this to sample a random candidate from a collection of distributions of candidates.
+    // Sample a point multiple times after the constructor call.
     let self = this
     let cdf = getCDF(candidateDistributions) 
     self.samplePoint = function() {

@@ -2,6 +2,11 @@ import CandidateDistributionSampler from "./CandidateDistributionSampler.js"
 import VoteManager from './VoteManager.js'
 import SimpleCandidate from "./SimpleCandidate.js"
 
+// Simulate winners from many elections
+// Candidates are sampled from a distribution
+// Winners are drawn as points
+// The simulation is dynamic. More simulations are performed at each frame.
+
 export default function SimVoteManager(screen) {
     let self = this
 

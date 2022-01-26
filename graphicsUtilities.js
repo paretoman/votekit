@@ -1,3 +1,6 @@
+// Graphics Utilities
+// Just a few helpful functions that are self-contained and don't need much context.
+
 export function _drawStrokedColor(text, x, y, textsize,lw, color, ctx, textAlign) {
 	ctx.save()
 	ctx.textAlign = textAlign || "center"
