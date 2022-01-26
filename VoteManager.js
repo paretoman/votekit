@@ -1,6 +1,9 @@
-import AreaSummer from './AreaSummer.js'
+import castVotes from './castVotes/castVotes.js'
+import electionMethods from './electionMethods/electionMethods.js'
 
-export default function VoteManager(screen) {
+// Here we are in the context of a single election with voter objects and candidate bojects.
+
+export default function VoteManager() {
     let self = this
 
     let voterGroups = []
@@ -14,7 +17,7 @@ export default function VoteManager(screen) {
         candidates.push(can)
     }
 
-    self.clearCandidates = function(can) {
+    self.clearCandidates = function() {
         candidates = []
     }
 
@@ -23,25 +26,29 @@ export default function VoteManager(screen) {
         return candidates
     }
 
-    self.vote = function() {
-        const fraction = self.count()
-        candidates.forEach( (can,index) => can.fraction = fraction[index])
+    self.runElection = function() {
+        
+        // Voters cast votes for candidates. There is also a separate graphical representation in VoronoiGroup.js
+        const votes = castVotes.pluralityBallot(candidates,voterGroups)
+
+        // why have two different kinds of results?
+        // methodResults, the smaller one, is in the context of the election method, which has tallies go in and analysis come out
+        // electionResults, the larger one, is in the context of candidate objects and voter objects.
+        let methodResults = electionMethods.plurality(votes)
+
+        let iWinner = methodResults.iWinner
+        let winner = candidates[iWinner]
+        let electionResults = { iWinner , winner }
+        return electionResults
     }
 
-    self.count = function() {
-        // All the election calculations happen here. There is also a separate graphical representation in VoronoiGroup.js
-        let summer = new AreaSummer(candidates)
+    self.updateTallies = function() {
+        // only update the tallies for each candidate so they can be shown
+        
+        // Voters cast votes for candidates. There is also a separate graphical representation in VoronoiGroup.js
+        const votes = castVotes(candidates,voterGroups)
 
-        // get fraction of votes for each candidate so we can summarize results
-        let n = candidates.length
-        let tally = (new Array(n)).fill(0)
-        for (let voterGroup of voterGroups) {
-            let area = summer.sumArea(voterGroup)
-            tally = tally.map( (value, index) => value + area[index])
-        }
-        let total = tally.reduce( (p,c) => p+c)
-        let fraction = tally.map( x => x / total)
-        return fraction
+        candidates.forEach( (can,index) => can.fraction = votes.tallyFractions[index])
     }
 
 }

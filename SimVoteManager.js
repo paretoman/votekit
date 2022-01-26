@@ -13,7 +13,7 @@ export default function SimVoteManager(screen) {
     self.points = []
     self.newPoints = []
 
-    let votem = new VoteManager(screen)
+    let votem = new VoteManager()
 
     let candidateDistributions = []
 
@@ -61,20 +61,10 @@ export default function SimVoteManager(screen) {
                 new SimpleCandidate(point.x,point.y,votem)
                 // votem.newCandidate({square:point})
             }
-            let candidates = votem.getCandidates()
             
             // find winner position
-            let fraction = votem.count()
-
-            const max = Math.max(...fraction);
-            const iWinner = fraction.indexOf(max);
-
-            // random winner
-            // let iWinner = Math.floor(Math.random()*nk)
-
-
-            let winner = candidates[iWinner]
-            // console.log(winner.square)
+            const results = votem.runElection()
+            const winner = results.winner
 
             // record point
             let winPoint = { x:winner.square.x , y:winner.square.y }

@@ -16,7 +16,7 @@ export default function sandbox(config) {
     
     let dragm = new DraggableManager( screen, changes)
 
-    let votem = new VoteManager(screen)
+    let votem = new VoteManager()
 
     let sq = new Candidate(100,200,21,21,"#e52",screen,dragm,votem)
     let sq2 = new Candidate(200,100,21,21,"#5e2",screen,dragm,votem)
@@ -37,7 +37,7 @@ export default function sandbox(config) {
         if (changes.length === 0) return
          // clear changes, reset to []
         changes.splice(0,changes.length)
-        votem.vote()
+        votem.updateTallies()
         ci.update()
         ci2.update()
     }
