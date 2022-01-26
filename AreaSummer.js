@@ -93,7 +93,8 @@ function sumCircle(circle,lineSet) {
 	let x1 = circle.handle.x
 	let y1 = circle.handle.y
 	let r = circle.r
-	for (let x = -1000; x < 2000; x += dx) {
+	// x only goes from x1-r to x1+r
+	for (let x = x1-r; x < x1+r; x += dx) {
 
 		// find bounds
 
