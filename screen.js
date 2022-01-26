@@ -1,8 +1,17 @@
 
 
-export default function Screen(id,w,h,draw) {
+export default function Screen(id,w,h) {
+
+    // set up a screen to view some objects
+
+    // A detail here is that we have browser pixels and device pixels.
+    // Broswer pixels feel about the same size on any device. (visual arc length)
+    // Device pixels can be much smaller for high-dpi devices.
 
     let self = this
+
+    self.width = w // measured in browser pixels
+    self.height = h
 
     // find id in divs
     let div = document.getElementById(id)
@@ -20,7 +29,7 @@ export default function Screen(id,w,h,draw) {
     // https://www.html5rocks.com/en/tutorials/canvas/hidpi/
     self.pixelRatio = getPixelRatio(self.ctx)
 
-    self.canvas.width = w * self.pixelRatio
+    self.canvas.width = w * self.pixelRatio // measured in device pixels
     self.canvas.height = h * self.pixelRatio
 
     self.canvas.style.width = w + "px"
@@ -31,12 +40,16 @@ export default function Screen(id,w,h,draw) {
         self.ctx.clearRect(0,0,self.canvas.width,self.canvas.height);
     }
 
-    let svgUIDiv = document.createElement('div')
-    parent.appendChild(svgUIDiv)
-    SVGScreen(self,svgUIDiv,w,h,draw)
 }
 
-function SVGScreen(screen,svgUIDiv,w,h,draw) {
+export function addSVGOutput(screen,draw) {
+
+
+    let w = screen.width
+    let h = screen.height
+
+    let svgUIDiv = document.createElement('div')
+    screen.canvas.parentNode.appendChild(svgUIDiv)
 
     // svg output button
     let button = document.createElement('button')

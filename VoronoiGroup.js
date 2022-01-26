@@ -17,7 +17,7 @@ export default function voronoiGroup(votem,voterGroup,screen) {
         cans = votem.getCandidates()
         const points = cans.map(e => [e.square.x,e.square.y] )
         const delaunay = Delaunay.from(points)
-        voronoi = delaunay.voronoi([0, 0, screen.canvas.width,screen.canvas.height])    
+        voronoi = delaunay.voronoi([0, 0, screen.width,screen.height])    
     }
     
     self.render = function() {
