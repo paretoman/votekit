@@ -1,6 +1,7 @@
 
 import DraggableManager from './DraggableManager.js'
-import Screen, {addSVGOutput} from './Screen.js'
+import Screen from './Screen.js'
+import addSVGOutput from './addSVGOutput.js'
 import VoterCircle from './VoterCircle.js'
 import VoteManager from './VoteManager.js'
 import Candidate from './Candidate.js'
