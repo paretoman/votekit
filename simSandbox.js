@@ -1,4 +1,3 @@
-
 import DraggableManager from './DraggableManager.js'
 import Screen from './Screen.js'
 import addSVGOutput from './addSVGOutput.js'
@@ -7,28 +6,28 @@ import SimVoteManager from './SimVoteManager.js'
 import CandidateDistribution from './CandidateDistribution.js'
 
 export default function sandbox(config) {
-    // sandbox for simulation of many 
+    // sandbox for simulation of many
 
     // make a canvas
-    let screen = new Screen(config.idScript,600,600)
-    addSVGOutput(screen,draw)
-    
-    let changes = ["init"] // manage dependent calculations because we only want to do calculations if we need to
-    
-    let dragm = new DraggableManager( screen, changes)
+    const screen = new Screen(config.idScript, 600, 600)
+    addSVGOutput(screen, draw)
 
-    let simVotem = new SimVoteManager(screen)
+    const changes = ['init'] // manage dependent calculations because we only want to do calculations if we need to
 
-    let cd = new CandidateDistribution( 300, 300, 400 ,screen,dragm,simVotem)
-    let ci = new SimVoterCircle( 100, 300, 200 ,screen,dragm,simVotem)
-    let ci2 = new SimVoterCircle( 500, 300, 200 ,screen,dragm,simVotem)
+    const dragm = new DraggableManager(screen, changes)
 
-    window.requestAnimationFrame(gameLoop);
-    
+    const simVotem = new SimVoteManager(screen)
+
+    const cd = new CandidateDistribution(300, 300, 400, screen, dragm, simVotem)
+    const ci = new SimVoterCircle(100, 300, 200, screen, dragm, simVotem)
+    const ci2 = new SimVoterCircle(500, 300, 200, screen, dragm, simVotem)
+
+    window.requestAnimationFrame(gameLoop)
+
     function gameLoop() {
         update()
-        draw();
-        window.requestAnimationFrame(gameLoop);
+        draw()
+        window.requestAnimationFrame(gameLoop)
     }
 
     function update() {
@@ -36,8 +35,8 @@ export default function sandbox(config) {
             simVotem.addSim()
             return
         }
-         // clear changes, reset to []
-        changes.splice(0,changes.length)
+        // clear changes, reset to []
+        changes.splice(0, changes.length)
         simVotem.startSim()
         ci.update()
         ci2.update()
@@ -50,5 +49,4 @@ export default function sandbox(config) {
         ci2.render()
         cd.render()
     }
-    
 }

@@ -1,10 +1,6 @@
-export default function SimpleCandidate(x,y,votem) {
-    // Candidate used for simulation of sampling candidates from a distribution. Just a single point (x,y) is needed.
-    
-    let self = this
+export default function simpleCandidate(x, y, votem) {
+    // Candidate used for simulation of sampling candidates from a distribution.
+    // Just a single point (x,y) is needed.
 
-    self.square = {x:x,y:y}
-
-    votem.newCandidate(self)
-
+    votem.newCandidate({ square: { x, y } })
 }

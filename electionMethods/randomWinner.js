@@ -1,6 +1,7 @@
-export default function randomWinner() {
+export default function randomWinner(votes) {
     // pick a random candidate as the winner
-    let iWinner = Math.floor(Math.random()*nk)
-    let results = {iWinner}
+    const nk = votes.tallyFractions.length
+    const iWinner = Math.floor(Math.random() * nk)
+    const results = { iWinner }
     return results
 }

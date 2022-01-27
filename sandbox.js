@@ -1,4 +1,3 @@
-
 import DraggableManager from './DraggableManager.js'
 import Screen from './Screen.js'
 import addSVGOutput from './addSVGOutput.js'
@@ -7,36 +6,34 @@ import VoteManager from './VoteManager.js'
 import Candidate from './Candidate.js'
 
 export default function sandbox(config) {
-
     // make a canvas
-    let screen = new Screen(config.idScript,600,600)
-    addSVGOutput(screen,draw)
-    
-    let changes = ["init"] // manage dependent calculations because we only want to do calculations if we need to
-    
-    let dragm = new DraggableManager( screen, changes)
+    const screen = new Screen(config.idScript, 600, 600)
+    addSVGOutput(screen, draw)
 
-    let votem = new VoteManager()
+    const changes = ['init'] // manage dependent calculations because we only want to do calculations if we need to
 
-    let sq = new Candidate(100,200,21,21,"#e52",screen,dragm,votem)
-    let sq2 = new Candidate(200,100,21,21,"#5e2",screen,dragm,votem)
-    let sq3 = new Candidate(600-200,600-100,21,21,"#25e",screen,dragm,votem)
-    let ci = new VoterCircle( 100, 300, 200 ,screen,dragm,votem)
-    let ci2 = new VoterCircle( 500, 300, 200 ,screen,dragm,votem)
+    const dragm = new DraggableManager(screen, changes)
 
+    const votem = new VoteManager()
 
-    window.requestAnimationFrame(gameLoop);
-    
+    const sq = new Candidate(100, 200, 21, 21, '#e52', screen, dragm, votem)
+    const sq2 = new Candidate(200, 100, 21, 21, '#5e2', screen, dragm, votem)
+    const sq3 = new Candidate(600 - 200, 600 - 100, 21, 21, '#25e', screen, dragm, votem)
+    const ci = new VoterCircle(100, 300, 200, screen, dragm, votem)
+    const ci2 = new VoterCircle(500, 300, 200, screen, dragm, votem)
+
+    window.requestAnimationFrame(gameLoop)
+
     function gameLoop() {
         update()
-        draw();
-        window.requestAnimationFrame(gameLoop);
+        draw()
+        window.requestAnimationFrame(gameLoop)
     }
 
     function update() {
         if (changes.length === 0) return
-         // clear changes, reset to []
-        changes.splice(0,changes.length)
+        // clear changes, reset to []
+        changes.splice(0, changes.length)
         votem.updateTallies()
         ci.update()
         ci2.update()
@@ -50,5 +47,4 @@ export default function sandbox(config) {
         sq2.render()
         sq3.render()
     }
-    
 }

@@ -1,7 +1,7 @@
-import pluralityBallot from "./pluralityBallot.js"
+import pluralityBallot from './pluralityBallot.js'
 
 // a collection of ways to cast votes
 
-const castVotes = {pluralityBallot}
+const castVotes = { pluralityBallot }
 
 export default castVotes

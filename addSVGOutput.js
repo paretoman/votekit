@@ -1,48 +1,50 @@
 export default function addSVGOutput(screen, draw) {
-
     // add a button so that we can generate an SVG of what is being rendered
-    // Two arguments: (1) the screen where the drawing context is (so that the drawing context can be temporarily replaced),
+    // Two arguments:
+    //   (1) the screen where the drawing context is
+    //       (so that the drawing context can be temporarily replaced),
     //   (2) the drawing function that renders drawings to the context.
 
-    let w = screen.width
-    let h = screen.height
+    const w = screen.width
+    const h = screen.height
 
-    let svgUIDiv = document.createElement('div')
+    const svgUIDiv = document.createElement('div')
     screen.canvas.parentNode.appendChild(svgUIDiv)
 
     // svg output button
-    let button = document.createElement('button')
-    button.innerText = "Make SVG"
+    const button = document.createElement('button')
+    button.innerText = 'Make SVG'
     button.onclick = makeSVG
     svgUIDiv.appendChild(button)
 
     // svg download link
-    let downloadLink = document.createElement('a')
-    downloadLink.innerText = "Download SVG"
-    downloadLink.download = "vote.svg"
+    const downloadLink = document.createElement('a')
+    downloadLink.innerText = 'Download SVG'
+    downloadLink.download = 'vote.svg'
     downloadLink.hidden = true
     svgUIDiv.appendChild(downloadLink)
 
     // svg hide button
-    let svgHideButton = document.createElement('button')
-    svgHideButton.innerText = "Hide SVG"
+    const svgHideButton = document.createElement('button')
+    svgHideButton.innerText = 'Hide SVG'
     svgHideButton.hidden = true
     svgHideButton.onclick = hideSVG
     svgUIDiv.appendChild(svgHideButton)
-    
+
     // hidden svg output div
-    let svgDiv = document.createElement('div')
-    svgDiv.setAttribute("class","svgDiv")
-    svgDiv.style.width = w + "px"
-    svgDiv.style.height = h + "px"
+    const svgDiv = document.createElement('div')
+    svgDiv.setAttribute('class', 'svgDiv')
+    svgDiv.style.width = `${w}px`
+    svgDiv.style.height = `${h}px`
     svgDiv.hidden = true
     svgUIDiv.appendChild(svgDiv)
 
-    let svgCtx = new C2S(w,h)
-    
+    const svgCtx = new window.C2S(w, h)
+
     function makeSVG() {
-        // temporarily swap drawing context, render SVG, then output SVG to div and to a download link
-        let old = screen.ctx
+        // temporarily swap drawing context, render SVG,
+        // then output SVG to div and to a download link
+        const old = screen.ctx
         screen.ctx = svgCtx
         screen.noBuffers = true
         draw()
@@ -52,13 +54,13 @@ export default function addSVGOutput(screen, draw) {
     }
 
     function outputSVG() {
-        let svg = svgCtx.getSerializedSvg(true)
+        const svg = svgCtx.getSerializedSvg(true)
         svgDiv.innerHTML = svg
         svgDiv.hidden = false
         svgHideButton.hidden = false
         downloadLink.hidden = false
 
-        let url = "data:image/svg+xml;charset=utf-8,"+encodeURIComponent(svg)
+        const url = `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}`
         downloadLink.href = url
     }
 

@@ -1,41 +1,39 @@
-import TWEEN from './lib/tween.esm.js'
+import { Tween } from './lib/tween.esm.js'
 
-export default function Handle(x, y, screen,dragm) {
-    let self = this
+export default function Handle(x, y, screen, dragm) {
+    const self = this
 
     self.x = x
     self.y = y
     self.handleSize = 10
     self.trueHandleSize = 10
 
-    dragm.newHandle(self,self.handleSize)
+    dragm.newHandle(self, self.handleSize)
 
-    self.pickUp = function() {
-        self.tween = new TWEEN.Tween(self)
-        self.tween.to({handleSize:self.trueHandleSize*2},100)
+    self.pickUp = function () {
+        self.tween = new Tween(self)
+        self.tween.to({ handleSize: self.trueHandleSize * 2 }, 100)
         self.tween.start()
     }
-    self.drop = function() {
-        self.tween = new TWEEN.Tween(self)
-        self.tween.to({handleSize:self.trueHandleSize},100)
+    self.drop = function () {
+        self.tween = new Tween(self)
+        self.tween.to({ handleSize: self.trueHandleSize }, 100)
         self.tween.start()
     }
 
     // Graphics component
-    self.render = function() {
-        let ctx = screen.ctx
-        
+    self.render = function () {
+        const { ctx } = screen
+
         if (self.tween) {
             self.tween.update()
         }
-        
+
         // handle
 
         ctx.beginPath()
-        ctx.fillStyle = "#555"
-        ctx.arc(self.x, self.y, self.handleSize, 0, 2*Math.PI)
-        // let hs = self.handleSize
-        // ctx.rect((self.x-.5*hs)-.5,(self.y-.5*hs)-.5,hs+1,hs+1)
+        ctx.fillStyle = '#555'
+        ctx.arc(self.x, self.y, self.handleSize, 0, 2 * Math.PI)
         ctx.fill()
         ctx.stroke()
     }
