@@ -118,7 +118,7 @@ export default function SimVoteManager(screen) {
             const p = points[i]
             // dot
             ctx.beginPath()
-            ctx.arc(p.x, p.y, 3, 0, 2*3.14159)
+            ctx.arc(p.x, p.y, 3, 0, 2*Math.PI)
             ctx.fill()
         }
     }

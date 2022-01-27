@@ -33,7 +33,7 @@ export default function Handle(x, y, screen,dragm) {
 
         ctx.beginPath()
         ctx.fillStyle = "#555"
-        ctx.arc(self.x, self.y, self.handleSize, 0, 2*3.14159)
+        ctx.arc(self.x, self.y, self.handleSize, 0, 2*Math.PI)
         // let hs = self.handleSize
         // ctx.rect((self.x-.5*hs)-.5,(self.y-.5*hs)-.5,hs+1,hs+1)
         ctx.fill()

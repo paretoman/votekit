@@ -19,7 +19,7 @@ export default function CandidateDistribution(x,y,r,screen,dragm,votem) {
 
         ctx.beginPath()
         // ctx.fillStyle = "grey"
-        ctx.arc(square.x, square.y, self.r, 0, 2*3.14159)
+        ctx.arc(square.x, square.y, self.r, 0, 2*Math.PI)
         // ctx.fill()
         ctx.stroke()
 

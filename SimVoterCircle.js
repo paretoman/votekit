@@ -21,9 +21,9 @@ export default function SimVoterCircle(x, y, r ,screen,dragm,votem) {
         let ctx = screen.ctx
         // circle
         ctx.beginPath()
-        ctx.fillStyle = "#eee"
-        ctx.arc(handle.x, handle.y, self.r, 0, 2*3.14159)
-        ctx.fill()
+        // ctx.fillStyle = "#eee"
+        ctx.arc(handle.x, handle.y, self.r, 0, 2*Math.PI)
+        // ctx.fill()
         ctx.stroke()
         
         // handle

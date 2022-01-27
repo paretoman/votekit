@@ -45,10 +45,10 @@ export default function sandbox(config) {
 
     function draw() {
         screen.clear()
+        simVotem.render()
         ci.render()
         ci2.render()
         cd.render()
-        simVotem.render()
     }
     
 }
