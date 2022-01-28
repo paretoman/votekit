@@ -12,6 +12,11 @@ export default function Candidate(x, y, w, h, color, screen, dragm, votem) {
 
     votem.newCandidate(self)
 
+    self.fraction = 0
+    self.setFraction = function (fraction) {
+        self.fraction = fraction
+    }
+
     self.render = function () {
         square.render()
 

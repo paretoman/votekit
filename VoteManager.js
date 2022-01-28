@@ -52,6 +52,9 @@ export default function VoteManager() {
         // There is also a separate graphical representation in VoronoiGroup.js
         const votes = castVotes(candidates, voterGroups)
 
-        candidates.forEach((can, index) => { can.fraction = votes.tallyFractions[index] })
+        candidates.forEach((can, index) => {
+            const fraction = votes.tallyFractions[index]
+            can.setFraction(fraction)
+        })
     }
 }

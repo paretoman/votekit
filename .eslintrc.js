@@ -21,7 +21,6 @@ module.exports = {
         'no-continue': 'off',
         'import/extensions': 'off',
         'func-names': 'off',
-        'no-param-reassign': 'off',
         'import/no-unresolved': 'off',
     },
 }

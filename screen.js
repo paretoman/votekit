@@ -20,6 +20,7 @@ export default function Screen(id, w, h) {
     parent.appendChild(self.canvas)
 
     self.ctx = self.canvas.getContext('2d')
+    self.noBuffers = false
 
     // use scaling for high DPI devices instead of multiplying every time inside draw calls
     // https://www.html5rocks.com/en/tutorials/canvas/hidpi/
@@ -34,6 +35,12 @@ export default function Screen(id, w, h) {
     self.ctx.scale(self.pixelRatio, self.pixelRatio)
     self.clear = function () {
         self.ctx.clearRect(0, 0, self.canvas.width, self.canvas.height)
+    }
+    self.setCtx = function (c) {
+        self.ctx = c
+    }
+    self.setNoBuffers = function (noBuffers) {
+        self.noBuffers = noBuffers
     }
 }
 
