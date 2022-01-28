@@ -5,7 +5,7 @@
 import { Delaunay } from 'https://cdn.skypack.dev/d3-delaunay@6'
 // https://github.com/d3/d3-delaunay
 
-export default function voronoiGroup(votem, voterGroup, screen) {
+export default function voronoiGroup(election, voterGroup, screen) {
     // Draw Voronoi cells to show votes.
 
     const self = this
@@ -14,7 +14,7 @@ export default function voronoiGroup(votem, voterGroup, screen) {
     let voronoi
 
     self.update = function () {
-        cans = votem.getCandidates()
+        cans = election.getCandidates()
         const points = cans.map((e) => [e.square.x, e.square.y])
         const delaunay = Delaunay.from(points)
         voronoi = delaunay.voronoi([0, 0, screen.width, screen.height])

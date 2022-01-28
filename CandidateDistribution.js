@@ -1,6 +1,6 @@
 import Square from './Square.js'
 
-export default function CandidateDistribution(x, y, r, screen, dragm, votem) {
+export default function CandidateDistribution(x, y, r, screen, dragm, election) {
     // This represents a spatial distribution of candidates.
     // A draggable square handle provides draggable behavior.
 
@@ -11,7 +11,7 @@ export default function CandidateDistribution(x, y, r, screen, dragm, votem) {
     const square = new Square(x, y, 10, 10, '#ccc', screen, dragm)
     self.square = square
 
-    votem.newCandidateDistribution(self)
+    election.newCandidateDistribution(self)
 
     self.render = function () {
         const { ctx } = screen

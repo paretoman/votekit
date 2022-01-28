@@ -1,7 +1,7 @@
 import Square from './Square.js'
 import { drawStrokedColor, textPercent } from './graphicsUtilities.js'
 
-export default function Candidate(x, y, w, h, color, screen, dragm, votem) {
+export default function Candidate(x, y, w, h, color, screen, dragm, election) {
     // Candidate class on top of square.
     // Candidate adds candidate behavior on top of a draggable square handle.
 
@@ -10,7 +10,7 @@ export default function Candidate(x, y, w, h, color, screen, dragm, votem) {
     const square = new Square(x, y, w, h, color, screen, dragm)
     self.square = square
 
-    votem.newCandidate(self)
+    election.newCandidate(self)
 
     self.fraction = 0
     self.setFraction = function (fraction) {

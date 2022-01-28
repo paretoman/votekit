@@ -1,7 +1,7 @@
 import Handle from './Handle.js'
 import VoronoiGroup from './VoronoiGroup.js'
 
-export default function VoterCircle(x, y, r, screen, dragm, votem) {
+export default function VoterCircle(x, y, r, screen, dragm, election) {
     // VoterCircle class with Handle component to take care of dragging.
     // VoronoiGroup component takes care of drawing votes.
 
@@ -12,9 +12,9 @@ export default function VoterCircle(x, y, r, screen, dragm, votem) {
     const handle = new Handle(x, y, screen, dragm)
     self.handle = handle
 
-    votem.newVoterGroup(self)
+    election.newVoterGroup(self)
 
-    const voronoiGroup = new VoronoiGroup(votem, self, screen)
+    const voronoiGroup = new VoronoiGroup(election, self, screen)
 
     self.update = function () {
         voronoiGroup.update()

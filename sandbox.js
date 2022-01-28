@@ -2,7 +2,7 @@ import DraggableManager from './DraggableManager.js'
 import Screen from './Screen.js'
 import addSVGOutput from './addSVGOutput.js'
 import VoterCircle from './VoterCircle.js'
-import VoteManager from './VoteManager.js'
+import Election from './Election.js'
 import Candidate from './Candidate.js'
 
 export default function sandbox(config) {
@@ -14,13 +14,13 @@ export default function sandbox(config) {
 
     const dragm = new DraggableManager(screen, changes)
 
-    const votem = new VoteManager()
+    const election = new Election()
 
-    const sq = new Candidate(100, 200, 21, 21, '#e52', screen, dragm, votem)
-    const sq2 = new Candidate(200, 100, 21, 21, '#5e2', screen, dragm, votem)
-    const sq3 = new Candidate(600 - 200, 600 - 100, 21, 21, '#25e', screen, dragm, votem)
-    const ci = new VoterCircle(100, 300, 200, screen, dragm, votem)
-    const ci2 = new VoterCircle(500, 300, 200, screen, dragm, votem)
+    const sq = new Candidate(100, 200, 21, 21, '#e52', screen, dragm, election)
+    const sq2 = new Candidate(200, 100, 21, 21, '#5e2', screen, dragm, election)
+    const sq3 = new Candidate(600 - 200, 600 - 100, 21, 21, '#25e', screen, dragm, election)
+    const ci = new VoterCircle(100, 300, 200, screen, dragm, election)
+    const ci2 = new VoterCircle(500, 300, 200, screen, dragm, election)
 
     window.requestAnimationFrame(gameLoop)
 
@@ -34,7 +34,7 @@ export default function sandbox(config) {
         if (changes.length === 0) return
         // clear changes, reset to []
         changes.splice(0, changes.length)
-        votem.updateTallies()
+        election.updateTallies()
         ci.update()
         ci2.update()
     }

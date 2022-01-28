@@ -2,7 +2,7 @@ import DraggableManager from './DraggableManager.js'
 import Screen from './Screen.js'
 import addSVGOutput from './addSVGOutput.js'
 import SimVoterCircle from './SimVoterCircle.js'
-import SimVoteManager from './SimVoteManager.js'
+import SimElections from './SimElections.js'
 import CandidateDistribution from './CandidateDistribution.js'
 
 export default function sandbox(config) {
@@ -16,11 +16,11 @@ export default function sandbox(config) {
 
     const dragm = new DraggableManager(screen, changes)
 
-    const simVotem = new SimVoteManager(screen)
+    const simElections = new SimElections(screen)
 
-    const cd = new CandidateDistribution(300, 300, 400, screen, dragm, simVotem)
-    const ci = new SimVoterCircle(100, 300, 200, screen, dragm, simVotem)
-    const ci2 = new SimVoterCircle(500, 300, 200, screen, dragm, simVotem)
+    const cd = new CandidateDistribution(300, 300, 400, screen, dragm, simElections)
+    const ci = new SimVoterCircle(100, 300, 200, screen, dragm, simElections)
+    const ci2 = new SimVoterCircle(500, 300, 200, screen, dragm, simElections)
 
     window.requestAnimationFrame(gameLoop)
 
@@ -32,19 +32,19 @@ export default function sandbox(config) {
 
     function update() {
         if (changes.length === 0) {
-            simVotem.addSim()
+            simElections.addSim()
             return
         }
         // clear changes, reset to []
         changes.splice(0, changes.length)
-        simVotem.startSim()
+        simElections.startSim()
         ci.update()
         ci2.update()
     }
 
     function draw() {
         screen.clear()
-        simVotem.render()
+        simElections.render()
         ci.render()
         ci2.render()
         cd.render()

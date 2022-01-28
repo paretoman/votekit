@@ -1,6 +1,6 @@
 import Handle from './Handle.js'
 
-export default function SimVoterCircle(x, y, r, screen, dragm, votem) {
+export default function SimVoterCircle(x, y, r, screen, dragm, election) {
     // VoterCircle for simulations of many candidates
     // VoterCircle class with Handle component to take care of dragging.
 
@@ -11,7 +11,7 @@ export default function SimVoterCircle(x, y, r, screen, dragm, votem) {
     const handle = new Handle(x, y, screen, dragm)
     self.handle = handle
 
-    votem.newVoterGroup(self)
+    election.newVoterGroup(self)
 
     self.update = function () {
     }

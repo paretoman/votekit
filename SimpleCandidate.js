@@ -1,6 +1,6 @@
-export default function simpleCandidate(x, y, votem) {
+export default function simpleCandidate(x, y, election) {
     // Candidate used for simulation of sampling candidates from a distribution.
     // Just a single point (x,y) is needed.
 
-    votem.newCandidate({ square: { x, y } })
+    election.newCandidate({ square: { x, y } })
 }

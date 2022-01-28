@@ -1,5 +1,5 @@
 import CandidateDistributionSampler from './CandidateDistributionSampler.js'
-import VoteManager from './VoteManager.js'
+import Election from './Election.js'
 import simpleCandidate from './simpleCandidate.js'
 
 // Simulate winners from many elections
@@ -7,18 +7,18 @@ import simpleCandidate from './simpleCandidate.js'
 // Winners are drawn as points
 // The simulation is dynamic. More simulations are performed at each frame.
 
-export default function SimVoteManager(screen) {
+export default function SimElections(screen) {
     const self = this
 
     self.points = []
     self.newPoints = []
 
-    const votem = new VoteManager()
+    const election = new Election()
 
     const candidateDistributions = []
 
     self.newVoterGroup = function (voterGroup) {
-        votem.newVoterGroup(voterGroup)
+        election.newVoterGroup(voterGroup)
     }
 
     self.newCandidateDistribution = function (canDis) {
@@ -53,18 +53,18 @@ export default function SimVoteManager(screen) {
                 const point = self.sampler.samplePoint()
 
                 // make a candidate... could make simpler
-                simpleCandidate(point.x, point.y, votem)
+                simpleCandidate(point.x, point.y, election)
             }
 
             // find winner position
-            const results = votem.runElection()
+            const results = election.runElection()
             const { winner } = results
 
             // record point
             const winPoint = { x: winner.square.x, y: winner.square.y }
             self.points.push(winPoint)
             self.newPoints.push(winPoint)
-            votem.clearCandidates()
+            election.clearCandidates()
         }
         renderToBuffer()
     }

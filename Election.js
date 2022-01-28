@@ -3,7 +3,7 @@ import electionMethods from './electionMethods/electionMethods.js'
 
 // Here we are in the context of a single election with voter objects and candidate bojects.
 
-export default function VoteManager() {
+export default function Election() {
     const self = this
 
     const voterGroups = []
@@ -50,7 +50,7 @@ export default function VoteManager() {
 
         // Voters cast votes for candidates.
         // There is also a separate graphical representation in VoronoiGroup.js
-        const votes = castVotes(candidates, voterGroups)
+        const votes = castVotes.pluralityBallot(candidates, voterGroups)
 
         candidates.forEach((can, index) => {
             const fraction = votes.tallyFractions[index]
