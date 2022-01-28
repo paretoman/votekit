@@ -61,7 +61,7 @@ export default function SimElections(screen) {
             const { winner } = results
 
             // record point
-            const winPoint = { x: winner.square.x, y: winner.square.y }
+            const winPoint = { x: winner.x, y: winner.y }
             self.points.push(winPoint)
             self.newPoints.push(winPoint)
             election.clearCandidates()

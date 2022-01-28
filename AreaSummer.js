@@ -31,8 +31,8 @@ function findLines(cans) {
             // skip sames
             if (i === k) continue
             // find equation for a line
-            const c1 = cans[i].square
-            const c2 = cans[k].square
+            const c1 = cans[i]
+            const c2 = cans[k]
             // lines[i][k] = equidistantLine(c1,c2) // problem when i === k
             lines[i].push(equidistantLine(c1, c2))
         }
@@ -84,8 +84,8 @@ function sumCircle(circle, lineSet) {
     // for each x coordinate,
     const dx = 2
     let sum = 0
-    const x1 = circle.handle.x
-    const y1 = circle.handle.y
+    const x1 = circle.x
+    const y1 = circle.y
     const { r } = circle
     // x only goes from x1-r to x1+r
     for (let x = x1 - r; x < x1 + r; x += dx) {

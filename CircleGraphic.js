@@ -1,23 +1,21 @@
 import { Tween } from './lib/tween.esm.js'
 
-export default function Handle(x, y, screen, dragm) {
+export default function CircleGraphic(parent, r, color, screen) {
+    // shows a circle at the parent object xy coordinates
+    // animates the circle when picking up and dropping
     const self = this
 
-    self.x = x
-    self.y = y
-    self.handleSize = 10
-    self.trueHandleSize = 10
-
-    dragm.newHandle(self, self.handleSize)
+    self.r = r
+    self.trueR = r
 
     self.pickUp = function () {
         self.tween = new Tween(self)
-        self.tween.to({ handleSize: self.trueHandleSize * 2 }, 100)
+        self.tween.to({ r: self.trueR * 2 }, 100)
         self.tween.start()
     }
     self.drop = function () {
         self.tween = new Tween(self)
-        self.tween.to({ handleSize: self.trueHandleSize }, 100)
+        self.tween.to({ r: self.trueR }, 100)
         self.tween.start()
     }
 
@@ -32,8 +30,8 @@ export default function Handle(x, y, screen, dragm) {
         // handle
 
         ctx.beginPath()
-        ctx.fillStyle = '#555'
-        ctx.arc(self.x, self.y, self.handleSize, 0, 2 * Math.PI)
+        ctx.fillStyle = color
+        ctx.arc(parent.x, parent.y, self.r, 0, 2 * Math.PI)
         ctx.fill()
         ctx.stroke()
     }

@@ -1,19 +1,19 @@
 import { Tween } from './lib/tween.esm.js'
 
-export default function Square(x, y, w, h, color, screen, dragm) {
+export default function SquareGraphic(parent, w, h, color, screen) {
+    // square is a graphic
+    // it displays itself on a parent object
+    // its parent object stores its x and y
+    // shows a square at the parent object xy coordinates
+    // animates the square when picking up and dropping
+    //
+
     const self = this
-    // x y coordinates, width and height, all private variables
-    self.x = x
-    self.y = y
     self.w = w // display width, because we're going to make animations with it
     self.h = h
     self.trueW = w // true width, because we want to return to this width after animating.
     self.trueH = h
     self.color = color
-
-    // draggable component
-    // register with draggable manager
-    dragm.newSquare(self)
 
     self.pickUp = function () {
         self.tweenSq = new Tween(self)
@@ -36,8 +36,8 @@ export default function Square(x, y, w, h, color, screen, dragm) {
         ctx.beginPath()
         ctx.fillStyle = self.color
         ctx.rect(
-            (self.x - 0.5 * self.w) - 0.5,
-            (self.y - 0.5 * self.h) - 0.5,
+            (parent.x - 0.5 * self.w) - 0.5,
+            (parent.y - 0.5 * self.h) - 0.5,
             self.w + 1,
             self.h + 1,
         )

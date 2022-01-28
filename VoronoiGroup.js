@@ -5,7 +5,7 @@
 import { Delaunay } from 'https://cdn.skypack.dev/d3-delaunay@6'
 // https://github.com/d3/d3-delaunay
 
-export default function voronoiGroup(election, voterGroup, screen) {
+export default function voronoiGroup(voterGroup, election, screen) {
     // Draw Voronoi cells to show votes.
 
     const self = this
@@ -15,7 +15,7 @@ export default function voronoiGroup(election, voterGroup, screen) {
 
     self.update = function () {
         cans = election.getCandidates()
-        const points = cans.map((e) => [e.square.x, e.square.y])
+        const points = cans.map((e) => [e.x, e.y])
         const delaunay = Delaunay.from(points)
         voronoi = delaunay.voronoi([0, 0, screen.width, screen.height])
     }
@@ -30,7 +30,7 @@ export default function voronoiGroup(election, voterGroup, screen) {
         // http://jsfiddle.net/jimrhoskins/dDUC3/1/
         // https://dustinpfister.github.io/2019/10/08/canvas-clip/
         ctx.beginPath()
-        ctx.arc(voterGroup.handle.x, voterGroup.handle.y, voterGroup.r, 0, 2 * Math.PI)
+        ctx.arc(voterGroup.x, voterGroup.y, voterGroup.r, 0, 2 * Math.PI)
         // ctx.closePath()
         ctx.clip()
 
@@ -44,7 +44,7 @@ export default function voronoiGroup(election, voterGroup, screen) {
         }
 
         ctx.beginPath()
-        ctx.arc(voterGroup.handle.x, voterGroup.handle.y, voterGroup.r, 0, 2 * Math.PI)
+        ctx.arc(voterGroup.x, voterGroup.y, voterGroup.r, 0, 2 * Math.PI)
         ctx.stroke()
 
         ctx.restore()

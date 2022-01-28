@@ -10,14 +10,14 @@ export default function DraggableManager(screen, changes) {
     const { canvas } = screen
 
     // add draggable objects
-    self.newSquare = function (o) {
+    self.newSquareHandle = function (o, g) {
         // set properties here so that we don't set properties on the actual object
         const p = { isSquare: true }
-        draggables.push({ o, p })
+        draggables.push({ o, g, p })
     }
-    self.newHandle = function (o, handleRadius) {
-        const p = { isHandle: true, handleRadius }
-        draggables.push({ o, p })
+    self.newCircleHandle = function (o, g) { // object, graphic
+        const p = { isCircle: true }
+        draggables.push({ o, g, p })
     }
 
     // mouse controls
@@ -35,7 +35,7 @@ export default function DraggableManager(screen, changes) {
                 drag.isDragging = true
                 drag.offX = d.o.x - mouse.x
                 drag.offY = d.o.y - mouse.y
-                d.o.pickUp()
+                d.g.pickUp()
                 canvas.dataset.cursor = 'grabbing' // CSS data attribute
                 break // exit after picking one object
             }
@@ -45,7 +45,7 @@ export default function DraggableManager(screen, changes) {
     canvas.onmouseup = function () {
         if (drag.iDragging !== undefined) {
             const dragging = draggables[drag.iDragging]
-            dragging.o.drop()
+            dragging.g.drop()
         }
         drag = {}
     }
@@ -79,15 +79,12 @@ export default function DraggableManager(screen, changes) {
         const x = d.o.x - m.x
         const y = d.o.y - m.y
         if (d.p.isCircle) {
-            const { r } = d.o
+            const { r } = d.g
             const hit = x * x + y * y < r * r
             return hit
         } if (d.p.isSquare) {
-            const hit = Math.abs(x) < 0.5 * d.o.w && Math.abs(y) < 0.5 * d.o.h
-            return hit
-        } if (d.p.isHandle) {
-            const r = d.p.handleRadius
-            const hit = x * x + y * y < r * r
+            const { w, h } = d.g
+            const hit = Math.abs(x) < 0.5 * w && Math.abs(y) < 0.5 * h
             return hit
         }
         return false

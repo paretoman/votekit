@@ -1,4 +1,4 @@
-import Handle from './Handle.js'
+import CircleGraphic from './CircleGraphic.js'
 import VoronoiGroup from './VoronoiGroup.js'
 
 export default function VoterCircle(x, y, r, screen, dragm, election) {
@@ -7,14 +7,18 @@ export default function VoterCircle(x, y, r, screen, dragm, election) {
 
     const self = this
 
+    self.x = x
+    self.y = y
     self.r = r
 
-    const handle = new Handle(x, y, screen, dragm)
-    self.handle = handle
+    const circle = new CircleGraphic(self, 10, '#555', screen)
+    self.circle = circle
+
+    dragm.newCircleHandle(self, circle)
 
     election.newVoterGroup(self)
 
-    const voronoiGroup = new VoronoiGroup(election, self, screen)
+    const voronoiGroup = new VoronoiGroup(self, election, screen)
 
     self.update = function () {
         voronoiGroup.update()
@@ -25,6 +29,6 @@ export default function VoterCircle(x, y, r, screen, dragm, election) {
         // circle
         voronoiGroup.render()
         // handle
-        handle.render()
+        circle.render()
     }
 }

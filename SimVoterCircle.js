@@ -1,4 +1,4 @@
-import Handle from './Handle.js'
+import CircleGraphic from './CircleGraphic.js'
 
 export default function SimVoterCircle(x, y, r, screen, dragm, election) {
     // VoterCircle for simulations of many candidates
@@ -6,10 +6,14 @@ export default function SimVoterCircle(x, y, r, screen, dragm, election) {
 
     const self = this
 
+    self.x = x
+    self.y = y
     self.r = r
 
-    const handle = new Handle(x, y, screen, dragm)
-    self.handle = handle
+    const circle = new CircleGraphic(self, 10, '#555', screen)
+    self.circle = circle
+
+    dragm.newCircleHandle(self, circle)
 
     election.newVoterGroup(self)
 
@@ -22,11 +26,11 @@ export default function SimVoterCircle(x, y, r, screen, dragm, election) {
         // circle
         ctx.beginPath()
         // ctx.fillStyle = "#eee"
-        ctx.arc(handle.x, handle.y, self.r, 0, 2 * Math.PI)
+        ctx.arc(self.x, self.y, self.r, 0, 2 * Math.PI)
         // ctx.fill()
         ctx.stroke()
 
         // handle
-        handle.render()
+        circle.render()
     }
 }
