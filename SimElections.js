@@ -7,13 +7,13 @@ import simpleCandidate from './simpleCandidate.js'
 // Winners are drawn as points
 // The simulation is dynamic. More simulations are performed at each frame.
 
-export default function SimElections(screen) {
+export default function SimElections(screen, menu) {
     const self = this
 
     self.points = []
     self.newPoints = []
 
-    const election = new Election()
+    const election = new Election(menu)
 
     const candidateDistributions = []
 
@@ -47,7 +47,12 @@ export default function SimElections(screen) {
 
         for (let i = 0; i < ns; i++) {
             // choose a number of candidates
-            const nk = 5
+            let nk
+            if (election.checkElectionType() === 'singleWinner') {
+                nk = 5
+            } else if (election.checkElectionType() === 'allocation') {
+                nk = 10
+            }
             for (let k = 0; k < nk; k++) {
                 // sample a point from the distribution of candidates
                 const point = self.sampler.samplePoint()
@@ -58,12 +63,40 @@ export default function SimElections(screen) {
 
             // find winner position
             const results = election.runElection()
-            const { winner } = results
 
-            // record point
-            const winPoint = { x: winner.x, y: winner.y }
-            self.points.push(winPoint)
-            self.newPoints.push(winPoint)
+            if (election.checkElectionType() === 'singleWinner') {
+                const { winner } = results
+
+                // record point
+                const winPoint = { x: winner.x, y: winner.y }
+                self.points.push(winPoint)
+                self.newPoints.push(winPoint)
+            } else {
+                const { allocation, candidates } = results
+
+                const jitterSize = 100
+                candidates.forEach(
+                    (can, k) => {
+                        const numPoints = allocation[k]
+                        for (let m = 0; m < numPoints; m++) {
+                            let winPoint
+                            if (m === 0) {
+                                // record point
+                                winPoint = { x: can.x, y: can.y }
+                            } else {
+                                // add jitter
+                                winPoint = {
+                                    x: can.x + (Math.random() - 0.5) * jitterSize,
+                                    y: can.y + (Math.random() - 0.5) * jitterSize,
+                                }
+                            }
+                            // record point
+                            self.points.push(winPoint)
+                            self.newPoints.push(winPoint)
+                        }
+                    },
+                )
+            }
             election.clearCandidates()
         }
         renderToBuffer()

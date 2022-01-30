@@ -3,7 +3,7 @@ import electionMethods from './electionMethods/electionMethods.js'
 
 // Here we are in the context of a single election with voter objects and candidate bojects.
 
-export default function Election() {
+export default function Election(menu) {
     const self = this
 
     const voterGroups = []
@@ -26,6 +26,8 @@ export default function Election() {
         return candidates
     }
 
+    // -- Update --
+
     self.runElection = function () {
         // Voters cast votes for candidates.
         // There is also a separate graphical representation in VoronoiGroup.js
@@ -37,11 +39,18 @@ export default function Election() {
         //   which has tallies go in and analysis come out
         // electionResults, the larger one,
         //   is in the context of candidate objects and voter objects.
-        const methodResults = electionMethods.plurality(votes)
-
-        const { iWinner } = methodResults
-        const winner = candidates[iWinner]
-        const electionResults = { iWinner, winner }
+        let electionResults
+        if (self.checkElectionType() === 'allocation') {
+            const electionMethodOptions = { seats: 5, threshold: 0.2 }
+            const methodResults = electionMethods[self.electionMethod](votes, electionMethodOptions)
+            const { allocation } = methodResults
+            electionResults = { allocation, candidates }
+        } else {
+            const methodResults = electionMethods[self.electionMethod](votes)
+            const { iWinner } = methodResults
+            const winner = candidates[iWinner]
+            electionResults = { iWinner, winner }
+        }
         return electionResults
     }
 
@@ -57,4 +66,32 @@ export default function Election() {
             can.setFraction(fraction)
         })
     }
+
+    // -- Menu --
+
+    // a list of election methods
+    self.electionMethodList = [
+        { name: 'Huntington Hill', value: 'huntingtonHill', type: 'allocation' },
+        { name: 'Plurality', value: 'plurality', type: 'singleWinner' },
+        { name: 'Random Winner', value: 'randomWinner', type: 'singleWinner' },
+    ]
+
+    // utilities for looking up this list
+    self.checkElectionType = () => self.electionMethodListByFunctionName[self.electionMethod].type
+    self.electionMethodListByFunctionName = []
+    self.electionMethodList.forEach(
+        (x) => { self.electionMethodListByFunctionName[x.value] = x },
+    )
+
+    // add a menu item to switch between types of elections
+    self.electionMethod = 'plurality'
+    menu.addMenuItem(
+        self,
+        {
+            label: 'Election Method:',
+            prop: 'electionMethod',
+            options: self.electionMethodList,
+            change: ['electionMethod'],
+        },
+    )
 }

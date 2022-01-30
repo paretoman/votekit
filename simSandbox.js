@@ -4,19 +4,23 @@ import addSVGOutput from './addSVGOutput.js'
 import SimVoterCircle from './SimVoterCircle.js'
 import SimElections from './SimElections.js'
 import CandidateDistribution from './CandidateDistribution.js'
+import Menu from './Menu.js'
 
 export default function sandbox(config) {
     // sandbox for simulation of many
+
+    const changes = ['init'] // manage dependent calculations because we only want to do calculations if we need to
+
+    // make a menu
+    const menu = new Menu(config.idScript, changes)
 
     // make a canvas
     const screen = new Screen(config.idScript, 600, 600)
     addSVGOutput(screen, draw)
 
-    const changes = ['init'] // manage dependent calculations because we only want to do calculations if we need to
-
     const dragm = new DraggableManager(screen, changes)
 
-    const simElections = new SimElections(screen)
+    const simElections = new SimElections(screen, menu)
 
     const cd = new CandidateDistribution(300, 300, 400, screen, dragm, simElections)
     const ci = new SimVoterCircle(100, 300, 200, screen, dragm, simElections)
