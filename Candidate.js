@@ -9,6 +9,12 @@ export default function Candidate(x, y, w, h, color, screen, dragm, election) {
 
     self.x = x
     self.y = y
+    self.setX = function (x1) {
+        self.x = x1
+    }
+    self.setY = function (y1) {
+        self.y = y1
+    }
 
     const square = new SquareGraphic(self, w, h, color, screen) // square is for rendering
     self.square = square

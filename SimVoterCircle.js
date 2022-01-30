@@ -9,6 +9,12 @@ export default function SimVoterCircle(x, y, r, screen, dragm, election) {
     self.x = x
     self.y = y
     self.r = r
+    self.setX = function (x1) {
+        self.x = x1
+    }
+    self.setY = function (y1) {
+        self.y = y1
+    }
 
     const circle = new CircleGraphic(self, 10, '#555', screen)
     self.circle = circle
