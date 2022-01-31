@@ -48,9 +48,9 @@ export default function SimElections(screen, menu) {
         for (let i = 0; i < ns; i++) {
             // choose a number of candidates
             let nk
-            if (election.checkElectionType() === 'singleWinner') {
+            if (election.method.checkElectionType() === 'singleWinner') {
                 nk = 5
-            } else if (election.checkElectionType() === 'allocation') {
+            } else if (election.method.checkElectionType() === 'allocation') {
                 nk = 10
             }
             for (let k = 0; k < nk; k++) {
@@ -64,7 +64,7 @@ export default function SimElections(screen, menu) {
             // find winner position
             const results = election.runElection()
 
-            if (election.checkElectionType() === 'singleWinner') {
+            if (election.method.checkElectionType() === 'singleWinner') {
                 const { winner } = results
 
                 // record point
