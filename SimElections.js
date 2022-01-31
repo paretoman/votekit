@@ -1,5 +1,4 @@
 import CandidateDistributionSampler from './CandidateDistributionSampler.js'
-import Election from './Election.js'
 import simpleCandidate from './simpleCandidate.js'
 
 // Simulate winners from many elections
@@ -7,13 +6,11 @@ import simpleCandidate from './simpleCandidate.js'
 // Winners are drawn as points
 // The simulation is dynamic. More simulations are performed at each frame.
 
-export default function SimElections(screen, menu) {
+export default function SimElections(screen, menu, election) {
     const self = this
 
     self.points = []
     self.newPoints = []
-
-    const election = new Election(menu)
 
     const candidateDistributions = []
 

@@ -10,9 +10,11 @@ export default function Menu(id, changes) {
     const parent = div.parentElement
 
     self.addMenuItem = function (object, choice) {
-        const { prop, options, change } = choice
+        const {
+            prop, setProp, label, options, change,
+        } = choice
 
-        const menuItem = new MenuItem(object, prop, options, change, changes)
+        const menuItem = new MenuItem(object, prop, setProp, label, options, change, changes)
         menuItem.select()
 
         parent.appendChild(menuItem.choose.dom)

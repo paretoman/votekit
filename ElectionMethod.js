@@ -50,6 +50,7 @@ export default function ElectionMethod(candidates, menu) {
         {
             label: 'Election Method:',
             prop: 'electionMethod',
+            setProp: (p) => { self.electionMethod = p },
             options: self.electionMethodList,
             change: ['electionMethod'],
         },

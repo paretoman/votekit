@@ -1,15 +1,16 @@
+import Changes from './Changes.js'
 import DraggableManager from './DraggableManager.js'
 import Screen from './Screen.js'
 import addSVGOutput from './addSVGOutput.js'
-import VoterCircle from './VoterCircle.js'
-import Election from './Election.js'
-import Candidate from './Candidate.js'
 import Menu from './Menu.js'
+import Election from './Election.js'
+import Sim from './Sim.js'
 
 export default function sandbox(config) {
-    // make a canvas
+    // Set up a user interface to run a simulation.
 
-    const changes = ['init'] // manage dependent calculations because we only want to do calculations if we need to
+    // manage dependent calculations because we only want to do calculations if we need to
+    const changes = new Changes()
 
     const menu = new Menu(config.idScript, changes)
 
@@ -20,11 +21,7 @@ export default function sandbox(config) {
 
     const election = new Election(menu)
 
-    const sq = new Candidate(100, 200, 21, 21, '#e52', screen, dragm, election)
-    const sq2 = new Candidate(200, 100, 21, 21, '#5e2', screen, dragm, election)
-    const sq3 = new Candidate(600 - 200, 600 - 100, 21, 21, '#25e', screen, dragm, election)
-    const ci = new VoterCircle(100, 300, 200, screen, dragm, election)
-    const ci2 = new VoterCircle(500, 300, 200, screen, dragm, election)
+    const sim = new Sim(screen, dragm, menu, changes, election, config.initialState)
 
     window.requestAnimationFrame(gameLoop)
 
@@ -35,20 +32,11 @@ export default function sandbox(config) {
     }
 
     function update() {
-        if (changes.length === 0) return
-        // clear changes, reset to []
-        changes.splice(0, changes.length)
-        election.updateTallies()
-        ci.update()
-        ci2.update()
+        sim.update()
     }
 
     function draw() {
         screen.clear()
-        ci.render()
-        ci2.render()
-        sq.render()
-        sq2.render()
-        sq3.render()
+        sim.render()
     }
 }

@@ -19,6 +19,9 @@ export default function DraggableManager(screen, changes) {
         const p = { isCircle: true }
         draggables.push({ o, g, p })
     }
+    self.clear = () => {
+        draggables.splice(0, draggables.length)
+    }
 
     // mouse controls
     // As a sidenote, it is interesting that we don't need to call model.update here
@@ -58,7 +61,7 @@ export default function DraggableManager(screen, changes) {
             const dragging = draggables[drag.iDragging]
             dragging.o.setX(mouse.x + drag.offX) // updates state.config too
             dragging.o.setY(mouse.y + drag.offY)
-            changes.push('draggables')
+            changes.add(['draggables'])
         } else {
             // see if we're hovering over something grabbable
             // because we want the user to see if they can grab something
