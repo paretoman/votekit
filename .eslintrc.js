@@ -19,7 +19,7 @@ module.exports = {
         'no-use-before-define': ['error', { functions: false }],
         'no-plusplus': ['error', { allowForLoopAfterthoughts: true }],
         'no-continue': 'off',
-        'import/extensions': 'off',
+        'import/extensions': ['error', 'always'],
         'func-names': 'off',
         'import/no-unresolved': 'off',
     },
