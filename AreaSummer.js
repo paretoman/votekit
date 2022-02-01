@@ -41,9 +41,26 @@ function findLines(cans) {
     return lines
 }
 
-export function testEquidistantLine() {
-    // should be such that A * [0,0] < b
-    // console.log(equidistantLine({ x: 0, y: 0 }, { x: 1, y: 1 }))
+export function testEquidistantLine(eq, assert) {
+    // Takes an assertion function.
+    // Returns a test function.
+
+    return [{
+        label: 'Finds line equation equidistant from two points.',
+        test: () => {
+            const m = equidistantLine({ x: 0, y: 0 }, { x: 1, y: 1 })
+            const e = { A: { x: 1, y: 1 }, b: 1 }
+            eq(e.A.x / e.b, m.A.x / m.b)
+            eq(e.A.y / e.b, m.A.y / m.b)
+        },
+    }, {
+        label: 'The first point satisfies Ac < b. A[0,0] < b. ',
+        test: () => {
+            const m = equidistantLine({ x: 0, y: 0 }, { x: 1, y: 1 })
+            assert(m.b > 0)
+        },
+    },
+    ]
 }
 
 function equidistantLine(c1, c2) {
