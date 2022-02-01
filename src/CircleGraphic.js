@@ -1,4 +1,4 @@
-import { Tween } from './lib/tween.esm.js'
+import { Tween } from '../lib/tween.esm.js'
 
 export default function CircleGraphic(parent, r, color, screen) {
     // shows a circle at the parent object xy coordinates

@@ -1,4 +1,4 @@
-import { Tween } from './lib/tween.esm.js'
+import { Tween } from '../lib/tween.esm.js'
 
 export default function SquareGraphic(parent, w, h, color, screen) {
     // square is a graphic
