@@ -1,10 +1,19 @@
+/** @module */
+
 import VoterCircle from './VoterCircle.js'
 import Candidate from './Candidate.js'
 
+/**
+ * Simulate one election with
+ *   candidates in defined positions, and
+ *   voters in a distribution that will be summed over.
+ * @param {Screen} screen
+ * @param {DraggableManager} dragm
+ * @param {Menu} menu
+ * @param {Changes} changes
+ * @param {Election} election
+ */
 export default function SimOne(screen, dragm, menu, changes, election) {
-    // Simulate one election with
-    //   candidates in defined positions, and
-    //   voters in a distribution that will be summed over.
     const self = this
 
     const sq = new Candidate(100, 200, 21, 21, '#e52', screen, dragm, election)

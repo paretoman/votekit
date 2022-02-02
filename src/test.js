@@ -1,11 +1,14 @@
+/** @module */
+
 import { testEquidistantLine } from './AreaSummer.js'
 import { eq, assert, tests } from '../lib/tinytest.esm.js'
 
+/**
+ * Collects tests from test functions.
+ * Runs tests.
+ * The test assertion functions are passed to the tests for modularity.
+ */
 export default function testAll() {
-    // Collects tests from test functions.
-    // Runs tests.
-    // The test assertion functions are passed to the tests for modularity.
-
     // Collect.
     const config = {}
     const testObjects = [

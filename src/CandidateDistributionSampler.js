@@ -1,6 +1,11 @@
+/** @module */
+
+/**
+ * Use this to sample a random candidate from a collection of distributions of candidates.
+ * Sample a point multiple times after the constructor call.
+ * @param {CandidateDistribution[]} candidateDistributions
+ */
 export default function CandidateDistributionSampler(candidateDistributions) {
-    // Use this to sample a random candidate from a collection of distributions of candidates.
-    // Sample a point multiple times after the constructor call.
     const self = this
     // cumulative distribution function
     const cdf = getCDF(candidateDistributions)

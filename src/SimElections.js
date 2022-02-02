@@ -1,11 +1,21 @@
+/** @module */
+
 import CandidateDistributionSampler from './CandidateDistributionSampler.js'
 import simpleCandidate from './simpleCandidate.js'
 
-// Simulate winners from many elections
-// Candidates are sampled from a distribution
-// Winners are drawn as points
-// The simulation is dynamic. More simulations are performed at each frame.
-
+//
+//
+//
+//
+/**
+ * Simulate winners from many elections
+ * Candidates are sampled from a distribution
+ * Winners are drawn as points
+ * The simulation is dynamic. More simulations are performed at each frame.
+ * @param {Screen} screen
+ * @param {Menu} menu
+ * @param {Election} election
+ */
 export default function SimElections(screen, menu, election) {
     const self = this
 

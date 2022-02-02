@@ -1,10 +1,12 @@
-export default function addSVGOutput(screen, draw) {
-    // add a button so that we can generate an SVG of what is being rendered
-    // Two arguments:
-    //   (1) the screen where the drawing context is
-    //       (so that the drawing context can be temporarily replaced),
-    //   (2) the drawing function that renders drawings to the context.
+/** @module */
 
+/**
+ * add a button so that we can generate an SVG of what is being rendered
+ * @param {Object} screen the screen where the drawing context is.
+ * We will temporarily change the drawing context.
+ * @param {Object} draw the drawing function that renders drawings to the context.
+ */
+export default function addSVGOutput(screen, draw) {
     const w = screen.width
     const h = screen.height
 

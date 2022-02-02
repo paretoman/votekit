@@ -1,6 +1,11 @@
-export default function plurality(votes) {
-    // the candidate with the highest tally wins
+/** @module */
 
+/**
+ * the candidate with the highest tally wins
+ * @param {*} votes
+ * @returns
+ */
+export default function plurality(votes) {
     const max = Math.max(...votes.tallyFractions)
     const iWinner = votes.tallyFractions.indexOf(max)
 

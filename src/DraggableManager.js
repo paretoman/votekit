@@ -1,6 +1,12 @@
+/** @module */
+
+/**
+ * Draggable Manager gives draggable behavior to objects on a canvas.
+ * If anything changes, an item is added to the "changes" array.
+ * @param {Screen} screen
+ * @param {Changes} changes
+ */
 export default function DraggableManager(screen, changes) {
-    // Draggable Manager gives draggable behavior to objects on a canvas.
-    // If anything changes, an item is added to the "changes" array.
     const self = this
 
     // private variables

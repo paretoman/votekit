@@ -1,3 +1,5 @@
+/** @module */
+
 import Changes from './Changes.js'
 import DraggableManager from './DraggableManager.js'
 import Screen from './Screen.js'
@@ -6,9 +8,14 @@ import Menu from './Menu.js'
 import Election from './Election.js'
 import Sim from './Sim.js'
 
+/**
+ * Set up a user interface to run a simulation.
+ * @param {Object} config
+ * @param {String} config.idScript - The id of an element.
+ * We will append the user interface as a sibling.
+ * @param {String} config.initialState - The game state of the simulation to load initially.
+ */
 export default function sandbox(config) {
-    // Set up a user interface to run a simulation.
-
     // manage dependent calculations because we only want to do calculations if we need to
     const changes = new Changes()
 

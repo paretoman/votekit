@@ -1,10 +1,16 @@
+/** @module */
+
+/**
+ * Set up a screen to view some objects.
+ * A detail here is that we have browser pixels and device pixels.
+ * Broswer pixels feel about the same size on any device (visual arc length).
+ * Device pixels can be much smaller for high-dpi devices.
+ * @param {String} id - The id of an element.
+ * We will append the user interface as a sibling.
+ * @param {Number} w - width in browser pixels of the canvas.
+ * @param {Number} h - height in browser pixels of the canvas.
+ */
 export default function Screen(id, w, h) {
-    // set up a screen to view some objects
-
-    // A detail here is that we have browser pixels and device pixels.
-    // Broswer pixels feel about the same size on any device. (visual arc length)
-    // Device pixels can be much smaller for high-dpi devices.
-
     const self = this
 
     self.width = w // measured in browser pixels

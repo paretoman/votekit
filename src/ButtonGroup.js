@@ -1,11 +1,11 @@
-/** *******************
+/** @module */
 
-Create a group of buttons,
-only one of which can be activated at a time.
-
-******************** */
 import Button from './Button.js'
 
+/**
+ * Create a group of buttons.
+ * @param {*} config
+ */
 export default function ButtonGroup(config) {
     const self = this
     self.config = config

@@ -1,8 +1,20 @@
+/** @module */
+
 import { Tween } from '../lib/tween.esm.js'
 
+/**
+ */
+
+/**
+ * Shows a circle at the parent object xy coordinates.
+ * Animates the circle when picking up and dropping.
+ * @param {(Candidate|CandidateDistribution|VoterCircle|SimVoterCircle)} parent
+ *  - something with x and y attributes.
+ * @param {Number} r - radius of graphic
+ * @param {String} color - color code
+ * @param {Screen} screen - something with .ctx to draw to.
+ */
 export default function CircleGraphic(parent, r, color, screen) {
-    // shows a circle at the parent object xy coordinates
-    // animates the circle when picking up and dropping
     const self = this
 
     self.r = r

@@ -1,10 +1,21 @@
+/** @module */
+
 import SquareGraphic from './SquareGraphic.js'
 import { drawStrokedColor, textPercent } from './graphicsUtilities.js'
 
+/**
+ * Candidate class on top of handle.
+ * Candidate adds candidate behavior on top of a draggable handle handle.
+ * @param {Number} x
+ * @param {Number} y
+ * @param {Number} w
+ * @param {Number} h
+ * @param {String} color
+ * @param {Screen} screen
+ * @param {DraggableManager} dragm
+ * @param {Election} election
+ */
 export default function Candidate(x, y, w, h, color, screen, dragm, election) {
-    // Candidate class on top of handle.
-    // Candidate adds candidate behavior on top of a draggable handle handle.
-
     const self = this
 
     self.x = x

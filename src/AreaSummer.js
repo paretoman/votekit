@@ -1,6 +1,10 @@
-export default function AreaSummer(cans) {
-    // Sum area of voter distributions to tally the votes
+/** @module */
 
+/**
+ * Sum area of voter distributions to tally the votes.
+ * @param {*} cans
+ */
+export default function AreaSummer(cans) {
     const self = this
 
     const lines = findLines(cans)

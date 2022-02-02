@@ -1,3 +1,5 @@
+/** @module */
+
 // d3-voronoi
 // d3-select
 // d3-range
@@ -5,9 +7,13 @@
 import { Delaunay } from 'https://cdn.skypack.dev/d3-delaunay@6'
 // https://github.com/d3/d3-delaunay
 
+/**
+ * Draw Voronoi cells to show votes.
+ * @param {VoterGroup} voterGroup
+ * @param {Election} election
+ * @param {Screen} screen
+ */
 export default function voronoiGroup(voterGroup, election, screen) {
-    // Draw Voronoi cells to show votes.
-
     const self = this
 
     let cans

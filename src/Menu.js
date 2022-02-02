@@ -1,8 +1,13 @@
+/** @module */
+
 import MenuItem from './MenuItem.js'
 
+/**
+ * Make a menu.
+ * @param {String} id - must be an element's id
+ * @param {Changes} changes
+ */
 export default function Menu(id, changes) {
-    // Make a menu.
-    // In order to make a
     const self = this
 
     // find id in divs

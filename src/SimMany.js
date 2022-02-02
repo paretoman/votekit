@@ -1,11 +1,20 @@
+/** @module */
+
 import SimVoterCircle from './SimVoterCircle.js'
 import SimElections from './SimElections.js'
 import CandidateDistribution from './CandidateDistribution.js'
 
+/**
+ * Simulate many elections with
+ *   candidates in random positions within a distribution, and
+ *   voters in a distribution that will be summed over.
+ * @param {Screen} screen
+ * @param {DraggableManager} dragm
+ * @param {Menu} menu
+ * @param {Changes} changes
+ * @param {Election} election
+ */
 export default function SimMany(screen, dragm, menu, changes, election) {
-    // Simulate many elections with
-    //   candidates in random positions within a distribution, and
-    //   voters in a distribution that will be summed over.
     const self = this
 
     const simElections = new SimElections(screen, menu, election)

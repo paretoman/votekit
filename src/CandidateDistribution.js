@@ -1,9 +1,18 @@
+/** @module */
+
 import SquareGraphic from './SquareGraphic.js'
 
+/**
+ * This represents a spatial distribution of candidates.
+ * A draggable handle handle provides draggable behavior.
+ * @param {Number} x
+ * @param {Number} y
+ * @param {Number} r
+ * @param {Screen} screen
+ * @param {DraggableManager} dragm
+ * @param {Election} election
+ */
 export default function CandidateDistribution(x, y, r, screen, dragm, election) {
-    // This represents a spatial distribution of candidates.
-    // A draggable handle handle provides draggable behavior.
-
     const self = this
 
     self.x = x

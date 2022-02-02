@@ -1,10 +1,23 @@
+/** @module */
+
 import ButtonGroup from './ButtonGroup.js'
 
+/**
+ * Make a selection that determines a single property's value.
+ * Defer handling dependent calculations to the next update step,
+ * where we will look at a dependency tree to determine what else needs updating.
+ * @param {Object.<string>} object
+ * @param {(String|Number|Boolean)} object.prop - The property being selected in the menu.
+ * @param {String} prop - Name of prop
+ * @param {Function} setProp - The callback function that is called to
+ * @callback setProp
+ * @param {String} label - The prompt presented to the user.
+ * @param {Object[]} options - the list of options that the UI presents to the user.
+ * @param {(String|Number|Boolean)} options[].value - Value to pass to setProp
+ * @param {String[]} change - list of changes made when pressing a button.
+ * @param {Changes} changes
+ */
 export default function MenuItem(object, prop, setProp, label, options, change, changes) {
-    // Make a selection that determines a single property's value.
-    // Defer handling dependent calculations to the next update step,
-    // where we will look at a dependency tree to determine what else needs updating.
-
     const self = this
     self.list = options
     self.onChoose = function (data) {

@@ -1,13 +1,22 @@
+/** @module */
+
 import { Tween } from '../lib/tween.esm.js'
 
+/**
+ * Square is a graphic.
+ * It displays itself on a parent object.
+ * Its parent object stores its x and y.
+ * It shows a square at the parent object xy coordinates.
+ * It animates the square when picking up and dropping.
+ * @param {Object} parent
+ * @param {Number} parent.x
+ * @param {Number} parent.y
+ * @param {Number} w - width of square to draw.
+ * @param {Number} h - height of square to draw.
+ * @param {String} color
+ * @param {Screen} screen
+ */
 export default function SquareGraphic(parent, w, h, color, screen) {
-    // square is a graphic
-    // it displays itself on a parent object
-    // its parent object stores its x and y
-    // shows a square at the parent object xy coordinates
-    // animates the square when picking up and dropping
-    //
-
     const self = this
     self.w = w // display width, because we're going to make animations with it
     self.h = h

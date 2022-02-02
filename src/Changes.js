@@ -1,6 +1,9 @@
-export default function Changes() {
-    // keep track of changes that occur to a simulation's configuration.
+/** @module */
 
+/**
+ * keep track of changes that occur to a simulation's configuration.
+ */
+export default function Changes() {
     const self = this
 
     const changes = ['init']

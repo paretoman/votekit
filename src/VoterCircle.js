@@ -1,10 +1,19 @@
+/** @module */
+
 import CircleGraphic from './CircleGraphic.js'
 import VoronoiGroup from './VoronoiGroup.js'
 
+/**
+ * VoterCircle class with Handle component to take care of dragging.
+ * VoronoiGroup component takes care of drawing votes.
+ * @param {Number} x
+ * @param {Number} y
+ * @param {Number} r - radius of circle of candidate positions.
+ * @param {Screen} screen
+ * @param {DraggableManager} dragm
+ * @param {Election} election
+ */
 export default function VoterCircle(x, y, r, screen, dragm, election) {
-    // VoterCircle class with Handle component to take care of dragging.
-    // VoronoiGroup component takes care of drawing votes.
-
     const self = this
 
     self.x = x

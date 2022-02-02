@@ -1,12 +1,22 @@
+/** @module */
+
 import SimOne from './SimOne.js'
 import SimMany from './SimMany.js'
 
+/**
+ * Simulation is the main task we're trying to accomplish in this program.
+ * There are multiple states that the sim can be in.
+ * Each state simulates something different.
+ * Each state has initialization, update, and render procedures.
+ * This is a state machine.
+ * @param {Screen} screen
+ * @param {DraggableManager} dragm
+ * @param {Menu} menu
+ * @param {Changes} changes
+ * @param {Election} election
+ * @param {String} initialState
+ */
 export default function Sim(screen, dragm, menu, changes, election, initialState) {
-    // Simulation is the main task we're trying to accomplish in this program.
-    // There are multiple states that the sim can be in.
-    // Each state simulates something different.
-    // Each state has initialization, update, and render procedures.
-    // This is a state machine.
     const self = this
 
     const sims = {

@@ -1,8 +1,13 @@
+/** @module */
+
 import electionMethods from './electionMethods/electionMethods.js'
 
+/**
+ * Store settings and functions that deal with the election method.
+ * @param {Candidate[]} candidates
+ * @param {Menu} menu
+ */
 export default function ElectionMethod(candidates, menu) {
-    // Store settings and functions that deal with the election method.
-
     const self = this
 
     self.run = (votes) => {

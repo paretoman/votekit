@@ -1,6 +1,10 @@
+/** @module */
+
 import pluralityBallot from './pluralityBallot.js'
 
-// a collection of ways to cast votes
+/**
+ * a collection of ways to cast votes
+ */
 
 const castVotes = { pluralityBallot }
 

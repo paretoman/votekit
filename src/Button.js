@@ -1,3 +1,10 @@
+/** @module */
+
+/**
+ * Class for a single button.
+ * @param {*} buttonConfig
+ * @param {*} onChoose
+ */
 export default function Button(buttonConfig, onChoose) {
     const self = this
 
