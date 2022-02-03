@@ -1,7 +1,7 @@
 /** @module */
 
-import VoterCircle from '../../simObjects/VoterCircle.js'
-import Candidate from '../../simObjects/Candidate.js'
+import VoterCircle from '../entities/VoterCircle.js'
+import Candidate from '../entities/Candidate.js'
 
 /**
  * Simulate one election with
