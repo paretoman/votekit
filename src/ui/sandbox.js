@@ -5,9 +5,9 @@ import DraggableManager from './DraggableManager.js'
 import Screen from './Screen.js'
 import addSVGOutput from './addSVGOutput.js'
 import Menu from '../menu/Menu.js'
-import Election from './Election.js'
+import Election from '../election/Election.js'
 import Sim from '../sim/Sim.js'
-import SimElections from './SimElections.js'
+import SimElections from '../election/SimElections.js'
 
 /**
  * Set up a user interface to run a simulation.

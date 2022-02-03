@@ -1,7 +1,7 @@
 /** @module */
 
-import CandidateDistributionSampler from '../sim/entities/CandidateDistributionSampler.js'
-import simpleCandidate from '../sim/entities/SimpleCandidate.js'
+import CandidateDistributionSampler from './CandidateDistributionSampler.js'
+import simpleCandidate from './simpleCandidate.js'
 
 /**
  * Simulate winners from many elections.
