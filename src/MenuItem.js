@@ -9,8 +9,7 @@ import ButtonGroup from './ButtonGroup.js'
  * @param {Object.<string>} object
  * @param {(String|Number|Boolean)} object.prop - The property being selected in the menu.
  * @param {String} prop - Name of prop
- * @param {Function} setProp - The callback function that is called to
- * @callback setProp
+ * @param {MenuItem~setProp} setProp - The action that is performed as part of onclick.
  * @param {String} label - The prompt presented to the user.
  * @param {Object[]} options - the list of options that the UI presents to the user.
  * @param {(String|Number|Boolean)} options[].value - Value to pass to setProp
@@ -41,5 +40,11 @@ export default function MenuItem(object, prop, setProp, label, options, change, 
         self.choose.highlight('value', object[prop])
     }
 }
+
+/**
+ * Called in onclick.
+ * @callback MenuItem~setProp
+ * @param {(String|Number|Boolean)} value
+ */
 
 function bw(x) { return (220 - 4 * (x - 1)) / x - 2 }

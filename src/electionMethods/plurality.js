@@ -2,8 +2,9 @@
 
 /**
  * the candidate with the highest tally wins
- * @param {*} votes
- * @returns
+ * @param {Object} votes
+ * @param {Number[]} votes.tallyFractions
+ * @returns {results}
  */
 export default function plurality(votes) {
     const max = Math.max(...votes.tallyFractions)
@@ -12,3 +13,7 @@ export default function plurality(votes) {
     const results = { iWinner }
     return results
 }
+/**
+ * @typedef {Object} results
+ * @property {Number} iWinner - Index of winner. Indexing according to votes[].
+ */
