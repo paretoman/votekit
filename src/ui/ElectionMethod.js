@@ -1,6 +1,6 @@
 /** @module */
 
-import electionMethods from './electionMethods/electionMethods.js'
+import electionMethods from '../electionMethods/electionMethods.js'
 
 /**
  * Store settings and functions that deal with the election method.

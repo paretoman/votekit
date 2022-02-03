@@ -1,6 +1,6 @@
 /** @module */
 
-import castVotes from './castVotes/castVotes.js'
+import castVotes from '../castVotes/castVotes.js'
 import ElectionMethod from './ElectionMethod.js'
 
 /**

@@ -1,6 +1,6 @@
 /** @module */
 
-import AreaSummer from '../AreaSummer.js'
+import AreaSummer from './AreaSummer.js'
 
 /**
  * Vote for one.

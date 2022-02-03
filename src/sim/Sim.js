@@ -1,7 +1,7 @@
 /** @module */
 
-import SimOne from './SimOne.js'
-import SimMany from './SimMany.js'
+import SimOne from './simStates/SimOne.js'
+import SimMany from './simStates/SimMany.js'
 
 /**
  * Simulation is the main task we're trying to accomplish in this program.
