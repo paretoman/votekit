@@ -1,7 +1,7 @@
 /** @module */
 
-import CandidateDistributionSampler from '../../simObjects/CandidateDistributionSampler.js'
-import simpleCandidate from '../../simObjects/SimpleCandidate.js'
+import CandidateDistributionSampler from '../simObjects/CandidateDistributionSampler.js'
+import simpleCandidate from '../simObjects/SimpleCandidate.js'
 
 //
 //

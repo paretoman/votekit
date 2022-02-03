@@ -14,14 +14,15 @@ import SimMany from './simStates/SimMany.js'
  * @param {Menu} menu
  * @param {Changes} changes
  * @param {Election} election
+ * @param {SimElections} simElections
  * @param {String} initialState
  */
-export default function Sim(screen, dragm, menu, changes, election, initialState) {
+export default function Sim(screen, dragm, menu, changes, election, simElections, initialState) {
     const self = this
 
     const sims = {
         one: new SimOne(screen, dragm, menu, changes, election),
-        many: new SimMany(screen, dragm, menu, changes, election),
+        many: new SimMany(screen, dragm, menu, changes, simElections),
     }
 
     self.state = initialState
@@ -37,7 +38,7 @@ export default function Sim(screen, dragm, menu, changes, election, initialState
             if (self.state === 'one') {
                 sims[self.state] = new SimOne(screen, dragm, menu, changes, election)
             } else {
-                sims[self.state] = new SimMany(screen, dragm, menu, changes, election)
+                sims[self.state] = new SimMany(screen, dragm, menu, changes, simElections)
             }
         }
 

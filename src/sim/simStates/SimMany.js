@@ -1,7 +1,6 @@
 /** @module */
 
 import SimVoterCircle from '../../simObjects/SimVoterCircle.js'
-import SimElections from './SimElections.js'
 import CandidateDistribution from '../../simObjects/CandidateDistribution.js'
 
 /**
@@ -12,12 +11,10 @@ import CandidateDistribution from '../../simObjects/CandidateDistribution.js'
  * @param {DraggableManager} dragm
  * @param {Menu} menu
  * @param {Changes} changes
- * @param {Election} election
+ * @param {SimElection} simElections
  */
-export default function SimMany(screen, dragm, menu, changes, election) {
+export default function SimMany(screen, dragm, menu, changes, simElections) {
     const self = this
-
-    const simElections = new SimElections(screen, menu, election)
 
     const cd = new CandidateDistribution(300, 300, 400, screen, dragm, simElections)
     const ci = new SimVoterCircle(100, 300, 200, screen, dragm, simElections)

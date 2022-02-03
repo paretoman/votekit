@@ -7,6 +7,7 @@ import addSVGOutput from './addSVGOutput.js'
 import Menu from '../menu/Menu.js'
 import Election from './Election.js'
 import Sim from '../sim/Sim.js'
+import SimElections from './SimElections.js'
 
 /**
  * Set up a user interface to run a simulation.
@@ -28,7 +29,9 @@ export default function sandbox(config) {
 
     const election = new Election(menu)
 
-    const sim = new Sim(screen, dragm, menu, changes, election, config.initialState)
+    const simElections = new SimElections(screen, menu, election)
+
+    const sim = new Sim(screen, dragm, menu, changes, election, simElections, config.initialState)
 
     window.requestAnimationFrame(gameLoop)
 
