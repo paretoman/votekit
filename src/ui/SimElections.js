@@ -3,14 +3,10 @@
 import CandidateDistributionSampler from '../simObjects/CandidateDistributionSampler.js'
 import simpleCandidate from '../simObjects/SimpleCandidate.js'
 
-//
-//
-//
-//
 /**
- * Simulate winners from many elections
- * Candidates are sampled from a distribution
- * Winners are drawn as points
+ * Simulate winners from many elections.
+ * Candidates are sampled from a distribution.
+ * Winners are drawn as points.
  * The simulation is dynamic. More simulations are performed at each frame.
  * @param {Screen} screen
  * @param {Menu} menu
