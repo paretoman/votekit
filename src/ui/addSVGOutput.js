@@ -1,5 +1,6 @@
 /** @module */
 
+import { C2S } from '../../lib/canvas2svg.esm.js'
 /**
  * add a button so that we can generate an SVG of what is being rendered
  * @param {Object} screen the screen where the drawing context is.
@@ -41,7 +42,7 @@ export default function addSVGOutput(screen, draw) {
     svgDiv.hidden = true
     svgUIDiv.appendChild(svgDiv)
 
-    const svgCtx = new window.C2S(w, h)
+    const svgCtx = new C2S(w, h)
 
     function makeSVG() {
         // temporarily swap drawing context, render SVG,

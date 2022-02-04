@@ -4,7 +4,8 @@
 // d3-select
 // d3-range
 
-import { Delaunay } from 'https://cdn.skypack.dev/d3-delaunay@6'
+import { Delaunay } from '../../../lib/d3-delaunay.esm.js'
+// import { Delaunay } from 'https://cdn.skypack.dev/d3-delaunay@6'
 // https://github.com/d3/d3-delaunay
 
 /**
