@@ -20,9 +20,10 @@ import SimMany from './states/SimMany.js'
 export default function Sim(screen, dragm, menu, changes, election, simElections, initialState) {
     const self = this
 
+    changes.add(['simType'])
     const sims = {
-        one: new SimOne(screen, dragm, menu, changes, election),
-        many: new SimMany(screen, dragm, menu, changes, simElections),
+        one: {},
+        many: {},
     }
 
     self.state = initialState
