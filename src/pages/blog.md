@@ -25,3 +25,11 @@ https://stackoverflow.com/a/69665352
 It was difficult to get source maps working. My workaround was to remove inline javascript code from the html, which is probably good anyway. 
 
 Here's an interesting sourcemap visualizer: https://parceljs.org/plugin-system/source-maps/#diagnosing-issues
+
+Tried a few different build steps during deployment to netlify. Build-2 worked. It keeps relative paths.
+
+    "build-1": "parcel build ./src/pages/*.html ./src/test/test.html --public-url ./",
+    "build-2": "parcel build ./src/pages/*.html ./src/test/test.html --public-url ../",
+    "build-3": "parcel build ./src/pages/*.html ./src/test/test.html"
+
+
