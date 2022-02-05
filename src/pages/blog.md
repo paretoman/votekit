@@ -26,7 +26,7 @@ It was difficult to get source maps working. My workaround was to remove inline 
 
 Here's an interesting sourcemap visualizer: https://parceljs.org/plugin-system/source-maps/#diagnosing-issues
 
-Tried a few different build steps during deployment to netlify. Build-2 worked. It keeps relative paths.
+Tried a few different build steps during deployment to netlify. Build-2 worked. It keeps relative paths. I set the publish directory on netlify to "dist".
 
     "build-1": "parcel build ./src/pages/*.html ./src/test/test.html --public-url ./",
     "build-2": "parcel build ./src/pages/*.html ./src/test/test.html --public-url ../",
