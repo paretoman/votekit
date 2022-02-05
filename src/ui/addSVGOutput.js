@@ -12,7 +12,6 @@ export default function addSVGOutput(screen, draw) {
     const h = screen.height
 
     const svgUIDiv = document.createElement('div')
-    screen.canvas.parentNode.appendChild(svgUIDiv)
 
     // svg output button
     const button = document.createElement('button')
@@ -72,4 +71,6 @@ export default function addSVGOutput(screen, draw) {
         svgHideButton.hidden = true
         downloadLink.hidden = true
     }
+
+    return svgUIDiv
 }

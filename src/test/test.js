@@ -1,6 +1,6 @@
 /** @module */
 
-import { testEquidistantLine } from './AreaSummer.js'
+import { testEquidistantLine } from '../castVotes/AreaSummer.js'
 import { eq, assert, tests } from '../../lib/tinytest.esm.js'
 
 /**

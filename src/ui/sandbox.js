@@ -8,6 +8,7 @@ import Menu from '../menu/Menu.js'
 import Election from '../election/Election.js'
 import Sim from '../sim/Sim.js'
 import SimElections from '../election/SimElections.js'
+import divSandbox from './divSandbox.js'
 
 /**
  * Set up a user interface to run a simulation.
@@ -17,13 +18,16 @@ import SimElections from '../election/SimElections.js'
  * @param {String} config.initialState - The game state of the simulation to load initially.
  */
 export default function sandbox(config) {
+    const { initialState } = config
+
     // manage dependent calculations because we only want to do calculations if we need to
     const changes = new Changes()
 
-    const menu = new Menu(config.idScript, changes)
+    const menu = new Menu(changes)
 
-    const screen = new Screen(config.idScript, 600, 600)
-    addSVGOutput(screen, draw)
+    const screen = new Screen(600, 600)
+
+    const svgUIDiv = addSVGOutput(screen, draw)
 
     const dragm = new DraggableManager(screen, changes)
 
@@ -31,9 +35,13 @@ export default function sandbox(config) {
 
     const simElections = new SimElections(screen, menu, election)
 
-    const sim = new Sim(screen, dragm, menu, changes, election, simElections, config.initialState)
+    const sim = new Sim(screen, dragm, menu, changes, election, simElections, initialState)
+
+    const div = divSandbox(menu, screen, svgUIDiv)
 
     window.requestAnimationFrame(gameLoop)
+
+    return div
 
     function gameLoop() {
         update()

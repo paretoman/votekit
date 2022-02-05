@@ -10,7 +10,7 @@ module.exports = {
         ecmaVersion: 'latest',
         sourceType: 'module',
     },
-    ignorePatterns: ['temp', 'lib'],
+    ignorePatterns: ['temp', 'lib', 'dist'],
     rules: {
         semi: ['error', 'never'],
         // we use 4 spaces to indent our code
