@@ -9,10 +9,7 @@
   "scripts": {
     "doc": "jsdoc -c jsdoc.json",
     "dev": "parcel serve ./src/pages/index.html --public-url ./",
-    "build": "rimraf dist && parcel build ./src/pages/*.html ./src/test/test.html --public-url ./",
-    "build-1": "rimraf dist && parcel build ./src/pages/*.html ./src/test/test.html --public-url ./",
-    "build-2": "rimraf dist && parcel build ./src/pages/*.html ./src/test/test.html --public-url ../",
-    "build-3": "rimraf dist && parcel build ./src/pages/*.html ./src/test/test.html"
+    "build": "rimraf dist && parcel build ./src/pages/*.html ./src/test/test.html --public-url ../"
   },
   "dependencies": {
     "parcel": "^2.2.1"
