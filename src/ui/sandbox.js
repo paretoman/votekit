@@ -8,7 +8,7 @@ import Menu from '../menu/Menu.js'
 import Election from '../election/Election.js'
 import Sim from '../sim/Sim.js'
 import SimElections from '../election/SimElections.js'
-import divSandbox from './divSandbox.js'
+import Layout from './Layout.js'
 
 /**
  * Set up a user interface to run a simulation.
@@ -23,11 +23,13 @@ export default function sandbox(config) {
     // manage dependent calculations because we only want to do calculations if we need to
     const changes = new Changes()
 
-    const menu = new Menu(changes)
+    const layout = new Layout(['menu', 'screen', 'svgUIDiv'])
 
-    const screen = new Screen(600, 600)
+    const menu = new Menu(changes, layout)
 
-    const svgUIDiv = addSVGOutput(screen, draw)
+    const screen = new Screen(600, 600, layout)
+
+    addSVGOutput(screen, draw, layout)
 
     const dragm = new DraggableManager(screen, changes)
 
@@ -37,7 +39,7 @@ export default function sandbox(config) {
 
     const sim = new Sim(screen, dragm, menu, changes, election, simElections, initialState)
 
-    const div = divSandbox(menu, screen, svgUIDiv)
+    const div = layout.makeComponent()
 
     window.requestAnimationFrame(gameLoop)
 

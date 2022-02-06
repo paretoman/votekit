@@ -7,8 +7,9 @@
  * Device pixels can be much smaller for high-dpi devices.
  * @param {Number} w - width in browser pixels of the canvas.
  * @param {Number} h - height in browser pixels of the canvas.
+ * @param {Layout} layout
  */
-export default function Screen(w, h) {
+export default function Screen(w, h, layout) {
     const self = this
 
     self.width = w // measured in browser pixels
@@ -17,6 +18,8 @@ export default function Screen(w, h) {
     // attach canvas
     self.canvas = document.createElement('canvas')
     self.canvas.setAttribute('class', 'interactive')
+
+    layout.newDiv('screen', self.canvas)
 
     self.ctx = self.canvas.getContext('2d')
     self.noBuffers = false

@@ -6,12 +6,14 @@ import { C2S } from '../../lib/canvas2svg.esm.js'
  * @param {Object} screen the screen where the drawing context is.
  * We will temporarily change the drawing context.
  * @param {Object} draw the drawing function that renders drawings to the context.
+ * @param {Layout} layout
  */
-export default function addSVGOutput(screen, draw) {
+export default function addSVGOutput(screen, draw, layout) {
     const w = screen.width
     const h = screen.height
 
     const svgUIDiv = document.createElement('div')
+    layout.newDiv('svgUIDiv', svgUIDiv)
 
     // svg output button
     const button = document.createElement('button')
@@ -71,6 +73,4 @@ export default function addSVGOutput(screen, draw) {
         svgHideButton.hidden = true
         downloadLink.hidden = true
     }
-
-    return svgUIDiv
 }

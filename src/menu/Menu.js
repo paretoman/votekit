@@ -5,11 +5,12 @@ import MenuItem from './MenuItem.js'
 /**
  * Make a menu.
  * @param {Changes} changes
+ * @param {Layout} layout
  */
-export default function Menu(changes) {
+export default function Menu(changes, layout) {
     const self = this
-
     self.divMenu = document.createElement('div')
+    layout.newDiv('menu', self.divMenu)
     self.addMenuItem = function (object, choice) {
         const {
             prop, setProp, label, options, change,
