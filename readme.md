@@ -2,9 +2,7 @@
 
 ## Try
 
-Try it out at https://votekit.netlify.app/pages/
-
-Here it is as part of a github-pages site at https://www.howtofixtheelection.com/votekit-example
+Here it is as part of a github-pages site at https://www.howtofixtheelection.com/votekit-example.
 
 ## Use
 
