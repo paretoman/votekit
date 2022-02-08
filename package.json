@@ -9,7 +9,8 @@
   "scripts": {
     "doc": "jsdoc -c jsdoc.json",
     "dev": "parcel serve ./src/pages/index.html --public-url ./",
-    "build": "rimraf dist && parcel build ./src/pages/*.html ./src/test/test.html --public-url ../"
+    "build": "rimraf dist && parcel build ./src/pages/*.html ./src/test/test.html --public-url ../",
+    "publish-docs": "cd docs && git add . && git commit && git push -u"
   },
   "dependencies": {
     "parcel": "^2.2.1"
