@@ -2,7 +2,7 @@
 
 /**
  * Sum area of voter distributions to tally the votes.
- * @param {*} cans
+ * @param {Candidate[]} cans
  */
 export default function AreaSummer(cans) {
     const self = this
