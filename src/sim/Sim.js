@@ -2,6 +2,7 @@
 
 import SimOne from './states/SimOne.js'
 import SimMany from './states/SimMany.js'
+import SimGeoOne from './states/SimGeoOne.js'
 
 /**
  * Simulation is the main task we're trying to accomplish in this program.
@@ -15,15 +16,26 @@ import SimMany from './states/SimMany.js'
  * @param {Changes} changes
  * @param {Election} election
  * @param {SimElections} simElections
+ * @param {GeoElection} geoElection
  * @param {String} initialState
  */
-export default function Sim(screen, dragm, menu, changes, election, simElections, initialState) {
+export default function Sim(
+    screen,
+    dragm,
+    menu,
+    changes,
+    election,
+    simElections,
+    geoElection,
+    initialState,
+) {
     const self = this
 
     changes.add(['simType'])
     const sims = {
         one: {},
         many: {},
+        geoOne: {},
     }
 
     self.state = initialState
@@ -38,8 +50,10 @@ export default function Sim(screen, dragm, menu, changes, election, simElections
             // enter state
             if (self.state === 'one') {
                 sims[self.state] = new SimOne(screen, dragm, menu, changes, election)
-            } else {
+            } else if (self.state === 'many') {
                 sims[self.state] = new SimMany(screen, dragm, menu, changes, simElections)
+            } else if (self.state === 'geoOne') {
+                sims[self.state] = new SimGeoOne(screen, dragm, menu, changes, geoElection)
             }
         }
 
@@ -55,6 +69,7 @@ export default function Sim(screen, dragm, menu, changes, election, simElections
     self.typeList = [
         { name: 'One Election', value: 'one', state: '' },
         { name: 'Many Elections', value: 'many', state: '' },
+        { name: 'Geo Election', value: 'geoOne', state: '' },
     ]
     menu.addMenuItem(
         self,

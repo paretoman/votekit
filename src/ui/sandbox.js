@@ -8,6 +8,7 @@ import Menu from '../menu/Menu.js'
 import Election from '../election/Election.js'
 import Sim from '../sim/Sim.js'
 import SimElections from '../election/SimElections.js'
+import GeoElection from '../election/GeoElection.js'
 import Layout from './Layout.js'
 
 /**
@@ -37,7 +38,10 @@ export default function sandbox(config) {
 
     const simElections = new SimElections(screen, menu, election)
 
-    const sim = new Sim(screen, dragm, menu, changes, election, simElections, initialState)
+    const geoElection = new GeoElection(menu)
+
+    // eslint-disable-next-line max-len
+    const sim = new Sim(screen, dragm, menu, changes, election, simElections, geoElection, initialState)
 
     const div = layout.makeComponent()
 
