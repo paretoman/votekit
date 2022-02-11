@@ -38,7 +38,7 @@ export default function sandbox(config) {
 
     const simElections = new SimElections(screen, menu, election)
 
-    const geoElection = new GeoElection(menu)
+    const geoElection = new GeoElection(screen, menu, election)
 
     // eslint-disable-next-line max-len
     const sim = new Sim(screen, dragm, menu, changes, election, simElections, geoElection, initialState)

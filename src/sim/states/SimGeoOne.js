@@ -31,6 +31,7 @@ export default function SimOne(screen, dragm, menu, changes, geoElection) {
     }
 
     self.render = () => {
+        geoElection.render()
         c1.render()
         c2.render()
         c3.render()

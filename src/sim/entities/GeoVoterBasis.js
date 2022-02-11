@@ -3,8 +3,8 @@
 import CircleGraphic from './CircleGraphic.js'
 
 /**
- * VoterCircle for simulations of many candidates
- * VoterCircle class with Handle component to take care of dragging.
+ * A basis of voters, to be moved around according to noise.
+ * Also, the user can move them around.
  * @param {Number} x
  * @param {Number} y
  * @param {Number} r - radius of circle of candidate positions.
@@ -42,6 +42,18 @@ export default function GeoVoterBasis(x, y, r, screen, dragm, geoElection) {
         ctx.beginPath()
         // ctx.fillStyle = "#eee"
         ctx.arc(self.x, self.y, self.r, 0, 2 * Math.PI)
+        // ctx.fill()
+        ctx.stroke()
+
+        // handle
+        circle.render()
+    }
+    self.renderAt = function (newX, newY) {
+        const { ctx } = screen
+        // circle
+        ctx.beginPath()
+        // ctx.fillStyle = "#eee"
+        ctx.arc(newX, newY, self.r, 0, 2 * Math.PI)
         // ctx.fill()
         ctx.stroke()
 

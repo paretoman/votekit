@@ -1,7 +1,8 @@
 /** @module */
 
-import ElectionMethod from './ElectionMethod.js'
-import castVotes from '../castVotes/castVotes.js'
+import geoNoise from './geoNoise.js'
+import NoiseImage from './NoiseImage.js'
+import simpleVoterGroup from './simpleVoterGroup.js'
 
 /**
  * An election with many districts.
@@ -12,34 +13,69 @@ import castVotes from '../castVotes/castVotes.js'
  * @param {Menu} menu
  * @param {Election} election
  */
-export default function GeoElection(menu) {
+export default function GeoElection(screen, menu, election) {
     const self = this
 
     const voterBasisSet = []
-    const candidates = []
-    self.method = new ElectionMethod(candidates, menu)
 
     self.newVoterBasis = function (voterBasis) {
         voterBasisSet.push(voterBasis)
     }
 
     self.newCandidate = function (can) {
-        candidates.push(can)
+        election.newCandidate(can)
     }
+
+    // Simplex Noise Parameters
+    let sn = []
+    const nx = 20 // noise image width
+    const ny = 20 // noise image height
+    const noiseWidth = 0.5
+    const noiseHeight = 0.5
+
+    /** Generate simplex noise. */
+    self.genNoise = () => {
+        sn = geoNoise(nx, ny, noiseWidth, noiseHeight)
+    }
+    self.genNoise()
 
     // Temporary function for showing tallies
     // Right now, just one district and just one voterCenter.
     self.updateTallies = function () {
         // only update the tallies for each candidate so they can be shown
 
-        // Voters cast votes for candidates.
-        const votes = castVotes.pluralityBallot(candidates, voterBasisSet)
+        // new set of voters
+        election.clearVoterGroups()
 
-        candidates.forEach((can, index) => {
-            const fraction = votes.tallyFractions[index]
-            can.setFraction(fraction)
+        voterBasisSet.forEach((vb) => {
+            sn.forEach((a) => {
+                a.forEach((n) => {
+                    simpleVoterGroup(vb.x + n[0] * 100, vb.y + n[1] * 100, vb.r, election)
+                })
+            })
         })
+
+        // visualize simplex noise
+        self.noiseImage.load(sn)
+
+        election.updateTallies()
     }
+
+    self.render = () => {
+        let i = 0
+        election.getVoterGroups().forEach((g) => {
+            voterBasisSet.forEach((b) => {
+                i = (i + 1) % 17 // draw only some circles
+                if (i === 0) {
+                    b.renderAt(g.x, g.y)
+                }
+            })
+        })
+        self.noiseImage.render(self.sn)
+    }
+
+    self.noiseImage = new NoiseImage(nx, ny, screen)
+
     // for each district
     // clear old voter groups
     // make a set of voter groups,

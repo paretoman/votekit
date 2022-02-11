@@ -25,15 +25,17 @@ export default function Election(menu) {
     self.clearCandidates = function () {
         candidates.splice(0, candidates.length)
     }
+    self.clearVoterGroups = function () {
+        voterGroups.splice(0, voterGroups.length)
+    }
     self.clear = () => {
         candidates.splice(0, candidates.length)
         voterGroups.splice(0, voterGroups.length)
     }
 
-    self.getCandidates = function () {
-        // return candidates.map(can =>  {x:can.x,y:can.y}) // todo: why doesn't this work?
-        return candidates
-    }
+    self.getCandidates = () => candidates
+
+    self.getVoterGroups = () => voterGroups
 
     // -- Update --
 
