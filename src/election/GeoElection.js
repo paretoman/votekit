@@ -5,6 +5,7 @@ import NoiseImage from './NoiseImage.js'
 import simpleVoterGroup from './simpleVoterGroup.js'
 import DistrictMaker from './DistrictMaker.js'
 import { range, jcopy } from './jsHelpers.js'
+import colorBlend, { toRGBA } from './colorBlend.js'
 
 /**
  * An election with many districts.
@@ -34,11 +35,11 @@ export default function GeoElection(screen, menu, election) {
     }
 
     // Districts
-    const nd = 10
+    const nd = 100
 
     // Display
-    const geoMapWidth = 200
-    const geoMapHeight = 200
+    const geoMapWidth = 150
+    const geoMapHeight = 150
 
     // Simplex Noise Parameters
     let sn = []
@@ -60,6 +61,7 @@ export default function GeoElection(screen, menu, election) {
     self.updateVotes = () => {
         self.updateTallies()
         self.updateGeoWinMap()
+        self.updateColorBlendGeoMap()
         self.updateWins()
     }
 
@@ -78,11 +80,29 @@ export default function GeoElection(screen, menu, election) {
                 })
             })
         })
+        election.updateTallies()
 
         // visualize simplex noise
-        self.noiseImage.load(sn)
+        // self.noiseImage.load(sn)
 
-        election.updateTallies()
+        // visualize with election data
+
+        const candidates = election.getCandidates()
+        const colorSet = candidates.map((can) => can.square.color)
+
+        const allColors = sn.map((rowNoise) => rowNoise.map((cellNoise) => {
+            election.clearVoterGroups()
+            voterBasisSet.forEach((vb) => {
+                const [xNoise, yNoise] = cellNoise
+                simpleVoterGroup(vb.x + xNoise * xAmp, vb.y + yNoise * yAmp, vb.r, election)
+            })
+            const votes = election.castVotes()
+            const { tallyFractions } = votes
+            const color = toRGBA(colorBlend(tallyFractions, colorSet))
+            return color
+        }))
+
+        self.noiseImage.loadColors(allColors)
     }
 
     self.updateGeoWinMap = () => {
@@ -126,6 +146,16 @@ export default function GeoElection(screen, menu, election) {
         election.setCandidateWins(histogram)
     }
 
+    self.updateColorBlendGeoMap = () => {
+        self.blendColors = self.resultsByDistrict.map((results) => {
+            const { tallyFractions } = results.votes
+            const candidates = election.getCandidates()
+            const colorSet = candidates.map((can) => can.square.color)
+            const color = colorBlend(tallyFractions, colorSet)
+            return color
+        })
+    }
+
     self.updateDistricts = () => {
         self.districtMaker.make(nx, ny, nd)
         // eslint-disable-next-line no-console
@@ -138,7 +168,8 @@ export default function GeoElection(screen, menu, election) {
         self.noiseImage.render(geoMapWidth, geoMapHeight)
 
         self.districtMaker.renderVoronoi(geoMapWidth, geoMapHeight)
-        self.districtMaker.renderVoronoiWinners(geoMapWidth, geoMapHeight, self.winnerColors)
+        self.districtMaker.renderVoronoiColors(450, 0, geoMapWidth, geoMapHeight, self.winnerColors)
+        self.districtMaker.renderVoronoiColors(225, 0, geoMapWidth, geoMapHeight, self.blendColors)
     }
 
     function renderPolicyNoise() {

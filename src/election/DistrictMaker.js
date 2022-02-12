@@ -21,27 +21,28 @@ export default function DistrictMaker(screen) {
 
     self.census = () => geoCensus(self)
 
+    /**
+     * Draw Voronoi cell boundaries.
+     * @param {Number} geoMapWidth - width of image
+     * @param {Number} geoMapHeight - height of image
+     */
     self.renderVoronoi = (geoMapWidth, geoMapHeight) => {
-        const { ctx } = screen
-        const {
-            centroids, voronoi, nx, ny,
-        } = self
-        const n = centroids.length
-        ctx.save()
-        const scaleX = geoMapWidth / nx
-        const scaleY = geoMapHeight / ny
-        ctx.scale(scaleX, scaleY)
-        for (let i = 0; i < n; i++) {
-            ctx.beginPath()
-            ctx.lineWidth = 2 / scaleX
-            voronoi.renderCell(i, ctx)
-            ctx.stroke()
-            renderAreaText(i)
-        }
-        ctx.restore()
+        self.renderVoronoiColors(0, 0, geoMapWidth, geoMapHeight, null, renderAreaText)
     }
 
-    self.renderVoronoiWinners = (geoMapWidth, geoMapHeight, winnerColors) => {
+    self.renderVoronoiColors = (x, y, geoMapWidth, geoMapHeight, colors) => {
+        self.renderVoronoiGeneral(x, y, geoMapWidth, geoMapHeight, colors, undefined)
+    }
+    /**
+     * Draw a Voronoi Diagram
+     * @param {Number} x - translate image
+     * @param {Number} y - translate image
+     * @param {Number} geoMapWidth - width of image
+     * @param {Number} geoMapHeight - height of image
+     * @param {string[]} colors - an option, say "null" if do not want colors
+     * @param {Function} textFunction - an option, defaults to undefined
+     */
+    self.renderVoronoiGeneral = (x, y, geoMapWidth, geoMapHeight, colors, textFunction) => {
         const { ctx } = screen
         const {
             centroids, voronoi, nx, ny,
@@ -50,15 +51,19 @@ export default function DistrictMaker(screen) {
         ctx.save()
         const scaleX = geoMapWidth / nx
         const scaleY = geoMapHeight / ny
-        ctx.translate(400, 0)
+        ctx.translate(x, y)
         ctx.scale(scaleX, scaleY)
         for (let i = 0; i < n; i++) {
             ctx.beginPath()
-            ctx.lineWidth = 2 / scaleX
+            ctx.strokeStyle = '#333'
+            ctx.lineWidth = 1 / scaleX
             voronoi.renderCell(i, ctx)
-            ctx.fillStyle = winnerColors[i]
-            ctx.fill()
+            if (colors !== null) { // option
+                ctx.fillStyle = colors[i]
+                ctx.fill()
+            }
             ctx.stroke()
+            if (textFunction !== undefined) renderAreaText(i) // option
         }
         ctx.restore()
     }
@@ -69,6 +74,6 @@ export default function DistrictMaker(screen) {
         const textHeight = 1
         // const area = textPercent(self.polygonAreas[i] / (self.nx * self.ny))
         const area = self.polygonAreas[i].toFixed(0)
-        drawStrokedColor(area, c[0], c[1] - textHeight * 0.5 - 0.2, textHeight, 0.2, '#222', ctx)
+        drawStrokedColor(area, c[0], c[1] + textHeight * 0.5 - 0.2, textHeight, 0.2, '#222', ctx)
     }
 }

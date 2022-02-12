@@ -35,6 +35,23 @@ export default function NoiseImage(nx, ny, screen) {
         offCtx.putImageData(imageData, 0, 0)
     }
 
+    self.loadColors = (colors) => {
+        const { data } = imageData
+
+        for (let x = 0; x < nx; x++) {
+            for (let y = 0; y < ny; y++) {
+                const color = colors[x][y]
+                const [r, g, b] = color
+                data[(x + y * nx) * 4 + 0] = r
+                data[(x + y * nx) * 4 + 1] = g
+                data[(x + y * nx) * 4 + 2] = b
+                data[(x + y * nx) * 4 + 3] = 255
+            }
+        }
+
+        offCtx.putImageData(imageData, 0, 0)
+    }
+
     self.render = (renderWidth, renderHeight) => {
         const { ctx } = screen
         ctx.save()

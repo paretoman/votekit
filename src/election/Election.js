@@ -44,7 +44,8 @@ export default function Election(menu) {
         // There is also a separate graphical representation in VoronoiGroup.js
         const votes = castVotes.pluralityBallot(candidates, voterGroups)
 
-        const electionResults = self.method.run(votes)
+        const methodResults = self.method.run(votes)
+        const electionResults = { ...methodResults, votes }
         return electionResults
     }
 
@@ -53,8 +54,12 @@ export default function Election(menu) {
 
         // Voters cast votes for candidates.
         // There is also a separate graphical representation in VoronoiGroup.js
-        const votes = castVotes.pluralityBallot(candidates, voterGroups)
+        const votes = self.castVotes()
         self.setCandidateFractions(votes.tallyFractions)
+    }
+    self.castVotes = () => {
+        const votes = castVotes.pluralityBallot(candidates, voterGroups)
+        return votes
     }
     self.setCandidateFractions = (fractions) => {
         candidates.forEach((can, index) => {
