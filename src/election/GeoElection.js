@@ -52,6 +52,12 @@ export default function GeoElection(screen, menu, election) {
     }
     self.genNoise()
 
+    self.updateVotes = () => {
+        self.updateTallies()
+        self.updateGeoWinMap()
+        self.updateWins()
+    }
+
     // Show tallies over all the districts
     self.updateTallies = function () {
         // only update the tallies for each candidate so they can be shown
@@ -78,7 +84,7 @@ export default function GeoElection(screen, menu, election) {
         // Loop through districts.
         // Find who won.
         self.savedVoterGroups = Array(nd).fill()
-        self.winnerColors = range(nd).map((iDistrict) => {
+        self.resultsByDistrict = range(nd).map((iDistrict) => {
             // set voterGroups
             election.clearVoterGroups()
             voterBasisSet.forEach((vb) => {
@@ -93,15 +99,26 @@ export default function GeoElection(screen, menu, election) {
 
             // run election
             const results = election.runElection()
-
-            // draw color on win map
-            if (election.method.checkElectionType() === 'singleWinner') {
-                const { winner } = results
-                const { color } = winner.square
-                return color
-            }
-            return 'ccc'
+            return results
         })
+
+        // draw color on win map
+        if (election.method.checkElectionType() === 'singleWinner') {
+            self.winnerColors = self.resultsByDistrict.map((results) => results.winner.square.color)
+            self.iWinners = self.resultsByDistrict.map((results) => results.iWinner)
+        }
+    }
+
+    // Show wins across all districts for each candidate
+    self.updateWins = function () {
+        // make a histogram
+        const candidates = election.getCandidates()
+        const numCandidates = candidates.length
+        const histogram = Array(numCandidates).fill(0)
+        self.iWinners.forEach((iWinner) => {
+            histogram[iWinner] += 1
+        })
+        election.setCandidateWins(histogram)
     }
 
     self.updateDistricts = () => {

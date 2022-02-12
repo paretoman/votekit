@@ -38,10 +38,15 @@ export default function GeoCandidate(x, y, w, h, color, screen, dragm, geoElecti
     self.setFraction = function (fraction) {
         self.fraction = fraction
     }
+    self.setWins = (wins) => {
+        self.wins = wins
+    }
 
     self.render = function () {
         square.render()
 
         drawStrokedColor(textPercent(self.fraction), self.x, self.y - square.h * 0.5 - 2, 20, 2, '#222', screen.ctx)
+
+        drawStrokedColor(self.wins, self.x, self.y + square.h * 0.5 + 20 + 2, 20, 2, '#222', screen.ctx)
     }
 }

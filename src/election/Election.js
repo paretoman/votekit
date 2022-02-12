@@ -54,10 +54,18 @@ export default function Election(menu) {
         // Voters cast votes for candidates.
         // There is also a separate graphical representation in VoronoiGroup.js
         const votes = castVotes.pluralityBallot(candidates, voterGroups)
-
+        self.setCandidateFractions(votes.tallyFractions)
+    }
+    self.setCandidateFractions = (fractions) => {
         candidates.forEach((can, index) => {
-            const fraction = votes.tallyFractions[index]
+            const fraction = fractions[index]
             can.setFraction(fraction)
+        })
+    }
+    self.setCandidateWins = (winsByCandidate) => {
+        candidates.forEach((can, index) => {
+            const win = winsByCandidate[index]
+            can.setWins(win)
         })
     }
 }

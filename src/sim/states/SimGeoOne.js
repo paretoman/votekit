@@ -30,8 +30,7 @@ export default function SimOne(screen, dragm, menu, changes, geoElection) {
             geoElection.updateDistricts()
         }
         changes.clear()
-        geoElection.updateTallies()
-        geoElection.updateGeoWinMap()
+        geoElection.updateVotes()
         vb.update()
     }
 
