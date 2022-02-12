@@ -1,6 +1,7 @@
 import lloydVoronoi from './lloydVoronoi.js'
 import { polygonArea } from '../../lib/d3-polygon/src/index.js'
 import { drawStrokedColor } from '../sim/entities/graphicsUtilities.js'
+import geoCensus from './geoCensus.js'
 /**
  * Makes and draws district boundaries.
  * Right now, just for a uniform square geography.
@@ -10,13 +11,15 @@ export default function DistrictMaker(screen) {
     const self = this
 
     self.make = (nx, ny, n) => {
-        let polygons
-        [self.centroids, self.voronoi, polygons] = lloydVoronoi(nx, ny, n)
+        [self.centroids, self.voronoi, self.polygons] = lloydVoronoi(nx, ny, n)
         self.nx = nx
         self.ny = ny
-        self.polygonAreas = polygons.map(polygonArea).map((x) => -x)
+        self.n = n
+        self.polygonAreas = self.polygons.map(polygonArea).map((x) => -x)
         self.totalArea = nx * ny
     }
+
+    self.census = () => geoCensus(self)
 
     self.renderVoronoi = (geoMapWidth, geoMapHeight) => {
         const { ctx } = screen

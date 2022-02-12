@@ -71,6 +71,8 @@ export default function GeoElection(screen, menu, election) {
 
     self.updateDistricts = () => {
         self.districtMaker.make(nx, ny, nd)
+        // eslint-disable-next-line no-console
+        console.log(self.districtMaker.census())
     }
 
     self.render = () => {
