@@ -56,8 +56,14 @@ export default function GeoVoterBasis(x, y, r, screen, dragm, geoElection) {
         ctx.arc(newX, newY, self.r, 0, 2 * Math.PI)
         // ctx.fill()
         ctx.stroke()
-
-        // handle
-        circle.render()
+    }
+    self.renderCenterAt = function (newX, newY) {
+        const { ctx } = screen
+        // circle
+        ctx.beginPath()
+        ctx.fillStyle = '#555'
+        ctx.arc(newX, newY, 1, 0, 2 * Math.PI)
+        ctx.fill()
+        // ctx.stroke()
     }
 }

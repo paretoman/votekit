@@ -4,7 +4,7 @@ import geoNoise from './geoNoise.js'
 import NoiseImage from './NoiseImage.js'
 import simpleVoterGroup from './simpleVoterGroup.js'
 import DistrictMaker from './DistrictMaker.js'
-import { range } from './jsHelpers.js'
+import { range, jcopy } from './jsHelpers.js'
 
 /**
  * An election with many districts.
@@ -52,8 +52,7 @@ export default function GeoElection(screen, menu, election) {
     }
     self.genNoise()
 
-    // Temporary function for showing tallies
-    // Right now, just one district and just one voterCenter.
+    // Show tallies over all the districts
     self.updateTallies = function () {
         // only update the tallies for each candidate so they can be shown
 
@@ -78,7 +77,7 @@ export default function GeoElection(screen, menu, election) {
     self.updateGeoWinMap = () => {
         // Loop through districts.
         // Find who won.
-
+        self.savedVoterGroups = Array(nd).fill()
         self.winnerColors = range(nd).map((iDistrict) => {
             // set voterGroups
             election.clearVoterGroups()
@@ -90,6 +89,7 @@ export default function GeoElection(screen, menu, election) {
                     simpleVoterGroup(vb.x + xNoise * xAmp, vb.y + yNoise * yAmp, vb.r, election, gf)
                 })
             })
+            self.savedVoterGroups[iDistrict] = jcopy(election.getVoterGroups())
 
             // run election
             const results = election.runElection()
@@ -110,20 +110,28 @@ export default function GeoElection(screen, menu, election) {
         self.census = self.districtMaker.census()
     }
 
+    // show a representation of noise
     self.render = () => {
-        let i = 0
-        election.getVoterGroups().forEach((g) => {
-            voterBasisSet.forEach((b) => {
-                i = (i + 1) % 17 // draw only some circles
-                if (i === 0) {
-                    b.renderAt(g.x, g.y)
-                }
-            })
-        })
+        renderPolicyNoise()
         self.noiseImage.render(geoMapWidth, geoMapHeight)
 
         self.districtMaker.renderVoronoi(geoMapWidth, geoMapHeight)
         self.districtMaker.renderVoronoiWinners(geoMapWidth, geoMapHeight, self.winnerColors)
+    }
+
+    function renderPolicyNoise() {
+        let i = 0
+        range(nd).forEach((iDistrict) => {
+            self.savedVoterGroups[iDistrict].forEach((g) => {
+                voterBasisSet.forEach((b) => {
+                    i = (i + 1) % 2 // draw only some centers
+                    if (i === 0) {
+                        b.renderCenterAt(g.x, g.y)
+                        // b.renderAt(g.x, g.y)
+                    }
+                })
+            })
+        })
     }
 
     self.noiseImage = new NoiseImage(nx, ny, screen)
