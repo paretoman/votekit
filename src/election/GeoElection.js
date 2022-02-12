@@ -4,6 +4,7 @@ import geoNoise from './geoNoise.js'
 import NoiseImage from './NoiseImage.js'
 import simpleVoterGroup from './simpleVoterGroup.js'
 import DistrictMaker from './DistrictMaker.js'
+import { range } from './jsHelpers.js'
 
 /**
  * An election with many districts.
@@ -41,6 +42,10 @@ export default function GeoElection(screen, menu, election) {
     const noiseWidth = 0.5
     const noiseHeight = 0.5
 
+    // Geographic Noise Parameters - amplitude of noise
+    const xAmp = 100
+    const yAmp = 100
+
     /** Generate simplex noise. */
     self.genNoise = () => {
         sn = geoNoise(nx, ny, noiseWidth, noiseHeight)
@@ -56,9 +61,10 @@ export default function GeoElection(screen, menu, election) {
         election.clearVoterGroups()
 
         voterBasisSet.forEach((vb) => {
-            sn.forEach((a) => {
-                a.forEach((n) => {
-                    simpleVoterGroup(vb.x + n[0] * 100, vb.y + n[1] * 100, vb.r, election)
+            sn.forEach((rowNoise) => {
+                rowNoise.forEach((cellNoise) => {
+                    const [xNoise, yNoise] = cellNoise
+                    simpleVoterGroup(vb.x + xNoise * xAmp, vb.y + yNoise * yAmp, vb.r, election)
                 })
             })
         })
@@ -69,10 +75,39 @@ export default function GeoElection(screen, menu, election) {
         election.updateTallies()
     }
 
+    self.updateGeoWinMap = () => {
+        // Loop through districts.
+        // Find who won.
+
+        self.winnerColors = range(nd).map((iDistrict) => {
+            // set voterGroups
+            election.clearVoterGroups()
+            voterBasisSet.forEach((vb) => {
+                const voterGroups = self.census[iDistrict]
+                voterGroups.forEach((g) => {
+                    const [gx, gy, gf] = g
+                    const [xNoise, yNoise] = sn[gx][gy]
+                    simpleVoterGroup(vb.x + xNoise * xAmp, vb.y + yNoise * yAmp, vb.r, election, gf)
+                })
+            })
+
+            // run election
+            const results = election.runElection()
+
+            // draw color on win map
+            if (election.method.checkElectionType() === 'singleWinner') {
+                const { winner } = results
+                const { color } = winner.square
+                return color
+            }
+            return 'ccc'
+        })
+    }
+
     self.updateDistricts = () => {
         self.districtMaker.make(nx, ny, nd)
         // eslint-disable-next-line no-console
-        console.log(self.districtMaker.census())
+        self.census = self.districtMaker.census()
     }
 
     self.render = () => {
@@ -88,6 +123,7 @@ export default function GeoElection(screen, menu, election) {
         self.noiseImage.render(geoMapWidth, geoMapHeight)
 
         self.districtMaker.renderVoronoi(geoMapWidth, geoMapHeight)
+        self.districtMaker.renderVoronoiWinners(geoMapWidth, geoMapHeight, self.winnerColors)
     }
 
     self.noiseImage = new NoiseImage(nx, ny, screen)

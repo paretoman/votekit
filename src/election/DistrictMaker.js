@@ -11,7 +11,7 @@ export default function DistrictMaker(screen) {
     const self = this
 
     self.make = (nx, ny, n) => {
-        [self.centroids, self.voronoi, self.polygons] = lloydVoronoi(nx, ny, n)
+        [self.centroids, self.voronoi, self.polygons] = lloydVoronoi(nx, ny, n, 0.01)
         self.nx = nx
         self.ny = ny
         self.n = n
@@ -37,6 +37,28 @@ export default function DistrictMaker(screen) {
             voronoi.renderCell(i, ctx)
             ctx.stroke()
             renderAreaText(i)
+        }
+        ctx.restore()
+    }
+
+    self.renderVoronoiWinners = (geoMapWidth, geoMapHeight, winnerColors) => {
+        const { ctx } = screen
+        const {
+            centroids, voronoi, nx, ny,
+        } = self
+        const n = centroids.length
+        ctx.save()
+        const scaleX = geoMapWidth / nx
+        const scaleY = geoMapHeight / ny
+        ctx.translate(400, 0)
+        ctx.scale(scaleX, scaleY)
+        for (let i = 0; i < n; i++) {
+            ctx.beginPath()
+            ctx.lineWidth = 2 / scaleX
+            voronoi.renderCell(i, ctx)
+            ctx.fillStyle = winnerColors[i]
+            ctx.fill()
+            ctx.stroke()
         }
         ctx.restore()
     }

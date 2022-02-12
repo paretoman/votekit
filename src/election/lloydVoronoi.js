@@ -8,15 +8,17 @@ import { Delaunay } from '../../lib/d3-delaunay.esm.js'
  * @param {Number} w - number of discrete points wide of space to divide
  * @param {Number} h - number of points high
  * @param {Number} n - number of voronoi cells
+ * @param {Number} tolFraction - fractional tolerance for relaxation. Maybe .01 is good.
  * @returns Centroids (list of points) and voronoi d3 object
  */
-export default function lloydVoronoi(w, h, n) {
+export default function lloydVoronoi(w, h, n, tolFraction) {
     let centroids = randomPoints(w, h, n)
     let converged = false
     let voronoi
     let polygons
+    const tol = tolFraction * Math.min(w, h)
     for (let i = 0; i < 1000; i++) {
-        [centroids, converged, voronoi, polygons] = relax(centroids, w, h)
+        [centroids, converged, voronoi, polygons] = relax(centroids, w, h, tol)
         if (converged) return centroids
     }
     return [centroids, voronoi, polygons]
@@ -28,12 +30,12 @@ function randomPoints(w, h, n) {
     return Array(n).fill().map(() => [Math.random() * w, Math.random() * h])
 }
 
-function relax(points, w, h) {
+function relax(points, w, h, tol) {
     const delaunay = Delaunay.from(points)
     const voronoi = delaunay.voronoi([0, 0, w, h])
     const polygons = range(points.length).map((i) => voronoi.cellPolygon(i))
     const centroids = polygons.map(polygonCentroid)
-    const converged = points.every((point, i) => distance2(point, centroids[i]) < 1)
+    const converged = points.every((point, i) => distance2(point, centroids[i]) < tol)
     return [centroids, converged, voronoi, polygons]
 }
 

@@ -31,6 +31,7 @@ export default function SimOne(screen, dragm, menu, changes, geoElection) {
         }
         changes.clear()
         geoElection.updateTallies()
+        geoElection.updateGeoWinMap()
         vb.update()
     }
 
