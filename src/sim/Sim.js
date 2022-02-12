@@ -46,6 +46,8 @@ export default function Sim(
             // exit state
             dragm.clear()
             election.clear()
+            simElections.clear()
+            geoElection.clear()
 
             // enter state
             if (self.state === 'one') {

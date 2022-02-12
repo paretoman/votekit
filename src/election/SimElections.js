@@ -28,6 +28,11 @@ export default function SimElections(screen, menu, election) {
         candidateDistributions.push(canDis)
     }
 
+    self.clear = () => {
+        candidateDistributions.splice(0, candidateDistributions.length)
+        election.clear()
+    }
+
     self.startSim = function () {
         // All the election calculations happen here.
 

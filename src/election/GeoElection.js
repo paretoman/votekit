@@ -28,6 +28,11 @@ export default function GeoElection(screen, menu, election) {
         election.newCandidate(can)
     }
 
+    self.clear = () => {
+        voterBasisSet.splice(0, voterBasisSet.length)
+        election.clear()
+    }
+
     // Districts
     const nd = 10
 
@@ -141,7 +146,7 @@ export default function GeoElection(screen, menu, election) {
         range(nd).forEach((iDistrict) => {
             self.savedVoterGroups[iDistrict].forEach((g) => {
                 voterBasisSet.forEach((b) => {
-                    i = (i + 1) % 2 // draw only some centers
+                    i = (i + 1) % 1 // draw only some centers if % 7, not if % 1
                     if (i === 0) {
                         b.renderCenterAt(g.x, g.y)
                         // b.renderAt(g.x, g.y)
