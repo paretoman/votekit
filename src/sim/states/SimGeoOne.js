@@ -21,10 +21,14 @@ export default function SimOne(screen, dragm, menu, changes, geoElection) {
     const c2 = new GeoCandidate(200, 100, 21, 21, '#5e2', screen, dragm, geoElection)
     const c3 = new GeoCandidate(600 - 200, 600 - 100, 21, 21, '#25e', screen, dragm, geoElection)
     const vb = new GeoVoterBasis(300, 300, 200, screen, dragm, geoElection)
+    changes.add(['districts'])
 
     self.update = () => {
         if (changes.checkNone()) return
         // clear changes, reset to []
+        if (changes.check(['districts'])) {
+            geoElection.updateDistricts()
+        }
         changes.clear()
         geoElection.updateTallies()
         vb.update()

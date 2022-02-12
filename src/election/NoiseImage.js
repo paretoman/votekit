@@ -35,11 +35,11 @@ export default function NoiseImage(nx, ny, screen) {
         offCtx.putImageData(imageData, 0, 0)
     }
 
-    self.render = () => {
+    self.render = (renderWidth, renderHeight) => {
         const { ctx } = screen
         ctx.save()
         ctx.imageSmoothingEnabled = false
-        ctx.drawImage(canvas, 0, 0, 200, 200)
+        ctx.drawImage(canvas, 0, 0, renderWidth, renderHeight)
         ctx.restore()
     }
     // Draw simplex noise

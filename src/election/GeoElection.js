@@ -3,6 +3,7 @@
 import geoNoise from './geoNoise.js'
 import NoiseImage from './NoiseImage.js'
 import simpleVoterGroup from './simpleVoterGroup.js'
+import DistrictMaker from './DistrictMaker.js'
 
 /**
  * An election with many districts.
@@ -26,10 +27,17 @@ export default function GeoElection(screen, menu, election) {
         election.newCandidate(can)
     }
 
+    // Districts
+    const nd = 10
+
+    // Display
+    const geoMapWidth = 200
+    const geoMapHeight = 200
+
     // Simplex Noise Parameters
     let sn = []
-    const nx = 20 // noise image width
-    const ny = 20 // noise image height
+    const nx = 20 // noise image width in cells
+    const ny = 20 // noise image height in cells
     const noiseWidth = 0.5
     const noiseHeight = 0.5
 
@@ -61,6 +69,10 @@ export default function GeoElection(screen, menu, election) {
         election.updateTallies()
     }
 
+    self.updateDistricts = () => {
+        self.districtMaker.make(nx, ny, nd)
+    }
+
     self.render = () => {
         let i = 0
         election.getVoterGroups().forEach((g) => {
@@ -71,10 +83,14 @@ export default function GeoElection(screen, menu, election) {
                 }
             })
         })
-        self.noiseImage.render(self.sn)
+        self.noiseImage.render(geoMapWidth, geoMapHeight)
+
+        self.districtMaker.renderVoronoi(geoMapWidth, geoMapHeight)
     }
 
     self.noiseImage = new NoiseImage(nx, ny, screen)
+
+    self.districtMaker = new DistrictMaker(screen)
 
     // for each district
     // clear old voter groups
