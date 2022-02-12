@@ -8,6 +8,8 @@
  * @param {Number} r - radius of circle of voter positions.
  * @param {Election} election
  */
-export default function simpleVoterGroup(x, y, r, election) {
-    election.newVoterGroup({ x, y, r })
+export default function simpleVoterGroup(x, y, r, election, weight) {
+    election.newVoterGroup({
+        x, y, r, weight,
+    })
 }

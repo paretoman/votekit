@@ -18,7 +18,8 @@ export default function pluralityBallot(candidates, voterGroups) {
     let tally = (new Array(n)).fill(0)
     voterGroups.forEach((voterGroup) => {
         const area = summer.sumArea(voterGroup)
-        tally = tally.map((value, index) => value + area[index])
+        const weight = ((voterGroup.weight === undefined) ? 1 : voterGroup.weight)
+        tally = tally.map((value, index) => value + area[index] * weight)
     })
     const total = tally.reduce((p, c) => p + c)
     const tallyFractions = tally.map((x) => x / total)
