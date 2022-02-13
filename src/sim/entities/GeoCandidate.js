@@ -15,7 +15,7 @@ import { drawStrokedColor, textPercent } from './graphicsUtilities.js'
  * @param {DraggableManager} dragm
  * @param {Election} election
  */
-export default function GeoCandidate(x, y, w, h, color, screen, dragm, geoElection) {
+export default function GeoCandidate(x, y, w, h, color, screen, dragm, candidates) {
     const self = this
 
     self.x = x
@@ -32,7 +32,7 @@ export default function GeoCandidate(x, y, w, h, color, screen, dragm, geoElecti
 
     dragm.newSquareHandle(self, square)
 
-    geoElection.newCandidate(self)
+    candidates.newCandidate(self)
 
     self.fraction = 0
     self.setFraction = function (fraction) {

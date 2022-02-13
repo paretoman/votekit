@@ -12,10 +12,9 @@ export default function Election(menu) {
 
     self.method = new ElectionMethod(menu)
 
-    self.runElection = function (candidates, voterGroups) {
-        const votes = castVotes.pluralityBallot(candidates, voterGroups)
-
-        const methodResults = self.method.run(candidates, votes)
+    self.runElection = function (canList, voterGroups) {
+        const votes = castVotes.pluralityBallot(canList, voterGroups)
+        const methodResults = self.method.run(canList, votes)
         const electionResults = { ...methodResults, votes }
         return electionResults
     }
@@ -24,7 +23,8 @@ export default function Election(menu) {
     // There is also a separate graphical representation in VoronoiGroup.js
     self.castVotes = (candidates, voters) => {
         const voterGroups = voters.getVoterGroups()
-        const votes = castVotes.pluralityBallot(candidates.getCandidates(), voterGroups)
+        const canList = candidates.getCandidates()
+        const votes = castVotes.pluralityBallot(canList, voterGroups)
         return votes
     }
 }

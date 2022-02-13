@@ -12,7 +12,7 @@ import CircleGraphic from './CircleGraphic.js'
  * @param {DraggableManager} dragm
  * @param {GeoElection} geoElection
  */
-export default function GeoVoterBasis(x, y, r, screen, dragm, geoElection) {
+export default function GeoVoterBasis(x, y, r, screen, dragm, geoVoters) {
     const self = this
 
     self.x = x
@@ -30,10 +30,7 @@ export default function GeoVoterBasis(x, y, r, screen, dragm, geoElection) {
 
     dragm.newCircleHandle(self, circle)
 
-    geoElection.newVoterBasis(self)
-
-    self.update = function () {
-    }
+    geoVoters.newVoterBasis(self)
 
     // Graphics component
     self.render = function () {

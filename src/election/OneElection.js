@@ -1,8 +1,5 @@
 export default function OneElection(screen, menu, election) {
     const self = this
-    self.clear = () => {
-        election.clear()
-    }
 
     self.updateTallies = function (candidates, voters) {
         // only update the tallies for each candidate so they can be shown

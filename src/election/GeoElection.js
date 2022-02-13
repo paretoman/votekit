@@ -1,7 +1,6 @@
 /** @module */
 
 import colorBlend, { toRGBA } from './colorBlend.js'
-import GeoVoters from './GeoVoters.js'
 
 /**
  * An election with many districts.
@@ -15,67 +14,53 @@ import GeoVoters from './GeoVoters.js'
 export default function GeoElection(screen, menu, election) {
     const self = this
 
-    self.geoVoters = new GeoVoters(screen)
-
-    self.newVoterBasis = function (voterBasis) {
-        self.geoVoters.newVoterBasis(voterBasis)
-    }
-
-    self.newCandidate = function (can) {
-        election.newCandidate(can)
-    }
-
-    self.clear = () => {
-        self.geoVoters.clear()
-        election.clear()
-    }
     self.update = () => {
         self.updateDistricts()
         self.updateVotes()
     }
-    self.updateDistricts = () => {
-        self.geoVoters.updateDistricts()
+    self.updateDistricts = (geoVoters) => {
+        geoVoters.updateDistricts()
     }
-    self.updateVotes = () => {
-        self.geoVoters.updateVotes()
-        self.updateStatewideTallies()
-        self.updateNoiseImage()
-        self.runDistrictElections()
+    self.updateVotes = (geoVoters, candidates) => {
+        geoVoters.updateVotes()
+        self.updateStatewideTallies(geoVoters, candidates)
+        self.updateNoiseImage(geoVoters, candidates)
+        self.runDistrictElections(geoVoters, candidates)
         self.updateWinColors()
-        self.updateColorBlendGeoMap()
-        self.updateWins()
+        self.updateColorBlendGeoMap(candidates)
+        self.updateWins(candidates)
     }
 
     /** Show tallies over all the districts
      * Find statewide support for candidates (parties).
      */
-    self.updateStatewideTallies = function () {
-        const candidates = election.getCandidates()
-        const { allVoterGroups } = self.geoVoters
-        const electionResults = election.runElection(candidates, allVoterGroups)
+    self.updateStatewideTallies = function (geoVoters, candidates) {
+        const canList = candidates.getCandidates()
+        const { allVoterGroups } = geoVoters
+        const electionResults = election.runElection(canList, allVoterGroups)
         const { tallyFractions } = electionResults.votes
-        election.setCandidateFractions(tallyFractions)
+        candidates.setCandidateFractions(tallyFractions)
     }
 
     /** Visualize voter demographics according to votes for candidates within a voterGroup.
      * Hold mini-elections within a voterGroup.
      */
-    self.updateNoiseImage = function () {
+    self.updateNoiseImage = function (geoVoters, candidates) {
         // visualize simplex noise
         // self.geoVoters.noiseImage.load(sn)
 
         // visualize noise with election data
-        const candidates = election.getCandidates()
-        const { voterGroupsByTract } = self.geoVoters
+        const canList = candidates.getCandidates()
+        const { voterGroupsByTract } = geoVoters
 
         const resultsByTract = voterGroupsByTract.map(
             (row) => row.map(
-                (voterGroups) => election.runElection(candidates, voterGroups),
+                (voterGroups) => election.runElection(canList, voterGroups),
             ),
         )
 
         // get color
-        const colorSet = candidates.map((can) => can.square.color)
+        const colorSet = canList.map((can) => can.square.color)
         const allColors = resultsByTract.map(
             (row) => row.map(
                 (results) => {
@@ -86,19 +71,19 @@ export default function GeoElection(screen, menu, election) {
             ),
         )
 
-        self.geoVoters.noiseImage.loadColors(allColors)
+        geoVoters.noiseImage.loadColors(allColors)
     }
 
     /** Run separate elections in each district. */
-    self.runDistrictElections = () => {
+    self.runDistrictElections = (geoVoters, candidates) => {
         // Loop through districts.
         // Find who won.
 
-        const candidates = election.getCandidates()
-        const { voterGroupsByDistrict } = self.geoVoters
+        const canList = candidates.getCandidates()
+        const { voterGroupsByDistrict } = geoVoters
 
         self.resultsByDistrict = voterGroupsByDistrict.map(
-            (voterGroups) => election.runElection(candidates, voterGroups),
+            (voterGroups) => election.runElection(canList, voterGroups),
         )
     }
     self.updateWinColors = () => {
@@ -109,26 +94,26 @@ export default function GeoElection(screen, menu, election) {
     }
 
     // Show wins across all districts for each candidate
-    self.updateWins = function () {
+    self.updateWins = function (candidates) {
         // make a histogram
-        const candidates = election.getCandidates()
-        const numCandidates = candidates.length
+        const canList = candidates.getCandidates()
+        const numCandidates = canList.length
         const histogram = Array(numCandidates).fill(0)
         self.iWinners = self.resultsByDistrict.map((results) => results.iWinner)
         self.iWinners.forEach((iWinner) => {
             histogram[iWinner] += 1
         })
-        election.setCandidateWins(histogram)
+        candidates.setCandidateWins(histogram)
     }
 
     /** Update color for each district, based on votes for each candidate.
      * Blend candidate colors in proportion to their votes.
      */
-    self.updateColorBlendGeoMap = () => {
+    self.updateColorBlendGeoMap = (candidates) => {
         self.blendColors = self.resultsByDistrict.map((results) => {
             const { tallyFractions } = results.votes
-            const candidates = election.getCandidates()
-            const colorSet = candidates.map((can) => can.square.color)
+            const canList = candidates.getCandidates()
+            const colorSet = canList.map((can) => can.square.color)
             const color = colorBlend(tallyFractions, colorSet)
             return color
         })
@@ -140,31 +125,31 @@ export default function GeoElection(screen, menu, election) {
     const geoMapHeight = 150
 
     /** Render all maps and  */
-    self.render = () => {
-        renderPolicyNoise()
-        self.renderTractVotes()
-        self.renderDistrictWins()
-        self.renderDistrictVotes()
+    self.render = (geoVoters) => {
+        renderPolicyNoise(geoVoters)
+        self.renderTractVotes(geoVoters)
+        self.renderDistrictWins(geoVoters)
+        self.renderDistrictVotes(geoVoters)
     }
     // Render census tract votes.
-    self.renderTractVotes = () => {
-        self.geoVoters.noiseImage.render(geoMapWidth, geoMapHeight)
-        self.geoVoters.districtMaker.renderVoronoi(geoMapWidth, geoMapHeight)
+    self.renderTractVotes = (geoVoters) => {
+        geoVoters.noiseImage.render(geoMapWidth, geoMapHeight)
+        geoVoters.districtMaker.renderVoronoi(geoMapWidth, geoMapHeight)
     }
     // Render district wins.
-    self.renderDistrictWins = () => {
-        const { renderVoronoiColors } = self.geoVoters.districtMaker
+    self.renderDistrictWins = (geoVoters) => {
+        const { renderVoronoiColors } = geoVoters.districtMaker
         renderVoronoiColors(450, 0, geoMapWidth, geoMapHeight, self.winnerColors)
     }
     // render district votes.
-    self.renderDistrictVotes = () => {
-        const { renderVoronoiColors } = self.geoVoters.districtMaker
+    self.renderDistrictVotes = (geoVoters) => {
+        const { renderVoronoiColors } = geoVoters.districtMaker
         renderVoronoiColors(225, 0, geoMapWidth, geoMapHeight, self.blendColors)
     }
 
     /** Draw dots to represent the political diversity across census tracts. */
-    function renderPolicyNoise() {
-        const { voterGroupsByTract } = self.geoVoters
+    function renderPolicyNoise(geoVoters) {
+        const { voterGroupsByTract } = geoVoters
         voterGroupsByTract.forEach((g) => {
             smallCircle(g.x, g.y)
         })
