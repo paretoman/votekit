@@ -4,6 +4,23 @@ import { SimplexNoise } from '../../lib/simplex-noise/dist/esm/simplex-noise.js'
 // https://npm.runkit.com/simplex-noise
 // https://www.npmjs.com/package/simplex-noise
 
+export default function GeoNoise(nx, ny) {
+    const self = this
+    // Simplex Noise Parameters
+    self.sn = []
+    const noiseWidth = 0.5
+    const noiseHeight = 0.5
+
+    // Geographic Noise Parameters - amplitude of noise
+    const xAmp = 100
+    const yAmp = 100
+
+    /** Generate simplex noise. */
+    self.genNoise = () => {
+        self.sn = makeGeoNoise(nx, ny, noiseWidth, noiseHeight, xAmp, yAmp)
+    }
+}
+
 /**
  * Generate a noisy 2D map with two noise sources per pixel.
  * @param {Number} nx - Number of x pixels
@@ -12,7 +29,7 @@ import { SimplexNoise } from '../../lib/simplex-noise/dist/esm/simplex-noise.js'
  * @param {Number} noiseHeight - A characteristic size of blobs, in pixels
  * @returns
  */
-export default function geoNoise(nx, ny, noiseWidth, noiseHeight) {
+export function makeGeoNoise(nx, ny, noiseWidth, noiseHeight, xAmp, yAmp) {
     const simplexX = new SimplexNoise('s')
     const simplexY = new SimplexNoise('seed')
     const map = zeros(nx, ny)
@@ -37,9 +54,9 @@ export default function geoNoise(nx, ny, noiseWidth, noiseHeight) {
     map.forEach((a) => { // array
         a.forEach((p) => { // pair
             // eslint-disable-next-line no-param-reassign
-            p[0] -= meanX
+            p[0] = (p[0] - meanX) * xAmp
             // eslint-disable-next-line no-param-reassign
-            p[1] -= meanY
+            p[1] = (p[1] - meanY) * yAmp
         })
     })
     return map

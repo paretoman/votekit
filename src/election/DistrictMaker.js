@@ -10,16 +10,22 @@ import geoCensus from './geoCensus.js'
 export default function DistrictMaker(screen) {
     const self = this
 
-    self.make = (nx, ny, n) => {
-        [self.centroids, self.voronoi, self.polygons] = lloydVoronoi(nx, ny, n, 0.01)
+    /**
+     * Define district lines and count demographics.
+     * @param {Number} nx - number of voter cells in x
+     * @param {Number} ny - number of voter cells in y
+     * @param {Number} nd - number of districts.
+     */
+    self.make = (nx, ny, nd) => {
+        [self.centroids, self.voronoi, self.polygons] = lloydVoronoi(nx, ny, nd, 0.01)
         self.nx = nx
         self.ny = ny
-        self.n = n
+        self.nd = nd
         self.polygonAreas = self.polygons.map(polygonArea).map((x) => -x)
         self.totalArea = nx * ny
-    }
 
-    self.census = () => geoCensus(self)
+        self.census = geoCensus(self)
+    }
 
     /**
      * Draw Voronoi cell boundaries.
@@ -45,15 +51,14 @@ export default function DistrictMaker(screen) {
     self.renderVoronoiGeneral = (x, y, geoMapWidth, geoMapHeight, colors, textFunction) => {
         const { ctx } = screen
         const {
-            centroids, voronoi, nx, ny,
+            voronoi, nx, ny, nd,
         } = self
-        const n = centroids.length
         ctx.save()
         const scaleX = geoMapWidth / nx
         const scaleY = geoMapHeight / ny
         ctx.translate(x, y)
         ctx.scale(scaleX, scaleY)
-        for (let i = 0; i < n; i++) {
+        for (let i = 0; i < nd; i++) {
             ctx.beginPath()
             ctx.strokeStyle = '#333'
             ctx.lineWidth = 1 / scaleX
@@ -63,7 +68,7 @@ export default function DistrictMaker(screen) {
                 ctx.fill()
             }
             ctx.stroke()
-            if (textFunction !== undefined) renderAreaText(i) // option
+            if (textFunction !== undefined) textFunction(i) // option
         }
         ctx.restore()
     }

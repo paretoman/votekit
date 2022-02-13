@@ -1,11 +1,7 @@
 /** @module */
 
-import geoNoise from './geoNoise.js'
-import NoiseImage from './NoiseImage.js'
-import simpleVoterGroup from './simpleVoterGroup.js'
-import DistrictMaker from './DistrictMaker.js'
-import { range, jcopy } from './jsHelpers.js'
 import colorBlend, { toRGBA } from './colorBlend.js'
+import GeoVoters from './GeoVoters.js'
 
 /**
  * An election with many districts.
@@ -19,10 +15,10 @@ import colorBlend, { toRGBA } from './colorBlend.js'
 export default function GeoElection(screen, menu, election) {
     const self = this
 
-    const voterBasisSet = []
+    self.geoVoters = new GeoVoters(screen)
 
     self.newVoterBasis = function (voterBasis) {
-        voterBasisSet.push(voterBasis)
+        self.geoVoters.newVoterBasis(voterBasis)
     }
 
     self.newCandidate = function (can) {
@@ -30,107 +26,85 @@ export default function GeoElection(screen, menu, election) {
     }
 
     self.clear = () => {
-        voterBasisSet.splice(0, voterBasisSet.length)
+        self.geoVoters.clear()
         election.clear()
     }
-
-    // Districts
-    const nd = 100
-
-    // Display
-    const geoMapWidth = 150
-    const geoMapHeight = 150
-
-    // Simplex Noise Parameters
-    let sn = []
-    const nx = 20 // noise image width in cells
-    const ny = 20 // noise image height in cells
-    const noiseWidth = 0.5
-    const noiseHeight = 0.5
-
-    // Geographic Noise Parameters - amplitude of noise
-    const xAmp = 100
-    const yAmp = 100
-
-    /** Generate simplex noise. */
-    self.genNoise = () => {
-        sn = geoNoise(nx, ny, noiseWidth, noiseHeight)
+    self.update = () => {
+        self.updateDistricts()
+        self.updateVotes()
     }
-    self.genNoise()
-
+    self.updateDistricts = () => {
+        self.geoVoters.updateDistricts()
+    }
     self.updateVotes = () => {
-        self.updateTallies()
-        self.updateGeoWinMap()
+        self.geoVoters.updateVotes()
+        self.updateStatewideTallies()
+        self.updateNoiseImage()
+        self.runDistrictElections()
+        self.updateWinColors()
         self.updateColorBlendGeoMap()
         self.updateWins()
     }
 
-    // Show tallies over all the districts
-    self.updateTallies = function () {
-        // only update the tallies for each candidate so they can be shown
-
-        // new set of voters
-        election.clearVoterGroups()
-
-        voterBasisSet.forEach((vb) => {
-            sn.forEach((rowNoise) => {
-                rowNoise.forEach((cellNoise) => {
-                    const [xNoise, yNoise] = cellNoise
-                    simpleVoterGroup(vb.x + xNoise * xAmp, vb.y + yNoise * yAmp, vb.r, election)
-                })
-            })
-        })
-        election.updateTallies()
-
-        // visualize simplex noise
-        // self.noiseImage.load(sn)
-
-        // visualize with election data
-
+    /** Show tallies over all the districts
+     * Find statewide support for candidates (parties).
+     */
+    self.updateStatewideTallies = function () {
         const candidates = election.getCandidates()
-        const colorSet = candidates.map((can) => can.square.color)
-
-        const allColors = sn.map((rowNoise) => rowNoise.map((cellNoise) => {
-            election.clearVoterGroups()
-            voterBasisSet.forEach((vb) => {
-                const [xNoise, yNoise] = cellNoise
-                simpleVoterGroup(vb.x + xNoise * xAmp, vb.y + yNoise * yAmp, vb.r, election)
-            })
-            const votes = election.castVotes()
-            const { tallyFractions } = votes
-            const color = toRGBA(colorBlend(tallyFractions, colorSet))
-            return color
-        }))
-
-        self.noiseImage.loadColors(allColors)
+        const { allVoterGroups } = self.geoVoters
+        const electionResults = election.hypotheticalRun(candidates, allVoterGroups)
+        const { tallyFractions } = electionResults.votes
+        election.setCandidateFractions(tallyFractions)
     }
 
-    self.updateGeoWinMap = () => {
+    /** Visualize voter demographics according to votes for candidates within a voterGroup.
+     * Hold mini-elections within a voterGroup.
+     */
+    self.updateNoiseImage = function () {
+        // visualize simplex noise
+        // self.geoVoters.noiseImage.load(sn)
+
+        // visualize noise with election data
+        const candidates = election.getCandidates()
+        const { voterGroupsByTract } = self.geoVoters
+
+        const resultsByTract = voterGroupsByTract.map(
+            (row) => row.map(
+                (voterGroups) => election.hypotheticalRun(candidates, voterGroups),
+            ),
+        )
+
+        // get color
+        const colorSet = candidates.map((can) => can.square.color)
+        const allColors = resultsByTract.map(
+            (row) => row.map(
+                (results) => {
+                    const { tallyFractions } = results.votes
+                    const color = toRGBA(colorBlend(tallyFractions, colorSet))
+                    return color
+                },
+            ),
+        )
+
+        self.geoVoters.noiseImage.loadColors(allColors)
+    }
+
+    /** Run separate elections in each district. */
+    self.runDistrictElections = () => {
         // Loop through districts.
         // Find who won.
-        self.savedVoterGroups = Array(nd).fill()
-        self.resultsByDistrict = range(nd).map((iDistrict) => {
-            // set voterGroups
-            election.clearVoterGroups()
-            voterBasisSet.forEach((vb) => {
-                const voterGroups = self.census[iDistrict]
-                voterGroups.forEach((g) => {
-                    const [gx, gy, gf] = g
-                    const [xNoise, yNoise] = sn[gx][gy]
-                    simpleVoterGroup(vb.x + xNoise * xAmp, vb.y + yNoise * yAmp, vb.r, election, gf)
-                })
-            })
-            self.savedVoterGroups[iDistrict] = jcopy(election.getVoterGroups())
 
-            // run election
-            const results = election.runElection()
-            return results
-        })
+        const candidates = election.getCandidates()
+        const { voterGroupsByDistrict } = self.geoVoters
 
-        // draw color on win map
+        self.resultsByDistrict = voterGroupsByDistrict.map(
+            (voterGroups) => election.hypotheticalRun(candidates, voterGroups),
+        )
+    }
+    self.updateWinColors = () => {
+        // calculate color for win map
         if (election.method.checkElectionType() === 'singleWinner') {
             self.winnerColors = self.resultsByDistrict.map((results) => results.winner.square.color)
-            self.iWinners = self.resultsByDistrict.map((results) => results.iWinner)
         }
     }
 
@@ -140,12 +114,16 @@ export default function GeoElection(screen, menu, election) {
         const candidates = election.getCandidates()
         const numCandidates = candidates.length
         const histogram = Array(numCandidates).fill(0)
+        self.iWinners = self.resultsByDistrict.map((results) => results.iWinner)
         self.iWinners.forEach((iWinner) => {
             histogram[iWinner] += 1
         })
         election.setCandidateWins(histogram)
     }
 
+    /** Update color for each district, based on votes for each candidate.
+     * Blend candidate colors in proportion to their votes.
+     */
     self.updateColorBlendGeoMap = () => {
         self.blendColors = self.resultsByDistrict.map((results) => {
             const { tallyFractions } = results.votes
@@ -156,45 +134,48 @@ export default function GeoElection(screen, menu, election) {
         })
     }
 
-    self.updateDistricts = () => {
-        self.districtMaker.make(nx, ny, nd)
-        // eslint-disable-next-line no-console
-        self.census = self.districtMaker.census()
-    }
+    // Display //
 
-    // show a representation of noise
+    const geoMapWidth = 150
+    const geoMapHeight = 150
+
+    /** Render all maps and  */
     self.render = () => {
         renderPolicyNoise()
-        self.noiseImage.render(geoMapWidth, geoMapHeight)
-
-        self.districtMaker.renderVoronoi(geoMapWidth, geoMapHeight)
-        self.districtMaker.renderVoronoiColors(450, 0, geoMapWidth, geoMapHeight, self.winnerColors)
-        self.districtMaker.renderVoronoiColors(225, 0, geoMapWidth, geoMapHeight, self.blendColors)
+        self.renderTractVotes()
+        self.renderDistrictWins()
+        self.renderDistrictVotes()
+    }
+    // Render census tract votes.
+    self.renderTractVotes = () => {
+        self.geoVoters.noiseImage.render(geoMapWidth, geoMapHeight)
+        self.geoVoters.districtMaker.renderVoronoi(geoMapWidth, geoMapHeight)
+    }
+    // Render district wins.
+    self.renderDistrictWins = () => {
+        const { renderVoronoiColors } = self.geoVoters.districtMaker
+        renderVoronoiColors(450, 0, geoMapWidth, geoMapHeight, self.winnerColors)
+    }
+    // render district votes.
+    self.renderDistrictVotes = () => {
+        const { renderVoronoiColors } = self.geoVoters.districtMaker
+        renderVoronoiColors(225, 0, geoMapWidth, geoMapHeight, self.blendColors)
     }
 
+    /** Draw dots to represent the political diversity across census tracts. */
     function renderPolicyNoise() {
-        let i = 0
-        range(nd).forEach((iDistrict) => {
-            self.savedVoterGroups[iDistrict].forEach((g) => {
-                voterBasisSet.forEach((b) => {
-                    i = (i + 1) % 1 // draw only some centers if % 7, not if % 1
-                    if (i === 0) {
-                        b.renderCenterAt(g.x, g.y)
-                        // b.renderAt(g.x, g.y)
-                    }
-                })
-            })
+        const { voterGroupsByTract } = self.geoVoters
+        voterGroupsByTract.forEach((g) => {
+            smallCircle(g.x, g.y)
         })
     }
 
-    self.noiseImage = new NoiseImage(nx, ny, screen)
-
-    self.districtMaker = new DistrictMaker(screen)
-
-    // for each district
-    // clear old voter groups
-    // make a set of voter groups,
-    // but these will be different than regular voter groups because we won't be able to drag them.
-    // election.newVoterGroup
-    // make a set of candidates
+    /** Draw a small dot */
+    function smallCircle(x, y) {
+        const { ctx } = screen
+        ctx.beginPath()
+        ctx.fillStyle = '#555'
+        ctx.arc(x, y, 1, 0, 2 * Math.PI)
+        ctx.fill()
+    }
 }

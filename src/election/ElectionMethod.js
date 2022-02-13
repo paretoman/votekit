@@ -7,10 +7,10 @@ import electionMethods from '../electionMethods/electionMethods.js'
  * @param {Candidate[]} candidates
  * @param {Menu} menu
  */
-export default function ElectionMethod(candidates, menu) {
+export default function ElectionMethod(menu) {
     const self = this
 
-    self.run = (votes) => {
+    self.run = (candidates, votes) => {
         // why have two different kinds of results?
         // methodResults, the smaller one,
         //   is in the context of the election method,

@@ -12,7 +12,7 @@ export default function Election(menu) {
 
     const voterGroups = []
     const candidates = []
-    self.method = new ElectionMethod(candidates, menu)
+    self.method = new ElectionMethod(menu)
 
     self.newVoterGroup = function (voterGroup) {
         voterGroups.push(voterGroup)
@@ -44,7 +44,15 @@ export default function Election(menu) {
         // There is also a separate graphical representation in VoronoiGroup.js
         const votes = castVotes.pluralityBallot(candidates, voterGroups)
 
-        const methodResults = self.method.run(votes)
+        const methodResults = self.method.run(candidates, votes)
+        const electionResults = { ...methodResults, votes }
+        return electionResults
+    }
+
+    self.hypotheticalRun = (newCandidates, newVoterGroups) => {
+        const votes = castVotes.pluralityBallot(newCandidates, newVoterGroups)
+
+        const methodResults = self.method.run(newCandidates, votes)
         const electionResults = { ...methodResults, votes }
         return electionResults
     }

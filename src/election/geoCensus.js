@@ -10,15 +10,15 @@ import { polygonArea } from '../../lib/d3-polygon/src/index.js'
 // the second of the pair is the fraction of the voterGroup within that district
 export default function geoCensus(self) {
     const {
-        n, nx, ny, polygons,
+        nd, nx, ny, polygons,
     } = self
 
-    const census = Array(n).fill().map(() => [])
+    const census = Array(nd).fill().map(() => [])
 
     for (let gx = 0; gx < nx; gx++) { // x-coordinate of group
         for (let gy = 0; gy < ny; gy++) { // y-coordinate of group
             const subject = makeSquare(gx, gy)
-            range(n).forEach((iDistrict) => {
+            range(nd).forEach((iDistrict) => {
                 const poly = polygons[iDistrict]
                 const clip = jcopy(poly).reverse()
                 const overlap = polygonClip(clip, subject)
