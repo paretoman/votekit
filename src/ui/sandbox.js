@@ -10,6 +10,7 @@ import Sim from '../sim/Sim.js'
 import SimElections from '../election/SimElections.js'
 import GeoElection from '../election/GeoElection.js'
 import Layout from './Layout.js'
+import OneElection from '../election/OneElection.js'
 
 /**
  * Set up a user interface to run a simulation.
@@ -36,12 +37,14 @@ export default function sandbox(config) {
 
     const election = new Election(menu)
 
+    const oneElection = new OneElection(screen, menu, election)
+
     const simElections = new SimElections(screen, menu, election)
 
     const geoElection = new GeoElection(screen, menu, election)
 
     // eslint-disable-next-line max-len
-    const sim = new Sim(screen, dragm, menu, changes, election, simElections, geoElection, initialState)
+    const sim = new Sim(screen, dragm, menu, changes, election, oneElection, simElections, geoElection, initialState)
 
     const div = layout.makeComponent()
 

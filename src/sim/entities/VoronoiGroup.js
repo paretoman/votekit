@@ -15,14 +15,14 @@ import { Delaunay } from '../../../lib/d3-delaunay.esm.js'
  * @param {Election} election
  * @param {Screen} screen
  */
-export default function voronoiGroup(voterGroup, election, screen) {
+export default function voronoiGroup(voterGroup, screen) {
     const self = this
 
     let cans
     let voronoi
 
-    self.update = function () {
-        cans = election.getCandidates()
+    self.update = function (candidates) {
+        cans = candidates.getCandidates()
         const points = cans.map((e) => [e.x, e.y])
         const delaunay = Delaunay.from(points)
         voronoi = delaunay.voronoi([0, 0, screen.width, screen.height])

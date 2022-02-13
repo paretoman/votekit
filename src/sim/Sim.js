@@ -25,6 +25,7 @@ export default function Sim(
     menu,
     changes,
     election,
+    oneElection,
     simElections,
     geoElection,
     initialState,
@@ -33,9 +34,6 @@ export default function Sim(
 
     changes.add(['simType'])
     const sims = {
-        one: {},
-        many: {},
-        geoOne: {},
     }
 
     self.state = initialState
@@ -45,13 +43,13 @@ export default function Sim(
         if (changes.check(['simType'])) {
             // exit state
             dragm.clear()
-            election.clear()
-            simElections.clear()
-            geoElection.clear()
+            if (sims.one) sims.one.clear()
+            if (sims.many) simElections.clear()
+            if (sims.geo) geoElection.clear()
 
             // enter state
             if (self.state === 'one') {
-                sims[self.state] = new SimOne(screen, dragm, menu, changes, election)
+                sims[self.state] = new SimOne(screen, dragm, menu, changes, oneElection)
             } else if (self.state === 'many') {
                 sims[self.state] = new SimMany(screen, dragm, menu, changes, simElections)
             } else if (self.state === 'geoOne') {

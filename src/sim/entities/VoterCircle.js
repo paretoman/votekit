@@ -13,7 +13,7 @@ import VoronoiGroup from './VoronoiGroup.js'
  * @param {DraggableManager} dragm
  * @param {Election} election
  */
-export default function VoterCircle(x, y, r, screen, dragm, election) {
+export default function VoterCircle(x, y, r, screen, dragm, voters) {
     const self = this
 
     self.x = x
@@ -31,12 +31,12 @@ export default function VoterCircle(x, y, r, screen, dragm, election) {
 
     dragm.newCircleHandle(self, circle)
 
-    election.newVoterGroup(self)
+    voters.newVoterGroup(self)
 
-    const voronoiGroup = new VoronoiGroup(self, election, screen)
+    const voronoiGroup = new VoronoiGroup(self, screen)
 
-    self.update = function () {
-        voronoiGroup.update()
+    self.update = function (candidates) {
+        voronoiGroup.update(candidates)
     }
 
     // Graphics component

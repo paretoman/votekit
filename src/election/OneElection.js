@@ -1,0 +1,15 @@
+export default function OneElection(screen, menu, election) {
+    const self = this
+    self.clear = () => {
+        election.clear()
+    }
+
+    self.updateTallies = function (candidates, voters) {
+        // only update the tallies for each candidate so they can be shown
+
+        // Voters cast votes for candidates.
+        // There is also a separate graphical representation in VoronoiGroup.js
+        const votes = election.castVotes(candidates, voters)
+        candidates.setCandidateFractions(votes.tallyFractions)
+    }
+}
