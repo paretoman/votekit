@@ -14,15 +14,7 @@ import colorBlend, { toRGBA } from './colorBlend.js'
 export default function GeoElection(screen, menu, election) {
     const self = this
 
-    self.update = () => {
-        self.updateDistricts()
-        self.updateVotes()
-    }
-    self.updateDistricts = (geoVoters) => {
-        geoVoters.updateDistricts()
-    }
     self.updateVotes = (geoVoters, candidates) => {
-        geoVoters.updateVotes()
         self.updateStatewideTallies(geoVoters, candidates)
         self.updateNoiseImage(geoVoters, candidates)
         self.runDistrictElections(geoVoters, candidates)

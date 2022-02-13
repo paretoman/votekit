@@ -23,6 +23,8 @@ export default function GeoVoters(screen, geoElection) {
     // Code that handles making images of geographic noise.
     self.noiseImage = new NoiseImage(nx, ny, screen)
 
+    // Manage VoterBasisSet //
+
     /** This voter basis is repeated at every census tract on the geo map.
      *  It is altered by translating it in policy space.
      *  */
@@ -35,17 +37,13 @@ export default function GeoVoters(screen, geoElection) {
         voterBasisSet.splice(0, voterBasisSet.length)
     }
 
-    // VoterGroup Sets //
+    // Update VoterGroup Sets //
 
     /** Make districts and update voter sets */
-    self.update = () => {
-        self.updateDistricts()
-        self.updateVotes()
-    }
     self.updateDistricts = () => {
         self.districtMaker.make(nx, ny, nd)
     }
-    self.updateVotes = () => {
+    self.updateVoters = () => {
         self.updateFullSet()
         self.updateVotersByDistrict()
         self.updateVotersByTract()
