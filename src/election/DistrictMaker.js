@@ -33,7 +33,7 @@ export default function DistrictMaker(screen) {
      * @param {Number} geoMapHeight - height of image
      */
     self.renderVoronoi = (geoMapWidth, geoMapHeight) => {
-        self.renderVoronoiColors(0, 0, geoMapWidth, geoMapHeight, null, renderAreaText)
+        self.renderVoronoiGeneral(0, 0, geoMapWidth, geoMapHeight, null, renderAreaText)
     }
 
     self.renderVoronoiColors = (x, y, geoMapWidth, geoMapHeight, colors) => {
