@@ -19,7 +19,7 @@ import Candidates from '../../election/Candidates.js'
 export default function SimOne(screen, dragm, menu, changes, geoElection) {
     const self = this
 
-    const geoVoters = new GeoVoters(screen)
+    const geoVoters = new GeoVoters(screen, geoElection)
     const candidates = new Candidates()
     const c1 = new GeoCandidate(100, 200, 21, 21, '#e52', screen, dragm, candidates)
     const c2 = new GeoCandidate(200, 100, 21, 21, '#5e2', screen, dragm, candidates)
@@ -43,7 +43,7 @@ export default function SimOne(screen, dragm, menu, changes, geoElection) {
     }
 
     self.render = () => {
-        geoElection.render(geoVoters)
+        geoVoters.render()
         c1.render()
         c2.render()
         c3.render()

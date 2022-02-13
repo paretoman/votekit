@@ -118,49 +118,4 @@ export default function GeoElection(screen, menu, election) {
             return color
         })
     }
-
-    // Display //
-
-    const geoMapWidth = 150
-    const geoMapHeight = 150
-
-    /** Render all maps and  */
-    self.render = (geoVoters) => {
-        renderPolicyNoise(geoVoters)
-        self.renderTractVotes(geoVoters)
-        self.renderDistrictWins(geoVoters)
-        self.renderDistrictVotes(geoVoters)
-    }
-    // Render census tract votes.
-    self.renderTractVotes = (geoVoters) => {
-        geoVoters.noiseImage.render(geoMapWidth, geoMapHeight)
-        geoVoters.districtMaker.renderVoronoi(geoMapWidth, geoMapHeight)
-    }
-    // Render district wins.
-    self.renderDistrictWins = (geoVoters) => {
-        const { renderVoronoiColors } = geoVoters.districtMaker
-        renderVoronoiColors(450, 0, geoMapWidth, geoMapHeight, self.winnerColors)
-    }
-    // render district votes.
-    self.renderDistrictVotes = (geoVoters) => {
-        const { renderVoronoiColors } = geoVoters.districtMaker
-        renderVoronoiColors(225, 0, geoMapWidth, geoMapHeight, self.blendColors)
-    }
-
-    /** Draw dots to represent the political diversity across census tracts. */
-    function renderPolicyNoise(geoVoters) {
-        const { voterGroupsByTract } = geoVoters
-        voterGroupsByTract.forEach((g) => {
-            smallCircle(g.x, g.y)
-        })
-    }
-
-    /** Draw a small dot */
-    function smallCircle(x, y) {
-        const { ctx } = screen
-        ctx.beginPath()
-        ctx.fillStyle = '#555'
-        ctx.arc(x, y, 1, 0, 2 * Math.PI)
-        ctx.fill()
-    }
 }

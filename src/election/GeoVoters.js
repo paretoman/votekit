@@ -3,7 +3,7 @@ import NoiseImage from './NoiseImage.js'
 import DistrictMaker from './DistrictMaker.js'
 import { range } from './jsHelpers.js'
 
-export default function GeoVoters(screen) {
+export default function GeoVoters(screen, geoElection) {
     const self = this
 
     /** Number of districts */
@@ -93,5 +93,49 @@ export default function GeoVoters(screen) {
                 ).flat(),
             ),
         )
+    }
+
+    // Display //
+
+    const geoMapWidth = 150
+    const geoMapHeight = 150
+
+    /** Render all maps and  */
+    self.render = () => {
+        renderPolicyNoise()
+        self.renderTractVotes()
+        self.renderDistrictWins()
+        self.renderDistrictVotes()
+    }
+    // Render census tract votes.
+    self.renderTractVotes = () => {
+        self.noiseImage.render(geoMapWidth, geoMapHeight)
+        self.districtMaker.renderVoronoi(geoMapWidth, geoMapHeight)
+    }
+    // Render district wins.
+    self.renderDistrictWins = () => {
+        const { renderVoronoiColors } = self.districtMaker
+        renderVoronoiColors(450, 0, geoMapWidth, geoMapHeight, geoElection.winnerColors)
+    }
+    // render district votes.
+    self.renderDistrictVotes = () => {
+        const { renderVoronoiColors } = self.districtMaker
+        renderVoronoiColors(225, 0, geoMapWidth, geoMapHeight, geoElection.blendColors)
+    }
+
+    /** Draw dots to represent the political diversity across census tracts. */
+    function renderPolicyNoise() {
+        self.voterGroupsByTract.forEach((g) => {
+            smallCircle(g.x, g.y)
+        })
+    }
+
+    /** Draw a small dot */
+    function smallCircle(x, y) {
+        const { ctx } = screen
+        ctx.beginPath()
+        ctx.fillStyle = '#555'
+        ctx.arc(x, y, 1, 0, 2 * Math.PI)
+        ctx.fill()
     }
 }
