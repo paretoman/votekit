@@ -35,7 +35,7 @@ export default function SimOne(screen, dragm, menu, changes, oneElection) {
         if (changes.checkNone()) return
         // clear changes, reset to []
         changes.clear()
-        oneElection.updateTallies(candidates, voters)
+        oneElection.updateTallies(voters, candidates)
         ci.update(candidates)
         ci2.update(candidates)
     }

@@ -44,7 +44,7 @@ export default function Sim(
             // exit state
             dragm.clear()
             if (sims.one) sims.one.clear()
-            if (sims.many) simElections.clear()
+            if (sims.many) sims.many.clear()
             if (sims.geoOne) sims.geoOne.clear()
 
             // enter state

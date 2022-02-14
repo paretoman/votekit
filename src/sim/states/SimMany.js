@@ -2,6 +2,8 @@
 
 import SimVoterCircle from '../entities/SimVoterCircle.js'
 import CandidateDistribution from '../entities/CandidateDistribution.js'
+import Voters from '../../election/Voters.js'
+import SampleCandidates from '../../election/SampleCandidates.js'
 
 /**
  * Simulate many elections with
@@ -16,20 +18,26 @@ import CandidateDistribution from '../entities/CandidateDistribution.js'
 export default function SimMany(screen, dragm, menu, changes, simElections) {
     const self = this
 
-    const cd = new CandidateDistribution(300, 300, 400, screen, dragm, simElections)
-    const ci = new SimVoterCircle(100, 300, 200, screen, dragm, simElections)
-    const ci2 = new SimVoterCircle(500, 300, 200, screen, dragm, simElections)
+    const voters = new Voters()
+    const sampleCandidates = new SampleCandidates()
+    const cd = new CandidateDistribution(300, 300, 400, screen, dragm, sampleCandidates)
+    const ci = new SimVoterCircle(100, 300, 200, screen, dragm, voters)
+    const ci2 = new SimVoterCircle(500, 300, 200, screen, dragm, voters)
+
+    self.clear = () => {
+        sampleCandidates.clear()
+        voters.clear()
+    }
 
     self.update = () => {
         if (changes.checkNone()) {
-            simElections.addSim()
-            return
+            simElections.addSim(voters, sampleCandidates)
+        } else {
+            // clear changes, reset to []
+            changes.clear()
+            sampleCandidates.startSampler()
+            simElections.startSim()
         }
-        // clear changes, reset to []
-        changes.clear()
-        simElections.startSim()
-        ci.update()
-        ci2.update()
     }
 
     self.render = () => {

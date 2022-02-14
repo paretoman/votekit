@@ -29,7 +29,7 @@ export default function GeoElection(screen, menu, election) {
     self.updateStatewideTallies = function (geoVoters, candidates) {
         const canList = candidates.getCandidates()
         const { allVoterGroups } = geoVoters
-        const electionResults = election.runElection(canList, allVoterGroups)
+        const electionResults = election.runElection(allVoterGroups, canList)
         const { tallyFractions } = electionResults.votes
         candidates.setCandidateFractions(tallyFractions)
     }
@@ -47,7 +47,7 @@ export default function GeoElection(screen, menu, election) {
 
         const resultsByTract = voterGroupsByTract.map(
             (row) => row.map(
-                (voterGroups) => election.runElection(canList, voterGroups),
+                (voterGroups) => election.runElection(voterGroups, canList),
             ),
         )
 
@@ -75,7 +75,7 @@ export default function GeoElection(screen, menu, election) {
         const { voterGroupsByDistrict } = geoVoters
 
         self.resultsByDistrict = voterGroupsByDistrict.map(
-            (voterGroups) => election.runElection(canList, voterGroups),
+            (voterGroups) => election.runElection(voterGroups, canList),
         )
     }
     self.updateWinColors = () => {

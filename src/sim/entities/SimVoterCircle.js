@@ -10,9 +10,9 @@ import CircleGraphic from './CircleGraphic.js'
  * @param {Number} r - radius of circle of candidate positions.
  * @param {Screen} screen
  * @param {DraggableManager} dragm
- * @param {Election} election
+ * @param {Voters} voters
  */
-export default function SimVoterCircle(x, y, r, screen, dragm, election) {
+export default function SimVoterCircle(x, y, r, screen, dragm, voters) {
     const self = this
 
     self.x = x
@@ -30,10 +30,7 @@ export default function SimVoterCircle(x, y, r, screen, dragm, election) {
 
     dragm.newCircleHandle(self, circle)
 
-    election.newVoterGroup(self)
-
-    self.update = function () {
-    }
+    voters.newVoterGroup(self)
 
     // Graphics component
     self.render = function () {

@@ -12,7 +12,7 @@ export default function Election(menu) {
 
     self.method = new ElectionMethod(menu)
 
-    self.runElection = function (canList, voterGroups) {
+    self.runElection = function (voterGroups, canList) {
         const votes = castVotes.pluralityBallot(canList, voterGroups)
         const methodResults = self.method.run(canList, votes)
         const electionResults = { ...methodResults, votes }
@@ -21,7 +21,7 @@ export default function Election(menu) {
 
     // Voters cast votes for candidates.
     // There is also a separate graphical representation in VoronoiGroup.js
-    self.castVotes = (candidates, voters) => {
+    self.castVotes = (voters, candidates) => {
         const voterGroups = voters.getVoterGroups()
         const canList = candidates.getCandidates()
         const votes = castVotes.pluralityBallot(canList, voterGroups)
