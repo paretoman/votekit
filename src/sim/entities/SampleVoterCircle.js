@@ -3,7 +3,7 @@
 import CircleGraphic from './CircleGraphic.js'
 
 /**
- * VoterCircle for simulations of many candidates
+ * VoterCircle for simulations of many sampled candidates
  * VoterCircle class with Handle component to take care of dragging.
  * @param {Number} x
  * @param {Number} y
@@ -12,7 +12,7 @@ import CircleGraphic from './CircleGraphic.js'
  * @param {DraggableManager} dragm
  * @param {Voters} voters
  */
-export default function SimVoterCircle(x, y, r, screen, dragm, voters) {
+export default function SampleVoterCircle(x, y, r, screen, dragm, voters) {
     const self = this
 
     self.x = x

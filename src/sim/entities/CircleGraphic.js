@@ -8,7 +8,7 @@ import { Tween } from '../../../lib/tween.esm.js'
 /**
  * Shows a circle at the parent object xy coordinates.
  * Animates the circle when picking up and dropping.
- * @param {(Candidate|CandidateDistribution|VoterCircle|SimVoterCircle)} parent
+ * @param {(Candidate|CandidateDistribution|VoterCircle|SampleVoterCircle)} parent
  *  - something with x and y attributes.
  * @param {Number} r - radius of graphic
  * @param {String} color - color code

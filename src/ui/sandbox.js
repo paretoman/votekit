@@ -7,7 +7,7 @@ import addSVGOutput from './addSVGOutput.js'
 import Menu from '../menu/Menu.js'
 import Election from '../election/Election.js'
 import Sim from '../sim/Sim.js'
-import SimElections from '../election/SimElections.js'
+import SampleElections from '../election/SampleElections.js'
 import GeoElection from '../election/GeoElection.js'
 import Layout from './Layout.js'
 import OneElection from '../election/OneElection.js'
@@ -39,12 +39,12 @@ export default function sandbox(config) {
 
     const oneElection = new OneElection(screen, menu, election)
 
-    const simElections = new SimElections(screen, menu, election)
+    const sampleElections = new SampleElections(screen, menu, election)
 
     const geoElection = new GeoElection(screen, menu, election)
 
     // eslint-disable-next-line max-len
-    const sim = new Sim(screen, dragm, menu, changes, election, oneElection, simElections, geoElection, initialState)
+    const sim = new Sim(screen, dragm, menu, changes, election, oneElection, sampleElections, geoElection, initialState)
 
     const div = layout.makeComponent()
 

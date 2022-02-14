@@ -1,7 +1,7 @@
 /** @module */
 
 /**
- * Simulate winners from many elections.
+ * Simulate winners from many sampled elections.
  * Candidates are sampled from a distribution.
  * Winners are drawn as points.
  * The simulation is dynamic. More simulations are performed at each frame.
@@ -9,7 +9,7 @@
  * @param {Menu} menu
  * @param {Election} election
  */
-export default function SimElections(screen, menu, election) {
+export default function SampleElections(screen, menu, election) {
     const self = this
 
     self.points = []
