@@ -7,7 +7,7 @@ export default function GeoVoters(screen, geoElection) {
     const self = this
 
     /** Number of districts */
-    const nd = 100
+    const nd = 20
 
     /** Number of census tracts in x and y */
     const nx = 20
@@ -123,8 +123,12 @@ export default function GeoVoters(screen, geoElection) {
 
     /** Draw dots to represent the political diversity across census tracts. */
     function renderPolicyNoise() {
-        self.voterGroupsByTract.forEach((g) => {
-            smallCircle(g.x, g.y)
+        self.voterGroupsByTract.forEach((row) => {
+            row.forEach((cell) => {
+                cell.forEach((group) => {
+                    smallCircle(group.x, group.y)
+                })
+            })
         })
     }
 
