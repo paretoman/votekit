@@ -62,7 +62,7 @@ export default function SampleElections(screen, menu, election) {
             } else {
                 const { allocation } = results
 
-                const jitterSize = 100
+                const jitterSize = 10
                 canList.forEach(
                     (can, k) => {
                         const numPoints = allocation[k]

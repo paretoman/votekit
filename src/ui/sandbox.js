@@ -25,11 +25,11 @@ export default function sandbox(config) {
     // manage dependent calculations because we only want to do calculations if we need to
     const changes = new Changes()
 
-    const layout = new Layout(['menu', 'screen', 'foreground', 'svgUIDiv'])
+    const layout = new Layout(['menu', 'screen', 'foreground', 'geoMaps', 'svgUIDiv'])
 
     const menu = new Menu(changes, layout)
 
-    const screen = new Screen(600, 600, layout)
+    const screen = new Screen(300, 300, layout)
 
     addSVGOutput(screen, draw, layout)
 

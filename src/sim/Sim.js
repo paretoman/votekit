@@ -46,6 +46,7 @@ export default function Sim(
             if (sims.one) sims.one.clear()
             if (sims.sample) sims.sample.clear()
             if (sims.geoOne) sims.geoOne.clear()
+            screen.hideGeoMaps()
 
             // enter state
             if (self.state === 'one') {

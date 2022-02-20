@@ -95,8 +95,8 @@ export default function GeoVoters(screen, geoElection) {
 
     // Display //
 
-    const geoMapWidth = 150
-    const geoMapHeight = 150
+    const geoMapWidth = 100
+    const geoMapHeight = 100
 
     /** Render all maps and  */
     self.render = () => {
@@ -113,12 +113,12 @@ export default function GeoVoters(screen, geoElection) {
     // Render district wins.
     self.renderDistrictWins = () => {
         const { renderVoronoiColors } = self.districtMaker
-        renderVoronoiColors(450, 0, geoMapWidth, geoMapHeight, geoElection.winnerColors)
+        renderVoronoiColors(200, 0, geoMapWidth, geoMapHeight, geoElection.winnerColors)
     }
     // render district votes.
     self.renderDistrictVotes = () => {
         const { renderVoronoiColors } = self.districtMaker
-        renderVoronoiColors(225, 0, geoMapWidth, geoMapHeight, geoElection.blendColors)
+        renderVoronoiColors(100, 0, geoMapWidth, geoMapHeight, geoElection.blendColors)
     }
 
     /** Draw dots to represent the political diversity across census tracts. */

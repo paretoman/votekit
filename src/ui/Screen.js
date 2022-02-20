@@ -25,8 +25,14 @@ export default function Screen(w, h, layout) {
     self.foreground.setAttribute('class', 'foreground')
     self.fctx = self.foreground.getContext('2d')
 
+    // geoMaps
+    self.geoMaps = document.createElement('canvas')
+    self.geoMaps.setAttribute('class', 'geoMaps')
+    self.gctx = self.geoMaps.getContext('2d')
+
     layout.newDiv('screen', self.canvas)
     layout.newDiv('foreground', self.foreground)
+    layout.newDiv('geoMaps', self.geoMaps)
 
     self.noBuffers = false
 
@@ -46,6 +52,13 @@ export default function Screen(w, h, layout) {
     self.foreground.style.width = `${w}px`
     self.foreground.style.height = `${h}px`
 
+    const h3 = Math.round(h / 3)
+    self.geoMaps.width = w * self.pixelRatio // measured in device pixels
+    self.geoMaps.height = h3 * self.pixelRatio
+
+    self.geoMaps.style.width = `${w}px`
+    self.geoMaps.style.height = `${h3}px`
+
     self.ctx.scale(self.pixelRatio, self.pixelRatio)
     self.clear = function () {
         self.ctx.clearRect(0, 0, self.canvas.width, self.canvas.height)
@@ -59,8 +72,17 @@ export default function Screen(w, h, layout) {
     self.setFCtx = function (c) {
         self.fctx = c
     }
+    self.setGCtx = function (c) {
+        self.gctx = c
+    }
     self.setNoBuffers = function (noBuffers) {
         self.noBuffers = noBuffers
+    }
+    self.showGeoMaps = () => {
+        self.geoMaps.style.display = 'block'
+    }
+    self.hideGeoMaps = () => {
+        self.geoMaps.style.display = 'none'
     }
 }
 

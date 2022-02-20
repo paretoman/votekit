@@ -20,9 +20,9 @@ export default function SimSample(screen, dragm, menu, changes, sampleElections)
 
     const voters = new Voters()
     const sampleCandidates = new SampleCandidates()
-    const cd = new CandidateDistribution(300, 300, 400, screen, dragm, sampleCandidates)
-    const ci = new SampleVoterCircle(100, 300, 200, screen, dragm, voters)
-    const ci2 = new SampleVoterCircle(500, 300, 200, screen, dragm, voters)
+    const cd = new CandidateDistribution(150, 150, 100, screen, dragm, sampleCandidates)
+    const ci = new SampleVoterCircle(50, 150, 100, screen, dragm, voters)
+    const ci2 = new SampleVoterCircle(250, 150, 100, screen, dragm, voters)
 
     self.clear = () => {
         sampleCandidates.clear()

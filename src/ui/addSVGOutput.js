@@ -28,6 +28,13 @@ export default function addSVGOutput(screen, draw, layout) {
     downloadLink.hidden = true
     svgUIDiv.appendChild(downloadLink)
 
+    // svg download link for geoMaps
+    const gDownloadLink = document.createElement('a')
+    gDownloadLink.innerText = 'Download geoMap SVG'
+    gDownloadLink.download = 'vote_geoMap.svg'
+    gDownloadLink.hidden = true
+    svgUIDiv.appendChild(gDownloadLink)
+
     // svg hide button
     const svgHideButton = document.createElement('button')
     svgHideButton.innerText = 'Hide SVG'
@@ -43,7 +50,16 @@ export default function addSVGOutput(screen, draw, layout) {
     svgDiv.hidden = true
     svgUIDiv.appendChild(svgDiv)
 
+    // hidden svg output div for geoMaps
+    const gSvgDiv = document.createElement('div')
+    gSvgDiv.setAttribute('class', 'gSvgDiv')
+    gSvgDiv.style.width = `${w}px`
+    gSvgDiv.style.height = `${Math.round(h / 3)}px`
+    gSvgDiv.hidden = true
+    svgUIDiv.appendChild(gSvgDiv)
+
     const svgCtx = new C2S(w, h)
+    const svgGCtx = new C2S(w, Math.round(h / 3))
 
     function makeSVG() {
         // temporarily swap drawing context, render SVG,
@@ -58,22 +74,40 @@ export default function addSVGOutput(screen, draw, layout) {
         screen.setCtx(old)
         screen.setFCtx(oldF)
         screen.setNoBuffers(false)
+
+        const oldG = screen.gctx
+        screen.setGCtx(svgGCtx)
+        draw()
+        outputGSVG()
+        screen.setGCtx(oldG)
     }
 
     function outputSVG() {
+        svgHideButton.hidden = false
+
         const svg = svgCtx.getSerializedSvg(true)
         svgDiv.innerHTML = svg
         svgDiv.hidden = false
-        svgHideButton.hidden = false
         downloadLink.hidden = false
-
         const url = `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}`
         downloadLink.href = url
     }
+    function outputGSVG() {
+        const gSvg = svgGCtx.getSerializedSvg(true)
+        gSvgDiv.innerHTML = gSvg
+        gSvgDiv.hidden = false
+        gDownloadLink.hidden = false
+        const gUrl = `data:image/svg+xml;charset=utf-8,${encodeURIComponent(gSvg)}`
+        gDownloadLink.href = gUrl
+    }
 
     function hideSVG() {
-        svgDiv.hidden = true
         svgHideButton.hidden = true
+
+        svgDiv.hidden = true
         downloadLink.hidden = true
+
+        gSvgDiv.hidden = true
+        gDownloadLink.hidden = true
     }
 }

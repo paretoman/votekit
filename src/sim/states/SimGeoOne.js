@@ -21,15 +21,18 @@ export default function SimOne(screen, dragm, menu, changes, geoElection) {
 
     const geoVoters = new GeoVoters(screen, geoElection)
     const candidates = new Candidates()
-    const c1 = new GeoCandidate(100, 200, 21, 21, '#e52', screen, dragm, candidates)
-    const c2 = new GeoCandidate(200, 100, 21, 21, '#5e2', screen, dragm, candidates)
-    const c3 = new GeoCandidate(600 - 200, 600 - 100, 21, 21, '#25e', screen, dragm, candidates)
-    const vb = new GeoVoterBasis(300, 300, 200, screen, dragm, geoVoters)
+    const c1 = new GeoCandidate(50, 100, 21, 21, '#e52', screen, dragm, candidates)
+    const c2 = new GeoCandidate(100, 50, 21, 21, '#5e2', screen, dragm, candidates)
+    const c3 = new GeoCandidate(300 - 100, 300 - 50, 21, 21, '#25e', screen, dragm, candidates)
+    const vb = new GeoVoterBasis(150, 150, 100, screen, dragm, geoVoters)
     changes.add(['districts'])
+
+    screen.showGeoMaps()
 
     self.clear = () => {
         candidates.clear()
         geoVoters.clear()
+        screen.hideGeoMaps()
     }
 
     self.update = () => {

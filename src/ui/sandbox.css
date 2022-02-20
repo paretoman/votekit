@@ -1,4 +1,4 @@
-canvas.background, canvas.foreground, div.svgDiv {
+canvas.background, canvas.foreground, canvas.geoMaps, div.svgDiv, div.gSvgDiv {
     border: solid black 1px;
 }
 

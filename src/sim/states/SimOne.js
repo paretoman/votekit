@@ -20,11 +20,11 @@ export default function SimOne(screen, dragm, menu, changes, oneElection) {
 
     const voters = new Voters()
     const candidates = new Candidates()
-    const sq = new Candidate(100, 200, 21, 21, '#e52', screen, dragm, candidates)
-    const sq2 = new Candidate(200, 100, 21, 21, '#5e2', screen, dragm, candidates)
-    const sq3 = new Candidate(600 - 200, 600 - 100, 21, 21, '#25e', screen, dragm, candidates)
-    const ci = new VoterCircle(100, 300, 200, screen, dragm, voters)
-    const ci2 = new VoterCircle(500, 300, 200, screen, dragm, voters)
+    const sq = new Candidate(50, 100, 21, 21, '#e52', screen, dragm, candidates)
+    const sq2 = new Candidate(100, 50, 21, 21, '#5e2', screen, dragm, candidates)
+    const sq3 = new Candidate(300 - 100, 300 - 50, 21, 21, '#25e', screen, dragm, candidates)
+    const ci = new VoterCircle(50, 150, 100, screen, dragm, voters)
+    const ci2 = new VoterCircle(250, 150, 100, screen, dragm, voters)
 
     self.clear = () => {
         candidates.clear()
