@@ -39,9 +39,9 @@ export default function Candidate(x, y, w, h, color, screen, dragm, candidates) 
         self.fraction = fraction
     }
 
-    self.render = function () {
+    self.renderForeground = function () {
         square.render()
 
-        drawStrokedColor(textPercent(self.fraction), self.x, self.y - square.h * 0.5 - 2, 20, 2, '#222', screen.ctx)
+        drawStrokedColor(textPercent(self.fraction), self.x, self.y - square.h * 0.5 - 2, 20, 2, '#222', screen.fctx)
     }
 }

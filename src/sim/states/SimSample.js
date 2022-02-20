@@ -31,12 +31,20 @@ export default function SimSample(screen, dragm, menu, changes, sampleElections)
 
     self.update = () => {
         if (changes.checkNone()) {
-            sampleElections.addSim(voters, sampleCandidates)
+            const noChange = sampleElections.addSim(voters, sampleCandidates)
+            if (!noChange) {
+                changes.clear()
+                // changed, so re-render
+                screen.clear()
+                self.render()
+            }
         } else {
             // clear changes, reset to []
             changes.clear()
             sampleCandidates.startSampler()
             sampleElections.startSim()
+            screen.clear()
+            self.render()
         }
     }
 
@@ -45,5 +53,11 @@ export default function SimSample(screen, dragm, menu, changes, sampleElections)
         ci.render()
         ci2.render()
         cd.render()
+    }
+    self.renderForeground = () => {
+        // sampleElections.renderForeground()
+        ci.renderForeground()
+        ci2.renderForeground()
+        cd.renderForeground()
     }
 }

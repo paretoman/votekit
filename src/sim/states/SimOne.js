@@ -38,13 +38,20 @@ export default function SimOne(screen, dragm, menu, changes, oneElection) {
         oneElection.updateTallies(voters, candidates)
         ci.update(candidates)
         ci2.update(candidates)
+        screen.clear()
+        self.render()
     }
 
     self.render = () => {
         ci.render()
         ci2.render()
-        sq.render()
-        sq2.render()
-        sq3.render()
+    }
+    self.renderForeground = () => {
+        // sampleElections.renderForeground()
+        ci.renderForeground()
+        ci2.renderForeground()
+        sq.renderForeground()
+        sq2.renderForeground()
+        sq3.renderForeground()
     }
 }

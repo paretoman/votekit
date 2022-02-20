@@ -49,11 +49,14 @@ export default function addSVGOutput(screen, draw, layout) {
         // temporarily swap drawing context, render SVG,
         // then output SVG to div and to a download link
         const old = screen.ctx
+        const oldF = screen.fctx
         screen.setCtx(svgCtx)
+        screen.setFCtx(svgCtx)
         screen.setNoBuffers(true)
         draw()
         outputSVG()
         screen.setCtx(old)
+        screen.setFCtx(oldF)
         screen.setNoBuffers(false)
     }
 

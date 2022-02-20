@@ -43,6 +43,8 @@ export default function VoterCircle(x, y, r, screen, dragm, voters) {
     self.render = function () {
         // circle
         voronoiGroup.render()
+    }
+    self.renderForeground = () => {
         // handle
         circle.render()
     }

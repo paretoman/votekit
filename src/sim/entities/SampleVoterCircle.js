@@ -41,7 +41,8 @@ export default function SampleVoterCircle(x, y, r, screen, dragm, voters) {
         ctx.arc(self.x, self.y, self.r, 0, 2 * Math.PI)
         // ctx.fill()
         ctx.stroke()
-
+    }
+    self.renderForeground = () => {
         // handle
         circle.render()
     }

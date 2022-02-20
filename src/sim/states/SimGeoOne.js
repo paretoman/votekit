@@ -41,13 +41,18 @@ export default function SimOne(screen, dragm, menu, changes, geoElection) {
         changes.clear()
         geoVoters.updateVoters()
         geoElection.updateVotes(geoVoters, candidates)
+        screen.clear()
+        self.render()
     }
 
     self.render = () => {
         geoVoters.render()
-        c1.render()
-        c2.render()
-        c3.render()
         vb.render()
+    }
+    self.renderForeground = () => {
+        c1.renderForeground()
+        c2.renderForeground()
+        c3.renderForeground()
+        vb.renderForeground()
     }
 }

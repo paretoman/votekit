@@ -37,20 +37,20 @@ export default function SquareGraphic(parent, w, h, color, screen) {
 
     // Graphics component
     self.render = function () {
-        const { ctx } = screen
+        const { fctx } = screen
 
         if (self.tweenSq) {
             self.tweenSq.update()
         }
-        ctx.beginPath()
-        ctx.fillStyle = self.color
-        ctx.rect(
+        fctx.beginPath()
+        fctx.fillStyle = self.color
+        fctx.rect(
             (parent.x - 0.5 * self.w) - 0.5,
             (parent.y - 0.5 * self.h) - 0.5,
             self.w + 1,
             self.h + 1,
         )
-        ctx.fill()
-        ctx.stroke()
+        fctx.fill()
+        fctx.stroke()
     }
 }

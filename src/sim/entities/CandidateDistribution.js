@@ -40,7 +40,8 @@ export default function CandidateDistribution(x, y, r, screen, dragm, candidates
         ctx.arc(self.x, self.y, self.r, 0, 2 * Math.PI)
         // ctx.fill()
         ctx.stroke()
-
+    }
+    self.renderForeground = () => {
         square.render()
     }
 }

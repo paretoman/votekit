@@ -1,13 +1,22 @@
-canvas.interactive, div.svgDiv {
+canvas.background, canvas.foreground, div.svgDiv {
     border: solid black 1px;
 }
 
-canvas.interactive[data-cursor=grab]{
+canvas.background {	
+	position:absolute;
+	z-index:-1;
+}
+
+canvas.foreground {
+	z-index:1;
+}
+
+canvas.foreground[data-cursor=grab]{
 	cursor: -webkit-grab;
 	cursor: -moz-grab;
 	cursor: grab;
 }
-canvas.interactive[data-cursor=grabbing]{
+canvas.foreground[data-cursor=grabbing]{
 	cursor: -webkit-grabbing;
 	cursor: -moz-grabbing;
 	cursor: grabbing;

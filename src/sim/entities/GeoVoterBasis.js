@@ -41,7 +41,8 @@ export default function GeoVoterBasis(x, y, r, screen, dragm, geoVoters) {
         ctx.arc(self.x, self.y, self.r, 0, 2 * Math.PI)
         // ctx.fill()
         ctx.stroke()
-
+    }
+    self.renderForeground = () => {
         // handle
         circle.render()
     }

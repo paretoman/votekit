@@ -23,7 +23,7 @@ export default function SampleElections(screen, menu, election) {
     self.addSim = function (voters, sampleCandidates) {
         // add more points
 
-        if (self.points.length > 5000) return
+        if (self.points.length > 5000) return 1
         // this limit right now is about graphics rendering.
         // todo: render to a buffer
 
@@ -87,6 +87,7 @@ export default function SampleElections(screen, menu, election) {
             }
         }
         renderToBuffer()
+        return 0
     }
 
     // buffer canvas

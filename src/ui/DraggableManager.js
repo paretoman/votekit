@@ -13,7 +13,7 @@ export default function DraggableManager(screen, changes) {
     let drag = {}
     const draggables = []
 
-    const { canvas } = screen
+    const canvas = screen.foreground
 
     // add draggable objects
     self.newSquareHandle = function (o, g) {

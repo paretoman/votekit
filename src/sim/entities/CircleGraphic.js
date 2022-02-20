@@ -33,7 +33,7 @@ export default function CircleGraphic(parent, r, color, screen) {
 
     // Graphics component
     self.render = function () {
-        const { ctx } = screen
+        const { fctx } = screen
 
         if (self.tween) {
             self.tween.update()
@@ -41,10 +41,10 @@ export default function CircleGraphic(parent, r, color, screen) {
 
         // handle
 
-        ctx.beginPath()
-        ctx.fillStyle = color
-        ctx.arc(parent.x, parent.y, self.r, 0, 2 * Math.PI)
-        ctx.fill()
-        ctx.stroke()
+        fctx.beginPath()
+        fctx.fillStyle = color
+        fctx.arc(parent.x, parent.y, self.r, 0, 2 * Math.PI)
+        fctx.fill()
+        fctx.stroke()
     }
 }

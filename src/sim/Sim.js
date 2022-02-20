@@ -60,6 +60,7 @@ export default function Sim(
         // state update
         sims[self.state].update()
     }
+    self.renderForeground = () => { sims[self.state].renderForeground() }
     self.render = () => { sims[self.state].render() }
 
     // -- Menu --

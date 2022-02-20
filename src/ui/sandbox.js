@@ -25,7 +25,7 @@ export default function sandbox(config) {
     // manage dependent calculations because we only want to do calculations if we need to
     const changes = new Changes()
 
-    const layout = new Layout(['menu', 'screen', 'svgUIDiv'])
+    const layout = new Layout(['menu', 'screen', 'foreground', 'svgUIDiv'])
 
     const menu = new Menu(changes, layout)
 
@@ -54,7 +54,7 @@ export default function sandbox(config) {
 
     function gameLoop() {
         update()
-        draw()
+        drawForeground()
         window.requestAnimationFrame(gameLoop)
     }
 
@@ -62,8 +62,14 @@ export default function sandbox(config) {
         sim.update()
     }
 
+    function drawForeground() {
+        screen.clearForeground()
+        sim.renderForeground()
+    }
+
     function draw() {
         screen.clear()
         sim.render()
+        sim.renderForeground()
     }
 }
