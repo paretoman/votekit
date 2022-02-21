@@ -43,6 +43,7 @@ export default function DraggableManager(screen, changes) {
             if (hitTest(d, mouse, extra)) {
                 if (event.isTouch) {
                     event.preventDefault()
+                    event.stopPropagation()
                 }
                 drag.iDragging = i
                 drag.isDragging = true
@@ -77,6 +78,7 @@ export default function DraggableManager(screen, changes) {
         if (drag.isDragging) { // because the mouse is moving
             if (event.isTouch) {
                 event.preventDefault()
+                event.stopPropagation()
             }
             const dragging = draggables[drag.iDragging]
             dragging.o.setX(mouse.x + drag.offX) // updates state.config too
