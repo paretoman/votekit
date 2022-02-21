@@ -60,6 +60,9 @@ export default function Screen(w, h, layout) {
     self.geoMaps.style.height = `${h3}px`
 
     self.ctx.scale(self.pixelRatio, self.pixelRatio)
+    self.fctx.scale(self.pixelRatio, self.pixelRatio)
+    self.gctx.scale(self.pixelRatio, self.pixelRatio)
+
     self.clear = function () {
         self.ctx.clearRect(0, 0, self.canvas.width, self.canvas.height)
     }
