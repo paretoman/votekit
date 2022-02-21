@@ -137,7 +137,7 @@ export default function DraggableManager(screen, changes) {
         const y = d.o.y - m.y
         if (d.p.isCircle) {
             const { r } = d.g
-            const hit = x * x + y * y < r * r + extra * extra
+            const hit = x * x + y * y < (r + extra) * (r + extra)
             return hit
         } if (d.p.isSquare) {
             const { w, h } = d.g
