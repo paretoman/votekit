@@ -41,6 +41,9 @@ export default function DraggableManager(screen, changes) {
         for (let i = 0; i < nd; i++) {
             const d = draggables[i]
             if (hitTest(d, mouse, extra)) {
+                if (event.isTouch) {
+                    event.preventDefault()
+                }
                 drag.iDragging = i
                 drag.isDragging = true
                 drag.offX = d.o.x - mouse.x
@@ -72,6 +75,9 @@ export default function DraggableManager(screen, changes) {
         mouse.x = event.offsetX
         mouse.y = event.offsetY
         if (drag.isDragging) { // because the mouse is moving
+            if (event.isTouch) {
+                event.preventDefault()
+            }
             const dragging = draggables[drag.iDragging]
             dragging.o.setX(mouse.x + drag.offX) // updates state.config too
             dragging.o.setY(mouse.y + drag.offY)
@@ -119,7 +125,8 @@ export default function DraggableManager(screen, changes) {
         if (x > w) x = w
         if (y > h) y = h
         const pass = { offsetX: x, offsetY: y, isTouch: true }
-        return pass
+        Object.assign(e, pass)
+        return e
     }
 
     function hitTest(d, m, extra) {
