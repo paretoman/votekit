@@ -32,14 +32,15 @@ export default function DraggableManager(screen, changes) {
     // mouse controls
     // As a sidenote, it is interesting that we don't need to call model.update here
     // because we are using a game loop that will call model.update.
-    canvas.onmousedown = function (event) {
+    const start = function (event) {
         const mouse = {}
         mouse.x = event.offsetX
         mouse.y = event.offsetY
+        const extra = (event.isTouch) ? 10 : 0
         const nd = draggables.length
         for (let i = 0; i < nd; i++) {
             const d = draggables[i]
-            if (hitTest(d, mouse)) {
+            if (hitTest(d, mouse, extra)) {
                 drag.iDragging = i
                 drag.isDragging = true
                 drag.offX = d.o.x - mouse.x
@@ -51,7 +52,7 @@ export default function DraggableManager(screen, changes) {
         }
     }
 
-    canvas.onmouseup = function () {
+    const end = function () {
         if (drag.iDragging !== undefined) {
             const dragging = draggables[drag.iDragging]
             dragging.g.drop()
@@ -59,7 +60,14 @@ export default function DraggableManager(screen, changes) {
         drag = {}
     }
 
-    canvas.onmousemove = function (event) {
+    // mouse up outside of canvas
+    const current = document.onmouseup
+    document.onmouseup = () => {
+        if (current) current()
+        canvas.onmouseup()
+    }
+
+    const move = function (event) {
         const mouse = {}
         mouse.x = event.offsetX
         mouse.y = event.offsetY
@@ -74,7 +82,7 @@ export default function DraggableManager(screen, changes) {
             const nd = draggables.length
             for (let i = 0; i < nd; i++) {
                 const d = draggables[i]
-                if (hitTest(d, mouse)) {
+                if (hitTest(d, mouse, 0)) {
                     canvas.dataset.cursor = 'grab'
                     return
                 }
@@ -82,18 +90,49 @@ export default function DraggableManager(screen, changes) {
             canvas.dataset.cursor = '' // nothing to grab
         }
     }
+    canvas.onmousedown = start
+    canvas.onmousemove = move
+    canvas.onmouseup = end
+    canvas.addEventListener('touchmove', (e) => {
+        const pass = passTouch(e)
+        move(pass)
+    })
+    canvas.addEventListener('touchstart', (e) => {
+        const pass = passTouch(e)
+        start(pass)
+    })
+    canvas.addEventListener('touchend', (e) => {
+        const pass = passTouch(e)
+        end(pass)
+    })
+    canvas.touchmove = move
+    canvas.touchend = canvas.onmouseup
 
-    function hitTest(d, m) {
+    function passTouch(e) {
+        const rect = e.target.getBoundingClientRect()
+        const w = e.target.clientWidth
+        const h = e.target.clientHeight
+        let x = e.changedTouches[0].clientX - rect.left
+        let y = e.changedTouches[0].clientY - rect.top
+        if (x < 0) x = 0
+        if (y < 0) y = 0
+        if (x > w) x = w
+        if (y > h) y = h
+        const pass = { offsetX: x, offsetY: y, isTouch: true }
+        return pass
+    }
+
+    function hitTest(d, m, extra) {
         // Only drag an object if we're near it.
         const x = d.o.x - m.x
         const y = d.o.y - m.y
         if (d.p.isCircle) {
             const { r } = d.g
-            const hit = x * x + y * y < r * r
+            const hit = x * x + y * y < r * r + extra * extra
             return hit
         } if (d.p.isSquare) {
             const { w, h } = d.g
-            const hit = Math.abs(x) < 0.5 * w && Math.abs(y) < 0.5 * h
+            const hit = Math.abs(x) < 0.5 * w + extra && Math.abs(y) < 0.5 * h + extra
             return hit
         }
         return false
