@@ -18,7 +18,7 @@ export default function GeoElection(screen, menu, election) {
         self.updateStatewideTallies(geoVoters, candidates)
         self.updateNoiseImage(geoVoters, candidates)
         self.runDistrictElections(geoVoters, candidates)
-        self.updateWinColors()
+        self.updateWinColors(candidates)
         self.updateColorBlendGeoMap(candidates)
         self.updateWins(candidates)
     }
@@ -78,10 +78,22 @@ export default function GeoElection(screen, menu, election) {
             (voterGroups) => election.runElection(voterGroups, canList),
         )
     }
-    self.updateWinColors = () => {
+    self.updateWinColors = (candidates) => {
         // calculate color for win map
         if (election.method.checkElectionType() === 'singleWinner') {
             self.winnerColors = self.resultsByDistrict.map((results) => results.winner.square.color)
+        } else {
+            const canList = candidates.getCandidates()
+            const colorSet = canList.map((can) => can.square.color)
+            self.winnerColors = self.resultsByDistrict.map(
+                (results) => {
+                    const { allocation } = results
+                    const sum = allocation.reduce((p, c) => p + c)
+                    const fractions = allocation.map((x) => x / sum)
+                    const color = colorBlend(fractions, colorSet)
+                    return color
+                },
+            )
         }
     }
 
@@ -91,10 +103,21 @@ export default function GeoElection(screen, menu, election) {
         const canList = candidates.getCandidates()
         const numCandidates = canList.length
         const histogram = Array(numCandidates).fill(0)
-        self.iWinners = self.resultsByDistrict.map((results) => results.iWinner)
-        self.iWinners.forEach((iWinner) => {
-            histogram[iWinner] += 1
-        })
+        if (election.method.checkElectionType() === 'singleWinner') {
+            const iWinners = self.resultsByDistrict.map((results) => results.iWinner)
+            iWinners.forEach((iWinner) => {
+                histogram[iWinner] += 1
+            })
+        } else {
+            self.resultsByDistrict.forEach(
+                (results) => {
+                    const { allocation } = results
+                    for (let i = 0; i < numCandidates; i++) {
+                        histogram[i] += allocation[i]
+                    }
+                },
+            )
+        }
         candidates.setCandidateWins(histogram)
     }
 

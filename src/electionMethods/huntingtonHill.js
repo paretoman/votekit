@@ -35,11 +35,12 @@ export default function huntingtonHill(votes, electionMethodOptions) {
         const allocation = pops2.map(
             (p) => p >= minPopulation,
         )
-        return allocation
+        const results = { allocation }
+        return results
     }
 
     // make a list of break points / divisors, independent of vote totals
-    const divisorPattern = Array(nparties).fill().map(
+    const divisorPattern = Array(seats).fill().map(
         (_, i) => Math.sqrt((i) * (i + 1)),
     )
 
@@ -51,7 +52,7 @@ export default function huntingtonHill(votes, electionMethodOptions) {
     // except that the divisorPattern is used to substitute a slightly different number
     // than the number of respresentatives.
     const signposts = populations.map(
-        (p) => (p === 0 ? [] : divisorPattern.map((d) => d / p)),
+        (p) => (p === 0 ? Infinity : divisorPattern.map((d) => d / p)),
     ).flat()
 
     // find last signpost to fill all seats
@@ -71,20 +72,21 @@ export default function huntingtonHill(votes, electionMethodOptions) {
     // d = p * lastSignpost
     // sqrt(i*(i+1)) = d
     // i=0 is one seat
-    // i**2 + i = d**2
-    // i = -b + sqrt(b-4ac) / 2a
-    // a = 1, b = 1, c = -d**2
-    // i = (-1 + sqrt(1+4d**2) ) / 2
+    // n = i + 1
+    // sqrt(n*(n-1)) = d
+    // n**2 - n = d**2
+    // n = (-b + sqrt(b-4ac) ) / 2a
+    // a = 1, b = -1, c = -d**2
+    // n = (1 + sqrt(1+4d**2) ) / 2
     const quotients = populations.map(
-        (p) => (-1 + Math.sqrt(1 + 4 * (p * lastSignpost) ** 2)) * 0.5,
+        (p) => ((p === 0) ? 0 : (1 + Math.sqrt(1 + 4 * (p * lastSignpost) ** 2)) * 0.5),
     )
     const allocation = quotients.map(
-        (p) => Math.floor(p) + 1,
+        (p) => Math.floor(p),
     )
 
     // Todo: consider if there is a tie.
     // Right now, we give extra seats to all the tied parties if there is a tie.
-
     const results = { allocation }
     return results
 }
