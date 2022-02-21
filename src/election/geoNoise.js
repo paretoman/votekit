@@ -27,7 +27,7 @@ export default function GeoNoise(nx, ny) {
  * @param {Number} ny - Number of y pixels
  * @param {Number} noiseWidth -  A characteristic size of blobs, in pixels
  * @param {Number} noiseHeight - A characteristic size of blobs, in pixels
- * @returns
+ * @returns {Number[][][]} - Noise in pixel displacement, indexed by row, col, dimension
  */
 export function makeGeoNoise(nx, ny, noiseWidth, noiseHeight, xAmp, yAmp) {
     const simplexX = new SimplexNoise('s')
