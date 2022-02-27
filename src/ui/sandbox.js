@@ -16,12 +16,9 @@ import addUndo from './addUndo.js'
 
 /**
  * Set up a user interface to run a simulation.
- * @param {Object} config
- * @param {String} config.initialState - The game state of the simulation to load initially.
+ * @param {Object} config - An object containing commands. A command is a {name,value} pair.
  */
 export default function sandbox(config) {
-    const { initialState } = config
-
     // manage dependent calculations because we only want to do calculations if we need to
     const changes = new Changes()
 
@@ -48,7 +45,9 @@ export default function sandbox(config) {
     const geoElection = new GeoElection(screen, menu, election)
 
     // eslint-disable-next-line max-len
-    const sim = new Sim(screen, dragm, menu, changes, election, oneElection, sampleElections, geoElection, initialState)
+    const sim = new Sim(screen, dragm, menu, changes, election, oneElection, sampleElections, geoElection)
+
+    commander.loadConfig(config)
 
     const div = layout.makeComponent()
 

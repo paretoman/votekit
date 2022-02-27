@@ -17,7 +17,6 @@ import SimGeoOne from './states/SimGeoOne.js'
  * @param {Election} election
  * @param {SampleElections} sampleElections
  * @param {GeoElection} geoElection
- * @param {String} initialState
  */
 export default function Sim(
     screen,
@@ -28,7 +27,6 @@ export default function Sim(
     oneElection,
     sampleElections,
     geoElection,
-    initialState,
 ) {
     const self = this
 
@@ -36,7 +34,7 @@ export default function Sim(
     const sims = {
     }
 
-    self.state = initialState
+    self.state = 'one' // default
     self.typeExit = self.state
     self.update = () => {
         // state change

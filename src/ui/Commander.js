@@ -1,3 +1,5 @@
+import { jcopy } from '../election/jsHelpers.js'
+
 /**
  * Both the command pattern and the memento pattern are used here.
  * Commands are performed to make changes to the mementos.
@@ -101,4 +103,16 @@ export default function Commander() {
 
         head += 1 // Now we're in the future.
     }
+
+    self.loadConfig = (newConfig) => {
+        // newConfig is a list of commands to execute.
+        const names = Object.keys(newConfig)
+        names.forEach((name) => {
+            const value = newConfig[name]
+            const command = { name, value }
+            execute(command)
+        })
+    }
+
+    self.getConfig = () => jcopy(config)
 }
