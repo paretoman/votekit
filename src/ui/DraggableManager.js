@@ -64,13 +64,6 @@ export default function DraggableManager(screen, changes) {
         drag = {}
     }
 
-    // mouse up outside of canvas
-    const current = document.onmouseup
-    document.onmouseup = () => {
-        if (current) current()
-        canvas.onmouseup()
-    }
-
     const move = function (event) {
         const mouse = {}
         mouse.x = event.offsetX
@@ -98,9 +91,20 @@ export default function DraggableManager(screen, changes) {
             canvas.dataset.cursor = '' // nothing to grab
         }
     }
+
+    // Mouse Listeners
     canvas.onmousedown = start
     canvas.onmousemove = move
     canvas.onmouseup = end
+
+    // mouse up outside of canvas
+    const current = document.onmouseup
+    document.onmouseup = () => {
+        if (current) current()
+        canvas.onmouseup()
+    }
+
+    // Touch Listeners
     canvas.addEventListener('touchmove', (e) => {
         const pass = passTouch(e)
         move(pass)
@@ -116,6 +120,11 @@ export default function DraggableManager(screen, changes) {
     canvas.touchmove = move
     canvas.touchend = canvas.onmouseup
 
+    /**
+     * Make a touch event look like a mouse event, with a flag.
+     * @param {Event} e - The event from the DOM
+     * @returns {Event} - The same event it received, plus some added properties.
+     */
     function passTouch(e) {
         const rect = e.target.getBoundingClientRect()
         const w = e.target.clientWidth
@@ -131,6 +140,13 @@ export default function DraggableManager(screen, changes) {
         return e
     }
 
+    /**
+     * Check whether m, e.g. a mouse, hits d, a draggable object.
+     * @param {Object} d - An entry in the draggables array.
+     * @param {Object} m - An object with properties x and y, e.g. a mouse.
+     * @param {Number} extra - Extra slack to catch touches outside of the hitbox.
+     * @returns {Boolean} - Whether m hits d.
+     */
     function hitTest(d, m, extra) {
         // Only drag an object if we're near it.
         const x = d.o.x - m.x
