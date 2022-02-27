@@ -11,12 +11,12 @@ import SampleElections from '../election/SampleElections.js'
 import GeoElection from '../election/GeoElection.js'
 import Layout from './Layout.js'
 import OneElection from '../election/OneElection.js'
+import Commander from './Commander.js'
+import addUndo from './addUndo.js'
 
 /**
  * Set up a user interface to run a simulation.
  * @param {Object} config
- * @param {String} config.idScript - The id of an element.
- * We will append the user interface as a sibling.
  * @param {String} config.initialState - The game state of the simulation to load initially.
  */
 export default function sandbox(config) {
@@ -25,9 +25,13 @@ export default function sandbox(config) {
     // manage dependent calculations because we only want to do calculations if we need to
     const changes = new Changes()
 
-    const layout = new Layout(['menu', 'screen', 'foreground', 'geoMaps', 'svgUIDiv'])
+    const layout = new Layout(['menu', 'undo', 'screen', 'foreground', 'geoMaps', 'svgUIDiv'])
 
-    const menu = new Menu(changes, layout)
+    const commander = new Commander()
+
+    const menu = new Menu(changes, layout, commander)
+
+    addUndo(layout, commander)
 
     const screen = new Screen(300, 300, layout)
 
