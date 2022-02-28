@@ -15,7 +15,7 @@ import Candidates from '../../election/Candidates.js'
  * @param {Changes} changes
  * @param {Election} election
  */
-export default function SimOne(screen, dragm, menu, changes, oneElection) {
+export default function SimOne(screen, dragm, menu, changes, oneElection, commander) {
     const self = this
 
     const voters = new Voters()
@@ -23,8 +23,8 @@ export default function SimOne(screen, dragm, menu, changes, oneElection) {
     const sq = new Candidate(50, 100, 21, 21, '#e52', screen, dragm, candidates)
     const sq2 = new Candidate(100, 50, 21, 21, '#5e2', screen, dragm, candidates)
     const sq3 = new Candidate(300 - 100, 300 - 50, 21, 21, '#25e', screen, dragm, candidates)
-    const ci = new VoterCircle(50, 150, 100, screen, dragm, voters)
-    const ci2 = new VoterCircle(250, 150, 100, screen, dragm, voters)
+    const ci = new VoterCircle(50, 150, 100, screen, dragm, voters, commander, '1', changes)
+    const ci2 = new VoterCircle(250, 150, 100, screen, dragm, voters, commander, '2', changes)
 
     self.clear = () => {
         candidates.clear()

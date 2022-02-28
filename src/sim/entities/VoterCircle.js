@@ -13,17 +13,28 @@ import VoronoiGroup from './VoronoiGroup.js'
  * @param {DraggableManager} dragm
  * @param {Election} election
  */
-export default function VoterCircle(x, y, r, screen, dragm, voters) {
+export default function VoterCircle(x, y, r, screen, dragm, voters, commander, name, changes) {
     const self = this
 
     self.x = x
     self.y = y
     self.r = r
-    self.setX = function (x1) {
-        self.x = x1
+
+    /**
+     * The action that will be carried out by the entity-setXY command.
+     * @param {Object} p - A point: has properties x and y.
+     */
+    self.setXYAction = function (p) {
+        self.x = p.x
+        self.y = p.y
+        changes.add(['draggables'])
     }
-    self.setY = function (y1) {
-        self.y = y1
+
+    const commandName = `voter-${name}-setXY`
+    commander.addAction(commandName, self.setXYAction, { x, y })
+    self.setXY = function (p) { // should be renamed setXYCommand, when ready to change all
+        const opt = { isSetXY: true }
+        commander.do(commandName, p, opt)
     }
 
     const circle = new CircleGraphic(self, 10, '#555', screen)

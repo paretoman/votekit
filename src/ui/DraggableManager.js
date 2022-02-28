@@ -74,8 +74,7 @@ export default function DraggableManager(screen, changes) {
                 event.stopPropagation()
             }
             const dragging = draggables[drag.iDragging]
-            dragging.o.setX(mouse.x + drag.offX) // updates state.config too
-            dragging.o.setY(mouse.y + drag.offY)
+            dragging.o.setXY({ x: mouse.x + drag.offX, y: mouse.y + drag.offY })
             changes.add(['draggables'])
         } else {
             // see if we're hovering over something grabbable

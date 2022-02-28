@@ -62,15 +62,15 @@ export default function Commander() {
      * @param {String} name
      * @param {(String|Number|Boolean)} value
      */
-    self.do = (name, value) => {
+    self.do = (name, value, props) => {
         // Store the current value so we can undo the command.
         const currentValue = config[name]
 
         // Store the command so we can redo it or call it on another sandbox.
-        const command = { name, value }
+        const command = { name, value, props }
 
         // Store how to undo the command.
-        const undoCommand = { name, value: currentValue }
+        const undoCommand = { name, value: currentValue, props }
 
         // remove future redos
         // example: head:-1 means history will be cleared splice(0,length)
@@ -84,6 +84,10 @@ export default function Commander() {
         execute(command)
     }
 
+    // control the duration of the setXY undos with a timeout. Here's a default timeout.
+    const xyDuration = 30
+    let xyTimer = setTimeout(() => null, xyDuration)
+
     self.undo = () => {
         if (head === -1) return // There is no history
 
@@ -92,6 +96,18 @@ export default function Commander() {
         execute(undoCommand)
 
         head -= 1 // Now we're in the past.
+
+        // If we're in a setXY chain, then continue with another undo after a pause.
+        if (undoCommand.props === undefined) return
+        if (undoCommand.props.isSetXY !== true) return
+        if (head === -1) return
+        const penUltimate = history[head]
+        if (penUltimate.undoCommand.name === undoCommand.name) {
+            // todo: make this only work for repeated setXY commands
+            // set timer and callback
+            clearTimeout(xyTimer)
+            xyTimer = setTimeout(self.undo, xyDuration)
+        }
     }
 
     self.redo = () => {
@@ -102,6 +118,18 @@ export default function Commander() {
         execute(command)
 
         head += 1 // Now we're in the future.
+
+        // If we're in a setXY chain, then continue with another redo after a pause.
+        if (command.props === undefined) return
+        if (command.props.isSetXY !== true) return
+        if (head === history.length - 1) return
+        const nextnext = history[head + 1]
+        if (nextnext.command.name === command.name) {
+            // todo: make this only work for repeated setXY commands
+            // set timer and callback
+            clearTimeout(xyTimer)
+            xyTimer = setTimeout(self.redo, xyDuration)
+        }
     }
 
     self.loadConfig = (newConfig) => {

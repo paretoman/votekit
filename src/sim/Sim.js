@@ -17,6 +17,7 @@ import SimGeoOne from './states/SimGeoOne.js'
  * @param {Election} election
  * @param {SampleElections} sampleElections
  * @param {GeoElection} geoElection
+ * @param {Commander} commander
  */
 export default function Sim(
     screen,
@@ -27,6 +28,7 @@ export default function Sim(
     oneElection,
     sampleElections,
     geoElection,
+    commander,
 ) {
     const self = this
 
@@ -48,7 +50,7 @@ export default function Sim(
 
             // enter state
             if (self.state === 'one') {
-                sims[self.state] = new SimOne(screen, dragm, menu, changes, oneElection)
+                sims[self.state] = new SimOne(screen, dragm, menu, changes, oneElection, commander)
             } else if (self.state === 'sample') {
                 sims[self.state] = new SimSample(screen, dragm, menu, changes, sampleElections)
             } else if (self.state === 'geoOne') {

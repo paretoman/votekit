@@ -45,7 +45,7 @@ export default function sandbox(config) {
     const geoElection = new GeoElection(screen, menu, election)
 
     // eslint-disable-next-line max-len
-    const sim = new Sim(screen, dragm, menu, changes, election, oneElection, sampleElections, geoElection)
+    const sim = new Sim(screen, dragm, menu, changes, election, oneElection, sampleElections, geoElection, commander)
 
     commander.loadConfig(config)
 
