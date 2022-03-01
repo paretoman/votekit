@@ -15,4 +15,15 @@ export default function Voters() {
     }
 
     self.getVoterGroups = () => voterGroups
+
+    self.update = (candidates) => {
+        voterGroups.forEach((v) => v.update(candidates))
+    }
+    self.render = () => {
+        voterGroups.forEach((v) => v.render())
+    }
+    self.renderForeground = () => {
+        voterGroups.forEach((v) => v.renderForeground())
+    }
+
 }

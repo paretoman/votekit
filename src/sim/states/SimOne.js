@@ -36,20 +36,17 @@ export default function SimOne(screen, dragm, menu, changes, oneElection, comman
         // clear changes, reset to []
         changes.clear()
         oneElection.updateTallies(voters, candidates)
-        ci.update(candidates)
-        ci2.update(candidates)
+        voters.update(candidates)
         screen.clear()
         self.render()
     }
 
     self.render = () => {
-        ci.render()
-        ci2.render()
+        voters.render()
     }
     self.renderForeground = () => {
         // sampleElections.renderForeground()
-        ci.renderForeground()
-        ci2.renderForeground()
+        voters.renderForeground()
         sq.renderForeground()
         sq2.renderForeground()
         sq3.renderForeground()
