@@ -47,8 +47,6 @@ export default function SimOne(screen, dragm, menu, changes, oneElection, comman
     self.renderForeground = () => {
         // sampleElections.renderForeground()
         voters.renderForeground()
-        sq.renderForeground()
-        sq2.renderForeground()
-        sq3.renderForeground()
+        candidates.renderForeground()
     }
 }

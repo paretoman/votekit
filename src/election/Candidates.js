@@ -27,4 +27,7 @@ export default function Candidates() {
             can.setWins(win)
         })
     }
+    self.renderForeground = () => {
+        candidates.forEach((can) => can.renderForeground())
+    }
 }

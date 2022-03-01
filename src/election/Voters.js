@@ -25,5 +25,4 @@ export default function Voters() {
     self.renderForeground = () => {
         voterGroups.forEach((v) => v.renderForeground())
     }
-
 }
