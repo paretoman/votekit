@@ -18,7 +18,7 @@ export default function Voters() {
         voterIDs.splice(0, voterIDs.length)
     }
 
-    self.getVoterGroups = () => voterGroups
+    self.getVoterGroups = () => voterGroups.filter((v) => v.exists)
 
     self.update = (candidates) => {
         voterGroups.forEach((v) => { if (v.exists) v.update(candidates) })
