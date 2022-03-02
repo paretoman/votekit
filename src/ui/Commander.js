@@ -62,12 +62,11 @@ export default function Commander() {
      * @param {String} name
      * @param {(String|Number|Boolean)} value
      */
-    self.do = (name, value, props) => {
+    self.do = (command) => {
+        const { name, props } = command // command is {name, value, props}
+
         // Store the current value so we can undo the command.
         const currentValue = config[name]
-
-        // Store the command so we can redo it or call it on another sandbox.
-        const command = { name, value, props }
 
         // Store how to undo the command.
         const undoCommand = { name, value: currentValue, props }
@@ -82,6 +81,10 @@ export default function Commander() {
 
         // Actually preform the command.
         execute(command)
+    }
+    self.doCommands = (commands) => {
+        commands.forEach((command) => self.do(command))
+        // todo: make into one undo item
     }
 
     // control the duration of the setXY undos with a timeout. Here's a default timeout.
@@ -138,6 +141,13 @@ export default function Commander() {
         names.forEach((name) => {
             const value = newConfig[name]
             const command = { name, value }
+            execute(command)
+        })
+    }
+
+    self.loadCommands = (commands) => {
+        // execute commands without adding to history
+        commands.forEach((command) => {
             execute(command)
         })
     }

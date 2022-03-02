@@ -1,3 +1,4 @@
+/* eslint-disable no-new */
 /** @module */
 
 import VoterCircle from '../entities/VoterCircle.js'
@@ -20,11 +21,15 @@ export default function SimOne(screen, dragm, menu, changes, oneElection, comman
 
     const voters = new Voters()
     const candidates = new Candidates()
-    const sq = new Candidate(50, 100, 21, 21, '#e52', screen, dragm, candidates)
-    const sq2 = new Candidate(100, 50, 21, 21, '#5e2', screen, dragm, candidates)
-    const sq3 = new Candidate(300 - 100, 300 - 50, 21, 21, '#25e', screen, dragm, candidates)
-    const ci = new VoterCircle(50, 150, 100, screen, dragm, voters, commander, '1', changes)
-    const ci2 = new VoterCircle(250, 150, 100, screen, dragm, voters, commander, '2', changes)
+    new Candidate(50, 100, 21, 21, '#e52', screen, dragm, candidates)
+    new Candidate(100, 50, 21, 21, '#5e2', screen, dragm, candidates)
+    new Candidate(300 - 100, 300 - 50, 21, 21, '#25e', screen, dragm, candidates)
+    new VoterCircle(50, 150, 100, screen, dragm, voters, commander, changes, true)
+    new VoterCircle(250, 150, 100, screen, dragm, voters, commander, changes, true)
+
+    self.addVoter = () => {
+        new VoterCircle(50, 50, 100, screen, dragm, voters, commander, changes, false)
+    }
 
     self.clear = () => {
         candidates.clear()

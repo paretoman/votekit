@@ -63,6 +63,7 @@ export default function Sim(
     }
     self.renderForeground = () => { sims[self.state].renderForeground() }
     self.render = () => { sims[self.state].render() }
+    self.addVoter = () => { sims[self.state].addVoter() }
 
     // -- Menu --
 

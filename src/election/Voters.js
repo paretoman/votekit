@@ -2,27 +2,31 @@ export default function Voters() {
     const self = this
 
     const voterGroups = []
+    const voterIDs = []
+    let nextID = 0
 
     self.newVoterGroup = function (voterGroup) {
+        const id = nextID
+        nextID += 1
         voterGroups.push(voterGroup)
+        voterIDs.push(id)
+        return id
     }
 
-    self.clearVoterGroups = function () {
-        voterGroups.splice(0, voterGroups.length)
-    }
     self.clear = () => {
         voterGroups.splice(0, voterGroups.length)
+        voterIDs.splice(0, voterIDs.length)
     }
 
     self.getVoterGroups = () => voterGroups
 
     self.update = (candidates) => {
-        voterGroups.forEach((v) => v.update(candidates))
+        voterGroups.forEach((v) => { if (v.exists) v.update(candidates) })
     }
     self.render = () => {
-        voterGroups.forEach((v) => v.render())
+        voterGroups.forEach((v) => { if (v.exists) v.render() })
     }
     self.renderForeground = () => {
-        voterGroups.forEach((v) => v.renderForeground())
+        voterGroups.forEach((v) => { if (v.exists) v.renderForeground() })
     }
 }
