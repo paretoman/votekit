@@ -76,15 +76,38 @@ export default function Commander() {
         history.splice(head + 1, history.length - (head + 1))
 
         // Add command to history
-        history.push({ command, undoCommand })
+        history.push([{ command, undoCommand }])
         head += 1
 
         // Actually preform the command.
         execute(command)
     }
     self.doCommands = (commands) => {
-        commands.forEach((command) => self.do(command))
+        const historyItem = []
+        commands.forEach((command) => {
         // todo: make into one undo item
+            const { name, props } = command // command is {name, value, props}
+
+            // Store the current value so we can undo the command.
+            const currentValue = config[name]
+
+            // Store how to undo the command.
+            const undoCommand = { name, value: currentValue, props }
+
+            // Store in one history item
+            historyItem.push({ command, undoCommand })
+
+            // Actually preform the command.
+            execute(command)
+        })
+
+        // remove future redos
+        // example: head:-1 means history will be cleared splice(0,length)
+        history.splice(head + 1, history.length - (head + 1))
+
+        // Add command to history
+        history.push(historyItem)
+        head += 1
     }
 
     // control the duration of the setXY undos with a timeout. Here's a default timeout.
@@ -95,16 +118,16 @@ export default function Commander() {
         if (head === -1) return // There is no history
 
         const last = history[head]
-        const { undoCommand } = last
-        execute(undoCommand)
+        last.forEach((pair) => execute(pair.undoCommand))
 
         head -= 1 // Now we're in the past.
 
         // If we're in a setXY chain, then continue with another undo after a pause.
+        const { undoCommand } = last[0]
         if (undoCommand.props === undefined) return
         if (undoCommand.props.isSetXY !== true) return
         if (head === -1) return
-        const penUltimate = history[head]
+        const penUltimate = history[head][0]
         if (penUltimate.undoCommand.name === undoCommand.name) {
             // todo: make this only work for repeated setXY commands
             // set timer and callback
@@ -117,16 +140,16 @@ export default function Commander() {
         if (head === history.length - 1) return // Nothing to do
 
         const next = history[head + 1]
-        const { command } = next
-        execute(command)
+        next.forEach((pair) => execute(pair.command))
 
         head += 1 // Now we're in the future.
 
         // If we're in a setXY chain, then continue with another redo after a pause.
+        const { command } = next[0]
         if (command.props === undefined) return
         if (command.props.isSetXY !== true) return
         if (head === history.length - 1) return
-        const nextnext = history[head + 1]
+        const nextnext = history[head + 1][0]
         if (nextnext.command.name === command.name) {
             // todo: make this only work for repeated setXY commands
             // set timer and callback
