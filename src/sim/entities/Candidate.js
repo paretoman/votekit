@@ -38,8 +38,8 @@ export default function Candidate(
     // use commands to instantiate variables
     self.instantiate = () => {
         const commands = [
-            self.setECommand(1), // set alive flag
-            self.setXYCommand({ x, y }),
+            self.setEClient.command(1), // set alive flag
+            self.setXYClient.command({ x, y }),
         ]
         // Either load the commands because we don't want to create an item of history
         // Or do the commands because want to store an item in history, so that we can undo.
@@ -51,37 +51,28 @@ export default function Candidate(
     }
 
     const prefix = 'candidate'
-    /**
-     * The action that will be carried out by the entity-setECommand command.
-     * @param {Boolean} e - Does the entity exist? Alternatively, it has been deleted.
-     */
-    self.setEAction = (e) => {
-        self.exists = e
-        changes.add(['draggables'])
-    }
-    self.commandNameE = `${prefix}-${id}-setE`
-    // the 0 here means we didn't exist before now
-    commander.addAction(self.commandNameE, self.setEAction, 0)
-    self.setECommand = (e) => ({ name: self.commandNameE, value: e })
-    self.setE = (e) => {
-        commander.do(self.setECommand(e))
-    }
 
-    /**
-     * The action that will be carried out by the entity-setXY command.
-     * @param {Object} p - A point: has properties x and y.
-     */
-    self.setXYAction = (p) => {
-        self.x = p.x
-        self.y = p.y
-        changes.add(['draggables'])
-    }
-    self.commandNameXY = `${prefix}-${id}-setXY`
-    commander.addAction(self.commandNameXY, self.setXYAction, { x, y })
-    self.setXYCommand = (p) => ({ name: self.commandNameXY, value: p, props: { isSetXY: true } })
-    self.setXY = (p) => {
-        commander.do(self.setXYCommand(p))
-    }
+    self.setEClient = commander.addClient({
+        action: (e) => {
+            self.exists = e
+            changes.add(['draggables'])
+        },
+        currentValue: 0,
+        name: `${prefix}-${id}-setE`,
+    })
+    self.setE = self.setEClient.go
+
+    self.setXYClient = commander.addClient({
+        action: (p) => {
+            self.x = p.x
+            self.y = p.y
+            changes.add(['draggables'])
+        },
+        currentValue: { x, y },
+        name: `${prefix}-${id}-setXY`,
+        props: { isSetXY: true },
+    })
+    self.setXY = self.setXYClient.go
 
     self.instantiate()
 

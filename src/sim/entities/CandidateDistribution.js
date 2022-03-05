@@ -33,9 +33,9 @@ export default function CandidateDistribution(
     // use commands to instantiate variables
     self.instantiate = () => {
         const commands = [
-            self.setECommand(1), // set alive flag
-            self.setXYCommand({ x, y }),
-            self.setRCommand(r),
+            self.setEClient.command(1), // set alive flag
+            self.setXYClient.command({ x, y }),
+            self.setRClient.command(r),
         ]
         // Either load the commands because we don't want to create an item of history
         // Or do the commands because want to store an item in history, so that we can undo.
@@ -47,52 +47,38 @@ export default function CandidateDistribution(
     }
 
     const prefix = 'candidateDistribution'
-    /**
-     * The action that will be carried out by the entity-setECommand command.
-     * @param {Boolean} e - Does the entity exist? Alternatively, it has been deleted.
-     */
-    self.setEAction = (e) => {
-        self.exists = e
-        changes.add(['draggables'])
-    }
-    self.commandNameE = `${prefix}-${id}-setE`
-    // the 0 here means we didn't exist before now
-    commander.addAction(self.commandNameE, self.setEAction, 0)
-    self.setECommand = (e) => ({ name: self.commandNameE, value: e })
-    self.setE = (e) => {
-        commander.do(self.setECommand(e))
-    }
 
-    /**
-     * The action that will be carried out by the entity-setXY command.
-     * @param {Object} p - A point: has properties x and y.
-     */
-    self.setXYAction = (p) => {
-        self.x = p.x
-        self.y = p.y
-        changes.add(['draggables'])
-    }
-    self.commandNameXY = `${prefix}-${id}-setXY`
-    commander.addAction(self.commandNameXY, self.setXYAction, { x, y })
-    self.setXYCommand = (p) => ({ name: self.commandNameXY, value: p, props: { isSetXY: true } })
-    self.setXY = (p) => {
-        commander.do(self.setXYCommand(p))
-    }
+    self.setEClient = commander.addClient({
+        action: (e) => {
+            self.exists = e
+            changes.add(['draggables'])
+        },
+        currentValue: 0,
+        name: `${prefix}-${id}-setE`,
+    })
+    self.setE = self.setEClient.go
 
-    /**
-     * The action that will be carried out by the entity-setR command.
-     * @param {Number} r - radius
-     */
-    self.setRAction = (newR) => {
-        self.r = newR
-        changes.add(['radius'])
-    }
-    self.commandNameR = `${prefix}-${id}-setR`
-    commander.addAction(self.commandNameR, self.setRAction, r)
-    self.setRCommand = (newR) => ({ name: self.commandNameR, value: newR })
-    self.setR = (newR) => {
-        commander.do(self.setRCommand(newR))
-    }
+    self.setXYClient = commander.addClient({
+        action: (p) => {
+            self.x = p.x
+            self.y = p.y
+            changes.add(['draggables'])
+        },
+        currentValue: { x, y },
+        name: `${prefix}-${id}-setXY`,
+        props: { isSetXY: true },
+    })
+    self.setXY = self.setXYClient.go
+
+    self.setRClient = commander.addClient({
+        action: (newR) => {
+            self.r = newR
+            changes.add(['radius'])
+        },
+        currentValue: r,
+        name: `${prefix}-${id}-setR`,
+    })
+    self.setR = self.setRClient.go
 
     self.instantiate()
 

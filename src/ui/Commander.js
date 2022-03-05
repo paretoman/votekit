@@ -35,13 +35,27 @@ export default function Commander() {
 
     /**
      * A menu item or other object can add an action that it wants to execute with a value.
-     * The action can be performed by calling commander.do(name,value).
+     * The action can be performed by calling commander.do(command),
+     * where command has a name and value.
      * @param {String} name - The name of the action.
      * @param {Function} action - The action function itself, which is called with a value.
      */
     self.addAction = (name, action, currentValue) => {
         actions[name] = action
         config[name] = currentValue
+    }
+
+    // make a client with a command and a way to do the command
+    self.addClient = (args) => {
+        const {
+            name, action, currentValue, props,
+        } = args
+
+        self.addAction(name, action, currentValue)
+        const command = (p) => ({ name, value: p, props })
+        const go = (p) => self.do(command(p))
+        const client = { command, go }
+        return client
     }
 
     /**
