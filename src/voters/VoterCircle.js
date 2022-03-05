@@ -86,8 +86,6 @@ export default function VoterCircle(
 
     // Done instantiating variables
 
-    // Dragging
-
     const circle = new CircleGraphic(self, 10, '#555', screen)
     self.circle = circle
 
