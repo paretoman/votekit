@@ -2,7 +2,9 @@
 
 ## Try
 
-Here it is as part of a github-pages site at https://www.howtofixtheelection.com/votekit-example.
+[Here is a simple example](https://www.howtofixtheelection.com/votekit/src/pages) running the source code in the browser, so you can see how it works. This is what I run when I'm coding: https://www.howtofixtheelection.com/votekit/src/pages
+
+[Here it is deployed](https://www.howtofixtheelection.com/votekit-example) as part of a github-pages site at https://www.howtofixtheelection.com/votekit-example.
 
 ## Use
 
@@ -32,10 +34,10 @@ To make changes, use a good code editor and launch a web server to view ./src/pa
 
 I suggest VSCode as an editor. Use an extension in VSCode to launch a web server. Specifically, use Ritwick Dey's Live Server. Also, you'll need to do a few steps to get fully into development mode. Use F5 to do debugging. For the first time hitting F5 in VSCode, choose to attach to Chrome, save the file, then hit F5 again.
 
-Read the documentation: https://www.howtofixtheelection.com/votekit-docs
+Read [the documentation](https://www.howtofixtheelection.com/votekit-docs): https://www.howtofixtheelection.com/votekit-docs
 
 ## Build
 
 There are a few more things you can do. Use JSDoc to make the documentation. Use Parcel to bundle the javascript into one file, like in the top link.
 
-Here's an example netlify deploy: https://votekit.netlify.app/
+Here's an example [netlify deploy](https://votekit.netlify.app/): https://votekit.netlify.app/
