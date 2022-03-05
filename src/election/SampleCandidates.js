@@ -4,24 +4,29 @@ export default function SampleCandidates() {
     const self = this
 
     const candidateDistributions = []
+    const candidateDistributionIDs = []
+    let nextID = 0
 
-    self.newCandidateDistribution = function (canDis) {
-        candidateDistributions.push(canDis)
+    self.newCandidateDistribution = function (candidateDistribution) {
+        const id = nextID
+        nextID += 1
+        candidateDistributions.push(candidateDistribution)
+        candidateDistributionIDs.push(id)
+        return id
     }
 
-    self.getCandidateDistributions = () => candidateDistributions
-
-    self.clear = () => {
-        candidateDistributions.splice(0, candidateDistributions.length)
-    }
+    self.getCandidateDistributions = () => candidateDistributions.filter((v) => v.exists)
 
     self.startSampler = () => {
-        self.sampler = new CandidateDistributionSampler(candidateDistributions)
+        const canDis = self.getCandidateDistributions()
+        self.sampler = new CandidateDistributionSampler(canDis)
     }
     self.render = () => {
-        candidateDistributions.forEach((can) => can.render())
+        const canDis = self.getCandidateDistributions()
+        canDis.forEach((can) => can.render())
     }
     self.renderForeground = () => {
-        candidateDistributions.forEach((can) => can.renderForeground())
+        const canDis = self.getCandidateDistributions()
+        canDis.forEach((can) => can.renderForeground())
     }
 }

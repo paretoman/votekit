@@ -1,33 +1,33 @@
 export default function Candidates() {
     const self = this
+
     const candidates = []
+    const candidateIDs = []
+    let nextID = 0
 
-    self.newCandidate = function (can) {
-        candidates.push(can)
+    self.newCandidate = function (candidate) {
+        const id = nextID
+        nextID += 1
+        candidates.push(candidate)
+        candidateIDs.push(id)
+        return id
     }
 
-    self.clearCandidates = function () {
-        candidates.splice(0, candidates.length)
-    }
-    self.clear = () => {
-        candidates.splice(0, candidates.length)
-    }
-
-    self.getCandidates = () => candidates
+    self.getCandidates = () => candidates.filter((v) => v.exists)
 
     self.setCandidateFractions = (fractions) => {
-        candidates.forEach((can, index) => {
+        self.getCandidates().forEach((can, index) => {
             const fraction = fractions[index]
             can.setFraction(fraction)
         })
     }
     self.setCandidateWins = (winsByCandidate) => {
-        candidates.forEach((can, index) => {
+        self.getCandidates().forEach((can, index) => {
             const win = winsByCandidate[index]
             can.setWins(win)
         })
     }
     self.renderForeground = () => {
-        candidates.forEach((can) => can.renderForeground())
+        self.getCandidates().forEach((can) => can.renderForeground())
     }
 }

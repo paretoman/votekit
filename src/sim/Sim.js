@@ -52,18 +52,25 @@ export default function Sim(
 
     // Entities //
 
-    self.addCandidate = (x, y, c) => {
-        // eslint-disable-next-line no-new
-        new Candidate(x, y, 21, 21, c, screen, dragm, candidates)
+    self.addCandidatePressed = () => {
+        self.addCandidate(50, 50, 'yellow', false)
     }
-    self.addCandidateDistribution = (x, y, r) => {
+    self.addCandidateDistributionPressed = () => {
+        self.addCandidateDistribution(50, 50, 100, false)
+    }
+    self.addCandidate = (x, y, c, doLoad) => {
         // eslint-disable-next-line no-new
-        new CandidateDistribution(x, y, r, screen, dragm, sampleCandidates)
+        new Candidate(x, y, 21, 21, c, screen, dragm, candidates, commander, changes, doLoad)
+    }
+    self.addCandidateDistribution = (x, y, r, doLoad) => {
+        // eslint-disable-next-line no-new, max-len
+        new CandidateDistribution(x, y, r, screen, dragm, sampleCandidates, commander, changes, doLoad)
     }
 
     self.addVoterPressed = () => {
         self.addVoterCircle(50, 50, 100, false)
     }
+
     self.addVoterCircle = (x, y, r, doLoad) => {
         // eslint-disable-next-line max-len
         const voterCircle = new VoterCircle(x, y, r, screen, dragm, voters, commander, changes, doLoad, self)
@@ -73,10 +80,10 @@ export default function Sim(
         sims.sample.addSimVoterCircle(voterCircle)
     }
 
-    self.addCandidate(50, 100, '#e52')
-    self.addCandidate(100, 50, '#5e2')
-    self.addCandidate(300 - 100, 300 - 50, '#25e')
-    self.addCandidateDistribution(150, 150, 100)
+    self.addCandidate(50, 100, '#e52', true)
+    self.addCandidate(100, 50, '#5e2', true)
+    self.addCandidate(300 - 100, 300 - 50, '#25e', true)
+    self.addCandidateDistribution(150, 150, 100, true)
     self.addVoterCircle(50, 150, 100, true)
     self.addVoterCircle(250, 150, 100, true)
 

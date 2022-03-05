@@ -14,6 +14,8 @@ import OneElection from '../election/OneElection.js'
 import Commander from './Commander.js'
 import addUndo from './addUndo.js'
 import createAddVoter from './createAddVoter.js'
+import createAddCandidate from './createAddCandidate.js'
+import createAddCandidateDistribution from './createAddCandidateDistribution.js'
 
 /**
  * Set up a user interface to run a simulation.
@@ -23,7 +25,7 @@ export default function sandbox(config) {
     // manage dependent calculations because we only want to do calculations if we need to
     const changes = new Changes()
 
-    const layout = new Layout(['menu', 'addVoter', 'undo', 'screen', 'foreground', 'geoMaps', 'svgUIDiv'])
+    const layout = new Layout(['menu', 'addVoter', 'addCandidate', 'addCandidateDistribution', 'undo', 'screen', 'foreground', 'geoMaps', 'svgUIDiv'])
 
     const commander = new Commander()
 
@@ -49,6 +51,8 @@ export default function sandbox(config) {
     const sim = new Sim(screen, dragm, menu, changes, election, oneElection, sampleElections, geoElection, commander)
 
     createAddVoter(layout, sim)
+    createAddCandidate(layout, sim)
+    createAddCandidateDistribution(layout, sim)
 
     commander.loadConfig(config)
 
