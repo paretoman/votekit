@@ -1,4 +1,4 @@
-import { jcopy } from '../election/jsHelpers.js'
+import { jcopy } from '../utilities/jsHelpers.js'
 
 /**
  * Both the command pattern and the memento pattern are used here.

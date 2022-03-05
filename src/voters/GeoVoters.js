@@ -1,8 +1,8 @@
 import GeoNoise from './geoNoise.js'
 import NoiseImage from './NoiseImage.js'
 import DistrictMaker from './DistrictMaker.js'
-import { range } from './jsHelpers.js'
-import SimVoterList from '../sim/entities/SimVoterList.js'
+import { range } from '../utilities/jsHelpers.js'
+import SimVoterList from './SimVoterList.js'
 
 export default function GeoVoters(screen, geoElection) {
     const self = this

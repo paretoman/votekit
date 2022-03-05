@@ -1,9 +1,9 @@
 /** @module */
 
-import SimCandidateDistributionList from '../entities/SimCandidateDistributionList.js'
-import SimCandidateDistribution from '../entities/SimCandidateDistribution.js'
-import SampleVoterCircle from '../entities/SampleVoterCircle.js'
-import SimVoterList from '../entities/SimVoterList.js'
+import SimCandidateDistributionList from '../../candidates/SimCandidateDistributionList.js'
+import SimCandidateDistribution from '../../candidates/SimCandidateDistribution.js'
+import SampleVoterCircle from '../../voters/SampleVoterCircle.js'
+import SimVoterList from '../../voters/SimVoterList.js'
 import SimBase from './SimBase.js'
 
 /**

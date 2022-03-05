@@ -3,10 +3,10 @@
 import SimOne from './states/SimOne.js'
 import SimSample from './states/SimSample.js'
 import SimGeoOne from './states/SimGeoOne.js'
-import VoterCircle from './entities/VoterCircle.js'
-import Candidate from './entities/Candidate.js'
-import CandidateDistribution from './entities/CandidateDistribution.js'
-import Registrar from './entities/Registrar.js'
+import VoterCircle from '../voters/VoterCircle.js'
+import Candidate from '../candidates/Candidate.js'
+import CandidateDistribution from '../candidates/CandidateDistribution.js'
+import Registrar from './Registrar.js'
 import DraggableManager from '../ui/DraggableManager.js'
 
 /**

@@ -1,6 +1,6 @@
 // import _ from 'https://cdn.skypack.dev/lodash@4.17.21'
 import polygonClip from '../../lib/polygonClip.js'
-import { range, jcopy } from './jsHelpers.js'
+import { range, jcopy } from '../utilities/jsHelpers.js'
 import { polygonArea } from '../../lib/d3-polygon/src/index.js'
 
 // what fraction of each voterGroup lives in each district?

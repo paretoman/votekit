@@ -1,9 +1,9 @@
 /** @module */
 
-import GeoVoterBasis from '../entities/GeoVoterBasis.js'
-import SimCandidate from '../entities/SimCandidate.js'
-import SimCandidateList from '../entities/SimCandidateList.js'
-import GeoVoters from '../../election/GeoVoters.js'
+import GeoVoterBasis from '../../voters/GeoVoterBasis.js'
+import SimCandidate from '../../candidates/SimCandidate.js'
+import SimCandidateList from '../../candidates/SimCandidateList.js'
+import GeoVoters from '../../voters/GeoVoters.js'
 import SimBase from './SimBase.js'
 /**
  * Simulate one election with

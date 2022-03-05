@@ -1,7 +1,7 @@
 /** @module */
 
 import SquareGraphic from './SquareGraphic.js'
-import { drawStrokedColor, textPercent } from './graphicsUtilities.js'
+import { drawStrokedColor, textPercent } from '../utilities/graphicsUtilities.js'
 
 /**
  * Candidate class on top of handle.

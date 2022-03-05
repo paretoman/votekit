@@ -1,4 +1,4 @@
-import CandidateDistributionSampler from '../../election/CandidateDistributionSampler.js'
+import CandidateDistributionSampler from '../election/CandidateDistributionSampler.js'
 
 /**
  * A simple list of simCandidateDistribution instances.

@@ -1,6 +1,6 @@
 import lloydVoronoi from './lloydVoronoi.js'
 import { polygonArea } from '../../lib/d3-polygon/src/index.js'
-import { drawStrokedColor } from '../sim/entities/graphicsUtilities.js'
+import { drawStrokedColor } from '../utilities/graphicsUtilities.js'
 import geoCensus from './geoCensus.js'
 /**
  * Makes and draws district boundaries.
