@@ -1,5 +1,7 @@
 /** @module */
 
+import EventHandlers from './EventHandlers.js'
+
 /**
  * Set up a screen to view some objects.
  * A detail here is that we have browser pixels and device pixels.
@@ -87,6 +89,8 @@ export default function Screen(w, h, layout) {
     self.hideGeoMaps = () => {
         self.geoMaps.style.display = 'none'
     }
+
+    self.eventHandlers = new EventHandlers(self.foreground)
 }
 
 function getPixelRatio(context) {

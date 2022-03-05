@@ -19,7 +19,7 @@ import SimBase from './SimBase.js'
 export default function SimGeoOne(screen, dragm, menu, changes, geoElection) {
     const self = this
 
-    SimBase.call(self, dragm)
+    SimBase.call(self, dragm, screen)
 
     const geoVoters = new GeoVoters(screen, geoElection)
 
@@ -37,7 +37,7 @@ export default function SimGeoOne(screen, dragm, menu, changes, geoElection) {
 
     self.enter = () => {
         screen.showGeoMaps()
-        dragm.setEventHandlers()
+        screen.eventHandlers.set(dragm.eventHandlers)
     }
 
     self.exit = () => {

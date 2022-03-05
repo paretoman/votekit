@@ -19,7 +19,7 @@ import SimBase from './SimBase.js'
 export default function SimSample(screen, dragm, menu, changes, sampleElections) {
     const self = this
 
-    SimBase.call(self, dragm)
+    SimBase.call(self, dragm, screen)
 
     const simCandidateList = new SimCandidateDistributionList()
 

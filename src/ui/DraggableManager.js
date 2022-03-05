@@ -3,6 +3,7 @@
 /**
  * Draggable Manager gives draggable behavior to objects on a canvas.
  * If anything changes, an item is added to the "changes" array.
+ * Calling screen.setEventHandlers(dragm.eventHandlers) sets the eventhandlers on the screen.
  * @param {Screen} screen
  * @param {Changes} changes
  */
@@ -26,7 +27,7 @@ export default function DraggableManager(screen, changes) {
         draggables.push({ o, g, p })
     }
 
-    // mouse controls
+    // Mouse Listeners
     // As a sidenote, it is interesting that we don't need to call model.update here
     // because we are using a game loop that will call model.update.
     const start = function (event) {
@@ -88,15 +89,6 @@ export default function DraggableManager(screen, changes) {
         }
     }
 
-    // Mouse Listeners
-
-    // mouse up outside of canvas
-    const current = document.onmouseup
-    document.onmouseup = () => {
-        if (current) current()
-        canvas.onmouseup()
-    }
-
     // Touch Listeners
     const touchmove = (e) => {
         const pass = passTouch(e)
@@ -111,15 +103,9 @@ export default function DraggableManager(screen, changes) {
         end(pass)
     }
 
-    self.setEventHandlers = () => {
-        canvas.onmousedown = start
-        canvas.onmousemove = move
-        canvas.onmouseup = end
-        canvas.addEventListener('touchmove', touchmove)
-        canvas.addEventListener('touchstart', touchstart)
-        canvas.addEventListener('touchend', touchend)
+    self.eventHandlers = {
+        start, move, end, touchmove, touchstart, touchend,
     }
-    self.setEventHandlers()
 
     /**
      * Make a touch event look like a mouse event, with a flag.
