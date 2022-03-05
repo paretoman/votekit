@@ -7,7 +7,8 @@ import SimVoterList from '../sim/entities/SimVoterList.js'
 export default function GeoVoters(screen, geoElection) {
     const self = this
 
-    // GeoVoters inherits from SimVoterList because we need to make a list instances of geoVoterBasis,
+    // GeoVoters inherits from SimVoterList
+    // because we need to make a list instances of geoVoterBasis,
     // and geoVoterBasis has a component called voter.
     SimVoterList.call(self)
 

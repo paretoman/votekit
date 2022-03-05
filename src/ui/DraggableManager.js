@@ -25,9 +25,6 @@ export default function DraggableManager(screen, changes) {
         const p = { isCircle: true }
         draggables.push({ o, g, p })
     }
-    self.clear = () => {
-        draggables.splice(0, draggables.length)
-    }
 
     // mouse controls
     // As a sidenote, it is interesting that we don't need to call model.update here
@@ -92,9 +89,6 @@ export default function DraggableManager(screen, changes) {
     }
 
     // Mouse Listeners
-    canvas.onmousedown = start
-    canvas.onmousemove = move
-    canvas.onmouseup = end
 
     // mouse up outside of canvas
     const current = document.onmouseup
@@ -104,20 +98,28 @@ export default function DraggableManager(screen, changes) {
     }
 
     // Touch Listeners
-    canvas.addEventListener('touchmove', (e) => {
+    const touchmove = (e) => {
         const pass = passTouch(e)
         move(pass)
-    })
-    canvas.addEventListener('touchstart', (e) => {
+    }
+    const touchstart = (e) => {
         const pass = passTouch(e)
         start(pass)
-    })
-    canvas.addEventListener('touchend', (e) => {
+    }
+    const touchend = (e) => {
         const pass = passTouch(e)
         end(pass)
-    })
-    canvas.touchmove = move
-    canvas.touchend = canvas.onmouseup
+    }
+
+    self.setEventHandlers = () => {
+        canvas.onmousedown = start
+        canvas.onmousemove = move
+        canvas.onmouseup = end
+        canvas.addEventListener('touchmove', touchmove)
+        canvas.addEventListener('touchstart', touchstart)
+        canvas.addEventListener('touchend', touchend)
+    }
+    self.setEventHandlers()
 
     /**
      * Make a touch event look like a mouse event, with a flag.

@@ -9,8 +9,7 @@ import CircleGraphic from './CircleGraphic.js'
  * @param {Number} y
  * @param {Number} r - radius of circle of candidate positions.
  * @param {Screen} screen
- * @param {DraggableManager} dragm
- * @param {Voters} voters
+ * @param {Registrar} voterRegistrar
  * @param {Commander} commander
  * @param {Changes} changes
  * @param {Boolean} doLoad - Should we add the voter without adding to the history?
@@ -20,17 +19,16 @@ export default function VoterCircle(
     y,
     r,
     screen,
-    dragm,
-    voters,
+    voterRegistrar,
     commander,
     changes,
     doLoad,
 ) {
     const self = this
 
-    // Get assigned a id by the voters list manager
+    // Get assigned a id by the voterRegistrar list manager
 
-    const id = voters.newVoterGroup(self)
+    const id = voterRegistrar.new()
 
     // Instantiate Variables
 
@@ -105,8 +103,6 @@ export default function VoterCircle(
 
     const circle = new CircleGraphic(self, 10, '#555', screen)
     self.circle = circle
-
-    dragm.newCircleHandle(self, circle)
 
     // Drawing
 

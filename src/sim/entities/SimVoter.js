@@ -7,10 +7,14 @@
  * An example of a SimVoter is a GeoVoterBasis or a OneVoterCircle.
  * This is an inheritance structure.
  * @param {VoterCircle} voterCircle - a voter component that SimVoter builds upon.
+ * @param {DraggableManager} dragm
  */
-export default function SimVoter(voterCircle) {
+export default function SimVoter(voterCircle, dragm) {
     const self = this
     self.voter = voterCircle
+
+    dragm.newCircleHandle(voterCircle, voterCircle.circle)
+
     self.renderForeground = () => {
         self.voter.renderForeground()
     }

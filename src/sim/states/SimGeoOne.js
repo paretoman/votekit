@@ -1,7 +1,10 @@
 /** @module */
 
 import GeoVoterBasis from '../entities/GeoVoterBasis.js'
+import SimCandidate from '../entities/SimCandidate.js'
+import SimCandidateList from '../entities/SimCandidateList.js'
 import GeoVoters from '../../election/GeoVoters.js'
+import SimBase from './SimBase.js'
 /**
  * Simulate one election with
  *   candidates in defined positions, and
@@ -13,36 +16,31 @@ import GeoVoters from '../../election/GeoVoters.js'
  * @param {Changes} changes
  * @param {Election} election
  */
-export default function SimGeoOne(
-    screen,
-    dragm,
-    menu,
-    changes,
-    geoElection,
-    commander,
-    candidates,
-) {
+export default function SimGeoOne(screen, dragm, menu, changes, geoElection) {
     const self = this
+
+    SimBase.call(self, dragm)
 
     const geoVoters = new GeoVoters(screen, geoElection)
 
+    const simCandidateList = new SimCandidateList()
+
+    self.addSimCandidate = (candidate) => {
+        simCandidateList.newCandidate(new SimCandidate(candidate, dragm))
+    }
+
     self.addSimVoterCircle = (voterCircle) => {
-        geoVoters.newVoterGroup(new GeoVoterBasis(voterCircle, screen))
+        geoVoters.newVoterGroup(new GeoVoterBasis(voterCircle, dragm, screen))
     }
 
     changes.add(['districts'])
 
     self.enter = () => {
         screen.showGeoMaps()
+        dragm.setEventHandlers()
     }
 
     self.exit = () => {
-        screen.hideGeoMaps()
-    }
-
-    self.clear = () => {
-        candidates.clear()
-        geoVoters.clear()
         screen.hideGeoMaps()
     }
 
@@ -54,7 +52,7 @@ export default function SimGeoOne(
         }
         changes.clear()
         geoVoters.updateVoters() // can make this only trigger when voters change
-        geoElection.updateVotes(geoVoters, candidates)
+        geoElection.updateVotes(geoVoters, simCandidateList)
         screen.clear()
         self.render()
     }
@@ -63,7 +61,7 @@ export default function SimGeoOne(
         geoVoters.render()
     }
     self.renderForeground = () => {
-        candidates.renderForeground()
+        simCandidateList.renderForeground()
         geoVoters.renderForeground()
     }
 }

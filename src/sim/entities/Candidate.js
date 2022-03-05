@@ -12,8 +12,7 @@ import { drawStrokedColor, textPercent } from './graphicsUtilities.js'
  * @param {Number} h
  * @param {String} color
  * @param {Screen} screen
- * @param {DraggableManager} dragm
- * @param {Candidates} candidates
+ * @param {Registrar} candidateRegistrar
  * @param {Commander} commander
  * @param {Changes} changes
  * @param {Boolean} doLoad - Should we add the candidateDistribution without adding to the history?
@@ -25,15 +24,14 @@ export default function Candidate(
     h,
     color,
     screen,
-    dragm,
-    candidates,
+    candidateRegistrar,
     commander,
     changes,
     doLoad,
 ) {
     const self = this
 
-    const id = candidates.newCandidate(self)
+    const id = candidateRegistrar.new()
 
     // Instantiate Variables
 
@@ -89,8 +87,6 @@ export default function Candidate(
 
     const square = new SquareGraphic(self, w, h, color, screen) // square is for rendering
     self.square = square
-
-    dragm.newSquareHandle(self, square)
 
     self.fraction = 0
     self.setFraction = function (fraction) {

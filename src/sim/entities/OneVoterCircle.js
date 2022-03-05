@@ -4,12 +4,13 @@ import SimVoter from './SimVoter.js'
 
 /**
  * Adds functionality for showing votes
- * @param {*} voterCircle
- * @param {*} screen
+ * @param {VoterCircle} voterCircle
+ * @param {DraggableManager} dragm
+ * @param {Screen} screen
  */
-export default function OneVoterCircle(voterCircle, screen) {
+export default function OneVoterCircle(voterCircle, dragm, screen) {
     const self = this
-    SimVoter.call(self, voterCircle)
+    SimVoter.call(self, voterCircle, dragm)
 
     const voronoiGroup = new VoronoiGroup(voterCircle, screen)
 

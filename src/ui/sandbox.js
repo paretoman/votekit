@@ -1,7 +1,6 @@
 /** @module */
 
 import Changes from './Changes.js'
-import DraggableManager from './DraggableManager.js'
 import Screen from './Screen.js'
 import addSVGOutput from './addSVGOutput.js'
 import Menu from '../menu/Menu.js'
@@ -37,8 +36,6 @@ export default function sandbox(config) {
 
     addSVGOutput(screen, draw, layout)
 
-    const dragm = new DraggableManager(screen, changes)
-
     const election = new Election(menu)
 
     const oneElection = new OneElection(screen, menu, election)
@@ -48,7 +45,7 @@ export default function sandbox(config) {
     const geoElection = new GeoElection(screen, menu, election)
 
     // eslint-disable-next-line max-len
-    const sim = new Sim(screen, dragm, menu, changes, election, oneElection, sampleElections, geoElection, commander)
+    const sim = new Sim(screen, menu, changes, oneElection, sampleElections, geoElection, commander)
 
     createAddVoter(layout, sim)
     createAddCandidate(layout, sim)

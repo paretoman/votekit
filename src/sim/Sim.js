@@ -4,11 +4,10 @@ import SimOne from './states/SimOne.js'
 import SimSample from './states/SimSample.js'
 import SimGeoOne from './states/SimGeoOne.js'
 import VoterCircle from './entities/VoterCircle.js'
-import Voters from '../election/Voters.js'
-import Candidates from '../election/Candidates.js'
 import Candidate from './entities/Candidate.js'
 import CandidateDistribution from './entities/CandidateDistribution.js'
-import SampleCandidates from '../election/SampleCandidates.js'
+import Registrar from './entities/Registrar.js'
+import DraggableManager from '../ui/DraggableManager.js'
 
 /**
  * Simulation is the main task we're trying to accomplish in this program.
@@ -17,20 +16,17 @@ import SampleCandidates from '../election/SampleCandidates.js'
  * Each state has initialization, update, and render procedures.
  * This is a state machine.
  * @param {Screen} screen
- * @param {DraggableManager} dragm
  * @param {Menu} menu
  * @param {Changes} changes
- * @param {Election} election
+ * @param {OneElection} oneElection
  * @param {SampleElections} sampleElections
  * @param {GeoElection} geoElection
  * @param {Commander} commander
  */
 export default function Sim(
     screen,
-    dragm,
     menu,
     changes,
-    election,
     oneElection,
     sampleElections,
     geoElection,
@@ -40,14 +36,20 @@ export default function Sim(
 
     // States //
 
-    const voters = new Voters()
-    const candidates = new Candidates()
-    const sampleCandidates = new SampleCandidates()
+    const voterRegistrar = new Registrar()
+    const candidateRegistrar = new Registrar()
+    const candidateDnRegistrar = new Registrar()
 
+    const dragms = {
+        one: new DraggableManager(screen, changes),
+        sample: new DraggableManager(screen, changes),
+        geoOne: new DraggableManager(screen, changes),
+    }
     const sims = {
-        one: new SimOne(screen, dragm, menu, changes, oneElection, commander, candidates),
-        sample: new SimSample(screen, dragm, menu, changes, sampleElections, sampleCandidates),
-        geoOne: new SimGeoOne(screen, dragm, menu, changes, geoElection, commander, candidates),
+        one: new SimOne(screen, dragms.one, menu, changes, oneElection),
+        // eslint-disable-next-line max-len
+        sample: new SimSample(screen, dragms.sample, menu, changes, sampleElections),
+        geoOne: new SimGeoOne(screen, dragms.geoOne, menu, changes, geoElection),
     }
 
     // Entities //
@@ -59,12 +61,15 @@ export default function Sim(
         self.addCandidateDistribution(50, 50, 100, false)
     }
     self.addCandidate = (x, y, c, doLoad) => {
-        // eslint-disable-next-line no-new
-        new Candidate(x, y, 21, 21, c, screen, dragm, candidates, commander, changes, doLoad)
+        // eslint-disable-next-line no-new, max-len
+        const candidate = new Candidate(x, y, 21, 21, c, screen, candidateRegistrar, commander, changes, doLoad)
+        sims.one.addSimCandidate(candidate)
+        sims.geoOne.addSimCandidate(candidate)
     }
     self.addCandidateDistribution = (x, y, r, doLoad) => {
         // eslint-disable-next-line no-new, max-len
-        new CandidateDistribution(x, y, r, screen, dragm, sampleCandidates, commander, changes, doLoad)
+        const candidateDistribution = new CandidateDistribution(x, y, r, screen, candidateDnRegistrar, commander, changes, doLoad)
+        sims.sample.addSimCandidateDistribution(candidateDistribution)
     }
 
     self.addVoterPressed = () => {
@@ -73,7 +78,7 @@ export default function Sim(
 
     self.addVoterCircle = (x, y, r, doLoad) => {
         // eslint-disable-next-line max-len
-        const voterCircle = new VoterCircle(x, y, r, screen, dragm, voters, commander, changes, doLoad, self)
+        const voterCircle = new VoterCircle(x, y, r, screen, voterRegistrar, commander, changes, doLoad, self)
 
         sims.one.addSimVoterCircle(voterCircle)
         sims.geoOne.addSimVoterCircle(voterCircle)

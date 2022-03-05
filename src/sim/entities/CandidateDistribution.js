@@ -9,8 +9,7 @@ import SquareGraphic from './SquareGraphic.js'
  * @param {Number} y
  * @param {Number} r
  * @param {Screen} screen
- * @param {DraggableManager} dragm
- * @param {SampleCandidates} sampleCandidates
+ * @param {Registrar} candidateDnRegistrar
  * @param {Commander} commander
  * @param {Changes} changes
  * @param {Boolean} doLoad - Should we add the candidateDistribution without adding to the history?
@@ -20,15 +19,14 @@ export default function CandidateDistribution(
     y,
     r,
     screen,
-    dragm,
-    sampleCandidates,
+    candidateDnRegistrar,
     commander,
     changes,
     doLoad,
 ) {
     const self = this
 
-    const id = sampleCandidates.newCandidateDistribution(self)
+    const id = candidateDnRegistrar.new()
 
     // Instantiate Variables
 
@@ -100,10 +98,6 @@ export default function CandidateDistribution(
 
     const square = new SquareGraphic(self, 10, 10, '#ccc', screen) // square is for rendering
     self.square = square
-
-    dragm.newSquareHandle(self, square)
-
-    sampleCandidates.newCandidateDistribution(self)
 
     self.render = function () {
         const { ctx } = screen
