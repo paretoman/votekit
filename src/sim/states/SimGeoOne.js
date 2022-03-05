@@ -1,10 +1,7 @@
 /** @module */
 
 import GeoVoterBasis from '../entities/GeoVoterBasis.js'
-import GeoCandidate from '../entities/GeoCandidate.js'
 import GeoVoters from '../../election/GeoVoters.js'
-import Candidates from '../../election/Candidates.js'
-
 /**
  * Simulate one election with
  *   candidates in defined positions, and
@@ -16,18 +13,32 @@ import Candidates from '../../election/Candidates.js'
  * @param {Changes} changes
  * @param {Election} election
  */
-export default function SimOne(screen, dragm, menu, changes, geoElection) {
+export default function SimGeoOne(
+    screen,
+    dragm,
+    menu,
+    changes,
+    geoElection,
+    commander,
+    candidates,
+) {
     const self = this
 
     const geoVoters = new GeoVoters(screen, geoElection)
-    const candidates = new Candidates()
-    const c1 = new GeoCandidate(50, 100, 21, 21, '#e52', screen, dragm, candidates)
-    const c2 = new GeoCandidate(100, 50, 21, 21, '#5e2', screen, dragm, candidates)
-    const c3 = new GeoCandidate(300 - 100, 300 - 50, 21, 21, '#25e', screen, dragm, candidates)
-    const vb = new GeoVoterBasis(150, 150, 100, screen, dragm, geoVoters)
+
+    self.addSimVoterCircle = (voterCircle) => {
+        geoVoters.newVoterGroup(new GeoVoterBasis(voterCircle, screen))
+    }
+
     changes.add(['districts'])
 
-    screen.showGeoMaps()
+    self.enter = () => {
+        screen.showGeoMaps()
+    }
+
+    self.exit = () => {
+        screen.hideGeoMaps()
+    }
 
     self.clear = () => {
         candidates.clear()
@@ -42,7 +53,7 @@ export default function SimOne(screen, dragm, menu, changes, geoElection) {
             geoVoters.updateDistricts()
         }
         changes.clear()
-        geoVoters.updateVoters()
+        geoVoters.updateVoters() // can make this only trigger when voters change
         geoElection.updateVotes(geoVoters, candidates)
         screen.clear()
         self.render()
@@ -50,12 +61,9 @@ export default function SimOne(screen, dragm, menu, changes, geoElection) {
 
     self.render = () => {
         geoVoters.render()
-        vb.render()
     }
     self.renderForeground = () => {
-        c1.renderForeground()
-        c2.renderForeground()
-        c3.renderForeground()
-        vb.renderForeground()
+        candidates.renderForeground()
+        geoVoters.renderForeground()
     }
 }

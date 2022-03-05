@@ -18,6 +18,7 @@ import { drawStrokedColor, textPercent } from './graphicsUtilities.js'
 export default function Candidate(x, y, w, h, color, screen, dragm, candidates) {
     const self = this
 
+    self.exists = true
     self.x = x
     self.y = y
     self.setX = function (x1) {
@@ -25,6 +26,10 @@ export default function Candidate(x, y, w, h, color, screen, dragm, candidates) 
     }
     self.setY = function (y1) {
         self.y = y1
+    }
+    self.setXY = function (p) {
+        self.x = p.x
+        self.y = p.y
     }
 
     const square = new SquareGraphic(self, w, h, color, screen) // square is for rendering
@@ -39,9 +44,17 @@ export default function Candidate(x, y, w, h, color, screen, dragm, candidates) 
         self.fraction = fraction
     }
 
+    self.setWins = (wins) => {
+        self.wins = wins
+    }
+
     self.renderForeground = function () {
         square.render()
 
         drawStrokedColor(textPercent(self.fraction), self.x, self.y - square.h * 0.5 - 2, 20, 2, '#222', screen.fctx)
+
+        if (self.wins !== undefined) {
+            drawStrokedColor(self.wins, self.x, self.y + square.h * 0.5 + 20 + 2, 20, 2, '#222', screen.fctx)
+        }
     }
 }

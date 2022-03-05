@@ -20,7 +20,7 @@ export default function SampleElections(screen, menu, election) {
         clearBuffer()
     }
 
-    self.addSim = function (voters, sampleCandidates) {
+    self.addSim = function (sampleVoters, sampleCandidates) {
         // add more points
 
         if (self.points.length > 5000) return 1
@@ -30,7 +30,7 @@ export default function SampleElections(screen, menu, election) {
         // number of sample elections
         const ns = 20
 
-        const voterGroups = voters.getVoterGroups()
+        const voterGroups = sampleVoters.getVoterGroups()
 
         for (let i = 0; i < ns; i++) {
             // choose a number of candidates

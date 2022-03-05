@@ -1,36 +1,16 @@
-/** @module */
+/** @constructor */
 
-import CircleGraphic from './CircleGraphic.js'
+import SimVoter from './SimVoter.js'
 
 /**
  * VoterCircle for simulations of many sampled candidates
  * VoterCircle class with Handle component to take care of dragging.
- * @param {Number} x
- * @param {Number} y
- * @param {Number} r - radius of circle of candidate positions.
- * @param {Screen} screen
- * @param {DraggableManager} dragm
- * @param {Voters} voters
+ * @param {VoterCircle} voterCircle - a voter component that SimVoter builds upon.
+ * @param {screen} screen - draw to the screen
  */
-export default function SampleVoterCircle(x, y, r, screen, dragm, voters) {
+export default function SampleVoterCircle(voterCircle, screen) {
     const self = this
-
-    self.x = x
-    self.y = y
-    self.r = r
-    self.setX = function (x1) {
-        self.x = x1
-    }
-    self.setY = function (y1) {
-        self.y = y1
-    }
-
-    const circle = new CircleGraphic(self, 10, '#555', screen)
-    self.circle = circle
-
-    dragm.newCircleHandle(self, circle)
-
-    voters.newVoterGroup(self)
+    SimVoter.call(self, voterCircle)
 
     // Graphics component
     self.render = function () {
@@ -38,12 +18,9 @@ export default function SampleVoterCircle(x, y, r, screen, dragm, voters) {
         // circle
         ctx.beginPath()
         // ctx.fillStyle = "#eee"
-        ctx.arc(self.x, self.y, self.r, 0, 2 * Math.PI)
+        const { x, y, r } = self.voter
+        ctx.arc(x, y, r, 0, 2 * Math.PI)
         // ctx.fill()
         ctx.stroke()
-    }
-    self.renderForeground = () => {
-        // handle
-        circle.render()
     }
 }

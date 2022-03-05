@@ -1,36 +1,16 @@
 /** @module */
 
-import CircleGraphic from './CircleGraphic.js'
-
+import SimVoter from './SimVoter.js'
 /**
  * A basis of voters, to be moved around according to noise.
  * Also, the user can move them around.
- * @param {Number} x
- * @param {Number} y
- * @param {Number} r - radius of circle of candidate positions.
- * @param {Screen} screen
- * @param {DraggableManager} dragm
- * @param {GeoElection} geoElection
+ * This is a Subclass of SimVoter.
+ * @param {VoterCircle} voterCircle - a voter component that SimVoter builds upon.
+ * @param {screen} screen - draw to the screen
  */
-export default function GeoVoterBasis(x, y, r, screen, dragm, geoVoters) {
+export default function GeoVoterBasis(voterCircle, screen) {
     const self = this
-
-    self.x = x
-    self.y = y
-    self.r = r
-    self.setX = function (x1) {
-        self.x = x1
-    }
-    self.setY = function (y1) {
-        self.y = y1
-    }
-
-    const circle = new CircleGraphic(self, 10, '#555', screen)
-    self.circle = circle
-
-    dragm.newCircleHandle(self, circle)
-
-    geoVoters.newVoterBasis(self)
+    SimVoter.call(self, voterCircle)
 
     // Graphics component
     self.render = function () {
@@ -41,10 +21,6 @@ export default function GeoVoterBasis(x, y, r, screen, dragm, geoVoters) {
         ctx.arc(self.x, self.y, self.r, 0, 2 * Math.PI)
         // ctx.fill()
         ctx.stroke()
-    }
-    self.renderForeground = () => {
-        // handle
-        circle.render()
     }
     self.renderAt = function (newX, newY) {
         const { ctx } = screen

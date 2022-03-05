@@ -15,6 +15,7 @@ import SquareGraphic from './SquareGraphic.js'
 export default function CandidateDistribution(x, y, r, screen, dragm, candidates) {
     const self = this
 
+    self.exists = true
     self.x = x
     self.y = y
     self.r = r
@@ -23,6 +24,10 @@ export default function CandidateDistribution(x, y, r, screen, dragm, candidates
     }
     self.setY = function (y1) {
         self.y = y1
+    }
+    self.setXY = function (p) {
+        self.x = p.x
+        self.y = p.y
     }
 
     const square = new SquareGraphic(self, 10, 10, '#ccc', screen) // square is for rendering

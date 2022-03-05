@@ -1,7 +1,6 @@
 /** @module */
 
 import CircleGraphic from './CircleGraphic.js'
-import VoronoiGroup from './VoronoiGroup.js'
 
 /**
  * VoterCircle class with Handle component to take care of dragging.
@@ -16,7 +15,17 @@ import VoronoiGroup from './VoronoiGroup.js'
  * @param {Changes} changes
  * @param {Boolean} doLoad - Should we add the voter without adding to the history?
  */
-export default function VoterCircle(x, y, r, screen, dragm, voters, commander, changes, doLoad) {
+export default function VoterCircle(
+    x,
+    y,
+    r,
+    screen,
+    dragm,
+    voters,
+    commander,
+    changes,
+    doLoad,
+) {
     const self = this
 
     // Get assigned a id by the voters list manager
@@ -92,24 +101,15 @@ export default function VoterCircle(x, y, r, screen, dragm, voters, commander, c
 
     // Done instantiating variables
 
-    // Other
+    // Dragging
 
     const circle = new CircleGraphic(self, 10, '#555', screen)
     self.circle = circle
 
     dragm.newCircleHandle(self, circle)
 
-    const voronoiGroup = new VoronoiGroup(self, screen)
+    // Drawing
 
-    self.update = function (candidates) {
-        voronoiGroup.update(candidates)
-    }
-
-    // Graphics component
-    self.render = function () {
-        // circle
-        voronoiGroup.render()
-    }
     self.renderForeground = () => {
         // handle
         circle.render()

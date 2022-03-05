@@ -2,9 +2,14 @@ import GeoNoise from './geoNoise.js'
 import NoiseImage from './NoiseImage.js'
 import DistrictMaker from './DistrictMaker.js'
 import { range } from './jsHelpers.js'
+import SimVoterList from '../sim/entities/SimVoterList.js'
 
 export default function GeoVoters(screen, geoElection) {
     const self = this
+
+    // GeoVoters inherits from SimVoterList because we need to make a list instances of geoVoterBasis,
+    // and geoVoterBasis has a component called voter.
+    SimVoterList.call(self)
 
     /** Number of districts */
     const nd = 20
@@ -28,22 +33,17 @@ export default function GeoVoters(screen, geoElection) {
     /** This voter basis is repeated at every census tract on the geo map.
      *  It is altered by translating it in policy space.
      *  */
-    const voterBasisSet = []
-
-    self.newVoterBasis = function (voterBasis) {
-        voterBasisSet.push(voterBasis)
-    }
-    self.clear = () => {
-        voterBasisSet.splice(0, voterBasisSet.length)
-    }
 
     // Update VoterGroup Sets //
+
+    let simVoterGroups = []
 
     /** Make districts and update voter sets */
     self.updateDistricts = () => {
         self.districtMaker.make(nx, ny, nd)
     }
     self.updateVoters = () => {
+        simVoterGroups = self.getSimVoterGroups()
         self.updateFullSet()
         self.updateVotersByDistrict()
         self.updateVotersByTract()
@@ -51,12 +51,13 @@ export default function GeoVoters(screen, geoElection) {
 
     self.updateFullSet = () => {
         const { sn } = self.geoNoise
-        self.allVoterGroups = voterBasisSet.map(
+        self.allVoterGroups = simVoterGroups.map(
             (vb) => sn.map(
                 (rowNoise) => rowNoise.map(
                     (cellNoise) => {
                         const [xNoise, yNoise] = cellNoise
-                        return { x: vb.x + xNoise, y: vb.y + yNoise, r: vb.r }
+                        const { x, y, r } = vb.voter
+                        return { x: x + xNoise, y: y + yNoise, r }
                     },
                 ).flat(),
             ).flat(),
@@ -67,12 +68,13 @@ export default function GeoVoters(screen, geoElection) {
         const { census } = self.districtMaker
         const { sn } = self.geoNoise
         self.voterGroupsByDistrict = range(nd).map(
-            (iDistrict) => voterBasisSet.map(
+            (iDistrict) => simVoterGroups.map(
                 (vb) => census[iDistrict].map((g) => {
                     const [gx, gy, gf] = g
                     const [xNoise, yNoise] = sn[gx][gy]
+                    const { x, y, r } = vb.voter
                     return {
-                        x: vb.x + xNoise, y: vb.y + yNoise, r: vb.r, f: gf,
+                        x: x + xNoise, y: y + yNoise, r, f: gf,
                     }
                 }).flat(),
             ).flat(),
@@ -83,10 +85,11 @@ export default function GeoVoters(screen, geoElection) {
         const { sn } = self.geoNoise
         self.voterGroupsByTract = sn.map(
             (rowNoise) => rowNoise.map(
-                (cellNoise) => voterBasisSet.map(
+                (cellNoise) => simVoterGroups.map(
                     (vb) => {
                         const [xNoise, yNoise] = cellNoise
-                        return { x: vb.x + xNoise, y: vb.y + yNoise, r: vb.r }
+                        const { x, y, r } = vb.voter
+                        return { x: x + xNoise, y: y + yNoise, r }
                     },
                 ).flat(),
             ),
@@ -104,6 +107,7 @@ export default function GeoVoters(screen, geoElection) {
         self.renderTractVotes()
         self.renderDistrictWins()
         self.renderDistrictVotes()
+        self.renderVoterBasisSet()
     }
     // Render census tract votes.
     self.renderTractVotes = () => {
@@ -119,6 +123,9 @@ export default function GeoVoters(screen, geoElection) {
     self.renderDistrictVotes = () => {
         const { renderVoronoiColors } = self.districtMaker
         renderVoronoiColors(100, 0, geoMapWidth, geoMapHeight, geoElection.blendColors)
+    }
+    self.renderVoterBasisSet = () => {
+        simVoterGroups.forEach((v) => v.render())
     }
 
     /** Draw dots to represent the political diversity across census tracts. */

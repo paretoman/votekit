@@ -9,7 +9,7 @@ export default function createAddVoter(layout, sim) {
     addVoterButton.innerText = 'Add Voter'
 
     addVoterButton.onclick = () => {
-        sim.addVoter()
+        sim.addVoterPressed()
     }
 
     const div = document.createElement('div')

@@ -1,10 +1,7 @@
-/* eslint-disable no-new */
 /** @module */
 
-import VoterCircle from '../entities/VoterCircle.js'
-import Candidate from '../entities/Candidate.js'
-import Voters from '../../election/Voters.js'
-import Candidates from '../../election/Candidates.js'
+import OneVoterCircle from '../entities/oneVoterCircle.js'
+import SimVoterList from '../entities/SimVoterList.js'
 
 /**
  * Simulate one election with
@@ -16,42 +13,43 @@ import Candidates from '../../election/Candidates.js'
  * @param {Changes} changes
  * @param {Election} election
  */
-export default function SimOne(screen, dragm, menu, changes, oneElection, commander) {
+export default function SimOne(
+    screen,
+    dragm,
+    menu,
+    changes,
+    oneElection,
+    commander,
+    candidates,
+) {
     const self = this
 
-    const voters = new Voters()
-    const candidates = new Candidates()
-    new Candidate(50, 100, 21, 21, '#e52', screen, dragm, candidates)
-    new Candidate(100, 50, 21, 21, '#5e2', screen, dragm, candidates)
-    new Candidate(300 - 100, 300 - 50, 21, 21, '#25e', screen, dragm, candidates)
-    new VoterCircle(50, 150, 100, screen, dragm, voters, commander, changes, true)
-    new VoterCircle(250, 150, 100, screen, dragm, voters, commander, changes, true)
+    const oneVoters = new SimVoterList()
 
-    self.addVoter = () => {
-        new VoterCircle(50, 50, 100, screen, dragm, voters, commander, changes, false)
-    }
-
-    self.clear = () => {
-        candidates.clear()
-        voters.clear()
+    self.addSimVoterCircle = (voterCircle) => {
+        oneVoters.newVoterGroup(new OneVoterCircle(voterCircle, screen))
     }
 
     self.update = () => {
         if (changes.checkNone()) return
         // clear changes, reset to []
         changes.clear()
-        oneElection.updateTallies(voters, candidates)
-        voters.update(candidates)
+        oneElection.updateTallies(oneVoters, candidates)
+        oneVoters.update(candidates)
         screen.clear()
         self.render()
     }
 
     self.render = () => {
-        voters.render()
+        oneVoters.render()
     }
     self.renderForeground = () => {
         // sampleElections.renderForeground()
-        voters.renderForeground()
+        oneVoters.renderForeground()
         candidates.renderForeground()
     }
+
+    self.enter = () => {}
+
+    self.exit = () => {}
 }

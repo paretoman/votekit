@@ -40,7 +40,7 @@ export default function DraggableManager(screen, changes) {
         const nd = draggables.length
         for (let i = 0; i < nd; i++) {
             const d = draggables[i]
-            if (hitTest(d, mouse, extra)) {
+            if (d.o.exists && hitTest(d, mouse, extra)) {
                 if (event.isTouch) {
                     event.preventDefault()
                     event.stopPropagation()
@@ -82,7 +82,7 @@ export default function DraggableManager(screen, changes) {
             const nd = draggables.length
             for (let i = 0; i < nd; i++) {
                 const d = draggables[i]
-                if (hitTest(d, mouse, 0)) {
+                if (d.o.exists && hitTest(d, mouse, 0)) {
                     canvas.dataset.cursor = 'grab'
                     return
                 }

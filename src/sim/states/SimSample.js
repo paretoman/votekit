@@ -2,8 +2,8 @@
 
 import SampleVoterCircle from '../entities/SampleVoterCircle.js'
 import CandidateDistribution from '../entities/CandidateDistribution.js'
-import Voters from '../../election/Voters.js'
 import SampleCandidates from '../../election/SampleCandidates.js'
+import SimVoterList from '../entities/SimVoterList.js'
 
 /**
  * Simulate many sample elections with
@@ -18,20 +18,18 @@ import SampleCandidates from '../../election/SampleCandidates.js'
 export default function SimSample(screen, dragm, menu, changes, sampleElections) {
     const self = this
 
-    const voters = new Voters()
+    const sampleVoters = new SimVoterList()
+
+    self.addSimVoterCircle = (voterCircle) => {
+        sampleVoters.newVoterGroup(new SampleVoterCircle(voterCircle, screen))
+    }
+
     const sampleCandidates = new SampleCandidates()
     const cd = new CandidateDistribution(150, 150, 100, screen, dragm, sampleCandidates)
-    const ci = new SampleVoterCircle(50, 150, 100, screen, dragm, voters)
-    const ci2 = new SampleVoterCircle(250, 150, 100, screen, dragm, voters)
-
-    self.clear = () => {
-        sampleCandidates.clear()
-        voters.clear()
-    }
 
     self.update = () => {
         if (changes.checkNone()) {
-            const noChange = sampleElections.addSim(voters, sampleCandidates)
+            const noChange = sampleElections.addSim(sampleVoters, sampleCandidates)
             if (!noChange) {
                 changes.clear()
                 // changed, so re-render
@@ -50,14 +48,15 @@ export default function SimSample(screen, dragm, menu, changes, sampleElections)
 
     self.render = () => {
         sampleElections.render()
-        ci.render()
-        ci2.render()
+        sampleVoters.render()
         cd.render()
     }
     self.renderForeground = () => {
-        // sampleElections.renderForeground()
-        ci.renderForeground()
-        ci2.renderForeground()
+        sampleVoters.renderForeground()
         cd.renderForeground()
     }
+
+    self.enter = () => {}
+
+    self.exit = () => {}
 }
