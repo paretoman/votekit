@@ -7,6 +7,8 @@ import VoterCircle from './entities/VoterCircle.js'
 import Voters from '../election/Voters.js'
 import Candidates from '../election/Candidates.js'
 import Candidate from './entities/Candidate.js'
+import CandidateDistribution from './entities/CandidateDistribution.js'
+import SampleCandidates from '../election/SampleCandidates.js'
 
 /**
  * Simulation is the main task we're trying to accomplish in this program.
@@ -40,10 +42,11 @@ export default function Sim(
 
     const voters = new Voters()
     const candidates = new Candidates()
+    const sampleCandidates = new SampleCandidates()
 
     const sims = {
         one: new SimOne(screen, dragm, menu, changes, oneElection, commander, candidates),
-        sample: new SimSample(screen, dragm, menu, changes, sampleElections),
+        sample: new SimSample(screen, dragm, menu, changes, sampleElections, sampleCandidates),
         geoOne: new SimGeoOne(screen, dragm, menu, changes, geoElection, commander, candidates),
     }
 
@@ -52,6 +55,10 @@ export default function Sim(
     self.addCandidate = (x, y, c) => {
         // eslint-disable-next-line no-new
         new Candidate(x, y, 21, 21, c, screen, dragm, candidates)
+    }
+    self.addCandidateDistribution = (x, y, r) => {
+        // eslint-disable-next-line no-new
+        new CandidateDistribution(x, y, r, screen, dragm, sampleCandidates)
     }
 
     self.addVoterPressed = () => {
@@ -69,6 +76,7 @@ export default function Sim(
     self.addCandidate(50, 100, '#e52')
     self.addCandidate(100, 50, '#5e2')
     self.addCandidate(300 - 100, 300 - 50, '#25e')
+    self.addCandidateDistribution(150, 150, 100)
     self.addVoterCircle(50, 150, 100, true)
     self.addVoterCircle(250, 150, 100, true)
 

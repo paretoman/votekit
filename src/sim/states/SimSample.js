@@ -1,8 +1,6 @@
 /** @module */
 
 import SampleVoterCircle from '../entities/SampleVoterCircle.js'
-import CandidateDistribution from '../entities/CandidateDistribution.js'
-import SampleCandidates from '../../election/SampleCandidates.js'
 import SimVoterList from '../entities/SimVoterList.js'
 
 /**
@@ -15,7 +13,7 @@ import SimVoterList from '../entities/SimVoterList.js'
  * @param {Changes} changes
  * @param {SimElection} sampleElections
  */
-export default function SimSample(screen, dragm, menu, changes, sampleElections) {
+export default function SimSample(screen, dragm, menu, changes, sampleElections, sampleCandidates) {
     const self = this
 
     const sampleVoters = new SimVoterList()
@@ -23,9 +21,6 @@ export default function SimSample(screen, dragm, menu, changes, sampleElections)
     self.addSimVoterCircle = (voterCircle) => {
         sampleVoters.newVoterGroup(new SampleVoterCircle(voterCircle, screen))
     }
-
-    const sampleCandidates = new SampleCandidates()
-    const cd = new CandidateDistribution(150, 150, 100, screen, dragm, sampleCandidates)
 
     self.update = () => {
         if (changes.checkNone()) {
@@ -49,11 +44,11 @@ export default function SimSample(screen, dragm, menu, changes, sampleElections)
     self.render = () => {
         sampleElections.render()
         sampleVoters.render()
-        cd.render()
+        sampleCandidates.render()
     }
     self.renderForeground = () => {
         sampleVoters.renderForeground()
-        cd.renderForeground()
+        sampleCandidates.renderForeground()
     }
 
     self.enter = () => {}

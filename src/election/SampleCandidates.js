@@ -18,4 +18,10 @@ export default function SampleCandidates() {
     self.startSampler = () => {
         self.sampler = new CandidateDistributionSampler(candidateDistributions)
     }
+    self.render = () => {
+        candidateDistributions.forEach((can) => can.render())
+    }
+    self.renderForeground = () => {
+        candidateDistributions.forEach((can) => can.renderForeground())
+    }
 }
