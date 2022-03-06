@@ -15,8 +15,9 @@ import SimBase from './SimBase.js'
  * @param {Menu} menu
  * @param {Changes} changes
  * @param {SimElection} sampleElections
+ * @param {Object} canDnButton - a button that lets us add a candidateDistribution
  */
-export default function SimSample(screen, dragm, menu, changes, sampleElections) {
+export default function SimSample(screen, dragm, menu, changes, sampleElections, canDnButton) {
     const self = this
 
     SimBase.call(self, dragm, screen)
@@ -31,6 +32,16 @@ export default function SimSample(screen, dragm, menu, changes, sampleElections)
 
     self.addSimVoterCircle = (voterCircle) => {
         sampleVoters.newVoterGroup(new SampleVoterCircle(voterCircle, dragm, screen))
+    }
+
+    const superEnter = self.enter
+    self.enter = () => {
+        superEnter()
+        canDnButton.show()
+    }
+
+    self.exit = () => {
+        canDnButton.hide()
     }
 
     self.update = () => {

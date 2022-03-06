@@ -15,8 +15,9 @@ import SimBase from './SimBase.js'
  * @param {Menu} menu
  * @param {Changes} changes
  * @param {Election} election
+ * @param {Object} canButton - a button that lets us add a candidate
  */
-export default function SimGeoOne(screen, dragm, menu, changes, geoElection) {
+export default function SimGeoOne(screen, dragm, menu, changes, geoElection, canButton) {
     const self = this
 
     SimBase.call(self, dragm, screen)
@@ -35,13 +36,16 @@ export default function SimGeoOne(screen, dragm, menu, changes, geoElection) {
 
     changes.add(['districts'])
 
+    const superEnter = self.enter
     self.enter = () => {
+        superEnter()
         screen.showGeoMaps()
-        screen.eventHandlers.set(dragm.eventHandlers)
+        canButton.show()
     }
 
     self.exit = () => {
         screen.hideGeoMaps()
+        canButton.hide()
     }
 
     self.update = () => {

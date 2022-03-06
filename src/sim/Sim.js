@@ -8,6 +8,9 @@ import Candidate from '../candidates/Candidate.js'
 import CandidateDistribution from '../candidates/CandidateDistribution.js'
 import Registrar from './Registrar.js'
 import DraggableManager from '../ui/DraggableManager.js'
+import createAddVoter from '../ui/createAddVoter.js'
+import CreateAddCandidate from '../ui/CreateAddCandidate.js'
+import CreateAddCandidateDistribution from '../ui/CreateAddCandidateDistribution.js'
 
 /**
  * Simulation is the main task we're trying to accomplish in this program.
@@ -22,6 +25,7 @@ import DraggableManager from '../ui/DraggableManager.js'
  * @param {SampleElections} sampleElections
  * @param {GeoElection} geoElection
  * @param {Commander} commander
+ *
  */
 export default function Sim(
     screen,
@@ -31,8 +35,15 @@ export default function Sim(
     sampleElections,
     geoElection,
     commander,
+    layout,
 ) {
     const self = this
+
+    // Buttons //
+
+    createAddVoter(layout, self)
+    const canButton = new CreateAddCandidate(layout, self)
+    const canDnButton = new CreateAddCandidateDistribution(layout, self)
 
     // States //
 
@@ -46,10 +57,10 @@ export default function Sim(
         geoOne: new DraggableManager(screen, changes),
     }
     const sims = {
-        one: new SimOne(screen, dragms.one, menu, changes, oneElection),
+        one: new SimOne(screen, dragms.one, menu, changes, oneElection, canButton),
         // eslint-disable-next-line max-len
-        sample: new SimSample(screen, dragms.sample, menu, changes, sampleElections),
-        geoOne: new SimGeoOne(screen, dragms.geoOne, menu, changes, geoElection),
+        sample: new SimSample(screen, dragms.sample, menu, changes, sampleElections, canDnButton),
+        geoOne: new SimGeoOne(screen, dragms.geoOne, menu, changes, geoElection, canButton),
     }
 
     // Entities //

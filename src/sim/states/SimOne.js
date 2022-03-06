@@ -15,8 +15,9 @@ import SimBase from './SimBase.js'
  * @param {Menu} menu
  * @param {Changes} changes
  * @param {Election} election
+ * @param {Object} canButton - a button that lets us add a candidate
  */
-export default function SimOne(screen, dragm, menu, changes, oneElection) {
+export default function SimOne(screen, dragm, menu, changes, oneElection, canButton) {
     const self = this
 
     SimBase.call(self, dragm, screen)
@@ -31,6 +32,16 @@ export default function SimOne(screen, dragm, menu, changes, oneElection) {
 
     self.addSimVoterCircle = (voterCircle) => {
         oneVoters.newVoterGroup(new OneVoterCircle(voterCircle, dragm, screen))
+    }
+
+    const superEnter = self.enter
+    self.enter = () => {
+        superEnter()
+        canButton.show()
+    }
+
+    self.exit = () => {
+        canButton.hide()
     }
 
     self.update = () => {

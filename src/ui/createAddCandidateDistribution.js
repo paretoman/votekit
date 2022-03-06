@@ -3,7 +3,8 @@
  * @param {Layout} layout
  * @param {Commander} commander
  */
-export default function createAddCandidateDistribution(layout, sim) {
+export default function CreateAddCandidateDistribution(layout, sim) {
+    const self = this
     const addCandidateDistributionButton = document.createElement('button')
 
     addCandidateDistributionButton.innerText = 'Add CandidateDistribution'
@@ -15,4 +16,11 @@ export default function createAddCandidateDistribution(layout, sim) {
     const div = document.createElement('div')
     div.appendChild(addCandidateDistributionButton)
     layout.newDiv('addCandidateDistribution', div)
+
+    self.show = () => {
+        addCandidateDistributionButton.hidden = false
+    }
+    self.hide = () => {
+        addCandidateDistributionButton.hidden = true
+    }
 }

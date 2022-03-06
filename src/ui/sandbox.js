@@ -12,9 +12,6 @@ import Layout from './Layout.js'
 import OneElection from '../election/OneElection.js'
 import Commander from './Commander.js'
 import addUndo from './addUndo.js'
-import createAddVoter from './createAddVoter.js'
-import createAddCandidate from './createAddCandidate.js'
-import createAddCandidateDistribution from './createAddCandidateDistribution.js'
 
 /**
  * Set up a user interface to run a simulation.
@@ -45,11 +42,7 @@ export default function sandbox(config) {
     const geoElection = new GeoElection(screen, menu, election)
 
     // eslint-disable-next-line max-len
-    const sim = new Sim(screen, menu, changes, oneElection, sampleElections, geoElection, commander)
-
-    createAddVoter(layout, sim)
-    createAddCandidate(layout, sim)
-    createAddCandidateDistribution(layout, sim)
+    const sim = new Sim(screen, menu, changes, oneElection, sampleElections, geoElection, commander, layout)
 
     commander.loadConfig(config)
 
