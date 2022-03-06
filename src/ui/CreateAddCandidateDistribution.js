@@ -8,7 +8,7 @@ export default function CreateAddCandidateDistribution(layout, sim) {
     const addCandidateDistributionButton = document.createElement('button')
 
     addCandidateDistributionButton.className = 'button2'
-    addCandidateDistributionButton.innerText = 'Add CandidateDistribution'
+    addCandidateDistributionButton.innerText = 'Add Candidate Distribution'
 
     addCandidateDistributionButton.onclick = () => {
         sim.addCandidateDistributionPressed()
