@@ -92,7 +92,22 @@ export default function Screen(w, h, layout) {
         self.geoMaps.style.display = 'none'
     }
 
-    self.eventHandlers = new EventHandlers(self.foreground)
+    self.eventHandlers = new EventHandlers()
+    const { handlers } = self.eventHandlers
+
+    self.foreground.onmousedown = (e) => handlers.start(e)
+    self.foreground.onmousemove = (e) => handlers.move(e)
+    self.foreground.onmouseup = (e) => handlers.end(e)
+    self.foreground.addEventListener('touchmove', (e) => handlers.touchmove(e))
+    self.foreground.addEventListener('touchstart', (e) => handlers.touchstart(e))
+    self.foreground.addEventListener('touchend', (e) => handlers.touchend(e))
+
+    // mouse up outside of canvas
+    const current = document.onmouseup
+    document.onmouseup = () => {
+        if (current) current()
+        self.foreground.onmouseup()
+    }
 }
 
 function getPixelRatio(context) {
