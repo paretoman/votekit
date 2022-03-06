@@ -21,7 +21,17 @@ export default function sandbox(config) {
     // manage dependent calculations because we only want to do calculations if we need to
     const changes = new Changes()
 
-    const layout = new Layout(['menu', 'addVoter', 'addCandidate', 'addCandidateDistribution', 'undo', 'screen', 'foreground', 'geoMaps', 'svgUIDiv'])
+    const layout = new Layout([
+        'menu',
+        'addVoter',
+        'addCandidate',
+        'addCandidateDistribution',
+        'undo',
+        'screen',
+        'foreground',
+        'geoMaps',
+        'svgUIDiv',
+    ])
 
     const commander = new Commander()
 
