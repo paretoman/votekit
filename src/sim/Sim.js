@@ -41,6 +41,11 @@ export default function Sim(
 
     // Buttons //
 
+    const label = document.createElement('div')
+    label.setAttribute('class', 'button-group-label')
+    label.innerText = 'Sim Controls:'
+    layout.newElement('simControlsLabel', label)
+
     createAddVoter(layout, self)
     const canButton = new CreateAddCandidate(layout, self)
     const canDnButton = new CreateAddCandidateDistribution(layout, self)

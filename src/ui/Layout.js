@@ -16,7 +16,7 @@ export default function Layout(order) {
      * @param {String} name
      * @param {HTMLElement} div
      */
-    self.newDiv = (name, div) => {
+    self.newElement = (name, div) => {
         if (order.includes(name)) {
             divsByName[name] = div
         } else {

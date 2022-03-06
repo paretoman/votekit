@@ -1,5 +1,6 @@
 canvas.background, canvas.foreground, canvas.geoMaps, div.svgDiv, div.gSvgDiv {
     border: solid black 1px;
+	margin: 4px;
 }
 
 canvas.background {	
@@ -20,4 +21,7 @@ canvas.foreground[data-cursor=grabbing]{
 	cursor: -webkit-grabbing;
 	cursor: -moz-grabbing;
 	cursor: grabbing;
+}
+button {
+	margin: 2px;
 }

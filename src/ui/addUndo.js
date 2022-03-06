@@ -7,14 +7,15 @@ export default function addUndo(layout, commander) {
     const undoButton = document.createElement('button')
     const redoButton = document.createElement('button')
 
+    undoButton.className = 'button2'
+    redoButton.className = 'button2'
+
     undoButton.innerText = 'Undo'
     redoButton.innerText = 'Redo'
 
     undoButton.onclick = commander.undo
     redoButton.onclick = commander.redo
 
-    const div = document.createElement('div')
-    div.appendChild(undoButton)
-    div.appendChild(redoButton)
-    layout.newDiv('undo', div)
+    layout.newElement('undo', undoButton)
+    layout.newElement('redo', redoButton)
 }

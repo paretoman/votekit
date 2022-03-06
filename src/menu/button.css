@@ -1,3 +1,6 @@
+.sim-sandbox{
+    margin: 0px -4px;
+}
 
 .sim-sandbox .button-group{
 	overflow: hidden;
@@ -8,31 +11,41 @@
 	font-weight: bold;
     font-size: 15px;
     margin-bottom: 2px;
+    margin: 2px 4px;
     line-height: 1.1em;
 }
-.sim-sandbox .button{
-	float: left;
+.sim-sandbox .button2{
+
+    height: 24px;
+    font: inherit;
+    font-weight: bold;
+
 	cursor: pointer;
     background: #fff;
     border: 1px solid #888;
     color: #888;
-	height: 20px;
 	line-height: 20px;
     font-size: 15px;
     font-weight: bold;
     text-align: center;
-    margin-bottom: 3px;
-    padding: 1px 0;
+    margin: 1px 4px;
+    padding: 1px 4px;
     
-    overflow:hidden;
-    
-    position: relative;
     top:0;
 
 	-webkit-transition: all 0.1s;
     -moz-transition: all 0.1s;
     -o-transition: all 0.1s;
     transition: all 0.1s;
+}
+
+.sim-sandbox .button{
+	float: left;
+    
+    overflow:hidden;
+    
+    position: relative;
+    height: 20px;
 }
 
 .sim-sandbox .button-group .smaller{

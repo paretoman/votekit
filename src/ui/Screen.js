@@ -32,9 +32,11 @@ export default function Screen(w, h, layout) {
     self.geoMaps.setAttribute('class', 'geoMaps')
     self.gctx = self.geoMaps.getContext('2d')
 
-    layout.newDiv('screen', self.canvas)
-    layout.newDiv('foreground', self.foreground)
-    layout.newDiv('geoMaps', self.geoMaps)
+    const clearDiv = document.createElement('div')
+    layout.newElement('clearDiv', clearDiv)
+    layout.newElement('screen', self.canvas)
+    layout.newElement('foreground', self.foreground)
+    layout.newElement('geoMaps', self.geoMaps)
 
     self.noBuffers = false
 

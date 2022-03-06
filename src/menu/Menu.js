@@ -11,7 +11,7 @@ import MenuItem from './MenuItem.js'
 export default function Menu(changes, layout, commander) {
     const self = this
     self.divMenu = document.createElement('div')
-    layout.newDiv('menu', self.divMenu)
+    layout.newElement('menu', self.divMenu)
     self.addMenuItem = function (object, choice) {
         const {
             prop, setProp, label, options, change,

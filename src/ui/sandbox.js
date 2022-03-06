@@ -23,10 +23,13 @@ export default function sandbox(config) {
 
     const layout = new Layout([
         'menu',
+        'simControlsLabel',
         'addVoter',
         'addCandidate',
         'addCandidateDistribution',
         'undo',
+        'redo',
+        'clearDiv',
         'screen',
         'foreground',
         'geoMaps',

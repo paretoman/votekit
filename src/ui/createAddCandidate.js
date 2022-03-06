@@ -8,15 +8,14 @@ export default function CreateAddCandidate(layout, sim) {
 
     const addCandidateButton = document.createElement('button')
 
+    addCandidateButton.className = 'button2'
     addCandidateButton.innerText = 'Add Candidate'
 
     addCandidateButton.onclick = () => {
         sim.addCandidatePressed()
     }
 
-    const div = document.createElement('div')
-    div.appendChild(addCandidateButton)
-    layout.newDiv('addCandidate', div)
+    layout.newElement('addCandidate', addCandidateButton)
 
     self.show = () => {
         addCandidateButton.hidden = false

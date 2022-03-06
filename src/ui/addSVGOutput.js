@@ -13,10 +13,11 @@ export default function addSVGOutput(screen, draw, layout) {
     const h = screen.height
 
     const svgUIDiv = document.createElement('div')
-    layout.newDiv('svgUIDiv', svgUIDiv)
+    layout.newElement('svgUIDiv', svgUIDiv)
 
     // svg output button
     const button = document.createElement('button')
+    button.className = 'button2'
     button.innerText = 'Make SVG'
     button.onclick = makeSVG
     svgUIDiv.appendChild(button)
@@ -26,6 +27,7 @@ export default function addSVGOutput(screen, draw, layout) {
     downloadLink.innerText = 'Download SVG'
     downloadLink.download = 'vote.svg'
     downloadLink.hidden = true
+    downloadLink.style.margin = '4px'
     svgUIDiv.appendChild(downloadLink)
 
     // svg download link for geoMaps
@@ -33,10 +35,12 @@ export default function addSVGOutput(screen, draw, layout) {
     gDownloadLink.innerText = 'Download geoMap SVG'
     gDownloadLink.download = 'vote_geoMap.svg'
     gDownloadLink.hidden = true
+    gDownloadLink.style.margin = '4px'
     svgUIDiv.appendChild(gDownloadLink)
 
     // svg hide button
     const svgHideButton = document.createElement('button')
+    svgHideButton.className = 'button2'
     svgHideButton.innerText = 'Hide SVG'
     svgHideButton.hidden = true
     svgHideButton.onclick = hideSVG
