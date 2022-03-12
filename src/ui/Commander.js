@@ -40,12 +40,6 @@ export default function Commander(comMessenger) {
 
     comMessenger.addCommander(self)
 
-    // handle the case where an action doesn't exist
-    const creators = {}
-    self.newCreator = (creator, creatorName) => {
-        creators[creatorName] = creator
-    }
-
     /**
      * A menu item or other object can add an action that it wants to execute with a value.
      * The action can be performed by calling commander.do(command),
@@ -151,29 +145,12 @@ export default function Commander(comMessenger) {
     self.passDo = (command) => {
         const { name, id, props } = command // command is {name, value, props}
 
-        // Should we store history for this item?
-        const storeHistory = (props !== undefined) ? props.noUndo !== true : true
-        if (!storeHistory) {
-            execute(command)
-            return
-        }
-
         // Store the current value so we can undo the command.
         let currentValue
         if (id === undefined) {
             currentValue = config[name]
         } else {
             currentValue = command.currentValue
-        }
-
-        // TODO: don't need this anymore?
-        // The entities we're trying to command don't exist,
-        // so keep creating entities until we have caught up.
-        while (currentValue === undefined) {
-            const { creatorName } = command.props
-            const create = creators[creatorName]
-            create()
-            currentValue = config[name]
         }
 
         // Store how to undo the command.
@@ -210,15 +187,6 @@ export default function Commander(comMessenger) {
                 currentValue = command.currentValue
             }
 
-            // The entities we're trying to command don't exist,
-            // so keep creating entities until we have caught up.
-            while (currentValue === undefined) {
-                const { creatorName } = command.props
-                const create = creators[creatorName]
-                create()
-                currentValue = config[name]
-            }
-
             // Store how to undo the command.
             const undoCommand = {
                 name, id, value: currentValue, props,
@@ -248,13 +216,7 @@ export default function Commander(comMessenger) {
         if (head === -1) return // There is no history
 
         const last = history[head]
-        last.forEach((pair) => {
-            const { props } = pair.command
-            const goOn = (props !== undefined) ? props.noUndo !== true : true
-            if (goOn) {
-                execute(pair.undoCommand)
-            }
-        })
+        last.forEach((pair) => { execute(pair.undoCommand) })
 
         head -= 1 // Now we're in the past.
 

@@ -14,8 +14,6 @@ export default function addSaveConfigToText(layout, commander) {
 
     button.onclick = () => {
         const config = commander.getConfig()
-        console.log(config)
-
         text.value = JSON.stringify(config)
     }
 

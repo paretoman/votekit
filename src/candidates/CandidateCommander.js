@@ -31,7 +31,7 @@ export default function CandidateCommander(candidateRegistrar, commander, sim) {
         },
         currentValue: 0,
         name: `${prefix}-setNumberAtLeast`,
-        props: { noUndo: true, isFirstAction: true },
+        props: { isFirstAction: true },
     })
     self.setNumberCandidates = (num) => {
         commander.loadCommands([self.setNumberCandidatesClient.command(num)])
