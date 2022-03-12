@@ -57,6 +57,7 @@ export default function VoterCircle(
         },
         currentValue: 0,
         name: `${prefix}-${id}-setE`,
+        props: { creatorName: 'createVoter' },
     })
     self.setE = self.setEClient.go
 
@@ -68,7 +69,7 @@ export default function VoterCircle(
         },
         currentValue: { x, y },
         name: `${prefix}-${id}-setXY`,
-        props: { isSetXY: true },
+        props: { isSetXY: true, creatorName: 'createVoter' },
     })
     self.setXY = self.setXYClient.go
 
@@ -79,6 +80,7 @@ export default function VoterCircle(
         },
         currentValue: r,
         name: `${prefix}-${id}-setR`,
+        props: { creatorName: 'createVoter' },
     })
     self.setR = self.setRClient.go
 

@@ -55,6 +55,7 @@ export default function CandidateDistribution(
         },
         currentValue: 0,
         name: `${prefix}-${id}-setE`,
+        props: { creatorName: 'createCandidateDistribution' },
     })
     self.setE = self.setEClient.go
 
@@ -66,7 +67,7 @@ export default function CandidateDistribution(
         },
         currentValue: { x, y },
         name: `${prefix}-${id}-setXY`,
-        props: { isSetXY: true },
+        props: { isSetXY: true, creatorName: 'createCandidateDistribution' },
     })
     self.setXY = self.setXYClient.go
 
@@ -77,6 +78,7 @@ export default function CandidateDistribution(
         },
         currentValue: r,
         name: `${prefix}-${id}-setR`,
+        props: { creatorName: 'createCandidateDistribution' },
     })
     self.setR = self.setRClient.go
 

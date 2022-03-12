@@ -20,7 +20,7 @@ import { jcopy } from '../utilities/jsHelpers.js'
  * * [Memento Pattern on Wikipedia](https://en.wikipedia.org/wiki/Memento_pattern)
  * * [Memento Tutorial from refractoring.guru](https://refactoring.guru/design-patterns/memento)
  */
-export default function Commander() {
+export default function Commander(comMessenger) {
     const self = this
 
     // Keep commands and undos in history
@@ -32,6 +32,14 @@ export default function Commander() {
 
     // A list of actions we can execute (for invoker)
     const actions = []
+
+    comMessenger.addCommander(self)
+
+    // handle the case where an action doesn't exist
+    const creators = {}
+    self.newCreator = (creator, creatorName) => {
+        creators[creatorName] = creator
+    }
 
     /**
      * A menu item or other object can add an action that it wants to execute with a value.
@@ -65,22 +73,47 @@ export default function Commander() {
     const execute = (command) => {
         const { name, value } = command
         const action = actions[name]
-        action(value)
+        if (action) {
+            action(value)
 
-        // Actually change the config.
-        config[name] = value
+            // Actually change the config.
+            config[name] = value
+        }
+    }
+
+    /**
+     * Put a commandMessenger in the middle,
+     * between the command being asked for and the command being done.
+     * @param {Object} command - a command to do. See passDo.
+     */
+    self.do = (command) => {
+        comMessenger.broadcastDo(command, self)
+    }
+    self.doCommands = (commands) => {
+        comMessenger.broadcastDoCommands(commands, self)
     }
 
     /**
      * We want to do a command. We need to keep track of what we do so we can undo it.
-     * @param {String} name
-     * @param {(String|Number|Boolean)} value
+     * @param {Object} command
+     * @param {String} command.name
+     * @param {(String|Number|Boolean)} command.value
+     * @param {Object} command.props - a catchall for easier coding
      */
-    self.do = (command) => {
+    self.passDo = (command) => {
         const { name, props } = command // command is {name, value, props}
 
         // Store the current value so we can undo the command.
-        const currentValue = config[name]
+        let currentValue = config[name]
+
+        // The entities we're trying to command don't exist,
+        // so keep creating entities until we have caught up.
+        while (currentValue === undefined) {
+            const { creatorName } = command.props
+            const create = creators[creatorName]
+            create()
+            currentValue = config[name]
+        }
 
         // Store how to undo the command.
         const undoCommand = { name, value: currentValue, props }
@@ -96,14 +129,27 @@ export default function Commander() {
         // Actually preform the command.
         execute(command)
     }
-    self.doCommands = (commands) => {
+    /**
+     * Do a set of commands together, so they have one history item.
+     * @param {Object[]} commands - a list of command objects
+     */
+    self.passDoCommands = (commands) => {
         const historyItem = []
         commands.forEach((command) => {
         // todo: make into one undo item
             const { name, props } = command // command is {name, value, props}
 
             // Store the current value so we can undo the command.
-            const currentValue = config[name]
+            let currentValue = config[name]
+
+            // The entities we're trying to command don't exist,
+            // so keep creating entities until we have caught up.
+            while (currentValue === undefined) {
+                const { creatorName } = command.props
+                const create = creators[creatorName]
+                create()
+                currentValue = config[name]
+            }
 
             // Store how to undo the command.
             const undoCommand = { name, value: currentValue, props }

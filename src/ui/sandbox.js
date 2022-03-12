@@ -17,7 +17,7 @@ import addUndo from './addUndo.js'
  * Set up a user interface to run a simulation.
  * @param {Object} config - An object containing commands. A command is a {name,value} pair.
  */
-export default function sandbox(config) {
+export default function sandbox(config, comMessenger) {
     // manage dependent calculations because we only want to do calculations if we need to
     const changes = new Changes()
 
@@ -36,7 +36,7 @@ export default function sandbox(config) {
         'svgUIDiv',
     ])
 
-    const commander = new Commander()
+    const commander = new Commander(comMessenger)
 
     const menu = new Menu(changes, layout, commander)
 

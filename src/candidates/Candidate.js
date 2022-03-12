@@ -59,6 +59,7 @@ export default function Candidate(
         },
         currentValue: 0,
         name: `${prefix}-${id}-setE`,
+        props: { creatorName: 'createCandidate' },
     })
     self.setE = self.setEClient.go
 
@@ -70,7 +71,7 @@ export default function Candidate(
         },
         currentValue: { x, y },
         name: `${prefix}-${id}-setXY`,
-        props: { isSetXY: true },
+        props: { isSetXY: true, creatorName: 'createCandidate' },
     })
     self.setXY = self.setXYClient.go
 

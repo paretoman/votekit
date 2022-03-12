@@ -108,6 +108,10 @@ export default function Sim(
     self.addVoterCircle(50, 150, 100, true)
     self.addVoterCircle(250, 150, 100, true)
 
+    commander.newCreator(self.addVoterPressed, 'createVoter')
+    commander.newCreator(self.addCandidatePressed, 'createCandidate')
+    commander.newCreator(self.addCandidateDistributionPressed, 'createCandidateDistribution')
+
     // State Machine //
 
     self.state = 'one' // default
