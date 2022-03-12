@@ -87,6 +87,7 @@ export default function Sim(
             self.addCandidate(50, 50, 'yellow', false)
         }
     }
+
     self.addCandidateDistributionPressed = () => {
         const num = candidateDnRegistrar.num() + 1
         candidateDnCommander.setNumberCandidateDns(num)
@@ -96,6 +97,7 @@ export default function Sim(
             self.addCandidateDistribution(50, 50, 100, false)
         }
     }
+
     self.addCandidate = (x, y, c, doLoad) => {
         // eslint-disable-next-line no-new, max-len
         const candidate = new Candidate(x, y, 21, 21, c, screen, candidateRegistrar, commander, changes, doLoad, candidateCommander)

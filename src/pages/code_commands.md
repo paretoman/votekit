@@ -55,3 +55,12 @@ Test: Undo creation of a candidate in one sandbox. Move the candidate in the oth
 Assert: The undone candidate doesn't get come back into existence.
 
 Future: Right now, we can get into a state where we don't have any way to bring a specific entity back into existence. Maybe I should make a way to toggle the existence of entities. Or maybe I could show entities that don't exist as ghosts (using transparency). They could still be moved and clicked on for editing properties. And there could be a "show deleted entities" button to avoid clutter. I haven't implemented clicking and editing properties yet.
+
+## Loading Commands
+When initially loading a sandbox, a config can be passed in. The commander takes this with commander.loadConfig, then broadcasts to other sandboxes. When we are setting the initial config, we clear the history so no undo is available initially.
+
+We prioritized loading the commands that have to do with creating candidates, voters, and candidateDistributions. 
+
+## Things to Delete
+The creator property can be deleted. We solved this problem another way by prioritizing commands. The noUndo property can be deleted. We solved this by loading commands instead of doing them.
+

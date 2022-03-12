@@ -24,13 +24,16 @@ export default function CandidateCommander(candidateRegistrar, commander, sim) {
     // An undo will reduce the number stored with the command name,
     // but not reduce the number of entities.
     // So we disable undo.
+    // Well, actually we can just loadCommands in order to avoid undo.
     self.setNumberCandidatesClient = commander.addClient({
         action: (num) => {
             sim.setNumberCandidatesAction(num)
         },
         currentValue: 0,
         name: `${prefix}-setNumberAtLeast`,
-        props: { noUndo: true },
+        props: { noUndo: true, isFirstAction: true },
     })
-    self.setNumberCandidates = self.setNumberCandidatesClient.go
+    self.setNumberCandidates = (num) => {
+        commander.loadCommands([self.setNumberCandidatesClient.command(num)])
+    }
 }

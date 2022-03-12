@@ -25,3 +25,7 @@ canvas.foreground[data-cursor=grabbing]{
 button {
 	margin: 2px;
 }
+textarea {
+	width: 296px;
+	margin: 4px;
+}

@@ -3,20 +3,19 @@
  * @param {Layout} layout
  * @param {Commander} commander
  */
-export default function addSaveConfigToText(layout, commander) {
+export default function addLoadConfigText(layout, commander) {
     const button = document.createElement('button')
 
     button.className = 'button2'
 
-    button.innerText = 'Save Config To Text'
+    button.innerText = 'Load Config Text'
 
     const text = document.createElement('textarea')
 
     button.onclick = () => {
-        const config = commander.getConfig()
-        console.log(config)
-
-        text.value = JSON.stringify(config)
+        if (text.value === '') return
+        const config = JSON.parse(text.value)
+        commander.loadConfig(config)
     }
 
     const clearDiv = document.createElement('div')
@@ -26,5 +25,5 @@ export default function addSaveConfigToText(layout, commander) {
     div.appendChild(clearDiv)
     div.appendChild(text)
 
-    layout.newElement('saveConfigToText', div)
+    layout.newElement('loadConfigText', div)
 }

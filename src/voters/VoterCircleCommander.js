@@ -36,7 +36,9 @@ export default function VoterCircleCommander(voterRegistrar, commander, sim) {
         action: (num) => sim.setNumberVotersAction(num),
         currentValue: 0,
         name: `${prefix}-setNumberAtLeast`,
-        props: { noUndo: true },
+        props: { isFirstAction: true },
     })
-    self.setNumberVoters = self.setNumberVotersClient.go
+    self.setNumberVoters = (num) => {
+        commander.loadCommands([self.setNumberVotersClient.command(num)])
+    }
 }

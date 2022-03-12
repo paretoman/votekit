@@ -37,4 +37,28 @@ export default class ComMessenger {
             originCommander.passDoCommands(commands)
         }
     }
+
+    broadcastLoadConfig(newConfig, originCommander) {
+        if (this.linked && this.#protect === false) {
+            this.#protect = true
+            this.commanders.forEach(
+                (com) => com.passLoadConfig(newConfig),
+            )
+            this.#protect = false
+        } else {
+            originCommander.passLoadConfig(newConfig)
+        }
+    }
+
+    broadCastLoadCommands(commands, originCommander) {
+        if (this.linked && this.#protect === false) {
+            this.#protect = true
+            this.commanders.forEach(
+                (com) => com.passLoadCommands(commands),
+            )
+            this.#protect = false
+        } else {
+            originCommander.passLoadCommands(commands)
+        }
+    }
 }

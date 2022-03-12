@@ -13,6 +13,7 @@ import OneElection from '../election/OneElection.js'
 import Commander from './Commander.js'
 import addUndo from './addUndo.js'
 import addSaveConfigToText from './addSaveConfigToText.js'
+import addLoadConfigText from './loadConfigText.js'
 
 /**
  * Set up a user interface to run a simulation.
@@ -35,6 +36,7 @@ export default function sandbox(config, comMessenger) {
         'foreground',
         'geoMaps',
         'saveConfigToText',
+        'loadConfigText',
         'svgUIDiv',
     ])
 
@@ -45,6 +47,8 @@ export default function sandbox(config, comMessenger) {
     addUndo(layout, commander)
 
     addSaveConfigToText(layout, commander)
+
+    addLoadConfigText(layout, commander)
 
     const screen = new Screen(300, 300, layout)
 
@@ -62,6 +66,7 @@ export default function sandbox(config, comMessenger) {
     const sim = new Sim(screen, menu, changes, oneElection, sampleElections, geoElection, commander, layout)
 
     commander.loadConfig(config)
+    commander.clearHistory()
 
     const div = layout.makeComponent()
 

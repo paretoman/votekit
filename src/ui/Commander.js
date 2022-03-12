@@ -25,11 +25,18 @@ export default function Commander(comMessenger) {
     const history = []
     let head = -1 // Head is where we are in history, where our head is at.
 
+    self.clearHistory = () => {
+        history.splice(0, history.length)
+        head = -1
+    }
+
     // The list of all mementos
-    const config = []
+    const config = {}
 
     // A list of actions we can execute (for invoker)
     const actions = []
+
+    const firstActions = []
 
     comMessenger.addCommander(self)
 
@@ -46,7 +53,10 @@ export default function Commander(comMessenger) {
      * @param {String} name - The name of the action.
      * @param {Function} action - The action function itself, which is called with a value.
      */
-    self.addAction = (name, action, currentValue) => {
+    self.addAction = (name, action, currentValue, props) => {
+        if (props !== undefined && props.isFirstAction) {
+            firstActions[name] = true
+        }
         actions[name] = action
         config[name] = currentValue
     }
@@ -57,7 +67,7 @@ export default function Commander(comMessenger) {
             name, action, currentValue, props,
         } = args
 
-        self.addAction(name, action, currentValue)
+        self.addAction(name, action, currentValue, props)
         const command = (value) => ({ name, value, props })
         const go = (value) => self.do(command(value))
         const client = { command, go }
@@ -285,18 +295,38 @@ export default function Commander(comMessenger) {
     }
 
     self.loadConfig = (newConfig) => {
+        comMessenger.broadcastLoadConfig(newConfig, self)
+    }
+
+    self.passLoadConfig = (newConfig) => {
+        // newConfig is a list of commands to execute.
+        self.loadConfigPriority(newConfig, 'high')
+        self.loadConfigPriority(newConfig, 'low')
+    }
+
+    self.loadConfigPriority = (newConfig, priority) => {
         // newConfig is a list of commands to execute.
         const names = Object.keys(newConfig)
         names.forEach((name) => {
+            // Decide whether to process commands, based on their priority.
+            const isHigh = firstActions[name] !== undefined
+            if (priority === 'low' && isHigh) {
+                return
+            }
+            if (priority === 'high' && !isHigh) {
+                return
+            }
+
             // if we have a list, then create commands for each item in the list
-            if (name instanceof Array) {
-                name.forEach((id) => {
-                    const value = newConfig[name][id]
-                    const command = { name, value }
+            const valueArray = newConfig[name]
+            if (valueArray instanceof Array) {
+                valueArray.forEach((value, id) => {
+                    // const subValue = newConfig[name][id]
+                    const command = { name, id, value }
                     execute(command)
                 })
             } else {
-                const value = newConfig[name]
+                const value = valueArray
                 const command = { name, value }
                 execute(command)
             }
@@ -304,6 +334,9 @@ export default function Commander(comMessenger) {
     }
 
     self.loadCommands = (commands) => {
+        comMessenger.broadCastLoadCommands(commands, self)
+    }
+    self.passLoadCommands = (commands) => {
         // execute commands without adding to history
         commands.forEach((command) => {
             execute(command)

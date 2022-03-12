@@ -38,7 +38,9 @@ export default function CandidateDnCommander(candidateDnRegistrar, commander, si
         },
         currentValue: 0,
         name: `${prefix}-setNumberAtLeast`,
-        props: { noUndo: true },
+        props: { isFirstAction: true },
     })
-    self.setNumberCandidateDns = self.setNumberCandidateDnsClient.go
+    self.setNumberCandidateDns = (num) => {
+        commander.loadCommands([self.setNumberCandidateDnsClient.command(num)])
+    }
 }
