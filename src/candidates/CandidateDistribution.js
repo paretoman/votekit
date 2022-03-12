@@ -23,19 +23,23 @@ export default function CandidateDistribution(
     commander,
     changes,
     doLoad,
+    candidateDnCommander,
 ) {
     const self = this
 
-    const id = candidateDnRegistrar.new()
+    const id = candidateDnRegistrar.new(self)
 
     // Instantiate Variables
 
     // use commands to instantiate variables
     self.instantiate = () => {
+        // candidateDnCommander.setEClientList.setCurrentValue(id, 0)
+        // candidateDnCommander.setXYClientList.setCurrentValue(id, { x, y })
+        // candidateDnCommander.setRClientList.setCurrentValue(id, r)
         const commands = [
-            self.setEClient.command(1), // set alive flag
-            self.setXYClient.command({ x, y }),
-            self.setRClient.command(r),
+            candidateDnCommander.setEClientList.command(id, 1, 0), // set alive flag
+            candidateDnCommander.setXYClientList.command(id, { x, y }, { x, y }),
+            candidateDnCommander.setRClientList.command(id, r, r),
         ]
         // Either load the commands because we don't want to create an item of history
         // Or do the commands because want to store an item in history, so that we can undo.
@@ -46,41 +50,33 @@ export default function CandidateDistribution(
         }
     }
 
-    const prefix = 'candidateDistribution'
+    self.setEAction = (e) => {
+        self.exists = e
+        changes.add(['draggables'])
+    }
+    self.setE = (e) => {
+        const cur = candidateDnCommander.setEClientList.getCurrentValue(id)
+        candidateDnCommander.setEClientList.go(id, e, cur)
+    }
 
-    self.setEClient = commander.addClient({
-        action: (e) => {
-            self.exists = e
-            changes.add(['draggables'])
-        },
-        currentValue: 0,
-        name: `${prefix}-${id}-setE`,
-        props: { creatorName: 'createCandidateDistribution' },
-    })
-    self.setE = self.setEClient.go
+    self.setXYAction = (p) => {
+        self.x = p.x
+        self.y = p.y
+        changes.add(['draggables'])
+    }
+    self.setXY = (p) => {
+        const cur = candidateDnCommander.setXYClientList.getCurrentValue(id)
+        candidateDnCommander.setXYClientList.go(id, p, cur)
+    }
 
-    self.setXYClient = commander.addClient({
-        action: (p) => {
-            self.x = p.x
-            self.y = p.y
-            changes.add(['draggables'])
-        },
-        currentValue: { x, y },
-        name: `${prefix}-${id}-setXY`,
-        props: { isSetXY: true, creatorName: 'createCandidateDistribution' },
-    })
-    self.setXY = self.setXYClient.go
-
-    self.setRClient = commander.addClient({
-        action: (newR) => {
-            self.r = newR
-            changes.add(['radius'])
-        },
-        currentValue: r,
-        name: `${prefix}-${id}-setR`,
-        props: { creatorName: 'createCandidateDistribution' },
-    })
-    self.setR = self.setRClient.go
+    self.setRAction = (newR) => {
+        self.r = newR
+        changes.add(['radius'])
+    }
+    self.setR = (newR) => {
+        const cur = candidateDnCommander.setRClientList.getCurrentValue(id)
+        candidateDnCommander.setRClientList.go(id, newR, cur)
+    }
 
     self.instantiate()
 

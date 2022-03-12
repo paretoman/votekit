@@ -29,7 +29,9 @@ export default class ComMessenger {
     broadcastDoCommands(commands, originCommander) {
         if (this.linked && this.#protect === false) {
             this.#protect = true
-            this.commanders.forEach((com) => com.passDoCommands(commands))
+            this.commanders.forEach(
+                (com) => com.passDoCommands(commands),
+            )
             this.#protect = false
         } else {
             originCommander.passDoCommands(commands)

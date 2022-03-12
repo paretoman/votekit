@@ -12,6 +12,7 @@ import Layout from './Layout.js'
 import OneElection from '../election/OneElection.js'
 import Commander from './Commander.js'
 import addUndo from './addUndo.js'
+import addSaveConfigToText from './addSaveConfigToText.js'
 
 /**
  * Set up a user interface to run a simulation.
@@ -33,6 +34,7 @@ export default function sandbox(config, comMessenger) {
         'screen',
         'foreground',
         'geoMaps',
+        'saveConfigToText',
         'svgUIDiv',
     ])
 
@@ -41,6 +43,8 @@ export default function sandbox(config, comMessenger) {
     const menu = new Menu(changes, layout, commander)
 
     addUndo(layout, commander)
+
+    addSaveConfigToText(layout, commander)
 
     const screen = new Screen(300, 300, layout)
 

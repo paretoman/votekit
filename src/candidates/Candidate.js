@@ -28,18 +28,24 @@ export default function Candidate(
     commander,
     changes,
     doLoad,
+    candidateCommander,
 ) {
     const self = this
 
-    const id = candidateRegistrar.new()
+    const id = candidateRegistrar.new(self)
 
     // Instantiate Variables
 
     // use commands to instantiate variables
     self.instantiate = () => {
+        // set current value because we need to be able to undo by returning to these values
+        // candidateCommander.setEClientList.setCurrentValue(id, 0)
+        // candidateCommander.setXYClientList.setCurrentValue(id, { x, y })
+
         const commands = [
-            self.setEClient.command(1), // set alive flag
-            self.setXYClient.command({ x, y }),
+            // candidateCommander.setNumberCandidatesClient.command(id + 1),
+            candidateCommander.setEClientList.command(id, 1, 0), // set alive flag
+            candidateCommander.setXYClientList.command(id, { x, y }, { x, y }),
         ]
         // Either load the commands because we don't want to create an item of history
         // Or do the commands because want to store an item in history, so that we can undo.
@@ -49,31 +55,24 @@ export default function Candidate(
             commander.doCommands(commands)
         }
     }
+    self.setEAction = (e) => {
+        self.exists = e
+        changes.add(['draggables'])
+    }
+    self.setE = (e) => {
+        const cur = candidateCommander.setEClientList.getCurrentValue(id)
+        candidateCommander.setEClientList.go(id, e, cur)
+    }
 
-    const prefix = 'candidate'
-
-    self.setEClient = commander.addClient({
-        action: (e) => {
-            self.exists = e
-            changes.add(['draggables'])
-        },
-        currentValue: 0,
-        name: `${prefix}-${id}-setE`,
-        props: { creatorName: 'createCandidate' },
-    })
-    self.setE = self.setEClient.go
-
-    self.setXYClient = commander.addClient({
-        action: (p) => {
-            self.x = p.x
-            self.y = p.y
-            changes.add(['draggables'])
-        },
-        currentValue: { x, y },
-        name: `${prefix}-${id}-setXY`,
-        props: { isSetXY: true, creatorName: 'createCandidate' },
-    })
-    self.setXY = self.setXYClient.go
+    self.setXYAction = (p) => {
+        self.x = p.x
+        self.y = p.y
+        changes.add(['draggables'])
+    }
+    self.setXY = (p) => {
+        const cur = candidateCommander.setXYClientList.getCurrentValue(id)
+        candidateCommander.setXYClientList.go(id, p, cur)
+    }
 
     self.instantiate()
 

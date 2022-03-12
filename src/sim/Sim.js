@@ -11,6 +11,9 @@ import DraggableManager from '../ui/DraggableManager.js'
 import createAddVoter from '../ui/createAddVoter.js'
 import CreateAddCandidate from '../ui/CreateAddCandidate.js'
 import CreateAddCandidateDistribution from '../ui/CreateAddCandidateDistribution.js'
+import CandidateCommander from '../candidates/CandidateCommander.js'
+import CandidateDnCommander from '../candidates/CandidateDnCommander.js'
+import VoterCircleCommander from '../voters/VoterCircleCommander.js'
 
 /**
  * Simulation is the main task we're trying to accomplish in this program.
@@ -70,35 +73,67 @@ export default function Sim(
 
     // Entities //
 
+    const candidateCommander = new CandidateCommander(candidateRegistrar, commander, self)
+    const candidateDnCommander = new CandidateDnCommander(candidateDnRegistrar, commander, self)
+    const voterCommander = new VoterCircleCommander(voterRegistrar, commander, self)
+
     self.addCandidatePressed = () => {
-        self.addCandidate(50, 50, 'yellow', false)
+        // really, we want to make a command to set numCandidates to at least an amount
+        const num = candidateRegistrar.num() + 1
+        candidateCommander.setNumberCandidates(num)
+    }
+    self.setNumberCandidatesAction = (num) => {
+        while (candidateRegistrar.num() < num) {
+            self.addCandidate(50, 50, 'yellow', false)
+        }
     }
     self.addCandidateDistributionPressed = () => {
-        self.addCandidateDistribution(50, 50, 100, false)
+        const num = candidateDnRegistrar.num() + 1
+        candidateDnCommander.setNumberCandidateDns(num)
+    }
+    self.setNumberCandidateDnsAction = (num) => {
+        while (candidateDnRegistrar.num() < num) {
+            self.addCandidateDistribution(50, 50, 100, false)
+        }
     }
     self.addCandidate = (x, y, c, doLoad) => {
         // eslint-disable-next-line no-new, max-len
-        const candidate = new Candidate(x, y, 21, 21, c, screen, candidateRegistrar, commander, changes, doLoad)
+        const candidate = new Candidate(x, y, 21, 21, c, screen, candidateRegistrar, commander, changes, doLoad, candidateCommander)
         sims.one.addSimCandidate(candidate)
         sims.geoOne.addSimCandidate(candidate)
+
+        const num = candidateRegistrar.num()
+        candidateCommander.setNumberCandidates(num)
     }
     self.addCandidateDistribution = (x, y, r, doLoad) => {
         // eslint-disable-next-line no-new, max-len
-        const candidateDistribution = new CandidateDistribution(x, y, r, screen, candidateDnRegistrar, commander, changes, doLoad)
+        const candidateDistribution = new CandidateDistribution(x, y, r, screen, candidateDnRegistrar, commander, changes, doLoad, candidateDnCommander)
         sims.sample.addSimCandidateDistribution(candidateDistribution)
+
+        const num = candidateDnRegistrar.num()
+        candidateDnCommander.setNumberCandidateDns(num)
     }
 
     self.addVoterPressed = () => {
-        self.addVoterCircle(50, 50, 100, false)
+        const num = voterRegistrar.num() + 1
+        voterCommander.setNumberVoters(num)
+    }
+    self.setNumberVotersAction = (num) => {
+        while (voterRegistrar.num() < num) {
+            self.addVoterCircle(50, 50, 100, false)
+        }
     }
 
     self.addVoterCircle = (x, y, r, doLoad) => {
         // eslint-disable-next-line max-len
-        const voterCircle = new VoterCircle(x, y, r, screen, voterRegistrar, commander, changes, doLoad, self)
+        const voterCircle = new VoterCircle(x, y, r, screen, voterRegistrar, commander, changes, doLoad, voterCommander)
 
         sims.one.addSimVoterCircle(voterCircle)
         sims.geoOne.addSimVoterCircle(voterCircle)
         sims.sample.addSimVoterCircle(voterCircle)
+
+        const num = voterRegistrar.num()
+        voterCommander.setNumberVoters(num)
     }
 
     self.addCandidate(50, 100, '#e52', true)

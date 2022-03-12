@@ -1,5 +1,3 @@
-import { jcopy } from '../utilities/jsHelpers.js'
-
 /**
  * Both the command pattern and the memento pattern are used here.
  * Commands are performed to make changes to the mementos.
@@ -60,24 +58,64 @@ export default function Commander(comMessenger) {
         } = args
 
         self.addAction(name, action, currentValue)
-        const command = (p) => ({ name, value: p, props })
-        const go = (p) => self.do(command(p))
+        const command = (value) => ({ name, value, props })
+        const go = (value) => self.do(command(value))
         const client = { command, go }
+        return client
+    }
+
+    /** Say we want to change a value for the nth candidate.
+     * And say the nth candidate doesn't exist.
+     * Then we have to use an action which acts on the list of candidates,
+     * rather than the candidate itself.
+     */
+    self.addActionList = (name, action) => {
+        actions[name] = action
+        config[name] = []
+    }
+
+    /**
+     * Make a client with a command and a way to do the command.
+     * This type of client deals with lists.
+     * @param {Object} args
+     * @returns {Object} - methods command(id,value) and go(id,value)
+     */
+    self.addClientList = (args) => {
+        const {
+            name, action, props,
+        } = args
+
+        self.addActionList(name, action)
+        const command = (id, value, currentValue) => ({
+            name, id, value, props, currentValue,
+        })
+        const go = (id, value, currentValue) => self.do(command(id, value, currentValue))
+        const setCurrentValue = (id, currentValue) => {
+            config[name][id] = currentValue
+        }
+        const getCurrentValue = (id) => config[name][id]
+        const client = {
+            command, go, setCurrentValue, getCurrentValue,
+        }
         return client
     }
 
     /**
      * Actually execute the action. Also, store the memento.
-     * @param {[String,(String|Number|Boolean)]} command
+     * @param {Object} command -
      */
     const execute = (command) => {
-        const { name, value } = command
+        const { name, id, value } = command
         const action = actions[name]
         if (action) {
-            action(value)
-
             // Actually change the config.
-            config[name] = value
+            if (id !== undefined) {
+                action(id, value)
+                config[name][id] = value
+            } else {
+                action(value)
+                config[name] = value
+            }
         }
     }
 
@@ -101,11 +139,24 @@ export default function Commander(comMessenger) {
      * @param {Object} command.props - a catchall for easier coding
      */
     self.passDo = (command) => {
-        const { name, props } = command // command is {name, value, props}
+        const { name, id, props } = command // command is {name, value, props}
+
+        // Should we store history for this item?
+        const storeHistory = (props !== undefined) ? props.noUndo !== true : true
+        if (!storeHistory) {
+            execute(command)
+            return
+        }
 
         // Store the current value so we can undo the command.
-        let currentValue = config[name]
+        let currentValue
+        if (id === undefined) {
+            currentValue = config[name]
+        } else {
+            currentValue = command.currentValue
+        }
 
+        // TODO: don't need this anymore?
         // The entities we're trying to command don't exist,
         // so keep creating entities until we have caught up.
         while (currentValue === undefined) {
@@ -116,7 +167,9 @@ export default function Commander(comMessenger) {
         }
 
         // Store how to undo the command.
-        const undoCommand = { name, value: currentValue, props }
+        const undoCommand = {
+            name, id, value: currentValue, props,
+        }
 
         // remove future redos
         // example: head:-1 means history will be cleared splice(0,length)
@@ -137,10 +190,15 @@ export default function Commander(comMessenger) {
         const historyItem = []
         commands.forEach((command) => {
         // todo: make into one undo item
-            const { name, props } = command // command is {name, value, props}
+            const { name, id, props } = command // command is {name, value, props}
 
             // Store the current value so we can undo the command.
-            let currentValue = config[name]
+            let currentValue
+            if (id === undefined) {
+                currentValue = config[name]
+            } else {
+                currentValue = command.currentValue
+            }
 
             // The entities we're trying to command don't exist,
             // so keep creating entities until we have caught up.
@@ -152,7 +210,9 @@ export default function Commander(comMessenger) {
             }
 
             // Store how to undo the command.
-            const undoCommand = { name, value: currentValue, props }
+            const undoCommand = {
+                name, id, value: currentValue, props,
+            }
 
             // Store in one history item
             historyItem.push({ command, undoCommand })
@@ -178,7 +238,13 @@ export default function Commander(comMessenger) {
         if (head === -1) return // There is no history
 
         const last = history[head]
-        last.forEach((pair) => execute(pair.undoCommand))
+        last.forEach((pair) => {
+            const { props } = pair.command
+            const goOn = (props !== undefined) ? props.noUndo !== true : true
+            if (goOn) {
+                execute(pair.undoCommand)
+            }
+        })
 
         head -= 1 // Now we're in the past.
 
@@ -222,9 +288,18 @@ export default function Commander(comMessenger) {
         // newConfig is a list of commands to execute.
         const names = Object.keys(newConfig)
         names.forEach((name) => {
-            const value = newConfig[name]
-            const command = { name, value }
-            execute(command)
+            // if we have a list, then create commands for each item in the list
+            if (name instanceof Array) {
+                name.forEach((id) => {
+                    const value = newConfig[name][id]
+                    const command = { name, value }
+                    execute(command)
+                })
+            } else {
+                const value = newConfig[name]
+                const command = { name, value }
+                execute(command)
+            }
         })
     }
 
@@ -235,5 +310,5 @@ export default function Commander(comMessenger) {
         })
     }
 
-    self.getConfig = () => jcopy(config)
+    self.getConfig = () => structuredClone(config)
 }
