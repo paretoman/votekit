@@ -15,6 +15,7 @@ import { Tween } from '../../lib/tween.esm.js'
  * @param {Number} h - height of square to draw.
  * @param {String} color
  * @param {Screen} screen
+ * @constructor
  */
 export default function SquareGraphic(parent, w, h, color, screen) {
     const self = this

@@ -1,17 +1,24 @@
+/** @module */
+
 // import _ from 'https://cdn.skypack.dev/lodash@4.17.21'
 import polygonClip from '../../lib/polygonClip.js'
 import { range, jcopy } from '../utilities/jsHelpers.js'
 import { polygonArea } from '../../lib/d3-polygon/src/index.js'
 
-// what fraction of each voterGroup lives in each district?
-// return an array indexed by district
-// each element contains an array of pairs
-// the first of the pair is a voterGroup pair of coordinates
-// the second of the pair is the fraction of the voterGroup within that district
-export default function geoCensus(self) {
+/**
+ * What fraction of each voterGroup lives in each district?
+ * Return an array indexed by district.
+ * Each element contains an array of pairs.
+ * The first of the pair is a voterGroup pair of coordinates.
+ * The second of the pair is the fraction of the voterGroup within that district.
+ * @param {DistrictMaker} districtMaker
+ * @returns {Number[][][]} - an array of districts,
+ * each with a list of census tract properties [x,y,overlap]
+ */
+export default function geoCensus(districtMaker) {
     const {
         nd, nx, ny, polygons,
-    } = self
+    } = districtMaker
 
     const census = Array(nd).fill().map(() => [])
 

@@ -7,6 +7,7 @@ import MenuItem from './MenuItem.js'
  * @param {Changes} changes
  * @param {Layout} layout
  * @param {Commander} commander - Follows command pattern.
+ * @constructor
  */
 export default function Menu(changes, layout, commander) {
     const self = this

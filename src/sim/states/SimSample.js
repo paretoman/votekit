@@ -16,6 +16,7 @@ import SimBase from './SimBase.js'
  * @param {Changes} changes
  * @param {SimElection} sampleElections
  * @param {Object} canDnButton - a button that lets us add a candidateDistribution
+ * @constructor
  */
 export default function SimSample(screen, dragm, menu, changes, sampleElections, canDnButton) {
     const self = this

@@ -4,6 +4,7 @@
  * Use this to sample a random candidate from a collection of distributions of candidates.
  * Sample a point multiple times after the constructor call.
  * @param {CandidateDistribution[]} candidateDistributions
+ * @constructor
  */
 export default function CandidateDistributionSampler(candidateDistributions) {
     const self = this

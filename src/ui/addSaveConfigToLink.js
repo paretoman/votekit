@@ -1,3 +1,5 @@
+/** @module */
+
 /**
  * Add buttons for saving the configuration to a link.
  * @param {Layout} layout

@@ -16,6 +16,7 @@ import SimBase from './SimBase.js'
  * @param {Changes} changes
  * @param {Election} election
  * @param {Object} canButton - a button that lets us add a candidate
+ * @constructor
  */
 export default function SimOne(screen, dragm, menu, changes, oneElection, canButton) {
     const self = this

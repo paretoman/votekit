@@ -1,3 +1,5 @@
+/** @module */
+
 /**
  * Super class
  * A SimVoter has functionality for a voter that is specific to a simulation.
@@ -8,6 +10,7 @@
  * This is an inheritance structure.
  * @param {VoterCircle} voterCircle - a voter component that SimVoter builds upon.
  * @param {DraggableManager} dragm
+ * @constructor
  */
 export default function SimVoter(voterCircle, dragm) {
     const self = this

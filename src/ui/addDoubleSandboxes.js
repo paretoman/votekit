@@ -1,3 +1,5 @@
+/** @module */
+
 import doubleSandbox from './doubleSandbox.js'
 
 /** Find all the divs of class "double_sandbox".

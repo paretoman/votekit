@@ -1,3 +1,5 @@
+/** @module */
+
 /**
  * Add buttons to layout for undo and redo, and connect them to commander for functionality.
  * @param {Layout} layout

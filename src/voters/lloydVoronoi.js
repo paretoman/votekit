@@ -1,3 +1,5 @@
+/** @module */
+
 // import { polygonCentroid } from 'https://cdn.skypack.dev/d3-polygon@3'
 import { polygonCentroid } from '../../lib/d3-polygon/src/index.js'
 // import * as d3 from 'https://cdn.skypack.dev/d3@7'

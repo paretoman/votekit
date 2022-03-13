@@ -18,6 +18,7 @@ import ButtonGroup from './ButtonGroup.js'
  * @param {String[]} change - list of changes made when pressing a button.
  * @param {Changes} changes
  * @param {Commander} commander - Follows command pattern.
+ * @constructor
  */
 // eslint-disable-next-line max-len
 export default function MenuItem(object, prop, setProp, label, options, change, changes, commander) {

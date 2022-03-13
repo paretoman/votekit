@@ -3,6 +3,7 @@
 /**
  * Sum area of voter distributions to tally the votes.
  * @param {Candidate[]} cans
+ * @constructor
  */
 export default function AreaSummer(cans) {
     const self = this
@@ -45,6 +46,12 @@ function findLines(cans) {
     return lines
 }
 
+/**
+ * Test for the function equidistantLine, which finds a line equidistant from two points.
+ * @param {Function} eq - assertion function for equality
+ * @param {Function} assert - assertion function for true
+ * @returns {Object[]} an array of test objects, each with a label and a test function.
+ */
 export function testEquidistantLine(eq, assert) {
     // Takes an assertion function.
     // Returns a test function.

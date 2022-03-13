@@ -2,6 +2,7 @@
 
 /**
  * keep track of changes that occur to a simulation's configuration.
+ * @constructor
  */
 export default function Changes() {
     const self = this

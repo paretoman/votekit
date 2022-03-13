@@ -29,6 +29,7 @@ import VoterCircleCommander from '../voters/VoterCircleCommander.js'
  * @param {GeoElection} geoElection
  * @param {Commander} commander
  *
+ * @constructor
  */
 export default function Sim(
     screen,

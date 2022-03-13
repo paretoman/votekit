@@ -1,3 +1,5 @@
+/** @module */
+
 /**
  * SimCandidate has functionality for a candidate that is specific to a simulation.
  * SimCandidate has a candidate component.
@@ -5,6 +7,7 @@
 
  * @param {Candidate} candidate - a candidate component that SimCandidate builds upon.
  * @param {DraggableManager} dragm
+ * @constructor
  */
 export default function SimCandidate(candidate, dragm) {
     const self = this

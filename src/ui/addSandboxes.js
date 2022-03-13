@@ -1,3 +1,5 @@
+/** @module */
+
 import checkURL from './checkURL.js'
 import ComMessenger from './ComMessenger.js'
 import sandbox from './sandbox.js'

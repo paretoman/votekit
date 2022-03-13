@@ -1,3 +1,5 @@
+/** @module */
+
 /**
  * Check if the URL is giving a configuration.
  * @returns {Object} - Property yes means we have a config to use from the URL.

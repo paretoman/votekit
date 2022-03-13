@@ -1,6 +1,14 @@
+/** @module */
+
 import ComMessenger from './ComMessenger.js'
 import sandbox from './sandbox.js'
 
+/**
+ * Makes Two sandboxes and links their commands together.
+ * @param {Object} config - To pass to commander to set the initial configuration of the sim.
+ * @param {String} sandboxURL - String to add to the current url directory to get to the sandbox.
+ * @returns {HTMLElement} - div containing the two sandboxes.
+ */
 export default function doubleSandbox(config, sandboxURL) {
     const comMessenger = new ComMessenger()
 

@@ -16,6 +16,7 @@ import { drawStrokedColor, textPercent } from '../utilities/graphicsUtilities.js
  * @param {Commander} commander
  * @param {Changes} changes
  * @param {Boolean} doLoad - Should we add the candidateDistribution without adding to the history?
+ * @constructor
  */
 export default function Candidate(
     x,

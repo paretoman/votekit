@@ -10,6 +10,7 @@ import colorBlend, { toRGBA } from './colorBlend.js'
  * All the voter groups share the same voter basis.
  * @param {Menu} menu
  * @param {Election} election
+ * @constructor
  */
 export default function GeoElection(screen, menu, election) {
     const self = this

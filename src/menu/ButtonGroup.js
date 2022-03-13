@@ -5,6 +5,7 @@ import Button from './Button.js'
 /**
  * Create a group of buttons.
  * @param {*} config
+ * @constructor
  */
 export default function ButtonGroup(config) {
     const self = this

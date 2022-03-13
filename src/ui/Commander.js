@@ -1,3 +1,5 @@
+/** @module */
+
 /**
  * Both the command pattern and the memento pattern are used here.
  * Commands are performed to make changes to the mementos.
@@ -17,6 +19,7 @@
  * * [First google result for "invoker command pattern". It has a classic example of a stock broker.](https://home.csulb.edu/~pnguyen/cecs277/lecnotes/Command%20Pattern%201.pdf)
  * * [Memento Pattern on Wikipedia](https://en.wikipedia.org/wiki/Memento_pattern)
  * * [Memento Tutorial from refractoring.guru](https://refactoring.guru/design-patterns/memento)
+ * @constructor
  */
 export default function Commander(comMessenger) {
     const self = this

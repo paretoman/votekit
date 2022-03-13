@@ -1,3 +1,6 @@
+/** @module */
+
+/** Connect two sandboxes by passing messages between their commanders. */
 export default class ComMessenger {
     /** Make sure broadcasted commands don't trigger broadcasts */
     #protect = false

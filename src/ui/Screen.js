@@ -10,6 +10,7 @@ import EventHandlers from './EventHandlers.js'
  * @param {Number} w - width in browser pixels of the canvas.
  * @param {Number} h - height in browser pixels of the canvas.
  * @param {Layout} layout
+ * @constructor
  */
 export default function Screen(w, h, layout) {
     const self = this

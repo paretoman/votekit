@@ -13,6 +13,7 @@ import CircleGraphic from './CircleGraphic.js'
  * @param {Commander} commander
  * @param {Changes} changes
  * @param {Boolean} doLoad - Should we add the voter without adding to the history?
+ * @constructor
  */
 export default function VoterCircle(
     x,

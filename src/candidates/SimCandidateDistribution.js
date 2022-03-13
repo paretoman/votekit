@@ -1,3 +1,5 @@
+/** @module */
+
 /**
  * SimCandidate has functionality for a canDn that is specific to a simulation.
  * SimCandidate has a canDn component.
@@ -5,6 +7,7 @@
 
  * @param {CandidateDistribution} canDn - a canDn component that SimCandidate builds upon.
  * @param {DraggableManager} dragm
+ * @constructor
  */
 export default function SimCandidateDistribution(canDn, dragm) {
     const self = this

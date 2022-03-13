@@ -8,6 +8,7 @@ import SimVoter from './SimVoter.js'
  * @param {VoterCircle} voterCircle - a voter component that SimVoter builds upon.
  * @param {DraggableManager} dragm
  * @param {screen} screen - draw to the screen
+ * @constructor
  */
 export default function GeoVoterBasis(voterCircle, dragm, screen) {
     const self = this

@@ -1,9 +1,17 @@
+/** @module */
+
 // import SimplexNoise from 'https://cdn.skypack.dev/simplex-noise@3.0.1'
 import { SimplexNoise } from '../../lib/simplex-noise/dist/esm/simplex-noise.js'
 // https://runkit-packages.com/14.x.x/1644541101130/simplex-noise/#simplex-noisejs
 // https://npm.runkit.com/simplex-noise
 // https://www.npmjs.com/package/simplex-noise
 
+/**
+ * Generate a noisy 2D map with two noise sources per pixel.
+ * @param {Number} nx - Number of x pixels
+ * @param {Number} ny - Number of y pixels
+ * @constructor
+ */
 export default function GeoNoise(nx, ny) {
     const self = this
     // Simplex Noise Parameters

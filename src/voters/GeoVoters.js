@@ -1,9 +1,17 @@
+/** @module */
+
 import GeoNoise from './geoNoise.js'
 import NoiseImage from './NoiseImage.js'
 import DistrictMaker from './DistrictMaker.js'
 import { range } from '../utilities/jsHelpers.js'
 import SimVoterList from './SimVoterList.js'
 
+/**
+ * GeoVoters inherits from SimVoterList.
+ * @param {Screen} screen
+ * @param {GeoElection} geoElection
+ * @constructor
+ */
 export default function GeoVoters(screen, geoElection) {
     const self = this
 

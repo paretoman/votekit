@@ -1,3 +1,5 @@
+/** @module */
+
 /**
  * Add buttons for saving the configuration to a textbox.
  * @param {Layout} layout

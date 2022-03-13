@@ -1,3 +1,5 @@
+/** @module */
+
 /**
  * Add button to layout for adding a candidate
  * @param {Layout} layout

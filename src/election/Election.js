@@ -6,6 +6,7 @@ import ElectionMethod from './ElectionMethod.js'
 /**
  * Here we are in the context of a single election with voter objects and candidate jects.
  * @param {Menu} menu
+ * @constructor
  */
 export default function Election(menu) {
     const self = this

@@ -8,6 +8,7 @@
  * @param {Screen} screen
  * @param {Menu} menu
  * @param {Election} election
+ * @constructor
  */
 export default function SampleElections(screen, menu, election) {
     const self = this

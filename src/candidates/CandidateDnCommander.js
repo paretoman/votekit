@@ -1,3 +1,13 @@
+/** @module */
+
+/**
+ * Register clients with the commander for setting entity values.
+ * This is here because we need an action that takes an id.
+ * @param {Registrar} candidateDnRegistrar
+ * @param {Commander} commander
+ * @param {Sim} sim
+ * @constructor
+ */
 export default function CandidateDnCommander(candidateDnRegistrar, commander, sim) {
     const self = this
 

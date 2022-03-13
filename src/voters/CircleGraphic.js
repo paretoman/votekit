@@ -13,6 +13,7 @@ import { Tween } from '../../lib/tween.esm.js'
  * @param {Number} r - radius of graphic
  * @param {String} color - color code
  * @param {Screen} screen - something with .ctx to draw to.
+ * @constructor
  */
 export default function CircleGraphic(parent, r, color, screen) {
     const self = this

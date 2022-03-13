@@ -6,6 +6,7 @@ import electionMethods from '../electionMethods/electionMethods.js'
  * Store settings and functions that deal with the election method.
  * @param {Candidate[]} candidates
  * @param {Menu} menu
+ * @constructor
  */
 export default function ElectionMethod(menu) {
     const self = this

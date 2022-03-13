@@ -1,8 +1,11 @@
+/** @module */
+
 /**
  * Set event handlers for a screen.foreground.
  * We want to set the handlers once for the canvas,
  * and use this class to change the functions that the handlers call.
  * Then allow sims to set the functions called by the handlers.
+ * @constructor
  */
 export default function EventHandlers() {
     const self = this

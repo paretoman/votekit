@@ -1,3 +1,5 @@
+/** @module */
+
 import lloydVoronoi from './lloydVoronoi.js'
 import { polygonArea } from '../../lib/d3-polygon/src/index.js'
 import { drawStrokedColor } from '../utilities/graphicsUtilities.js'
@@ -6,6 +8,7 @@ import geoCensus from './geoCensus.js'
  * Makes and draws district boundaries.
  * Right now, just for a uniform square geography.
  * @param {Screen} screen
+ * @constructor
  */
 export default function DistrictMaker(screen) {
     const self = this

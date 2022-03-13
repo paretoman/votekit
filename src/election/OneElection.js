@@ -1,3 +1,13 @@
+/** @module */
+
+/**
+ * A simple election.
+ * Voters are in shaped distributions.
+ * @param {Screen} screen
+ * @param {Menu} menu
+ * @param {Election} election
+ * @constructor
+ */
 export default function OneElection(screen, menu, election) {
     const self = this
 

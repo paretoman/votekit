@@ -1,3 +1,5 @@
+/** @module */
+
 import VoronoiGroup from './VoronoiGroup.js'
 
 import SimVoter from './SimVoter.js'
@@ -7,6 +9,7 @@ import SimVoter from './SimVoter.js'
  * @param {VoterCircle} voterCircle
  * @param {DraggableManager} dragm
  * @param {Screen} screen
+ * @constructor
  */
 export default function OneVoterCircle(voterCircle, dragm, screen) {
     const self = this

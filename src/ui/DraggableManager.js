@@ -6,6 +6,7 @@
  * Calling screen.setEventHandlers(dragm.eventHandlers) sets the eventhandlers on the screen.
  * @param {Screen} screen
  * @param {Changes} changes
+ * @constructor
  */
 export default function DraggableManager(screen, changes) {
     const self = this

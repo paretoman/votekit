@@ -4,6 +4,7 @@
  * Class for a single button.
  * @param {*} buttonConfig
  * @param {*} onChoose
+ * @constructor
  */
 export default function Button(buttonConfig, onChoose) {
     const self = this

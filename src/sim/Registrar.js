@@ -1,5 +1,8 @@
+/** @module */
+
 /**
- * @constructor - Gives an id to an entity.
+ * Gives an id to an entity.
+ * @constructor
  */
 export default function Registrar() {
     const self = this

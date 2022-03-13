@@ -1,3 +1,5 @@
+/** @module */
+
 // import { normal } from 'color-blend'
 
 import { blend, toRGBA } from '../../lib/colorBlendScript.js'

@@ -14,6 +14,7 @@ import { Delaunay } from '../../lib/d3-delaunay.esm.js'
  * @param {VoterGroup} voterGroup
  * @param {Election} election
  * @param {Screen} screen
+ * @constructor
  */
 export default function voronoiGroup(voterGroup, screen) {
     const self = this

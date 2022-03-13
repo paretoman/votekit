@@ -1,8 +1,11 @@
+/** @module */
+
 /**
- * @constructor
+ *
  * A simple list of simCandidateDistribution instances.
  * It really just passes along function calls to each member of the list.
  * It also checks if that member exists. Alternatively, it was deleted.
+ * @constructor
  */
 export default function SimCandidateList() {
     const self = this
