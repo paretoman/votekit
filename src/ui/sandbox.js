@@ -14,12 +14,13 @@ import Commander from './Commander.js'
 import addUndo from './addUndo.js'
 import addSaveConfigToText from './addSaveConfigToText.js'
 import addLoadConfigText from './loadConfigText.js'
+import addSaveConfigToLink from './addSaveConfigToLink.js'
 
 /**
  * Set up a user interface to run a simulation.
  * @param {Object} config - An object containing commands. A command is a {name,value} pair.
  */
-export default function sandbox(config, comMessenger) {
+export default function sandbox(config, comMessenger, sandboxURL) {
     // manage dependent calculations because we only want to do calculations if we need to
     const changes = new Changes()
 
@@ -35,6 +36,7 @@ export default function sandbox(config, comMessenger) {
         'screen',
         'foreground',
         'geoMaps',
+        'saveConfigToLink',
         'saveConfigToText',
         'loadConfigText',
         'svgUIDiv',
@@ -45,6 +47,8 @@ export default function sandbox(config, comMessenger) {
     const menu = new Menu(changes, layout, commander)
 
     addUndo(layout, commander)
+
+    addSaveConfigToLink(layout, commander, sandboxURL)
 
     addSaveConfigToText(layout, commander)
 

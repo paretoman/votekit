@@ -1,7 +1,7 @@
 import ComMessenger from './ComMessenger.js'
 import sandbox from './sandbox.js'
 
-export default function doubleSandbox(config) {
+export default function doubleSandbox(config, sandboxURL) {
     const comMessenger = new ComMessenger()
 
     const divLink = document.createElement('button')
@@ -21,8 +21,8 @@ export default function doubleSandbox(config) {
     }
     divLink.onclick = toggle
 
-    const div1 = sandbox(config, comMessenger)
-    const div2 = sandbox(config, comMessenger)
+    const div1 = sandbox(config, comMessenger, sandboxURL)
+    const div2 = sandbox(config, comMessenger, sandboxURL)
     div1.style.display = 'inline-block'
     div2.style.display = 'inline-block'
 

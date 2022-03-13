@@ -6,7 +6,11 @@ const targets = Array.from(document.getElementsByClassName('double_sandbox'))
 targets.forEach((target) => {
     const hasConfig = target.dataset.config !== undefined
     const config = (hasConfig) ? JSON.parse(target.dataset.config) : {}
-    const div = doubleSandbox(config)
+
+    const hasSandboxURL = target.dataset.sandboxurl !== undefined
+    const sandboxURL = hasSandboxURL ? target.dataset.sandboxurl : ''
+
+    const div = doubleSandbox(config, sandboxURL)
     const parent = target.parentNode
     parent.appendChild(div)
 })
