@@ -1,5 +1,5 @@
 /**
- * Add buttons to layout for undo and redo, and connect them to commander for functionality.
+ * Add buttons for saving the configuration to a textbox.
  * @param {Layout} layout
  * @param {Commander} commander
  */
