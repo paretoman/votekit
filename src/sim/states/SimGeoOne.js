@@ -51,7 +51,7 @@ export default function SimGeoOne(screen, dragm, menu, changes, geoElection, can
     self.update = () => {
         if (changes.checkNone()) return
         // clear changes, reset to []
-        if (changes.check(['districts'])) {
+        if (changes.check(['districts', 'simType'])) {
             geoVoters.updateDistricts()
         }
         changes.clear()
