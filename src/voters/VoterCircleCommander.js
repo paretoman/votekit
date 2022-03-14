@@ -29,7 +29,7 @@ export default function VoterCircleCommander(voterRegistrar, commander, sim) {
             voter.setXYAction(p)
         },
         name: `${prefix}-setXY`,
-        props: { isSetXY: true },
+        props: { isChain: true },
     })
 
     self.setRClientList = commander.addClientList({

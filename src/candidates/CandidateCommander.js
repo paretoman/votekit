@@ -29,7 +29,7 @@ export default function CandidateCommander(candidateRegistrar, commander, sim) {
             candidate.setXYAction(p)
         },
         name: `${prefix}-setXY`,
-        props: { isSetXY: true },
+        props: { isChain: true },
     })
 
     // This is kind of weird because this value is not a good measure of the number of entities.

@@ -29,7 +29,7 @@ export default function CandidateDnCommander(candidateDnRegistrar, commander, si
             candidateDn.setXYAction(p)
         },
         name: `${prefix}-setXY`,
-        props: { isSetXY: true },
+        props: { isChain: true },
     })
 
     self.setRClientList = commander.addClientList({
