@@ -15,6 +15,7 @@ export default function CandidateCommander(candidateRegistrar, commander, sim) {
 
     self.setEClientList = commander.addClientList({
         action: (id, e) => {
+            self.setNumberCandidates(id + 1)
             const candidate = candidateRegistrar.get(id)
             candidate.setEAction(e)
         },
@@ -23,6 +24,7 @@ export default function CandidateCommander(candidateRegistrar, commander, sim) {
 
     self.setXYClientList = commander.addClientList({
         action: (id, p) => {
+            self.setNumberCandidates(id + 1)
             const candidate = candidateRegistrar.get(id)
             candidate.setXYAction(p)
         },

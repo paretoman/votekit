@@ -153,7 +153,10 @@ export default function Commander(comMessenger) {
         if (id === undefined) {
             currentValue = config[name]
         } else {
-            currentValue = command.currentValue
+            currentValue = config[name][id]
+            if (currentValue === undefined) {
+                currentValue = command.currentValue
+            }
         }
 
         // Store how to undo the command.
@@ -165,12 +168,12 @@ export default function Commander(comMessenger) {
         // example: head:-1 means history will be cleared splice(0,length)
         history.splice(head + 1, history.length - (head + 1))
 
+        // Actually preform the command.
+        execute(command)
+
         // Add command to history
         history.push([{ command, undoCommand }])
         head += 1
-
-        // Actually preform the command.
-        execute(command)
     }
     /**
      * Do a set of commands together, so they have one history item.
@@ -187,7 +190,10 @@ export default function Commander(comMessenger) {
             if (id === undefined) {
                 currentValue = config[name]
             } else {
-                currentValue = command.currentValue
+                currentValue = config[name][id]
+                if (currentValue === undefined) {
+                    currentValue = command.currentValue
+                }
             }
 
             // Store how to undo the command.

@@ -15,6 +15,7 @@ export default function VoterCircleCommander(voterRegistrar, commander, sim) {
 
     self.setEClientList = commander.addClientList({
         action: (id, e) => {
+            self.setNumberVoters(id + 1)
             const voter = voterRegistrar.get(id)
             voter.setEAction(e)
         },
@@ -23,6 +24,7 @@ export default function VoterCircleCommander(voterRegistrar, commander, sim) {
 
     self.setXYClientList = commander.addClientList({
         action: (id, p) => {
+            self.setNumberVoters(id + 1)
             const voter = voterRegistrar.get(id)
             voter.setXYAction(p)
         },
@@ -32,6 +34,7 @@ export default function VoterCircleCommander(voterRegistrar, commander, sim) {
 
     self.setRClientList = commander.addClientList({
         action: (id, r) => {
+            self.setNumberVoters(id + 1)
             const voter = voterRegistrar.get(id)
             voter.setRAction(r)
         },
