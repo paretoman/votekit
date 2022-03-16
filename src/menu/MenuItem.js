@@ -43,7 +43,7 @@ export default function MenuItem(object, prop, setProp, label, options, change, 
     }
     self.choose = new ButtonGroup({
         label,
-        width: bw(2),
+        width: buttonWidth(3),
         data: self.list,
         onChoose: self.onChoose,
     })
@@ -54,4 +54,14 @@ export default function MenuItem(object, prop, setProp, label, options, change, 
     }
 }
 
-function bw(x) { return (220 - 4 * (x - 1)) / x - 2 }
+function buttonWidth(numButtons) {
+    const padding = 4
+    const border = 1
+    const margin = 4
+    const between = (padding + border + margin) * 2
+    const end = padding + border
+    const width = 302
+    const usableSpace = width - between * (numButtons - 1) - 2 * end
+    const buttonWidth1 = usableSpace / numButtons
+    return buttonWidth1
+}
