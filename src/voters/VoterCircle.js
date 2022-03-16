@@ -37,14 +37,14 @@ export default function VoterCircle(
     // use commands to instantiate variables
     self.instantiate = () => {
         // set current value because we need to be able to undo by returning to these values
-        // voterCommander.setEClientList.setCurrentValue(id, 0)
-        // voterCommander.setXYClientList.setCurrentValue(id, { x, y })
-        // voterCommander.setRClientList.setCurrentValue(id, r)
+        // voterCommander.setESenderForList.setCurrentValue(id, 0)
+        // voterCommander.setXYSenderForList.setCurrentValue(id, { x, y })
+        // voterCommander.setRSenderForList.setCurrentValue(id, r)
 
         const commands = [
-            voterCommander.setEClientList.command(id, 1, 0), // set alive flag
-            voterCommander.setXYClientList.command(id, { x, y }, { x, y }),
-            voterCommander.setRClientList.command(id, r, r),
+            voterCommander.setESenderForList.command(id, 1, 0), // set alive flag
+            voterCommander.setXYSenderForList.command(id, { x, y }, { x, y }),
+            voterCommander.setRSenderForList.command(id, r, r),
         ]
         // Either load the commands because we don't want to create an item of history
         // Or do the commands because want to store an item in history, so that we can undo.
@@ -60,8 +60,8 @@ export default function VoterCircle(
         changes.add(['draggables'])
     }
     self.setE = (e) => {
-        const cur = voterCommander.setEClientList.getCurrentValue(id)
-        voterCommander.setEClientList.go(id, e, cur)
+        const cur = voterCommander.setESenderForList.getCurrentValue(id)
+        voterCommander.setESenderForList.go(id, e, cur)
     }
 
     self.setXYAction = (p) => {
@@ -70,8 +70,8 @@ export default function VoterCircle(
         changes.add(['draggables'])
     }
     self.setXY = (p) => {
-        const cur = voterCommander.setXYClientList.getCurrentValue(id)
-        voterCommander.setXYClientList.go(id, p, cur)
+        const cur = voterCommander.setXYSenderForList.getCurrentValue(id)
+        voterCommander.setXYSenderForList.go(id, p, cur)
     }
 
     self.setRAction = (newR) => {
@@ -79,8 +79,8 @@ export default function VoterCircle(
         changes.add(['radius'])
     }
     self.setR = (newR) => {
-        const cur = voterCommander.setRClientList.getCurrentValue(id)
-        voterCommander.setRClientList.go(id, newR, cur)
+        const cur = voterCommander.setRSenderForList.getCurrentValue(id)
+        voterCommander.setRSenderForList.go(id, newR, cur)
     }
 
     self.instantiate()

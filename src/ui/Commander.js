@@ -8,12 +8,14 @@
  *  Caretaker: this class. It keeps config as a list of mementos.
  *  Originator: menuItem.
  *  Mementos: Config is a list of mementos. It's not a strict pattern.
+ *  Maybe the way we are storing commands is more like storing mementos of a commands.
  *
  * Command Pattern:
- *  Client: this class. It asks an invoker to execute commands.
+ *  Client: this class. It asks a sender to execute commands.
  *  Command: a name-value pair. Actions are listed by name. Commands are stored in history.
- *  Invoker: actions, execute(). The invoker keeps a list of actions to execute.
- *  Receiver: menuItem. The receiver calls commander.addAction(...) to add to the invoker's actions.
+ *  Invoker: actions, execute(). The sender keeps a list of actions to execute.
+ *  Receiver: menuItem. The receiver calls commander.addAction(...) to add to the sender's actions.
+ *  Sender: Candidate.setXY calls CandidateCommander.setXYSenderForList.go(id, value)
  *
  * References:
  * * [First google result for "invoker command pattern". It has a classic example of a stock broker.](https://home.csulb.edu/~pnguyen/cecs277/lecnotes/Command%20Pattern%201.pdf)
@@ -36,7 +38,7 @@ export default function Commander(comMessenger) {
     // The list of all mementos
     const config = {}
 
-    // A list of actions we can execute (for invoker)
+    // A list of actions we can execute (for sender)
     const actions = []
 
     const firstActions = []
@@ -58,8 +60,8 @@ export default function Commander(comMessenger) {
         config[name] = currentValue
     }
 
-    // make a client with a command and a way to do the command
-    self.addClient = (args) => {
+    // make a sender with a command and a way to do the command
+    self.addSender = (args) => {
         const {
             name, action, currentValue, props,
         } = args
@@ -67,8 +69,8 @@ export default function Commander(comMessenger) {
         self.addAction(name, action, currentValue, props)
         const command = (value) => ({ name, value, props })
         const go = (value) => self.do(command(value))
-        const client = { command, go }
-        return client
+        const sender = { command, go }
+        return sender
     }
 
     /** Say we want to change a value for the nth candidate.
@@ -82,12 +84,12 @@ export default function Commander(comMessenger) {
     }
 
     /**
-     * Make a client with a command and a way to do the command.
-     * This type of client deals with lists.
+     * Make a sender with a command and a way to do the command.
+     * This type of sender deals with lists.
      * @param {Object} args
      * @returns {Object} - methods command(id,value) and go(id,value)
      */
-    self.addClientList = (args) => {
+    self.addSenderForList = (args) => {
         const {
             name, action, props,
         } = args
@@ -101,10 +103,10 @@ export default function Commander(comMessenger) {
             config[name][id] = currentValue
         }
         const getCurrentValue = (id) => config[name][id]
-        const client = {
+        const sender = {
             command, go, setCurrentValue, getCurrentValue,
         }
-        return client
+        return sender
     }
 
     /**

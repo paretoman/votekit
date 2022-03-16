@@ -34,13 +34,13 @@ export default function CandidateDistribution(
 
     // use commands to instantiate variables
     self.instantiate = () => {
-        // candidateDnCommander.setEClientList.setCurrentValue(id, 0)
-        // candidateDnCommander.setXYClientList.setCurrentValue(id, { x, y })
-        // candidateDnCommander.setRClientList.setCurrentValue(id, r)
+        // candidateDnCommander.setESenderForList.setCurrentValue(id, 0)
+        // candidateDnCommander.setXYSenderForList.setCurrentValue(id, { x, y })
+        // candidateDnCommander.setRSenderForList.setCurrentValue(id, r)
         const commands = [
-            candidateDnCommander.setEClientList.command(id, 1, 0), // set alive flag
-            candidateDnCommander.setXYClientList.command(id, { x, y }, { x, y }),
-            candidateDnCommander.setRClientList.command(id, r, r),
+            candidateDnCommander.setESenderForList.command(id, 1, 0), // set alive flag
+            candidateDnCommander.setXYSenderForList.command(id, { x, y }, { x, y }),
+            candidateDnCommander.setRSenderForList.command(id, r, r),
         ]
         // Either load the commands because we don't want to create an item of history
         // Or do the commands because want to store an item in history, so that we can undo.
@@ -56,8 +56,8 @@ export default function CandidateDistribution(
         changes.add(['draggables'])
     }
     self.setE = (e) => {
-        const cur = candidateDnCommander.setEClientList.getCurrentValue(id)
-        candidateDnCommander.setEClientList.go(id, e, cur)
+        const cur = candidateDnCommander.setESenderForList.getCurrentValue(id)
+        candidateDnCommander.setESenderForList.go(id, e, cur)
     }
 
     self.setXYAction = (p) => {
@@ -66,8 +66,8 @@ export default function CandidateDistribution(
         changes.add(['draggables'])
     }
     self.setXY = (p) => {
-        const cur = candidateDnCommander.setXYClientList.getCurrentValue(id)
-        candidateDnCommander.setXYClientList.go(id, p, cur)
+        const cur = candidateDnCommander.setXYSenderForList.getCurrentValue(id)
+        candidateDnCommander.setXYSenderForList.go(id, p, cur)
     }
 
     self.setRAction = (newR) => {
@@ -75,8 +75,8 @@ export default function CandidateDistribution(
         changes.add(['radius'])
     }
     self.setR = (newR) => {
-        const cur = candidateDnCommander.setRClientList.getCurrentValue(id)
-        candidateDnCommander.setRClientList.go(id, newR, cur)
+        const cur = candidateDnCommander.setRSenderForList.getCurrentValue(id)
+        candidateDnCommander.setRSenderForList.go(id, newR, cur)
     }
 
     self.instantiate()

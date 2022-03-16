@@ -1,7 +1,7 @@
 /** @module */
 
 /**
- * Register clients with the commander for setting entity values.
+ * Register senders with the commander for setting entity values.
  * This is here because we need an action that takes an id.
  * @param {Registrar} voterRegistrar
  * @param {Commander} commander
@@ -13,7 +13,7 @@ export default function VoterCircleCommander(voterRegistrar, commander, sim) {
 
     const prefix = 'voters'
 
-    self.setEClientList = commander.addClientList({
+    self.setESenderForList = commander.addSenderForList({
         action: (id, e) => {
             self.setNumberVoters(id + 1)
             const voter = voterRegistrar.get(id)
@@ -22,7 +22,7 @@ export default function VoterCircleCommander(voterRegistrar, commander, sim) {
         name: `${prefix}-setE`,
     })
 
-    self.setXYClientList = commander.addClientList({
+    self.setXYSenderForList = commander.addSenderForList({
         action: (id, p) => {
             self.setNumberVoters(id + 1)
             const voter = voterRegistrar.get(id)
@@ -32,7 +32,7 @@ export default function VoterCircleCommander(voterRegistrar, commander, sim) {
         props: { isChain: true },
     })
 
-    self.setRClientList = commander.addClientList({
+    self.setRSenderForList = commander.addSenderForList({
         action: (id, r) => {
             self.setNumberVoters(id + 1)
             const voter = voterRegistrar.get(id)
@@ -45,13 +45,13 @@ export default function VoterCircleCommander(voterRegistrar, commander, sim) {
     // An undo will reduce the number stored with the command name,
     // but not reduce the number of entities.
     // So we disable undo.
-    self.setNumberVotersClient = commander.addClient({
+    self.setNumberVotersSender = commander.addSender({
         action: (num) => sim.setNumberVotersAction(num),
         currentValue: 0,
         name: `${prefix}-setNumberAtLeast`,
         props: { isFirstAction: true },
     })
     self.setNumberVoters = (num) => {
-        commander.loadCommands([self.setNumberVotersClient.command(num)])
+        commander.loadCommands([self.setNumberVotersSender.command(num)])
     }
 }

@@ -11,10 +11,10 @@ Memento Pattern:
  * Mementos: Config is a list of mementos. It's not a strict pattern.
  
 Command Pattern:
- * Client: this class. It asks an invoker to execute commands.
+ * Client: this class. It asks a sender to execute commands.
  * Command: a name-value pair. Actions are listed by name. Commands are stored in history.
- * Invoker: actions, execute(). The invoker keeps a list of actions to execute.
- * Receiver: menuItem. The receiver calls commander.addAction(...) to add to the invoker's actions.
+ * Invoker: actions, execute(). The sender keeps a list of actions to execute.
+ * Receiver: menuItem. The receiver calls commander.addAction(...) to add to the sender's actions.
  
 References:
  * [First google result for "invoker command pattern". It has a classic example of a stock broker.](https://home.csulb.edu/~pnguyen/cecs277/lecnotes/Command%20Pattern%201.pdf)
@@ -30,14 +30,14 @@ Undo and Redo are not linked.
 ## Commanding Non-instantiated Entities
 
 ### Old Way
-Tell commander how to create new entities when they haven't been instantiated yet. Without being instantiated, they don't have command clients yet, so the commander will get a command that it doesn't know how to handle.
+Tell commander how to create new entities when they haven't been instantiated yet. Without being instantiated, they don't have command senders yet, so the commander will get a command that it doesn't know how to handle.
 commander.newCreator(creator = sim.addVoterPressed, creatorName = "addVoter")
 If there is no action for a command, then call the creator that is referenced by its name.
 
 ### New Way
 A new way of handling this problem was created because we want to be able to load a sim configuration from a config file. The commander needed a list of all commands before the entities are created, so we created a CandidateCommander class and similar for voters and candidateDistributions. 
 
-For the Commander class, we made new methods like Commander.addListClient for creating command clients that deal with lists of entities. Instead of passing a currentValue when creating a command client, we pass a currentValue when instantiating an entity. The values are stored in arrays inside config[name].
+For the Commander class, we made new methods like Commander.addListSender for creating command senders that deal with lists of entities. Instead of passing a currentValue when creating a command sender, we pass a currentValue when instantiating an entity. The values are stored in arrays inside config[name].
 
 We created a command property that specifies to not add it to the history. This was needed for setNumberCandidates because the command needed to be broadcast to the other commanders but not stored in the history. We don't want to undo setNumberCandidates because we don't actually undo creating entities, we just set their exists property to false.
 
