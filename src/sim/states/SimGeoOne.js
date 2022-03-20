@@ -11,28 +11,27 @@ import SimBase from './SimBase.js'
  *   voters in a distribution that will be summed over.
  * Create a geographical map with variations of voter center.
  * @param {Screen} screen
- * @param {DraggableManager} dragm
  * @param {Menu} menu
  * @param {Changes} changes
  * @param {Election} election
  * @param {Object} canButton - a button that lets us add a candidate
  * @constructor
  */
-export default function SimGeoOne(screen, dragm, menu, changes, geoElection, canButton) {
+export default function SimGeoOne(screen, menu, changes, geoElection, canButton) {
     const self = this
 
-    SimBase.call(self, dragm, screen)
+    SimBase.call(self, screen, changes)
 
     const geoVoters = new GeoVoters(screen, geoElection)
 
     const simCandidateList = new SimCandidateList()
 
     self.addSimCandidate = (candidate) => {
-        simCandidateList.newCandidate(new SimCandidate(candidate, dragm))
+        simCandidateList.newCandidate(new SimCandidate(candidate, self.dragm))
     }
 
     self.addSimVoterCircle = (voterCircle) => {
-        geoVoters.newVoterGroup(new GeoVoterBasis(voterCircle, dragm, screen))
+        geoVoters.newVoterGroup(new GeoVoterBasis(voterCircle, self.dragm, screen))
     }
 
     changes.add(['districts'])

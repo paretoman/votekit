@@ -7,7 +7,6 @@ import VoterCircle from '../voters/VoterCircle.js'
 import Candidate from '../candidates/Candidate.js'
 import CandidateDistribution from '../candidates/CandidateDistribution.js'
 import Registrar from './Registrar.js'
-import DraggableManager from '../ui/DraggableManager.js'
 import createAddVoter from './createAddVoter.js'
 import CreateAddCandidate from './CreateAddCandidate.js'
 import CreateAddCandidateDistribution from './CreateAddCandidateDistribution.js'
@@ -60,16 +59,11 @@ export default function Sim(
     const candidateRegistrar = new Registrar()
     const candidateDnRegistrar = new Registrar()
 
-    const dragms = {
-        one: new DraggableManager(screen, changes),
-        sample: new DraggableManager(screen, changes),
-        geoOne: new DraggableManager(screen, changes),
-    }
     const sims = {
-        one: new SimOne(screen, dragms.one, menu, changes, oneElection, canButton),
+        one: new SimOne(screen, menu, changes, oneElection, canButton),
         // eslint-disable-next-line max-len
-        sample: new SimSample(screen, dragms.sample, menu, changes, sampleElections, canDnButton),
-        geoOne: new SimGeoOne(screen, dragms.geoOne, menu, changes, geoElection, canButton),
+        sample: new SimSample(screen, menu, changes, sampleElections, canDnButton),
+        geoOne: new SimGeoOne(screen, menu, changes, geoElection, canButton),
     }
 
     // Entities //

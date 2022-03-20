@@ -11,28 +11,27 @@ import SimBase from './SimBase.js'
  *   candidates in defined positions, and
  *   voters in a distribution that will be summed over.
  * @param {Screen} screen
- * @param {DraggableManager} dragm
  * @param {Menu} menu
  * @param {Changes} changes
  * @param {Election} election
  * @param {Object} canButton - a button that lets us add a candidate
  * @constructor
  */
-export default function SimOne(screen, dragm, menu, changes, oneElection, canButton) {
+export default function SimOne(screen, menu, changes, oneElection, canButton) {
     const self = this
 
-    SimBase.call(self, dragm, screen)
+    SimBase.call(self, screen, changes)
 
     const oneVoters = new SimVoterList()
 
     const simCandidateList = new SimCandidateList()
 
     self.addSimCandidate = (candidate) => {
-        simCandidateList.newCandidate(new SimCandidate(candidate, dragm))
+        simCandidateList.newCandidate(new SimCandidate(candidate, self.dragm))
     }
 
     self.addSimVoterCircle = (voterCircle) => {
-        oneVoters.newVoterGroup(new OneVoterCircle(voterCircle, dragm, screen))
+        oneVoters.newVoterGroup(new OneVoterCircle(voterCircle, self.dragm, screen))
     }
 
     const superEnter = self.enter

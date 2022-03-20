@@ -1,14 +1,18 @@
 /** @module */
 
+import DraggableManager from '../DraggableManager.js'
+
 /**
  * The super class for each sim. Provides some basic required functionality.
- * @param {DraggableManager} dragm
+ * @param {Screen} screen
+ * @param {Changes} changes
  * @constructor
  */
-export default function SimBase(dragm, screen) {
+export default function SimBase(screen, changes) {
     const self = this
+    self.dragm = new DraggableManager(screen, changes)
     self.enter = () => {
-        screen.eventHandlers.set(dragm.eventHandlers)
+        screen.eventHandlers.set(self.dragm.eventHandlers)
     }
     self.exit = () => {}
     self.update = () => {}
