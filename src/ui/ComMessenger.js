@@ -1,28 +1,33 @@
 /** @module */
 
-/** Connect two sandboxes by passing messages between their commanders. */
+/** Connect two sandboxes by passing messages between their commanders.
+ * This is kind of like a mediator pattern, but also maybe an observer pattern. */
 export default class ComMessenger {
     /** Make sure broadcasted commands don't trigger broadcasts */
-    #protect = false
+    #protect
+
+    #commanders
+
+    #linked
 
     constructor() {
-        this.linked = true
-        this.commanders = []
+        this.#linked = true
+        this.#commanders = []
         this.#protect = false
     }
 
     setLinked(value) {
-        this.linked = value
+        this.#linked = value
     }
 
     addCommander(commander) {
-        this.commanders.push(commander)
+        this.#commanders.push(commander)
     }
 
     broadcastDo(command, originCommander) {
-        if (this.linked && this.#protect === false) {
+        if (this.#linked && this.#protect === false) {
             this.#protect = true
-            this.commanders.forEach((com) => com.passDo(command))
+            this.#commanders.forEach((com) => com.passDo(command))
             this.#protect = false
         } else {
             originCommander.passDo(command)
@@ -30,9 +35,9 @@ export default class ComMessenger {
     }
 
     broadcastDoCommands(commands, originCommander) {
-        if (this.linked && this.#protect === false) {
+        if (this.#linked && this.#protect === false) {
             this.#protect = true
-            this.commanders.forEach(
+            this.#commanders.forEach(
                 (com) => com.passDoCommands(commands),
             )
             this.#protect = false
@@ -42,9 +47,9 @@ export default class ComMessenger {
     }
 
     broadcastLoadConfig(newConfig, originCommander) {
-        if (this.linked && this.#protect === false) {
+        if (this.#linked && this.#protect === false) {
             this.#protect = true
-            this.commanders.forEach(
+            this.#commanders.forEach(
                 (com) => com.passLoadConfig(newConfig),
             )
             this.#protect = false
@@ -54,9 +59,9 @@ export default class ComMessenger {
     }
 
     broadCastLoadCommands(commands, originCommander) {
-        if (this.linked && this.#protect === false) {
+        if (this.#linked && this.#protect === false) {
             this.#protect = true
-            this.commanders.forEach(
+            this.#commanders.forEach(
                 (com) => com.passLoadCommands(commands),
             )
             this.#protect = false
