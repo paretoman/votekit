@@ -3,7 +3,7 @@
 /**
  * Add button to layout for adding a candidate
  * @param {Layout} layout
- * @param {Commander} commander
+ * @param {Sim} sim
  */
 export default function CreateAddCandidate(layout, sim) {
     const self = this

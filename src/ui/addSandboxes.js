@@ -1,7 +1,7 @@
 /** @module */
 
-import checkURL from './checkURL.js'
-import ComMessenger from './ComMessenger.js'
+import checkURL from '../command/checkURL.js'
+import ComMessenger from '../command/ComMessenger.js'
 import sandbox from './sandbox.js'
 
 /** Find all the divs of class "sandbox".

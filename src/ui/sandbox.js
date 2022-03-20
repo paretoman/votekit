@@ -10,11 +10,11 @@ import SampleElections from '../election/SampleElections.js'
 import GeoElection from '../election/GeoElection.js'
 import Layout from './Layout.js'
 import OneElection from '../election/OneElection.js'
-import Commander from './Commander.js'
-import addUndo from './addUndo.js'
-import addSaveConfigToText from './addSaveConfigToText.js'
-import addLoadConfigText from './loadConfigText.js'
-import addSaveConfigToLink from './addSaveConfigToLink.js'
+import Commander from '../command/Commander.js'
+import addUndo from '../command/addUndo.js'
+import addSaveConfigToText from '../command/addSaveConfigToText.js'
+import addLoadConfigText from '../command/loadConfigText.js'
+import addSaveConfigToLink from '../command/addSaveConfigToLink.js'
 
 /**
  * Set up a user interface to run a simulation.
