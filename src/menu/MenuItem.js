@@ -25,13 +25,17 @@ export default function MenuItem(object, prop, setProp, label, options, change, 
     const self = this
     self.list = options
     self.onChoose = function (data) {
-        commander.do({ name: prop, value: data.value })
+        self.sender.go(data.value)
     }
     self.action = (value) => {
         self.set(value)
         self.select()
     }
-    commander.addAction(prop, self.action, object[prop])
+    self.sender = commander.addSender({
+        name: prop,
+        action: self.action,
+        currentValue: object[prop],
+    })
     self.set = function (value) {
         // LOAD INPUT
 
