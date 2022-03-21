@@ -9,17 +9,21 @@ import History from './History.js'
  * Commands are performed to make changes to the mementos.
  *
  * Memento Pattern:
- *  Caretaker: this class. It keeps config as a list of mementos.
- *  Originator: menuItem.
+ *  Caretaker: ConfigKeeper class. It keeps config as a list of mementos.
+ *  Originator: sender returned by CommandStore.addSender, used by menuItem, Candidate, Voter, etc
  *  Mementos: Config is a list of mementos. It's not a strict pattern.
- *  Maybe the way we are storing commands is more like storing mementos of a commands.
+ *  Also, the way we are storing commands is like storing mementos of a commands (not strictly).
  *
  * Command Pattern:
- *  Client: this class. It asks a sender to execute commands.
- *  Command: a name-value pair. Actions are listed by name. Commands are stored in history.
- *  Sender: actions, execute(). The sender keeps a list of actions to execute.
- *  Receiver: menuItem. The receiver calls commander.addAction(...) to add to the sender's actions.
- *  Sender: Candidate.setXY calls CandidateCommander.setXYSenderForList.go(id, value)
+ * * Client: a CandidateCommander, VoterCommander, MenuItem, etc
+ * * Command: Here, a command is a memento of a way to make a command.
+ *     CommandStore stores lists of ways to make commands.
+ *     mostly with a name and an action.
+ *     Also, History stores a list of commands.
+ *  Sender: A sender is returned by CommandStore.addSender.
+ *  Receiver: a property of a Candidate, Voter, MenuItem, etc.
+ *  For example, Candidate.setXY calls CandidateCommander.setXYSenderForList.go(id, value),
+ *    which then calls Candidate.setXYAction to set Candidate.x and Candidate.y
  *
  * This isn't exactly either pattern.
  * Instead of commands with execute functions,
@@ -31,9 +35,7 @@ import History from './History.js'
  * This class is similar to the mediator in the mediator pattern.
  *
  * References:
- * * [First google result for "invoker command pattern". It has a classic example of a stock broker.](https://home.csulb.edu/~pnguyen/cecs277/lecnotes/Command%20Pattern%201.pdf)
  * * [Command Pattern on refactoring.guru](https://refactoring.guru/design-patterns/command)
- * * [Memento Pattern on Wikipedia](https://en.wikipedia.org/wiki/Memento_pattern)
  * * [Memento Pattern on refactoring.guru](https://refactoring.guru/design-patterns/memento)
  * * [Mediator Pattern on refactoring.guru](https://refactoring.guru/design-patterns/mediator)
  * @constructor
