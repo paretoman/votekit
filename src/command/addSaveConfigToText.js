@@ -1,5 +1,7 @@
 /** @module */
 
+import { orderedJsonStringify } from '../utilities/jsHelpers.js'
+
 /**
  * Add buttons for saving the configuration to a textbox.
  * @param {Layout} layout
@@ -16,7 +18,7 @@ export default function addSaveConfigToText(layout, commander) {
 
     button.onclick = () => {
         const config = commander.getConfig()
-        text.value = JSON.stringify(config)
+        text.value = orderedJsonStringify(config)
     }
 
     const clearDiv = document.createElement('div')
