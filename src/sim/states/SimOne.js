@@ -17,7 +17,7 @@ import SimBase from './SimBase.js'
  * @param {Object} canButton - a button that lets us add a candidate
  * @constructor
  */
-export default function SimOne(screen, menu, changes, oneElection, canButton) {
+export default function SimOne(screen, menu, changes, oneElection, sim) {
     const self = this
 
     SimBase.call(self, screen, changes)
@@ -37,11 +37,11 @@ export default function SimOne(screen, menu, changes, oneElection, canButton) {
     const superEnter = self.enter
     self.enter = () => {
         superEnter()
-        canButton.show()
+        sim.simAddCandidates.canButton.show()
     }
 
     self.exit = () => {
-        canButton.hide()
+        sim.simAddCandidates.canButton.hide()
     }
 
     self.update = () => {

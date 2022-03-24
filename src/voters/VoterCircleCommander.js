@@ -5,10 +5,10 @@
  * This is here because we need an action that takes an id.
  * @param {Registrar} voterRegistrar
  * @param {Commander} commander
- * @param {Sim} sim
+ * @param {SimAddVoters} simAddVoters
  * @constructor
  */
-export default function VoterCircleCommander(voterRegistrar, commander, sim) {
+export default function VoterCircleCommander(voterRegistrar, commander, simAddVoters) {
     const self = this
 
     const prefix = 'voters'
@@ -46,7 +46,7 @@ export default function VoterCircleCommander(voterRegistrar, commander, sim) {
     // but not reduce the number of entities.
     // So we disable undo.
     self.setNumberVotersSender = commander.addSender({
-        action: (num) => sim.setNumberVotersAction(num),
+        action: (num) => simAddVoters.setNumberVotersAction(num),
         currentValue: 0,
         name: `${prefix}-setNumberAtLeast`,
         props: { isFirstAction: true },

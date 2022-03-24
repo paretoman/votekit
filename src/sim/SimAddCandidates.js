@@ -1,0 +1,33 @@
+import Candidate from '../candidates/Candidate.js'
+import CandidateCommander from '../candidates/CandidateCommander.js'
+import CreateAddCandidate from './CreateAddCandidate.js'
+import Registrar from './Registrar.js'
+
+/** A component of sim.js that deals with adding candidates. */
+export default function SimAddCandidates(screen, layout, changes, commander, sims) {
+    const self = this
+    self.canButton = new CreateAddCandidate(layout, self)
+    const candidateRegistrar = new Registrar()
+    const candidateCommander = new CandidateCommander(candidateRegistrar, commander, self)
+
+    self.addCandidatePressed = () => {
+        // really, we want to make a command to set numCandidates to at least an amount
+        const num = candidateRegistrar.num() + 1
+        candidateCommander.setNumberCandidates(num)
+    }
+    self.setNumberCandidatesAction = (num) => {
+        while (candidateRegistrar.num() < num) {
+            self.addCandidate(50, 50, 'yellow', false)
+        }
+    }
+
+    self.addCandidate = (x, y, c, doLoad) => {
+        // eslint-disable-next-line no-new, max-len
+        const candidate = new Candidate(x, y, 21, 21, c, screen, candidateRegistrar, commander, changes, doLoad, candidateCommander)
+        sims.one.addSimCandidate(candidate)
+        sims.geoOne.addSimCandidate(candidate)
+
+        const num = candidateRegistrar.num()
+        candidateCommander.setNumberCandidates(num)
+    }
+}

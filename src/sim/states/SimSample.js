@@ -14,10 +14,10 @@ import SimBase from './SimBase.js'
  * @param {Menu} menu
  * @param {Changes} changes
  * @param {SimElection} sampleElections
- * @param {Object} canDnButton - a button that lets us add a candidateDistribution
+ * @param {Sim} sim
  * @constructor
  */
-export default function SimSample(screen, menu, changes, sampleElections, canDnButton) {
+export default function SimSample(screen, menu, changes, sampleElections, sim) {
     const self = this
 
     SimBase.call(self, screen, changes)
@@ -37,11 +37,11 @@ export default function SimSample(screen, menu, changes, sampleElections, canDnB
     const superEnter = self.enter
     self.enter = () => {
         superEnter()
-        canDnButton.show()
+        sim.simAddCandidateDns.canDnButton.show()
     }
 
     self.exit = () => {
-        canDnButton.hide()
+        sim.simAddCandidateDns.canDnButton.hide()
     }
 
     self.update = () => {

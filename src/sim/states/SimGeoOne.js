@@ -14,10 +14,10 @@ import SimBase from './SimBase.js'
  * @param {Menu} menu
  * @param {Changes} changes
  * @param {Election} election
- * @param {Object} canButton - a button that lets us add a candidate
+ * @param {Sim} sim
  * @constructor
  */
-export default function SimGeoOne(screen, menu, changes, geoElection, canButton) {
+export default function SimGeoOne(screen, menu, changes, geoElection, sim) {
     const self = this
 
     SimBase.call(self, screen, changes)
@@ -40,12 +40,12 @@ export default function SimGeoOne(screen, menu, changes, geoElection, canButton)
     self.enter = () => {
         superEnter()
         screen.showGeoMaps()
-        canButton.show()
+        sim.simAddCandidates.canButton.show()
     }
 
     self.exit = () => {
         screen.hideGeoMaps()
-        canButton.hide()
+        sim.simAddCandidates.canButton.hide()
     }
 
     self.update = () => {
