@@ -7,6 +7,7 @@ import SimAddVoters from './SimAddVoters.js'
 import SimAddCandidates from './SimAddCandidates.js'
 import SimAddCandidateDns from './SimAddCandidateDns.js'
 import addSimControlsLabel from './addSimControlsLabel.js'
+import SimOneDOne from './states/SimOneDOne.js'
 
 /**
  * Simulation is the main task we're trying to accomplish in this program.
@@ -40,6 +41,7 @@ export default function Sim(
 
     const sims = {
         one: new SimOne(screen, menu, changes, oneElection, self),
+        oneDOne: new SimOneDOne(screen, menu, changes, oneElection, self),
         // eslint-disable-next-line max-len
         sample: new SimSample(screen, menu, changes, sampleElections, self),
         geoOne: new SimGeoOne(screen, menu, changes, geoElection, self),
@@ -91,6 +93,7 @@ export default function Sim(
     // a list of simulation types
     self.typeList = [
         { name: 'One Election', value: 'one', state: '' },
+        { name: '1D One Election', value: 'oneDOne', state: '' },
         { name: 'Sample Elections', value: 'sample', state: '' },
         { name: 'Geo Election', value: 'geoOne', state: '' },
     ]

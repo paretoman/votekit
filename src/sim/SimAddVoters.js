@@ -27,6 +27,7 @@ export default function SimAddVoters(screen, layout, changes, commander, sims) {
         const voterCircle = new VoterCircle(x, y, r, screen, voterRegistrar, commander, changes, doLoad, voterCommander)
 
         sims.one.addSimVoterCircle(voterCircle)
+        sims.oneDOne.addSimVoterCircle(voterCircle)
         sims.geoOne.addSimVoterCircle(voterCircle)
         sims.sample.addSimVoterCircle(voterCircle)
 
