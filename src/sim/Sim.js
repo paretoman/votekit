@@ -72,6 +72,8 @@ export default function Sim(
     const candidateDnCommander = new CandidateDnCommander(candidateDnRegistrar, commander, self)
     const voterCommander = new VoterCircleCommander(voterRegistrar, commander, self)
 
+    // Candidates //
+
     self.addCandidatePressed = () => {
         // really, we want to make a command to set numCandidates to at least an amount
         const num = candidateRegistrar.num() + 1
@@ -80,16 +82,6 @@ export default function Sim(
     self.setNumberCandidatesAction = (num) => {
         while (candidateRegistrar.num() < num) {
             self.addCandidate(50, 50, 'yellow', false)
-        }
-    }
-
-    self.addCandidateDistributionPressed = () => {
-        const num = candidateDnRegistrar.num() + 1
-        candidateDnCommander.setNumberCandidateDns(num)
-    }
-    self.setNumberCandidateDnsAction = (num) => {
-        while (candidateDnRegistrar.num() < num) {
-            self.addCandidateDistribution(50, 50, 100, false)
         }
     }
 
@@ -102,6 +94,19 @@ export default function Sim(
         const num = candidateRegistrar.num()
         candidateCommander.setNumberCandidates(num)
     }
+
+    // Candidate Distributions //
+
+    self.addCandidateDistributionPressed = () => {
+        const num = candidateDnRegistrar.num() + 1
+        candidateDnCommander.setNumberCandidateDns(num)
+    }
+    self.setNumberCandidateDnsAction = (num) => {
+        while (candidateDnRegistrar.num() < num) {
+            self.addCandidateDistribution(50, 50, 100, false)
+        }
+    }
+
     self.addCandidateDistribution = (x, y, r, doLoad) => {
         // eslint-disable-next-line no-new, max-len
         const candidateDistribution = new CandidateDistribution(x, y, r, screen, candidateDnRegistrar, commander, changes, doLoad, candidateDnCommander)
@@ -110,6 +115,8 @@ export default function Sim(
         const num = candidateDnRegistrar.num()
         candidateDnCommander.setNumberCandidateDns(num)
     }
+
+    // Voters //
 
     self.addVoterPressed = () => {
         const num = voterRegistrar.num() + 1
@@ -132,6 +139,8 @@ export default function Sim(
         const num = voterRegistrar.num()
         voterCommander.setNumberVoters(num)
     }
+
+    // Default Entities //
 
     self.addCandidate(50, 100, '#e52', true)
     self.addCandidate(100, 50, '#5e2', true)
