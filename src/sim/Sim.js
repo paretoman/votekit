@@ -6,6 +6,7 @@ import SimGeoOne from './states/SimGeoOne.js'
 import SimAddVoters from './SimAddVoters.js'
 import SimAddCandidates from './SimAddCandidates.js'
 import SimAddCandidateDns from './SimAddCandidateDns.js'
+import addSimControlsLabel from './addSimControlsLabel.js'
 
 /**
  * Simulation is the main task we're trying to accomplish in this program.
@@ -82,10 +83,7 @@ export default function Sim(
 
     // Buttons //
 
-    const label = document.createElement('div')
-    label.setAttribute('class', 'button-group-label')
-    label.innerText = 'Sim Controls:'
-    layout.newElement('simControlsLabel', label)
+    addSimControlsLabel(layout)
 
     // -- Menu -- //
 
