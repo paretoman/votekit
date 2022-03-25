@@ -38,6 +38,9 @@ export default function SimSample(screen, menu, changes, sampleElections, sim) {
     self.enter = () => {
         superEnter()
         sim.simAddCandidateDns.canDnButton.show()
+        sim.election.setDimensions(2)
+        sampleVoters.updateXY()
+        simCandidateList.updateXY()
     }
 
     self.exit = () => {

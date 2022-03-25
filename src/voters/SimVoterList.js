@@ -23,6 +23,9 @@ export default function SimVoterList() {
     self.update = (candidates) => {
         simVoters.forEach((v) => { if (v.voter.exists) v.update(candidates) })
     }
+    self.updateXY = () => {
+        simVoters.forEach((v) => v.voter.updateXY())
+    }
     self.render = () => {
         simVoters.forEach((v) => { if (v.voter.exists) v.render() })
     }

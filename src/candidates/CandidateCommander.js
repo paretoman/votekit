@@ -22,13 +22,23 @@ export default function CandidateCommander(candidateRegistrar, commander, sim) {
         name: `${prefix}-setE`,
     })
 
-    self.setXYSenderForList = commander.addSenderForList({
+    self.setP2SenderForList = commander.addSenderForList({
         action: (id, p) => {
             self.setNumberCandidates(id + 1)
             const candidate = candidateRegistrar.get(id)
-            candidate.setXYAction(p)
+            candidate.setP2Action(p)
         },
-        name: `${prefix}-setXY`,
+        name: `${prefix}-setP2`,
+        props: { isChain: true },
+    })
+
+    self.setP1SenderForList = commander.addSenderForList({
+        action: (id, p) => {
+            self.setNumberCandidates(id + 1)
+            const candidate = candidateRegistrar.get(id)
+            candidate.setP1Action(p)
+        },
+        name: `${prefix}-setP1`,
         props: { isChain: true },
     })
 

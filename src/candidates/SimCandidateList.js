@@ -37,6 +37,9 @@ export default function SimCandidateList() {
             can.setWins(win)
         })
     }
+    self.updateXY = () => {
+        simCans.forEach((simCan) => simCan.candidate.updateXY())
+    }
     self.renderForeground = () => {
         const cans = self.getCandidates()
         cans.forEach((can) => can.renderForeground())

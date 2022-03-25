@@ -66,7 +66,7 @@ export default function GeoVoters(screen, geoElection) {
                     (cellNoise) => {
                         const [xNoise, yNoise] = cellNoise
                         const { x, y, r } = vb.voter
-                        return { x: x + xNoise, y: y + yNoise, r }
+                        return { p2: { x: x + xNoise, y: y + yNoise }, r }
                     },
                 ).flat(),
             ).flat(),
@@ -83,7 +83,7 @@ export default function GeoVoters(screen, geoElection) {
                     const [xNoise, yNoise] = sn[gx][gy]
                     const { x, y, r } = vb.voter
                     return {
-                        x: x + xNoise, y: y + yNoise, r, f: gf,
+                        p2: { x: x + xNoise, y: y + yNoise }, r, weight: gf,
                     }
                 }).flat(),
             ).flat(),
@@ -98,7 +98,7 @@ export default function GeoVoters(screen, geoElection) {
                     (vb) => {
                         const [xNoise, yNoise] = cellNoise
                         const { x, y, r } = vb.voter
-                        return { x: x + xNoise, y: y + yNoise, r }
+                        return { p2: { x: x + xNoise, y: y + yNoise }, r }
                     },
                 ).flat(),
             ),
@@ -142,7 +142,7 @@ export default function GeoVoters(screen, geoElection) {
         self.voterGroupsByTract.forEach((row) => {
             row.forEach((cell) => {
                 cell.forEach((group) => {
-                    smallCircle(group.x, group.y)
+                    smallCircle(group.p2.x, group.p2.y)
                 })
             })
         })

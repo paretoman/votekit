@@ -4,7 +4,7 @@ import CreateAddCandidate from './CreateAddCandidate.js'
 import Registrar from './Registrar.js'
 
 /** A component of sim.js that deals with adding candidates. */
-export default function SimAddCandidates(screen, layout, changes, commander, sims) {
+export default function SimAddCandidates(screen, layout, changes, commander, sims, sim) {
     const self = this
     self.canButton = new CreateAddCandidate(layout, self)
     const candidateRegistrar = new Registrar()
@@ -17,13 +17,13 @@ export default function SimAddCandidates(screen, layout, changes, commander, sim
     }
     self.setNumberCandidatesAction = (num) => {
         while (candidateRegistrar.num() < num) {
-            self.addCandidate(50, 50, 'yellow', false)
+            self.addCandidate(50, 50, 50, 'yellow', false)
         }
     }
 
-    self.addCandidate = (x, y, c, doLoad) => {
+    self.addCandidate = (x, y, p1, c, doLoad) => {
         // eslint-disable-next-line no-new, max-len
-        const candidate = new Candidate(x, y, 21, 21, c, screen, candidateRegistrar, commander, changes, doLoad, candidateCommander)
+        const candidate = new Candidate({ x, y }, p1, 21, 21, c, screen, candidateRegistrar, commander, changes, doLoad, candidateCommander, sim)
         sims.one.addSimCandidate(candidate)
         sims.oneDOne.addSimCandidate(candidate)
         sims.geoOne.addSimCandidate(candidate)

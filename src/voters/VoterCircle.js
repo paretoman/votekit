@@ -16,8 +16,8 @@ import CircleGraphic from './CircleGraphic.js'
  * @constructor
  */
 export default function VoterCircle(
-    x,
-    y,
+    p2,
+    p1,
     r,
     screen,
     voterRegistrar,
@@ -25,6 +25,7 @@ export default function VoterCircle(
     changes,
     doLoad,
     voterCommander,
+    sim,
 ) {
     const self = this
 
@@ -43,7 +44,8 @@ export default function VoterCircle(
 
         const commands = [
             voterCommander.setESenderForList.command(id, 1, 0), // set alive flag
-            voterCommander.setXYSenderForList.command(id, { x, y }, { x, y }),
+            voterCommander.setP2SenderForList.command(id, p2, p2),
+            voterCommander.setP1SenderForList.command(id, p1, p1),
             voterCommander.setRSenderForList.command(id, r, r),
         ]
         // Either load the commands because we don't want to create an item of history
@@ -64,14 +66,39 @@ export default function VoterCircle(
         voterCommander.setESenderForList.go(id, e, cur)
     }
 
-    self.setXYAction = (p) => {
-        self.x = p.x
-        self.y = p.y
+    self.setP2Action = (p) => {
+        self.p2 = structuredClone(p)
+        if (sim.election.dimensions === 2) {
+            self.x = p.x
+            self.y = p.y
+        }
+        changes.add(['draggables'])
+    }
+    self.setP1Action = (p) => {
+        self.p1 = p
+        if (sim.election.dimensions === 1) {
+            self.x = p
+            self.y = 150
+        }
         changes.add(['draggables'])
     }
     self.setXY = (p) => {
-        const cur = voterCommander.setXYSenderForList.getCurrentValue(id)
-        voterCommander.setXYSenderForList.go(id, p, cur)
+        if (sim.election.dimensions === 1) {
+            const cur = voterCommander.setP1SenderForList.getCurrentValue(id)
+            voterCommander.setP1SenderForList.go(id, p.x, cur)
+        } else {
+            const cur = voterCommander.setP2SenderForList.getCurrentValue(id)
+            voterCommander.setP2SenderForList.go(id, p, cur)
+        }
+    }
+    /** Do this when entering a state because x and y change.
+     *  Maybe x and y should be in the SimVoter instead... just speculating. */
+    self.updateXY = () => {
+        if (sim.election.dimensions === 1) {
+            self.setP1Action(self.p1)
+        } else {
+            self.setP2Action(self.p2)
+        }
     }
 
     self.setRAction = (newR) => {
@@ -87,7 +114,7 @@ export default function VoterCircle(
 
     // Done instantiating variables
 
-    const circle = new CircleGraphic(self, 10, '#555', screen)
+    const circle = new CircleGraphic(self, 13, '#999', screen)
     self.circle = circle
 
     // Drawing

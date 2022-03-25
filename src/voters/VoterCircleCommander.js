@@ -22,13 +22,23 @@ export default function VoterCircleCommander(voterRegistrar, commander, simAddVo
         name: `${prefix}-setE`,
     })
 
-    self.setXYSenderForList = commander.addSenderForList({
+    self.setP2SenderForList = commander.addSenderForList({
         action: (id, p) => {
             self.setNumberVoters(id + 1)
             const voter = voterRegistrar.get(id)
-            voter.setXYAction(p)
+            voter.setP2Action(p)
         },
-        name: `${prefix}-setXY`,
+        name: `${prefix}-setP2`,
+        props: { isChain: true },
+    })
+
+    self.setP1SenderForList = commander.addSenderForList({
+        action: (id, p) => {
+            self.setNumberVoters(id + 1)
+            const voter = voterRegistrar.get(id)
+            voter.setP1Action(p)
+        },
+        name: `${prefix}-setP1`,
         props: { isChain: true },
     })
 

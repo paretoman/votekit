@@ -4,7 +4,7 @@ import CreateAddCandidateDistribution from './CreateAddCandidateDistribution.js'
 import Registrar from './Registrar.js'
 
 /** A component of sim.js that deals with adding candidate distributions. */
-export default function SimAddCandidateDns(screen, layout, changes, commander, sims) {
+export default function SimAddCandidateDns(screen, layout, changes, commander, sims, sim) {
     const self = this
 
     self.canDnButton = new CreateAddCandidateDistribution(layout, self)
@@ -17,13 +17,13 @@ export default function SimAddCandidateDns(screen, layout, changes, commander, s
     }
     self.setNumberCandidateDnsAction = (num) => {
         while (candidateDnRegistrar.num() < num) {
-            self.addCandidateDistribution(50, 50, 100, false)
+            self.addCandidateDistribution(50, 50, 50, 100, false)
         }
     }
 
-    self.addCandidateDistribution = (x, y, r, doLoad) => {
+    self.addCandidateDistribution = (x, y, p1, r, doLoad) => {
         // eslint-disable-next-line no-new, max-len
-        const candidateDistribution = new CandidateDistribution(x, y, r, screen, candidateDnRegistrar, commander, changes, doLoad, candidateDnCommander)
+        const candidateDistribution = new CandidateDistribution({ x, y }, p1, r, screen, candidateDnRegistrar, commander, changes, doLoad, candidateDnCommander, sim)
         sims.sample.addSimCandidateDistribution(candidateDistribution)
 
         const num = candidateDnRegistrar.num()

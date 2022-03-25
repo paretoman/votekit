@@ -41,6 +41,9 @@ export default function SimGeoOne(screen, menu, changes, geoElection, sim) {
         superEnter()
         screen.showGeoMaps()
         sim.simAddCandidates.canButton.show()
+        sim.election.setDimensions(2)
+        geoVoters.updateXY()
+        simCandidateList.updateXY()
     }
 
     self.exit = () => {
@@ -56,7 +59,7 @@ export default function SimGeoOne(screen, menu, changes, geoElection, sim) {
         }
         changes.clear()
         geoVoters.updateVoters() // can make this only trigger when voters change
-        geoElection.updateVotes(geoVoters, simCandidateList)
+        geoElection.updateVotes(geoVoters, simCandidateList, sim.dimensions)
         screen.clear()
         self.render()
     }

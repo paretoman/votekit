@@ -22,13 +22,23 @@ export default function CandidateDnCommander(candidateDnRegistrar, commander, si
         name: `${prefix}-setE`,
     })
 
-    self.setXYSenderForList = commander.addSenderForList({
+    self.setP2SenderForList = commander.addSenderForList({
         action: (id, p) => {
             self.setNumberCandidateDns(id + 1)
             const candidateDn = candidateDnRegistrar.get(id)
-            candidateDn.setXYAction(p)
+            candidateDn.setP2Action(p)
         },
-        name: `${prefix}-setXY`,
+        name: `${prefix}-setP2`,
+        props: { isChain: true },
+    })
+
+    self.setP1SenderForList = commander.addSenderForList({
+        action: (id, p) => {
+            self.setNumberCandidateDns(id + 1)
+            const candidateDn = candidateDnRegistrar.get(id)
+            candidateDn.setP1Action(p)
+        },
+        name: `${prefix}-setP1`,
         props: { isChain: true },
     })
 

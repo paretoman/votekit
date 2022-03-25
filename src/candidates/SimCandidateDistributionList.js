@@ -33,6 +33,9 @@ export default function SimCandidateDistributionList() {
         const canDns = self.getCandidateDistributions()
         self.sampler = new CandidateDistributionSampler(canDns)
     }
+    self.updateXY = () => {
+        simCanDns.forEach((simCanDn) => simCanDn.canDn.updateXY())
+    }
     self.render = () => {
         const canDns = self.getCandidateDistributions()
         canDns.forEach((canDn) => canDn.render())

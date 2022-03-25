@@ -16,8 +16,8 @@ import SquareGraphic from './SquareGraphic.js'
  * @constructor
  */
 export default function CandidateDistribution(
-    x,
-    y,
+    p2,
+    p1,
     r,
     screen,
     candidateDnRegistrar,
@@ -25,6 +25,7 @@ export default function CandidateDistribution(
     changes,
     doLoad,
     candidateDnCommander,
+    sim,
 ) {
     const self = this
 
@@ -39,7 +40,8 @@ export default function CandidateDistribution(
         // candidateDnCommander.setRSenderForList.setCurrentValue(id, r)
         const commands = [
             candidateDnCommander.setESenderForList.command(id, 1, 0), // set alive flag
-            candidateDnCommander.setXYSenderForList.command(id, { x, y }, { x, y }),
+            candidateDnCommander.setP2SenderForList.command(id, p2, p2),
+            candidateDnCommander.setP1SenderForList.command(id, p1, p1),
             candidateDnCommander.setRSenderForList.command(id, r, r),
         ]
         // Either load the commands because we don't want to create an item of history
@@ -60,14 +62,39 @@ export default function CandidateDistribution(
         candidateDnCommander.setESenderForList.go(id, e, cur)
     }
 
-    self.setXYAction = (p) => {
-        self.x = p.x
-        self.y = p.y
+    self.setP2Action = (p) => {
+        self.p2 = structuredClone(p)
+        if (sim.election.dimensions === 2) {
+            self.x = p.x
+            self.y = p.y
+        }
+        changes.add(['draggables'])
+    }
+    self.setP1Action = (p) => {
+        self.p1 = p
+        if (sim.election.dimensions === 1) {
+            self.x = p
+            self.y = 150
+        }
         changes.add(['draggables'])
     }
     self.setXY = (p) => {
-        const cur = candidateDnCommander.setXYSenderForList.getCurrentValue(id)
-        candidateDnCommander.setXYSenderForList.go(id, p, cur)
+        if (sim.election.dimensions === 1) {
+            const cur = candidateDnCommander.setP1SenderForList.getCurrentValue(id)
+            candidateDnCommander.setP1SenderForList.go(id, p.x, cur)
+        } else {
+            const cur = candidateDnCommander.setP2SenderForList.getCurrentValue(id)
+            candidateDnCommander.setP2SenderForList.go(id, p, cur)
+        }
+    }
+    /** Do this when entering a state because x and y change.
+     *  Maybe x and y should be in the SimCandidateDn instead... just speculating. */
+    self.updateXY = () => {
+        if (sim.election.dimensions === 1) {
+            self.setP1Action(self.p1)
+        } else {
+            self.setP2Action(self.p2)
+        }
     }
 
     self.setRAction = (newR) => {

@@ -40,7 +40,8 @@ export default function OneDVoronoi(voterGroup, screen) {
         // http://jsfiddle.net/jimrhoskins/dDUC3/1/
         // https://dustinpfister.github.io/2019/10/08/canvas-clip/
         ctx.beginPath()
-        ctx.arc(voterGroup.x, voterGroup.y, voterGroup.r, 0, 2 * Math.PI)
+        const { x, r } = voterGroup
+        ctx.rect(x - r, 100, 2 * r, 100)
         // ctx.closePath()
         ctx.clip()
 
@@ -54,7 +55,8 @@ export default function OneDVoronoi(voterGroup, screen) {
         }
 
         ctx.beginPath()
-        ctx.arc(voterGroup.x, voterGroup.y, voterGroup.r, 0, 2 * Math.PI)
+        const h = 100
+        ctx.rect(x - r, 150 - h * 0.5, 2 * r, h)
         ctx.stroke()
 
         ctx.restore()

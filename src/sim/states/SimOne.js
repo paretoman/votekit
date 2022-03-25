@@ -13,8 +13,8 @@ import SimBase from './SimBase.js'
  * @param {Screen} screen
  * @param {Menu} menu
  * @param {Changes} changes
- * @param {Election} election
- * @param {Object} canButton - a button that lets us add a candidate
+ * @param {OneElection} oneElection
+ * @param {Sim} sim
  * @constructor
  */
 export default function SimOne(screen, menu, changes, oneElection, sim) {
@@ -38,6 +38,9 @@ export default function SimOne(screen, menu, changes, oneElection, sim) {
     self.enter = () => {
         superEnter()
         sim.simAddCandidates.canButton.show()
+        sim.election.setDimensions(2)
+        oneVoters.updateXY()
+        simCandidateList.updateXY()
     }
 
     self.exit = () => {

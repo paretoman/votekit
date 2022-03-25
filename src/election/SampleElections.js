@@ -47,7 +47,7 @@ export default function SampleElections(screen, menu, election) {
                 const point = sampleCandidates.sampler.samplePoint()
 
                 // make a candidate
-                canList.push(point)
+                canList.push({ p2: point })
             }
 
             // find winner position
@@ -57,7 +57,7 @@ export default function SampleElections(screen, menu, election) {
                 const { winner } = results
 
                 // record point
-                const winPoint = { x: winner.x, y: winner.y }
+                const winPoint = winner.p2
                 self.points.push(winPoint)
                 self.newPoints.push(winPoint)
             } else {
@@ -71,12 +71,12 @@ export default function SampleElections(screen, menu, election) {
                             let winPoint
                             if (m === 0) {
                                 // record point
-                                winPoint = { x: can.x, y: can.y }
+                                winPoint = can.p2
                             } else {
                                 // add jitter
                                 winPoint = {
-                                    x: can.x + (Math.random() - 0.5) * jitterSize,
-                                    y: can.y + (Math.random() - 0.5) * jitterSize,
+                                    x: can.p2.x + (Math.random() - 0.5) * jitterSize,
+                                    y: can.p2.y + (Math.random() - 0.5) * jitterSize,
                                 }
                             }
                             // record point

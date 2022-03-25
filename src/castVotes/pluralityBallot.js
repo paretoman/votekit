@@ -1,17 +1,19 @@
 /** @module */
 
 import AreaSummer from './AreaSummer.js'
+import LineSummer from './LineSummer.js'
 
 /**
  * Vote for one.
  * Voters cast votes for candidates.
  * There is also a separate graphical representation in VoronoiGroup.js.
- * @param {*} candidates - an array of objects with x and y attributes.
- * @param {*} voterGroups - an array of objects with x,y, and r attributes.
+ * @param {*} candidates - an array of objects each with a p2 or p1 property.
+ * Or a list of positions for the 1D case.
+ * @param {*} voterGroups - an array of objects with {p2 or p1} and r attributes.
  * @returns votes, an object
  */
-export default function pluralityBallot(candidates, voterGroups) {
-    const summer = new AreaSummer(candidates)
+export default function pluralityBallot(candidates, voterGroups, dimensions) {
+    const summer = (dimensions === 1) ? new LineSummer(candidates) : new AreaSummer(candidates)
 
     // get fraction of votes for each candidate so we can summarize results
     const n = candidates.length

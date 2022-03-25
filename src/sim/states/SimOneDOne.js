@@ -1,10 +1,10 @@
 /** @module */
 
-import OneVoterCircle from '../../voters/OneVoterCircle.js'
 import SimCandidate from '../../candidates/SimCandidate.js'
 import SimCandidateList from '../../candidates/SimCandidateList.js'
 import SimVoterList from '../../voters/SimVoterList.js'
 import SimBase from './SimBase.js'
+import OneDVoterBlock from '../../voters/OneDVoterBlock.js'
 
 /**
  * Simulate one election with
@@ -12,6 +12,7 @@ import SimBase from './SimBase.js'
  *   voters in a distribution that will be summed over.
  * Plan:
  * * SimOneDOne is a subclass of SimBase.
+ * * OneDVoterBlock is a subclass of SimVoter.
  * * OneDVoronoi is a component of OneDVoterBlock.
  * @param {Screen} screen
  * @param {Menu} menu
@@ -34,13 +35,16 @@ export default function SimOneDOne(screen, menu, changes, oneElection, sim) {
     }
 
     self.addSimVoterCircle = (voterCircle) => {
-        oneVoters.newVoterGroup(new OneVoterCircle(voterCircle, self.dragm, screen))
+        oneVoters.newVoterGroup(new OneDVoterBlock(voterCircle, self.dragm, screen))
     }
 
     const superEnter = self.enter
     self.enter = () => {
         superEnter()
         sim.simAddCandidates.canButton.show()
+        sim.election.setDimensions(1)
+        oneVoters.updateXY()
+        simCandidateList.updateXY()
     }
 
     self.exit = () => {
