@@ -10,11 +10,14 @@ import SimBase from './SimBase.js'
  * Simulate one election with
  *   candidates in defined positions, and
  *   voters in a distribution that will be summed over.
+ * Plan:
+ * * SimOneDOne is a subclass of SimBase.
+ * * OneDVoronoi is a component of OneDVoterBlock.
  * @param {Screen} screen
  * @param {Menu} menu
  * @param {Changes} changes
  * @param {Election} election
- * @param {Object} canButton - a button that lets us add a candidate
+ * @param {Sim} sim
  * @constructor
  */
 export default function SimOneDOne(screen, menu, changes, oneElection, sim) {
