@@ -21,9 +21,13 @@ export default function Election(menu) {
     /** Get the correct geometry, depending on dimension. */
     const mapVoters = (voterGroups) => {
         if (self.dimensions === 1) {
-            return voterGroups.map((vg) => ({ x: vg.p1, r: vg.r }))
+            return voterGroups.map((vg) => ({
+                x: vg.p1, r: vg.r, densityProfile1: vg.densityProfile1,
+            }))
         }
-        return voterGroups.map((vg) => ({ x: vg.p2.x, y: vg.p2.y, r: vg.r }))
+        return voterGroups.map((vg) => ({
+            x: vg.p2.x, y: vg.p2.y, r: vg.r, densityProfile1: vg.densityProfile1,
+        }))
     }
 
     /** Get the correct geometry, depending on dimension. */

@@ -51,6 +51,15 @@ export default function VoterCircleCommander(voterRegistrar, commander, simAddVo
         name: `${prefix}-setR`,
     })
 
+    self.setDensityProfile1SenderForList = commander.addSenderForList({
+        action: (id, r) => {
+            self.setNumberVoters(id + 1)
+            const voter = voterRegistrar.get(id)
+            voter.setDensityProfile1Action(r)
+        },
+        name: `${prefix}-setDensityProfile1`,
+    })
+
     // This is kind of weird because this value is not a good measure of the number of entities.
     // An undo will reduce the number stored with the command name,
     // but not reduce the number of entities.

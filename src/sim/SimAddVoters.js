@@ -18,13 +18,13 @@ export default function SimAddVoters(screen, layout, changes, commander, sims, s
     }
     self.setNumberVotersAction = (num) => {
         while (voterRegistrar.num() < num) {
-            self.addVoterCircle(50, 50, 50, 100, false)
+            self.addVoterCircle(50, 50, 50, 100, 'gaussian', false)
         }
     }
 
-    self.addVoterCircle = (x, y, p1, r, doLoad) => {
+    self.addVoterCircle = (x, y, p1, r, densityProfile1, doLoad) => {
         // eslint-disable-next-line max-len
-        const voterCircle = new VoterCircle({ x, y }, p1, r, screen, voterRegistrar, commander, changes, doLoad, voterCommander, sim)
+        const voterCircle = new VoterCircle({ x, y }, p1, r, densityProfile1, screen, voterRegistrar, commander, changes, doLoad, voterCommander, sim)
 
         sims.one.addSimVoterCircle(voterCircle)
         sims.oneDOne.addSimVoterCircle(voterCircle)

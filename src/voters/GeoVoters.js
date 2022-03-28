@@ -65,8 +65,10 @@ export default function GeoVoters(screen, geoElection) {
                 (rowNoise) => rowNoise.map(
                     (cellNoise) => {
                         const [xNoise, yNoise] = cellNoise
-                        const { x, y, r } = vb.voter
-                        return { p2: { x: x + xNoise, y: y + yNoise }, r }
+                        const {
+                            x, y, r, densityProfile1,
+                        } = vb.voter
+                        return { p2: { x: x + xNoise, y: y + yNoise }, r, densityProfile1 }
                     },
                 ).flat(),
             ).flat(),
@@ -81,9 +83,11 @@ export default function GeoVoters(screen, geoElection) {
                 (vb) => census[iDistrict].map((g) => {
                     const [gx, gy, gf] = g
                     const [xNoise, yNoise] = sn[gx][gy]
-                    const { x, y, r } = vb.voter
+                    const {
+                        x, y, r, densityProfile1,
+                    } = vb.voter
                     return {
-                        p2: { x: x + xNoise, y: y + yNoise }, r, weight: gf,
+                        p2: { x: x + xNoise, y: y + yNoise }, r, densityProfile1, weight: gf,
                     }
                 }).flat(),
             ).flat(),
@@ -97,8 +101,10 @@ export default function GeoVoters(screen, geoElection) {
                 (cellNoise) => simVoterGroups.map(
                     (vb) => {
                         const [xNoise, yNoise] = cellNoise
-                        const { x, y, r } = vb.voter
-                        return { p2: { x: x + xNoise, y: y + yNoise }, r }
+                        const {
+                            x, y, r, densityProfile1,
+                        } = vb.voter
+                        return { p2: { x: x + xNoise, y: y + yNoise }, r, densityProfile1 }
                     },
                 ).flat(),
             ),

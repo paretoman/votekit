@@ -19,6 +19,7 @@ export default function VoterCircle(
     p2,
     p1,
     r,
+    densityProfile1,
     screen,
     voterRegistrar,
     commander,
@@ -47,6 +48,8 @@ export default function VoterCircle(
             voterCommander.setP2SenderForList.command(id, p2, p2),
             voterCommander.setP1SenderForList.command(id, p1, p1),
             voterCommander.setRSenderForList.command(id, r, r),
+            voterCommander
+                .setDensityProfile1SenderForList.command(id, densityProfile1, densityProfile1),
         ]
         // Either load the commands because we don't want to create an item of history
         // Or do the commands because want to store an item in history, so that we can undo.
@@ -108,6 +111,16 @@ export default function VoterCircle(
     self.setR = (newR) => {
         const cur = voterCommander.setRSenderForList.getCurrentValue(id)
         voterCommander.setRSenderForList.go(id, newR, cur)
+    }
+
+    /** Density Profile can be "gaussian" or "step" */
+    self.setDensityProfile1Action = (newDensityProfile1) => {
+        self.densityProfile1 = newDensityProfile1
+        changes.add(['densityProfile'])
+    }
+    self.setDensityProfile1 = (newDensityProfile1) => {
+        const cur = voterCommander.setDensityProfile1SenderForList.getCurrentValue(id)
+        voterCommander.setDensityProfile1SenderForList.go(id, newDensityProfile1, cur)
     }
 
     self.instantiate()

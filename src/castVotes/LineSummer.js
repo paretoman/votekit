@@ -1,6 +1,6 @@
 /** @module */
 
-import { range } from '../utilities/jsHelpers.js'
+import { range, normCDF } from '../utilities/jsHelpers.js'
 
 /**
  * Sum area of voter distributions to tally the votes.
@@ -15,9 +15,15 @@ export default function LineSummer(cans) {
     self.sumArea = function sumArea(voterGroup) {
         const n = cans.length
         const area = Array(n)
-        for (let i = 0; i < n; i++) {
-            // return sum for each candidate
-            area[i] = sumBlock(voterGroup, intervals[i])
+        // return sum for each candidate
+        if (voterGroup.densityProfile1 === 'gaussian') {
+            for (let i = 0; i < n; i++) {
+                area[i] = sumGaussian(voterGroup, intervals[i])
+            }
+        } else {
+            for (let i = 0; i < n; i++) {
+                area[i] = sumBlock(voterGroup, intervals[i])
+            }
         }
         return area
     }
@@ -49,5 +55,16 @@ function sumBlock(block, interval) {
     const lower3 = Math.max(lower, lower2)
     const upper3 = Math.min(upper, upper2)
     const sum = Math.max(0, upper3 - lower3)
+    return sum
+}
+
+function sumGaussian(block, interval) {
+    const { lower, upper } = interval
+    const { x, r } = block
+    const center = x
+    const sigma = (2 * r) / Math.sqrt(2 * Math.PI) // 2 * r = sigma * sqrt(2*pi)
+    // evaluate integral of gaussian on interval
+    const sum = normCDF(upper, center, sigma) - normCDF(lower, center, sigma)
+
     return sum
 }

@@ -32,16 +32,18 @@ export default function OneDVoronoi(voterGroup, screen) {
 
     self.render = function () {
         const { ctx } = screen
+        const { x, r, densityProfile1 } = voterGroup
+        const h = 100
 
         ctx.save()
 
-        // draw circle clip
+        // clip the voronoi diagram
 
         // http://jsfiddle.net/jimrhoskins/dDUC3/1/
         // https://dustinpfister.github.io/2019/10/08/canvas-clip/
+
         ctx.beginPath()
-        const { x, r } = voterGroup
-        ctx.rect(x - r, 100, 2 * r, 100)
+        doPath()
         // ctx.closePath()
         ctx.clip()
 
@@ -55,10 +57,38 @@ export default function OneDVoronoi(voterGroup, screen) {
         }
 
         ctx.beginPath()
-        const h = 100
-        ctx.rect(x - r, 150 - h * 0.5, 2 * r, h)
+        doPath()
         ctx.stroke()
 
         ctx.restore()
+
+        function doPath() {
+            if (densityProfile1 === 'gaussian') {
+                gaussianPath()
+            } else {
+                rectanglePath()
+            }
+        }
+        function gaussianPath() {
+            const sigma = (2 * r) / Math.sqrt(2 * Math.PI) // 2 * r = sigma * sqrt(2*pi)
+            const amp = h
+            const bottom = 150 + h * 0.5
+            // start bottom left
+            ctx.moveTo(0, bottom)
+            const pa = []
+            for (let i = 0; i <= screen.width; i += 1) {
+                const xp = 0.5 * ((i - x) / sigma) ** 2
+                const y = bottom - amp * Math.exp(-xp)
+                pa.push(y)
+                ctx.lineTo(i, y)
+            }
+            // end bottom right
+            ctx.lineTo(screen.width, bottom)
+            ctx.lineTo(0, bottom)
+            // ctx.closePath()
+        }
+        function rectanglePath() {
+            ctx.rect(x - r, 150 - h * 0.5, 2 * r, h)
+        }
     }
 }
