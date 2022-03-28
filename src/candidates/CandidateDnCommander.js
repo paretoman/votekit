@@ -19,7 +19,7 @@ export default function CandidateDnCommander(candidateDnRegistrar, commander, si
             const candidateDn = candidateDnRegistrar.get(id)
             candidateDn.setEAction(e)
         },
-        name: `${prefix}-setE`,
+        name: `${prefix}-exists`,
     })
 
     self.setP2SenderForList = commander.addSenderForList({
@@ -28,7 +28,7 @@ export default function CandidateDnCommander(candidateDnRegistrar, commander, si
             const candidateDn = candidateDnRegistrar.get(id)
             candidateDn.setP2Action(p)
         },
-        name: `${prefix}-setP2`,
+        name: `${prefix}-p2`,
         props: { isChain: true },
     })
 
@@ -38,7 +38,7 @@ export default function CandidateDnCommander(candidateDnRegistrar, commander, si
             const candidateDn = candidateDnRegistrar.get(id)
             candidateDn.setP1Action(p)
         },
-        name: `${prefix}-setP1`,
+        name: `${prefix}-p1`,
         props: { isChain: true },
     })
 
@@ -48,7 +48,7 @@ export default function CandidateDnCommander(candidateDnRegistrar, commander, si
             const candidateDn = candidateDnRegistrar.get(id)
             candidateDn.setRAction(r)
         },
-        name: `${prefix}-setR`,
+        name: `${prefix}-r`,
     })
 
     // This is kind of weird because this value is not a good measure of the number of entities.

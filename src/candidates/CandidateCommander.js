@@ -19,7 +19,7 @@ export default function CandidateCommander(candidateRegistrar, commander, sim) {
             const candidate = candidateRegistrar.get(id)
             candidate.setEAction(e)
         },
-        name: `${prefix}-setE`,
+        name: `${prefix}-exists`,
     })
 
     self.setP2SenderForList = commander.addSenderForList({
@@ -28,7 +28,7 @@ export default function CandidateCommander(candidateRegistrar, commander, sim) {
             const candidate = candidateRegistrar.get(id)
             candidate.setP2Action(p)
         },
-        name: `${prefix}-setP2`,
+        name: `${prefix}-p2`,
         props: { isChain: true },
     })
 
@@ -38,7 +38,7 @@ export default function CandidateCommander(candidateRegistrar, commander, sim) {
             const candidate = candidateRegistrar.get(id)
             candidate.setP1Action(p)
         },
-        name: `${prefix}-setP1`,
+        name: `${prefix}-p1`,
         props: { isChain: true },
     })
 
