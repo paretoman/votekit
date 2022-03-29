@@ -49,7 +49,8 @@ function findIntervals(cans) {
 
 function sumBlock(block, interval) {
     const { lower, upper } = interval
-    const { x, r } = block
+    const { x, w } = block
+    const r = 0.5 * w
     const lower2 = x - r
     const upper2 = x + r
     const lower3 = Math.max(lower, lower2)
@@ -60,9 +61,9 @@ function sumBlock(block, interval) {
 
 function sumGaussian(block, interval) {
     const { lower, upper } = interval
-    const { x, r } = block
+    const { x, w } = block
     const center = x
-    const sigma = (2 * r) / Math.sqrt(2 * Math.PI) // 2 * r = sigma * sqrt(2*pi)
+    const sigma = w / Math.sqrt(2 * Math.PI) // w = sigma * sqrt(2*pi)
     // evaluate integral of gaussian on interval
     const sum = normCDF(upper, center, sigma) - normCDF(lower, center, sigma)
 

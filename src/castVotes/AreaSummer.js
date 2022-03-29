@@ -114,7 +114,8 @@ function sumCircle(circle, lineSet) {
     let sum = 0
     const x1 = circle.x
     const y1 = circle.y
-    const { r } = circle
+    const { w } = circle
+    const r = 0.5 * w
     // x only goes from x1-r to x1+r
     for (let x = x1 - r; x < x1 + r; x += dx) {
         // find bounds

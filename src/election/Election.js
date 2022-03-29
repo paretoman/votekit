@@ -22,11 +22,11 @@ export default function Election(menu) {
     const mapVoters = (voterGroups) => {
         if (self.dimensions === 1) {
             return voterGroups.map((vg) => ({
-                x: vg.p1, r: vg.r, densityProfile1: vg.densityProfile1,
+                x: vg.p1, w: vg.w1, densityProfile1: vg.densityProfile1,
             }))
         }
         return voterGroups.map((vg) => ({
-            x: vg.p2.x, y: vg.p2.y, r: vg.r, densityProfile1: vg.densityProfile1,
+            x: vg.p2.x, y: vg.p2.y, w: vg.w2, densityProfile1: vg.densityProfile1,
         }))
     }
 

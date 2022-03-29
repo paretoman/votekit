@@ -7,7 +7,7 @@ import CircleGraphic from './CircleGraphic.js'
  * VoronoiGroup component takes care of drawing votes.
  * @param {Number} x
  * @param {Number} y
- * @param {Number} r - radius of circle of candidate positions.
+ * @param {Number} w - width of circle of candidate positions.
  * @param {Screen} screen
  * @param {Registrar} voterRegistrar
  * @param {Commander} commander
@@ -18,7 +18,8 @@ import CircleGraphic from './CircleGraphic.js'
 export default function VoterCircle(
     p2,
     p1,
-    r,
+    w2,
+    w1,
     densityProfile1,
     screen,
     voterRegistrar,
@@ -41,13 +42,14 @@ export default function VoterCircle(
         // set current value because we need to be able to undo by returning to these values
         // voterCommander.setESenderForList.setCurrentValue(id, 0)
         // voterCommander.setXYSenderForList.setCurrentValue(id, { x, y })
-        // voterCommander.setRSenderForList.setCurrentValue(id, r)
+        // voterCommander.setWSenderForList.setCurrentValue(id, w2)
 
         const commands = [
             voterCommander.setESenderForList.command(id, 1, 0), // set alive flag
             voterCommander.setP2SenderForList.command(id, p2, p2),
             voterCommander.setP1SenderForList.command(id, p1, p1),
-            voterCommander.setRSenderForList.command(id, r, r),
+            voterCommander.setW2SenderForList.command(id, w2, w2),
+            voterCommander.setW1SenderForList.command(id, w1, w1),
             voterCommander
                 .setDensityProfile1SenderForList.command(id, densityProfile1, densityProfile1),
         ]
@@ -104,13 +106,22 @@ export default function VoterCircle(
         }
     }
 
-    self.setRAction = (newR) => {
-        self.r = newR
-        changes.add(['radius'])
+    self.setW2Action = (newW) => {
+        self.w2 = newW
+        changes.add(['width'])
     }
-    self.setR = (newR) => {
-        const cur = voterCommander.setRSenderForList.getCurrentValue(id)
-        voterCommander.setRSenderForList.go(id, newR, cur)
+    self.setW2 = (newW) => {
+        const cur = voterCommander.setW2SenderForList.getCurrentValue(id)
+        voterCommander.setW2SenderForList.go(id, newW, cur)
+    }
+
+    self.setW1Action = (newW) => {
+        self.w1 = newW
+        changes.add(['width'])
+    }
+    self.setW1 = (newW) => {
+        const cur = voterCommander.setW1SenderForList.getCurrentValue(id)
+        voterCommander.setW1SenderForList.go(id, newW, cur)
     }
 
     /** Density Profile can be "gaussian" or "step" */

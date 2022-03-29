@@ -7,7 +7,7 @@ import AreaSummer from './AreaSummer.js'
  * Voters cast votes for candidates.
  * There is also a separate graphical representation in VoronoiGroup.js.
  * @param {*} candidates - an array of objects with x and y attributes.
- * @param {*} voterGroups - an array of objects with x,y, and r attributes.
+ * @param {*} voterGroups - an array of objects with x,y, and w attributes.
  * @returns votes, an object
  */
 export default function pluralityBallot(candidates, voterGroups) {

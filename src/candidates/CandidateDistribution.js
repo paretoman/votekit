@@ -7,7 +7,7 @@ import SquareGraphic from './SquareGraphic.js'
  * A draggable handle handle provides draggable behavior.
  * @param {Number} x
  * @param {Number} y
- * @param {Number} r
+ * @param {Number} w2
  * @param {Screen} screen
  * @param {Registrar} candidateDnRegistrar
  * @param {Commander} commander
@@ -18,7 +18,7 @@ import SquareGraphic from './SquareGraphic.js'
 export default function CandidateDistribution(
     p2,
     p1,
-    r,
+    w2,
     screen,
     candidateDnRegistrar,
     commander,
@@ -37,12 +37,12 @@ export default function CandidateDistribution(
     self.instantiate = () => {
         // candidateDnCommander.setESenderForList.setCurrentValue(id, 0)
         // candidateDnCommander.setXYSenderForList.setCurrentValue(id, { x, y })
-        // candidateDnCommander.setRSenderForList.setCurrentValue(id, r)
+        // candidateDnCommander.setWSenderForList.setCurrentValue(id, w2)
         const commands = [
             candidateDnCommander.setESenderForList.command(id, 1, 0), // set alive flag
             candidateDnCommander.setP2SenderForList.command(id, p2, p2),
             candidateDnCommander.setP1SenderForList.command(id, p1, p1),
-            candidateDnCommander.setRSenderForList.command(id, r, r),
+            candidateDnCommander.setW2SenderForList.command(id, w2, w2),
         ]
         // Either load the commands because we don't want to create an item of history
         // Or do the commands because want to store an item in history, so that we can undo.
@@ -97,13 +97,13 @@ export default function CandidateDistribution(
         }
     }
 
-    self.setRAction = (newR) => {
-        self.r = newR
-        changes.add(['radius'])
+    self.setW2Action = (newW) => {
+        self.w2 = newW
+        changes.add(['width'])
     }
-    self.setR = (newR) => {
-        const cur = candidateDnCommander.setRSenderForList.getCurrentValue(id)
-        candidateDnCommander.setRSenderForList.go(id, newR, cur)
+    self.setW2 = (newW) => {
+        const cur = candidateDnCommander.setW2SenderForList.getCurrentValue(id)
+        candidateDnCommander.setW2SenderForList.go(id, newW, cur)
     }
 
     self.instantiate()
@@ -116,7 +116,7 @@ export default function CandidateDistribution(
 
         ctx.beginPath()
         // ctx.fillStyle = "grey"
-        ctx.arc(self.x, self.y, self.r, 0, 2 * Math.PI)
+        ctx.arc(self.x, self.y, self.w2 * 0.5, 0, 2 * Math.PI)
         // ctx.fill()
         ctx.stroke()
     }

@@ -42,20 +42,29 @@ export default function VoterCircleCommander(voterRegistrar, commander, simAddVo
         props: { isChain: true },
     })
 
-    self.setRSenderForList = commander.addSenderForList({
-        action: (id, r) => {
+    self.setW2SenderForList = commander.addSenderForList({
+        action: (id, w) => {
             self.setNumberVoters(id + 1)
             const voter = voterRegistrar.get(id)
-            voter.setRAction(r)
+            voter.setW2Action(w)
         },
-        name: `${prefix}-r`,
+        name: `${prefix}-w2`,
+    })
+
+    self.setW1SenderForList = commander.addSenderForList({
+        action: (id, w) => {
+            self.setNumberVoters(id + 1)
+            const voter = voterRegistrar.get(id)
+            voter.setW1Action(w)
+        },
+        name: `${prefix}-w1`,
     })
 
     self.setDensityProfile1SenderForList = commander.addSenderForList({
-        action: (id, r) => {
+        action: (id, dp1) => {
             self.setNumberVoters(id + 1)
             const voter = voterRegistrar.get(id)
-            voter.setDensityProfile1Action(r)
+            voter.setDensityProfile1Action(dp1)
         },
         name: `${prefix}-densityProfile1`,
     })

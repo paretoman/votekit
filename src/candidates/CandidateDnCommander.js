@@ -42,13 +42,13 @@ export default function CandidateDnCommander(candidateDnRegistrar, commander, si
         props: { isChain: true },
     })
 
-    self.setRSenderForList = commander.addSenderForList({
-        action: (id, r) => {
+    self.setW2SenderForList = commander.addSenderForList({
+        action: (id, w2) => {
             self.setNumberCandidateDns(id + 1)
             const candidateDn = candidateDnRegistrar.get(id)
-            candidateDn.setRAction(r)
+            candidateDn.setW2Action(w2)
         },
-        name: `${prefix}-r`,
+        name: `${prefix}-w2`,
     })
 
     // This is kind of weird because this value is not a good measure of the number of entities.

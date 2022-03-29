@@ -9,7 +9,7 @@ import LineSummer from './LineSummer.js'
  * There is also a separate graphical representation in VoronoiGroup.js.
  * @param {*} candidates - an array of objects each with a p2 or p1 property.
  * Or a list of positions for the 1D case.
- * @param {*} voterGroups - an array of objects with {p2 or p1} and r attributes.
+ * @param {*} voterGroups - an array of objects with {x,w} or {x,y,w} attributes.
  * @returns votes, an object
  */
 export default function pluralityBallot(candidates, voterGroups, dimensions) {

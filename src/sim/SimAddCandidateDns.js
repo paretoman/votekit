@@ -17,13 +17,13 @@ export default function SimAddCandidateDns(screen, layout, changes, commander, s
     }
     self.setNumberCandidateDnsAction = (num) => {
         while (candidateDnRegistrar.num() < num) {
-            self.addCandidateDistribution(50, 50, 50, 100, false)
+            self.addCandidateDistribution(50, 50, 50, 200, false)
         }
     }
 
-    self.addCandidateDistribution = (x, y, p1, r, doLoad) => {
+    self.addCandidateDistribution = (x, y, p1, w2, doLoad) => {
         // eslint-disable-next-line no-new, max-len
-        const candidateDistribution = new CandidateDistribution({ x, y }, p1, r, screen, candidateDnRegistrar, commander, changes, doLoad, candidateDnCommander, sim)
+        const candidateDistribution = new CandidateDistribution({ x, y }, p1, w2, screen, candidateDnRegistrar, commander, changes, doLoad, candidateDnCommander, sim)
         sims.sample.addSimCandidateDistribution(candidateDistribution)
 
         const num = candidateDnRegistrar.num()

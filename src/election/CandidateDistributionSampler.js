@@ -20,7 +20,7 @@ function samplePoint1(candidateDistributions, cdf) {
     const iDist = randomDistribution(cdf)
     const cd = candidateDistributions[iDist]
     // sample circle
-    const point = randomInsideCircle(cd.x, cd.y, cd.r)
+    const point = randomInsideCircle(cd.x, cd.y, cd.w2 * 0.5)
     return point
 }
 
@@ -34,7 +34,7 @@ function randomDistribution(cdf) {
 
 function getCDF(candidateDistributions) {
     // find the size of the voter distributions
-    const areasProportion = candidateDistributions.map((cd) => cd.r ** 2)
+    const areasProportion = candidateDistributions.map((cd) => cd.w2 ** 2)
 
     const sumAreasProportion = areasProportion.reduce((p, c) => p + c)
 

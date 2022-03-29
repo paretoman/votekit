@@ -8,8 +8,8 @@ import { drawStrokedColor, textPercent } from '../utilities/graphicsUtilities.js
  * Candidate adds candidate behavior on top of a draggable handle handle.
  * @param {Number} x
  * @param {Number} y
- * @param {Number} w
- * @param {Number} h
+ * @param {Number} wHandle
+ * @param {Number} hHandle
  * @param {String} color
  * @param {Screen} screen
  * @param {Registrar} candidateRegistrar
@@ -21,8 +21,8 @@ import { drawStrokedColor, textPercent } from '../utilities/graphicsUtilities.js
 export default function Candidate(
     p2,
     p1,
-    w,
-    h,
+    wHandle,
+    hHandle,
     color,
     screen,
     candidateRegistrar,
@@ -104,7 +104,8 @@ export default function Candidate(
 
     self.instantiate()
 
-    const square = new SquareGraphic(self, w, h, color, screen) // square is for rendering
+    // square is for rendering
+    const square = new SquareGraphic(self, wHandle, hHandle, color, screen)
     self.square = square
 
     self.fraction = 0
