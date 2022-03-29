@@ -28,7 +28,7 @@ export default function VoterCircleCommander(voterRegistrar, commander, simAddVo
             const voter = voterRegistrar.get(id)
             voter.setP2Action(p)
         },
-        name: `${prefix}-d2-p`,
+        name: `${prefix}-2D-point`,
         props: { isChain: true },
     })
 
@@ -38,7 +38,7 @@ export default function VoterCircleCommander(voterRegistrar, commander, simAddVo
             const voter = voterRegistrar.get(id)
             voter.setP1Action(p)
         },
-        name: `${prefix}-d1-x`,
+        name: `${prefix}-1D-x`,
         props: { isChain: true },
     })
 
@@ -48,7 +48,7 @@ export default function VoterCircleCommander(voterRegistrar, commander, simAddVo
             const voter = voterRegistrar.get(id)
             voter.setW2Action(w)
         },
-        name: `${prefix}-d2-w`,
+        name: `${prefix}-2D-width`,
     })
 
     self.setW1SenderForList = commander.addSenderForList({
@@ -57,7 +57,7 @@ export default function VoterCircleCommander(voterRegistrar, commander, simAddVo
             const voter = voterRegistrar.get(id)
             voter.setW1Action(w)
         },
-        name: `${prefix}-d1-w`,
+        name: `${prefix}-1D-width`,
     })
 
     self.setDensityProfile1SenderForList = commander.addSenderForList({
@@ -66,7 +66,7 @@ export default function VoterCircleCommander(voterRegistrar, commander, simAddVo
             const voter = voterRegistrar.get(id)
             voter.setDensityProfile1Action(dp1)
         },
-        name: `${prefix}-d1-densityProfile`,
+        name: `${prefix}-1D-densityProfile`,
     })
 
     // This is kind of weird because this value is not a good measure of the number of entities.
