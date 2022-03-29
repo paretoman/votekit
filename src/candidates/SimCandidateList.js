@@ -44,4 +44,5 @@ export default function SimCandidateList() {
         const cans = self.getCandidates()
         cans.forEach((can) => can.renderForeground())
     }
+    self.numCandidates = () => simCans.length
 }

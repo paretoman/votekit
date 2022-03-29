@@ -49,6 +49,9 @@ export default function SimGeoOne(screen, menu, changes, geoElection, sim) {
     self.exit = () => {
         screen.hideGeoMaps()
         sim.simAddCandidates.canButton.hide()
+        // clean up fractions
+        const fillUndefined = Array(simCandidateList.numCandidates()).fill(undefined)
+        simCandidateList.setCandidateWins(fillUndefined)
     }
 
     self.update = () => {
