@@ -83,7 +83,7 @@ export default function VoterCircle(
         self.p1 = p
         if (sim.election.dimensions === 1) {
             self.x = p
-            self.y = 150
+            self.y = 250
         }
         changes.add(['draggables'])
     }
