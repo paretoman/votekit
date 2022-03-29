@@ -28,7 +28,7 @@ export default function CandidateCommander(candidateRegistrar, commander, sim) {
             const candidate = candidateRegistrar.get(id)
             candidate.setP2Action(p)
         },
-        name: `${prefix}-p2`,
+        name: `${prefix}-d2-p`,
         props: { isChain: true },
     })
 
@@ -38,7 +38,7 @@ export default function CandidateCommander(candidateRegistrar, commander, sim) {
             const candidate = candidateRegistrar.get(id)
             candidate.setP1Action(p)
         },
-        name: `${prefix}-p1`,
+        name: `${prefix}-d1-x`,
         props: { isChain: true },
     })
 

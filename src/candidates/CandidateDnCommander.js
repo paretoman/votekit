@@ -28,7 +28,7 @@ export default function CandidateDnCommander(candidateDnRegistrar, commander, si
             const candidateDn = candidateDnRegistrar.get(id)
             candidateDn.setP2Action(p)
         },
-        name: `${prefix}-p2`,
+        name: `${prefix}-d2-p`,
         props: { isChain: true },
     })
 
@@ -38,7 +38,7 @@ export default function CandidateDnCommander(candidateDnRegistrar, commander, si
             const candidateDn = candidateDnRegistrar.get(id)
             candidateDn.setP1Action(p)
         },
-        name: `${prefix}-p1`,
+        name: `${prefix}-d1-x`,
         props: { isChain: true },
     })
 
@@ -48,7 +48,7 @@ export default function CandidateDnCommander(candidateDnRegistrar, commander, si
             const candidateDn = candidateDnRegistrar.get(id)
             candidateDn.setW2Action(w2)
         },
-        name: `${prefix}-w2`,
+        name: `${prefix}-d2-w`,
     })
 
     // This is kind of weird because this value is not a good measure of the number of entities.
