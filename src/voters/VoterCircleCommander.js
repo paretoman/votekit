@@ -49,6 +49,7 @@ export default function VoterCircleCommander(voterRegistrar, commander, simAddVo
             voter.setW2Action(w)
         },
         name: `${prefix}-shape2D-width`,
+        props: { isChain: true },
     })
 
     self.setW1SenderForList = commander.addSenderForList({
@@ -58,6 +59,7 @@ export default function VoterCircleCommander(voterRegistrar, commander, simAddVo
             voter.setW1Action(w)
         },
         name: `${prefix}-shape1D-width`,
+        props: { isChain: true },
     })
 
     self.setDensityProfile1SenderForList = commander.addSenderForList({

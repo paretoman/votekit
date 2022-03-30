@@ -49,6 +49,7 @@ export default function CandidateDnCommander(candidateDnRegistrar, commander, si
             candidateDn.setW2Action(w2)
         },
         name: `${prefix}-shape2D-width`,
+        props: { isChain: true },
     })
 
     // This is kind of weird because this value is not a good measure of the number of entities.
