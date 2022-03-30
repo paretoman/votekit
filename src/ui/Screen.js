@@ -105,9 +105,9 @@ export default function Screen(w, h, layout) {
 
     // mouse up outside of canvas
     const current = document.onmouseup
-    document.onmouseup = () => {
-        if (current) current()
-        self.foreground.onmouseup()
+    document.onmouseup = (e) => {
+        if (current) current(e)
+        self.foreground.onmouseup(e)
     }
 }
 

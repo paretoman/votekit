@@ -138,6 +138,10 @@ export default function VoterCircle(
 
     // Done instantiating variables
 
+    // Click Handler
+
+    self.click = () => {}
+
     const circle = new CircleGraphic(self, 13, '#999', screen)
     self.circle = circle
 

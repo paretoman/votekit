@@ -104,6 +104,10 @@ export default function Candidate(
 
     self.instantiate()
 
+    // Click Handler
+
+    self.click = () => {}
+
     // square is for rendering
     const square = new SquareGraphic(self, wHandle, hHandle, color, screen)
     self.square = square
