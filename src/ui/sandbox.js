@@ -34,6 +34,7 @@ export default function sandbox(config, comMessenger, sandboxURL) {
         'redo',
         'clearDiv',
         'screen',
+        'tooltips',
         'foreground',
         'geoMaps',
         'saveConfigToLink',

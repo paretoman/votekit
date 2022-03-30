@@ -8,6 +8,10 @@ canvas.background {
 	z-index:-1;
 }
 
+div.tooltips {
+	position:relative;
+}
+
 canvas.foreground {
 	z-index:1;
 }

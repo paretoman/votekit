@@ -2,6 +2,7 @@
 
 import SquareGraphic from './SquareGraphic.js'
 import { drawStrokedColor, textPercent } from '../utilities/graphicsUtilities.js'
+import tooltipForEntity from '../sim/tooltipForEntity.js'
 
 /**
  * Candidate class on top of handle.
@@ -106,7 +107,9 @@ export default function Candidate(
 
     // Click Handler
 
-    self.click = () => {}
+    self.click = () => {
+        tooltipForEntity(self, screen, sim)
+    }
 
     // square is for rendering
     const square = new SquareGraphic(self, wHandle, hHandle, color, screen)

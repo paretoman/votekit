@@ -23,6 +23,10 @@ export default function Screen(w, h, layout) {
     self.canvas.setAttribute('class', 'background')
     self.ctx = self.canvas.getContext('2d')
 
+    // tooltips
+    self.tooltips = document.createElement('div')
+    self.tooltips.setAttribute('class', 'tooltips')
+
     // foreground
     self.foreground = document.createElement('canvas')
     self.foreground.setAttribute('class', 'foreground')
@@ -36,6 +40,7 @@ export default function Screen(w, h, layout) {
     const clearDiv = document.createElement('div')
     layout.newElement('clearDiv', clearDiv)
     layout.newElement('screen', self.canvas)
+    layout.newElement('tooltips', self.tooltips)
     layout.newElement('foreground', self.foreground)
     layout.newElement('geoMaps', self.geoMaps)
 
@@ -50,6 +55,9 @@ export default function Screen(w, h, layout) {
 
     self.canvas.style.width = `${w}px`
     self.canvas.style.height = `${h}px`
+
+    self.tooltips.style.width = `${w}px`
+    self.tooltips.style.height = '0px'
 
     self.foreground.width = w * self.pixelRatio // measured in device pixels
     self.foreground.height = h * self.pixelRatio

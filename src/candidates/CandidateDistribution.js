@@ -1,5 +1,6 @@
 /** @module */
 
+import tooltipForEntity from '../sim/tooltipForEntity.js'
 import SquareGraphic from './SquareGraphic.js'
 
 /**
@@ -110,7 +111,9 @@ export default function CandidateDistribution(
 
     // Click Handler
 
-    self.click = () => {}
+    self.click = () => {
+        tooltipForEntity(self, screen, sim)
+    }
 
     const square = new SquareGraphic(self, 21, 21, '#ccc', screen) // square is for rendering
     self.square = square

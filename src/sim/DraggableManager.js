@@ -40,10 +40,6 @@ export default function DraggableManager(screen, changes) {
         for (let i = 0; i < nd; i++) {
             const d = draggables[i]
             if (d.o.exists && hitTest(d, mouse, extra)) {
-                if (event.isTouch) {
-                    event.preventDefault()
-                    event.stopPropagation()
-                }
                 drag.iDragging = i
                 drag.isDragging = true
                 drag.offX = d.o.x - mouse.x
