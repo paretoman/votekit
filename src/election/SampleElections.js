@@ -24,6 +24,9 @@ export default function SampleElections(screen, menu, election) {
     self.addSim = function (sampleVoters, sampleCandidates) {
         // add more points
 
+        if (sampleVoters.getVoterGroups().length === 0) return 1
+        if (sampleCandidates.getCandidateDistributions().length === 0) return 1
+
         if (self.points.length > 5000) return 1
         // this limit right now is about graphics rendering.
         // todo: render to a buffer
