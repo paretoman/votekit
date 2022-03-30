@@ -65,7 +65,7 @@ function sumGaussian(block, interval) {
     const center = x
     const sigma = w / Math.sqrt(2 * Math.PI) // w = sigma * sqrt(2*pi)
     // evaluate integral of gaussian on interval
-    const sum = normCDF(upper, center, sigma) - normCDF(lower, center, sigma)
+    const sum = w * normCDF(upper, center, sigma) - w * normCDF(lower, center, sigma)
 
     return sum
 }
