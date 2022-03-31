@@ -34,7 +34,7 @@ export default function tooltipForEntity(entity, screen, sim) {
     items.exists = new Item(
         'checkbox',
         'Exists',
-        'Exists',
+        'Exists: ',
         (val) => entity.setE(val ? 1 : 0),
         entity.exists === 1,
     )
@@ -44,7 +44,7 @@ export default function tooltipForEntity(entity, screen, sim) {
             items.w1 = new Item(
                 'range',
                 'Width',
-                'Width',
+                'Width: ',
                 (val) => entity.setW1(val),
                 entity.w1,
             )
@@ -54,7 +54,7 @@ export default function tooltipForEntity(entity, screen, sim) {
             items.densityProfile1 = new Item(
                 'select',
                 'Density Profile',
-                'Density Profile',
+                'Density Profile: ',
                 (val) => entity.setDensityProfile1(val),
                 entity.densityProfile1,
                 ['step', 'gaussian'],
@@ -65,16 +65,26 @@ export default function tooltipForEntity(entity, screen, sim) {
         items.w2 = new Item(
             'range',
             'Width',
-            'Width',
+            'Width: ',
             (val) => entity.setW2(val),
             entity.w2,
         )
         box.appendChild(items.w2.div)
     }
+    if (entity.color) {
+        items.color = new Item(
+            'color',
+            'Color',
+            'Color: ',
+            (val) => entity.setColor(val),
+            entity.color,
+        )
+        box.appendChild(items.color.div)
+    }
     items.showGhosts = new Item(
         'checkbox',
         'Show Ghosts',
-        'Show Ghosts',
+        'Show Ghosts: ',
         (val) => sim.setShowNonExistingEntities(val),
         sim.showGhosts,
     )
@@ -106,12 +116,14 @@ function Item(type, name, text, onChange, defaultValue, choices) {
                 self.input.checked = true
             }
             self.input.addEventListener('change', () => onChange(self.input.checked))
-        }
-        if (type === 'range') {
+        } else if (type === 'range') {
             self.input.min = 1
             self.input.max = 300
             self.input.value = defaultValue
             self.input.step = 1
+            self.input.addEventListener('input', () => onChange(self.input.value))
+        } else if (type === 'color') {
+            self.input.value = defaultValue
             self.input.addEventListener('input', () => onChange(self.input.value))
         }
     }

@@ -1,5 +1,6 @@
 import Candidate from '../candidates/Candidate.js'
 import CandidateCommander from '../candidates/CandidateCommander.js'
+import { standardizeColor } from '../utilities/jsHelpers.js'
 import CreateAddCandidate from './CreateAddCandidate.js'
 import Registrar from './Registrar.js'
 
@@ -17,7 +18,8 @@ export default function SimAddCandidates(screen, layout, changes, commander, sim
     }
     self.setNumberCandidatesAction = (num) => {
         while (candidateRegistrar.num() < num) {
-            self.addCandidate(50, 50, 50, 'yellow', false)
+            const color = standardizeColor('yellow')
+            self.addCandidate(50, 50, 50, color, false)
         }
     }
 

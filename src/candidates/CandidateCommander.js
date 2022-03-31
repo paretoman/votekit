@@ -42,6 +42,15 @@ export default function CandidateCommander(candidateRegistrar, commander, sim) {
         props: { isChain: true },
     })
 
+    self.setColorSenderForList = commander.addSenderForList({
+        action: (id, e) => {
+            self.setNumberCandidates(id + 1)
+            const candidate = candidateRegistrar.get(id)
+            candidate.setColorAction(e)
+        },
+        name: `${prefix}-color`,
+    })
+
     // This is kind of weird because this value is not a good measure of the number of entities.
     // An undo will reduce the number stored with the command name,
     // but not reduce the number of entities.

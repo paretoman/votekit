@@ -47,7 +47,7 @@ export default function voronoiGroup(voterGroup, screen) {
         for (let i = 0; i < n; i++) {
             ctx.beginPath()
             voronoi.renderCell(i, ctx)
-            ctx.fillStyle = cans[i].square.color
+            ctx.fillStyle = cans[i].color
             ctx.fill()
             ctx.stroke()
         }

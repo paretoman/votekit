@@ -13,17 +13,15 @@ import { Tween } from '../../lib/tween.esm.js'
  * @param {Number} parent.y
  * @param {Number} w - width of square to draw.
  * @param {Number} h - height of square to draw.
- * @param {String} color
  * @param {Screen} screen
  * @constructor
  */
-export default function SquareGraphic(parent, w, h, color, screen) {
+export default function SquareGraphic(parent, w, h, screen) {
     const self = this
     self.w = w // display width, because we're going to make animations with it
     self.h = h
     self.trueW = w // true width, because we want to return to this width after animating.
     self.trueH = h
-    self.color = color
 
     self.pickUp = function () {
         self.tweenSq = new Tween(self)
@@ -49,7 +47,7 @@ export default function SquareGraphic(parent, w, h, color, screen) {
         if (parent.exists === 0) { fctx.globalAlpha = 0.2 }
 
         fctx.beginPath()
-        fctx.fillStyle = self.color
+        fctx.fillStyle = parent.color
         fctx.rect(
             (parent.x - 0.5 * self.w) - 0.5,
             (parent.y - 0.5 * self.h) - 0.5,

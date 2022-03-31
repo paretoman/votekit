@@ -55,7 +55,7 @@ export default function GeoElection(screen, menu, election) {
         )
 
         // get color
-        const colorSet = canList.map((can) => can.square.color)
+        const colorSet = canList.map((can) => can.color)
         const allColors = resultsByTract.map(
             (row) => row.map(
                 (results) => {
@@ -84,10 +84,10 @@ export default function GeoElection(screen, menu, election) {
     self.updateWinColors = (candidates) => {
         // calculate color for win map
         if (election.method.checkElectionType() === 'singleWinner') {
-            self.winnerColors = self.resultsByDistrict.map((results) => results.winner.square.color)
+            self.winnerColors = self.resultsByDistrict.map((results) => results.winner.color)
         } else {
             const canList = candidates.getCandidates()
-            const colorSet = canList.map((can) => can.square.color)
+            const colorSet = canList.map((can) => can.color)
             self.winnerColors = self.resultsByDistrict.map(
                 (results) => {
                     const { allocation } = results
@@ -131,7 +131,7 @@ export default function GeoElection(screen, menu, election) {
         self.blendColors = self.resultsByDistrict.map((results) => {
             const { tallyFractions } = results.votes
             const canList = candidates.getCandidates()
-            const colorSet = canList.map((can) => can.square.color)
+            const colorSet = canList.map((can) => can.color)
             const color = colorBlend(tallyFractions, colorSet)
             return color
         })

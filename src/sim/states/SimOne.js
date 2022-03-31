@@ -24,7 +24,7 @@ export default function SimOne(screen, menu, changes, oneElection, sim) {
 
     const oneVoters = new SimVoterList(sim)
 
-    const simCandidateList = new SimCandidateList()
+    const simCandidateList = new SimCandidateList(sim)
 
     self.addSimCandidate = (candidate) => {
         simCandidateList.newCandidate(new SimCandidate(candidate, self.dragm))

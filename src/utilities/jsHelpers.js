@@ -21,7 +21,7 @@ export function jcopy(a) {
     return JSON.parse(JSON.stringify(a))
 }
 
-// https://stackoverflow.com/a/35810961
+/** https://stackoverflow.com/a/35810961 */
 function sortObjByKey(value) {
     // eslint-disable-next-line no-nested-ternary
     return (typeof value === 'object')
@@ -60,4 +60,14 @@ function erf(x) {
     const radical = Math.sqrt(1 - expofun)
     const z = radical * Math.sign(x)
     return z
+}
+
+/** https://stackoverflow.com/a/47355187 */
+export function standardizeColor(str) {
+    const canvas = document.createElement('canvas')
+    const ctx = canvas.getContext('2d')
+    ctx.fillStyle = str
+    const sColor = ctx.fillStyle
+    canvas.remove()
+    return sColor
 }
