@@ -17,7 +17,7 @@ export default function GeoElection(screen, menu, election) {
 
     self.updateVotes = (geoVoters, candidates) => {
         if (geoVoters.getSimVoterGroups().length === 0) return
-        if (candidates.getCandidates().length < 3) return
+        if (candidates.getCandidates().length === 0) return
         self.updateStatewideTallies(geoVoters, candidates)
         self.updateNoiseImage(geoVoters, candidates)
         self.runDistrictElections(geoVoters, candidates)
