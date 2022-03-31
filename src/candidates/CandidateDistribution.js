@@ -115,6 +115,8 @@ export default function CandidateDistribution(
         tooltipForEntity(self, screen, sim)
     }
 
+    // Rendering
+
     const square = new SquareGraphic(self, 21, 21, '#ccc', screen) // square is for rendering
     self.square = square
 

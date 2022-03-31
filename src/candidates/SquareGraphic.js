@@ -40,9 +40,14 @@ export default function SquareGraphic(parent, w, h, color, screen) {
     self.render = function () {
         const { fctx } = screen
 
+        fctx.save()
+
         if (self.tweenSq) {
             self.tweenSq.update()
         }
+
+        if (parent.exists === 0) { fctx.globalAlpha = 0.2 }
+
         fctx.beginPath()
         fctx.fillStyle = self.color
         fctx.rect(
@@ -53,5 +58,7 @@ export default function SquareGraphic(parent, w, h, color, screen) {
         )
         fctx.fill()
         fctx.stroke()
+
+        fctx.restore()
     }
 }

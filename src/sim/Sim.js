@@ -88,6 +88,11 @@ export default function Sim(
     self.renderForeground = () => { sims[self.state].renderForeground() }
     self.render = () => { sims[self.state].render() }
 
+    self.setShowNonExistingEntities = (a) => {
+        self.showGhosts = a
+        changes.add(['showGhosts'])
+    }
+
     // Buttons //
 
     addSimControlsLabel(layout)

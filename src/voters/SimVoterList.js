@@ -7,7 +7,7 @@
  * SimVoterList is different from Voters because it is a list of simVoters.
  * @constructor
  */
-export default function SimVoterList() {
+export default function SimVoterList(sim) {
     const self = this
 
     const simVoters = []
@@ -26,10 +26,22 @@ export default function SimVoterList() {
     self.updateXY = () => {
         simVoters.forEach((v) => v.voter.updateXY())
     }
+
     self.render = () => {
         simVoters.forEach((v) => { if (v.voter.exists) v.render() })
     }
+
     self.renderForeground = () => {
+        if (sim.showGhosts) {
+            self.renderForegroundAll()
+        } else {
+            self.renderForegroundExisting()
+        }
+    }
+    self.renderForegroundExisting = () => {
         simVoters.forEach((v) => { if (v.voter.exists) v.renderForeground() })
+    }
+    self.renderForegroundAll = () => {
+        simVoters.forEach((v) => { v.renderForeground() })
     }
 }

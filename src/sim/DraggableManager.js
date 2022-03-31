@@ -8,7 +8,7 @@
  * @param {Changes} changes
  * @constructor
  */
-export default function DraggableManager(screen, changes) {
+export default function DraggableManager(screen, changes, sim) {
     const self = this
 
     // private variables
@@ -39,7 +39,7 @@ export default function DraggableManager(screen, changes) {
         const nd = draggables.length
         for (let i = 0; i < nd; i++) {
             const d = draggables[i]
-            if (d.o.exists && hitTest(d, mouse, extra)) {
+            if ((d.o.exists || sim.showGhosts) && hitTest(d, mouse, extra)) {
                 drag.iDragging = i
                 drag.isDragging = true
                 drag.offX = d.o.x - mouse.x
@@ -81,7 +81,7 @@ export default function DraggableManager(screen, changes) {
             const nd = draggables.length
             for (let i = 0; i < nd; i++) {
                 const d = draggables[i]
-                if (d.o.exists && hitTest(d, mouse, 0)) {
+                if ((sim.showGhosts || d.o.exists) && hitTest(d, mouse, 0)) {
                     canvas.dataset.cursor = 'grab'
                     return
                 }

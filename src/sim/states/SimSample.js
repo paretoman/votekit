@@ -20,15 +20,15 @@ import SimBase from './SimBase.js'
 export default function SimSample(screen, menu, changes, sampleElections, sim) {
     const self = this
 
-    SimBase.call(self, screen, changes)
+    SimBase.call(self, screen, changes, sim)
 
-    const simCandidateList = new SimCandidateDistributionList()
+    const simCandidateList = new SimCandidateDistributionList(sim)
 
     self.addSimCandidateDistribution = (canDn) => {
         simCandidateList.newCandidate(new SimCandidateDistribution(canDn, self.dragm))
     }
 
-    const sampleVoters = new SimVoterList()
+    const sampleVoters = new SimVoterList(sim)
 
     self.addSimVoterCircle = (voterCircle) => {
         sampleVoters.newVoterGroup(new SampleVoterCircle(voterCircle, self.dragm, screen))

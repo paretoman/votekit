@@ -24,11 +24,11 @@ import OneDVoterBlock from '../../voters/OneDVoterBlock.js'
 export default function SimOneDOne(screen, menu, changes, oneElection, sim) {
     const self = this
 
-    SimBase.call(self, screen, changes)
+    SimBase.call(self, screen, changes, sim)
 
-    const oneVoters = new SimVoterList()
+    const oneVoters = new SimVoterList(sim)
 
-    const simCandidateList = new SimCandidateList()
+    const simCandidateList = new SimCandidateList(sim)
 
     self.addSimCandidate = (candidate) => {
         simCandidateList.newCandidate(new SimCandidate(candidate, self.dragm))

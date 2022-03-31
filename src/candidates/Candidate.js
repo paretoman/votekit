@@ -111,7 +111,8 @@ export default function Candidate(
         tooltipForEntity(self, screen, sim)
     }
 
-    // square is for rendering
+    // Rendering
+
     const square = new SquareGraphic(self, wHandle, hHandle, color, screen)
     self.square = square
 
@@ -127,10 +128,13 @@ export default function Candidate(
     self.renderForeground = function () {
         square.render()
 
-        drawStrokedColor(textPercent(self.fraction), self.x, self.y - square.h * 0.5 - 2, 20, 2, '#222', screen.fctx)
+        // show minimal graphics when rendering as a ghost.
+        if (self.exists === 0) return
+
+        drawStrokedColor(textPercent(self.fraction), self.x, self.y - square.h * 0.5 - 2, 20, 2, '#222', 1, screen.fctx)
 
         if (self.wins !== undefined) {
-            drawStrokedColor(self.wins, self.x, self.y + square.h * 0.5 + 20 + 2, 20, 2, '#222', screen.fctx)
+            drawStrokedColor(self.wins, self.x, self.y + square.h * 0.5 + 20 + 2, 20, 2, '#222', 1, screen.fctx)
         }
     }
 }

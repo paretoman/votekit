@@ -8,9 +8,9 @@ import DraggableManager from '../DraggableManager.js'
  * @param {Changes} changes
  * @constructor
  */
-export default function SimBase(screen, changes) {
+export default function SimBase(screen, changes, sim) {
     const self = this
-    self.dragm = new DraggableManager(screen, changes)
+    self.dragm = new DraggableManager(screen, changes, sim)
     self.enter = () => {
         screen.eventHandlers.set(self.dragm.eventHandlers)
     }

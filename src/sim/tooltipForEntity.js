@@ -71,6 +71,14 @@ export default function tooltipForEntity(entity, screen, sim) {
         )
         box.appendChild(items.w2.div)
     }
+    items.showGhosts = new Item(
+        'checkbox',
+        'Show Ghosts',
+        'Show Ghosts',
+        (val) => sim.setShowNonExistingEntities(val),
+        sim.showGhosts,
+    )
+    box.appendChild(items.showGhosts.div)
 }
 
 function Item(type, name, text, onChange, defaultValue, choices) {

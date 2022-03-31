@@ -20,9 +20,9 @@ import SimBase from './SimBase.js'
 export default function SimOne(screen, menu, changes, oneElection, sim) {
     const self = this
 
-    SimBase.call(self, screen, changes)
+    SimBase.call(self, screen, changes, sim)
 
-    const oneVoters = new SimVoterList()
+    const oneVoters = new SimVoterList(sim)
 
     const simCandidateList = new SimCandidateList()
 

@@ -3,8 +3,9 @@
  * Just a few helpful functions that are self-contained and don't need much context.
  * @module */
 
-export function drawStrokedColor(text, x, y, textsize, lw, color, ctx, textAlign) {
+export function drawStrokedColor(text, x, y, textsize, lw, color, alpha, ctx, textAlign) {
     ctx.save()
+    ctx.globalAlpha = alpha
     ctx.textAlign = textAlign || 'center'
     ctx.font = `${textsize}px Sans-serif`
     ctx.lineWidth = lw

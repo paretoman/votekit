@@ -12,13 +12,13 @@ import SimVoterList from './SimVoterList.js'
  * @param {GeoElection} geoElection
  * @constructor
  */
-export default function GeoVoters(screen, geoElection) {
+export default function GeoVoters(screen, geoElection, sim) {
     const self = this
 
     // GeoVoters inherits from SimVoterList
     // because we need to make a list instances of geoVoterBasis,
     // and geoVoterBasis has a component called voter.
-    SimVoterList.call(self)
+    SimVoterList.call(self, sim)
 
     /** Number of districts */
     const nd = 20

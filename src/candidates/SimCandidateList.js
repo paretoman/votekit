@@ -7,7 +7,7 @@
  * It also checks if that member exists. Alternatively, it was deleted.
  * @constructor
  */
-export default function SimCandidateList() {
+export default function SimCandidateList(sim) {
     const self = this
 
     const simCans = []
@@ -22,6 +22,8 @@ export default function SimCandidateList() {
         const simCansEx = self.getSimCandidates()
         return simCansEx.map((simCan) => simCan.candidate)
     }
+
+    self.getCandidatesAll = () => simCans.map((simCan) => simCan.candidate)
 
     self.setCandidateFractions = (fractions) => {
         const cans = self.getCandidates()
@@ -41,7 +43,18 @@ export default function SimCandidateList() {
         simCans.forEach((simCan) => simCan.candidate.updateXY())
     }
     self.renderForeground = () => {
+        if (sim.showGhosts) {
+            self.renderForegroundAll()
+        } else {
+            self.renderForegroundExisting()
+        }
+    }
+    self.renderForegroundExisting = () => {
         const cans = self.getCandidates()
+        cans.forEach((can) => can.renderForeground())
+    }
+    self.renderForegroundAll = () => {
+        const cans = self.getCandidatesAll()
         cans.forEach((can) => can.renderForeground())
     }
     self.numCandidates = () => simCans.length

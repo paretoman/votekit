@@ -36,16 +36,23 @@ export default function CircleGraphic(parent, r, color, screen) {
     self.render = function () {
         const { fctx } = screen
 
+        fctx.save()
+
         if (self.tween) {
             self.tween.update()
         }
 
         // handle
 
+        if (parent.exists === 0) {
+            fctx.globalAlpha = 0.2
+        }
         fctx.beginPath()
         fctx.fillStyle = color
         fctx.arc(parent.x, parent.y, self.r, 0, 2 * Math.PI)
         fctx.fill()
         fctx.stroke()
+
+        fctx.restore()
     }
 }

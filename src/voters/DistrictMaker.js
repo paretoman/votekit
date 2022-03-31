@@ -82,6 +82,6 @@ export default function DistrictMaker(screen) {
         const textHeight = 1
         // const area = textPercent(self.polygonAreas[i] / (self.nx * self.ny))
         const area = self.polygonAreas[i].toFixed(0)
-        drawStrokedColor(area, c[0], c[1] + textHeight * 0.5 - 0.2, textHeight, 0.2, '#222', gctx)
+        drawStrokedColor(area, c[0], c[1] + textHeight * 0.5 - 0.2, textHeight, 0.2, '#222', 1, gctx)
     }
 }

@@ -68,7 +68,6 @@ export default function VoterCircle(
         changes.add(['draggables'])
     }
     self.setE = (e) => {
-        console.log(e)
         const cur = voterCommander.setESenderForList.getCurrentValue(id)
         voterCommander.setESenderForList.go(id, e, cur)
     }
@@ -146,10 +145,10 @@ export default function VoterCircle(
         tooltipForEntity(self, screen, sim)
     }
 
+    // Rendering
+
     const circle = new CircleGraphic(self, 13, '#999', screen)
     self.circle = circle
-
-    // Drawing
 
     self.renderForeground = () => {
         // handle
