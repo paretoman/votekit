@@ -52,17 +52,6 @@ export default function DraggableManager(screen, changes, sim) {
         startClickDetect(mouse)
     }
 
-    const end = function (e) {
-        // eslint-disable-next-line no-use-before-define
-        move(e)
-        endClickDetect()
-        if (drag.iDragging !== undefined) {
-            const dragging = draggables[drag.iDragging]
-            dragging.g.drop()
-        }
-        drag = {}
-    }
-
     const move = function (event) {
         const mouse = {}
         mouse.x = event.offsetX
@@ -89,6 +78,16 @@ export default function DraggableManager(screen, changes, sim) {
             canvas.dataset.cursor = '' // nothing to grab
         }
         moveClickDetect(mouse)
+    }
+
+    const end = function (e) {
+        move(e)
+        endClickDetect()
+        if (drag.iDragging !== undefined) {
+            const dragging = draggables[drag.iDragging]
+            dragging.g.drop()
+        }
+        drag = {}
     }
 
     // Touch Listeners
