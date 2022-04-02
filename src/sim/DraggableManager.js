@@ -1,5 +1,7 @@
 /** @module */
 
+import { minIndex } from '../utilities/jsHelpers.js'
+
 /**
  * Draggable Manager gives draggable behavior to objects on a canvas.
  * If anything changes, an item is added to the "changes" array.
@@ -37,17 +39,32 @@ export default function DraggableManager(screen, changes, sim) {
         mouse.y = event.offsetY
         const extra = (event.isTouch) ? 10 : 0
         const nd = draggables.length
+        // We are in the hitboxes of these draggables.
+        const hitList = []
         for (let i = 0; i < nd; i++) {
             const d = draggables[i]
             if ((d.o.exists || sim.showGhosts) && hitTest(d, mouse, extra)) {
-                drag.iDragging = i
-                drag.isDragging = true
-                drag.offX = d.o.x - mouse.x
-                drag.offY = d.o.y - mouse.y
-                d.g.pickUp()
-                canvas.dataset.cursor = 'grabbing' // CSS data attribute
-                break // exit after picking one object
+                hitList.push(i)
             }
+        }
+        if (hitList.length > 0) {
+            const distances2 = hitList.map((i) => {
+                const d = draggables[i]
+                const offX = d.o.x - mouse.x
+                const offY = d.o.y - mouse.y
+                return offX ** 2 + offY ** 2
+            })
+            // pick up
+            const iHitListClosest = minIndex(distances2)
+            const iDraggableClosest = hitList[iHitListClosest]
+
+            const d = draggables[iDraggableClosest]
+            drag.iDragging = iDraggableClosest
+            drag.isDragging = true
+            drag.offX = d.o.x - mouse.x
+            drag.offY = d.o.y - mouse.y
+            d.g.pickUp()
+            canvas.dataset.cursor = 'grabbing' // CSS data attribute
         }
         startClickDetect(mouse)
     }

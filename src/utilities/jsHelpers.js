@@ -71,3 +71,16 @@ export function standardizeColor(str) {
     canvas.remove()
     return sColor
 }
+
+export function minIndex(a) {
+    let min = Infinity
+    let iClosest = null
+    for (let i = 0; i < a.length; i++) {
+        const d = a[i]
+        if (d < min) {
+            min = d
+            iClosest = i
+        }
+    }
+    return iClosest
+}
