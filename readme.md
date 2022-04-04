@@ -2,9 +2,17 @@
 
 ## Try
 
-[Here is a simple example](https://www.howtofixtheelection.com/votekit/src/pages) running the source code in the browser, so you can see how it works. This is what I run when I'm coding: https://www.howtofixtheelection.com/votekit/src/pages
+[Here is a simple example](https://www.howtofixtheelection.com/votekit/src/pages) running the source code in the browser, so you can see how it works. This is what I run when I'm coding:
 
-[Here it is deployed](https://www.howtofixtheelection.com/votekit-example) as part of a github-pages site at https://www.howtofixtheelection.com/votekit-example.
+* https://www.howtofixtheelection.com/votekit/src/pages
+
+[Make edits and save as a fork on codesandbox](https://codesandbox.io/s/github/paretoman/votekit). This is pretty cool, you can just jump right into the code and make new things and save them. Much better than F12.
+
+* https://codesandbox.io/s/github/paretoman/votekit
+
+[Here is the votekit library being included as a submodule](https://www.howtofixtheelection.com/votekit-example) as part of a github-pages site.
+
+* https://www.howtofixtheelection.com/votekit-example.
 
 ## Use
 
@@ -17,7 +25,9 @@ Then add this script tag in your code.
 <script src="votekit/src/ui/addSandboxes.js"></script>
 ```
 
-Another way is to copy and paste the [distribution bundle](https://github.com/paretoman/votekit-example/tree/gh-pages/votekit/dist) to your project.
+Another way is to copy and paste the [distribution bundle](https://github.com/paretoman/votekit-example-src/tree/main/lib/votekit/dist) to your project: 
+
+* https://github.com/paretoman/votekit-example-src/tree/main/lib/votekit/dist
 
 
 Another way to add this distribution bundle is to put this script tag in your code:
@@ -34,10 +44,14 @@ To make changes, use a good code editor and launch a web server to view ./src/pa
 
 I suggest VSCode as an editor. Use an extension in VSCode to launch a web server. Specifically, use Ritwick Dey's Live Server. Also, you'll need to do a few steps to get fully into development mode. Use F5 to do debugging. For the first time hitting F5 in VSCode, choose to attach to Chrome, save the file, then hit F5 again.
 
-Read [the documentation](https://www.howtofixtheelection.com/votekit-docs): https://www.howtofixtheelection.com/votekit-docs
+Read [the documentation](https://votekit.netlify.app/docs/):
+
+* https://votekit.netlify.app/docs/
 
 ## Build
 
 There are a few more things you can do. Use JSDoc to make the documentation. Use Parcel to bundle the javascript into one file, like in the top link.
 
-Here's an example [netlify deploy](https://votekit.netlify.app/): https://votekit.netlify.app/
+Here's an example [netlify deploy](https://votekit.netlify.app/):
+
+* https://votekit.netlify.app/
