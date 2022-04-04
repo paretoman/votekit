@@ -1,6 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="src/ui/sandbox.css" rel="stylesheet">
+        <link href="src/menu/button.css" rel="stylesheet">
+        <script type="module" src="src/ui/addSandboxes.js"></script>
+        <style>
+            ul li{
+                display: inline;
+                padding-right: 20px;
+            }
+        </style>
     </head>
     <body> 
         <ul>
@@ -12,5 +22,15 @@
             <li><a href="./src/pages/sandbox.html">one election</a></li>
             <li><a href="./src/test/test.html">test</a></li>
         </ul>
+        <div class="sim-sandbox">
+            <div class="sim-container">
+                <!-- <div class="sandbox" data-sandboxurl="s/"></div> -->
+                <!-- <div class="sandbox" data-sandboxurl="s/" data-config='{"state": "sample","electionMethod": "huntingtonHill"}'></div> -->
+                <!-- <div class="sandbox" data-sandboxurl="s/" data-config='{"state": "geoOne","electionMethod": "huntingtonHill"}'></div> -->
+                <!-- <div class="sandbox" data-sandboxurl="s/" data-config='{"state": "oneDOne"}'></div> -->
+                <div class="double_sandbox" data-sandboxurl="s/"></div>
+                <!-- <div class="double_sandbox" data-sandboxurl="s/" data-config='{"state": "geoOne","electionMethod": "huntingtonHill"}'></div> -->
+            </div>
+        </div>
     </body>
 </html>
