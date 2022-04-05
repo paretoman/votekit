@@ -5,16 +5,14 @@
     "eslint": "^8.7.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-plugin-import": "^2.25.4",
-    "jsdoc": "^3.6.10"
+    "jsdoc": "^3.6.10",
+    "parcel": "^2.4.1",
+    "process": "^0.11.10"
   },
   "scripts": {
     "doc": "jsdoc -c jsdoc.json",
     "build": "parcel build src/ui/addSandboxes.js",
     "build-n-doc": "npm run build && npm run doc",
     "publish-docs": "cd docs && git add . && git commit && git push -u"
-  },
-  "dependencies": {
-    "parcel": "^2.2.1",
-    "process": "^0.11.10"
   }
 }
