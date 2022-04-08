@@ -2,17 +2,24 @@
   "devDependencies": {
     "@babel/core": "^7.17.8",
     "@babel/plugin-transform-runtime": "^7.17.0",
+    "@tweenjs/tween.js": "^18.6.4",
+    "canvas2svg": "^1.0.16",
+    "d3-delaunay": "^6.0.2",
+    "d3-polygon": "^3.0.1",
     "eslint": "^8.7.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-plugin-import": "^2.25.4",
     "jsdoc": "^3.6.10",
     "parcel": "^2.4.1",
-    "process": "^0.11.10"
+    "process": "^0.11.10",
+    "simplex-noise": "^3.0.1",
+    "snowpack": "^3.8.8"
   },
   "scripts": {
     "doc": "jsdoc -c jsdoc.json",
     "build": "parcel build src/ui/addSandboxes.js",
     "build-n-doc": "npm run build && npm run doc",
-    "publish-docs": "cd docs && git add . && git commit && git push -u"
+    "publish-docs": "cd docs && git add . && git commit && git push -u",
+    "snowpack": "snowpack build"
   }
 }

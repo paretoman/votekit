@@ -6,10 +6,10 @@
  * @param {Number[][]} subject - polygon, gets mutated
  * @returns {Number[][]} - polygon
  */
-export default function polygonClip(clip, subject) {
-    const closed = polygonClosed(subject)
+export default function polygonClip(clip, subject0) {
+    const closed = polygonClosed(subject0)
     const n = clip.length - polygonClosed(clip)
-    subject = subject.slice() // copy before mutate
+    const subject = subject0.slice() // copy before mutate
     for (let i = 0, a = clip[n - 1], b, c, d; i < n; ++i) {
         const input = subject.slice()
         const m = input.length - closed
@@ -47,7 +47,7 @@ function polygonClosed(points) {
         [bx, by] = points[points.length - 1]
     return ax === bx && ay === by
 }
-function polygonConvex(points) {
+export function polygonConvex(points) {
     const n = points.length
     const [rx, ry] = points[n - 2]
     let [qx, qy] = points[n - 1]
@@ -58,8 +58,12 @@ function polygonConvex(points) {
         const wx = qx - px; const
             wy = qy - py
         if (wx * vy < wy * vx) return false
-        if (wx || wy) vx = wx, vy = wy
-        qx = px, qy = py
+        if (wx || wy) {
+            vx = wx
+            vy = wy
+        }
+        qx = px
+        qy = py
     }
     return true
 }

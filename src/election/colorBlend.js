@@ -2,7 +2,7 @@
 
 // import { normal } from 'color-blend'
 
-import { blend, toRGBA } from '../../lib/colorBlendScript.js'
+import { blend, toRGBA } from '../lib/colorBlendScript.js'
 
 /**
  * Blend colors in given proportions.

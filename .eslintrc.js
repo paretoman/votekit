@@ -10,7 +10,7 @@ module.exports = {
         ecmaVersion: 'latest',
         sourceType: 'module',
     },
-    ignorePatterns: ['temp', 'lib', 'dist'],
+    ignorePatterns: ['temp', 'lib', 'dist', 'snowpack'],
     rules: {
         semi: ['error', 'never'],
         // we use 4 spaces to indent our code
@@ -22,5 +22,6 @@ module.exports = {
         'import/extensions': ['error', 'ignorePackages'],
         'func-names': 'off',
         'import/no-unresolved': 'off',
+        'no-bitwise': 'off',
     },
 }
