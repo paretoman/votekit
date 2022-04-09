@@ -30,10 +30,12 @@ Another way is to copy and paste the [distribution bundle](https://github.com/pa
 * https://github.com/paretoman/votekit-example-src/tree/main/lib/votekit/dist
 
 
-Another way to add this distribution bundle is to put this script tag in your code:
+Another way to add this distribution bundle is to put this script tag and these css tags in your code:
 
 ```
 <script src="https://raw.githubusercontent.com/paretoman/votekit-example-src/main/lib/votekit/dist/addSandboxes.js"></script>
+<link href="https://raw.githubusercontent.com/paretoman/votekit-example-src/main/lib/votekit/dist/ui/sandbox.css" rel="stylesheet">
+<link href="https://raw.githubusercontent.com/paretoman/votekit-example-src/main/lib/votekit/dist/menu/button.css" rel="stylesheet">
 ```
 
 For any of these methods, the script will run and find any HTMLElements, such as a div, with the class "sandbox" and insert a simulation sandbox as its neighbor under the same parent. You can use the data- attributes to pass data to the sandbox to configure it.
