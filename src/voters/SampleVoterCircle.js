@@ -20,8 +20,8 @@ export default function SampleVoterCircle(voterCircle, dragm, screen) {
         // circle
         ctx.beginPath()
         // ctx.fillStyle = "#eee"
-        const { x, y, w2 } = self.voter
-        ctx.arc(x, y, w2 * 0.5, 0, 2 * Math.PI)
+        const { x, y, g2 } = self.voter
+        ctx.arc(x, y, g2.w * 0.5, 0, 2 * Math.PI)
         // ctx.fill()
         ctx.stroke()
     }

@@ -43,10 +43,10 @@ export default function CandidateDnCommander(candidateDnRegistrar, commander, si
     })
 
     self.setW2SenderForList = commander.addSenderForList({
-        action: (id, w2) => {
+        action: (id, w) => {
             self.setNumberCandidateDns(id + 1)
             const candidateDn = candidateDnRegistrar.get(id)
-            candidateDn.setW2Action(w2)
+            candidateDn.setW2Action(w)
         },
         name: `${prefix}-shape2D-width`,
         props: { isChain: true },

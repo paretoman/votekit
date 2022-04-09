@@ -32,7 +32,8 @@ export default function OneDVoronoi(voterGroup, screen) {
 
     self.render = function () {
         const { ctx } = screen
-        const { x, w1, densityProfile1 } = voterGroup
+        const { x, g1 } = voterGroup
+        const { w, densityProfile } = g1
         const h = 100
 
         ctx.save()
@@ -63,14 +64,14 @@ export default function OneDVoronoi(voterGroup, screen) {
         ctx.restore()
 
         function doPath() {
-            if (densityProfile1 === 'gaussian') {
+            if (densityProfile === 'gaussian') {
                 gaussianPath()
             } else {
                 rectanglePath()
             }
         }
         function gaussianPath() {
-            const sigma = w1 / Math.sqrt(2 * Math.PI) // w = sigma * sqrt(2*pi)
+            const sigma = w / Math.sqrt(2 * Math.PI) // w = sigma * sqrt(2*pi)
             const amp = h
             const bottom = 150 + h * 0.5
             // start bottom left
@@ -88,7 +89,7 @@ export default function OneDVoronoi(voterGroup, screen) {
             // ctx.closePath()
         }
         function rectanglePath() {
-            ctx.rect(x - w1 * 0.5, 150 - h * 0.5, w1, h)
+            ctx.rect(x - w * 0.5, 150 - h * 0.5, w, h)
         }
     }
 }

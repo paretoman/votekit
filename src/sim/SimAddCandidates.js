@@ -19,13 +19,13 @@ export default function SimAddCandidates(screen, layout, changes, commander, sim
     self.setNumberCandidatesAction = (num) => {
         while (candidateRegistrar.num() < num) {
             const color = standardizeColor('yellow')
-            self.addCandidate(50, 50, 50, color, false)
+            self.addCandidate({ x: 50, y: 50 }, { x: 50 }, color, false)
         }
     }
 
-    self.addCandidate = (x, y, p1, c, doLoad) => {
+    self.addCandidate = (g2, g1, c, doLoad) => {
         // eslint-disable-next-line no-new, max-len
-        const candidate = new Candidate({ x, y }, p1, 21, 21, c, screen, candidateRegistrar, commander, changes, doLoad, candidateCommander, sim)
+        const candidate = new Candidate(g2, g1, 21, 21, c, screen, candidateRegistrar, commander, changes, doLoad, candidateCommander, sim)
         sims.one.addSimCandidate(candidate)
         sims.oneDOne.addSimCandidate(candidate)
         sims.geoOne.addSimCandidate(candidate)

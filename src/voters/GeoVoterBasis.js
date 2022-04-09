@@ -20,7 +20,7 @@ export default function GeoVoterBasis(voterCircle, dragm, screen) {
         // circle
         ctx.beginPath()
         // ctx.fillStyle = "#eee"
-        ctx.arc(self.voter.x, self.voter.y, self.voter.w2 * 0.5, 0, 2 * Math.PI)
+        ctx.arc(self.voter.x, self.voter.y, self.voter.g2.w * 0.5, 0, 2 * Math.PI)
         // ctx.fill()
         ctx.stroke()
     }
@@ -29,7 +29,7 @@ export default function GeoVoterBasis(voterCircle, dragm, screen) {
         // circle
         ctx.beginPath()
         // ctx.fillStyle = "#eee"
-        ctx.arc(newX, newY, self.voter.w2 * 0.5, 0, 2 * Math.PI)
+        ctx.arc(newX, newY, self.voter.g2.w * 0.5, 0, 2 * Math.PI)
         // ctx.fill()
         ctx.stroke()
     }

@@ -58,6 +58,9 @@ export default function GeoVoters(screen, geoElection, sim) {
         self.updateVotersByTract()
     }
 
+    // We want to copy a set of voter basis objects for each census tract.
+    // Then we add a little noise to represent differences due to geography.
+
     self.updateFullSet = () => {
         const { sn } = self.geoNoise
         self.allVoterGroups = simVoterGroups.map(
@@ -65,9 +68,11 @@ export default function GeoVoters(screen, geoElection, sim) {
                 (rowNoise) => rowNoise.map(
                     (cellNoise) => {
                         const [xNoise, yNoise] = cellNoise
-                        const { w2, densityProfile1 } = vb.voter
-                        const { x, y } = vb.voter.p2
-                        return { p2: { x: x + xNoise, y: y + yNoise }, w2, densityProfile1 }
+                        const g2 = structuredClone(vb.voter.g2)
+                        g2.x += xNoise
+                        g2.y += yNoise
+                        const { g1 } = vb.voter
+                        return { g2, g1 }
                     },
                 ).flat(),
             ).flat(),
@@ -82,11 +87,11 @@ export default function GeoVoters(screen, geoElection, sim) {
                 (vb) => census[iDistrict].map((g) => {
                     const [gx, gy, gf] = g
                     const [xNoise, yNoise] = sn[gx][gy]
-                    const { w2, densityProfile1 } = vb.voter
-                    const { x, y } = vb.voter.p2
-                    return {
-                        p2: { x: x + xNoise, y: y + yNoise }, w2, densityProfile1, weight: gf,
-                    }
+                    const g2 = structuredClone(vb.voter.g2)
+                    g2.x += xNoise
+                    g2.y += yNoise
+                    const { g1 } = vb.voter
+                    return { g2, g1, weight: gf }
                 }).flat(),
             ).flat(),
         )
@@ -99,9 +104,11 @@ export default function GeoVoters(screen, geoElection, sim) {
                 (cellNoise) => simVoterGroups.map(
                     (vb) => {
                         const [xNoise, yNoise] = cellNoise
-                        const { w2, densityProfile1 } = vb.voter
-                        const { x, y } = vb.voter.p2
-                        return { p2: { x: x + xNoise, y: y + yNoise }, w2, densityProfile1 }
+                        const g2 = structuredClone(vb.voter.g2)
+                        g2.x += xNoise
+                        g2.y += yNoise
+                        const { g1 } = vb.voter
+                        return { g2, g1 }
                     },
                 ).flat(),
             ),
@@ -145,7 +152,7 @@ export default function GeoVoters(screen, geoElection, sim) {
         self.voterGroupsByTract.forEach((row) => {
             row.forEach((cell) => {
                 cell.forEach((group) => {
-                    smallCircle(group.p2.x, group.p2.y)
+                    smallCircle(group.g2.x, group.g2.y) // TODO: use .x and .y instead of g2
                 })
             })
         })

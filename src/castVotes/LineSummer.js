@@ -4,7 +4,7 @@ import { range, normCDF } from '../utilities/jsHelpers.js'
 
 /**
  * Sum area of voter distributions to tally the votes.
- * @param {Number[]} cans - position of each candidate
+ * @param {Object[]} cans - position of each candidate {x}
  * @constructor
  */
 export default function LineSummer(cans) {
@@ -16,7 +16,7 @@ export default function LineSummer(cans) {
         const n = cans.length
         const area = Array(n)
         // return sum for each candidate
-        if (voterGroup.densityProfile1 === 'gaussian') {
+        if (voterGroup.densityProfile === 'gaussian') {
             for (let i = 0; i < n; i++) {
                 area[i] = sumGaussian(voterGroup, intervals[i])
             }
@@ -32,10 +32,10 @@ export default function LineSummer(cans) {
 /** Find boundary between candidates */
 function findIntervals(cans) {
     const n = cans.length
-    const iSorted = range(n).sort((a, b) => cans[a] - cans[b])
+    const iSorted = range(n).sort((a, b) => cans[a].x - cans[b].x)
     const midpoints = new Array(n - 1)
     for (let i = 0; i < n - 1; i++) {
-        midpoints[i] = (cans[iSorted[i]] + cans[iSorted[i + 1]]) * 0.5
+        midpoints[i] = (cans[iSorted[i]].x + cans[iSorted[i + 1]].x) * 0.5
     }
     const intervals = new Array(n)
     for (let i = 0; i < n; i++) {

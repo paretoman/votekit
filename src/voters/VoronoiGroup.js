@@ -39,7 +39,7 @@ export default function voronoiGroup(voterGroup, screen) {
         // http://jsfiddle.net/jimrhoskins/dDUC3/1/
         // https://dustinpfister.github.io/2019/10/08/canvas-clip/
         ctx.beginPath()
-        ctx.arc(voterGroup.x, voterGroup.y, voterGroup.w2 * 0.5, 0, 2 * Math.PI)
+        ctx.arc(voterGroup.x, voterGroup.y, voterGroup.g2.w * 0.5, 0, 2 * Math.PI)
         // ctx.closePath()
         ctx.clip()
 
@@ -53,7 +53,7 @@ export default function voronoiGroup(voterGroup, screen) {
         }
 
         ctx.beginPath()
-        ctx.arc(voterGroup.x, voterGroup.y, voterGroup.w2 * 0.5, 0, 2 * Math.PI)
+        ctx.arc(voterGroup.x, voterGroup.y, voterGroup.g2.w * 0.5, 0, 2 * Math.PI)
         ctx.stroke()
 
         ctx.restore()

@@ -7,9 +7,10 @@ import LineSummer from './LineSummer.js'
  * Vote for one.
  * Voters cast votes for candidates.
  * There is also a separate graphical representation in VoronoiGroup.js.
- * @param {*} candidates - an array of objects each with a p2 or p1 property.
- * Or a list of positions for the 1D case.
- * @param {*} voterGroups - an array of objects with {x,w} or {x,y,w} attributes.
+ * @param {Objects[]} candidates - For 2D, an array of objects: {x,y}.
+ * For 1D, an array of objects: {x}.
+ * @param {Objects[]} voterGroups - For 2D, an array of objects: {x,y,w}.
+ * For 1D, an array of objects: {x,w,densityProfile}.
  * @returns votes, an object
  */
 export default function pluralityBallot(candidates, voterGroups, dimensions) {
