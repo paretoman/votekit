@@ -1,3 +1,8 @@
+---
+title: Architecture
+layout: default
+---
+
 The architecture tries to be context-oriented. I mean that we keep an idea of the task to be performed.
 
 * An Election class just has code in the context of running an election. Voters and candidates are passed as arguments to functions in the Election class. 

@@ -1,3 +1,7 @@
+---
+title: Blog
+layout: default
+---
 
 # Learning JSDoc
 Documentation generator. Using JSDoc. 

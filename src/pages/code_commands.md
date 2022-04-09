@@ -1,3 +1,8 @@
+---
+title: Commands
+layout: default
+---
+
 # Command Pattern and Uses
 
 ## Commander.js

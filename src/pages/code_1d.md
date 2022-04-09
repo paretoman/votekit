@@ -1,3 +1,8 @@
+---
+title: 1D
+layout: default
+---
+
 This describes how 1D simulations were added to the 2D simulations.
 
 # New Classes

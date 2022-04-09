@@ -1,3 +1,8 @@
+---
+title: Sim
+layout: default
+---
+
 # Sim Architecture for Voters
 Made a super class, SimVoterList. GeoVoters inherits from SimVoterList. There is no OneVoters because there isn't any additional functionality that OneVoters would need.
 
