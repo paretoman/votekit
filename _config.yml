@@ -21,7 +21,7 @@
 title: Votekit
 baseurl: "/votekit" # the subpath of your site, e.g. /blog
 url: "https://paretoman.github.io" # the base hostname & protocol for your site, e.g. http://example.com
-
+description: "An explorable sandbox that shows how different voting methods work using a spatial opinion model."
 # Build settings
 theme: minima
 

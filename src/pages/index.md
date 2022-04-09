@@ -1,5 +1,5 @@
 ---
-title: Tutorial
+title: Pages
 layout: default
 ---
 
