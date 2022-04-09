@@ -3,5 +3,4 @@ node_modules
 package-lock.json
 docs
 .parcel-cache
-dist/addSandboxes.js
-dist/addSandboxes.js.map
+dist
