@@ -1,7 +1,8 @@
 {
     "source": {
         "include": ["src"],
-        "includePattern": ".js$"
+        "includePattern": ".js$",
+        "excludePattern": "lib"
     },
     "opts": {
         "recurse":true,

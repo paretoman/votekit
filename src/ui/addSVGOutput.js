@@ -1,6 +1,6 @@
 /** @module */
 
-import C2S from '../../snowpack/build/snowpack/pkg/canvas2svg.js'
+import C2S from '../lib/snowpack/build/snowpack/pkg/canvas2svg.js'
 /**
  * add a button so that we can generate an SVG of what is being rendered
  * @param {Object} screen the screen where the drawing context is.

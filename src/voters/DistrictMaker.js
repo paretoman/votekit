@@ -1,6 +1,6 @@
 /** @module */
 
-import { polygonArea } from '../../snowpack/build/snowpack/pkg/d3-polygon.js'
+import { polygonArea } from '../lib/snowpack/build/snowpack/pkg/d3-polygon.js'
 import lloydVoronoi from './lloydVoronoi.js'
 import { drawStrokedColor } from '../utilities/graphicsUtilities.js'
 import geoCensus from './geoCensus.js'

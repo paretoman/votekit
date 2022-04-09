@@ -1,7 +1,7 @@
 /** @module */
 
 // import SimplexNoise from 'https://cdn.skypack.dev/simplex-noise@3.0.1'
-import { SimplexNoise } from '../../snowpack/build/snowpack/pkg/simplex-noise.js'
+import { SimplexNoise } from '../lib/snowpack/build/snowpack/pkg/simplex-noise.js'
 // https://runkit-packages.com/14.x.x/1644541101130/simplex-noise/#simplex-noisejs
 // https://npm.runkit.com/simplex-noise
 // https://www.npmjs.com/package/simplex-noise
