@@ -68,11 +68,11 @@ export default function GeoVoters(screen, geoElection, sim) {
                 (rowNoise) => rowNoise.map(
                     (cellNoise) => {
                         const [xNoise, yNoise] = cellNoise
-                        const g2 = structuredClone(vb.voter.g2)
-                        g2.x += xNoise
-                        g2.y += yNoise
-                        const { g1 } = vb.voter
-                        return { g2, g1 }
+                        const shape2 = structuredClone(vb.voter.shape2)
+                        shape2.x += xNoise
+                        shape2.y += yNoise
+                        const { shape1 } = vb.voter
+                        return { shape2, shape1 }
                     },
                 ).flat(),
             ).flat(),
@@ -87,11 +87,11 @@ export default function GeoVoters(screen, geoElection, sim) {
                 (vb) => census[iDistrict].map((g) => {
                     const [gx, gy, gf] = g
                     const [xNoise, yNoise] = sn[gx][gy]
-                    const g2 = structuredClone(vb.voter.g2)
-                    g2.x += xNoise
-                    g2.y += yNoise
-                    const { g1 } = vb.voter
-                    return { g2, g1, weight: gf }
+                    const shape2 = structuredClone(vb.voter.shape2)
+                    shape2.x += xNoise
+                    shape2.y += yNoise
+                    const { shape1 } = vb.voter
+                    return { shape2, shape1, weight: gf }
                 }).flat(),
             ).flat(),
         )
@@ -104,11 +104,11 @@ export default function GeoVoters(screen, geoElection, sim) {
                 (cellNoise) => simVoterGroups.map(
                     (vb) => {
                         const [xNoise, yNoise] = cellNoise
-                        const g2 = structuredClone(vb.voter.g2)
-                        g2.x += xNoise
-                        g2.y += yNoise
-                        const { g1 } = vb.voter
-                        return { g2, g1 }
+                        const shape2 = structuredClone(vb.voter.shape2)
+                        shape2.x += xNoise
+                        shape2.y += yNoise
+                        const { shape1 } = vb.voter
+                        return { shape2, shape1 }
                     },
                 ).flat(),
             ),
@@ -152,7 +152,7 @@ export default function GeoVoters(screen, geoElection, sim) {
         self.voterGroupsByTract.forEach((row) => {
             row.forEach((cell) => {
                 cell.forEach((group) => {
-                    smallCircle(group.g2.x, group.g2.y) // TODO: use .x and .y instead of g2
+                    smallCircle(group.shape2.x, group.shape2.y) // TODO: use .x and .y instead of shape2
                 })
             })
         })

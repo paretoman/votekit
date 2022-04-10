@@ -32,8 +32,8 @@ export default function OneDVoronoi(voterGroup, screen) {
 
     self.render = function () {
         const { ctx } = screen
-        const { x, g1 } = voterGroup
-        const { w, densityProfile } = g1
+        const { x, shape1 } = voterGroup
+        const { w, densityProfile } = shape1
         const h = 100
 
         ctx.save()

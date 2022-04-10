@@ -40,34 +40,34 @@ export default function tooltipForEntity(entity, screen, sim) {
     )
     box.appendChild(items.exists.div)
     if (sim.election.dimensions === 1) {
-        if (entity.g1.w) {
+        if (entity.shape1.w) {
             items.w1 = new Item(
                 'range',
                 'Width',
                 'Width: ',
                 (val) => entity.setW1(val),
-                entity.g1.w,
+                entity.shape1.w,
             )
             box.appendChild(items.w1.div)
         }
-        if (entity.g1.densityProfile) {
+        if (entity.shape1.densityProfile) {
             items.densityProfile1 = new Item(
                 'select',
                 'Density Profile',
                 'Density Profile: ',
                 (val) => entity.setDensityProfile1(val),
-                entity.g1.densityProfile,
+                entity.shape1.densityProfile,
                 ['step', 'gaussian'],
             )
             box.appendChild(items.densityProfile1.div)
         }
-    } else if (entity.g2.w) {
+    } else if (entity.shape2.w) {
         items.w2 = new Item(
             'range',
             'Width',
             'Width: ',
             (val) => entity.setW2(val),
-            entity.g2.w,
+            entity.shape2.w,
         )
         box.appendChild(items.w2.div)
     }

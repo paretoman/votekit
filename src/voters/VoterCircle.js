@@ -6,8 +6,8 @@ import tooltipForEntity from '../sim/tooltipForEntity.js'
 /**
  * VoterCircle class with Handle component to take care of dragging.
  * VoronoiGroup component takes care of drawing votes.
- * @param {Object} g2
- * @param {Object} g1
+ * @param {Object} shape2
+ * @param {Object} shape1
  * @param {Screen} screen
  * @param {Registrar} voterRegistrar
  * @param {Commander} commander
@@ -16,8 +16,8 @@ import tooltipForEntity from '../sim/tooltipForEntity.js'
  * @constructor
  */
 export default function VoterCircle(
-    g2,
-    g1,
+    shape2,
+    shape1,
     screen,
     voterRegistrar,
     commander,
@@ -28,8 +28,8 @@ export default function VoterCircle(
 ) {
     const self = this
 
-    self.g1 = {}
-    self.g2 = {}
+    self.shape1 = {}
+    self.shape2 = {}
 
     // Get assigned a id by the voterRegistrar list manager
 
@@ -39,20 +39,23 @@ export default function VoterCircle(
 
     // use commands to instantiate variables
     self.instantiate = () => {
-        const g2p = { x: g2.x, y: g2.y }
+        const shape2p = { x: shape2.x, y: shape2.y }
         // set current value because we need to be able to undo by returning to these values
         // voterCommander.setESenderForList.setCurrentValue(id, 0)
-        // voterCommander.setXYSenderForList.setCurrentValue(id, g2p)
-        // voterCommander.setWSenderForList.setCurrentValue(id, g2.w)
+        // voterCommander.setXYSenderForList.setCurrentValue(id, shape2p)
+        // voterCommander.setWSenderForList.setCurrentValue(id, shape2.w)
 
         const commands = [
             voterCommander.setESenderForList.command(id, 1, 0), // set alive flag
-            voterCommander.setP2SenderForList.command(id, g2p, g2p),
-            voterCommander.setP1SenderForList.command(id, g1.x, g1.x),
-            voterCommander.setW2SenderForList.command(id, g2.w, g2.w),
-            voterCommander.setW1SenderForList.command(id, g1.w, g1.w),
-            voterCommander
-                .setDensityProfile1SenderForList.command(id, g1.densityProfile, g1.densityProfile),
+            voterCommander.setP2SenderForList.command(id, shape2p, shape2p),
+            voterCommander.setP1SenderForList.command(id, shape1.x, shape1.x),
+            voterCommander.setW2SenderForList.command(id, shape2.w, shape2.w),
+            voterCommander.setW1SenderForList.command(id, shape1.w, shape1.w),
+            voterCommander.setDensityProfile1SenderForList.command(
+                id,
+                shape1.densityProfile,
+                shape1.densityProfile,
+            ),
         ]
         // Either load the commands because we don't want to create an item of history
         // Or do the commands because want to store an item in history, so that we can undo.
@@ -73,8 +76,8 @@ export default function VoterCircle(
     }
 
     self.setP2Action = (p) => {
-        self.g2.x = p.x
-        self.g2.y = p.y
+        self.shape2.x = p.x
+        self.shape2.y = p.y
         if (sim.election.dimensions === 2) {
             self.x = p.x
             self.y = p.y
@@ -82,7 +85,7 @@ export default function VoterCircle(
         changes.add(['draggables'])
     }
     self.setP1Action = (p) => {
-        self.g1.x = p
+        self.shape1.x = p
         if (sim.election.dimensions === 1) {
             self.x = p
             self.y = 250
@@ -102,14 +105,14 @@ export default function VoterCircle(
      *  Maybe x and y should be in the SimVoter instead... just speculating. */
     self.updateXY = () => {
         if (sim.election.dimensions === 1) {
-            self.setP1Action(self.g1.x)
+            self.setP1Action(self.shape1.x)
         } else {
-            self.setP2Action({ x: self.g2.x, y: self.g2.y })
+            self.setP2Action({ x: self.shape2.x, y: self.shape2.y })
         }
     }
 
     self.setW2Action = (newW) => {
-        self.g2.w = newW
+        self.shape2.w = newW
         changes.add(['width'])
     }
     self.setW2 = (newW) => {
@@ -118,7 +121,7 @@ export default function VoterCircle(
     }
 
     self.setW1Action = (newW) => {
-        self.g1.w = newW
+        self.shape1.w = newW
         changes.add(['width'])
     }
     self.setW1 = (newW) => {
@@ -128,7 +131,7 @@ export default function VoterCircle(
 
     /** Density Profile can be "gaussian" or "step" */
     self.setDensityProfile1Action = (newDensityProfile1) => {
-        self.g1.densityProfile = newDensityProfile1
+        self.shape1.densityProfile = newDensityProfile1
         changes.add(['densityProfile'])
     }
     self.setDensityProfile1 = (newDensityProfile1) => {

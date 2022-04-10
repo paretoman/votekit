@@ -21,17 +21,17 @@ export default function Election(menu) {
     /** Get the correct geometry, depending on dimension. */
     const mapVoters = (voterGroups) => {
         if (self.dimensions === 1) {
-            return voterGroups.map((vg) => (vg.g1))
+            return voterGroups.map((vg) => (vg.shape1))
         }
-        return voterGroups.map((vg) => (vg.g2))
+        return voterGroups.map((vg) => (vg.shape2))
     }
 
     /** Get the correct geometry, depending on dimension. */
     const mapCans = (canList) => {
         if (self.dimensions === 1) {
-            return canList.map((can) => (can.g1))
+            return canList.map((can) => (can.shape1))
         }
-        return canList.map((can) => (can.g2))
+        return canList.map((can) => (can.shape2))
     }
 
     // Election //

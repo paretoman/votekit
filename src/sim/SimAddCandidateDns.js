@@ -21,9 +21,9 @@ export default function SimAddCandidateDns(screen, layout, changes, commander, s
         }
     }
 
-    self.addCandidateDistribution = (g2, g1, doLoad) => {
+    self.addCandidateDistribution = (shape2, shape1, doLoad) => {
         // eslint-disable-next-line no-new, max-len
-        const candidateDistribution = new CandidateDistribution(g2, g1, screen, candidateDnRegistrar, commander, changes, doLoad, candidateDnCommander, sim)
+        const candidateDistribution = new CandidateDistribution(shape2, shape1, screen, candidateDnRegistrar, commander, changes, doLoad, candidateDnCommander, sim)
         sims.sample.addSimCandidateDistribution(candidateDistribution)
 
         const num = candidateDnRegistrar.num()

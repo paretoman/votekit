@@ -7,8 +7,8 @@ import tooltipForEntity from '../sim/tooltipForEntity.js'
 /**
  * Candidate class on top of handle.
  * Candidate adds candidate behavior on top of a draggable handle handle.
- * @param {Object} g2
- * @param {Object} g1
+ * @param {Object} shape2
+ * @param {Object} shape1
  * @param {Number} wHandle
  * @param {Number} hHandle
  * @param {String} color
@@ -20,8 +20,8 @@ import tooltipForEntity from '../sim/tooltipForEntity.js'
  * @constructor
  */
 export default function Candidate(
-    g2,
-    g1,
+    shape2,
+    shape1,
     wHandle,
     hHandle,
     color,
@@ -35,8 +35,8 @@ export default function Candidate(
 ) {
     const self = this
 
-    self.g1 = {}
-    self.g2 = {}
+    self.shape1 = {}
+    self.shape2 = {}
 
     const id = candidateRegistrar.new(self)
 
@@ -48,13 +48,13 @@ export default function Candidate(
         // candidateCommander.setESenderForList.setCurrentValue(id, 0)
         // candidateCommander.setXYSenderForList.setCurrentValue(id, { x, y })
 
-        const g2p = { x: g2.x, y: g2.y }
+        const shape2p = { x: shape2.x, y: shape2.y }
 
         const commands = [
             // candidateCommander.setNumberCandidatesSender.command(id + 1),
             candidateCommander.setESenderForList.command(id, 1, 0), // set alive flag
-            candidateCommander.setP2SenderForList.command(id, g2p, g2p),
-            candidateCommander.setP1SenderForList.command(id, g1.x, g1.x),
+            candidateCommander.setP2SenderForList.command(id, shape2p, shape2p),
+            candidateCommander.setP1SenderForList.command(id, shape1.x, shape1.x),
             candidateCommander.setColorSenderForList.command(id, color, color), // set alive flag
         ]
         // Either load the commands because we don't want to create an item of history
@@ -75,8 +75,8 @@ export default function Candidate(
     }
 
     self.setP2Action = (p) => {
-        self.g2.x = p.x
-        self.g2.y = p.y
+        self.shape2.x = p.x
+        self.shape2.y = p.y
         if (sim.election.dimensions === 2) {
             self.x = p.x
             self.y = p.y
@@ -84,7 +84,7 @@ export default function Candidate(
         changes.add(['draggables'])
     }
     self.setP1Action = (p) => {
-        self.g1.x = p
+        self.shape1.x = p
         if (sim.election.dimensions === 1) {
             self.x = p
             self.y = 250
@@ -104,9 +104,9 @@ export default function Candidate(
      *  Maybe x and y should be in the SimCandidate instead... just speculating. */
     self.updateXY = () => {
         if (sim.election.dimensions === 1) {
-            self.setP1Action(self.g1.x)
+            self.setP1Action(self.shape1.x)
         } else {
-            self.setP2Action({ x: self.g2.x, y: self.g2.y })
+            self.setP2Action({ x: self.shape2.x, y: self.shape2.y })
         }
     }
 
