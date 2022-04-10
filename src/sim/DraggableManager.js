@@ -1,6 +1,6 @@
 /** @module */
 
-import { minIndex } from '../utilities/jsHelpers.js'
+import { clamp, minIndex } from '../utilities/jsHelpers.js'
 
 /**
  * Draggable Manager gives draggable behavior to objects on a canvas.
@@ -79,7 +79,13 @@ export default function DraggableManager(screen, changes, sim) {
                 event.stopPropagation()
             }
             const dragging = draggables[drag.iDragging]
-            dragging.o.setXY({ x: mouse.x + drag.offX, y: mouse.y + drag.offY })
+
+            const w = screen.width
+            const h = screen.height
+            dragging.o.setXY({
+                x: clamp(mouse.x + drag.offX, 0, w),
+                y: clamp(mouse.y + drag.offY, 0, h),
+            })
             changes.add(['draggables'])
         } else {
             // see if we're hovering over something grabbable
@@ -97,8 +103,7 @@ export default function DraggableManager(screen, changes, sim) {
         moveClickDetect(mouse)
     }
 
-    const end = function (e) {
-        move(e)
+    const end = function () {
         endClickDetect()
         if (drag.iDragging !== undefined) {
             const dragging = draggables[drag.iDragging]
@@ -118,6 +123,7 @@ export default function DraggableManager(screen, changes, sim) {
     }
     const touchend = (e) => {
         const pass = passTouch(e)
+        move(pass)
         end(pass)
     }
 
@@ -136,10 +142,8 @@ export default function DraggableManager(screen, changes, sim) {
         const h = e.target.clientHeight
         let x = e.changedTouches[0].clientX - rect.left
         let y = e.changedTouches[0].clientY - rect.top
-        if (x < 0) x = 0
-        if (y < 0) y = 0
-        if (x > w) x = w
-        if (y > h) y = h
+        x = clamp(x, 0, w)
+        y = clamp(y, 0, h)
         const pass = { offsetX: x, offsetY: y, isTouch: true }
         Object.assign(e, pass)
         return e

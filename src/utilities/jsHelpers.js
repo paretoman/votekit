@@ -84,3 +84,10 @@ export function minIndex(a) {
     }
     return iClosest
 }
+
+/** https://stackoverflow.com/a/24719569 */
+export function clamp(value, min, max) {
+    if (value < min) return min
+    if (value > max) return max
+    return value
+}
