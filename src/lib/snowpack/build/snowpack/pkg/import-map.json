@@ -1,7 +1,7 @@
 {
   "imports": {
+    "@mithrandirii/canvas2svg": "./@mithrandirii/canvas2svg.js",
     "@tweenjs/tween.js": "./@tweenjs/tweenjs.js",
-    "canvas2svg": "./canvas2svg.js",
     "d3-delaunay": "./d3-delaunay.js",
     "d3-polygon": "./d3-polygon.js",
     "simplex-noise": "./simplex-noise.js"
