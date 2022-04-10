@@ -38,14 +38,14 @@ export default function CandidateDistribution(
     // use commands to instantiate variables
     self.instantiate = () => {
         const shape2p = { x: shape2.x, y: shape2.y }
-        // candidateDnCommander.setESenderForList.setCurrentValue(id, 0)
-        // candidateDnCommander.setXYSenderForList.setCurrentValue(id, shape2p)
-        // candidateDnCommander.setWSenderForList.setCurrentValue(id, shape2.w)
+        // candidateDnCommander.setForListSenders.exists.setCurrentValue(id, 0)
+        // candidateDnCommander.setForListSenders.shape2p.setCurrentValue(id, shape2p)
+        // candidateDnCommander.setForListSenders.shape2w.setCurrentValue(id, shape2.w)
         const commands = [
-            candidateDnCommander.setESenderForList.command(id, 1, 0), // set alive flag
-            candidateDnCommander.setP2SenderForList.command(id, shape2p, shape2p),
-            candidateDnCommander.setP1SenderForList.command(id, shape1.x, shape1.x),
-            candidateDnCommander.setW2SenderForList.command(id, shape2.w, shape2.w),
+            candidateDnCommander.setForListSenders.exists.command(id, 1, 0), // set alive flag
+            candidateDnCommander.setForListSenders.shape2p.command(id, shape2p, shape2p),
+            candidateDnCommander.setForListSenders.shape1x.command(id, shape1.x, shape1.x),
+            candidateDnCommander.setForListSenders.shape2w.command(id, shape2.w, shape2.w),
         ]
         // Either load the commands because we don't want to create an item of history
         // Or do the commands because want to store an item in history, so that we can undo.
@@ -56,16 +56,18 @@ export default function CandidateDistribution(
         }
     }
 
-    self.setEAction = (e) => {
+    self.setAction = {}
+
+    self.setAction.exists = (e) => {
         self.exists = e
         changes.add(['draggables'])
     }
     self.setE = (e) => {
-        const cur = candidateDnCommander.setESenderForList.getCurrentValue(id)
-        candidateDnCommander.setESenderForList.go(id, e, cur)
+        const cur = candidateDnCommander.setForListSenders.exists.getCurrentValue(id)
+        candidateDnCommander.setForListSenders.exists.go(id, e, cur)
     }
 
-    self.setP2Action = (p) => {
+    self.setAction.shape2p = (p) => {
         self.shape2.x = p.x
         self.shape2.y = p.y
         if (sim.election.dimensions === 2) {
@@ -74,7 +76,7 @@ export default function CandidateDistribution(
         }
         changes.add(['draggables'])
     }
-    self.setP1Action = (p) => {
+    self.setAction.shape1x = (p) => {
         self.shape1.x = p
         if (sim.election.dimensions === 1) {
             self.x = p
@@ -84,30 +86,30 @@ export default function CandidateDistribution(
     }
     self.setXY = (p) => {
         if (sim.election.dimensions === 1) {
-            const cur = candidateDnCommander.setP1SenderForList.getCurrentValue(id)
-            candidateDnCommander.setP1SenderForList.go(id, p.x, cur)
+            const cur = candidateDnCommander.setForListSenders.shape1x.getCurrentValue(id)
+            candidateDnCommander.setForListSenders.shape1x.go(id, p.x, cur)
         } else {
-            const cur = candidateDnCommander.setP2SenderForList.getCurrentValue(id)
-            candidateDnCommander.setP2SenderForList.go(id, p, cur)
+            const cur = candidateDnCommander.setForListSenders.shape2p.getCurrentValue(id)
+            candidateDnCommander.setForListSenders.shape2p.go(id, p, cur)
         }
     }
     /** Do this when entering a state because x and y change.
      *  Maybe x and y should be in the SimCandidateDn instead... just speculating. */
     self.updateXY = () => {
         if (sim.election.dimensions === 1) {
-            self.setP1Action(self.shape1.x)
+            self.setAction.shape1x(self.shape1.x)
         } else {
-            self.setP2Action({ x: self.shape2.x, y: self.shape2.y })
+            self.setAction.shape2p({ x: self.shape2.x, y: self.shape2.y })
         }
     }
 
-    self.setW2Action = (newW) => {
+    self.setAction.shape2w = (newW) => {
         self.shape2.w = newW
         changes.add(['width'])
     }
     self.setW2 = (newW) => {
-        const cur = candidateDnCommander.setW2SenderForList.getCurrentValue(id)
-        candidateDnCommander.setW2SenderForList.go(id, newW, cur)
+        const cur = candidateDnCommander.setForListSenders.shape2w.getCurrentValue(id)
+        candidateDnCommander.setForListSenders.shape2w.go(id, newW, cur)
     }
 
     self.instantiate()

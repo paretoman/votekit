@@ -13,43 +13,26 @@ export default function CandidateCommander(candidateRegistrar, commander, sim) {
 
     const prefix = 'candidates'
 
-    self.setESenderForList = commander.addSenderForList({
-        action: (id, e) => {
-            self.setNumberCandidates(id + 1)
-            const candidate = candidateRegistrar.get(id)
-            candidate.setEAction(e)
-        },
-        name: `${prefix}-exists`,
-    })
+    // a object with senders that set parameters for lists of entities.
+    // Like if you want to set the exists property of the 2nd candidate to 1.
+    self.setForListSenders = {}
 
-    self.setP2SenderForList = commander.addSenderForList({
-        action: (id, p) => {
-            self.setNumberCandidates(id + 1)
-            const candidate = candidateRegistrar.get(id)
-            candidate.setP2Action(p)
-        },
-        name: `${prefix}-shape2D-point`,
-        props: { isChain: true },
-    })
+    function makeSetForListSender(key, configKey, isChain) {
+        self.setForListSenders[key] = commander.addSenderForList({
+            action: (id, e) => {
+                self.setNumberCandidates(id + 1)
+                const candidate = candidateRegistrar.get(id)
+                candidate.setAction[key](e)
+            },
+            name: `${prefix}-${configKey}`,
+            props: { isChain },
+        })
+    }
 
-    self.setP1SenderForList = commander.addSenderForList({
-        action: (id, p) => {
-            self.setNumberCandidates(id + 1)
-            const candidate = candidateRegistrar.get(id)
-            candidate.setP1Action(p)
-        },
-        name: `${prefix}-shape1D-x`,
-        props: { isChain: true },
-    })
-
-    self.setColorSenderForList = commander.addSenderForList({
-        action: (id, e) => {
-            self.setNumberCandidates(id + 1)
-            const candidate = candidateRegistrar.get(id)
-            candidate.setColorAction(e)
-        },
-        name: `${prefix}-color`,
-    })
+    makeSetForListSender('exists', 'exists', false)
+    makeSetForListSender('shape2p', 'shape2D-point', true)
+    makeSetForListSender('shape1x', 'shape1D-x', true)
+    makeSetForListSender('color', 'color', false)
 
     // This is kind of weird because this value is not a good measure of the number of entities.
     // An undo will reduce the number stored with the command name,

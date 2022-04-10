@@ -13,63 +13,27 @@ export default function VoterCircleCommander(voterRegistrar, commander, simAddVo
 
     const prefix = 'voters'
 
-    self.setESenderForList = commander.addSenderForList({
-        action: (id, e) => {
-            self.setNumberVoters(id + 1)
-            const voter = voterRegistrar.get(id)
-            voter.setEAction(e)
-        },
-        name: `${prefix}-exists`,
-    })
+    // a object with senders that set parameters for lists of entities.
+    // Like if you want to set the exists property of the 2nd voter to 1.
+    self.setForListSenders = {}
 
-    self.setP2SenderForList = commander.addSenderForList({
-        action: (id, p) => {
-            self.setNumberVoters(id + 1)
-            const voter = voterRegistrar.get(id)
-            voter.setP2Action(p)
-        },
-        name: `${prefix}-shape2D-point`,
-        props: { isChain: true },
-    })
-
-    self.setP1SenderForList = commander.addSenderForList({
-        action: (id, p) => {
-            self.setNumberVoters(id + 1)
-            const voter = voterRegistrar.get(id)
-            voter.setP1Action(p)
-        },
-        name: `${prefix}-shape1D-x`,
-        props: { isChain: true },
-    })
-
-    self.setW2SenderForList = commander.addSenderForList({
-        action: (id, w) => {
-            self.setNumberVoters(id + 1)
-            const voter = voterRegistrar.get(id)
-            voter.setW2Action(w)
-        },
-        name: `${prefix}-shape2D-width`,
-        props: { isChain: true },
-    })
-
-    self.setW1SenderForList = commander.addSenderForList({
-        action: (id, w) => {
-            self.setNumberVoters(id + 1)
-            const voter = voterRegistrar.get(id)
-            voter.setW1Action(w)
-        },
-        name: `${prefix}-shape1D-width`,
-        props: { isChain: true },
-    })
-
-    self.setDensityProfile1SenderForList = commander.addSenderForList({
-        action: (id, dp1) => {
-            self.setNumberVoters(id + 1)
-            const voter = voterRegistrar.get(id)
-            voter.setDensityProfile1Action(dp1)
-        },
-        name: `${prefix}-shape1D-densityProfile`,
-    })
+    function makeSetForListSender(key, configKey, isChain) {
+        self.setForListSenders[key] = commander.addSenderForList({
+            action: (id, e) => {
+                self.setNumberVoters(id + 1)
+                const voter = voterRegistrar.get(id)
+                voter.setAction[key](e)
+            },
+            name: `${prefix}-${configKey}`,
+            props: { isChain },
+        })
+    }
+    makeSetForListSender('exists', 'exists', false)
+    makeSetForListSender('shape2p', 'shape2D-point', true)
+    makeSetForListSender('shape1x', 'shape1D-x', true)
+    makeSetForListSender('shape2w', 'shape2D-width', true)
+    makeSetForListSender('shape1w', 'shape1D-width', true)
+    makeSetForListSender('shape1densityProfile', 'shape1D-densityProfile', false)
 
     // This is kind of weird because this value is not a good measure of the number of entities.
     // An undo will reduce the number stored with the command name,

@@ -13,44 +13,26 @@ export default function CandidateDnCommander(candidateDnRegistrar, commander, si
 
     const prefix = 'candidateDns'
 
-    self.setESenderForList = commander.addSenderForList({
-        action: (id, e) => {
-            self.setNumberCandidateDns(id + 1)
-            const candidateDn = candidateDnRegistrar.get(id)
-            candidateDn.setEAction(e)
-        },
-        name: `${prefix}-exists`,
-    })
+    // a object with senders that set parameters for lists of entities.
+    // Like if you want to set the exists property of the 2nd candidate to 1.
+    self.setForListSenders = {}
 
-    self.setP2SenderForList = commander.addSenderForList({
-        action: (id, p) => {
-            self.setNumberCandidateDns(id + 1)
-            const candidateDn = candidateDnRegistrar.get(id)
-            candidateDn.setP2Action(p)
-        },
-        name: `${prefix}-shape2D-point`,
-        props: { isChain: true },
-    })
+    function makeSetForListSender(key, configKey, isChain) {
+        self.setForListSenders[key] = commander.addSenderForList({
+            action: (id, e) => {
+                self.setNumberCandidateDns(id + 1)
+                const candidateDn = candidateDnRegistrar.get(id)
+                candidateDn.setAction[key](e)
+            },
+            name: `${prefix}-${configKey}`,
+            props: { isChain },
+        })
+    }
 
-    self.setP1SenderForList = commander.addSenderForList({
-        action: (id, p) => {
-            self.setNumberCandidateDns(id + 1)
-            const candidateDn = candidateDnRegistrar.get(id)
-            candidateDn.setP1Action(p)
-        },
-        name: `${prefix}-shape1D-x`,
-        props: { isChain: true },
-    })
-
-    self.setW2SenderForList = commander.addSenderForList({
-        action: (id, w) => {
-            self.setNumberCandidateDns(id + 1)
-            const candidateDn = candidateDnRegistrar.get(id)
-            candidateDn.setW2Action(w)
-        },
-        name: `${prefix}-shape2D-width`,
-        props: { isChain: true },
-    })
+    makeSetForListSender('exists', 'exists', false)
+    makeSetForListSender('shape2p', 'shape2D-point', true)
+    makeSetForListSender('shape1x', 'shape1D-x', true)
+    makeSetForListSender('shape2w', 'shape2D-width', true)
 
     // This is kind of weird because this value is not a good measure of the number of entities.
     // An undo will reduce the number stored with the command name,

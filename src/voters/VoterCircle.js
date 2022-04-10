@@ -41,17 +41,17 @@ export default function VoterCircle(
     self.instantiate = () => {
         const shape2p = { x: shape2.x, y: shape2.y }
         // set current value because we need to be able to undo by returning to these values
-        // voterCommander.setESenderForList.setCurrentValue(id, 0)
+        // voterCommander.setForListSenders.exists.setCurrentValue(id, 0)
         // voterCommander.setXYSenderForList.setCurrentValue(id, shape2p)
         // voterCommander.setWSenderForList.setCurrentValue(id, shape2.w)
 
         const commands = [
-            voterCommander.setESenderForList.command(id, 1, 0), // set alive flag
-            voterCommander.setP2SenderForList.command(id, shape2p, shape2p),
-            voterCommander.setP1SenderForList.command(id, shape1.x, shape1.x),
-            voterCommander.setW2SenderForList.command(id, shape2.w, shape2.w),
-            voterCommander.setW1SenderForList.command(id, shape1.w, shape1.w),
-            voterCommander.setDensityProfile1SenderForList.command(
+            voterCommander.setForListSenders.exists.command(id, 1, 0), // set alive flag
+            voterCommander.setForListSenders.shape2p.command(id, shape2p, shape2p),
+            voterCommander.setForListSenders.shape1x.command(id, shape1.x, shape1.x),
+            voterCommander.setForListSenders.shape2w.command(id, shape2.w, shape2.w),
+            voterCommander.setForListSenders.shape1w.command(id, shape1.w, shape1.w),
+            voterCommander.setForListSenders.shape1densityProfile.command(
                 id,
                 shape1.densityProfile,
                 shape1.densityProfile,
@@ -66,16 +66,17 @@ export default function VoterCircle(
         }
     }
 
-    self.setEAction = (e) => {
+    self.setAction = {}
+    self.setAction.exists = (e) => {
         self.exists = e
         changes.add(['draggables'])
     }
     self.setE = (e) => {
-        const cur = voterCommander.setESenderForList.getCurrentValue(id)
-        voterCommander.setESenderForList.go(id, e, cur)
+        const cur = voterCommander.setForListSenders.exists.getCurrentValue(id)
+        voterCommander.setForListSenders.exists.go(id, e, cur)
     }
 
-    self.setP2Action = (p) => {
+    self.setAction.shape2p = (p) => {
         self.shape2.x = p.x
         self.shape2.y = p.y
         if (sim.election.dimensions === 2) {
@@ -84,7 +85,7 @@ export default function VoterCircle(
         }
         changes.add(['draggables'])
     }
-    self.setP1Action = (p) => {
+    self.setAction.shape1x = (p) => {
         self.shape1.x = p
         if (sim.election.dimensions === 1) {
             self.x = p
@@ -94,49 +95,49 @@ export default function VoterCircle(
     }
     self.setXY = (p) => {
         if (sim.election.dimensions === 1) {
-            const cur = voterCommander.setP1SenderForList.getCurrentValue(id)
-            voterCommander.setP1SenderForList.go(id, p.x, cur)
+            const cur = voterCommander.setForListSenders.shape1x.getCurrentValue(id)
+            voterCommander.setForListSenders.shape1x.go(id, p.x, cur)
         } else {
-            const cur = voterCommander.setP2SenderForList.getCurrentValue(id)
-            voterCommander.setP2SenderForList.go(id, p, cur)
+            const cur = voterCommander.setForListSenders.shape2p.getCurrentValue(id)
+            voterCommander.setForListSenders.shape2p.go(id, p, cur)
         }
     }
     /** Do this when entering a state because x and y change.
      *  Maybe x and y should be in the SimVoter instead... just speculating. */
     self.updateXY = () => {
         if (sim.election.dimensions === 1) {
-            self.setP1Action(self.shape1.x)
+            self.setAction.shape1x(self.shape1.x)
         } else {
-            self.setP2Action({ x: self.shape2.x, y: self.shape2.y })
+            self.setAction.shape2p({ x: self.shape2.x, y: self.shape2.y })
         }
     }
 
-    self.setW2Action = (newW) => {
+    self.setAction.shape2w = (newW) => {
         self.shape2.w = newW
         changes.add(['width'])
     }
     self.setW2 = (newW) => {
-        const cur = voterCommander.setW2SenderForList.getCurrentValue(id)
-        voterCommander.setW2SenderForList.go(id, newW, cur)
+        const cur = voterCommander.setForListSenders.shape2w.getCurrentValue(id)
+        voterCommander.setForListSenders.shape2w.go(id, newW, cur)
     }
 
-    self.setW1Action = (newW) => {
+    self.setAction.shape1w = (newW) => {
         self.shape1.w = newW
         changes.add(['width'])
     }
     self.setW1 = (newW) => {
-        const cur = voterCommander.setW1SenderForList.getCurrentValue(id)
-        voterCommander.setW1SenderForList.go(id, newW, cur)
+        const cur = voterCommander.setForListSenders.shape1w.getCurrentValue(id)
+        voterCommander.setForListSenders.shape1w.go(id, newW, cur)
     }
 
     /** Density Profile can be "gaussian" or "step" */
-    self.setDensityProfile1Action = (newDensityProfile1) => {
+    self.setAction.shape1densityProfile = (newDensityProfile1) => {
         self.shape1.densityProfile = newDensityProfile1
         changes.add(['densityProfile'])
     }
     self.setDensityProfile1 = (newDensityProfile1) => {
-        const cur = voterCommander.setDensityProfile1SenderForList.getCurrentValue(id)
-        voterCommander.setDensityProfile1SenderForList.go(id, newDensityProfile1, cur)
+        const cur = voterCommander.setForListSenders.shape1densityProfile.getCurrentValue(id)
+        voterCommander.setForListSenders.shape1densityProfile.go(id, newDensityProfile1, cur)
     }
 
     self.instantiate()
