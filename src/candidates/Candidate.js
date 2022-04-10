@@ -44,14 +44,9 @@ export default function Candidate(
 
     // use commands to instantiate variables
     self.instantiate = () => {
-        // set current value because we need to be able to undo by returning to these values
-        // candidateCommander.setForListSenders.exists.setCurrentValue(id, 0)
-        // candidateCommander.setXYSenderForList.setCurrentValue(id, { x, y })
-
         const shape2p = { x: shape2.x, y: shape2.y }
 
         const commands = [
-            // candidateCommander.setNumberCandidatesSender.command(id + 1),
             candidateCommander.setForListSenders.exists.command(id, 1, 0), // set alive flag
             candidateCommander.setForListSenders.shape2p.command(id, shape2p, shape2p),
             candidateCommander.setForListSenders.shape1x.command(id, shape1.x, shape1.x),

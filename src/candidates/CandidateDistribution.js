@@ -38,9 +38,7 @@ export default function CandidateDistribution(
     // use commands to instantiate variables
     self.instantiate = () => {
         const shape2p = { x: shape2.x, y: shape2.y }
-        // candidateDnCommander.setForListSenders.exists.setCurrentValue(id, 0)
-        // candidateDnCommander.setForListSenders.shape2p.setCurrentValue(id, shape2p)
-        // candidateDnCommander.setForListSenders.shape2w.setCurrentValue(id, shape2.w)
+
         const commands = [
             candidateDnCommander.setForListSenders.exists.command(id, 1, 0), // set alive flag
             candidateDnCommander.setForListSenders.shape2p.command(id, shape2p, shape2p),

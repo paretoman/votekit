@@ -40,10 +40,6 @@ export default function VoterCircle(
     // use commands to instantiate variables
     self.instantiate = () => {
         const shape2p = { x: shape2.x, y: shape2.y }
-        // set current value because we need to be able to undo by returning to these values
-        // voterCommander.setForListSenders.exists.setCurrentValue(id, 0)
-        // voterCommander.setXYSenderForList.setCurrentValue(id, shape2p)
-        // voterCommander.setWSenderForList.setCurrentValue(id, shape2.w)
 
         const commands = [
             voterCommander.setForListSenders.exists.command(id, 1, 0), // set alive flag
