@@ -34,9 +34,7 @@ export default function DraggableManager(screen, changes, sim) {
     // As a sidenote, it is interesting that we don't need to call model.update here
     // because we are using a game loop that will call model.update.
     const start = function (event) {
-        const mouse = {}
-        mouse.x = event.offsetX
-        mouse.y = event.offsetY
+        const mouse = getMouse(event)
         const extra = (event.isTouch) ? 10 : 0
         const nd = draggables.length
         // We are in the hitboxes of these draggables.
@@ -70,9 +68,7 @@ export default function DraggableManager(screen, changes, sim) {
     }
 
     const move = function (event) {
-        const mouse = {}
-        mouse.x = event.offsetX
-        mouse.y = event.offsetY
+        const mouse = getMouse(event)
         if (drag.isDragging) { // because the mouse is moving
             if (event.isTouch) {
                 event.preventDefault()
@@ -137,16 +133,20 @@ export default function DraggableManager(screen, changes, sim) {
      * @returns {Event} - The same event it received, plus some added properties.
      */
     function passTouch(e) {
-        const rect = e.target.getBoundingClientRect()
-        const w = e.target.clientWidth
-        const h = e.target.clientHeight
-        let x = e.changedTouches[0].clientX - rect.left
-        let y = e.changedTouches[0].clientY - rect.top
-        x = clamp(x, 0, w)
-        y = clamp(y, 0, h)
-        const pass = { offsetX: x, offsetY: y, isTouch: true }
-        Object.assign(e, pass)
+        e.isTouch = true
         return e
+    }
+
+    /** Fix position relative to parent
+     *  https://stackoverflow.com/questions/2614461/javascript-get-mouse-position-relative-to-parent-element
+     */
+    function getMouse(e) {
+        const rect = screen.canvas.getBoundingClientRect()
+        const c = (e.isTouch) ? e.changedTouches[0] : e
+        const x = c.clientX - rect.left
+        const y = c.clientY - rect.top
+        const mouse = { x, y }
+        return mouse
     }
 
     /**
@@ -194,7 +194,18 @@ export default function DraggableManager(screen, changes, sim) {
             if (drag.isDragging) { // because the mouse is moving
                 const dragging = draggables[drag.iDragging]
                 dragging.o.click()
+            } else {
+                // We are not dragging anything, and we clicked,
+                // and we're inside the screen because this could be a click,
+                // so let's do the click action for blank space.
+                clickEmpty(startPos)
             }
         }
+    }
+
+    // Test Point
+
+    function clickEmpty(p) {
+        sim.testVoter.start(p)
     }
 }

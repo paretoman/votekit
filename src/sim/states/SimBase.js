@@ -18,4 +18,5 @@ export default function SimBase(screen, changes, sim) {
     self.update = () => {}
     self.render = () => { }
     self.renderForeground = () => { }
+    self.testVote = () => {}
 }

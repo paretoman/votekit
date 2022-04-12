@@ -136,4 +136,12 @@ export default function GeoElection(screen, menu, election) {
             return color
         })
     }
+
+    self.testVote = (testVoter, candidates) => {
+        const vote = election.testVote(testVoter, candidates)
+        const i = vote.tallyFractions.indexOf(1)
+        const cans = candidates.getCandidates()
+        vote.color = cans[i].color
+        return vote
+    }
 }

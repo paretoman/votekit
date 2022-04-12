@@ -2,6 +2,7 @@
 
 import AreaSummer from './AreaSummer.js'
 import LineSummer from './LineSummer.js'
+import pluralityTestVote from './pluralityTestVote.js'
 
 /**
  * Vote for one.
@@ -13,7 +14,13 @@ import LineSummer from './LineSummer.js'
  * For 1D, an array of objects: {x,w,densityProfile}.
  * @returns votes, an object
  */
-export default function pluralityBallot(candidates, voterGroups, dimensions) {
+export default function pluralityBallot(candidates, voterGroups, dimensions, isTestVoter) {
+    if (isTestVoter) {
+        const tallyFractions = pluralityTestVote(candidates, voterGroups[0], dimensions)
+        const votes = { tallyFractions }
+        return votes
+    }
+
     const summer = (dimensions === 1) ? new LineSummer(candidates) : new AreaSummer(candidates)
 
     // get fraction of votes for each candidate so we can summarize results

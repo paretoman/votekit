@@ -8,6 +8,7 @@ import SimAddCandidates from './SimAddCandidates.js'
 import SimAddCandidateDns from './SimAddCandidateDns.js'
 import addSimControlsLabel from './addSimControlsLabel.js'
 import SimOneDOne from './states/SimOneDOne.js'
+import TestVoter from './TestVoter.js'
 
 /**
  * Simulation is the main task we're trying to accomplish in this program.
@@ -51,12 +52,16 @@ export default function Sim(
         sample: new SimSample(screen, menu, changes, sampleElections, self),
         geoOne: new SimGeoOne(screen, menu, changes, geoElection, self),
     }
+    self.sims = sims
 
     // Entities //
 
     self.simAddVoters = new SimAddVoters(screen, layout, changes, commander, sims, self)
     self.simAddCandidates = new SimAddCandidates(screen, layout, changes, commander, sims, self)
     self.simAddCandidateDns = new SimAddCandidateDns(screen, layout, changes, commander, sims, self)
+
+    self.testVoter = new TestVoter(screen, sims, self)
+    self.testVote = () => sims[self.state].testVote()
 
     // Default Entities //
 

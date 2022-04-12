@@ -55,4 +55,13 @@ export default function Election(menu) {
         const votes = castVotes.pluralityBallot(canGeom, voterGeom, self.dimensions)
         return votes
     }
+
+    self.testVote = (testVoter, candidates) => {
+        const voterGroups = [testVoter]
+        const canList = candidates.getCandidates()
+        const voterGeom = mapVoters(voterGroups)
+        const canGeom = mapCans(canList)
+        const vote = castVotes.pluralityBallot(canGeom, voterGeom, self.dimensions, true)
+        return vote
+    }
 }

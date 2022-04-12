@@ -1,33 +1,13 @@
-import hideOnClickOutside from './hideOnClickOutside.js'
+import tooltipBox from './tooltipBox.js'
 
 export default function tooltipForEntity(entity, screen, sim) {
     // make a html box appear
-    const box = document.createElement('div')
 
-    const offset = 5 // margin plus border
-    box.style.position = 'absolute'
-    if (entity.x > screen.width * 0.5) {
-        box.style.right = `${screen.width - (entity.x + offset)}px`
-    } else {
-        box.style.left = `${entity.x + offset}px`
-    }
-    box.style.top = `${entity.y + offset}px`
-    // box.style.width = '10px'
-    // box.style.height = '10px'
+    const box = tooltipBox(entity, screen)
+
     box.innerText = '- Properties -'
-    box.style.border = '1px solid black'
-    box.style.padding = '4px'
-    box.style.background = 'white'
-    // screen.canvas.parentNode.appendChild(box)
-    // screen.canvas.parentNode.insertBefore(box, screen.canvas)
-    screen.tooltips.appendChild(box)
 
-    const hidebox = () => {
-        // box.style.display = 'none'
-        box.remove()
-    }
-
-    hideOnClickOutside(box, hidebox)
+    // Items //
 
     const items = {}
 
@@ -89,6 +69,10 @@ export default function tooltipForEntity(entity, screen, sim) {
         sim.showGhosts,
     )
     box.appendChild(items.showGhosts.div)
+
+    // Append //
+
+    screen.tooltips.appendChild(box)
 }
 
 function Item(type, name, text, onChange, defaultValue, choices) {

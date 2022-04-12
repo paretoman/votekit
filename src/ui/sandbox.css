@@ -1,4 +1,8 @@
-canvas.background, canvas.foreground, canvas.geoMaps, div.svgDiv, div.gSvgDiv {
+div.screenWrap {
+	position:relative;
+}
+
+div.screenWrap, canvas.geoMaps, div.svgDiv, div.gSvgDiv {
     border: solid black 1px;
 	margin: 4px;
 }
@@ -9,7 +13,7 @@ canvas.background {
 }
 
 div.tooltips {
-	position:relative;
+	position:absolute;
 }
 
 canvas.foreground {

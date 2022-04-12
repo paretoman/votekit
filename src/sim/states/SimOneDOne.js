@@ -45,10 +45,12 @@ export default function SimOneDOne(screen, menu, changes, oneElection, sim) {
         sim.election.setDimensions(1)
         oneVoters.updateXY()
         simCandidateList.updateXY()
+        sim.testVoter.updateXY()
     }
 
     self.exit = () => {
         sim.simAddCandidates.canButton.hide()
+        sim.testVoter.setE(0)
     }
 
     self.update = () => {
@@ -57,9 +59,12 @@ export default function SimOneDOne(screen, menu, changes, oneElection, sim) {
         changes.clear()
         oneElection.updateTallies(oneVoters, simCandidateList)
         oneVoters.update(simCandidateList)
+        sim.testVoter.update()
         screen.clear()
         self.render()
     }
+
+    self.testVote = () => oneElection.testVote(sim.testVoter, simCandidateList)
 
     self.render = () => {
         oneVoters.render()
@@ -68,5 +73,6 @@ export default function SimOneDOne(screen, menu, changes, oneElection, sim) {
         // sampleElections.renderForeground()
         oneVoters.renderForeground()
         simCandidateList.renderForeground()
+        sim.testVoter.renderForeground()
     }
 }

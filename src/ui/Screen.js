@@ -38,10 +38,16 @@ export default function Screen(w, h, layout) {
     self.gctx = self.geoMaps.getContext('2d')
 
     const clearDiv = document.createElement('div')
-    layout.newElement('clearDiv', clearDiv)
-    layout.newElement('screen', self.canvas)
-    layout.newElement('tooltips', self.tooltips)
-    layout.newElement('foreground', self.foreground)
+
+    // wrap
+    self.wrap = document.createElement('div')
+    self.wrap.setAttribute('class', 'screenWrap')
+    self.wrap.appendChild(clearDiv)
+    self.wrap.appendChild(self.canvas)
+    self.wrap.appendChild(self.tooltips)
+    self.wrap.appendChild(self.foreground)
+
+    layout.newElement('screenWrap', self.wrap)
     layout.newElement('geoMaps', self.geoMaps)
 
     self.noBuffers = false
@@ -56,8 +62,11 @@ export default function Screen(w, h, layout) {
     self.canvas.style.width = `${w}px`
     self.canvas.style.height = `${h}px`
 
+    self.wrap.style.width = `${w}px`
+    self.wrap.style.height = `${h}px`
+
     self.tooltips.style.width = `${w}px`
-    self.tooltips.style.height = '0px'
+    self.tooltips.style.height = `${h}px`
 
     self.foreground.width = w * self.pixelRatio // measured in device pixels
     self.foreground.height = h * self.pixelRatio
@@ -104,18 +113,18 @@ export default function Screen(w, h, layout) {
     self.eventHandlers = new EventHandlers()
     const { handlers } = self.eventHandlers
 
-    self.foreground.onmousedown = (e) => handlers.start(e)
-    self.foreground.onmousemove = (e) => handlers.move(e)
-    self.foreground.onmouseup = (e) => handlers.end(e)
-    self.foreground.addEventListener('touchmove', (e) => handlers.touchmove(e))
-    self.foreground.addEventListener('touchstart', (e) => handlers.touchstart(e))
-    self.foreground.addEventListener('touchend', (e) => handlers.touchend(e))
+    self.wrap.onmousedown = (e) => handlers.start(e)
+    self.wrap.onmousemove = (e) => handlers.move(e)
+    self.wrap.onmouseup = (e) => handlers.end(e)
+    self.wrap.addEventListener('touchmove', (e) => handlers.touchmove(e))
+    self.wrap.addEventListener('touchstart', (e) => handlers.touchstart(e))
+    self.wrap.addEventListener('touchend', (e) => handlers.touchend(e))
 
     // mouse up outside of canvas
     const current = document.onmouseup
     document.onmouseup = (e) => {
         if (current) current(e)
-        self.foreground.onmouseup(e)
+        self.wrap.onmouseup(e)
     }
 }
 

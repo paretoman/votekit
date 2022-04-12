@@ -31,7 +31,7 @@ export default function VoterCircle(
     self.shape1 = {}
     self.shape2 = {}
 
-    // Get assigned a id by the voterRegistrar list manager
+    // Get assigned an id by the voterRegistrar list manager
 
     const id = voterRegistrar.new(self)
 
@@ -148,7 +148,8 @@ export default function VoterCircle(
 
     // Rendering
 
-    const circle = new CircleGraphic(self, 13, '#999', screen)
+    self.color = '#999'
+    const circle = new CircleGraphic(self, 13, screen)
     self.circle = circle
 
     self.renderForeground = () => {

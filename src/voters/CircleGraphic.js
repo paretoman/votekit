@@ -15,7 +15,7 @@ import { Tween } from '../lib/snowpack/build/snowpack/pkg/@tweenjs/tweenjs.js'
  * @param {Screen} screen - something with .ctx to draw to.
  * @constructor
  */
-export default function CircleGraphic(parent, r, color, screen) {
+export default function CircleGraphic(parent, r, screen) {
     const self = this
 
     self.r = r
@@ -35,6 +35,7 @@ export default function CircleGraphic(parent, r, color, screen) {
     // Graphics component
     self.render = function () {
         const { fctx } = screen
+        const { color } = parent
 
         fctx.save()
 

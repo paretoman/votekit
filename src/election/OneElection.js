@@ -22,4 +22,12 @@ export default function OneElection(screen, menu, election) {
         const votes = election.castVotes(oneVoters, candidates)
         candidates.setCandidateFractions(votes.tallyFractions)
     }
+
+    self.testVote = (testVoter, candidates) => {
+        const vote = election.testVote(testVoter, candidates)
+        const i = vote.tallyFractions.indexOf(1)
+        const cans = candidates.getCandidates()
+        vote.color = cans[i].color
+        return vote
+    }
 }
