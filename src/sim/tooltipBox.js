@@ -23,12 +23,25 @@ export default function tooltipBox(entity, screen) {
     box.style.padding = '4px'
     box.style.background = 'white'
 
+    let pinned = false
+    /**
+     * Set pinned to true or false, to keep the box persistent.
+     * @param {Boolean} b
+     */
+    const setPin = (b) => {
+        pinned = b
+    }
+
     const hidebox = () => {
         // box.style.display = 'none'
-        box.remove()
+        if (!pinned) {
+            box.remove()
+            return true
+        }
+        return false
     }
 
     hideOnClickOutside(box, hidebox)
 
-    return { box, update }
+    return { box, update, setPin }
 }

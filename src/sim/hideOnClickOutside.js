@@ -5,9 +5,9 @@ export default function hideOnClickOutside(element, hide) {
     const outsideClickListener = (event) => {
         if (!element.contains(event.target) && isVisible(element)) {
             // or use: event.target.closest(selector) === null
-            hide()
+            const success = hide()
             // eslint-disable-next-line no-use-before-define
-            removeClickListener()
+            if (success) removeClickListener()
         }
     }
 
