@@ -3,7 +3,8 @@ import tooltipBox from './tooltipBox.js'
 export default function tooltipForEntity(entity, screen, sim) {
     // make a html box appear
 
-    const box = tooltipBox(entity, screen)
+    const tbox = tooltipBox(entity, screen)
+    const { box } = tbox
 
     box.innerText = '- Properties -'
 

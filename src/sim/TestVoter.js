@@ -39,7 +39,7 @@ export default function TestVoter(screen, sims, sim) {
         } else {
             self.setAction.shape2p(p)
         }
-        self.click()
+        self.update()
     }
     /** Do this when entering a state because x and y change. */
     self.updateXY = () => {
@@ -78,7 +78,7 @@ export default function TestVoter(screen, sims, sim) {
 
     // Rendering
 
-    let tooltip = null
+    let tooltip = {}
 
     self.update = () => {
         // who would this test point vote for?
@@ -87,14 +87,16 @@ export default function TestVoter(screen, sims, sim) {
 
         self.color = vote.color
 
-        // tooltip.update(vote)
+        if (tooltip.box) {
+            tooltip.update(vote)
+        }
 
         return vote
     }
 
     self.click = () => {
         const vote = self.update()
-        if (tooltip) tooltip.remove()
+        if (tooltip.box) tooltip.box.remove()
         tooltip = tooltipForTestVoter(self, screen, vote)
     }
 

@@ -34,6 +34,11 @@ export default function DraggableManager(screen, changes, sim) {
     // As a sidenote, it is interesting that we don't need to call model.update here
     // because we are using a game loop that will call model.update.
     const start = function (event) {
+        // don't interact with stuff underneath a tooltip
+        if (event.target.closest('.tooltipBox') !== null) {
+            return
+        }
+
         const mouse = getMouse(event)
         const extra = (event.isTouch) ? 10 : 0
         const nd = draggables.length
