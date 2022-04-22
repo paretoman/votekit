@@ -126,6 +126,7 @@ export default function DraggableManager(screen, changes, sim) {
         const pass = passTouch(e)
         move(pass)
         end(pass)
+        e.preventDefault() // prevent mousedown from firing
     }
 
     self.eventHandlers = {
