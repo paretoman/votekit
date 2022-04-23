@@ -18,8 +18,8 @@ export default function GeoElection(screen, menu, election) {
     self.updateVotes = (voterGeoList, candidateSimList) => {
         const cans = candidateSimList.getCandidates()
 
-        if (voterGeoList.getVoterSimGroups().length === 0) return
-        if (cans.length === 0) return
+        if (voterGeoList.getVoterSimGroups().length === 0) return { error: 'no voters' }
+        if (cans.length === 0) return { error: 'no candidates' }
 
         const resultsStatewide = runStatewideElection(voterGeoList, cans)
 
