@@ -18,12 +18,12 @@ import VizGeo2D from '../../viz/VizGeo2D.js'
  * @param {Sim} sim
  * @constructor
  */
-export default function SimGeoOne(screen, menu, changes, geoElection, sim) {
+export default function SimGeoOne(screen, menu, changes, electionGeo, sim) {
     const self = this
 
     SimBase.call(self, screen, changes, sim)
 
-    const voterGeoList = new VoterGeoList(screen, geoElection, sim)
+    const voterGeoList = new VoterGeoList(screen, electionGeo, sim)
 
     const candidateSimList = new CandidateSimList(sim)
 
@@ -67,14 +67,14 @@ export default function SimGeoOne(screen, menu, changes, geoElection, sim) {
         }
         changes.clear()
         voterGeoList.updateVoters() // can make this only trigger when voters change
-        const geoElectionResults = geoElection.updateVotes(voterGeoList, candidateSimList)
+        const geoElectionResults = electionGeo.updateVotes(voterGeoList, candidateSimList)
         vizGeo2D.update(geoElectionResults)
         sim.testVoter.update()
         screen.clear()
         self.render()
     }
 
-    self.testVote = () => geoElection.testVote(sim.testVoter, candidateSimList)
+    self.testVote = () => electionGeo.testVote(sim.testVoter, candidateSimList)
 
     self.render = () => {
         vizGeo2D.render()

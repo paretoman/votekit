@@ -14,11 +14,11 @@ import VoterSim from '../../voters/VoterSim.js'
  * @param {Screen} screen
  * @param {Menu} menu
  * @param {Changes} changes
- * @param {SimElection} sampleElections
+ * @param {ElectionSample} electionSample
  * @param {Sim} sim
  * @constructor
  */
-export default function SimSample(screen, menu, changes, sampleElections, sim) {
+export default function SimSample(screen, menu, changes, electionSample, sim) {
     const self = this
 
     SimBase.call(self, screen, changes, sim)
@@ -52,7 +52,7 @@ export default function SimSample(screen, menu, changes, sampleElections, sim) {
 
     self.update = () => {
         if (changes.checkNone()) {
-            const addResult = sampleElections.addSim(sampleVoters, candidateSimList)
+            const addResult = electionSample.addSim(sampleVoters, candidateSimList)
             const { noChange, newPoints, points } = addResult
             // changes.clear()
             if (!noChange) {
@@ -66,7 +66,7 @@ export default function SimSample(screen, menu, changes, sampleElections, sim) {
             changes.clear()
             candidateSimList.startSampler()
             vizSample2D.start()
-            sampleElections.startSim()
+            electionSample.startSim()
             screen.clear()
             self.render()
         }

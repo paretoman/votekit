@@ -12,7 +12,7 @@ import colorBlend, { toRGBA } from './colorBlend.js'
  * @param {Election} election
  * @constructor
  */
-export default function GeoElection(election) {
+export default function ElectionGeo(election) {
     const self = this
 
     self.updateVotes = (voterGeoList, candidateSimList) => {

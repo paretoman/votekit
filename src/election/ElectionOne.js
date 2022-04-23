@@ -8,7 +8,7 @@
  * @param {Election} election
  * @constructor
  */
-export default function OneElection(election) {
+export default function ElectionOne(election) {
     const self = this
 
     self.updateTallies = function (oneVoters, candidates) {

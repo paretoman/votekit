@@ -22,7 +22,7 @@ import VizOne1D from '../../viz/VizOne1D.js'
  * @param {Sim} sim
  * @constructor
  */
-export default function SimOne1D(screen, menu, changes, oneElection, sim) {
+export default function SimOne1D(screen, menu, changes, electionOne, sim) {
     const self = this
 
     SimBase.call(self, screen, changes, sim)
@@ -60,20 +60,20 @@ export default function SimOne1D(screen, menu, changes, oneElection, sim) {
         if (changes.checkNone()) return
         // clear changes, reset to []
         changes.clear()
-        oneElection.updateTallies(oneVoters, candidateSimList)
+        electionOne.updateTallies(oneVoters, candidateSimList)
         vizOne1D.update()
         sim.testVoter.update()
         screen.clear()
         self.render()
     }
 
-    self.testVote = () => oneElection.testVote(sim.testVoter, candidateSimList)
+    self.testVote = () => electionOne.testVote(sim.testVoter, candidateSimList)
 
     self.render = () => {
         vizOne1D.render()
     }
     self.renderForeground = () => {
-        // sampleElections.renderForeground()
+        // electionSample.renderForeground()
         oneVoters.renderForeground()
         candidateSimList.renderForeground()
         sim.testVoter.renderForeground()

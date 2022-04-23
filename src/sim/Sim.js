@@ -9,9 +9,9 @@ import SimAddCandidateDns from './SimAddCandidateDns.js'
 import addSimControlsLabel from './addSimControlsLabel.js'
 import SimOne1D from './states/SimOne1D.js'
 import TestVoter from './TestVoter.js'
-import OneElection from '../election/OneElection.js'
-import SampleElections from '../election/SampleElections.js'
-import GeoElection from '../election/GeoElection.js'
+import ElectionOne from '../election/ElectionOne.js'
+import ElectionSample from '../election/ElectionSample.js'
+import ElectionGeo from '../election/ElectionGeo.js'
 import Election from '../election/Election.js'
 
 /**
@@ -39,20 +39,20 @@ export default function Sim(
     // Components //
 
     const election = new Election(menu)
-    const oneElection = new OneElection(election)
-    const sampleElections = new SampleElections(election)
-    const geoElection = new GeoElection(election)
+    const electionOne = new ElectionOne(election)
+    const electionSample = new ElectionSample(election)
+    const electionGeo = new ElectionGeo(election)
 
     self.election = election
 
     // States //
 
     const sims = {
-        one2D: new SimOne2D(screen, menu, changes, oneElection, self),
-        one1D: new SimOne1D(screen, menu, changes, oneElection, self),
+        one2D: new SimOne2D(screen, menu, changes, electionOne, self),
+        one1D: new SimOne1D(screen, menu, changes, electionOne, self),
         // eslint-disable-next-line max-len
-        sample: new SimSample(screen, menu, changes, sampleElections, self),
-        geoOne: new SimGeoOne(screen, menu, changes, geoElection, self),
+        sample: new SimSample(screen, menu, changes, electionSample, self),
+        geoOne: new SimGeoOne(screen, menu, changes, electionGeo, self),
     }
     self.sims = sims
 

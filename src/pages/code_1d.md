@@ -35,7 +35,7 @@ When casting a ballot, we need to know which coordinates to use for the candidat
 ## Election Dimension
 The Election class handles deciding what geometry to send to the ballot caster. It will send p1 or p2, if 1D or 2D, respectively.
 
-## SampleElections
+## ElectionSample
 Right now, we're using the same p2 as {x,y}, but in the future, we might have to revisit our choice of variables for rendering points. For example, we might try zooming in.
 
 ## Double Sandbox

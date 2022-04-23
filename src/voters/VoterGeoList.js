@@ -8,10 +8,10 @@ import VoterSimList from './VoterSimList.js'
 /**
  * VoterGeoList inherits from VoterSimList.
  * @param {Screen} screen
- * @param {GeoElection} geoElection
+ * @param {ElectionGeo} electionGeo
  * @constructor
  */
-export default function VoterGeoList(screen, geoElection, sim) {
+export default function VoterGeoList(screen, electionGeo, sim) {
     const self = this
 
     // VoterGeoList inherits from VoterSimList
