@@ -8,7 +8,7 @@ Made a super class, SimVoterList. GeoVoters inherits from SimVoterList. There is
 
 SimVoterList is different from Registrar. Registrar just assigns an id.
 
-An example of a SimVoter is a GeoVoterBasis or a OneVoterCircle. This is an inheritance structure. 
+An example of a SimVoter is a GeoVoterBasis. This is an inheritance structure. 
 
 A SimVoter has functionality for a voter that is specific to a simulation. Each SimVoter has a voter component. The voter component is a VoterShape, for now. This voter component is common to all simulations.
 
@@ -21,7 +21,6 @@ SimVoterList
 
 SimVoter
 - GeoVoterBasis
-- OneVoterCircle
 
 ### Calls
 

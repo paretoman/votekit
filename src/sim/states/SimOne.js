@@ -1,10 +1,11 @@
 /** @module */
 
-import OneVoterCircle from '../../viz/OneViz.js'
 import SimCandidate from '../../candidates/SimCandidate.js'
 import SimCandidateList from '../../candidates/SimCandidateList.js'
 import SimVoterList from '../../voters/SimVoterList.js'
 import SimBase from './SimBase.js'
+import SimVoter from '../../voters/SimVoter.js'
+import OneViz from '../../viz/OneViz.js'
 
 /**
  * Simulate one election with
@@ -31,8 +32,10 @@ export default function SimOne(screen, menu, changes, oneElection, sim) {
     }
 
     self.addSimVoterCircle = (voterShape) => {
-        oneVoters.newVoterGroup(new OneVoterCircle(voterShape, self.dragm, screen))
+        oneVoters.newVoterGroup(new SimVoter(voterShape, self.dragm, screen))
     }
+
+    const oneViz = new OneViz(screen)
 
     const superEnter = self.enter
     self.enter = () => {
@@ -54,7 +57,7 @@ export default function SimOne(screen, menu, changes, oneElection, sim) {
         // clear changes, reset to []
         changes.clear()
         oneElection.updateTallies(oneVoters, simCandidateList)
-        oneVoters.update(simCandidateList)
+        oneViz.update(oneVoters, simCandidateList)
         sim.testVoter.update()
         screen.clear()
         self.render()
@@ -63,7 +66,7 @@ export default function SimOne(screen, menu, changes, oneElection, sim) {
     self.testVote = () => oneElection.testVote(sim.testVoter, simCandidateList)
 
     self.render = () => {
-        oneVoters.render()
+        oneViz.render()
     }
     self.renderForeground = () => {
         // sampleElections.renderForeground()

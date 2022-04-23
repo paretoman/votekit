@@ -2,28 +2,26 @@
 
 import VoronoiGroup from './VoronoiGroup.js'
 
-import SimVoter from '../voters/SimVoter.js'
-
 /**
- * Adds functionality for showing votes
- * @param {VoterShape} voterShape
- * @param {DraggableManager} dragm
+ * Show votes
  * @param {Screen} screen
  * @constructor
  */
-export default function OneVoterCircle(voterShape, dragm, screen) {
+export default function OneViz(screen) {
     const self = this
-    SimVoter.call(self, voterShape, dragm)
 
-    const voronoiGroup = new VoronoiGroup(voterShape, screen)
+    let voronoiGroups = []
 
-    self.update = function (candidates) {
-        voronoiGroup.update(candidates)
+    self.update = function (oneVoters, candidates) {
+        const voterGroups = oneVoters.getVoterGroups()
+        voronoiGroups = voterGroups.map(
+            (voterShape) => new VoronoiGroup(voterShape, candidates, screen),
+        )
     }
 
-    // Graphics component
     self.render = function () {
-        // circle
-        voronoiGroup.render()
+        voronoiGroups.forEach(
+            (voronoiGroup) => voronoiGroup.render(),
+        )
     }
 }

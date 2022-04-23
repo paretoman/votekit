@@ -6,7 +6,7 @@
  * Each SimVoter has a voter component.
  * The voter component is a VoterShape, for now.
  * This voter component is common to all simulations.
- * An example of a SimVoter is a GeoVoterBasis or a OneVoterCircle.
+ * An example of a SimVoter is a GeoVoterBasis.
  * This is an inheritance structure.
  * @param {VoterShape} voterShape - a voter component that SimVoter builds upon.
  * @param {DraggableManager} dragm
