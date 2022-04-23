@@ -9,6 +9,10 @@ import SimAddCandidateDns from './SimAddCandidateDns.js'
 import addSimControlsLabel from './addSimControlsLabel.js'
 import SimOne1D from './states/SimOne1D.js'
 import TestVoter from './TestVoter.js'
+import OneElection from '../election/OneElection.js'
+import SampleElections from '../election/SampleElections.js'
+import GeoElection from '../election/GeoElection.js'
+import Election from '../election/Election.js'
 
 /**
  * Simulation is the main task we're trying to accomplish in this program.
@@ -19,9 +23,6 @@ import TestVoter from './TestVoter.js'
  * @param {Screen} screen
  * @param {Menu} menu
  * @param {Changes} changes
- * @param {OneElection} oneElection
- * @param {SampleElections} sampleElections
- * @param {GeoElection} geoElection
  * @param {Commander} commander
  *
  * @constructor
@@ -30,16 +31,17 @@ export default function Sim(
     screen,
     menu,
     changes,
-    election,
-    oneElection,
-    sampleElections,
-    geoElection,
     commander,
     layout,
 ) {
     const self = this
 
     // Components //
+
+    const election = new Election(menu)
+    const oneElection = new OneElection(election)
+    const sampleElections = new SampleElections(election)
+    const geoElection = new GeoElection(election)
 
     self.election = election
 

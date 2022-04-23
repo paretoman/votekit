@@ -10,7 +10,7 @@
  * @param {Election} election
  * @constructor
  */
-export default function SampleElections(screen, menu, election) {
+export default function SampleElections(election) {
     const self = this
 
     const maxPoints = 5000

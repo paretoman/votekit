@@ -4,12 +4,8 @@ import Changes from './Changes.js'
 import Screen from './Screen.js'
 import addSVGOutput from './addSVGOutput.js'
 import Menu from '../menu/Menu.js'
-import Election from '../election/Election.js'
 import Sim from '../sim/Sim.js'
-import SampleElections from '../election/SampleElections.js'
-import GeoElection from '../election/GeoElection.js'
 import Layout from './Layout.js'
-import OneElection from '../election/OneElection.js'
 import Commander from '../command/Commander.js'
 import addUndo from '../command/addUndo.js'
 import addSaveConfigToText from '../command/addSaveConfigToText.js'
@@ -56,16 +52,7 @@ export default function sandbox(config, comMessenger, sandboxURL) {
 
     addSVGOutput(screen, draw, layout)
 
-    const election = new Election(menu)
-
-    const oneElection = new OneElection(screen, menu, election)
-
-    const sampleElections = new SampleElections(screen, menu, election)
-
-    const geoElection = new GeoElection(screen, menu, election)
-
-    // eslint-disable-next-line max-len
-    const sim = new Sim(screen, menu, changes, election, oneElection, sampleElections, geoElection, commander, layout)
+    const sim = new Sim(screen, menu, changes, commander, layout)
 
     commander.loadConfig(config)
     commander.clearHistory()
