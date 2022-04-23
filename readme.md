@@ -2,9 +2,9 @@
 
 ## Try
 
-[Here is a simple example](https://www.howtofixtheelection.com/votekit/src/pages) running the source code in the browser, so you can see how it works. This is what I run when I'm coding:
+[Here is a simple example](https://www.howtofixtheelection.com/votekit/src) running the source code in the browser, so you can see how it works. This is what I run when I'm coding:
 
-* https://www.howtofixtheelection.com/votekit/src/pages
+* https://www.howtofixtheelection.com/votekit/src
 
 [Make edits and save as a fork on codesandbox](https://codesandbox.io/s/github/paretoman/votekit). This is pretty cool, you can just jump right into the code and make new things and save them. Much better than F12.
 
@@ -41,6 +41,10 @@ Another way to add this distribution bundle is to put this script tag and these 
 For any of these methods, the script will run and find any HTMLElements, such as a div, with the class "sandbox" and insert a simulation sandbox as its neighbor under the same parent. You can use the data- attributes to pass data to the sandbox to configure it.
 
 ## Develop
+
+[Architecture](https://www.howtofixtheelection.com/votekit/src/pages/architecture): 
+
+* https://www.howtofixtheelection.com/votekit/src/pages/architecture
 
 To make changes, use a good code editor and launch a web server to view ./src/pages/index.html. 
 
