@@ -35,7 +35,7 @@ export default function SimOne(screen, menu, changes, oneElection, sim) {
         oneVoters.newVoterGroup(new VoterSim(voterShape, self.dragm, screen))
     }
 
-    const vizOne2D = new VizOne2D(screen)
+    const vizOne2D = new VizOne2D(oneVoters, simCandidateList, screen)
 
     const superEnter = self.enter
     self.enter = () => {
@@ -57,7 +57,7 @@ export default function SimOne(screen, menu, changes, oneElection, sim) {
         // clear changes, reset to []
         changes.clear()
         oneElection.updateTallies(oneVoters, simCandidateList)
-        vizOne2D.update(oneVoters, simCandidateList)
+        vizOne2D.update()
         sim.testVoter.update()
         screen.clear()
         self.render()
