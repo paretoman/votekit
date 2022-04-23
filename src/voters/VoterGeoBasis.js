@@ -10,7 +10,7 @@ import VoterSim from './VoterSim.js'
  * @param {screen} screen - draw to the screen
  * @constructor
  */
-export default function GeoVoterBasis(voterShape, dragm, screen) {
+export default function VoterGeoBasis(voterShape, dragm, screen) {
     const self = this
     VoterSim.call(self, voterShape, dragm)
 

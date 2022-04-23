@@ -1,9 +1,9 @@
 /** @module */
 
-import GeoVoterBasis from '../../voters/GeoVoterBasis.js'
+import VoterGeoBasis from '../../voters/VoterGeoBasis.js'
 import SimCandidate from '../../candidates/SimCandidate.js'
 import SimCandidateList from '../../candidates/SimCandidateList.js'
-import GeoVoters from '../../voters/GeoVoters.js'
+import VoterGeoList from '../../voters/VoterGeoList.js'
 import SimBase from './SimBase.js'
 /**
  * Simulate one election with
@@ -22,7 +22,7 @@ export default function SimGeoOne(screen, menu, changes, geoElection, sim) {
 
     SimBase.call(self, screen, changes, sim)
 
-    const geoVoters = new GeoVoters(screen, geoElection, sim)
+    const voterGeoList = new VoterGeoList(screen, geoElection, sim)
 
     const simCandidateList = new SimCandidateList(sim)
 
@@ -31,7 +31,7 @@ export default function SimGeoOne(screen, menu, changes, geoElection, sim) {
     }
 
     self.addSimVoterCircle = (voterShape) => {
-        geoVoters.newVoterGroup(new GeoVoterBasis(voterShape, self.dragm, screen))
+        voterGeoList.newVoterGroup(new VoterGeoBasis(voterShape, self.dragm, screen))
     }
 
     changes.add(['districts'])
@@ -42,7 +42,7 @@ export default function SimGeoOne(screen, menu, changes, geoElection, sim) {
         screen.showGeoMaps()
         sim.simAddCandidates.canButton.show()
         sim.election.setDimensions(2)
-        geoVoters.updateXY()
+        voterGeoList.updateXY()
         simCandidateList.updateXY()
         sim.testVoter.updateXY()
     }
@@ -60,11 +60,11 @@ export default function SimGeoOne(screen, menu, changes, geoElection, sim) {
         if (changes.checkNone()) return
         // clear changes, reset to []
         if (changes.check(['districts', 'simType'])) {
-            geoVoters.updateDistricts()
+            voterGeoList.updateDistricts()
         }
         changes.clear()
-        geoVoters.updateVoters() // can make this only trigger when voters change
-        geoElection.updateVotes(geoVoters, simCandidateList, sim.dimensions)
+        voterGeoList.updateVoters() // can make this only trigger when voters change
+        geoElection.updateVotes(voterGeoList, simCandidateList, sim.dimensions)
         sim.testVoter.update()
         screen.clear()
         self.render()
@@ -73,11 +73,11 @@ export default function SimGeoOne(screen, menu, changes, geoElection, sim) {
     self.testVote = () => geoElection.testVote(sim.testVoter, simCandidateList)
 
     self.render = () => {
-        geoVoters.render()
+        voterGeoList.render()
     }
     self.renderForeground = () => {
         simCandidateList.renderForeground()
-        geoVoters.renderForeground()
+        voterGeoList.renderForeground()
         sim.testVoter.renderForeground()
     }
 }

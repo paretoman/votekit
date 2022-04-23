@@ -6,7 +6,7 @@
  * Each VoterSim has a voter component.
  * The voter component is a VoterShape, for now.
  * This voter component is common to all simulations.
- * An example of a VoterSim is a GeoVoterBasis.
+ * An example of a VoterSim is a VoterGeoBasis.
  * This is an inheritance structure.
  * @param {VoterShape} voterShape - a voter component that VoterSim builds upon.
  * @param {DraggableManager} dragm

@@ -4,11 +4,11 @@ layout: default
 ---
 
 # Sim Architecture for Voters
-Made a super class, VoterSimList. GeoVoters inherits from VoterSimList. There is no OneVoters because there isn't any additional functionality that OneVoters would need.
+Made a super class, VoterSimList. VoterGeoList inherits from VoterSimList. There is no OneVoters because there isn't any additional functionality that OneVoters would need.
 
 VoterSimList is different from Registrar. Registrar just assigns an id.
 
-An example of a VoterSim is a GeoVoterBasis. This is an inheritance structure. 
+An example of a VoterSim is a VoterGeoBasis. This is an inheritance structure. 
 
 A VoterSim has functionality for a voter that is specific to a simulation. Each VoterSim has a voter component. The voter component is a VoterShape, for now. This voter component is common to all simulations.
 
@@ -17,10 +17,10 @@ A VoterSim has functionality for a voter that is specific to a simulation. Each 
 ### Inheritance
 
 VoterSimList
-- GeoVoters
+- VoterGeoList
 
 VoterSim
-- GeoVoterBasis
+- VoterGeoBasis
 
 ### Calls
 

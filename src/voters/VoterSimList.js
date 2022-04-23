@@ -2,7 +2,7 @@
 
 /**
  * Made a super class, VoterSimList.
- * GeoVoters inherits from VoterSimList.
+ * VoterGeoList inherits from VoterSimList.
  * There is no OneVoters because there isn't any additional functionality that OneVoters would need.
  * VoterSimList is different from Voters because it is a list of simVoters.
  * @constructor
