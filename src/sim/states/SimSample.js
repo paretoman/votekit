@@ -1,7 +1,7 @@
 /** @module */
 
-import CandidateDnSimList from '../../candidates/CandidateDnSimList.js'
-import CandidateDnSim from '../../candidates/CandidateDnSim.js'
+import CandidateDnSimList from '../../candidateDns/CandidateDnSimList.js'
+import CandidateDnSim from '../../candidateDns/CandidateDnSim.js'
 import VizSample2D from '../../viz/VizSample2D.js'
 import VoterSimList from '../../voters/VoterSimList.js'
 import SimBase from './SimBase.js'

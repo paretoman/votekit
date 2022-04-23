@@ -1,5 +1,5 @@
-import CandidateDn from '../candidates/CandidateDn.js'
-import CandidateDnCommander from '../candidates/CandidateDnCommander.js'
+import CandidateDn from '../candidateDns/CandidateDn.js'
+import CandidateDnCommander from '../candidateDns/CandidateDnCommander.js'
 import CreateAddCandidateDistribution from './CreateAddCandidateDistribution.js'
 import Registrar from './Registrar.js'
 

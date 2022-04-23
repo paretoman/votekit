@@ -1,7 +1,7 @@
 /** @module */
 
 import tooltipForEntity from '../sim/tooltipForEntity.js'
-import SquareGraphic from './SquareGraphic.js'
+import SquareGraphic from '../candidates/SquareGraphic.js'
 
 /**
  * This represents a spatial distribution of candidates.
