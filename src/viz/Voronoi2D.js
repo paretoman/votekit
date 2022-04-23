@@ -16,7 +16,7 @@ import { Delaunay } from '../lib/snowpack/build/snowpack/pkg/d3-delaunay.js'
  * @param {Screen} screen
  * @constructor
  */
-export default function VoronoiGroup(voterGroup, candidates, screen) {
+export default function Voronoi2D(voterGroup, candidates, screen) {
     const self = this
 
     const cans = candidates.getCandidates()

@@ -15,7 +15,7 @@ export default function OneElection(screen, menu, election) {
         // only update the tallies for each candidate so they can be shown
 
         // Voters cast votes for candidates.
-        // There is also a separate graphical representation in VoronoiGroup.js
+        // There is also a separate graphical representation in Voronoi2D.js
 
         if (oneVoters.getVoterGroups().length === 0) return
         if (candidates.getCandidates().length === 0) return

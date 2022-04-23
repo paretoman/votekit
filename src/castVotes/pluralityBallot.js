@@ -7,7 +7,7 @@ import pluralityTestVote from './pluralityTestVote.js'
 /**
  * Vote for one.
  * Voters cast votes for candidates.
- * There is also a separate graphical representation in VoronoiGroup.js.
+ * There is also a separate graphical representation in Voronoi2D.js.
  * @param {Objects[]} candidates - For 2D, an array of objects: {x,y}.
  * For 1D, an array of objects: {x}.
  * @param {Objects[]} voterGroups - For 2D, an array of objects: {x,y,w}.

@@ -8,8 +8,8 @@ This describes how 1D simulations were added to the 2D simulations.
 
 ## New Classes
 * SimOneDOne is a subclass of SimBase.
-* OneDVoterBlock is a subclass of SimVoter and very similar to OneVoterCircle.
-* OneDVoronoi is a component of OneDVoterBlock.
+* One1DViz is very similar to One2DViz.
+* Voronoi1D is called by One1DViz.
 
 ## Maybe new in future.
 OneDCandidate would be a sibling of SimCandidate but maybe it overwrites renderForeground and instead has render1DForeground.

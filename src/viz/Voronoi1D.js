@@ -11,13 +11,13 @@ import { Delaunay } from '../lib/snowpack/build/snowpack/pkg/d3-delaunay.js'
 
 /**
  * Draw Voronoi cells to show votes.
- * OneDVoronoi is a component of OneDVoterBlock.
+ * Voronoi1D is called by One1DViz.
  * @param {VoterGroup} voterGroup
  * @param {Election} election
  * @param {Screen} screen
  * @constructor
  */
-export default function OneDVoronoi(voterGroup, screen) {
+export default function Voronoi1D(voterGroup, screen) {
     const self = this
 
     let cans

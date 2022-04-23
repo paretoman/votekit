@@ -1,21 +1,20 @@
 /** @module */
 
-import OneDVoronoi from './OneDVoronoi.js'
-import SimVoter from './SimVoter.js'
+import Voronoi1D from './Voronoi1D.js'
+import SimVoter from '../voters/SimVoter.js'
 
 /**
  * Adds functionality for showing votes.
- * OneDVoterBlock is a subclass of SimVoter.
  * @param {VoterShape} voterShape
  * @param {DraggableManager} dragm
  * @param {Screen} screen
  * @constructor
  */
-export default function OneDVoterBlock(voterShape, dragm, screen) {
+export default function One1DViz(voterShape, dragm, screen) {
     const self = this
     SimVoter.call(self, voterShape, dragm)
 
-    const oneDVoronoiBlock = new OneDVoronoi(voterShape, screen)
+    const oneDVoronoiBlock = new Voronoi1D(voterShape, screen)
 
     self.update = function (candidates) {
         oneDVoronoiBlock.update(candidates)

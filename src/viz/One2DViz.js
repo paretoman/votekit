@@ -1,13 +1,13 @@
 /** @module */
 
-import VoronoiGroup from './VoronoiGroup.js'
+import Voronoi2D from './Voronoi2D.js'
 
 /**
  * Show votes
  * @param {Screen} screen
  * @constructor
  */
-export default function OneViz(screen) {
+export default function One2DViz(screen) {
     const self = this
 
     let voronoiGroups = []
@@ -15,7 +15,7 @@ export default function OneViz(screen) {
     self.update = function (oneVoters, candidates) {
         const voterGroups = oneVoters.getVoterGroups()
         voronoiGroups = voterGroups.map(
-            (voterShape) => new VoronoiGroup(voterShape, candidates, screen),
+            (voterShape) => new Voronoi2D(voterShape, candidates, screen),
         )
     }
 
