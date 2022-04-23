@@ -30,8 +30,8 @@ export default function SimSample(screen, menu, changes, sampleElections, sim) {
 
     const sampleVoters = new SimVoterList(sim)
 
-    self.addSimVoterCircle = (voterCircle) => {
-        sampleVoters.newVoterGroup(new SampleVoterCircle(voterCircle, self.dragm, screen))
+    self.addSimVoterCircle = (voterShape) => {
+        sampleVoters.newVoterGroup(new SampleVoterCircle(voterShape, self.dragm, screen))
     }
 
     const superEnter = self.enter

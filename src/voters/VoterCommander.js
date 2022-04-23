@@ -8,7 +8,7 @@
  * @param {SimAddVoters} simAddVoters
  * @constructor
  */
-export default function VoterCircleCommander(voterRegistrar, commander, simAddVoters) {
+export default function VoterCommander(voterRegistrar, commander, simAddVoters) {
     const self = this
 
     const prefix = 'voters'

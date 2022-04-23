@@ -34,8 +34,8 @@ export default function SimOneDOne(screen, menu, changes, oneElection, sim) {
         simCandidateList.newCandidate(new SimCandidate(candidate, self.dragm))
     }
 
-    self.addSimVoterCircle = (voterCircle) => {
-        oneVoters.newVoterGroup(new OneDVoterBlock(voterCircle, self.dragm, screen))
+    self.addSimVoterCircle = (voterShape) => {
+        oneVoters.newVoterGroup(new OneDVoterBlock(voterShape, self.dragm, screen))
     }
 
     const superEnter = self.enter

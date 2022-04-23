@@ -30,8 +30,8 @@ export default function SimGeoOne(screen, menu, changes, geoElection, sim) {
         simCandidateList.newCandidate(new SimCandidate(candidate, self.dragm))
     }
 
-    self.addSimVoterCircle = (voterCircle) => {
-        geoVoters.newVoterGroup(new GeoVoterBasis(voterCircle, self.dragm, screen))
+    self.addSimVoterCircle = (voterShape) => {
+        geoVoters.newVoterGroup(new GeoVoterBasis(voterShape, self.dragm, screen))
     }
 
     changes.add(['districts'])

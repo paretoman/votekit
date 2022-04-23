@@ -1,6 +1,6 @@
 /** @module */
 
-import OneVoterCircle from '../../voters/OneVoterCircle.js'
+import OneVoterCircle from '../../viz/OneViz.js'
 import SimCandidate from '../../candidates/SimCandidate.js'
 import SimCandidateList from '../../candidates/SimCandidateList.js'
 import SimVoterList from '../../voters/SimVoterList.js'
@@ -30,8 +30,8 @@ export default function SimOne(screen, menu, changes, oneElection, sim) {
         simCandidateList.newCandidate(new SimCandidate(candidate, self.dragm))
     }
 
-    self.addSimVoterCircle = (voterCircle) => {
-        oneVoters.newVoterGroup(new OneVoterCircle(voterCircle, self.dragm, screen))
+    self.addSimVoterCircle = (voterShape) => {
+        oneVoters.newVoterGroup(new OneVoterCircle(voterShape, self.dragm, screen))
     }
 
     const superEnter = self.enter

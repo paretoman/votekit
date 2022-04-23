@@ -4,7 +4,7 @@ import CircleGraphic from './CircleGraphic.js'
 import tooltipForEntity from '../sim/tooltipForEntity.js'
 
 /**
- * VoterCircle class with Handle component to take care of dragging.
+ * VoterShape class with Handle component to take care of dragging.
  * VoronoiGroup component takes care of drawing votes.
  * @param {Object} shape2
  * @param {Object} shape1
@@ -15,7 +15,7 @@ import tooltipForEntity from '../sim/tooltipForEntity.js'
  * @param {Boolean} doLoad - Should we add the voter without adding to the history?
  * @constructor
  */
-export default function VoterCircle(
+export default function VoterShape(
     shape2,
     shape1,
     screen,

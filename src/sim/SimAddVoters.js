@@ -1,7 +1,7 @@
 import createAddVoter from './createAddVoter.js'
 import Registrar from './Registrar.js'
-import VoterCircle from '../voters/VoterCircle.js'
-import VoterCircleCommander from '../voters/VoterCircleCommander.js'
+import VoterShape from '../voters/VoterShape.js'
+import VoterCommander from '../voters/VoterCommander.js'
 
 /** A component of sim.js that deals with adding voters. */
 export default function SimAddVoters(screen, layout, changes, commander, sims, sim) {
@@ -10,7 +10,7 @@ export default function SimAddVoters(screen, layout, changes, commander, sims, s
     createAddVoter(layout, self)
 
     const voterRegistrar = new Registrar()
-    const voterCommander = new VoterCircleCommander(voterRegistrar, commander, self)
+    const voterCommander = new VoterCommander(voterRegistrar, commander, self)
 
     self.addVoterPressed = () => {
         const num = voterRegistrar.num() + 1
@@ -24,12 +24,12 @@ export default function SimAddVoters(screen, layout, changes, commander, sims, s
 
     self.addVoterCircle = (shape2, shape1, doLoad) => {
         // eslint-disable-next-line max-len
-        const voterCircle = new VoterCircle(shape2, shape1, screen, voterRegistrar, commander, changes, doLoad, voterCommander, sim)
+        const voterShape = new VoterShape(shape2, shape1, screen, voterRegistrar, commander, changes, doLoad, voterCommander, sim)
 
-        sims.one.addSimVoterCircle(voterCircle)
-        sims.oneDOne.addSimVoterCircle(voterCircle)
-        sims.geoOne.addSimVoterCircle(voterCircle)
-        sims.sample.addSimVoterCircle(voterCircle)
+        sims.one.addSimVoterCircle(voterShape)
+        sims.oneDOne.addSimVoterCircle(voterShape)
+        sims.geoOne.addSimVoterCircle(voterShape)
+        sims.sample.addSimVoterCircle(voterShape)
 
         const num = voterRegistrar.num()
         voterCommander.setNumberVoters(num)
