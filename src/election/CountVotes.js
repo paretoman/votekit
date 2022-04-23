@@ -47,9 +47,18 @@ export default function CountVotes(menu) {
 
     // a list of election methods
     self.electionMethodList = [
-        { name: 'Huntington Hill', value: 'huntingtonHill', type: 'allocation' },
-        { name: 'Plurality', value: 'plurality', type: 'singleWinner' },
-        { name: 'Random Winner', value: 'randomWinner', type: 'singleWinner' },
+        {
+            name: 'Huntington Hill', value: 'huntingtonHill', type: 'allocation', caster: 'pluralityBallot',
+        },
+        {
+            name: 'Plurality', value: 'plurality', type: 'singleWinner', caster: 'pluralityBallot',
+        },
+        {
+            name: 'Random Winner', value: 'randomWinner', type: 'singleWinner', caster: 'pluralityBallot',
+        },
+        {
+            name: 'Score', value: 'score', type: 'singleWinner', caster: 'castScore',
+        },
     ]
 
     // utilities for looking up this list
@@ -59,14 +68,17 @@ export default function CountVotes(menu) {
         (x) => { self.electionMethodListByFunctionName[x.value] = x },
     )
 
-    // add a menu item to switch between types of elections
-    self.electionMethod = 'plurality'
-
     /**
      * Called in onclick.
      * @param {(String|Number|Boolean)} value
      */
-    self.setElectionMethod = (value) => { self.electionMethod = value }
+    self.setElectionMethod = (value) => {
+        self.electionMethod = value
+        self.caster = self.electionMethodListByFunctionName[value].caster
+    }
+
+    // add a menu item to switch between types of elections
+    self.setElectionMethod('plurality')
 
     menu.addMenuItem(
         self,

@@ -1,5 +1,7 @@
 /** @module */
 
+import { maxIndex } from '../utilities/jsHelpers.js'
+
 /**
  * A simple election.
  * Voters are in shaped distributions.
@@ -17,15 +19,16 @@ export default function ElectionOne(election) {
         // Voters cast votes for candidates.
         // There is also a separate graphical representation in Voronoi2D.js
 
-        if (oneVoters.getVoterShapes().length === 0) return
-        if (candidates.getCandidates().length === 0) return
+        if (oneVoters.getVoterShapes().length === 0) return { error: 'No Voters' }
+        if (candidates.getCandidates().length === 0) return { error: 'No Candidates' }
         const votes = election.castVotes(oneVoters, candidates)
         candidates.setCandidateFractions(votes.tallyFractions)
+        return votes
     }
 
     self.testVote = (voterTest, candidates) => {
         const vote = election.testVote(voterTest, candidates)
-        const i = vote.tallyFractions.indexOf(1)
+        const i = maxIndex(vote.tallyFractions) // TODO
         const cans = candidates.getCandidates()
         vote.color = cans[i].color
         return vote

@@ -41,6 +41,11 @@ export function orderedJsonStringify(obj) {
     return JSON.stringify(sortObjByKey(obj), null, '\t')
 }
 
+export function normPDF(x, mean, sd) {
+    const coef = 1 / (sd * Math.sqrt(2 * Math.PI))
+    return coef * Math.exp(-0.5 * ((x - mean) / sd) ** 2)
+}
+
 export function normCDF(x, mean, sd) {
     if (x === Infinity) {
         return 1
@@ -83,6 +88,33 @@ export function minIndex(a) {
         }
     }
     return iClosest
+}
+export function maxIndex(a) {
+    let max = -Infinity
+    let iMax = null
+    for (let i = 0; i < a.length; i++) {
+        const d = a[i]
+        if (d > max) {
+            max = d
+            iMax = i
+        }
+    }
+    return iMax
+}
+
+export function minMax(a) {
+    let min = a[0]
+    let max = a[0]
+    for (let i = 0; i < a.length; i++) {
+        const d = a[i]
+        if (d < min) {
+            min = d
+        }
+        if (d > max) {
+            max = d
+        }
+    }
+    return [min, max]
 }
 
 /** https://stackoverflow.com/a/24719569 */

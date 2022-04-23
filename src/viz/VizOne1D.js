@@ -1,5 +1,6 @@
 /** @module */
 
+import Grid1D from './Grid1D.js'
 import Voronoi1D from './Voronoi1D.js'
 
 /**
@@ -7,21 +8,38 @@ import Voronoi1D from './Voronoi1D.js'
  * @param {Screen} screen
  * @constructor
  */
-export default function VizOne1D(oneVoters, candidateSimList, screen) {
+export default function VizOne1D(oneVoters, candidateSimList, screen, sim) {
     const self = this
 
     let voronoiGroups = []
+    let grid1Ds = []
 
-    self.update = function () {
+    self.update = function (votes) {
         const voterShapes = oneVoters.getVoterShapes()
-        voronoiGroups = voterShapes.map(
-            (voterShape) => new Voronoi1D(voterShape, candidateSimList, screen),
-        )
+        if (sim.election.countVotes.caster === 'plurality') {
+            voronoiGroups = voterShapes.map(
+                (voterShape) => new Voronoi1D(voterShape, candidateSimList, screen),
+            )
+        } else { // "score"
+            grid1Ds = []
+            for (let i = 0; i < votes.gridData.length; i++) {
+                const vo = votes.gridData[i]
+
+                const grid1D = new Grid1D(vo, candidateSimList, screen)
+                grid1Ds.push(grid1D)
+            }
+        }
     }
 
     self.render = function () {
-        voronoiGroups.forEach(
-            (voronoiGroup) => voronoiGroup.render(),
-        )
+        if (sim.election.countVotes.caster === 'plurality') {
+            voronoiGroups.forEach(
+                (voronoiGroup) => voronoiGroup.render(),
+            )
+        } else { // "score"
+            grid1Ds.forEach(
+                (grid1D) => grid1D.render(),
+            )
+        }
     }
 }
