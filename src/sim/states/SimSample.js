@@ -52,9 +52,11 @@ export default function SimSample(screen, menu, changes, sampleElections, sim) {
 
     self.update = () => {
         if (changes.checkNone()) {
-            const noChange = sampleElections.addSim(sampleVoters, candidateSimList)
+            const addResult = sampleElections.addSim(sampleVoters, candidateSimList)
+            const { noChange, newPoints, points } = addResult
+            // changes.clear()
             if (!noChange) {
-                changes.clear()
+                vizSample2D.update(newPoints, points)
                 // changed, so re-render
                 screen.clear()
                 self.render()
@@ -63,6 +65,7 @@ export default function SimSample(screen, menu, changes, sampleElections, sim) {
             // clear changes, reset to []
             changes.clear()
             candidateSimList.startSampler()
+            vizSample2D.start()
             sampleElections.startSim()
             screen.clear()
             self.render()
@@ -70,7 +73,6 @@ export default function SimSample(screen, menu, changes, sampleElections, sim) {
     }
 
     self.render = () => {
-        sampleElections.render()
         vizSample2D.render()
         candidateSimList.render()
     }

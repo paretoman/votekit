@@ -11,6 +11,8 @@ import electionMethods from '../electionMethods/electionMethods.js'
 export default function ElectionMethod(menu) {
     const self = this
 
+    self.seats = 1
+
     self.run = (candidates, votes) => {
         // why have two different kinds of results?
         // methodResults, the smaller one,
@@ -21,10 +23,12 @@ export default function ElectionMethod(menu) {
         let electionResults
         if (self.checkElectionType() === 'allocation') {
             const electionMethodOptions = { seats: 5, threshold: 0.2 }
+            self.seats = electionMethodOptions.seats
             const methodResults = electionMethods[self.electionMethod](votes, electionMethodOptions)
             const { allocation } = methodResults
             electionResults = { allocation, candidates }
         } else {
+            self.seats = 1
             const methodResults = electionMethods[self.electionMethod](votes)
             const { iWinner } = methodResults
             const winner = candidates[iWinner]
