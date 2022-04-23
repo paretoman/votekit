@@ -1,13 +1,13 @@
 /** @module */
 
-import SimOne from './states/SimOne.js'
+import SimOne2D from './states/SimOne2D.js'
 import SimSample from './states/SimSample.js'
 import SimGeoOne from './states/SimGeoOne.js'
 import SimAddVoters from './SimAddVoters.js'
 import SimAddCandidates from './SimAddCandidates.js'
 import SimAddCandidateDns from './SimAddCandidateDns.js'
 import addSimControlsLabel from './addSimControlsLabel.js'
-import SimOneDOne from './states/SimOneDOne.js'
+import SimOne1D from './states/SimOne1D.js'
 import TestVoter from './TestVoter.js'
 
 /**
@@ -46,8 +46,8 @@ export default function Sim(
     // States //
 
     const sims = {
-        one: new SimOne(screen, menu, changes, oneElection, self),
-        oneDOne: new SimOneDOne(screen, menu, changes, oneElection, self),
+        one2D: new SimOne2D(screen, menu, changes, oneElection, self),
+        one1D: new SimOne1D(screen, menu, changes, oneElection, self),
         // eslint-disable-next-line max-len
         sample: new SimSample(screen, menu, changes, sampleElections, self),
         geoOne: new SimGeoOne(screen, menu, changes, geoElection, self),
@@ -74,7 +74,7 @@ export default function Sim(
 
     // State Machine //
 
-    self.state = 'one' // default
+    self.state = 'one2D' // default
     // self.typeExit = self.state
     changes.add(['simType'])
 
@@ -107,8 +107,8 @@ export default function Sim(
     // add a menu item to switch between types of sims
     // a list of simulation types
     self.typeList = [
-        { name: 'One Election', value: 'one', state: '' },
-        { name: '1D One Election', value: 'oneDOne', state: '' },
+        { name: 'One Election', value: 'one2D', state: '' },
+        { name: '1D One Election', value: 'one1D', state: '' },
         { name: 'Sample Elections', value: 'sample', state: '' },
         { name: 'Geo Election', value: 'geoOne', state: '' },
     ]

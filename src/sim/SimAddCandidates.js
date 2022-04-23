@@ -26,8 +26,8 @@ export default function SimAddCandidates(screen, layout, changes, commander, sim
     self.addCandidate = (shape2, shape1, c, doLoad) => {
         // eslint-disable-next-line no-new, max-len
         const candidate = new Candidate(shape2, shape1, 21, 21, c, screen, candidateRegistrar, commander, changes, doLoad, candidateCommander, sim)
-        sims.one.addSimCandidate(candidate)
-        sims.oneDOne.addSimCandidate(candidate)
+        sims.one2D.addSimCandidate(candidate)
+        sims.one1D.addSimCandidate(candidate)
         sims.geoOne.addSimCandidate(candidate)
 
         const num = candidateRegistrar.num()

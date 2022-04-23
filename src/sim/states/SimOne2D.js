@@ -5,24 +5,20 @@ import SimCandidateList from '../../candidates/SimCandidateList.js'
 import VoterSimList from '../../voters/VoterSimList.js'
 import SimBase from './SimBase.js'
 import VoterSim from '../../voters/VoterSim.js'
-import VizOne1D from '../../viz/VizOne1D.js'
+import VizOne2D from '../../viz/VizOne2D.js'
 
 /**
  * Simulate one election with
  *   candidates in defined positions, and
  *   voters in a distribution that will be summed over.
- * Plan:
- * * SimOneDOne is a subclass of SimBase.
- * * VizOne1D is a subclass of VoterSim.
- * * Voronoi1D is called by VizOne1D.
  * @param {Screen} screen
  * @param {Menu} menu
  * @param {Changes} changes
- * @param {Election} election
+ * @param {OneElection} oneElection
  * @param {Sim} sim
  * @constructor
  */
-export default function SimOneDOne(screen, menu, changes, oneElection, sim) {
+export default function SimOne2D(screen, menu, changes, oneElection, sim) {
     const self = this
 
     SimBase.call(self, screen, changes, sim)
@@ -39,13 +35,13 @@ export default function SimOneDOne(screen, menu, changes, oneElection, sim) {
         oneVoters.newVoterGroup(new VoterSim(voterShape, self.dragm, screen))
     }
 
-    const vizOne1D = new VizOne1D(oneVoters, simCandidateList, screen)
+    const vizOne2D = new VizOne2D(oneVoters, simCandidateList, screen)
 
     const superEnter = self.enter
     self.enter = () => {
         superEnter()
         sim.simAddCandidates.canButton.show()
-        sim.election.setDimensions(1)
+        sim.election.setDimensions(2)
         oneVoters.updateXY()
         simCandidateList.updateXY()
         sim.testVoter.updateXY()
@@ -61,7 +57,7 @@ export default function SimOneDOne(screen, menu, changes, oneElection, sim) {
         // clear changes, reset to []
         changes.clear()
         oneElection.updateTallies(oneVoters, simCandidateList)
-        vizOne1D.update()
+        vizOne2D.update()
         sim.testVoter.update()
         screen.clear()
         self.render()
@@ -70,7 +66,7 @@ export default function SimOneDOne(screen, menu, changes, oneElection, sim) {
     self.testVote = () => oneElection.testVote(sim.testVoter, simCandidateList)
 
     self.render = () => {
-        vizOne1D.render()
+        vizOne2D.render()
     }
     self.renderForeground = () => {
         // sampleElections.renderForeground()

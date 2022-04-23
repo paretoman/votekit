@@ -26,8 +26,8 @@ export default function SimAddVoters(screen, layout, changes, commander, sims, s
         // eslint-disable-next-line max-len
         const voterShape = new VoterShape(shape2, shape1, screen, voterRegistrar, commander, changes, doLoad, voterCommander, sim)
 
-        sims.one.addSimVoterCircle(voterShape)
-        sims.oneDOne.addSimVoterCircle(voterShape)
+        sims.one2D.addSimVoterCircle(voterShape)
+        sims.one1D.addSimVoterCircle(voterShape)
         sims.geoOne.addSimVoterCircle(voterShape)
         sims.sample.addSimVoterCircle(voterShape)
 

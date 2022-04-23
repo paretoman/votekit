@@ -71,8 +71,8 @@ export default function TestVoter(screen, sims, sim) {
     const circle = new CircleGraphic(self, 9, screen)
     self.circle = circle
 
-    sims.one.dragm.newCircleHandle(self, self.circle)
-    sims.oneDOne.dragm.newCircleHandle(self, self.circle)
+    sims.one2D.dragm.newCircleHandle(self, self.circle)
+    sims.one1D.dragm.newCircleHandle(self, self.circle)
     sims.geoOne.dragm.newCircleHandle(self, self.circle)
     sims.sample.dragm.newCircleHandle(self, self.circle)
 

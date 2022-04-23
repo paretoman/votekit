@@ -7,7 +7,7 @@ layout: default
 This describes how 1D simulations were added to the 2D simulations.
 
 ## New Classes
-* SimOneDOne is a subclass of SimBase.
+* SimOne1D is a subclass of SimBase.
 * VizOne1D is very similar to VizOne2D.
 * Voronoi1D is called by VizOne1D.
 
