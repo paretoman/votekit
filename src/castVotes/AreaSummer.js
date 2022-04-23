@@ -140,7 +140,8 @@ function sumCircle(circle, lineSet) {
         // If the y coefficient is negative, then Ac < b, and Ac = b is a lower bound.
         // A.x * x + A.y * y = b
         // y = (b - A.x * x) / A.y
-        lineSet.forEach((line) => {
+        for (let i = 0; i < lineSet.length; i++) {
+            const line = lineSet[i]
             const ay = line.A.y
             const ax = line.A.x
             const { b } = line
@@ -159,7 +160,7 @@ function sumCircle(circle, lineSet) {
                     high = Math.min(high, y2)
                 }
             }
-        })
+        }
 
         // count area inside lines
         const dy = high - low
