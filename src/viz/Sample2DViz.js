@@ -1,6 +1,6 @@
 /** @module */
 
-import SimVoter from './SimVoter.js'
+import SimVoter from '../voters/SimVoter.js'
 
 /**
  * VoterShape for simulations of many sampled candidates
@@ -10,7 +10,7 @@ import SimVoter from './SimVoter.js'
  * @param {screen} screen - draw to the screen
  * @constructor
  */
-export default function SampleVoterCircle(voterShape, dragm, screen) {
+export default function Sample2DViz(voterShape, dragm, screen) {
     const self = this
     SimVoter.call(self, voterShape, dragm)
 

@@ -152,7 +152,8 @@ export default function GeoVoters(screen, geoElection, sim) {
         self.voterGroupsByTract.forEach((row) => {
             row.forEach((cell) => {
                 cell.forEach((group) => {
-                    smallCircle(group.shape2.x, group.shape2.y) // TODO: use .x and .y instead of shape2
+                    smallCircle(group.shape2.x, group.shape2.y)
+                    // TODO: use .x and .y instead of shape2
                 })
             })
         })
