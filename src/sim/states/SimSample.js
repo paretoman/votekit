@@ -2,7 +2,7 @@
 
 import SimCandidateDistributionList from '../../candidates/SimCandidateDistributionList.js'
 import SimCandidateDistribution from '../../candidates/SimCandidateDistribution.js'
-import Sample2DViz from '../../viz/Sample2DViz.js'
+import VizSample2D from '../../viz/VizSample2D.js'
 import VoterSimList from '../../voters/VoterSimList.js'
 import SimBase from './SimBase.js'
 import VoterSim from '../../voters/VoterSim.js'
@@ -35,7 +35,7 @@ export default function SimSample(screen, menu, changes, sampleElections, sim) {
         sampleVoters.newVoterGroup(new VoterSim(voterShape, self.dragm, screen))
     }
 
-    const sample2DViz = new Sample2DViz(sampleVoters, screen)
+    const vizSample2D = new VizSample2D(sampleVoters, screen)
 
     const superEnter = self.enter
     self.enter = () => {
@@ -71,7 +71,7 @@ export default function SimSample(screen, menu, changes, sampleElections, sim) {
 
     self.render = () => {
         sampleElections.render()
-        sample2DViz.render()
+        vizSample2D.render()
         simCandidateList.render()
     }
     self.renderForeground = () => {

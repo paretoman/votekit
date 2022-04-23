@@ -6,7 +6,7 @@
  * @param {screen} screen - draw to the screen
  * @constructor
  */
-export default function Sample2DViz(sampleVoters, screen) {
+export default function VizSample2D(sampleVoters, screen) {
     const self = this
 
     // Graphics component

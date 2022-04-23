@@ -5,7 +5,7 @@ import SimCandidateList from '../../candidates/SimCandidateList.js'
 import VoterSimList from '../../voters/VoterSimList.js'
 import SimBase from './SimBase.js'
 import VoterSim from '../../voters/VoterSim.js'
-import One1DViz from '../../viz/One1DViz.js'
+import VizOne1D from '../../viz/VizOne1D.js'
 
 /**
  * Simulate one election with
@@ -13,8 +13,8 @@ import One1DViz from '../../viz/One1DViz.js'
  *   voters in a distribution that will be summed over.
  * Plan:
  * * SimOneDOne is a subclass of SimBase.
- * * One1DViz is a subclass of VoterSim.
- * * Voronoi1D is called by One1DViz.
+ * * VizOne1D is a subclass of VoterSim.
+ * * Voronoi1D is called by VizOne1D.
  * @param {Screen} screen
  * @param {Menu} menu
  * @param {Changes} changes
@@ -39,7 +39,7 @@ export default function SimOneDOne(screen, menu, changes, oneElection, sim) {
         oneVoters.newVoterGroup(new VoterSim(voterShape, self.dragm, screen))
     }
 
-    const one1DViz = new One1DViz(screen)
+    const vizOne1D = new VizOne1D(screen)
 
     const superEnter = self.enter
     self.enter = () => {
@@ -61,7 +61,7 @@ export default function SimOneDOne(screen, menu, changes, oneElection, sim) {
         // clear changes, reset to []
         changes.clear()
         oneElection.updateTallies(oneVoters, simCandidateList)
-        one1DViz.update(oneVoters, simCandidateList)
+        vizOne1D.update(oneVoters, simCandidateList)
         sim.testVoter.update()
         screen.clear()
         self.render()
@@ -70,7 +70,7 @@ export default function SimOneDOne(screen, menu, changes, oneElection, sim) {
     self.testVote = () => oneElection.testVote(sim.testVoter, simCandidateList)
 
     self.render = () => {
-        one1DViz.render()
+        vizOne1D.render()
     }
     self.renderForeground = () => {
         // sampleElections.renderForeground()

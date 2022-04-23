@@ -5,7 +5,7 @@ import SimCandidateList from '../../candidates/SimCandidateList.js'
 import VoterSimList from '../../voters/VoterSimList.js'
 import SimBase from './SimBase.js'
 import VoterSim from '../../voters/VoterSim.js'
-import One2DViz from '../../viz/One2DViz.js'
+import VizOne2D from '../../viz/VizOne2D.js'
 
 /**
  * Simulate one election with
@@ -35,7 +35,7 @@ export default function SimOne(screen, menu, changes, oneElection, sim) {
         oneVoters.newVoterGroup(new VoterSim(voterShape, self.dragm, screen))
     }
 
-    const one2DViz = new One2DViz(screen)
+    const vizOne2D = new VizOne2D(screen)
 
     const superEnter = self.enter
     self.enter = () => {
@@ -57,7 +57,7 @@ export default function SimOne(screen, menu, changes, oneElection, sim) {
         // clear changes, reset to []
         changes.clear()
         oneElection.updateTallies(oneVoters, simCandidateList)
-        one2DViz.update(oneVoters, simCandidateList)
+        vizOne2D.update(oneVoters, simCandidateList)
         sim.testVoter.update()
         screen.clear()
         self.render()
@@ -66,7 +66,7 @@ export default function SimOne(screen, menu, changes, oneElection, sim) {
     self.testVote = () => oneElection.testVote(sim.testVoter, simCandidateList)
 
     self.render = () => {
-        one2DViz.render()
+        vizOne2D.render()
     }
     self.renderForeground = () => {
         // sampleElections.renderForeground()
