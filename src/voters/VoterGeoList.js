@@ -48,7 +48,7 @@ export default function VoterGeoList(screen, electionGeo, sim) {
         self.districtMaker.make(self.nx, self.ny, nd)
     }
     self.updateVoters = () => {
-        voterSimGroups = self.getVoterSimGroups()
+        voterSimGroups = self.getVoterSims()
         self.updateFullSet()
         self.updateVotersByDistrict()
         self.updateVotersByTract()
@@ -64,10 +64,10 @@ export default function VoterGeoList(screen, electionGeo, sim) {
                 (rowNoise) => rowNoise.map(
                     (cellNoise) => {
                         const [xNoise, yNoise] = cellNoise
-                        const shape2 = structuredClone(vb.voter.shape2)
+                        const shape2 = structuredClone(vb.voterShape.shape2)
                         shape2.x += xNoise
                         shape2.y += yNoise
-                        const { shape1 } = vb.voter
+                        const { shape1 } = vb.voterShape
                         return { shape2, shape1 }
                     },
                 ).flat(),
@@ -83,10 +83,10 @@ export default function VoterGeoList(screen, electionGeo, sim) {
                 (vb) => census[iDistrict].map((g) => {
                     const [gx, gy, gf] = g
                     const [xNoise, yNoise] = sn[gx][gy]
-                    const shape2 = structuredClone(vb.voter.shape2)
+                    const shape2 = structuredClone(vb.voterShape.shape2)
                     shape2.x += xNoise
                     shape2.y += yNoise
-                    const { shape1 } = vb.voter
+                    const { shape1 } = vb.voterShape
                     return { shape2, shape1, weight: gf }
                 }).flat(),
             ).flat(),
@@ -100,10 +100,10 @@ export default function VoterGeoList(screen, electionGeo, sim) {
                 (cellNoise) => voterSimGroups.map(
                     (vb) => {
                         const [xNoise, yNoise] = cellNoise
-                        const shape2 = structuredClone(vb.voter.shape2)
+                        const shape2 = structuredClone(vb.voterShape.shape2)
                         shape2.x += xNoise
                         shape2.y += yNoise
-                        const { shape1 } = vb.voter
+                        const { shape1 } = vb.voterShape
                         return { shape2, shape1 }
                     },
                 ).flat(),

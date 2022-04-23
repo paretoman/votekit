@@ -32,7 +32,7 @@ export default function SimSample(screen, menu, changes, electionSample, sim) {
     const sampleVoters = new VoterSimList(sim)
 
     self.addSimVoterCircle = (voterShape) => {
-        sampleVoters.newVoterGroup(new VoterSim(voterShape, self.dragm, screen))
+        sampleVoters.newVoterSim(new VoterSim(voterShape, self.dragm, screen))
     }
 
     const vizSample2D = new VizSample2D(sampleVoters, screen)
@@ -40,14 +40,14 @@ export default function SimSample(screen, menu, changes, electionSample, sim) {
     const superEnter = self.enter
     self.enter = () => {
         superEnter()
-        sim.simAddCandidateDns.canDnButton.show()
+        sim.candidateDnAdd.canDnButton.show()
         sim.election.setDimensions(2)
         sampleVoters.updateXY()
         candidateSimList.updateXY()
     }
 
     self.exit = () => {
-        sim.simAddCandidateDns.canDnButton.hide()
+        sim.candidateDnAdd.canDnButton.hide()
     }
 
     self.update = () => {

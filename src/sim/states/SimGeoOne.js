@@ -32,7 +32,7 @@ export default function SimGeoOne(screen, menu, changes, electionGeo, sim) {
     }
 
     self.addSimVoterCircle = (voterShape) => {
-        voterGeoList.newVoterGroup(new VoterGeoBasis(voterShape, self.dragm, screen))
+        voterGeoList.newVoterSim(new VoterGeoBasis(voterShape, self.dragm, screen))
     }
 
     const vizGeo2D = new VizGeo2D(voterGeoList, screen)
@@ -43,7 +43,7 @@ export default function SimGeoOne(screen, menu, changes, electionGeo, sim) {
     self.enter = () => {
         superEnter()
         screen.showGeoMaps()
-        sim.simAddCandidates.canButton.show()
+        sim.candidateAdd.canButton.show()
         sim.election.setDimensions(2)
         voterGeoList.updateXY()
         candidateSimList.updateXY()
@@ -52,7 +52,7 @@ export default function SimGeoOne(screen, menu, changes, electionGeo, sim) {
 
     self.exit = () => {
         screen.hideGeoMaps()
-        sim.simAddCandidates.canButton.hide()
+        sim.candidateAdd.canButton.hide()
         // clean up fractions
         const fillUndefined = Array(candidateSimList.numCandidates()).fill(undefined)
         candidateSimList.setCandidateWins(fillUndefined)

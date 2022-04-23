@@ -4,7 +4,7 @@ layout: default
 ---
 
 # Sim Architecture for Voters
-Made a super class, VoterSimList. VoterGeoList inherits from VoterSimList. There is no OneVoters because there isn't any additional functionality that OneVoters would need.
+Made a super class, VoterSimList. VoterGeoList inherits from VoterSimList. There is no VoterOne because there isn't any additional functionality that VoterOne would need.
 
 VoterSimList is different from Registrar. Registrar just assigns an id.
 

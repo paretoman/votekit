@@ -3,32 +3,33 @@
 /**
  * Made a super class, VoterSimList.
  * VoterGeoList inherits from VoterSimList.
- * There is no OneVoters because there isn't any additional functionality that OneVoters would need.
- * VoterSimList is different from Voters because it is a list of simVoters.
+ * There is no VoterOne because there isn't any additional functionality that VoterOne would need.
+ * VoterSimList is different from voterRegistrar
+ * because it is a list of VoterSim objects rather than VoterShape objects.
  * @constructor
  */
 export default function VoterSimList(sim) {
     const self = this
 
-    const simVoters = []
-    self.simVoters = simVoters
+    const list = []
+    self.list = list
 
-    self.newVoterGroup = function (voterGroup) {
-        simVoters.push(voterGroup)
+    self.newVoterSim = function (voterGroup) {
+        list.push(voterGroup)
     }
 
-    self.getVoterGroups = () => simVoters.filter((v) => v.voter.exists).map((v) => v.voter)
-    self.getVoterSimGroups = () => simVoters.filter((v) => v.voter.exists)
+    self.getVoterShapes = () => list.filter((v) => v.voterShape.exists).map((v) => v.voterShape)
+    self.getVoterSims = () => list.filter((v) => v.voterShape.exists)
 
     self.update = (candidates) => {
-        simVoters.forEach((v) => { if (v.voter.exists) v.update(candidates) })
+        list.forEach((v) => { if (v.voterShape.exists) v.update(candidates) })
     }
     self.updateXY = () => {
-        simVoters.forEach((v) => v.voter.updateXY())
+        list.forEach((v) => v.voterShape.updateXY())
     }
 
     self.render = () => {
-        simVoters.forEach((v) => { if (v.voter.exists) v.render() })
+        list.forEach((v) => { if (v.voterShape.exists) v.render() })
     }
 
     self.renderForeground = () => {
@@ -39,9 +40,9 @@ export default function VoterSimList(sim) {
         }
     }
     self.renderForegroundExisting = () => {
-        simVoters.forEach((v) => { if (v.voter.exists) v.renderForeground() })
+        list.forEach((v) => { if (v.voterShape.exists) v.renderForeground() })
     }
     self.renderForegroundAll = () => {
-        simVoters.forEach((v) => { v.renderForeground() })
+        list.forEach((v) => { v.renderForeground() })
     }
 }

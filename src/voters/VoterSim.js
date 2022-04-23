@@ -14,11 +14,11 @@
  */
 export default function VoterSim(voterShape, dragm) {
     const self = this
-    self.voter = voterShape
+    self.voterShape = voterShape
 
     dragm.newCircleHandle(voterShape, voterShape.circle)
 
     self.renderForeground = () => {
-        self.voter.renderForeground()
+        self.voterShape.renderForeground()
     }
 }

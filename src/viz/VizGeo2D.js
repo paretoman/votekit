@@ -52,7 +52,7 @@ export default function VizGeo2D(voterGeoList, screen) {
         renderVoronoiColors(100, 0, geoMapWidth, geoMapHeight, self.colorOfVoteByDistrict)
     }
     self.renderVoterBasisSet = () => {
-        const voterSimGroups = voterGeoList.getVoterSimGroups()
+        const voterSimGroups = voterGeoList.getVoterSims()
         voterSimGroups.forEach((v) => v.render())
     }
 

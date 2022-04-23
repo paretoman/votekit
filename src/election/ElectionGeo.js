@@ -18,7 +18,7 @@ export default function ElectionGeo(election) {
     self.updateVotes = (voterGeoList, candidateSimList) => {
         const cans = candidateSimList.getCandidates()
 
-        if (voterGeoList.getVoterSimGroups().length === 0) return { error: 'no voters' }
+        if (voterGeoList.getVoterSims().length === 0) return { error: 'no voters' }
         if (cans.length === 0) return { error: 'no candidates' }
 
         const resultsStatewide = runStatewideElection(voterGeoList, cans)
@@ -62,7 +62,7 @@ export default function ElectionGeo(election) {
 
         const resultsByTract = voterGroupsByTract.map(
             (row) => row.map(
-                (voterGroups) => election.runElection(voterGroups, cans),
+                (voterShapes) => election.runElection(voterShapes, cans),
             ),
         )
         return resultsByTract
@@ -91,7 +91,7 @@ export default function ElectionGeo(election) {
         const { voterGroupsByDistrict } = voterGeoList
 
         const resultsByDistrict = voterGroupsByDistrict.map(
-            (voterGroups) => election.runElection(voterGroups, cans),
+            (voterShapes) => election.runElection(voterShapes, cans),
         )
         return resultsByDistrict
     }

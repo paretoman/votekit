@@ -1,13 +1,13 @@
-import CandidateDn from '../candidateDns/CandidateDn.js'
-import CandidateDnCommander from '../candidateDns/CandidateDnCommander.js'
-import CreateAddCandidateDistribution from './CreateAddCandidateDistribution.js'
-import Registrar from './Registrar.js'
+import CandidateDn from './CandidateDn.js'
+import CandidateDnCommander from './CandidateDnCommander.js'
+import CandidateDnAddMakeButton from '../sim/CandidateDnAddMakeButton.js'
+import Registrar from '../sim/Registrar.js'
 
 /** A component of sim.js that deals with adding candidate distributions. */
-export default function SimAddCandidateDns(screen, layout, changes, commander, sims, sim) {
+export default function CandidateDnAdd(screen, layout, changes, commander, sims, sim) {
     const self = this
 
-    self.canDnButton = new CreateAddCandidateDistribution(layout, self)
+    self.canDnButton = new CandidateDnAddMakeButton(layout, self)
     const candidateDnRegistrar = new Registrar()
     const candidateDnCommander = new CandidateDnCommander(candidateDnRegistrar, commander, self)
 

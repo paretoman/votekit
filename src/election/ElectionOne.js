@@ -17,7 +17,7 @@ export default function ElectionOne(election) {
         // Voters cast votes for candidates.
         // There is also a separate graphical representation in Voronoi2D.js
 
-        if (oneVoters.getVoterGroups().length === 0) return
+        if (oneVoters.getVoterShapes().length === 0) return
         if (candidates.getCandidates().length === 0) return
         const votes = election.castVotes(oneVoters, candidates)
         candidates.setCandidateFractions(votes.tallyFractions)

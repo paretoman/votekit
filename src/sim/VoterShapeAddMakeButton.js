@@ -3,16 +3,16 @@
 /**
  * Add buttons to layout for undo and redo, and connect them to commander for functionality.
  * @param {Layout} layout
- * @param {SimAddVoters} simAddVoters
+ * @param {VoterShapeAdd} voterShapeAdd
  */
-export default function createAddVoter(layout, simAddVoters) {
+export default function VoterShapeAddMakeButton(layout, voterShapeAdd) {
     const addVoterButton = document.createElement('button')
 
     addVoterButton.innerText = 'Add Voter'
     addVoterButton.className = 'button2'
 
     addVoterButton.onclick = () => {
-        simAddVoters.addVoterPressed()
+        voterShapeAdd.addVoterPressed()
     }
 
     layout.newElement('addVoter', addVoterButton)

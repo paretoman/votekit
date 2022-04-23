@@ -24,7 +24,7 @@ export default function ElectionSample(election) {
     self.addSim = function (sampleVoters, sampleCandidates) {
         // add more points
 
-        if (sampleVoters.getVoterGroups().length === 0) return { noChange: 1 }
+        if (sampleVoters.getVoterShapes().length === 0) return { noChange: 1 }
         if (sampleCandidates.getCandidateDistributions().length === 0) return { noChange: 1 }
 
         if (points.length > maxPoints) return { noChange: 1 }
@@ -39,7 +39,7 @@ export default function ElectionSample(election) {
         const nnp = seats * ns
         const newPoints = Array(nnp)
 
-        const voterGroups = sampleVoters.getVoterGroups()
+        const voterShapes = sampleVoters.getVoterShapes()
 
         for (let i = 0; i < ns; i++) {
             // choose a number of candidates
@@ -59,7 +59,7 @@ export default function ElectionSample(election) {
             }
 
             // find winner position
-            const results = election.runElection(voterGroups, canList)
+            const results = election.runElection(voterShapes, canList)
 
             if (election.method.checkElectionType() === 'singleWinner') {
                 const { winner } = results

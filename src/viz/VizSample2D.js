@@ -75,8 +75,8 @@ export default function VizSample2D(sampleVoters, screen) {
 
     self.renderVoters = function () {
         const { ctx } = screen
-        const voterGroups = sampleVoters.getVoterGroups()
-        voterGroups.forEach((voterGroup) => {
+        const voterShapes = sampleVoters.getVoterShapes()
+        voterShapes.forEach((voterGroup) => {
             // circle
             ctx.beginPath()
             // ctx.fillStyle = "#eee"

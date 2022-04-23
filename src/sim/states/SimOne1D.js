@@ -36,7 +36,7 @@ export default function SimOne1D(screen, menu, changes, electionOne, sim) {
     }
 
     self.addSimVoterCircle = (voterShape) => {
-        oneVoters.newVoterGroup(new VoterSim(voterShape, self.dragm, screen))
+        oneVoters.newVoterSim(new VoterSim(voterShape, self.dragm, screen))
     }
 
     const vizOne1D = new VizOne1D(oneVoters, candidateSimList, screen)
@@ -44,7 +44,7 @@ export default function SimOne1D(screen, menu, changes, electionOne, sim) {
     const superEnter = self.enter
     self.enter = () => {
         superEnter()
-        sim.simAddCandidates.canButton.show()
+        sim.candidateAdd.canButton.show()
         sim.election.setDimensions(1)
         oneVoters.updateXY()
         candidateSimList.updateXY()
@@ -52,7 +52,7 @@ export default function SimOne1D(screen, menu, changes, electionOne, sim) {
     }
 
     self.exit = () => {
-        sim.simAddCandidates.canButton.hide()
+        sim.candidateAdd.canButton.hide()
         sim.testVoter.setE(0)
     }
 

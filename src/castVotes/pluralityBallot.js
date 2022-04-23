@@ -10,13 +10,13 @@ import pluralityTestVote from './pluralityTestVote.js'
  * There is also a separate graphical representation in Voronoi2D.js.
  * @param {Objects[]} candidates - For 2D, an array of objects: {x,y}.
  * For 1D, an array of objects: {x}.
- * @param {Objects[]} voterGroups - For 2D, an array of objects: {x,y,w}.
+ * @param {Objects[]} voterShapes - For 2D, an array of objects: {x,y,w}.
  * For 1D, an array of objects: {x,w,densityProfile}.
  * @returns votes, an object
  */
-export default function pluralityBallot(candidates, voterGroups, dimensions, isTestVoter) {
+export default function pluralityBallot(candidates, voterShapes, dimensions, isTestVoter) {
     if (isTestVoter) {
-        const tallyFractions = pluralityTestVote(candidates, voterGroups[0], dimensions)
+        const tallyFractions = pluralityTestVote(candidates, voterShapes[0], dimensions)
         const votes = { tallyFractions }
         return votes
     }
@@ -26,7 +26,7 @@ export default function pluralityBallot(candidates, voterGroups, dimensions, isT
     // get fraction of votes for each candidate so we can summarize results
     const n = candidates.length
     let tally = (new Array(n)).fill(0)
-    voterGroups.forEach((voterGroup) => {
+    voterShapes.forEach((voterGroup) => {
         const area = summer.sumArea(voterGroup)
         const weight = ((voterGroup.weight === undefined) ? 1 : voterGroup.weight)
         tally = tally.map((value, index) => value + area[index] * weight)

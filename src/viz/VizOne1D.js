@@ -13,8 +13,8 @@ export default function VizOne1D(oneVoters, candidateSimList, screen) {
     let voronoiGroups = []
 
     self.update = function () {
-        const voterGroups = oneVoters.getVoterGroups()
-        voronoiGroups = voterGroups.map(
+        const voterShapes = oneVoters.getVoterShapes()
+        voronoiGroups = voterShapes.map(
             (voterShape) => new Voronoi1D(voterShape, candidateSimList, screen),
         )
     }

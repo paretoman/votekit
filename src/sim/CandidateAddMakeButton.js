@@ -5,7 +5,7 @@
  * @param {Layout} layout
  * @param {Sim} sim
  */
-export default function CreateAddCandidate(layout, sim) {
+export default function CandidateAddMakeButton(layout, sim) {
     const self = this
 
     const addCandidateButton = document.createElement('button')

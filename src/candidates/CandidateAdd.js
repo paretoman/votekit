@@ -1,13 +1,13 @@
-import Candidate from '../candidates/Candidate.js'
-import CandidateCommander from '../candidates/CandidateCommander.js'
+import Candidate from './Candidate.js'
+import CandidateCommander from './CandidateCommander.js'
 import { standardizeColor } from '../utilities/jsHelpers.js'
-import CreateAddCandidate from './CreateAddCandidate.js'
-import Registrar from './Registrar.js'
+import CandidateAddMakeButton from '../sim/CandidateAddMakeButton.js'
+import Registrar from '../sim/Registrar.js'
 
 /** A component of sim.js that deals with adding candidates. */
-export default function SimAddCandidates(screen, layout, changes, commander, sims, sim) {
+export default function CandidateAdd(screen, layout, changes, commander, sims, sim) {
     const self = this
-    self.canButton = new CreateAddCandidate(layout, self)
+    self.canButton = new CandidateAddMakeButton(layout, self)
     const candidateRegistrar = new Registrar()
     const candidateCommander = new CandidateCommander(candidateRegistrar, commander, self)
 

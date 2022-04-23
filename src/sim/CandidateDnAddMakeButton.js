@@ -5,7 +5,7 @@
  * @param {Layout} layout
  * @param {Commander} commander
  */
-export default function CreateAddCandidateDistribution(layout, sim) {
+export default function CandidateDnAddMakeButton(layout, sim) {
     const self = this
     const addCandidateDistributionButton = document.createElement('button')
 

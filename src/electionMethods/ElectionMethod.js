@@ -1,9 +1,15 @@
 /** @module */
 
-import electionMethods from '../electionMethods/electionMethods.js'
+import electionMethods from './electionMethods.js'
 
 /**
  * Store settings and functions that deal with the election method.
+ * The difference between ElectionMethod and Election is that
+ * Election encompasses all concepts of an election such as casting a vote
+ * or the number of dimensions,
+ * while ElectionMethod just considers the votes and the result of counting.
+ * Then ElectionMethod returns a summary of how the election went.
+ * Perhaps CountingMethod is a more specific name.
  * @param {Candidate[]} candidates
  * @param {Menu} menu
  * @constructor
@@ -26,13 +32,13 @@ export default function ElectionMethod(menu) {
             self.seats = electionMethodOptions.seats
             const methodResults = electionMethods[self.electionMethod](votes, electionMethodOptions)
             const { allocation } = methodResults
-            electionResults = { allocation, candidates }
+            electionResults = { allocation, candidates, votes }
         } else {
             self.seats = 1
             const methodResults = electionMethods[self.electionMethod](votes)
             const { iWinner } = methodResults
             const winner = candidates[iWinner]
-            electionResults = { iWinner, winner }
+            electionResults = { iWinner, winner, votes }
         }
         return electionResults
     }

@@ -3,9 +3,9 @@
 import SimOne2D from './states/SimOne2D.js'
 import SimSample from './states/SimSample.js'
 import SimGeoOne from './states/SimGeoOne.js'
-import SimAddVoters from './SimAddVoters.js'
-import SimAddCandidates from './SimAddCandidates.js'
-import SimAddCandidateDns from './SimAddCandidateDns.js'
+import VoterShapeAdd from '../voters/VoterShapeAdd.js'
+import CandidateAdd from '../candidates/CandidateAdd.js'
+import CandidateDnAdd from '../candidateDns/CandidateDnAdd.js'
 import addSimControlsLabel from './addSimControlsLabel.js'
 import SimOne1D from './states/SimOne1D.js'
 import TestVoter from './TestVoter.js'
@@ -58,21 +58,21 @@ export default function Sim(
 
     // Entities //
 
-    self.simAddVoters = new SimAddVoters(screen, layout, changes, commander, sims, self)
-    self.simAddCandidates = new SimAddCandidates(screen, layout, changes, commander, sims, self)
-    self.simAddCandidateDns = new SimAddCandidateDns(screen, layout, changes, commander, sims, self)
+    self.voterShapeAdd = new VoterShapeAdd(screen, layout, changes, commander, sims, self)
+    self.candidateAdd = new CandidateAdd(screen, layout, changes, commander, sims, self)
+    self.candidateDnAdd = new CandidateDnAdd(screen, layout, changes, commander, sims, self)
 
     self.testVoter = new TestVoter(screen, sims, self)
     self.testVote = () => sims[self.state].testVote()
 
     // Default Entities //
 
-    self.simAddCandidates.addCandidate({ x: 50, y: 100 }, { x: 50 }, '#e05020', true)
-    self.simAddCandidates.addCandidate({ x: 100, y: 50 }, { x: 100 }, '#50e020', true)
-    self.simAddCandidates.addCandidate({ x: 300 - 100, y: 300 - 50 }, { x: 200 }, '#2050e0', true)
-    self.simAddCandidateDns.addCandidateDistribution({ x: 150, y: 150, w: 200 }, { x: 150 }, true)
-    self.simAddVoters.addVoterCircle({ x: 50, y: 150, w: 200 }, { x: 50, w: 200, densityProfile: 'gaussian' }, true)
-    self.simAddVoters.addVoterCircle({ x: 250, y: 150, w: 200 }, { x: 250, w: 200, densityProfile: 'gaussian' }, true)
+    self.candidateAdd.addCandidate({ x: 50, y: 100 }, { x: 50 }, '#e05020', true)
+    self.candidateAdd.addCandidate({ x: 100, y: 50 }, { x: 100 }, '#50e020', true)
+    self.candidateAdd.addCandidate({ x: 300 - 100, y: 300 - 50 }, { x: 200 }, '#2050e0', true)
+    self.candidateDnAdd.addCandidateDistribution({ x: 150, y: 150, w: 200 }, { x: 150 }, true)
+    self.voterShapeAdd.addVoterCircle({ x: 50, y: 150, w: 200 }, { x: 50, w: 200, densityProfile: 'gaussian' }, true)
+    self.voterShapeAdd.addVoterCircle({ x: 250, y: 150, w: 200 }, { x: 250, w: 200, densityProfile: 'gaussian' }, true)
 
     // State Machine //
 

@@ -1,13 +1,13 @@
-import createAddVoter from './createAddVoter.js'
-import Registrar from './Registrar.js'
-import VoterShape from '../voters/VoterShape.js'
-import VoterCommander from '../voters/VoterCommander.js'
+import VoterShapeAddMakeButton from '../sim/VoterShapeAddMakeButton.js'
+import Registrar from '../sim/Registrar.js'
+import VoterShape from './VoterShape.js'
+import VoterCommander from './VoterCommander.js'
 
 /** A component of sim.js that deals with adding voters. */
-export default function SimAddVoters(screen, layout, changes, commander, sims, sim) {
+export default function VoterShapeAdd(screen, layout, changes, commander, sims, sim) {
     const self = this
 
-    createAddVoter(layout, self)
+    VoterShapeAddMakeButton(layout, self)
 
     const voterRegistrar = new Registrar()
     const voterCommander = new VoterCommander(voterRegistrar, commander, self)
