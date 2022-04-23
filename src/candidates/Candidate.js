@@ -16,7 +16,7 @@ import tooltipForEntity from '../sim/tooltipForEntity.js'
  * @param {Registrar} candidateRegistrar
  * @param {Commander} commander
  * @param {Changes} changes
- * @param {Boolean} doLoad - Should we add the candidateDistribution without adding to the history?
+ * @param {Boolean} doLoad - Should we add the candidateDn without adding to the history?
  * @constructor
  */
 export default function Candidate(
@@ -99,7 +99,7 @@ export default function Candidate(
         }
     }
     /** Do this when entering a state because x and y change.
-     *  Maybe x and y should be in the SimCandidate instead... just speculating. */
+     *  Maybe x and y should be in the CandidateSim instead... just speculating. */
     self.updateXY = () => {
         if (sim.election.dimensions === 1) {
             self.setAction.shape1x(self.shape1.x)

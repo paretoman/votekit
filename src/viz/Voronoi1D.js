@@ -13,14 +13,14 @@ import { Delaunay } from '../lib/snowpack/build/snowpack/pkg/d3-delaunay.js'
  * Draw Voronoi cells to show votes.
  * Voronoi1D is called by VizOne1D.
  * @param {VoterGroup} voterGroup
- * @param {SimCandidateList} simCandidateList
+ * @param {CandidateSimList} candidateSimList
  * @param {Screen} screen
  * @constructor
  */
-export default function Voronoi1D(voterGroup, simCandidateList, screen) {
+export default function Voronoi1D(voterGroup, candidateSimList, screen) {
     const self = this
 
-    const cans = simCandidateList.getCandidates()
+    const cans = candidateSimList.getCandidates()
     const points = cans.map((e) => [e.x, e.y])
     const delaunay = Delaunay.from(points)
     const voronoi = delaunay.voronoi([0, 0, screen.width, screen.height])

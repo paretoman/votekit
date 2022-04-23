@@ -3,12 +3,12 @@
 import CandidateDistributionSampler from '../election/CandidateDistributionSampler.js'
 
 /**
- * A simple list of simCandidateDistribution instances.
+ * A simple list of candidateDnSim instances.
  * It really just passes along function calls to each member of the list.
  * It also checks if that member exists. Alternatively, it was deleted.
  * @constructor
  */
-export default function SimCandidateDistributionList(sim) {
+export default function CandidateDnSimList(sim) {
     const self = this
 
     const simCanDns = []

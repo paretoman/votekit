@@ -1,4 +1,4 @@
-import CandidateDistribution from '../candidates/CandidateDistribution.js'
+import CandidateDn from '../candidates/CandidateDn.js'
 import CandidateDnCommander from '../candidates/CandidateDnCommander.js'
 import CreateAddCandidateDistribution from './CreateAddCandidateDistribution.js'
 import Registrar from './Registrar.js'
@@ -23,8 +23,8 @@ export default function SimAddCandidateDns(screen, layout, changes, commander, s
 
     self.addCandidateDistribution = (shape2, shape1, doLoad) => {
         // eslint-disable-next-line no-new, max-len
-        const candidateDistribution = new CandidateDistribution(shape2, shape1, screen, candidateDnRegistrar, commander, changes, doLoad, candidateDnCommander, sim)
-        sims.sample.addSimCandidateDistribution(candidateDistribution)
+        const candidateDn = new CandidateDn(shape2, shape1, screen, candidateDnRegistrar, commander, changes, doLoad, candidateDnCommander, sim)
+        sims.sample.addSimCandidateDistribution(candidateDn)
 
         const num = candidateDnRegistrar.num()
         candidateDnCommander.setNumberCandidateDns(num)

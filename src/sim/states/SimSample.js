@@ -1,7 +1,7 @@
 /** @module */
 
-import SimCandidateDistributionList from '../../candidates/SimCandidateDistributionList.js'
-import SimCandidateDistribution from '../../candidates/SimCandidateDistribution.js'
+import CandidateDnSimList from '../../candidates/CandidateDnSimList.js'
+import CandidateDnSim from '../../candidates/SimCandidateDistribution.js'
 import VizSample2D from '../../viz/VizSample2D.js'
 import VoterSimList from '../../voters/VoterSimList.js'
 import SimBase from './SimBase.js'
@@ -23,10 +23,10 @@ export default function SimSample(screen, menu, changes, sampleElections, sim) {
 
     SimBase.call(self, screen, changes, sim)
 
-    const simCandidateList = new SimCandidateDistributionList(sim)
+    const candidateSimList = new CandidateDnSimList(sim)
 
     self.addSimCandidateDistribution = (canDn) => {
-        simCandidateList.newCandidate(new SimCandidateDistribution(canDn, self.dragm))
+        candidateSimList.newCandidate(new CandidateDnSim(canDn, self.dragm))
     }
 
     const sampleVoters = new VoterSimList(sim)
@@ -43,7 +43,7 @@ export default function SimSample(screen, menu, changes, sampleElections, sim) {
         sim.simAddCandidateDns.canDnButton.show()
         sim.election.setDimensions(2)
         sampleVoters.updateXY()
-        simCandidateList.updateXY()
+        candidateSimList.updateXY()
     }
 
     self.exit = () => {
@@ -52,7 +52,7 @@ export default function SimSample(screen, menu, changes, sampleElections, sim) {
 
     self.update = () => {
         if (changes.checkNone()) {
-            const noChange = sampleElections.addSim(sampleVoters, simCandidateList)
+            const noChange = sampleElections.addSim(sampleVoters, candidateSimList)
             if (!noChange) {
                 changes.clear()
                 // changed, so re-render
@@ -62,7 +62,7 @@ export default function SimSample(screen, menu, changes, sampleElections, sim) {
         } else {
             // clear changes, reset to []
             changes.clear()
-            simCandidateList.startSampler()
+            candidateSimList.startSampler()
             sampleElections.startSim()
             screen.clear()
             self.render()
@@ -72,10 +72,10 @@ export default function SimSample(screen, menu, changes, sampleElections, sim) {
     self.render = () => {
         sampleElections.render()
         vizSample2D.render()
-        simCandidateList.render()
+        candidateSimList.render()
     }
     self.renderForeground = () => {
         sampleVoters.renderForeground()
-        simCandidateList.renderForeground()
+        candidateSimList.renderForeground()
     }
 }

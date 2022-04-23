@@ -1,8 +1,8 @@
 /** @module */
 
 import VoterGeoBasis from '../../voters/VoterGeoBasis.js'
-import SimCandidate from '../../candidates/SimCandidate.js'
-import SimCandidateList from '../../candidates/SimCandidateList.js'
+import CandidateSim from '../../candidates/CandidateSim.js'
+import CandidateSimList from '../../candidates/CandidateSimList.js'
 import VoterGeoList from '../../voters/VoterGeoList.js'
 import SimBase from './SimBase.js'
 import VizGeo2D from '../../viz/VizGeo2D.js'
@@ -25,10 +25,10 @@ export default function SimGeoOne(screen, menu, changes, geoElection, sim) {
 
     const voterGeoList = new VoterGeoList(screen, geoElection, sim)
 
-    const simCandidateList = new SimCandidateList(sim)
+    const candidateSimList = new CandidateSimList(sim)
 
     self.addSimCandidate = (candidate) => {
-        simCandidateList.newCandidate(new SimCandidate(candidate, self.dragm))
+        candidateSimList.newCandidate(new CandidateSim(candidate, self.dragm))
     }
 
     self.addSimVoterCircle = (voterShape) => {
@@ -46,7 +46,7 @@ export default function SimGeoOne(screen, menu, changes, geoElection, sim) {
         sim.simAddCandidates.canButton.show()
         sim.election.setDimensions(2)
         voterGeoList.updateXY()
-        simCandidateList.updateXY()
+        candidateSimList.updateXY()
         sim.testVoter.updateXY()
     }
 
@@ -54,8 +54,8 @@ export default function SimGeoOne(screen, menu, changes, geoElection, sim) {
         screen.hideGeoMaps()
         sim.simAddCandidates.canButton.hide()
         // clean up fractions
-        const fillUndefined = Array(simCandidateList.numCandidates()).fill(undefined)
-        simCandidateList.setCandidateWins(fillUndefined)
+        const fillUndefined = Array(candidateSimList.numCandidates()).fill(undefined)
+        candidateSimList.setCandidateWins(fillUndefined)
         sim.testVoter.setE(0)
     }
 
@@ -67,20 +67,20 @@ export default function SimGeoOne(screen, menu, changes, geoElection, sim) {
         }
         changes.clear()
         voterGeoList.updateVoters() // can make this only trigger when voters change
-        const geoElectionResults = geoElection.updateVotes(voterGeoList, simCandidateList)
+        const geoElectionResults = geoElection.updateVotes(voterGeoList, candidateSimList)
         vizGeo2D.update(geoElectionResults)
         sim.testVoter.update()
         screen.clear()
         self.render()
     }
 
-    self.testVote = () => geoElection.testVote(sim.testVoter, simCandidateList)
+    self.testVote = () => geoElection.testVote(sim.testVoter, candidateSimList)
 
     self.render = () => {
         vizGeo2D.render()
     }
     self.renderForeground = () => {
-        simCandidateList.renderForeground()
+        candidateSimList.renderForeground()
         voterGeoList.renderForeground()
         sim.testVoter.renderForeground()
     }

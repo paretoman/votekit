@@ -27,20 +27,20 @@ VoterSim
 voterSimList -> voterSim -> voter -> voterRegistrar
 
 # Sim Architecture for Candidates
-Made classes that will exist only within a sim state: SimCandidate and SimCandidateDistribution. These handle functionality that is specific to sims.
+Made classes that will exist only within a sim state: CandidateSim and CandidateDnSim. These handle functionality that is specific to sims.
 
-A SimCandidate has a component that is an instance of Candidate. This candidate component persists between states. Registrar also has related functionality for assigning each candidate an id.
+A CandidateSim has a component that is an instance of Candidate. This candidate component persists between states. Registrar also has related functionality for assigning each candidate an id.
 
-A SimCandidateDistribution has a component that is an instance of CandidateDistribution. This persists between states. Registrar has related functionality.
+A CandidateDnSim has a component that is an instance of CandidateDn. This persists between states. Registrar has related functionality.
 
-We don't need inheritance like we used for voters, at least not for right now. If we did want inheritance, we could call subclasses of SimCandidate and SimCandidateDistribution from each sim.
+We don't need inheritance like we used for voters, at least not for right now. If we did want inheritance, we could call subclasses of CandidateSim and CandidateDnSim from each sim.
 
-Made a simple list of simCandidate instances called simCandidateList. It really just passes along function calls to each member of the list. The class simCandidateDistributionList is analogous to this for candidate distributions.
+Made a simple list of candidateSim instances called candidateSimList. It really just passes along function calls to each member of the list. The class candidateDnSimList is analogous to this for candidate distributions.
 
 ## Class Diagrams
 
 
-simCandidateList -> simCandidate -> candidate -> candidateRegistrar
+candidateSimList -> candidateSim -> candidate -> candidateRegistrar
 
-simCandidateDistributionList -> simCandidateDistribution -> candidateDistribution -> candidateDistributionRegistrar
+candidateDnSimList -> candidateDnSim -> candidateDn -> candidateDistributionRegistrar
 

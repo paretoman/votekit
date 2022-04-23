@@ -2,12 +2,12 @@
 
 /**
  *
- * A simple list of simCandidateDistribution instances.
+ * A simple list of candidateDnSim instances.
  * It really just passes along function calls to each member of the list.
  * It also checks if that member exists. Alternatively, it was deleted.
  * @constructor
  */
-export default function SimCandidateList(sim) {
+export default function CandidateSimList(sim) {
     const self = this
 
     const simCans = []

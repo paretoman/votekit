@@ -7,7 +7,7 @@ import Voronoi1D from './Voronoi1D.js'
  * @param {Screen} screen
  * @constructor
  */
-export default function VizOne1D(oneVoters, simCandidateList, screen) {
+export default function VizOne1D(oneVoters, candidateSimList, screen) {
     const self = this
 
     let voronoiGroups = []
@@ -15,7 +15,7 @@ export default function VizOne1D(oneVoters, simCandidateList, screen) {
     self.update = function () {
         const voterGroups = oneVoters.getVoterGroups()
         voronoiGroups = voterGroups.map(
-            (voterShape) => new Voronoi1D(voterShape, simCandidateList, screen),
+            (voterShape) => new Voronoi1D(voterShape, candidateSimList, screen),
         )
     }
 

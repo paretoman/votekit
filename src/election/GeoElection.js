@@ -15,8 +15,8 @@ import colorBlend, { toRGBA } from './colorBlend.js'
 export default function GeoElection(screen, menu, election) {
     const self = this
 
-    self.updateVotes = (voterGeoList, simCandidateList) => {
-        const cans = simCandidateList.getCandidates()
+    self.updateVotes = (voterGeoList, candidateSimList) => {
+        const cans = candidateSimList.getCandidates()
 
         if (voterGeoList.getVoterSimGroups().length === 0) return
         if (cans.length === 0) return
@@ -31,8 +31,8 @@ export default function GeoElection(screen, menu, election) {
         const colorOfVoteByDistrict = colorDistrictVote(resultsByDistrict, cans)
         const winsByDistrict = updateWins(resultsByDistrict, cans)
 
-        simCandidateList.setCandidateWins(winsByDistrict)
-        simCandidateList.setCandidateFractions(resultsStatewide.votes.tallyFractions)
+        candidateSimList.setCandidateWins(winsByDistrict)
+        candidateSimList.setCandidateFractions(resultsStatewide.votes.tallyFractions)
 
         return {
             resultsStatewide,
@@ -151,10 +151,10 @@ export default function GeoElection(screen, menu, election) {
         return colorOfVoteByDistrict
     }
 
-    self.testVote = (testVoter, simCandidateList) => {
-        const vote = election.testVote(testVoter, simCandidateList)
+    self.testVote = (testVoter, candidateSimList) => {
+        const vote = election.testVote(testVoter, candidateSimList)
         const i = vote.tallyFractions.indexOf(1)
-        const cans = simCandidateList.getCandidates()
+        const cans = candidateSimList.getCandidates()
         vote.color = cans[i].color
         return vote
     }

@@ -12,7 +12,7 @@ This describes how 1D simulations were added to the 2D simulations.
 * Voronoi1D is called by VizOne1D.
 
 ## Maybe new in future.
-OneDCandidate would be a sibling of SimCandidate but maybe it overwrites renderForeground and instead has render1DForeground.
+OneDCandidate would be a sibling of CandidateSim but maybe it overwrites renderForeground and instead has render1DForeground.
 
 ## Election.js
 Election is a component of Sim. So we store the dimensions in Election and can refer to them with a reference to sim.election.

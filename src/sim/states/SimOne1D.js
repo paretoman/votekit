@@ -1,7 +1,7 @@
 /** @module */
 
-import SimCandidate from '../../candidates/SimCandidate.js'
-import SimCandidateList from '../../candidates/SimCandidateList.js'
+import CandidateSim from '../../candidates/CandidateSim.js'
+import CandidateSimList from '../../candidates/CandidateSimList.js'
 import VoterSimList from '../../voters/VoterSimList.js'
 import SimBase from './SimBase.js'
 import VoterSim from '../../voters/VoterSim.js'
@@ -29,17 +29,17 @@ export default function SimOne1D(screen, menu, changes, oneElection, sim) {
 
     const oneVoters = new VoterSimList(sim)
 
-    const simCandidateList = new SimCandidateList(sim)
+    const candidateSimList = new CandidateSimList(sim)
 
     self.addSimCandidate = (candidate) => {
-        simCandidateList.newCandidate(new SimCandidate(candidate, self.dragm))
+        candidateSimList.newCandidate(new CandidateSim(candidate, self.dragm))
     }
 
     self.addSimVoterCircle = (voterShape) => {
         oneVoters.newVoterGroup(new VoterSim(voterShape, self.dragm, screen))
     }
 
-    const vizOne1D = new VizOne1D(oneVoters, simCandidateList, screen)
+    const vizOne1D = new VizOne1D(oneVoters, candidateSimList, screen)
 
     const superEnter = self.enter
     self.enter = () => {
@@ -47,7 +47,7 @@ export default function SimOne1D(screen, menu, changes, oneElection, sim) {
         sim.simAddCandidates.canButton.show()
         sim.election.setDimensions(1)
         oneVoters.updateXY()
-        simCandidateList.updateXY()
+        candidateSimList.updateXY()
         sim.testVoter.updateXY()
     }
 
@@ -60,14 +60,14 @@ export default function SimOne1D(screen, menu, changes, oneElection, sim) {
         if (changes.checkNone()) return
         // clear changes, reset to []
         changes.clear()
-        oneElection.updateTallies(oneVoters, simCandidateList)
+        oneElection.updateTallies(oneVoters, candidateSimList)
         vizOne1D.update()
         sim.testVoter.update()
         screen.clear()
         self.render()
     }
 
-    self.testVote = () => oneElection.testVote(sim.testVoter, simCandidateList)
+    self.testVote = () => oneElection.testVote(sim.testVoter, candidateSimList)
 
     self.render = () => {
         vizOne1D.render()
@@ -75,7 +75,7 @@ export default function SimOne1D(screen, menu, changes, oneElection, sim) {
     self.renderForeground = () => {
         // sampleElections.renderForeground()
         oneVoters.renderForeground()
-        simCandidateList.renderForeground()
+        candidateSimList.renderForeground()
         sim.testVoter.renderForeground()
     }
 }
