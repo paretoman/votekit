@@ -18,7 +18,7 @@ export default function VoterSimList(sim) {
     }
 
     self.getVoterGroups = () => simVoters.filter((v) => v.voter.exists).map((v) => v.voter)
-    self.getSimVoterGroups = () => simVoters.filter((v) => v.voter.exists)
+    self.getVoterSimGroups = () => simVoters.filter((v) => v.voter.exists)
 
     self.update = (candidates) => {
         simVoters.forEach((v) => { if (v.voter.exists) v.update(candidates) })

@@ -15,11 +15,11 @@ import colorBlend, { toRGBA } from './colorBlend.js'
 export default function GeoElection(screen, menu, election) {
     const self = this
 
-    self.updateVotes = (voterGeoList, candidates) => {
-        if (voterGeoList.getSimVoterGroups().length === 0) return
+    self.updateVotes = (voterGeoList, candidates, dimensions, vizGeo2D) => {
+        if (voterGeoList.getVoterSimGroups().length === 0) return
         if (candidates.getCandidates().length === 0) return
         self.updateStatewideTallies(voterGeoList, candidates)
-        self.updateNoiseImage(voterGeoList, candidates)
+        self.updateNoiseImage(voterGeoList, candidates, vizGeo2D)
         self.runDistrictElections(voterGeoList, candidates)
         self.updateWinColors(candidates)
         self.updateColorBlendGeoMap(candidates)
@@ -40,7 +40,7 @@ export default function GeoElection(screen, menu, election) {
     /** Visualize voter demographics according to votes for candidates within a voterGroup.
      * Hold mini-elections within a voterGroup.
      */
-    self.updateNoiseImage = function (voterGeoList, candidates) {
+    self.updateNoiseImage = function (voterGeoList, candidates, vizGeo2D) {
         // visualize simplex noise
         // self.voterGeoList.noiseImage.load(sn)
 
@@ -66,7 +66,7 @@ export default function GeoElection(screen, menu, election) {
             ),
         )
 
-        voterGeoList.noiseImage.loadColors(allColors)
+        vizGeo2D.noiseImage.loadColors(allColors)
     }
 
     /** Run separate elections in each district. */

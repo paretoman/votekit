@@ -5,6 +5,7 @@ import SimCandidate from '../../candidates/SimCandidate.js'
 import SimCandidateList from '../../candidates/SimCandidateList.js'
 import VoterGeoList from '../../voters/VoterGeoList.js'
 import SimBase from './SimBase.js'
+import VizGeo2D from '../../viz/VizGeo2D.js'
 /**
  * Simulate one election with
  *   candidates in defined positions, and
@@ -33,6 +34,8 @@ export default function SimGeoOne(screen, menu, changes, geoElection, sim) {
     self.addSimVoterCircle = (voterShape) => {
         voterGeoList.newVoterGroup(new VoterGeoBasis(voterShape, self.dragm, screen))
     }
+
+    const vizGeo2D = new VizGeo2D(voterGeoList, simCandidateList, screen, geoElection)
 
     changes.add(['districts'])
 
@@ -64,7 +67,7 @@ export default function SimGeoOne(screen, menu, changes, geoElection, sim) {
         }
         changes.clear()
         voterGeoList.updateVoters() // can make this only trigger when voters change
-        geoElection.updateVotes(voterGeoList, simCandidateList, sim.dimensions)
+        geoElection.updateVotes(voterGeoList, simCandidateList, sim.dimensions, vizGeo2D)
         sim.testVoter.update()
         screen.clear()
         self.render()
@@ -73,7 +76,7 @@ export default function SimGeoOne(screen, menu, changes, geoElection, sim) {
     self.testVote = () => geoElection.testVote(sim.testVoter, simCandidateList)
 
     self.render = () => {
-        voterGeoList.render()
+        vizGeo2D.render()
     }
     self.renderForeground = () => {
         simCandidateList.renderForeground()
