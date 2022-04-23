@@ -39,7 +39,7 @@ export default function Election(menu) {
     self.runElection = function (voterShapes, canList) {
         const voterGeom = mapVoters(voterShapes)
         const canGeom = mapCans(canList)
-        const votes = castVotes.pluralityBallot(canGeom, voterGeom, self.dimensions)
+        const votes = castVotes.castPlurality(canGeom, voterGeom, self.dimensions)
         const electionResults = self.countVotes.run(canList, votes)
         return electionResults
     }
@@ -51,7 +51,7 @@ export default function Election(menu) {
         const canList = candidates.getCandidates()
         const voterGeom = mapVoters(voterShapes)
         const canGeom = mapCans(canList)
-        const votes = castVotes.pluralityBallot(canGeom, voterGeom, self.dimensions)
+        const votes = castVotes.castPlurality(canGeom, voterGeom, self.dimensions)
         return votes
     }
 
@@ -60,7 +60,7 @@ export default function Election(menu) {
         const canList = candidates.getCandidates()
         const voterGeom = mapVoters(voterShapes)
         const canGeom = mapCans(canList)
-        const vote = castVotes.pluralityBallot(canGeom, voterGeom, self.dimensions, true)
+        const vote = castVotes.castPlurality(canGeom, voterGeom, self.dimensions, true)
         return vote
     }
 }

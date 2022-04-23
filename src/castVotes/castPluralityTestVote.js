@@ -7,7 +7,7 @@ import { minIndex } from '../utilities/jsHelpers.js'
  * @param {*} voter
  * @param {*} dimensions
  */
-export default function pluralityTestVote(candidates, voter, dimensions) {
+export default function castPluralityTestVote(candidates, voter, dimensions) {
     const df = (dimensions === 1) ? df1 : df2
     const dist2 = candidates.map((c) => df(c, voter))
     const i = minIndex(dist2)

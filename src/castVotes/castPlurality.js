@@ -1,8 +1,8 @@
 /** @module */
 
-import AreaSummer from './AreaSummer.js'
-import LineSummer from './LineSummer.js'
-import pluralityTestVote from './pluralityTestVote.js'
+import CastPluralityAreaSummer from './CastPluralityAreaSummer.js'
+import CastPluralityLineSummer from './CastPluralityLineSummer.js'
+import castPluralityTestVote from './castPluralityTestVote.js'
 
 /**
  * Vote for one.
@@ -14,14 +14,16 @@ import pluralityTestVote from './pluralityTestVote.js'
  * For 1D, an array of objects: {x,w,densityProfile}.
  * @returns votes, an object
  */
-export default function pluralityBallot(candidates, voterShapes, dimensions, isTestVoter) {
+export default function castPlurality(candidates, voterShapes, dimensions, isTestVoter) {
     if (isTestVoter) {
-        const tallyFractions = pluralityTestVote(candidates, voterShapes[0], dimensions)
+        const tallyFractions = castPluralityTestVote(candidates, voterShapes[0], dimensions)
         const votes = { tallyFractions }
         return votes
     }
 
-    const summer = (dimensions === 1) ? new LineSummer(candidates) : new AreaSummer(candidates)
+    const summer = (dimensions === 1)
+        ? new CastPluralityLineSummer(candidates)
+        : new CastPluralityAreaSummer(candidates)
 
     // get fraction of votes for each candidate so we can summarize results
     const n = candidates.length
