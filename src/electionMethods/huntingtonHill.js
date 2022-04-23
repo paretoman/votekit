@@ -8,7 +8,7 @@
  * @param {number} electionMethodOptions.seats - The number of seats to fill.
  * @param {number} electionMethodOptions.threshold - The minimum fraction of voters
  * that a party needs to be eligible for a seat.
- * @returns {{allocation:number[]}} - results, with property allocation.
+ * @returns {{allocation:number[]}} - countResults, with property allocation.
  * Allocation is an array of integers that say how many representatives each party gets.
  */
 
@@ -35,8 +35,8 @@ export default function huntingtonHill(votes, electionMethodOptions) {
         const allocation = pops2.map(
             (p) => p >= minPopulation,
         )
-        const results = { allocation }
-        return results
+        const countResults = { allocation }
+        return countResults
     }
 
     // make a list of break points / divisors, independent of vote totals
@@ -87,6 +87,6 @@ export default function huntingtonHill(votes, electionMethodOptions) {
 
     // Todo: consider if there is a tie.
     // Right now, we give extra seats to all the tied parties if there is a tie.
-    const results = { allocation }
-    return results
+    const countResults = { allocation }
+    return countResults
 }

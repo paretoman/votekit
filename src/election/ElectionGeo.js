@@ -73,8 +73,8 @@ export default function ElectionGeo(election) {
         const colorSet = cans.map((can) => can.color)
         const colorByTract = resultsByTract.map(
             (row) => row.map(
-                (results) => {
-                    const { tallyFractions } = results.votes
+                (electionResults) => {
+                    const { tallyFractions } = electionResults.votes
                     const color = toRGBA(colorBlend(tallyFractions, colorSet))
                     return color
                 },
@@ -98,13 +98,15 @@ export default function ElectionGeo(election) {
     function colorDistrictWins(resultsByDistrict, cans) {
         // calculate color for win map
         let colorOfWinsByDistrict
-        if (election.method.checkElectionType() === 'singleWinner') {
-            colorOfWinsByDistrict = resultsByDistrict.map((results) => results.winner.color)
+        if (election.countVotes.checkElectionType() === 'singleWinner') {
+            colorOfWinsByDistrict = resultsByDistrict.map(
+                (electionResults) => electionResults.winner.color,
+            )
         } else {
             const colorSet = cans.map((can) => can.color)
             colorOfWinsByDistrict = resultsByDistrict.map(
-                (results) => {
-                    const { allocation } = results
+                (electionResults) => {
+                    const { allocation } = electionResults
                     const sum = allocation.reduce((p, c) => p + c)
                     const fractions = allocation.map((x) => x / sum)
                     const color = colorBlend(fractions, colorSet)
@@ -120,15 +122,15 @@ export default function ElectionGeo(election) {
         // make a histogram of winsByDistrict
         const numCandidates = cans.length
         const winsByDistrict = Array(numCandidates).fill(0)
-        if (election.method.checkElectionType() === 'singleWinner') {
-            const iWinners = resultsByDistrict.map((results) => results.iWinner)
+        if (election.countVotes.checkElectionType() === 'singleWinner') {
+            const iWinners = resultsByDistrict.map((electionResults) => electionResults.iWinner)
             iWinners.forEach((iWinner) => {
                 winsByDistrict[iWinner] += 1
             })
         } else {
             resultsByDistrict.forEach(
-                (results) => {
-                    const { allocation } = results
+                (electionResults) => {
+                    const { allocation } = electionResults
                     for (let i = 0; i < numCandidates; i++) {
                         winsByDistrict[i] += allocation[i]
                     }
@@ -142,8 +144,8 @@ export default function ElectionGeo(election) {
      * Blend candidate colors in proportion to their votes.
      */
     function colorDistrictVote(resultsByDistrict, cans) {
-        const colorOfVoteByDistrict = resultsByDistrict.map((results) => {
-            const { tallyFractions } = results.votes
+        const colorOfVoteByDistrict = resultsByDistrict.map((electionResults) => {
+            const { tallyFractions } = electionResults.votes
             const colorSet = cans.map((can) => can.color)
             const color = colorBlend(tallyFractions, colorSet)
             return color

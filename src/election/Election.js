@@ -1,7 +1,7 @@
 /** @module */
 
 import castVotes from '../castVotes/castVotes.js'
-import ElectionMethod from '../electionMethods/ElectionMethod.js'
+import CountVotes from './CountVotes.js'
 
 /**
  * Here we are in the context of a single election with voter objects and candidate objects.
@@ -11,7 +11,7 @@ import ElectionMethod from '../electionMethods/ElectionMethod.js'
 export default function Election(menu) {
     const self = this
 
-    self.method = new ElectionMethod(menu)
+    self.countVotes = new CountVotes(menu)
     self.dimensions = 1
 
     self.setDimensions = (d) => { self.dimensions = d }
@@ -40,7 +40,7 @@ export default function Election(menu) {
         const voterGeom = mapVoters(voterShapes)
         const canGeom = mapCans(canList)
         const votes = castVotes.pluralityBallot(canGeom, voterGeom, self.dimensions)
-        const electionResults = self.method.run(canList, votes)
+        const electionResults = self.countVotes.run(canList, votes)
         return electionResults
     }
 

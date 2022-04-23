@@ -29,4 +29,4 @@ The architecture tries to be context-oriented. I mean that we keep an idea of th
     * Entities are visual objects that can be controlled by the user. These include voters and candidates.
 * A sandbox is the main user interface.
 
-The difference between ElectionMethod and Election is that Election encompasses all concepts of an election such as casting a vote or the number of dimensions, while ElectionMethod just considers the votes and the result of counting. Then ElectionMethod returns a summary of how the election went. Perhaps CountingMethod would be a more specific name.
+The difference between CountVotes and Election is that Election encompasses all concepts of an election such as casting a vote or the number of dimensions, while CountVotes just considers the votes and the result of counting. Then CountVotes returns a summary of how the election went. Perhaps CountingMethod would be a more specific name.

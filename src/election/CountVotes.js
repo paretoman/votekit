@@ -1,27 +1,27 @@
 /** @module */
 
-import electionMethods from './electionMethods.js'
+import electionMethods from '../electionMethods/electionMethods.js'
 
 /**
  * Store settings and functions that deal with the election method.
- * The difference between ElectionMethod and Election is that
+ * The difference between CountVotes and Election is that
  * Election encompasses all concepts of an election such as casting a vote
  * or the number of dimensions,
- * while ElectionMethod just considers the votes and the result of counting.
- * Then ElectionMethod returns a summary of how the election went.
+ * while CountVotes just considers the votes and the result of counting.
+ * Then CountVotes returns a summary of how the election went.
  * Perhaps CountingMethod is a more specific name.
  * @param {Candidate[]} candidates
  * @param {Menu} menu
  * @constructor
  */
-export default function ElectionMethod(menu) {
+export default function CountVotes(menu) {
     const self = this
 
     self.seats = 1
 
     self.run = (candidates, votes) => {
         // why have two different kinds of results?
-        // methodResults, the smaller one,
+        // countResults, the smaller one,
         //   is in the context of the election method,
         //   which has tallies go in and analysis come out
         // electionResults, the larger one,
@@ -30,13 +30,13 @@ export default function ElectionMethod(menu) {
         if (self.checkElectionType() === 'allocation') {
             const electionMethodOptions = { seats: 5, threshold: 0.2 }
             self.seats = electionMethodOptions.seats
-            const methodResults = electionMethods[self.electionMethod](votes, electionMethodOptions)
-            const { allocation } = methodResults
+            const countResults = electionMethods[self.electionMethod](votes, electionMethodOptions)
+            const { allocation } = countResults
             electionResults = { allocation, candidates, votes }
         } else {
             self.seats = 1
-            const methodResults = electionMethods[self.electionMethod](votes)
-            const { iWinner } = methodResults
+            const countResults = electionMethods[self.electionMethod](votes)
+            const { iWinner } = countResults
             const winner = candidates[iWinner]
             electionResults = { iWinner, winner, votes }
         }

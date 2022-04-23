@@ -35,7 +35,7 @@ export default function ElectionSample(election) {
         const ns = 20
 
         // number of new points
-        const { seats } = election.method
+        const { seats } = election.countVotes
         const nnp = seats * ns
         const newPoints = Array(nnp)
 
@@ -44,9 +44,9 @@ export default function ElectionSample(election) {
         for (let i = 0; i < ns; i++) {
             // choose a number of candidates
             let nk
-            if (election.method.checkElectionType() === 'singleWinner') {
+            if (election.countVotes.checkElectionType() === 'singleWinner') {
                 nk = 5
-            } else if (election.method.checkElectionType() === 'allocation') {
+            } else if (election.countVotes.checkElectionType() === 'allocation') {
                 nk = 10
             }
             const canList = []
@@ -59,17 +59,17 @@ export default function ElectionSample(election) {
             }
 
             // find winner position
-            const results = election.runElection(voterShapes, canList)
+            const electionResults = election.runElection(voterShapes, canList)
 
-            if (election.method.checkElectionType() === 'singleWinner') {
-                const { winner } = results
+            if (election.countVotes.checkElectionType() === 'singleWinner') {
+                const { winner } = electionResults
 
                 // record point
                 const winPoint = winner.shape2
                 points.push(winPoint)
                 newPoints[i] = winPoint
             } else {
-                const { allocation } = results
+                const { allocation } = electionResults
 
                 const jitterSize = 10
                 let q = 0
