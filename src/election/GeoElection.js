@@ -15,48 +15,63 @@ import colorBlend, { toRGBA } from './colorBlend.js'
 export default function GeoElection(screen, menu, election) {
     const self = this
 
-    self.updateVotes = (voterGeoList, candidates, dimensions, vizGeo2D) => {
+    self.updateVotes = (voterGeoList, simCandidateList) => {
+        const cans = simCandidateList.getCandidates()
+
         if (voterGeoList.getVoterSimGroups().length === 0) return
-        if (candidates.getCandidates().length === 0) return
-        self.updateStatewideTallies(voterGeoList, candidates)
-        self.updateNoiseImage(voterGeoList, candidates, vizGeo2D)
-        self.runDistrictElections(voterGeoList, candidates)
-        self.updateWinColors(candidates)
-        self.updateColorBlendGeoMap(candidates)
-        self.updateWins(candidates)
+        if (cans.length === 0) return
+
+        const resultsStatewide = runStatewideElection(voterGeoList, cans)
+
+        const resultsByTract = runTractElections(voterGeoList, cans)
+        const colorByTract = colorTracts(resultsByTract, cans)
+
+        const resultsByDistrict = runDistrictElections(voterGeoList, cans)
+        const colorOfWinsByDistrict = colorDistrictWins(resultsByDistrict, cans)
+        const colorOfVoteByDistrict = colorDistrictVote(resultsByDistrict, cans)
+        const winsByDistrict = updateWins(resultsByDistrict, cans)
+
+        simCandidateList.setCandidateWins(winsByDistrict)
+        simCandidateList.setCandidateFractions(resultsStatewide.votes.tallyFractions)
+
+        return {
+            resultsStatewide,
+            resultsByTract,
+            colorByTract,
+            resultsByDistrict,
+            colorOfVoteByDistrict,
+            winsByDistrict,
+            colorOfWinsByDistrict,
+        }
     }
 
     /** Show tallies over all the districts
      * Find statewide support for candidates (parties).
      */
-    self.updateStatewideTallies = function (voterGeoList, candidates) {
-        const canList = candidates.getCandidates()
+    function runStatewideElection(voterGeoList, cans) {
         const { allVoterGroups } = voterGeoList
-        const electionResults = election.runElection(allVoterGroups, canList)
-        const { tallyFractions } = electionResults.votes
-        candidates.setCandidateFractions(tallyFractions)
+        const resultsStatewide = election.runElection(allVoterGroups, cans)
+        return resultsStatewide
     }
 
     /** Visualize voter demographics according to votes for candidates within a voterGroup.
      * Hold mini-elections within a voterGroup.
      */
-    self.updateNoiseImage = function (voterGeoList, candidates, vizGeo2D) {
-        // visualize simplex noise
-        // self.voterGeoList.noiseImage.load(sn)
-
-        // visualize noise with election data
-        const canList = candidates.getCandidates()
+    function runTractElections(voterGeoList, cans) {
         const { voterGroupsByTract } = voterGeoList
 
         const resultsByTract = voterGroupsByTract.map(
             (row) => row.map(
-                (voterGroups) => election.runElection(voterGroups, canList),
+                (voterGroups) => election.runElection(voterGroups, cans),
             ),
         )
+        return resultsByTract
+    }
 
+    function colorTracts(resultsByTract, cans) {
         // get color
-        const colorSet = canList.map((can) => can.color)
-        const allColors = resultsByTract.map(
+        const colorSet = cans.map((can) => can.color)
+        const colorByTract = resultsByTract.map(
             (row) => row.map(
                 (results) => {
                     const { tallyFractions } = results.votes
@@ -65,30 +80,29 @@ export default function GeoElection(screen, menu, election) {
                 },
             ),
         )
-
-        vizGeo2D.noiseImage.loadColors(allColors)
+        return colorByTract
     }
 
     /** Run separate elections in each district. */
-    self.runDistrictElections = (voterGeoList, candidates) => {
+    function runDistrictElections(voterGeoList, cans) {
         // Loop through districts.
         // Find who won.
 
-        const canList = candidates.getCandidates()
         const { voterGroupsByDistrict } = voterGeoList
 
-        self.resultsByDistrict = voterGroupsByDistrict.map(
-            (voterGroups) => election.runElection(voterGroups, canList),
+        const resultsByDistrict = voterGroupsByDistrict.map(
+            (voterGroups) => election.runElection(voterGroups, cans),
         )
+        return resultsByDistrict
     }
-    self.updateWinColors = (candidates) => {
+    function colorDistrictWins(resultsByDistrict, cans) {
         // calculate color for win map
+        let colorOfWinsByDistrict
         if (election.method.checkElectionType() === 'singleWinner') {
-            self.winnerColors = self.resultsByDistrict.map((results) => results.winner.color)
+            colorOfWinsByDistrict = resultsByDistrict.map((results) => results.winner.color)
         } else {
-            const canList = candidates.getCandidates()
-            const colorSet = canList.map((can) => can.color)
-            self.winnerColors = self.resultsByDistrict.map(
+            const colorSet = cans.map((can) => can.color)
+            colorOfWinsByDistrict = resultsByDistrict.map(
                 (results) => {
                     const { allocation } = results
                     const sum = allocation.reduce((p, c) => p + c)
@@ -98,49 +112,49 @@ export default function GeoElection(screen, menu, election) {
                 },
             )
         }
+        return colorOfWinsByDistrict
     }
 
     // Show wins across all districts for each candidate
-    self.updateWins = function (candidates) {
-        // make a histogram
-        const canList = candidates.getCandidates()
-        const numCandidates = canList.length
-        const histogram = Array(numCandidates).fill(0)
+    function updateWins(resultsByDistrict, cans) {
+        // make a histogram of winsByDistrict
+        const numCandidates = cans.length
+        const winsByDistrict = Array(numCandidates).fill(0)
         if (election.method.checkElectionType() === 'singleWinner') {
-            const iWinners = self.resultsByDistrict.map((results) => results.iWinner)
+            const iWinners = resultsByDistrict.map((results) => results.iWinner)
             iWinners.forEach((iWinner) => {
-                histogram[iWinner] += 1
+                winsByDistrict[iWinner] += 1
             })
         } else {
-            self.resultsByDistrict.forEach(
+            resultsByDistrict.forEach(
                 (results) => {
                     const { allocation } = results
                     for (let i = 0; i < numCandidates; i++) {
-                        histogram[i] += allocation[i]
+                        winsByDistrict[i] += allocation[i]
                     }
                 },
             )
         }
-        candidates.setCandidateWins(histogram)
+        return winsByDistrict
     }
 
     /** Update color for each district, based on votes for each candidate.
      * Blend candidate colors in proportion to their votes.
      */
-    self.updateColorBlendGeoMap = (candidates) => {
-        self.blendColors = self.resultsByDistrict.map((results) => {
+    function colorDistrictVote(resultsByDistrict, cans) {
+        const colorOfVoteByDistrict = resultsByDistrict.map((results) => {
             const { tallyFractions } = results.votes
-            const canList = candidates.getCandidates()
-            const colorSet = canList.map((can) => can.color)
+            const colorSet = cans.map((can) => can.color)
             const color = colorBlend(tallyFractions, colorSet)
             return color
         })
+        return colorOfVoteByDistrict
     }
 
-    self.testVote = (testVoter, candidates) => {
-        const vote = election.testVote(testVoter, candidates)
+    self.testVote = (testVoter, simCandidateList) => {
+        const vote = election.testVote(testVoter, simCandidateList)
         const i = vote.tallyFractions.indexOf(1)
-        const cans = candidates.getCandidates()
+        const cans = simCandidateList.getCandidates()
         vote.color = cans[i].color
         return vote
     }

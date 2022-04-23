@@ -35,7 +35,7 @@ export default function SimGeoOne(screen, menu, changes, geoElection, sim) {
         voterGeoList.newVoterGroup(new VoterGeoBasis(voterShape, self.dragm, screen))
     }
 
-    const vizGeo2D = new VizGeo2D(voterGeoList, simCandidateList, screen, geoElection)
+    const vizGeo2D = new VizGeo2D(voterGeoList, screen)
 
     changes.add(['districts'])
 
@@ -67,7 +67,8 @@ export default function SimGeoOne(screen, menu, changes, geoElection, sim) {
         }
         changes.clear()
         voterGeoList.updateVoters() // can make this only trigger when voters change
-        geoElection.updateVotes(voterGeoList, simCandidateList, sim.dimensions, vizGeo2D)
+        const geoElectionResults = geoElection.updateVotes(voterGeoList, simCandidateList)
+        vizGeo2D.update(geoElectionResults)
         sim.testVoter.update()
         screen.clear()
         self.render()

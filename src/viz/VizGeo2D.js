@@ -5,15 +5,23 @@ import NoiseImage from './NoiseImage.js'
 /**
  * Show votes
  * @param {VoterGeoList} voterGeoList
- * @param {SimCandidateList} simCandidateList
  * @param {Screen} screen
  * @constructor
  */
-export default function VizGeo2D(voterGeoList, simCandidateList, screen, geoElection) {
+export default function VizGeo2D(voterGeoList, screen) {
     const self = this
 
     // Code that handles making images of geographic noise.
     self.noiseImage = new NoiseImage(voterGeoList.nx, voterGeoList.ny, screen)
+
+    // Update //
+
+    self.update = (geoElectionResults) => {
+        const { colorByTract, colorOfVoteByDistrict, colorOfWinsByDistrict } = geoElectionResults
+        self.colorOfVoteByDistrict = colorOfVoteByDistrict
+        self.winnerColors = colorOfWinsByDistrict
+        self.noiseImage.loadColors(colorByTract)
+    }
 
     // Display //
 
@@ -36,12 +44,12 @@ export default function VizGeo2D(voterGeoList, simCandidateList, screen, geoElec
     // Render district wins.
     self.renderDistrictWins = () => {
         const { renderVoronoiColors } = voterGeoList.districtMaker
-        renderVoronoiColors(200, 0, geoMapWidth, geoMapHeight, geoElection.winnerColors)
+        renderVoronoiColors(200, 0, geoMapWidth, geoMapHeight, self.winnerColors)
     }
     // render district votes.
     self.renderDistrictVotes = () => {
         const { renderVoronoiColors } = voterGeoList.districtMaker
-        renderVoronoiColors(100, 0, geoMapWidth, geoMapHeight, geoElection.blendColors)
+        renderVoronoiColors(100, 0, geoMapWidth, geoMapHeight, self.colorOfVoteByDistrict)
     }
     self.renderVoterBasisSet = () => {
         const voterSimGroups = voterGeoList.getVoterSimGroups()
