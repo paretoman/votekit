@@ -2,9 +2,9 @@
 
 import SimCandidate from '../../candidates/SimCandidate.js'
 import SimCandidateList from '../../candidates/SimCandidateList.js'
-import SimVoterList from '../../voters/SimVoterList.js'
+import VoterSimList from '../../voters/VoterSimList.js'
 import SimBase from './SimBase.js'
-import SimVoter from '../../voters/SimVoter.js'
+import VoterSim from '../../voters/VoterSim.js'
 import One2DViz from '../../viz/One2DViz.js'
 
 /**
@@ -23,7 +23,7 @@ export default function SimOne(screen, menu, changes, oneElection, sim) {
 
     SimBase.call(self, screen, changes, sim)
 
-    const oneVoters = new SimVoterList(sim)
+    const oneVoters = new VoterSimList(sim)
 
     const simCandidateList = new SimCandidateList(sim)
 
@@ -32,7 +32,7 @@ export default function SimOne(screen, menu, changes, oneElection, sim) {
     }
 
     self.addSimVoterCircle = (voterShape) => {
-        oneVoters.newVoterGroup(new SimVoter(voterShape, self.dragm, screen))
+        oneVoters.newVoterGroup(new VoterSim(voterShape, self.dragm, screen))
     }
 
     const one2DViz = new One2DViz(screen)

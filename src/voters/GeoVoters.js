@@ -4,10 +4,10 @@ import GeoNoise from './geoNoise.js'
 import NoiseImage from './NoiseImage.js'
 import DistrictMaker from './DistrictMaker.js'
 import { range } from '../utilities/jsHelpers.js'
-import SimVoterList from './SimVoterList.js'
+import VoterSimList from './VoterSimList.js'
 
 /**
- * GeoVoters inherits from SimVoterList.
+ * GeoVoters inherits from VoterSimList.
  * @param {Screen} screen
  * @param {GeoElection} geoElection
  * @constructor
@@ -15,10 +15,10 @@ import SimVoterList from './SimVoterList.js'
 export default function GeoVoters(screen, geoElection, sim) {
     const self = this
 
-    // GeoVoters inherits from SimVoterList
+    // GeoVoters inherits from VoterSimList
     // because we need to make a list instances of geoVoterBasis,
     // and geoVoterBasis has a component called voter.
-    SimVoterList.call(self, sim)
+    VoterSimList.call(self, sim)
 
     /** Number of districts */
     const nd = 20

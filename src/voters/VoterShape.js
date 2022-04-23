@@ -99,7 +99,7 @@ export default function VoterShape(
         }
     }
     /** Do this when entering a state because x and y change.
-     *  Maybe x and y should be in the SimVoter instead... just speculating. */
+     *  Maybe x and y should be in the VoterSim instead... just speculating. */
     self.updateXY = () => {
         if (sim.election.dimensions === 1) {
             self.setAction.shape1x(self.shape1.x)

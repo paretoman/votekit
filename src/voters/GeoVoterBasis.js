@@ -1,18 +1,18 @@
 /** @module */
 
-import SimVoter from './SimVoter.js'
+import VoterSim from './VoterSim.js'
 /**
  * A basis of voters, to be moved around according to noise.
  * Also, the user can move them around.
- * This is a Subclass of SimVoter.
- * @param {VoterShape} voterShape - a voter component that SimVoter builds upon.
+ * This is a Subclass of VoterSim.
+ * @param {VoterShape} voterShape - a voter component that VoterSim builds upon.
  * @param {DraggableManager} dragm
  * @param {screen} screen - draw to the screen
  * @constructor
  */
 export default function GeoVoterBasis(voterShape, dragm, screen) {
     const self = this
-    SimVoter.call(self, voterShape, dragm)
+    VoterSim.call(self, voterShape, dragm)
 
     // Graphics component
     self.render = function () {

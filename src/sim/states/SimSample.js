@@ -3,9 +3,9 @@
 import SimCandidateDistributionList from '../../candidates/SimCandidateDistributionList.js'
 import SimCandidateDistribution from '../../candidates/SimCandidateDistribution.js'
 import Sample2DViz from '../../viz/Sample2DViz.js'
-import SimVoterList from '../../voters/SimVoterList.js'
+import VoterSimList from '../../voters/VoterSimList.js'
 import SimBase from './SimBase.js'
-import SimVoter from '../../voters/SimVoter.js'
+import VoterSim from '../../voters/VoterSim.js'
 
 /**
  * Simulate many sample elections with
@@ -29,10 +29,10 @@ export default function SimSample(screen, menu, changes, sampleElections, sim) {
         simCandidateList.newCandidate(new SimCandidateDistribution(canDn, self.dragm))
     }
 
-    const sampleVoters = new SimVoterList(sim)
+    const sampleVoters = new VoterSimList(sim)
 
     self.addSimVoterCircle = (voterShape) => {
-        sampleVoters.newVoterGroup(new SimVoter(voterShape, self.dragm, screen))
+        sampleVoters.newVoterGroup(new VoterSim(voterShape, self.dragm, screen))
     }
 
     const sample2DViz = new Sample2DViz(sampleVoters, screen)

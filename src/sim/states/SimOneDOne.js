@@ -2,9 +2,9 @@
 
 import SimCandidate from '../../candidates/SimCandidate.js'
 import SimCandidateList from '../../candidates/SimCandidateList.js'
-import SimVoterList from '../../voters/SimVoterList.js'
+import VoterSimList from '../../voters/VoterSimList.js'
 import SimBase from './SimBase.js'
-import SimVoter from '../../voters/SimVoter.js'
+import VoterSim from '../../voters/VoterSim.js'
 import One1DViz from '../../viz/One1DViz.js'
 
 /**
@@ -13,7 +13,7 @@ import One1DViz from '../../viz/One1DViz.js'
  *   voters in a distribution that will be summed over.
  * Plan:
  * * SimOneDOne is a subclass of SimBase.
- * * One1DViz is a subclass of SimVoter.
+ * * One1DViz is a subclass of VoterSim.
  * * Voronoi1D is called by One1DViz.
  * @param {Screen} screen
  * @param {Menu} menu
@@ -27,7 +27,7 @@ export default function SimOneDOne(screen, menu, changes, oneElection, sim) {
 
     SimBase.call(self, screen, changes, sim)
 
-    const oneVoters = new SimVoterList(sim)
+    const oneVoters = new VoterSimList(sim)
 
     const simCandidateList = new SimCandidateList(sim)
 
@@ -36,7 +36,7 @@ export default function SimOneDOne(screen, menu, changes, oneElection, sim) {
     }
 
     self.addSimVoterCircle = (voterShape) => {
-        oneVoters.newVoterGroup(new SimVoter(voterShape, self.dragm, screen))
+        oneVoters.newVoterGroup(new VoterSim(voterShape, self.dragm, screen))
     }
 
     const one1DViz = new One1DViz(screen)

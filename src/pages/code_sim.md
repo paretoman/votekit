@@ -4,27 +4,27 @@ layout: default
 ---
 
 # Sim Architecture for Voters
-Made a super class, SimVoterList. GeoVoters inherits from SimVoterList. There is no OneVoters because there isn't any additional functionality that OneVoters would need.
+Made a super class, VoterSimList. GeoVoters inherits from VoterSimList. There is no OneVoters because there isn't any additional functionality that OneVoters would need.
 
-SimVoterList is different from Registrar. Registrar just assigns an id.
+VoterSimList is different from Registrar. Registrar just assigns an id.
 
-An example of a SimVoter is a GeoVoterBasis. This is an inheritance structure. 
+An example of a VoterSim is a GeoVoterBasis. This is an inheritance structure. 
 
-A SimVoter has functionality for a voter that is specific to a simulation. Each SimVoter has a voter component. The voter component is a VoterShape, for now. This voter component is common to all simulations.
+A VoterSim has functionality for a voter that is specific to a simulation. Each VoterSim has a voter component. The voter component is a VoterShape, for now. This voter component is common to all simulations.
 
 ## Class Diagrams
 
 ### Inheritance
 
-SimVoterList
+VoterSimList
 - GeoVoters
 
-SimVoter
+VoterSim
 - GeoVoterBasis
 
 ### Calls
 
-simVoterList -> simVoter -> voter -> voterRegistrar
+voterSimList -> voterSim -> voter -> voterRegistrar
 
 # Sim Architecture for Candidates
 Made classes that will exist only within a sim state: SimCandidate and SimCandidateDistribution. These handle functionality that is specific to sims.

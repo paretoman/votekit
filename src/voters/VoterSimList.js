@@ -1,13 +1,13 @@
 /** @module */
 
 /**
- * Made a super class, SimVoterList.
- * GeoVoters inherits from SimVoterList.
+ * Made a super class, VoterSimList.
+ * GeoVoters inherits from VoterSimList.
  * There is no OneVoters because there isn't any additional functionality that OneVoters would need.
- * SimVoterList is different from Voters because it is a list of simVoters.
+ * VoterSimList is different from Voters because it is a list of simVoters.
  * @constructor
  */
-export default function SimVoterList(sim) {
+export default function VoterSimList(sim) {
     const self = this
 
     const simVoters = []
