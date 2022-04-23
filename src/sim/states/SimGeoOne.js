@@ -47,7 +47,7 @@ export default function SimGeoOne(screen, menu, changes, electionGeo, sim) {
         sim.election.setDimensions(2)
         voterGeoList.updateXY()
         candidateSimList.updateXY()
-        sim.testVoter.updateXY()
+        sim.voterTest.updateXY()
     }
 
     self.exit = () => {
@@ -56,7 +56,7 @@ export default function SimGeoOne(screen, menu, changes, electionGeo, sim) {
         // clean up fractions
         const fillUndefined = Array(candidateSimList.numCandidates()).fill(undefined)
         candidateSimList.setCandidateWins(fillUndefined)
-        sim.testVoter.setE(0)
+        sim.voterTest.setE(0)
     }
 
     self.update = () => {
@@ -69,12 +69,12 @@ export default function SimGeoOne(screen, menu, changes, electionGeo, sim) {
         voterGeoList.updateVoters() // can make this only trigger when voters change
         const geoElectionResults = electionGeo.updateVotes(voterGeoList, candidateSimList)
         vizGeo2D.update(geoElectionResults)
-        sim.testVoter.update()
+        sim.voterTest.update()
         screen.clear()
         self.render()
     }
 
-    self.testVote = () => electionGeo.testVote(sim.testVoter, candidateSimList)
+    self.testVote = () => electionGeo.testVote(sim.voterTest, candidateSimList)
 
     self.render = () => {
         vizGeo2D.render()
@@ -82,6 +82,6 @@ export default function SimGeoOne(screen, menu, changes, electionGeo, sim) {
     self.renderForeground = () => {
         candidateSimList.renderForeground()
         voterGeoList.renderForeground()
-        sim.testVoter.renderForeground()
+        sim.voterTest.renderForeground()
     }
 }

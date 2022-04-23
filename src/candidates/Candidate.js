@@ -2,7 +2,7 @@
 
 import SquareGraphic from './SquareGraphic.js'
 import { drawStrokedColor, textPercent } from '../utilities/graphicsUtilities.js'
-import tooltipForEntity from '../sim/tooltipForEntity.js'
+import tooltipForEntity from '../tooltips/tooltipForEntity.js'
 
 /**
  * Candidate class on top of handle.

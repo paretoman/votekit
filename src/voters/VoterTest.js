@@ -1,8 +1,8 @@
-import CircleGraphic from '../voters/CircleGraphic.js'
-import hideOnClickOutside from './hideOnClickOutside.js'
-import tooltipForTestVoter from './tooltipForTestVoter.js'
+import CircleGraphic from './CircleGraphic.js'
+import hideOnClickOutside from '../tooltips/hideOnClickOutside.js'
+import tooltipForTestVoter from '../tooltips/tooltipForTestVoter.js'
 
-export default function TestVoter(screen, sims, sim) {
+export default function VoterTest(screen, sims, sim) {
     const self = this
 
     // Position
@@ -57,12 +57,12 @@ export default function TestVoter(screen, sims, sim) {
 
     // Start displaying testvoter
     self.start = (p) => {
-        sim.testVoter.setE(1)
-        sim.testVoter.setXY(p)
+        sim.voterTest.setE(1)
+        sim.voterTest.setXY(p)
         hideOnClickOutside(screen.wrap, removeTestPoint)
     }
     function removeTestPoint() {
-        sim.testVoter.setE(0)
+        sim.voterTest.setE(0)
     }
 
     // Dragging

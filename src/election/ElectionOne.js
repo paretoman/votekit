@@ -23,8 +23,8 @@ export default function ElectionOne(election) {
         candidates.setCandidateFractions(votes.tallyFractions)
     }
 
-    self.testVote = (testVoter, candidates) => {
-        const vote = election.testVote(testVoter, candidates)
+    self.testVote = (voterTest, candidates) => {
+        const vote = election.testVote(voterTest, candidates)
         const i = vote.tallyFractions.indexOf(1)
         const cans = candidates.getCandidates()
         vote.color = cans[i].color

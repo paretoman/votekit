@@ -8,7 +8,7 @@ import CandidateAdd from '../candidates/CandidateAdd.js'
 import CandidateDnAdd from '../candidateDns/CandidateDnAdd.js'
 import addSimControlsLabel from './addSimControlsLabel.js'
 import SimOne1D from './states/SimOne1D.js'
-import TestVoter from './TestVoter.js'
+import VoterTest from '../voters/VoterTest.js'
 import ElectionOne from '../election/ElectionOne.js'
 import ElectionSample from '../election/ElectionSample.js'
 import ElectionGeo from '../election/ElectionGeo.js'
@@ -62,7 +62,7 @@ export default function Sim(
     self.candidateAdd = new CandidateAdd(screen, layout, changes, commander, sims, self)
     self.candidateDnAdd = new CandidateDnAdd(screen, layout, changes, commander, sims, self)
 
-    self.testVoter = new TestVoter(screen, sims, self)
+    self.voterTest = new VoterTest(screen, sims, self)
     self.testVote = () => sims[self.state].testVote()
 
     // Default Entities //

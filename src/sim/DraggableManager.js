@@ -212,6 +212,6 @@ export default function DraggableManager(screen, changes, sim) {
     // Test Point
 
     function clickEmpty(p) {
-        sim.testVoter.start(p)
+        sim.voterTest.start(p)
     }
 }

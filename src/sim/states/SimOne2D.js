@@ -44,12 +44,12 @@ export default function SimOne2D(screen, menu, changes, electionOne, sim) {
         sim.election.setDimensions(2)
         oneVoters.updateXY()
         candidateSimList.updateXY()
-        sim.testVoter.updateXY()
+        sim.voterTest.updateXY()
     }
 
     self.exit = () => {
         sim.candidateAdd.canButton.hide()
-        sim.testVoter.setE(0)
+        sim.voterTest.setE(0)
     }
 
     self.update = () => {
@@ -58,12 +58,12 @@ export default function SimOne2D(screen, menu, changes, electionOne, sim) {
         changes.clear()
         electionOne.updateTallies(oneVoters, candidateSimList)
         vizOne2D.update()
-        sim.testVoter.update()
+        sim.voterTest.update()
         screen.clear()
         self.render()
     }
 
-    self.testVote = () => electionOne.testVote(sim.testVoter, candidateSimList)
+    self.testVote = () => electionOne.testVote(sim.voterTest, candidateSimList)
 
     self.render = () => {
         vizOne2D.render()
@@ -72,6 +72,6 @@ export default function SimOne2D(screen, menu, changes, electionOne, sim) {
         // electionSample.renderForeground()
         oneVoters.renderForeground()
         candidateSimList.renderForeground()
-        sim.testVoter.renderForeground()
+        sim.voterTest.renderForeground()
     }
 }

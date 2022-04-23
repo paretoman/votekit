@@ -1,7 +1,7 @@
 /** @module */
 
 import CircleGraphic from './CircleGraphic.js'
-import tooltipForEntity from '../sim/tooltipForEntity.js'
+import tooltipForEntity from '../tooltips/tooltipForEntity.js'
 
 /**
  * VoterShape class with Handle component to take care of dragging.

@@ -151,8 +151,8 @@ export default function ElectionGeo(election) {
         return colorOfVoteByDistrict
     }
 
-    self.testVote = (testVoter, candidateSimList) => {
-        const vote = election.testVote(testVoter, candidateSimList)
+    self.testVote = (voterTest, candidateSimList) => {
+        const vote = election.testVote(voterTest, candidateSimList)
         const i = vote.tallyFractions.indexOf(1)
         const cans = candidateSimList.getCandidates()
         vote.color = cans[i].color

@@ -20,6 +20,7 @@ The architecture tries to be context-oriented. I mean that we keep an idea of th
         * VoterGeoList is a variation on VoterSimList with more functionality for districts. 
     * Viz* draws the voters because there is more context to draw them as a group than individually. 
         * VizGeo2D draws the voters are in tracts and districts.
+    * VoterTest is a copy of VoterShape, mostly. VoterTest exists outside of these other classes. It doesn't have command history and doesn't interact with other voters. It's just a test.
 * Candidates
     * Candidate represents a single candidate.
     * CandidateAdd manages a list of candidates.

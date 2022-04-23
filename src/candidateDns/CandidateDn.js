@@ -1,6 +1,6 @@
 /** @module */
 
-import tooltipForEntity from '../sim/tooltipForEntity.js'
+import tooltipForEntity from '../tooltips/tooltipForEntity.js'
 import SquareGraphic from '../candidates/SquareGraphic.js'
 
 /**
