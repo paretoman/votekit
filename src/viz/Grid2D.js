@@ -3,6 +3,10 @@ import { toRGBA } from '../lib/colorBlendScript.js'
 
 /**
  * Draw grid cells to show votes.
+ * Basically, we have a rectangular grid of voter support.
+ * Even if the voterGeom is a circle.
+ * Later, when we draw, we make a clip in the shape of the voterGeom,
+ * and draw the grid inside the clip.
  * @param {Screen} screen
  * @constructor
  */
@@ -21,6 +25,8 @@ export default function Grid2D(gridData, candidateSimList, screen) {
     const nCans = cans.length
     const nHeight = Math.floor((nCans - 1) / 3) + 1
     screen.setMapsHeight(nHeight * (1 / 3) * screen.height)
+
+    const isGauss = voterGeom.densityProfile === 'gaussian'
 
     fillDataSeparate()
     fillDataBlend()
@@ -44,7 +50,7 @@ export default function Grid2D(gridData, candidateSimList, screen) {
             for (let yp = 0; yp < ny; yp++) {
                 for (let xp = 0; xp < nx; xp++) {
                     const support = voteSet[k].tallyFractions[i]
-                    const a = support * weight[k] * 255
+                    const a = support * ((isGauss) ? weight[k] : 1) * 255
 
                     data[(xp + yp * nx) * 4 + 0] = r
                     data[(xp + yp * nx) * 4 + 1] = g
@@ -72,7 +78,6 @@ export default function Grid2D(gridData, candidateSimList, screen) {
         const { data } = imageData
 
         let k = 0
-        const isGauss = voterGeom.densityProfile === 'gaussian'
         for (let yp = 0; yp < ny; yp++) {
             for (let xp = 0; xp < nx; xp++) {
                 const { tallyFractions } = voteSet[k]
@@ -102,9 +107,8 @@ export default function Grid2D(gridData, candidateSimList, screen) {
         function drawSeparate() {
             // draw each can separately
             for (let i = 0; i < nCans; i++) {
-            // draw image data
-            // overlap images for now
-            // transform is t
+                // draw image
+                // transform is t
                 mctx.save()
                 // mctx.globalAlpha = 0.7
                 const t = {
@@ -153,7 +157,7 @@ export default function Grid2D(gridData, candidateSimList, screen) {
             ctx.arc(x, y, w * 0.5, 0, 2 * Math.PI)
             ctx.clip()
 
-            // draw image data
+            // draw image
             // transform is t
             const t = {
                 w: 1, h: 1, x: 0, y: 0,
