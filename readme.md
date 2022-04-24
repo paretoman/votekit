@@ -33,7 +33,7 @@ Another way is to copy and paste the [distribution bundle](https://github.com/pa
 Another way to add this distribution bundle is to put this script tag and these css tags in your code:
 
 ```
-<script src="https://raw.githubusercontent.com/paretoman/votekit-example-src/main/lib/votekit/dist/addSandboxes.js"></script>
+<script src="https://raw.githubusercontent.com/paretoman/votekit-example-src/main/lib/votekit/dist/ui/addSandboxes.js"></script>
 <link href="https://raw.githubusercontent.com/paretoman/votekit-example-src/main/lib/votekit/dist/ui/sandbox.css" rel="stylesheet">
 <link href="https://raw.githubusercontent.com/paretoman/votekit-example-src/main/lib/votekit/dist/menu/button.css" rel="stylesheet">
 ```
