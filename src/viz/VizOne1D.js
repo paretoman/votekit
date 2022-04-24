@@ -38,6 +38,9 @@ export default function VizOne1D(oneVoters, candidateSimList, screen, sim) {
             )
         } else { // "score"
             grid1Ds.forEach(
+                (grid1D) => grid1D.renderBackground(),
+            )
+            grid1Ds.forEach(
                 (grid1D) => grid1D.render(),
             )
         }
