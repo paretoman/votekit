@@ -52,7 +52,7 @@ export default function tooltipForEntity(entity, screen, sim) {
         )
         box.appendChild(items.w2.div)
     }
-    if (entity.color) {
+    if (entity.setColor !== undefined) {
         items.color = new Item(
             'color',
             'Color',
