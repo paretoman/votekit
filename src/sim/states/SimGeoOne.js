@@ -42,7 +42,7 @@ export default function SimGeoOne(screen, menu, changes, electionGeo, sim) {
     const superEnter = self.enter
     self.enter = () => {
         superEnter()
-        screen.showGeoMaps()
+        screen.showMaps()
         sim.candidateAdd.canButton.show()
         sim.election.setDimensions(2)
         voterGeoList.updateXY()
@@ -51,7 +51,7 @@ export default function SimGeoOne(screen, menu, changes, electionGeo, sim) {
     }
 
     self.exit = () => {
-        screen.hideGeoMaps()
+        screen.hideMaps()
         sim.candidateAdd.canButton.hide()
         // clean up fractions
         const fillUndefined = Array(candidateSimList.numCandidates()).fill(undefined)

@@ -29,7 +29,7 @@ export default function sandbox(config, comMessenger, sandboxURL) {
         'undo',
         'redo',
         'screenWrap',
-        'geoMaps',
+        'maps',
         'saveConfigToLink',
         'saveConfigToText',
         'loadConfigText',
@@ -80,7 +80,7 @@ export default function sandbox(config, comMessenger, sandboxURL) {
 
     function draw() {
         screen.clear()
-        screen.clearGeo()
+        screen.clearMaps()
         screen.clearForeground()
         sim.render()
         sim.renderForeground()

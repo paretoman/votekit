@@ -20,7 +20,7 @@ export default function Grid2D(gridData, candidateSimList, screen) {
 
     const nCans = cans.length
     const nHeight = Math.floor((nCans - 1) / 3) + 1
-    screen.setGeoMapsHeight(nHeight * (1 / 3) * screen.height)
+    screen.setMapsHeight(nHeight * (1 / 3) * screen.height)
 
     fillDataSeparate()
     fillDataBlend()
@@ -93,7 +93,7 @@ export default function Grid2D(gridData, candidateSimList, screen) {
     }
 
     self.render = function () {
-        const { ctx, gctx } = screen
+        const { ctx, mctx } = screen
 
         drawBlend()
 
@@ -105,8 +105,8 @@ export default function Grid2D(gridData, candidateSimList, screen) {
             // draw image data
             // overlap images for now
             // transform is t
-                gctx.save()
-                // gctx.globalAlpha = 0.7
+                mctx.save()
+                // mctx.globalAlpha = 0.7
                 const t = {
                     w: 1 / 3, h: 1 / 3, x: (i % 3) * 100, y: Math.floor(i / 3) * 100,
                 }
@@ -119,13 +119,13 @@ export default function Grid2D(gridData, candidateSimList, screen) {
                 }
 
                 // clip outline of shape
-                gctx.beginPath()
-                gctx.arc(sh.x, sh.y, sh.r, 0, 2 * Math.PI)
-                gctx.clip()
+                mctx.beginPath()
+                mctx.arc(sh.x, sh.y, sh.r, 0, 2 * Math.PI)
+                mctx.clip()
 
-                gctx.beginPath()
-                gctx.rect(t.x, t.y, 100, 100)
-                gctx.clip()
+                mctx.beginPath()
+                mctx.rect(t.x, t.y, 100, 100)
+                mctx.clip()
 
                 const canvas = canvases[i]
                 const im = {
@@ -134,13 +134,13 @@ export default function Grid2D(gridData, candidateSimList, screen) {
                     w: w * t.w,
                     h: w * t.h,
                 }
-                gctx.drawImage(canvas, im.x, im.y, im.w, im.h)
+                mctx.drawImage(canvas, im.x, im.y, im.w, im.h)
 
                 // draw outline of shape
-                gctx.beginPath()
-                gctx.arc(sh.x, sh.y, sh.r, 0, 2 * Math.PI)
-                gctx.stroke()
-                gctx.restore()
+                mctx.beginPath()
+                mctx.arc(sh.x, sh.y, sh.r, 0, 2 * Math.PI)
+                mctx.stroke()
+                mctx.restore()
             }
         }
 
