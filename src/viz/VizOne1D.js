@@ -16,7 +16,7 @@ export default function VizOne1D(oneVoters, candidateSimList, screen, sim) {
 
     self.update = function (votes) {
         const voterShapes = oneVoters.getVoterShapes()
-        if (sim.election.countVotes.caster === 'plurality') {
+        if (sim.election.countVotes.caster === 'castPlurality') {
             voronoiGroups = voterShapes.map(
                 (voterShape) => new Voronoi1D(voterShape, candidateSimList, screen),
             )
@@ -32,7 +32,7 @@ export default function VizOne1D(oneVoters, candidateSimList, screen, sim) {
     }
 
     self.render = function () {
-        if (sim.election.countVotes.caster === 'plurality') {
+        if (sim.election.countVotes.caster === 'castPlurality') {
             voronoiGroups.forEach(
                 (voronoiGroup) => voronoiGroup.render(),
             )

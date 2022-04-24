@@ -41,8 +41,8 @@ export default function NoiseImage(nx, ny, screen) {
     self.loadColors = (colors) => {
         const { data } = imageData
 
-        for (let x = 0; x < nx; x++) {
-            for (let y = 0; y < ny; y++) {
+        for (let y = 0; y < ny; y++) {
+            for (let x = 0; x < nx; x++) {
                 const color = colors[x][y]
                 const [r, g, b] = color
                 data[(x + y * nx) * 4 + 0] = r

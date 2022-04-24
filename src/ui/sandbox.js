@@ -80,6 +80,8 @@ export default function sandbox(config, comMessenger, sandboxURL) {
 
     function draw() {
         screen.clear()
+        screen.clearGeo()
+        screen.clearForeground()
         sim.render()
         sim.renderForeground()
     }

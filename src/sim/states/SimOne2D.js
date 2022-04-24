@@ -35,11 +35,12 @@ export default function SimOne2D(screen, menu, changes, electionOne, sim) {
         oneVoters.newVoterSim(new VoterSim(voterShape, self.dragm, screen))
     }
 
-    const vizOne2D = new VizOne2D(oneVoters, candidateSimList, screen)
+    const vizOne2D = new VizOne2D(oneVoters, candidateSimList, screen, sim)
 
     const superEnter = self.enter
     self.enter = () => {
         superEnter()
+        screen.showGeoMaps()
         sim.candidateAdd.canButton.show()
         sim.election.setDimensions(2)
         oneVoters.updateXY()
@@ -48,6 +49,7 @@ export default function SimOne2D(screen, menu, changes, electionOne, sim) {
     }
 
     self.exit = () => {
+        screen.hideGeoMaps()
         sim.candidateAdd.canButton.hide()
         sim.voterTest.setE(0)
     }
@@ -56,10 +58,11 @@ export default function SimOne2D(screen, menu, changes, electionOne, sim) {
         if (changes.checkNone()) return
         // clear changes, reset to []
         changes.clear()
-        electionOne.updateTallies(oneVoters, candidateSimList)
-        vizOne2D.update()
+        const votes = electionOne.updateTallies(oneVoters, candidateSimList)
+        vizOne2D.update(votes)
         sim.voterTest.update()
         screen.clear()
+        screen.clearGeo()
         self.render()
     }
 

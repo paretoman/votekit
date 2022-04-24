@@ -1,6 +1,6 @@
 /** @module */
 
-import { maxIndex } from '../utilities/jsHelpers.js'
+import colorBlend from './colorBlend.js'
 
 /**
  * A simple election.
@@ -13,6 +13,8 @@ import { maxIndex } from '../utilities/jsHelpers.js'
 export default function ElectionOne(election) {
     const self = this
 
+    const optionCast = { usr: 4 }
+
     self.updateTallies = function (oneVoters, candidates) {
         // only update the tallies for each candidate so they can be shown
 
@@ -21,16 +23,21 @@ export default function ElectionOne(election) {
 
         if (oneVoters.getVoterShapes().length === 0) return { error: 'No Voters' }
         if (candidates.getCandidates().length === 0) return { error: 'No Candidates' }
-        const votes = election.castVotes(oneVoters, candidates)
+        const votes = election.castVotes(oneVoters, candidates, optionCast)
         candidates.setCandidateFractions(votes.tallyFractions)
         return votes
     }
 
     self.testVote = (voterTest, candidates) => {
         const vote = election.testVote(voterTest, candidates)
-        const i = maxIndex(vote.tallyFractions) // TODO
+
         const cans = candidates.getCandidates()
-        vote.color = cans[i].color
+        const colorSet = cans.map((can) => can.color)
+
+        const { tallyFractions } = vote
+        const color = colorBlend(tallyFractions, colorSet)
+
+        vote.color = color
         return vote
     }
 }

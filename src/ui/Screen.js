@@ -74,12 +74,15 @@ export default function Screen(w, h, layout) {
     self.foreground.style.width = `${w}px`
     self.foreground.style.height = `${h}px`
 
-    const h3 = Math.round(h / 3)
+    self.setGeoMapsHeight = (height) => {
+        const h3 = Math.round(height)
+        self.geoMaps.heightBrowser = h3
+        self.geoMaps.height = h3 * self.pixelRatio // measured in device pixels
+        self.geoMaps.style.height = `${h3}px` // measured in browser pixels
+    }
+    self.setGeoMapsHeight((1 / 3) * h)
     self.geoMaps.width = w * self.pixelRatio // measured in device pixels
-    self.geoMaps.height = h3 * self.pixelRatio
-
     self.geoMaps.style.width = `${w}px`
-    self.geoMaps.style.height = `${h3}px`
 
     self.ctx.scale(self.pixelRatio, self.pixelRatio)
     self.fctx.scale(self.pixelRatio, self.pixelRatio)
@@ -89,7 +92,10 @@ export default function Screen(w, h, layout) {
         self.ctx.clearRect(0, 0, self.canvas.width, self.canvas.height)
     }
     self.clearForeground = function () {
-        self.fctx.clearRect(0, 0, self.canvas.width, self.canvas.height)
+        self.fctx.clearRect(0, 0, self.foreground.width, self.foreground.height)
+    }
+    self.clearGeo = function () {
+        self.gctx.clearRect(0, 0, self.geoMaps.width, self.geoMaps.height)
     }
     self.setCtx = function (c) {
         self.ctx = c

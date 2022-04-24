@@ -7,13 +7,13 @@ import { minMax } from '../utilities/jsHelpers.js'
  * @param {*} voter
  * @param {*} dimensions
  */
-export default function castScoreTestVote(candidates, voter, dimensions) {
+export default function castScoreTestVote(candidates, voterGeom, dimensions) {
     const lc = candidates.length
     const tally = (new Array(lc)).fill(0)
     const df = (dimensions === 1) ? df1 : df2
 
     // in the current implementation, all candidates are frontrunners
-    const dist = candidates.map((c) => df(c, voter))
+    const dist = candidates.map((c) => df(c, voterGeom))
     const [min, max] = minMax(dist)
     const maxscore = 1
     const minscore = 0
@@ -37,5 +37,5 @@ function df1(a, b) {
     return Math.abs(a.x - b.x)
 }
 function df2(a, b) {
-    return (a.x - b.x) ** 2 + (a.y - b.y) ** 2
+    return Math.sqrt((a.x - b.x) ** 2 + (a.y - b.y) ** 2)
 }

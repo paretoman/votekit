@@ -11,9 +11,9 @@ import castScoreTestVote from './castScoreTestVote.js'
 export default function CastScoreLineSummer(cans) {
     const self = this
 
-    self.sumArea = function sumArea(voterGroup) {
+    self.sumArea = function sumArea(voterGeom) {
         // just find the vote at each grid point and weight according to type
-        const grid = makeGrid(voterGroup)
+        const grid = makeGrid(voterGeom)
 
         const n = cans.length
         const area = Array(n).fill(0)
@@ -27,7 +27,7 @@ export default function CastScoreLineSummer(cans) {
             const testVoter = { x: xi }
             const tallyFractions = castScoreTestVote(cans, testVoter, 1)
             voteSet[i] = { tallyFractions }
-            const weight = findWeight(voterGroup, xi)
+            const weight = findWeight(voterGeom, xi)
             totalArea += weight
             for (let k = 0; k < n; k++) {
                 area[k] += tallyFractions[k] * weight
@@ -39,25 +39,24 @@ export default function CastScoreLineSummer(cans) {
     }
 }
 
-function makeGrid(voterGroup) {
-    const isGauss = voterGroup.densityProfile === 'gaussian'
+function makeGrid(voterGeom) {
+    const isGauss = voterGeom.densityProfile === 'gaussian'
     const spread = (isGauss) ? 3 : 1
-    const { x, w } = voterGroup
-    const iWidth = w * spread
+    const { x, w } = voterGeom
+    const iWidth = Math.round(w * spread)
     const iGrid = range(iWidth)
     const gridX = iGrid.map((i) => i + 0.5 - iWidth * 0.5 + x)
     const grid = { x: gridX }
     return grid
 }
 
-function findWeight(voterGroup, xi) {
-    const isGauss = voterGroup.densityProfile === 'gaussian'
+function findWeight(voterGeom, xi) {
+    const isGauss = voterGeom.densityProfile === 'gaussian'
     if (!isGauss) {
         return 1
     }
-    const { x, w } = voterGroup
-    const center = x
+    const { x, w } = voterGeom
     const sigma = w / Math.sqrt(2 * Math.PI) // w = sigma * sqrt(2*pi)
-    const weight = w * normPDF(xi, center, sigma)
+    const weight = w * normPDF(xi, x, sigma)
     return weight
 }

@@ -65,24 +65,41 @@ export default function addSVGOutput(screen, draw, layout) {
     const svgCtx = new C2S(w, h)
     const svgGCtx = new C2S(w, Math.round(h / 3))
 
+    function setHeightGCtx(height) {
+        gSvgDiv.style.height = `${Math.round(height)}px`
+        gSvgDiv.height = height
+        // eslint-disable-next-line no-underscore-dangle
+        svgGCtx.__root.setAttribute('height', height)
+    }
+
     function makeSVG() {
         // temporarily swap drawing context, render SVG,
         // then output SVG to div and to a download link
+
+        // set
         const old = screen.ctx
         const oldF = screen.fctx
         screen.setCtx(svgCtx)
         screen.setFCtx(svgCtx)
         screen.setNoBuffers(true)
+
+        const oldG = screen.gctx
+        screen.setGCtx(svgGCtx)
+
+        // update
+        const { heightBrowser } = screen.geoMaps
+        setHeightGCtx(heightBrowser)
+
+        // draw
         draw()
         outputSVG()
+        outputGSVG()
+
+        // unset
         screen.setCtx(old)
         screen.setFCtx(oldF)
         screen.setNoBuffers(false)
 
-        const oldG = screen.gctx
-        screen.setGCtx(svgGCtx)
-        draw()
-        outputGSVG()
         screen.setGCtx(oldG)
     }
 

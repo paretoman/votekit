@@ -15,6 +15,8 @@ import colorBlend, { toRGBA } from './colorBlend.js'
 export default function ElectionGeo(election) {
     const self = this
 
+    const optionCast = { usr: 32 }
+
     self.updateVotes = (voterGeoList, candidateSimList) => {
         const cans = candidateSimList.getCandidates()
 
@@ -50,7 +52,7 @@ export default function ElectionGeo(election) {
      */
     function runStatewideElection(voterGeoList, cans) {
         const { allVoterGroups } = voterGeoList
-        const resultsStatewide = election.runElection(allVoterGroups, cans)
+        const resultsStatewide = election.runElection(allVoterGroups, cans, optionCast)
         return resultsStatewide
     }
 
@@ -62,7 +64,7 @@ export default function ElectionGeo(election) {
 
         const resultsByTract = voterGroupsByTract.map(
             (row) => row.map(
-                (voterShapes) => election.runElection(voterShapes, cans),
+                (voterShapes) => election.runElection(voterShapes, cans, optionCast),
             ),
         )
         return resultsByTract
@@ -91,7 +93,7 @@ export default function ElectionGeo(election) {
         const { voterGroupsByDistrict } = voterGeoList
 
         const resultsByDistrict = voterGroupsByDistrict.map(
-            (voterShapes) => election.runElection(voterShapes, cans),
+            (voterShapes) => election.runElection(voterShapes, cans, optionCast),
         )
         return resultsByDistrict
     }

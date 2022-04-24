@@ -17,9 +17,9 @@ import castScoreTestVote from './castScoreTestVote.js'
  * For 1D, an array of objects: {x,w,densityProfile}.
  * @returns votes, an object
  */
-export default function castScore(candidates, voterShapes, dimensions, isTestVoter) {
+export default function castScore(candidates, voterGeoms, dimensions, optionCast, isTestVoter) {
     if (isTestVoter) {
-        const testVoter = voterShapes[0]
+        const testVoter = voterGeoms[0]
         const tallyFractions = castScoreTestVote(candidates, testVoter, dimensions)
         const votes = { tallyFractions }
         return votes
@@ -27,23 +27,23 @@ export default function castScore(candidates, voterShapes, dimensions, isTestVot
 
     const summer = (dimensions === 1)
         ? new CastScoreLineSummer(candidates)
-        : new CastScoreAreaSummer(candidates)
+        : new CastScoreAreaSummer(candidates, optionCast)
 
     // get fraction of votes for each candidate so we can summarize results
     const n = candidates.length
     let tally = (new Array(n)).fill(0)
     let total = 0
     const gridData = []
-    for (let i = 0; i < voterShapes.length; i++) {
-        const voterShape = voterShapes[i]
+    for (let i = 0; i < voterGeoms.length; i++) {
+        const voterGeom = voterGeoms[i]
         const {
             grid, voteSet, area, totalArea,
-        } = summer.sumArea(voterShape)
+        } = summer.sumArea(voterGeom)
 
-        const gridDataEntry = { grid, voteSet, voterShape }
+        const gridDataEntry = { grid, voteSet, voterGeom }
         gridData.push(gridDataEntry)
 
-        const weight = ((voterShape.weight === undefined) ? 1 : voterShape.weight)
+        const weight = ((voterGeom.weight === undefined) ? 1 : voterGeom.weight)
         tally = tally.map((value, index) => value + area[index] * weight)
         total += totalArea
     }

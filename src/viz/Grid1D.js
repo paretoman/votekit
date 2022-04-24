@@ -1,6 +1,6 @@
 /**
  * Draw grid cells to show votes.
- * @param {VoterShape} voterShape
+ * @param {VoterShape} voterGeom
  * @param {Screen} screen
  * @constructor
  */
@@ -8,9 +8,9 @@ export default function Grid1D(gridData, candidateSimList, screen) {
     const self = this
 
     const cans = candidateSimList.getCandidates()
-    const { grid, voteSet, voterShape } = gridData
+    const { grid, voteSet, voterGeom } = gridData
 
-    const { x, w, densityProfile } = voterShape
+    const { x, w, densityProfile } = voterGeom
     const h = 200
     const center = 100
 

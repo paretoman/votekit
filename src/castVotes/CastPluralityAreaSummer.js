@@ -12,15 +12,15 @@ export default function AreaSummer(cans) {
 
     // todo: figure out if this is really just a function rather than a class.
 
-    self.sumArea = function sumArea(voterGroup) {
-        // draw lines across shape of voterGroup
+    self.sumArea = function sumArea(voterGeom) {
+        // draw lines across shape of voterGeom
 
         const n = lines.length
         const area = Array(n)
         for (let i = 0; i < n; i++) {
             const lineSet = lines[i]
             // return area for each candidate
-            area[i] = sumCircle(voterGroup, lineSet)
+            area[i] = sumCircle(voterGeom, lineSet)
         }
         return area
     }

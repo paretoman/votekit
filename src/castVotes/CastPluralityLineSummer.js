@@ -12,17 +12,17 @@ export default function LineSummer(cans) {
 
     const intervals = findIntervals(cans)
 
-    self.sumArea = function sumArea(voterGroup) {
+    self.sumArea = function sumArea(voterGeom) {
         const n = cans.length
         const area = Array(n)
         // return sum for each candidate
-        if (voterGroup.densityProfile === 'gaussian') {
+        if (voterGeom.densityProfile === 'gaussian') {
             for (let i = 0; i < n; i++) {
-                area[i] = sumGaussian(voterGroup, intervals[i])
+                area[i] = sumGaussian(voterGeom, intervals[i])
             }
         } else {
             for (let i = 0; i < n; i++) {
-                area[i] = sumBlock(voterGroup, intervals[i])
+                area[i] = sumBlock(voterGeom, intervals[i])
             }
         }
         return area

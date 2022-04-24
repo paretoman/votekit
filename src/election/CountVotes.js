@@ -48,13 +48,13 @@ export default function CountVotes(menu) {
     // a list of election methods
     self.electionMethodList = [
         {
-            name: 'Huntington Hill', value: 'huntingtonHill', type: 'allocation', caster: 'pluralityBallot',
+            name: 'Huntington Hill', value: 'huntingtonHill', type: 'allocation', caster: 'castPlurality',
         },
         {
-            name: 'Plurality', value: 'plurality', type: 'singleWinner', caster: 'pluralityBallot',
+            name: 'Plurality', value: 'plurality', type: 'singleWinner', caster: 'castPlurality',
         },
         {
-            name: 'Random Winner', value: 'randomWinner', type: 'singleWinner', caster: 'pluralityBallot',
+            name: 'Random Winner', value: 'randomWinner', type: 'singleWinner', caster: 'castPlurality',
         },
         {
             name: 'Score', value: 'score', type: 'singleWinner', caster: 'castScore',
