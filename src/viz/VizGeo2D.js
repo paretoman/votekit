@@ -28,6 +28,7 @@ export default function VizGeo2D(voterGeoList, screen) {
     const geoMapWidth = 100
     const geoMapHeight = 100
 
+    // screen.setMapsHeight((1 / 3) * screen.height)
     /** Render all maps and  */
     self.render = () => {
         renderPolicyNoise()

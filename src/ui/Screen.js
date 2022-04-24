@@ -74,6 +74,8 @@ export default function Screen(w, h, layout) {
     self.foreground.style.width = `${w}px`
     self.foreground.style.height = `${h}px`
 
+    self.maps.width = w * self.pixelRatio // measured in device pixels
+    self.maps.style.width = `${w}px`
     self.setMapsHeight = (height) => {
         const h3 = Math.round(height)
         self.maps.heightBrowser = h3
@@ -82,8 +84,6 @@ export default function Screen(w, h, layout) {
         self.mctx.scale(self.pixelRatio, self.pixelRatio)
     }
     self.setMapsHeight((1 / 3) * h)
-    self.maps.width = w * self.pixelRatio // measured in device pixels
-    self.maps.style.width = `${w}px`
 
     self.ctx.scale(self.pixelRatio, self.pixelRatio)
     self.fctx.scale(self.pixelRatio, self.pixelRatio)
