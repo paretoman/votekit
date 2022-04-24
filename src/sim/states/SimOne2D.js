@@ -40,7 +40,6 @@ export default function SimOne2D(screen, menu, changes, electionOne, sim) {
     const superEnter = self.enter
     self.enter = () => {
         superEnter()
-        screen.showMaps()
         sim.candidateAdd.canButton.show()
         sim.election.setDimensions(2)
         oneVoters.updateXY()
@@ -56,8 +55,18 @@ export default function SimOne2D(screen, menu, changes, electionOne, sim) {
 
     self.update = () => {
         if (changes.checkNone()) return
-        // clear changes, reset to []
+
+        // deal with changes
+        if (changes.check(['simType', 'electionMethod'])) {
+            // show or hide maps
+            if (sim.election.countVotes.caster === 'castScore') {
+                screen.showMaps()
+            } else {
+                screen.hideMaps()
+            }
+        }
         changes.clear()
+
         const votes = electionOne.updateTallies(oneVoters, candidateSimList)
         vizOne2D.update(votes)
         sim.voterTest.update()
