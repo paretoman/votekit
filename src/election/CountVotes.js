@@ -28,7 +28,7 @@ export default function CountVotes(menu) {
         //   is in the context of candidate objects and voter objects.
         let electionResults
         if (self.checkElectionType() === 'allocation') {
-            const electionMethodOptions = { seats: 5, threshold: 0.2 }
+            const electionMethodOptions = { seats: 5, threshold: 0.1 }
             self.seats = electionMethodOptions.seats
             const countResults = electionMethods[self.electionMethod](votes, electionMethodOptions)
             const { allocation } = countResults

@@ -40,6 +40,7 @@ export default function ElectionSample(election) {
         const { seats } = election.countVotes
         const nnp = seats * ns
         const newPoints = Array(nnp)
+        let q = 0
 
         const voterShapes = sampleVoters.getVoterShapes()
 
@@ -74,7 +75,6 @@ export default function ElectionSample(election) {
                 const { allocation } = electionResults
 
                 const jitterSize = 10
-                let q = 0
                 for (let k = 0; k < canList.length; k++) {
                     const can = canList[k]
                     const numPoints = allocation[k]
@@ -92,7 +92,7 @@ export default function ElectionSample(election) {
                         }
                         // record point
                         points.push(winPoint)
-                        newPoints[i * seats + q] = winPoint
+                        newPoints[q] = winPoint
                         q += 1
                     }
                 }

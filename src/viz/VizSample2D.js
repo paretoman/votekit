@@ -48,11 +48,11 @@ export default function VizSample2D(sampleVoters, screen) {
         renderPoints(ctx, newPoints)
     }
 
-    function renderPoints(ctx, points) {
+    function renderPoints(ctx, newPoints) {
         ctx.fillStyle = 'grey'
-        const n = points.length
+        const n = newPoints.length
         for (let i = 0; i < n; i++) {
-            const p = points[i]
+            const p = newPoints[i]
             // dot
             ctx.beginPath()
             ctx.arc(p.x, p.y, 3, 0, 2 * Math.PI)

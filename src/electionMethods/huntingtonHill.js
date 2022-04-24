@@ -1,5 +1,7 @@
 /** @module */
 
+import { range } from '../utilities/jsHelpers.js'
+
 /**
  * Run the Huntington-Hill method of apportionment and return an allocation of seats.
  * @param {Object} votes
@@ -15,14 +17,32 @@
 export default function huntingtonHill(votes, electionMethodOptions) {
     const { seats, threshold } = electionMethodOptions
 
-    const populations = votes.tallyFractions.map(
+    let populations = votes.tallyFractions.map(
         (p) => ((p < threshold) ? 0 : p),
     )
 
-    const nparties = populations.length
+    let positivePopulations = populations.map(
+        (p) => ((p === 0) ? 0 : 1),
+    )
 
-    // When the threshold is 0, we have to give each party a seat.
-    if (threshold === 0 && nparties > seats) {
+    let nPositiveParties = positivePopulations.reduce(
+        (p, c) => p + c,
+    )
+
+    // make an adjustment
+    if (nPositiveParties === 0) {
+        populations = structuredClone(votes.tallyFractions)
+        positivePopulations = populations.map(
+            (p) => ((p === 0) ? 0 : 1),
+        )
+        nPositiveParties = positivePopulations.reduce(
+            (p, c) => p + c,
+        )
+    }
+
+    // When there are more parties above the threshold than seats,
+    // we have to give each party a seat in order.
+    if (nPositiveParties > seats || nPositiveParties === 0) {
         // sort parties by population
         // sort decreasing
         const populationsSorted = [...populations].sort(
@@ -33,7 +53,7 @@ export default function huntingtonHill(votes, electionMethodOptions) {
 
         // todo: consider ties
         const allocation = pops2.map(
-            (p) => p >= minPopulation,
+            (p) => ((p >= minPopulation) ? 1 : 0),
         )
         const countResults = { allocation }
         return countResults
@@ -52,16 +72,44 @@ export default function huntingtonHill(votes, electionMethodOptions) {
     // except that the divisorPattern is used to substitute a slightly different number
     // than the number of respresentatives.
     const signposts = populations.map(
-        (p) => (p === 0 ? Infinity : divisorPattern.map((d) => d / p)),
+        (p) => (p === 0 ? Array(seats).fill(Infinity) : divisorPattern.map((d) => d / p)),
     ).flat()
 
+    const doOld = false
+    if (doOld) {
+        return oldWay(seats, populations, signposts)
+    }
+    const ids = populations.map(
+        (p, i) => Array(seats).fill(i),
+    ).flat()
+
+    const order = range(ids.length).sort(
+        (a, b) => signposts[a] - signposts[b],
+    )
+
+    const allocation = Array(populations.length).fill(0)
+    for (let i = 0; i < seats; i++) {
+        const iId = order[i]
+        const iCan = ids[iId]
+        allocation[iCan] += 1
+    }
+
+    // Todo: consider if there is a tie.
+    // Right now, we give extra seats to all the tied parties if there is a tie.
+    const countResults = { allocation }
+    return countResults
+}
+
+function oldWay(seats, populations, signposts) {
     // find last signpost to fill all seats
     // sort increasing
-    const sortedSignposts = signposts.flat().sort(
+    const sortedSignposts = signposts.sort(
         (a, b) => a - b,
     )
 
-    const lastSignpost = sortedSignposts[seats - 1]
+    const tolerance = 0.00000001 // add a little bit of tolerance for machine-accuracy
+    // hopefully there will not be any exact ties.
+    const lastSignpost = sortedSignposts[seats - 1] + tolerance
 
     // In the jargon:
     //   Divide by populations by the divisors to get the quotients.
@@ -84,9 +132,6 @@ export default function huntingtonHill(votes, electionMethodOptions) {
     const allocation = quotients.map(
         (p) => Math.floor(p),
     )
-
-    // Todo: consider if there is a tie.
-    // Right now, we give extra seats to all the tied parties if there is a tie.
     const countResults = { allocation }
     return countResults
 }
