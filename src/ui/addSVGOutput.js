@@ -65,7 +65,7 @@ export default function addSVGOutput(screen, draw, layout) {
     const svgCtx = new C2S(w, h)
     const svgMCtx = new C2S(w, Math.round(h / 3))
 
-    function setHeightGCtx(height) {
+    function setHeightMCtx(height) {
         mSvgDiv.style.height = `${Math.round(height)}px`
         mSvgDiv.height = height
         // eslint-disable-next-line no-underscore-dangle
@@ -88,7 +88,7 @@ export default function addSVGOutput(screen, draw, layout) {
 
         // update
         const { heightBrowser } = screen.maps
-        setHeightGCtx(heightBrowser)
+        setHeightMCtx(heightBrowser)
 
         // draw
         draw()

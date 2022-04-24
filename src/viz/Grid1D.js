@@ -16,11 +16,10 @@ export default function Grid1D(gridData, candidateSimList, screen) {
     const h = 200
     const center = 100
 
-    const { ctx } = screen
-
     const nCans = cans.length
 
     self.renderBackground = function () {
+        const { ctx } = screen
         ctx.save()
         ctx.globalAlpha = 0.7
 
@@ -29,12 +28,13 @@ export default function Grid1D(gridData, candidateSimList, screen) {
             ctx.strokeStyle = '#dddddd'
             // ctx.strokeStyle = '#333333'
             ctx.beginPath()
-            shapePath(i, true)
+            shapePath(ctx, i, true)
             ctx.stroke()
         }
         ctx.restore()
     }
     self.render = function () {
+        const { ctx } = screen
         ctx.save()
         ctx.globalAlpha = 0.7
         for (let i = 0; i < nCans; i++) {
@@ -42,13 +42,13 @@ export default function Grid1D(gridData, candidateSimList, screen) {
             ctx.fillStyle = cans[i].color
             ctx.strokeStyle = colorBlend([0.8, 0.2], [cans[i].color, '#000000'])
             ctx.beginPath()
-            shapePath(i, false)
+            shapePath(ctx, i, false)
             ctx.fill()
             ctx.stroke()
         }
         ctx.restore()
     }
-    function shapePath(iCan, drawOutline) {
+    function shapePath(ctx, iCan, drawOutline) {
         const isGauss = (densityProfile === 'gaussian')
         const gridX = grid.x
         const sigma = w / Math.sqrt(2 * Math.PI) // w = sigma * sqrt(2*pi)
