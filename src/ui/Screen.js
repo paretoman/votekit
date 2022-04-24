@@ -79,6 +79,7 @@ export default function Screen(w, h, layout) {
         self.maps.heightBrowser = h3
         self.maps.height = h3 * self.pixelRatio // measured in device pixels
         self.maps.style.height = `${h3}px` // measured in browser pixels
+        self.mctx.scale(self.pixelRatio, self.pixelRatio)
     }
     self.setMapsHeight((1 / 3) * h)
     self.maps.width = w * self.pixelRatio // measured in device pixels
@@ -86,7 +87,6 @@ export default function Screen(w, h, layout) {
 
     self.ctx.scale(self.pixelRatio, self.pixelRatio)
     self.fctx.scale(self.pixelRatio, self.pixelRatio)
-    self.mctx.scale(self.pixelRatio, self.pixelRatio)
 
     self.clear = function () {
         self.ctx.clearRect(0, 0, self.canvas.width, self.canvas.height)
