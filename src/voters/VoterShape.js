@@ -148,7 +148,7 @@ export default function VoterShape(
 
     // Rendering
 
-    self.color = '#999'
+    self.color = '#88888888'
     const circle = new CircleGraphic(self, 13, screen)
     self.circle = circle
 
