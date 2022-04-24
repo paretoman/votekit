@@ -1,3 +1,5 @@
+import colorBlend from '../election/colorBlend.js'
+
 /**
  * Draw grid cells to show votes.
  * @param {VoterShape} voterGeom
@@ -25,9 +27,11 @@ export default function Grid1D(gridData, candidateSimList, screen) {
         for (let i = 0; i < n; i++) {
             // draw image
             ctx.fillStyle = cans[i].color
+            ctx.strokeStyle = colorBlend([0.8, 0.2], [cans[i].color, '#000000'])
             ctx.beginPath()
             shapePath(i, false)
             ctx.fill()
+            ctx.stroke()
 
             ctx.strokeStyle = '#dddddd'
             // ctx.strokeStyle = '#333333'
@@ -45,20 +49,21 @@ export default function Grid1D(gridData, candidateSimList, screen) {
             const amp = h / n
             const bottom = center + h * 0.5 - iCan * amp
             // start bottom left
-            const left = Math.max(0, gridX[0])
+            // go outside of screen by one pixel
+            const left = Math.max(-1, gridX[0])
             ctx.moveTo(left, bottom)
             const gl = gridX.length
             for (let i = 0; i < gl; i += 1) {
                 const xg = gridX[i]
-                if (xg < 0) continue
-                if (xg > screen.width) continue
+                if (xg < -1) continue
+                if (xg > screen.width + 1) continue
                 const voteMult = (drawOutline) ? 1 : voteSet[i].tallyFractions[iCan]
                 const shapeMult = (isGauss) ? Math.exp(-0.5 * ((xg - x) / sigma) ** 2) : 1
                 const y = bottom - amp * shapeMult * voteMult
                 ctx.lineTo(xg, y)
             }
             // end bottom right
-            const right = Math.min(screen.width, gridX[gl - 1])
+            const right = Math.min(screen.width + 1, gridX[gl - 1])
             ctx.lineTo(right, bottom)
             // close path
             ctx.lineTo(left, bottom)
