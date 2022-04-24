@@ -38,6 +38,7 @@ export default function DraggableManager(screen, changes, sim) {
         if (event.target.closest('.tooltipBox') !== null) {
             return
         }
+        console.log(event)
 
         const mouse = getMouse(event)
         const extra = (event.isTouch) ? 10 : 0
@@ -105,6 +106,7 @@ export default function DraggableManager(screen, changes, sim) {
     }
 
     const end = function () {
+        console.log('end')
         endClickDetect()
         if (drag.iDragging !== undefined) {
             const dragging = draggables[drag.iDragging]
@@ -126,7 +128,11 @@ export default function DraggableManager(screen, changes, sim) {
         const pass = passTouch(e)
         move(pass)
         end(pass)
-        e.preventDefault() // prevent mousedown from firing
+
+        // prevent mousedown from firing unless we're on a tooltip
+        if (e.target.closest('.tooltipBox') === null) {
+            e.preventDefault()
+        }
     }
 
     self.eventHandlers = {
