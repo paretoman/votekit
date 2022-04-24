@@ -20,12 +20,12 @@ canvas.foreground {
 	z-index:1;
 }
 
-canvas.foreground[data-cursor=grab]{
+div.tooltips[data-cursor=grab]{
 	cursor: -webkit-grab;
 	cursor: -moz-grab;
 	cursor: grab;
 }
-canvas.foreground[data-cursor=grabbing]{
+div.tooltips[data-cursor=grabbing]{
 	cursor: -webkit-grabbing;
 	cursor: -moz-grabbing;
 	cursor: grabbing;

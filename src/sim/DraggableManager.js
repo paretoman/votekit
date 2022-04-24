@@ -17,7 +17,7 @@ export default function DraggableManager(screen, changes, sim) {
     let drag = {}
     const draggables = []
 
-    const canvas = screen.foreground
+    const grabCanvas = screen.tooltips
 
     // add draggable objects
     self.newSquareHandle = function (o, g) {
@@ -67,7 +67,7 @@ export default function DraggableManager(screen, changes, sim) {
             drag.offX = d.o.x - mouse.x
             drag.offY = d.o.y - mouse.y
             d.g.pickUp()
-            canvas.dataset.cursor = 'grabbing' // CSS data attribute
+            grabCanvas.dataset.cursor = 'grabbing' // CSS data attribute
         }
         startClickDetect(mouse)
     }
@@ -95,11 +95,11 @@ export default function DraggableManager(screen, changes, sim) {
             for (let i = 0; i < nd; i++) {
                 const d = draggables[i]
                 if ((sim.showGhosts || d.o.exists) && hitTest(d, mouse, 0)) {
-                    canvas.dataset.cursor = 'grab'
+                    grabCanvas.dataset.cursor = 'grab'
                     return
                 }
             }
-            canvas.dataset.cursor = '' // nothing to grab
+            grabCanvas.dataset.cursor = '' // nothing to grab
         }
         moveClickDetect(mouse)
     }
