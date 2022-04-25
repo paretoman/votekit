@@ -1,19 +1,18 @@
 /** @module */
 
-import SimOne2D from './states/SimOne2D.js'
 import SimSample from './states/SimSample.js'
 import SimGeoOne from './states/SimGeoOne.js'
 import VoterShapeAdd from '../voters/VoterShapeAdd.js'
 import CandidateAdd from '../candidates/CandidateAdd.js'
 import CandidateDnAdd from '../candidateDns/CandidateDnAdd.js'
 import addSimControlsLabel from './addSimControlsLabel.js'
-import SimOne1D from './states/SimOne1D.js'
 import VoterTest from '../voters/VoterTest.js'
 import ElectionOne from '../election/ElectionOne.js'
 import ElectionSample from '../election/ElectionSample.js'
 import ElectionGeo from '../election/ElectionGeo.js'
 import Election from '../election/Election.js'
 import SimBase from './states/SimBase.js'
+import SimOne from './states/SimOne.js'
 
 /**
  * Simulation is the main task we're trying to accomplish in this program.
@@ -49,8 +48,7 @@ export default function Sim(
     // States //
 
     const sims = {
-        one2D: new SimOne2D(screen, menu, changes, electionOne, self),
-        one1D: new SimOne1D(screen, menu, changes, electionOne, self),
+        one: new SimOne(screen, menu, changes, electionOne, self),
         // eslint-disable-next-line max-len
         sample: new SimSample(screen, menu, changes, electionSample, self),
         geoOne: new SimGeoOne(screen, menu, changes, electionGeo, self),
@@ -78,7 +76,7 @@ export default function Sim(
 
     // State Machine //
 
-    self.state = 'one2D' // default
+    self.state = 'one' // default
     self.viz = 'one'
     self.geo = false
     self.election.setDimensions(2)
@@ -107,10 +105,7 @@ export default function Sim(
         // combinations of these state variables.
         if (self.viz === 'one') {
             if (self.geo === false) {
-                if (self.election.dimensions === 1) {
-                    return 'one1D'
-                }
-                return 'one2D'
+                return 'one'
             }
             if (self.election.dimensions === 1) {
                 return 'base'

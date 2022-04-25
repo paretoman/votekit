@@ -5,12 +5,16 @@ import CandidateSimList from '../../candidates/CandidateSimList.js'
 import VoterSimList from '../../voters/VoterSimList.js'
 import SimBase from './SimBase.js'
 import VoterSim from '../../voters/VoterSim.js'
-import VizOne2D from '../../viz/VizOne2D.js'
+import VizOne from '../../viz/VizOne.js'
 
 /**
  * Simulate one election with
  *   candidates in defined positions, and
  *   voters in a distribution that will be summed over.
+ * Plan:
+ * * SimOne is a subclass of SimBase.
+ * * VizOne is a subclass of VoterSim.
+ * * Voronoi1D is called by VizOne.
  * @param {Screen} screen
  * @param {Menu} menu
  * @param {Changes} changes
@@ -18,7 +22,7 @@ import VizOne2D from '../../viz/VizOne2D.js'
  * @param {Sim} sim
  * @constructor
  */
-export default function SimOne2D(screen, menu, changes, electionOne, sim) {
+export default function SimOne(screen, menu, changes, electionOne, sim) {
     const self = this
 
     SimBase.call(self, screen, changes, sim)
@@ -35,7 +39,7 @@ export default function SimOne2D(screen, menu, changes, electionOne, sim) {
         oneVoters.newVoterSim(new VoterSim(voterShape, self.dragm, screen))
     }
 
-    const vizOne2D = new VizOne2D(oneVoters, candidateSimList, screen, sim)
+    const vizOne = new VizOne(oneVoters, candidateSimList, screen, sim)
 
     const superEnter = self.enter
     self.enter = () => {
@@ -55,19 +59,18 @@ export default function SimOne2D(screen, menu, changes, electionOne, sim) {
     self.update = () => {
         if (changes.checkNone()) return
 
-        // deal with changes
-        if (changes.check(['viz', 'dimensions', 'geo', 'electionMethod'])) {
+        if (changes.check(['viz', 'electionMethod', 'dimensions'])) {
             // show or hide maps
-            if (sim.election.countVotes.caster === 'castScore') {
+            if (sim.election.dimensions === 2 && sim.election.countVotes.caster === 'castScore') {
                 screen.showMaps()
             } else {
                 screen.hideMaps()
             }
         }
+        // clear changes, reset to []
         changes.clear()
-
         const votes = electionOne.updateTallies(oneVoters, candidateSimList)
-        vizOne2D.update(votes)
+        vizOne.update(votes)
         sim.voterTest.update()
         screen.clear()
         screen.clearMaps()
@@ -77,7 +80,7 @@ export default function SimOne2D(screen, menu, changes, electionOne, sim) {
     self.testVote = () => electionOne.testVote(sim.voterTest, candidateSimList)
 
     self.render = () => {
-        vizOne2D.render()
+        vizOne.render()
     }
     self.renderForeground = () => {
         // electionSample.renderForeground()
