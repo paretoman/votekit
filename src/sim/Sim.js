@@ -77,20 +77,42 @@ export default function Sim(
     // State Machine //
 
     self.state = 'one2D' // default
+    self.viz = 'one'
+    self.geo = false
+    self.election.setDimensions(2)
     // self.typeExit = self.state
-    changes.add(['simType'])
+    changes.add(['simType', 'geo', 'dimensions', 'viz'])
 
     self.update = () => {
         // state change
         if (changes.check(['simType'])) {
             // exit states
             Object.keys(sims).forEach((k) => sims[k].exit())
+            // compute state
+            self.state = computeState()
             // enter state
             sims[self.state].enter()
         }
 
         // state update
         sims[self.state].update()
+    }
+    function computeState() {
+        // right now, we use combinations of these state variables
+        // to determine which state to take, as opposed to having
+        // nested states.
+        // Also, we don't yet have implementations of all the possible
+        // combinations of these state variables.
+        if (self.viz === 'one') {
+            if (self.geo === false) {
+                if (self.election.dimensions === 1) {
+                    return 'one1D'
+                }
+                return 'one2D'
+            }
+            return 'geoOne'
+        }
+        return 'sample'
     }
     self.renderForeground = () => { sims[self.state].renderForeground() }
     self.render = () => { sims[self.state].render() }
@@ -108,20 +130,48 @@ export default function Sim(
 
     // add a menu item to switch between types of sims
     // a list of simulation types
-    self.typeList = [
-        { name: 'One Election', value: 'one2D', state: '' },
-        { name: '1D One Election', value: 'one1D', state: '' },
-        { name: 'Sample Elections', value: 'sample', state: '' },
-        { name: 'Geo Election', value: 'geoOne', state: '' },
+    const vizList = [
+        { name: 'One Election', value: 'one' },
+        { name: 'Sample Elections', value: 'sample' },
     ]
     menu.addMenuItem(
         self,
         {
-            label: 'Simulation:',
-            prop: 'state',
-            setProp: (p) => { self.state = p },
-            options: self.typeList,
-            change: ['simType'],
+            label: 'Viz:',
+            prop: 'viz',
+            setProp: (p) => { self.viz = p },
+            options: vizList,
+            change: ['simType', 'viz'],
+        },
+    )
+
+    const geoList = [
+        { name: 'On', value: true },
+        { name: 'Off', value: false },
+    ]
+    menu.addMenuItem(
+        self,
+        {
+            label: 'Geo:',
+            prop: 'geo',
+            setProp: (p) => { self.geo = p },
+            options: geoList,
+            change: ['simType', 'geo'],
+        },
+    )
+
+    const dimensionList = [
+        { name: '1D', value: 1 },
+        { name: '2D', value: 2 },
+    ]
+    menu.addMenuItem(
+        self.election,
+        {
+            label: 'Dimensions:',
+            prop: 'dimensions',
+            setProp: (p) => { self.election.setDimensions(p) },
+            options: dimensionList,
+            change: ['simType', 'dimension'],
         },
     )
 }
