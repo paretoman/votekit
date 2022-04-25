@@ -28,13 +28,11 @@ export default function CountVotes(menu) {
         //   is in the context of candidate objects and voter objects.
         let electionResults
         if (self.checkElectionType() === 'allocation') {
-            const electionMethodOptions = { seats: 5, threshold: 0.1 }
-            self.seats = electionMethodOptions.seats
+            const electionMethodOptions = { seats: self.seats, threshold: 0.1 }
             const countResults = electionMethods[self.electionMethod](votes, electionMethodOptions)
             const { allocation } = countResults
             electionResults = { allocation, candidates, votes }
         } else {
-            self.seats = 1
             const countResults = electionMethods[self.electionMethod](votes)
             const { iWinner } = countResults
             const winner = candidates[iWinner]
@@ -75,6 +73,12 @@ export default function CountVotes(menu) {
     self.setElectionMethod = (value) => {
         self.electionMethod = value
         self.caster = self.electionMethodListByFunctionName[value].caster
+
+        if (self.checkElectionType() === 'allocation') {
+            self.seats = 5
+        } else {
+            self.seats = 1
+        }
     }
 
     // add a menu item to switch between types of elections
