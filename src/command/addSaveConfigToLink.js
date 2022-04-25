@@ -26,10 +26,13 @@ export default function addSaveConfigToLink(layout, commander, sandboxURL) {
     }
     function getLink() {
         const config = commander.getConfig()
-        const encodedConfig = encodeURIComponent(JSON.stringify(config))
+        const string = JSON.stringify(config)
+        const encoded = encodeURIComponent(string)
+        const params = new URLSearchParams({ a: encoded })
+        const search = params.toString()
         const currentUrlFolder = getFolder()
 
-        const link = `${currentUrlFolder}/${sandboxURL}?a=${encodedConfig}`
+        const link = `${currentUrlFolder}/${sandboxURL}?${search}`
         return link
     }
     function getFolder() {
