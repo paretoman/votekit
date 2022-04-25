@@ -44,7 +44,6 @@ export default function SimGeoOne(screen, menu, changes, electionGeo, sim) {
         superEnter()
         screen.showMaps()
         sim.candidateAdd.canButton.show()
-        sim.election.setDimensions(2)
         voterGeoList.updateXY()
         candidateSimList.updateXY()
         sim.voterTest.updateXY()
@@ -61,10 +60,11 @@ export default function SimGeoOne(screen, menu, changes, electionGeo, sim) {
 
     self.update = () => {
         if (changes.checkNone()) return
-        // clear changes, reset to []
-        if (changes.check(['districts', 'simType'])) {
+        // deal with changes
+        if (changes.check(['districts', 'geo', 'dimensions'])) {
             voterGeoList.updateDistricts()
         }
+        // clear changes, reset to []
         changes.clear()
         voterGeoList.updateVoters() // can make this only trigger when voters change
         const geoElectionResults = electionGeo.updateVotes(voterGeoList, candidateSimList)

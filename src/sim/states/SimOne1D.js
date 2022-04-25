@@ -45,7 +45,6 @@ export default function SimOne1D(screen, menu, changes, electionOne, sim) {
     self.enter = () => {
         superEnter()
         sim.candidateAdd.canButton.show()
-        sim.election.setDimensions(1)
         oneVoters.updateXY()
         candidateSimList.updateXY()
         sim.voterTest.updateXY()

@@ -1,5 +1,6 @@
 /** @module */
 
+import { drawStrokedColor } from '../../utilities/graphicsUtilities.js'
 import DraggableManager from '../DraggableManager.js'
 
 /**
@@ -15,7 +16,12 @@ export default function SimBase(screen, changes, sim) {
         screen.eventHandlers.set(self.dragm.eventHandlers)
     }
     self.exit = () => {}
-    self.update = () => {}
+    self.update = () => {
+        if (changes.checkNone()) return
+        screen.clear()
+        const [x, y] = [150, 150]
+        drawStrokedColor('Not Yet Implemented', x, y, 20, 2, '#222', 1, screen.ctx)
+    }
     self.render = () => { }
     self.renderForeground = () => { }
     self.testVote = () => {}

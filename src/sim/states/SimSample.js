@@ -41,7 +41,6 @@ export default function SimSample(screen, menu, changes, electionSample, sim) {
     self.enter = () => {
         superEnter()
         sim.candidateDnAdd.canDnButton.show()
-        sim.election.setDimensions(2)
         sampleVoters.updateXY()
         candidateSimList.updateXY()
     }

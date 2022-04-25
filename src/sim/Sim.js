@@ -13,6 +13,7 @@ import ElectionOne from '../election/ElectionOne.js'
 import ElectionSample from '../election/ElectionSample.js'
 import ElectionGeo from '../election/ElectionGeo.js'
 import Election from '../election/Election.js'
+import SimBase from './states/SimBase.js'
 
 /**
  * Simulation is the main task we're trying to accomplish in this program.
@@ -53,6 +54,7 @@ export default function Sim(
         // eslint-disable-next-line max-len
         sample: new SimSample(screen, menu, changes, electionSample, self),
         geoOne: new SimGeoOne(screen, menu, changes, electionGeo, self),
+        base: new SimBase(screen, changes, self),
     }
     self.sims = sims
 
@@ -81,11 +83,11 @@ export default function Sim(
     self.geo = false
     self.election.setDimensions(2)
     // self.typeExit = self.state
-    changes.add(['simType', 'geo', 'dimensions', 'viz'])
+    changes.add(['geo', 'dimensions', 'viz'])
 
     self.update = () => {
         // state change
-        if (changes.check(['simType'])) {
+        if (changes.check(['geo', 'dimensions', 'viz'])) {
             // exit states
             Object.keys(sims).forEach((k) => sims[k].exit())
             // compute state
@@ -110,7 +112,16 @@ export default function Sim(
                 }
                 return 'one2D'
             }
+            if (self.election.dimensions === 1) {
+                return 'base'
+            }
             return 'geoOne'
+        }
+        if (self.geo === true) {
+            return 'base'
+        }
+        if (self.election.dimensions === 1) {
+            return 'base'
         }
         return 'sample'
     }
@@ -141,7 +152,7 @@ export default function Sim(
             prop: 'viz',
             setProp: (p) => { self.viz = p },
             options: vizList,
-            change: ['simType', 'viz'],
+            change: ['viz'],
         },
     )
 
@@ -156,7 +167,7 @@ export default function Sim(
             prop: 'geo',
             setProp: (p) => { self.geo = p },
             options: geoList,
-            change: ['simType', 'geo'],
+            change: ['geo'],
         },
     )
 
@@ -171,7 +182,7 @@ export default function Sim(
             prop: 'dimensions',
             setProp: (p) => { self.election.setDimensions(p) },
             options: dimensionList,
-            change: ['simType', 'dimension'],
+            change: ['dimensions'],
         },
     )
 }
