@@ -13,7 +13,7 @@ import { toRGBA } from '../lib/colorBlendScript.js'
 export default function Grid2D(gridData, candidateSimList, screen) {
     const self = this
 
-    const cans = candidateSimList.getCandidates()
+    const canList = candidateSimList.getCandidates()
     const { grid, voteSet, voterGeom } = gridData
 
     const { x, y, w } = voterGeom
@@ -22,7 +22,7 @@ export default function Grid2D(gridData, candidateSimList, screen) {
     let singleCanvas
     // TODO: set up canvases ahead of time
 
-    const nCans = cans.length
+    const nCans = canList.length
     const nHeight = Math.floor((nCans - 1) / 3) + 1
     screen.setMapsHeight(nHeight * (1 / 3) * screen.height)
 
@@ -34,7 +34,7 @@ export default function Grid2D(gridData, candidateSimList, screen) {
     function fillDataSeparate() {
     // make image data
         const { nx, ny, weight } = grid
-        for (let i = 0; i < cans.length; i++) {
+        for (let i = 0; i < canList.length; i++) {
             const canvas = document.createElement('canvas')
             canvas.width = nx
             canvas.height = ny
@@ -43,7 +43,7 @@ export default function Grid2D(gridData, candidateSimList, screen) {
 
             const { data } = imageData
 
-            const { color } = cans[i]
+            const { color } = canList[i]
             const [r, g, b] = toRGBA(color)
 
             let k = 0
@@ -67,7 +67,7 @@ export default function Grid2D(gridData, candidateSimList, screen) {
     function fillDataBlend() {
         // make image data
         const { nx, ny, weight } = grid
-        const colorSet = cans.map((can) => can.color)
+        const colorSet = canList.map((can) => can.color)
 
         const canvas = document.createElement('canvas')
         canvas.width = nx

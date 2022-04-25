@@ -47,9 +47,9 @@ export default function Election(menu) {
 
     // Voters cast votes for candidates.
     // There is also a separate graphical representation in Voronoi2D.js
-    self.castVotes = (voters, candidates, optionCast) => {
+    self.castVotes = (voters, candidateSimList, optionCast) => {
         const voterShapes = voters.getVoterShapes()
-        const canList = candidates.getCandidates()
+        const canList = candidateSimList.getCandidates()
         const voterGeom = mapVoters(voterShapes)
         const canGeom = mapCans(canList)
         const casterFun = castVotes[self.countVotes.caster]
@@ -57,9 +57,9 @@ export default function Election(menu) {
         return votes
     }
 
-    self.testVote = (voterTest, candidates, optionCast) => {
+    self.testVote = (voterTest, candidateSimList, optionCast) => {
         const voterShapes = [voterTest]
-        const canList = candidates.getCandidates()
+        const canList = candidateSimList.getCandidates()
         const voterGeom = mapVoters(voterShapes)
         const canGeom = mapCans(canList)
         const casterFun = castVotes[self.countVotes.caster]

@@ -26,15 +26,15 @@ export default function CandidateSimList(sim) {
     self.getCandidatesAll = () => simCans.map((simCan) => simCan.candidate)
 
     self.setCandidateFractions = (fractions) => {
-        const cans = self.getCandidates()
-        cans.forEach((can, index) => {
+        const canList = self.getCandidates()
+        canList.forEach((can, index) => {
             const fraction = fractions[index]
             can.setFraction(fraction)
         })
     }
     self.setCandidateWins = (winsByCandidate) => {
-        const cans = self.getCandidates()
-        cans.forEach((can, index) => {
+        const canList = self.getCandidates()
+        canList.forEach((can, index) => {
             const win = winsByCandidate[index]
             can.setWins(win)
         })
@@ -50,12 +50,12 @@ export default function CandidateSimList(sim) {
         }
     }
     self.renderForegroundExisting = () => {
-        const cans = self.getCandidates()
-        cans.forEach((can) => can.renderForeground())
+        const canList = self.getCandidates()
+        canList.forEach((can) => can.renderForeground())
     }
     self.renderForegroundAll = () => {
-        const cans = self.getCandidatesAll()
-        cans.forEach((can) => can.renderForeground())
+        const canList = self.getCandidatesAll()
+        canList.forEach((can) => can.renderForeground())
     }
     self.numCandidates = () => simCans.length
 }

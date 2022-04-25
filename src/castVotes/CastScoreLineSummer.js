@@ -5,17 +5,17 @@ import castScoreTestVote from './castScoreTestVote.js'
 
 /**
  * Sum area of voter distributions to tally the votes.
- * @param {Object[]} cans - position of each candidate {x}
+ * @param {Object[]} canGeoms - position of each candidate {x}
  * @constructor
  */
-export default function CastScoreLineSummer(cans) {
+export default function CastScoreLineSummer(canGeoms) {
     const self = this
 
     self.sumArea = function sumArea(voterGeom) {
         // just find the vote at each grid point and weight according to type
         const grid = makeGrid(voterGeom)
 
-        const n = cans.length
+        const n = canGeoms.length
         const area = Array(n).fill(0)
         let totalArea = 0
 
@@ -25,7 +25,7 @@ export default function CastScoreLineSummer(cans) {
         for (let i = 0; i < gridLength; i++) {
             const xi = grid.x[i]
             const testVoter = { x: xi }
-            const tallyFractions = castScoreTestVote(cans, testVoter, 1)
+            const tallyFractions = castScoreTestVote(canGeoms, testVoter, 1)
             voteSet[i] = { tallyFractions }
             const weight = findWeight(voterGeom, xi)
             totalArea += weight

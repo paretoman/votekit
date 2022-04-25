@@ -2,16 +2,16 @@ import { minIndex } from '../utilities/jsHelpers.js'
 
 /**
  * Vote for the closest candidate.
- * @param {Objects[]} candidates - For 2D, an array of objects: {x,y}.
+ * @param {Objects[]} canGeoms - For 2D, an array of objects: {x,y}.
  * For 1D, an array of objects: {x}.
  * @param {*} voterGeom
  * @param {*} dimensions
  */
-export default function castPluralityTestVote(candidates, voterGeom, dimensions) {
+export default function castPluralityTestVote(canGeoms, voterGeom, dimensions) {
     const df = (dimensions === 1) ? df1 : df2
-    const dist2 = candidates.map((c) => df(c, voterGeom))
+    const dist2 = canGeoms.map((c) => df(c, voterGeom))
     const i = minIndex(dist2)
-    const n = candidates.length
+    const n = canGeoms.length
     const tally = (new Array(n)).fill(0)
     tally[i] = 1
     return tally

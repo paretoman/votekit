@@ -2,18 +2,18 @@ import { minMax } from '../utilities/jsHelpers.js'
 
 /**
  * Vote for the closest candidate.
- * @param {Objects[]} candidates - For 2D, an array of objects: {x,y}.
+ * @param {Objects[]} canGeoms - For 2D, an array of objects: {x,y}.
  * For 1D, an array of objects: {x}.
  * @param {*} voter
  * @param {*} dimensions
  */
-export default function castScoreTestVote(candidates, voterGeom, dimensions) {
-    const lc = candidates.length
+export default function castScoreTestVote(canGeoms, voterGeom, dimensions) {
+    const lc = canGeoms.length
     const tally = (new Array(lc)).fill(0)
     const df = (dimensions === 1) ? df1 : df2
 
     // in the current implementation, all candidates are frontrunners
-    const dist = candidates.map((c) => df(c, voterGeom))
+    const dist = canGeoms.map((c) => df(c, voterGeom))
     const [min, max] = minMax(dist)
     const maxscore = 1
     const minscore = 0

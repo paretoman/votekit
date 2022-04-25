@@ -9,14 +9,14 @@ import colorBlend from '../election/colorBlend.js'
 export default function Grid1D(gridData, candidateSimList, screen) {
     const self = this
 
-    const cans = candidateSimList.getCandidates()
+    const canList = candidateSimList.getCandidates()
     const { grid, voteSet, voterGeom } = gridData
 
     const { x, w, densityProfile } = voterGeom
     const h = 200
     const center = 100
 
-    const nCans = cans.length
+    const nCans = canList.length
 
     self.renderBackground = function () {
         const { ctx } = screen
@@ -39,8 +39,8 @@ export default function Grid1D(gridData, candidateSimList, screen) {
         ctx.globalAlpha = 0.7
         for (let i = 0; i < nCans; i++) {
             // draw image
-            ctx.fillStyle = cans[i].color
-            ctx.strokeStyle = colorBlend([0.8, 0.2], [cans[i].color, '#000000'])
+            ctx.fillStyle = canList[i].color
+            ctx.strokeStyle = colorBlend([0.8, 0.2], [canList[i].color, '#000000'])
             ctx.beginPath()
             shapePath(ctx, i, false)
             ctx.fill()

@@ -31,16 +31,16 @@ export default function CandidateDnSimList(sim) {
     self.getCandidateDistributionsAll = () => simCanDns.map((simCanDn) => simCanDn.canDn)
 
     self.startSampler = () => {
-        const canDns = self.getCandidateDistributions()
-        if (canDns.length === 0) return
-        self.sampler = new CandidateDistributionSampler(canDns)
+        const canDnsList = self.getCandidateDistributions()
+        if (canDnsList.length === 0) return
+        self.sampler = new CandidateDistributionSampler(canDnsList)
     }
     self.updateXY = () => {
         simCanDns.forEach((simCanDn) => simCanDn.canDn.updateXY())
     }
     self.render = () => {
-        const canDns = self.getCandidateDistributions()
-        canDns.forEach((canDn) => canDn.render())
+        const canDnsList = self.getCandidateDistributions()
+        canDnsList.forEach((canDn) => canDn.render())
     }
     self.renderForeground = () => {
         if (sim.showGhosts) {
@@ -50,11 +50,11 @@ export default function CandidateDnSimList(sim) {
         }
     }
     self.renderForegroundExisting = () => {
-        const canDns = self.getCandidateDistributions()
-        canDns.forEach((canDn) => canDn.renderForeground())
+        const canDnsList = self.getCandidateDistributions()
+        canDnsList.forEach((canDn) => canDn.renderForeground())
     }
     self.renderForegroundAll = () => {
-        const cans = self.getCandidateDistributionsAll()
-        cans.forEach((can) => can.renderForeground())
+        const canDnsList = self.getCandidateDistributionsAll()
+        canDnsList.forEach((can) => can.renderForeground())
     }
 }

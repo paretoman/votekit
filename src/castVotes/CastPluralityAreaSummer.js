@@ -2,13 +2,13 @@
 
 /**
  * Sum area of voter distributions to tally the votes.
- * @param {Candidate[]} cans
+ * @param {Object[]} canGeoms
  * @constructor
  */
-export default function AreaSummer(cans) {
+export default function AreaSummer(canGeoms) {
     const self = this
 
-    const lines = findLines(cans)
+    const lines = findLines(canGeoms)
 
     // todo: figure out if this is really just a function rather than a class.
 
@@ -26,9 +26,9 @@ export default function AreaSummer(cans) {
     }
 }
 
-function findLines(cans) {
+function findLines(canGeoms) {
     // find all lines
-    const n = cans.length
+    const n = canGeoms.length
     const lines = new Array(n) // each candidate has a set of lines for themselves
     for (let i = 0; i < n; i++) {
         lines[i] = []
@@ -36,8 +36,8 @@ function findLines(cans) {
             // skip sames
             if (i === k) continue
             // find equation for a line
-            const c1 = cans[i]
-            const c2 = cans[k]
+            const c1 = canGeoms[i]
+            const c2 = canGeoms[k]
             // lines[i][k] = equidistantLine(c1,c2) // problem when i === k
             lines[i].push(equidistantLine(c1, c2))
         }

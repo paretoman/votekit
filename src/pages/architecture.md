@@ -50,6 +50,11 @@ Create a 2D spatial model.
     * CandidateSim deals with draggin the Candidate for a particular sim.
     * CandidateSimList manages a list of CandidateSim objects and tracks whether candidates exist and provides functions to return an array of Candidate objects. It also handles methods that apply to all the members of the list so you don't have to loop through the Candidate objects on your own.
     * SquareGraphic makes an animated square and shows stats.
+    * Data types: 
+        * I made a standard way of referring to candidates as objects that are not classes.
+        * canGeoms: For 2D, an array of objects: {x,y}. For 1D, an array of objects: {x}.
+        * canList: An array of Candidate objects.
+        * candidateSimList: a CandidateSimList object.
 * CandidateDns
     * Nearly identical mirrors of the classes for Candidates above exist for CandidateDns.
 

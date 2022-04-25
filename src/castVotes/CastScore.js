@@ -11,26 +11,26 @@ import castScoreTestVote from './castScoreTestVote.js'
  * Vote for one.
  * Voters cast votes for candidates.
  * There is also a separate graphical representation in VoronoiGroup.js.
- * @param {Objects[]} candidates - For 2D, an array of objects: {x,y}.
+ * @param {Objects[]} canGeoms - For 2D, an array of objects: {x,y}.
  * For 1D, an array of objects: {x}.
  * @param {Objects[]} voterShapes - For 2D, an array of objects: {x,y,w}.
  * For 1D, an array of objects: {x,w,densityProfile}.
  * @returns votes, an object
  */
-export default function castScore(candidates, voterGeoms, dimensions, optionCast, isTestVoter) {
+export default function castScore(canGeoms, voterGeoms, dimensions, optionCast, isTestVoter) {
     if (isTestVoter) {
         const testVoter = voterGeoms[0]
-        const tallyFractions = castScoreTestVote(candidates, testVoter, dimensions)
+        const tallyFractions = castScoreTestVote(canGeoms, testVoter, dimensions)
         const votes = { tallyFractions }
         return votes
     }
 
     const summer = (dimensions === 1)
-        ? new CastScoreLineSummer(candidates)
-        : new CastScoreAreaSummer(candidates, optionCast)
+        ? new CastScoreLineSummer(canGeoms)
+        : new CastScoreAreaSummer(canGeoms, optionCast)
 
     // get fraction of votes for each candidate so we can summarize results
-    const n = candidates.length
+    const n = canGeoms.length
     let tally = (new Array(n)).fill(0)
     let total = 0
     const gridData = []
