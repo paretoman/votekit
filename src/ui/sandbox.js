@@ -23,11 +23,11 @@ export default function sandbox(config, comMessenger, sandboxURL) {
     const layout = new Layout([
         'menu',
         'simControlsLabel',
+        'undo',
+        'redo',
         'addVoter',
         'addCandidate',
         'addCandidateDistribution',
-        'undo',
-        'redo',
         'screenWrap',
         'maps',
         'saveConfigToLink',
