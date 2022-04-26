@@ -14,8 +14,8 @@ export default function VoterSimList(sim) {
     const list = []
     self.list = list
 
-    self.newVoterSim = function (voterGroup) {
-        list.push(voterGroup)
+    self.newVoterSim = function (voterSim) {
+        list.push(voterSim)
     }
 
     self.getVoterShapes = () => list.filter((v) => v.voterShape.exists).map((v) => v.voterShape)

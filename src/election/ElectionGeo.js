@@ -56,15 +56,15 @@ export default function ElectionGeo(election) {
         return resultsStatewide
     }
 
-    /** Visualize voter demographics according to votes for candidates within a voterGroup.
-     * Hold mini-elections within a voterGroup.
+    /** Visualize voter demographics according to votes for candidates within a tract.
+     * Hold mini-elections within a tract.
      */
     function runTractElections(voterGeoList, canList) {
         const { voterGroupsByTract } = voterGeoList
 
         const resultsByTract = voterGroupsByTract.map(
             (row) => row.map(
-                (voterShapes) => election.runElection(voterShapes, canList, optionCast),
+                (voterGroups) => election.runElection(voterGroups, canList, optionCast),
             ),
         )
         return resultsByTract
@@ -93,7 +93,7 @@ export default function ElectionGeo(election) {
         const { voterGroupsByDistrict } = voterGeoList
 
         const resultsByDistrict = voterGroupsByDistrict.map(
-            (voterShapes) => election.runElection(voterShapes, canList, optionCast),
+            (voterGroups) => election.runElection(voterGroups, canList, optionCast),
         )
         return resultsByDistrict
     }

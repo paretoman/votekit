@@ -42,17 +42,25 @@ Create a 2D spatial model.
         * VizGeo2D draws the voters are in tracts and districts.
     * VoterTest is a copy of VoterShape, mostly. VoterTest exists outside of these other classes. It doesn't have command history and doesn't interact with other voters. It's just a test.
     * CircleGraphic makes an animated circle.
+    * Data types:
+        * These are the standard ways of referring to voter objects that are not classes.
+        * voterGroup: an object with a shape1, shape2, and weight (optional) property.
+        * voterGeom: 
+            * For 2D, an array of objects: {x,y,w}.
+            * For 1D, an array of objects: {x,w,densityProfile}.
 * Candidates
     * Candidate represents a single candidate. It keeps its state, works with undo, and has render functions.
     * CandidateAdd manages a list of candidates and adds new ones.
         * Registrar is the component that manages the list.
         * CandidateCommander is the component that handles commands for each Candidate.
-    * CandidateSim deals with draggin the Candidate for a particular sim.
+    * CandidateSim deals with dragging the Candidate for a particular sim.
     * CandidateSimList manages a list of CandidateSim objects and tracks whether candidates exist and provides functions to return an array of Candidate objects. It also handles methods that apply to all the members of the list so you don't have to loop through the Candidate objects on your own.
     * SquareGraphic makes an animated square and shows stats.
     * Data types: 
         * I made a standard way of referring to candidates as objects that are not classes.
-        * canGeoms: For 2D, an array of objects: {x,y}. For 1D, an array of objects: {x}.
+        * canGeoms: 
+            * For 2D, an array of objects: {x,y}. 
+            * For 1D, an array of objects: {x}.
         * canList: An array of Candidate objects.
         * candidateSimList: a CandidateSimList object.
 * CandidateDns

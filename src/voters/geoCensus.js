@@ -6,11 +6,11 @@ import polygonClip from '../lib/polygonClip.js'
 import { range, jcopy } from '../utilities/jsHelpers.js'
 
 /**
- * What fraction of each voterGroup lives in each district?
+ * What fraction of each tract lives in each district?
  * Return an array indexed by district.
  * Each element contains an array of pairs.
- * The first of the pair is a voterGroup pair of coordinates.
- * The second of the pair is the fraction of the voterGroup within that district.
+ * The first of the pair is a tract's pair of coordinates.
+ * The second of the pair is the fraction of the tract within that district.
  * @param {DistrictMaker} districtMaker
  * @returns {Number[][][]} - an array of districts,
  * each with a list of census tract properties [x,y,overlap]
@@ -22,8 +22,8 @@ export default function geoCensus(districtMaker) {
 
     const census = Array(nd).fill().map(() => [])
 
-    for (let gx = 0; gx < nx; gx++) { // x-coordinate of group
-        for (let gy = 0; gy < ny; gy++) { // y-coordinate of group
+    for (let gx = 0; gx < nx; gx++) { // x-coordinate of tract
+        for (let gy = 0; gy < ny; gy++) { // y-coordinate of tract
             const subject = makeSquare(gx, gy)
             range(nd).forEach((iDistrict) => {
                 const poly = polygons[iDistrict]

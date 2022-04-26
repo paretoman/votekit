@@ -61,8 +61,8 @@ export default function VizGeo2D(voterGeoList, screen) {
     function renderPolicyNoise() {
         voterGeoList.voterGroupsByTract.forEach((row) => {
             row.forEach((cell) => {
-                cell.forEach((group) => {
-                    smallCircle(group.shape2.x, group.shape2.y)
+                cell.forEach((voterGroup) => {
+                    smallCircle(voterGroup.shape2.x, voterGroup.shape2.y)
                     // TODO: use .x and .y instead of shape2
                 })
             })

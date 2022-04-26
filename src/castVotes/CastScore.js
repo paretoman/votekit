@@ -13,7 +13,7 @@ import castScoreTestVote from './castScoreTestVote.js'
  * There is also a separate graphical representation in VoronoiGroup.js.
  * @param {Objects[]} canGeoms - For 2D, an array of objects: {x,y}.
  * For 1D, an array of objects: {x}.
- * @param {Objects[]} voterShapes - For 2D, an array of objects: {x,y,w}.
+ * @param {Objects[]} voterGeoms - For 2D, an array of objects: {x,y,w}.
  * For 1D, an array of objects: {x,w,densityProfile}.
  * @returns votes, an object
  */

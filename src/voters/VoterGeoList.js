@@ -41,14 +41,14 @@ export default function VoterGeoList(screen, electionGeo, sim) {
 
     // Update VoterGroup Sets //
 
-    let voterSimGroups = []
+    let voterSims = []
 
     /** Make districts and update voter sets */
     self.updateDistricts = () => {
         self.districtMaker.make(self.nx, self.ny, nd)
     }
     self.updateVoters = () => {
-        voterSimGroups = self.getVoterSims()
+        voterSims = self.getVoterSims()
         self.updateFullSet()
         self.updateVotersByDistrict()
         self.updateVotersByTract()
@@ -59,7 +59,7 @@ export default function VoterGeoList(screen, electionGeo, sim) {
 
     self.updateFullSet = () => {
         const { sn } = self.geoNoise
-        self.allVoterGroups = voterSimGroups.map(
+        self.allVoterGroups = voterSims.map(
             (vb) => sn.map(
                 (rowNoise) => rowNoise.map(
                     (cellNoise) => {
@@ -79,7 +79,7 @@ export default function VoterGeoList(screen, electionGeo, sim) {
         const { census } = self.districtMaker
         const { sn } = self.geoNoise
         self.voterGroupsByDistrict = range(nd).map(
-            (iDistrict) => voterSimGroups.map(
+            (iDistrict) => voterSims.map(
                 (vb) => census[iDistrict].map((g) => {
                     const [gx, gy, gf] = g
                     const [xNoise, yNoise] = sn[gx][gy]
@@ -97,7 +97,7 @@ export default function VoterGeoList(screen, electionGeo, sim) {
         const { sn } = self.geoNoise
         self.voterGroupsByTract = sn.map(
             (rowNoise) => rowNoise.map(
-                (cellNoise) => voterSimGroups.map(
+                (cellNoise) => voterSims.map(
                     (vb) => {
                         const [xNoise, yNoise] = cellNoise
                         const shape2 = structuredClone(vb.voterShape.shape2)
