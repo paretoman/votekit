@@ -8,7 +8,7 @@ import NoiseImage from './NoiseImage.js'
  * @param {Screen} screen
  * @constructor
  */
-export default function VizGeo2D(voterGeoList, screen) {
+export default function GeoMaps(voterGeoList, screen, sim) {
     const self = this
 
     // Code that handles making images of geographic noise.
@@ -35,7 +35,6 @@ export default function VizGeo2D(voterGeoList, screen) {
         self.renderTractVotes()
         self.renderDistrictWins()
         self.renderDistrictVotes()
-        self.renderVoterBasisSet()
     }
     // Render census tract votes.
     self.renderTractVotes = () => {
@@ -52,18 +51,23 @@ export default function VizGeo2D(voterGeoList, screen) {
         const { renderVoronoiColors } = voterGeoList.districtMaker
         renderVoronoiColors(100, 0, geoMapWidth, geoMapHeight, self.colorOfVoteByDistrict)
     }
-    self.renderVoterBasisSet = () => {
-        const voterSimGroups = voterGeoList.getVoterSims()
-        voterSimGroups.forEach((v) => v.render())
-    }
 
     /** Draw dots to represent the political diversity across census tracts. */
     function renderPolicyNoise() {
         voterGeoList.voterGroupsByTract.forEach((row) => {
             row.forEach((cell) => {
                 cell.forEach((voterGroup) => {
-                    smallCircle(voterGroup.shape2.x, voterGroup.shape2.y)
-                    // TODO: use .x and .y instead of shape2
+                    if (sim.election.dimensions === 1) {
+                        const { x } = voterGroup.shape1
+                        const { y } = voterGroup.shape2
+                        const ym = (y % 100) + 100 // TODO: better visual
+                        // const y = Math.random() * 100
+                        smallCircle(x, ym)
+                    } else {
+                        const { x, y } = voterGroup.shape2
+                        smallCircle(x, y)
+                        // TODO: use .x and .y instead of shape2
+                    }
                 })
             })
         })

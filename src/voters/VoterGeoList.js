@@ -64,10 +64,11 @@ export default function VoterGeoList(screen, electionGeo, sim) {
                 (rowNoise) => rowNoise.map(
                     (cellNoise) => {
                         const [xNoise, yNoise] = cellNoise
+                        const shape1 = structuredClone(vb.voterShape.shape1)
                         const shape2 = structuredClone(vb.voterShape.shape2)
+                        shape1.x += xNoise
                         shape2.x += xNoise
                         shape2.y += yNoise
-                        const { shape1 } = vb.voterShape
                         return { shape2, shape1 }
                     },
                 ).flat(),
@@ -83,10 +84,11 @@ export default function VoterGeoList(screen, electionGeo, sim) {
                 (vb) => census[iDistrict].map((g) => {
                     const [gx, gy, gf] = g
                     const [xNoise, yNoise] = sn[gx][gy]
+                    const shape1 = structuredClone(vb.voterShape.shape1)
                     const shape2 = structuredClone(vb.voterShape.shape2)
+                    shape1.x += xNoise
                     shape2.x += xNoise
                     shape2.y += yNoise
-                    const { shape1 } = vb.voterShape
                     return { shape2, shape1, weight: gf }
                 }).flat(),
             ).flat(),
@@ -100,10 +102,11 @@ export default function VoterGeoList(screen, electionGeo, sim) {
                 (cellNoise) => voterSims.map(
                     (vb) => {
                         const [xNoise, yNoise] = cellNoise
+                        const shape1 = structuredClone(vb.voterShape.shape1)
                         const shape2 = structuredClone(vb.voterShape.shape2)
+                        shape1.x += xNoise
                         shape2.x += xNoise
                         shape2.y += yNoise
-                        const { shape1 } = vb.voterShape
                         return { shape2, shape1 }
                     },
                 ).flat(),

@@ -107,9 +107,6 @@ export default function Sim(
             if (self.geo === false) {
                 return 'one'
             }
-            if (self.election.dimensions === 1) {
-                return 'base'
-            }
             return 'geoOne'
         }
         if (self.geo === true) {

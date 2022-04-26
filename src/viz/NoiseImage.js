@@ -21,6 +21,7 @@ export default function NoiseImage(nx, ny, screen) {
     const offCtx = canvas.getContext('2d')
     const imageData = offCtx.createImageData(nx, ny)
 
+    // not used anymore
     self.load = (sn) => {
         const { data } = imageData
 

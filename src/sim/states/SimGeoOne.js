@@ -1,11 +1,11 @@
 /** @module */
 
-import VoterGeoBasis from '../../voters/VoterGeoBasis.js'
 import CandidateSim from '../../candidates/CandidateSim.js'
 import CandidateSimList from '../../candidates/CandidateSimList.js'
 import VoterGeoList from '../../voters/VoterGeoList.js'
 import SimBase from './SimBase.js'
-import VizGeo2D from '../../viz/VizGeo2D.js'
+import VoterSim from '../../voters/VoterSim.js'
+import VizGeo from '../../viz/VizGeo.js'
 /**
  * Simulate one election with
  *   candidates in defined positions, and
@@ -32,10 +32,10 @@ export default function SimGeoOne(screen, menu, changes, electionGeo, sim) {
     }
 
     self.addSimVoterCircle = (voterShape) => {
-        voterGeoList.newVoterSim(new VoterGeoBasis(voterShape, self.dragm, screen))
+        voterGeoList.newVoterSim(new VoterSim(voterShape, self.dragm))
     }
 
-    const vizGeo2D = new VizGeo2D(voterGeoList, screen)
+    const vizGeo2D = new VizGeo(voterGeoList, null, screen, sim)
 
     changes.add(['districts'])
 

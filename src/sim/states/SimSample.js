@@ -32,7 +32,7 @@ export default function SimSample(screen, menu, changes, electionSample, sim) {
     const sampleVoters = new VoterSimList(sim)
 
     self.addSimVoterCircle = (voterShape) => {
-        sampleVoters.newVoterSim(new VoterSim(voterShape, self.dragm, screen))
+        sampleVoters.newVoterSim(new VoterSim(voterShape, self.dragm))
     }
 
     const vizSample2D = new VizSample2D(sampleVoters, screen)

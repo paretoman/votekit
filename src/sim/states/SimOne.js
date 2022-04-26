@@ -36,7 +36,7 @@ export default function SimOne(screen, menu, changes, electionOne, sim) {
     }
 
     self.addSimVoterCircle = (voterShape) => {
-        oneVoters.newVoterSim(new VoterSim(voterShape, self.dragm, screen))
+        oneVoters.newVoterSim(new VoterSim(voterShape, self.dragm))
     }
 
     const vizOne = new VizOne(oneVoters, candidateSimList, screen, sim)

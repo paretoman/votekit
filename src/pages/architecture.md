@@ -35,11 +35,13 @@ Create a 2D spatial model.
         * VoterCommander is the component that handles commands for each VoterShape.
     * VoterSim deals with dragging the VoterShape for a particular sim.
         * voterShape is a component of VoterSim.
-        * VoterGeoBasis is a variation on VoterSim with more drawing functions. It could be replaced with code in VizGeo2D.
     * VoterSimList manages a list of VoterSim objects for each sim. It provides a count of the VoterShapes and renders the VoterShapes. It is important because the "exists" property of a VoterShape can be toggled, so we have to filter the list of voters
         * VoterGeoList is a variation on VoterSimList with more functionality for districts. 
-    * Viz\* draws the voters because there is more context to draw them as a group than individually. 
-        * VizGeo2D draws the voters are in tracts and districts.
+    * Viz\* draws the voters because there is more context to draw them as a group than individually. There are specialized drawing functions for each viz type:
+        * GeoMaps draws the voters in tracts and districts.
+        * Voronoi1D/2D draws voronoi diagrams.
+        * Grid1D/2D draws grids of votes.
+        * VoterRender1D/2D has methods to draw the voters outside of any other context.
     * VoterTest is a copy of VoterShape, mostly. VoterTest exists outside of these other classes. It doesn't have command history and doesn't interact with other voters. It's just a test.
     * CircleGraphic makes an animated circle.
     * Data types:

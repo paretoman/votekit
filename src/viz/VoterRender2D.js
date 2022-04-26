@@ -1,23 +1,14 @@
-/** @module */
-
-import VoterSim from './VoterSim.js'
 /**
- * A basis of voters, to be moved around according to noise.
- * Also, the user can move them around.
- * This is a Subclass of VoterSim.
- * @param {VoterShape} voterShape - a voter component that VoterSim builds upon.
- * @param {DraggableManager} dragm
- * @param {screen} screen - draw to the screen
- * @constructor
+ * Graphics Component for voterShapes in 2D
+ * @param {VoterShape} voterShape
+ * @param {Screen} screen
  */
-export default function VoterGeoBasis(voterShape, dragm, screen) {
+export default function VoterRender2D(voterShape, screen) {
     const self = this
-    VoterSim.call(self, voterShape, dragm)
 
-    // Graphics component
     self.render = function () {
         const { ctx } = screen
-        const { x, y, shape2 } = self.voterShape
+        const { x, y, shape2 } = voterShape
         // circle
         ctx.beginPath()
         // ctx.fillStyle = "#eee"
@@ -27,7 +18,7 @@ export default function VoterGeoBasis(voterShape, dragm, screen) {
     }
     self.renderAt = function (newX, newY) {
         const { ctx } = screen
-        const { w } = self.voterShape.shape2
+        const { w } = voterShape.shape2
         // circle
         ctx.beginPath()
         // ctx.fillStyle = "#eee"
@@ -35,7 +26,7 @@ export default function VoterGeoBasis(voterShape, dragm, screen) {
         // ctx.fill()
         ctx.stroke()
     }
-    self.renderCenterAt = function (newX, newY) {
+    self.renderCenterAt2 = function (newX, newY) {
         const { ctx } = screen
         // circle
         ctx.beginPath()

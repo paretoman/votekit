@@ -7,7 +7,10 @@ import Voronoi2D from './Voronoi2D.js'
 
 /**
  * Show votes
+ * @param {VoterSimList} oneVoters
+ * @param {CandidateSimList} candidateSimList
  * @param {Screen} screen
+ * @param {Sim} sim
  * @constructor
  */
 export default function VizOne(oneVoters, candidateSimList, screen, sim) {
