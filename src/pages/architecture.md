@@ -90,7 +90,7 @@ Create a 2D spatial model.
 * Tooltips
     * Make a tooltip appear when an entity is clicked or a blank space is clicked.
 * Test
-    * A barebones unit test for now. Should do more.
+    * A bare bones unit test for now. Should do more.
 * Viz
     * Draws visualizations of the voters and candidates.
     * This is preferred to having the voters and candidates draw themselves because there can be interactions and overlaps.
