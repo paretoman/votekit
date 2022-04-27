@@ -17,7 +17,7 @@ export default function ElectionGeo(election) {
 
     const optionCast = { usr: 32 }
 
-    self.updateVotes = (voterGeoList, candidateSimList) => {
+    self.runElectionAndUpdateTallies = (voterGeoList, candidateSimList) => {
         const canList = candidateSimList.getCandidates()
 
         if (voterGeoList.getVoterSims().length === 0) return { error: 'no voters' }
@@ -36,7 +36,7 @@ export default function ElectionGeo(election) {
         candidateSimList.setCandidateWins(winsByDistrict)
         candidateSimList.setCandidateFractions(resultsStatewide.votes.tallyFractions)
 
-        return {
+        const geoElectionResults = {
             resultsStatewide,
             resultsByTract,
             colorByTract,
@@ -45,6 +45,7 @@ export default function ElectionGeo(election) {
             winsByDistrict,
             colorOfWinsByDistrict,
         }
+        return geoElectionResults
     }
 
     /** Show tallies over all the districts

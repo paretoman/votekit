@@ -67,7 +67,8 @@ export default function SimGeoOne(screen, menu, changes, electionGeo, sim) {
         // clear changes, reset to []
         changes.clear()
         voterGeoList.updateVoters() // can make this only trigger when voters change
-        const geoElectionResults = electionGeo.updateVotes(voterGeoList, candidateSimList)
+        // eslint-disable-next-line max-len
+        const geoElectionResults = electionGeo.runElectionAndUpdateTallies(voterGeoList, candidateSimList)
         vizGeo2D.update(geoElectionResults)
         sim.voterTest.update()
         screen.clear()

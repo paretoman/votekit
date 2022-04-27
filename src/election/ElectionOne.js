@@ -28,6 +28,11 @@ export default function ElectionOne(election) {
         return votes
     }
 
+    self.runElectionAndUpdateTallies = function (oneVoters, candidateSimList) {
+        const votes = self.updateTallies(oneVoters, candidateSimList)
+        return { votes }
+    }
+
     self.testVote = (voterTest, candidateSimList) => {
         const vote = election.testVote(voterTest, candidateSimList)
 
