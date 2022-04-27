@@ -72,7 +72,6 @@ export default function VoterTest(screen, sims, sim) {
     self.circle = circle
 
     sims.one.dragm.newCircleHandle(self, self.circle)
-    sims.geoOne.dragm.newCircleHandle(self, self.circle)
     sims.sample.dragm.newCircleHandle(self, self.circle)
 
     // Rendering

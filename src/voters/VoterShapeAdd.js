@@ -27,7 +27,6 @@ export default function VoterShapeAdd(screen, layout, changes, commander, sims, 
         const voterShape = new VoterShape(shape2, shape1, screen, voterRegistrar, commander, changes, doLoad, voterCommander, sim)
 
         sims.one.addSimVoterCircle(voterShape)
-        sims.geoOne.addSimVoterCircle(voterShape)
         sims.sample.addSimVoterCircle(voterShape)
 
         const num = voterRegistrar.num()

@@ -1,7 +1,6 @@
 /** @module */
 
 import SimSample from './states/SimSample.js'
-import SimGeoOne from './states/SimGeoOne.js'
 import VoterShapeAdd from '../voters/VoterShapeAdd.js'
 import CandidateAdd from '../candidates/CandidateAdd.js'
 import CandidateDnAdd from '../candidateDns/CandidateDnAdd.js'
@@ -48,10 +47,9 @@ export default function Sim(
     // States //
 
     const sims = {
-        one: new SimOne(screen, menu, changes, electionOne, self),
+        one: new SimOne(screen, menu, changes, electionOne, electionGeo, self),
         // eslint-disable-next-line max-len
         sample: new SimSample(screen, menu, changes, electionSample, self),
-        geoOne: new SimGeoOne(screen, menu, changes, electionGeo, self),
         base: new SimBase(screen, changes, self),
     }
     self.sims = sims
@@ -104,10 +102,7 @@ export default function Sim(
         // Also, we don't yet have implementations of all the possible
         // combinations of these state variables.
         if (self.viz === 'one') {
-            if (self.geo === false) {
-                return 'one'
-            }
-            return 'geoOne'
+            return 'one'
         }
         if (self.geo === true) {
             return 'base'
