@@ -11,7 +11,7 @@ import VoterSimList from './VoterSimList.js'
  * @param {ElectionGeo} electionGeo
  * @constructor
  */
-export default function VoterGeoList(screen, electionGeo, sim) {
+export default function VoterGeoList(screen, electionGeo, sim, changes) {
     const self = this
 
     // VoterGeoList inherits from VoterSimList
@@ -38,6 +38,16 @@ export default function VoterGeoList(screen, electionGeo, sim) {
     /** This voter basis is repeated at every census tract on the geo map.
      *  It is altered by translating it in policy space.
      *  */
+
+    // Update call from sim //
+
+    self.update = () => {
+        if (changes.checkNone()) return
+        if (changes.check(['districts', 'geo', 'dimensions'])) {
+            self.updateDistricts()
+        }
+        self.updateVoters()
+    }
 
     // Update VoterGroup Sets //
 

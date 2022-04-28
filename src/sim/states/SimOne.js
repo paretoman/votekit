@@ -6,6 +6,7 @@ import VoterGeoList from '../../voters/VoterGeoList.js'
 import SimBase from './SimBase.js'
 import VoterSim from '../../voters/VoterSim.js'
 import VizOne from '../../viz/VizOne.js'
+import VoterSimList from '../../voters/VoterSimList.js'
 
 /**
  * Simulate one election with
@@ -29,7 +30,18 @@ export default function SimOne(screen, menu, changes, electionOne, electionGeo, 
 
     SimBase.call(self, screen, changes, sim)
 
-    const voterGeoList = new VoterGeoList(screen, electionGeo, sim)
+    let voterList
+    const voterGeoList = new VoterGeoList(screen, electionGeo, sim, changes)
+    const oneVoters = new VoterSimList(sim)
+
+    function updateVoterListStrategy() {
+        voterList = (sim.geo) ? voterGeoList : oneVoters
+    }
+
+    let electionStrategy
+    function updateElectionStrategy() {
+        electionStrategy = (sim.geo) ? electionGeo : electionOne
+    }
 
     const candidateSimList = new CandidateSimList(sim)
 
@@ -39,6 +51,7 @@ export default function SimOne(screen, menu, changes, electionOne, electionGeo, 
 
     self.addSimVoterCircle = (voterShape) => {
         voterGeoList.newVoterSim(new VoterSim(voterShape, self.dragm))
+        oneVoters.newVoterSim(new VoterSim(voterShape, self.dragm))
     }
 
     const vizOne = new VizOne(voterGeoList, candidateSimList, screen, sim)
@@ -49,7 +62,9 @@ export default function SimOne(screen, menu, changes, electionOne, electionGeo, 
     self.enter = () => {
         superEnter()
         sim.candidateAdd.canButton.show()
-        voterGeoList.updateXY()
+        updateVoterListStrategy()
+        updateElectionStrategy()
+        voterList.updateXY()
         candidateSimList.updateXY()
         sim.voterTest.updateXY()
     }
@@ -66,9 +81,11 @@ export default function SimOne(screen, menu, changes, electionOne, electionGeo, 
     self.update = () => {
         if (changes.checkNone()) return
 
-        if (sim.geo) {
-            if (changes.check(['districts', 'geo', 'dimensions'])) {
-                voterGeoList.updateDistricts()
+        voterList.update()
+
+        if (sim.geo === true) {
+            if (changes.check(['viz', 'geo'])) {
+                screen.showMaps()
             }
         } else if (changes.check(['viz', 'electionMethod', 'dimensions'])) {
             // show or hide maps
@@ -80,11 +97,10 @@ export default function SimOne(screen, menu, changes, electionOne, electionGeo, 
         }
         // clear changes, reset to []
         changes.clear()
-        if (sim.geo) voterGeoList.updateVoters() // can make this only trigger when voters change
-        const electionResults = (sim.geo === false)
-            ? electionOne.runElectionAndUpdateTallies(voterGeoList, candidateSimList)
-            : electionGeo.runElectionAndUpdateTallies(voterGeoList, candidateSimList)
-        vizOne.update(electionResults)
+        voterList.updateVoters() // can make this only trigger when voters change
+        // eslint-disable-next-line max-len
+        const electionResults = electionStrategy.runElectionAndUpdateTallies(voterList, candidateSimList)
+        vizOne.update(voterList, electionResults)
         sim.voterTest.update()
         screen.clear()
         screen.clearMaps()
@@ -92,11 +108,7 @@ export default function SimOne(screen, menu, changes, electionOne, electionGeo, 
     }
 
     self.testVote = () => {
-        if (sim.geo) {
-            electionGeo.testVote(sim.voterTest, candidateSimList)
-        } else {
-            electionOne.testVote(sim.voterTest, candidateSimList)
-        }
+        electionStrategy.testVote(sim.voterTest, candidateSimList)
     }
 
     self.render = () => {
@@ -104,7 +116,7 @@ export default function SimOne(screen, menu, changes, electionOne, electionGeo, 
     }
     self.renderForeground = () => {
         // electionSample.renderForeground()
-        voterGeoList.renderForeground()
+        voterList.renderForeground()
         candidateSimList.renderForeground()
         sim.voterTest.renderForeground()
     }

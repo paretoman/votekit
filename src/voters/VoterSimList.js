@@ -21,12 +21,11 @@ export default function VoterSimList(sim) {
     self.getVoterShapes = () => list.filter((v) => v.voterShape.exists).map((v) => v.voterShape)
     self.getVoterSims = () => list.filter((v) => v.voterShape.exists)
 
-    self.update = (candidates) => {
-        list.forEach((v) => { if (v.voterShape.exists) v.update(candidates) })
-    }
+    self.update = () => { } // strategy pattern. There is a similar function for VoterGeoList
     self.updateXY = () => {
         list.forEach((v) => v.voterShape.updateXY())
     }
+    self.updateVoters = () => { } // strategy pattern. There is a similar function for VoterGeoList
 
     self.render = () => {
         list.forEach((v) => { if (v.voterShape.exists) v.render() })

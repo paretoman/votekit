@@ -10,74 +10,64 @@ import VoterRender2D from './VoterRender2D.js'
 
 /**
  * Show votes
- * @param {VoterSimList} oneVoters
+ * @param {VoterGeoList} voterGeoList
  * @param {CandidateSimList} candidateSimList
  * @param {Screen} screen
  * @param {Sim} sim
  * @constructor
  */
-export default function VizOne(oneVoters, candidateSimList, screen, sim) {
+export default function VizOne(voterGeoList, candidateSimList, screen, sim) {
     const self = this
 
-    const geoMaps = new GeoMaps(oneVoters, screen, sim)
-    let geoVoterRenderers
-    let voronoiGroups
-    let grids
+    const geoMaps = new GeoMaps(voterGeoList, screen, sim)
+    let renderers
 
-    self.update = function (electionResults) {
+    self.update = function (voterList, electionResults) {
         if (sim.geo === true) {
             geoMaps.update(electionResults)
+        }
 
-            const voterShapes = oneVoters.getVoterShapes()
-            geoVoterRenderers = voterShapes.map(
-                (voterShape) => ((sim.election.dimensions === 1)
-                    ? new VoterRender1D(voterShape, screen)
-                    : new VoterRender2D(voterShape, screen)),
+        // renderer factory //
+
+        const { dimensions } = sim.election
+        const VoterRenderer = (dimensions === 1) ? VoterRender1D : VoterRender2D
+        const Voronoi = (dimensions === 1) ? Voronoi1D : Voronoi2D
+        const Grid = (dimensions === 1) ? Grid1D : Grid2D
+
+        const voterShapes = voterList.getVoterShapes()
+        if (sim.geo === true) {
+            renderers = voterShapes.map(
+                (voterShape) => new VoterRenderer(voterShape, screen),
             )
             return
         }
-        const voterShapes = oneVoters.getVoterShapes()
         if (sim.election.countVotes.caster === 'castPlurality') {
-            voronoiGroups = voterShapes.map(
-                (voterShape) => ((sim.election.dimensions === 1)
-                    ? new Voronoi1D(voterShape, candidateSimList, screen)
-                    : new Voronoi2D(voterShape, candidateSimList, screen)),
+            renderers = voterShapes.map(
+                (voterShape) => new Voronoi(voterShape, candidateSimList, screen),
             )
         } else { // "score"
             const { votes } = electionResults
-            if (votes.error) return
-            grids = []
-            for (let i = 0; i < votes.gridData.length; i++) {
-                const vo = votes.gridData[i]
+            if (votes.error) renderers = []
 
-                const grid = (sim.election.dimensions === 1)
-                    ? new Grid1D(vo, candidateSimList, screen)
-                    : new Grid2D(vo, candidateSimList, screen)
-                grids.push(grid)
-            }
+            renderers = votes.gridData.map(
+                (vo) => new Grid(vo, candidateSimList, screen),
+            )
         }
     }
 
     self.render = function () {
         if (sim.geo === true) {
             geoMaps.render()
+        }
 
-            geoVoterRenderers.forEach(
-                (geoVoterRenderer) => geoVoterRenderer.render(),
-            )
-            return
-        }
-        if (sim.election.countVotes.caster === 'castPlurality') {
-            voronoiGroups.forEach(
-                (voronoiGroup) => voronoiGroup.render(),
-            )
-        } else { // "score"
-            grids.forEach(
-                (grid) => grid.renderBackground(),
-            )
-            grids.forEach(
-                (grid) => grid.render(),
+        if (sim.geo === false && sim.election.countVotes.caster === 'castScore' && sim.election.dimensions === 1) {
+            renderers.forEach(
+                (renderer) => renderer.renderBackground(),
             )
         }
+
+        renderers.forEach(
+            (renderer) => renderer.render(),
+        )
     }
 }

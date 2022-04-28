@@ -97,8 +97,6 @@ export default function Grid2D(gridData, candidateSimList, screen) {
         offCtx.putImageData(imageData, 0, 0)
     }
 
-    self.renderBackground = function () {}
-
     self.render = function () {
         const { ctx, mctx } = screen
 
