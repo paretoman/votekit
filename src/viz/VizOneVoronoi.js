@@ -11,12 +11,16 @@ import Voronoi2D from './Voronoi2D.js'
  * @param {Sim} sim
  * @constructor
  */
-export default function VizOneVoronoi(voterGeoList, candidateSimList, screen, sim) {
+export default function VizOneVoronoi(voterGeoList, candidateSimList, screen, sim, changes) {
     const self = this
 
     let renderers
 
     self.update = function (voterList) {
+        if (changes.check(['viz', 'electionMethod', 'dimensions'])) {
+            screen.hideMaps()
+        }
+
         // renderer factory //
 
         const { dimensions } = sim.election

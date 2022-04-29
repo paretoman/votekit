@@ -12,7 +12,7 @@ import VoterRender2D from './VoterRender2D.js'
  * @param {Sim} sim
  * @constructor
  */
-export default function VizGeo(voterGeoList, candidateSimList, screen, sim) {
+export default function VizGeo(voterGeoList, candidateSimList, screen, sim, changes) {
     const self = this
 
     const geoMaps = new GeoMaps(voterGeoList, screen, sim)
@@ -20,6 +20,10 @@ export default function VizGeo(voterGeoList, candidateSimList, screen, sim) {
 
     self.update = function (voterList, electionResults) {
         geoMaps.update(electionResults)
+
+        if (changes.check(['viz', 'geo'])) {
+            screen.showMaps()
+        }
 
         // renderer factory //
 

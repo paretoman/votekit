@@ -46,7 +46,7 @@ export default function VoterGeoList(screen, electionGeo, sim, changes) {
         if (changes.check(['districts', 'geo', 'dimensions'])) {
             self.updateDistricts()
         }
-        self.updateVoters()
+        self.updateVoters() // todo: maybe make this only trigger when voters change
     }
 
     // Update VoterGroup Sets //

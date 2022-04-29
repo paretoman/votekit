@@ -32,26 +32,12 @@ export default function SimOne(screen, menu, changes, electionOne, electionGeo, 
 
     SimBase.call(self, screen, changes, sim)
 
-    let voterList
+    // Entities //
+
     const voterGeoList = new VoterGeoList(screen, electionGeo, sim, changes)
     const oneVoters = new VoterSimList(sim)
-    function updateVoterListStrategy() {
-        voterList = (sim.geo) ? voterGeoList : oneVoters
-    }
 
     const candidateSimList = new CandidateSimList(sim)
-
-    let electionStrategy
-    function updateElectionStrategy() {
-        electionStrategy = (sim.geo) ? electionGeo : electionOne
-    }
-
-    let vizOne
-    function updateVizStrategy() {
-        const VizOneOnly = (sim.election.countVotes.caster === 'castPlurality') ? VizOneVoronoi : VizOneGrid
-        const VizOne = (sim.geo === true) ? VizGeo : VizOneOnly
-        vizOne = new VizOne(voterGeoList, candidateSimList, screen, sim)
-    }
 
     self.addSimCandidate = (candidate) => {
         candidateSimList.newCandidate(new CandidateSim(candidate, self.dragm))
@@ -63,6 +49,27 @@ export default function SimOne(screen, menu, changes, electionOne, electionGeo, 
     }
 
     changes.add(['districts'])
+
+    // Strategies //
+
+    let voterList
+    function updateVoterListStrategy() {
+        voterList = (sim.geo) ? voterGeoList : oneVoters
+    }
+
+    let electionStrategy
+    function updateElectionStrategy() {
+        electionStrategy = (sim.geo) ? electionGeo : electionOne
+    }
+
+    let vizOne
+    function updateVizStrategy() {
+        const VizOneOnly = (sim.election.countVotes.caster === 'castPlurality') ? VizOneVoronoi : VizOneGrid
+        const VizOne = (sim.geo === true) ? VizGeo : VizOneOnly
+        vizOne = new VizOne(voterGeoList, candidateSimList, screen, sim, changes)
+    }
+
+    // Main State Machine Functions //
 
     const superEnter = self.enter
     self.enter = () => {
@@ -89,26 +96,12 @@ export default function SimOne(screen, menu, changes, electionOne, electionGeo, 
         if (changes.checkNone()) return
 
         voterList.update()
-
-        if (sim.geo === true) {
-            if (changes.check(['viz', 'geo'])) {
-                screen.showMaps()
-            }
-        } else if (changes.check(['viz', 'electionMethod', 'dimensions'])) {
-            // show or hide maps
-            if (sim.election.dimensions === 2 && sim.election.countVotes.caster === 'castScore') {
-                screen.showMaps()
-            } else {
-                screen.hideMaps()
-            }
-        }
-        // clear changes, reset to []
-        changes.clear()
-        voterList.updateVoters() // can make this only trigger when voters change
-        // eslint-disable-next-line max-len
-        const electionResults = electionStrategy.runElectionAndUpdateTallies(voterList, candidateSimList)
+        const electionResults = electionStrategy
+            .runElectionAndUpdateTallies(voterList, candidateSimList)
         vizOne.update(voterList, electionResults)
         sim.voterTest.update()
+        changes.clear()
+
         screen.clear()
         screen.clearMaps()
         self.render()
@@ -122,7 +115,6 @@ export default function SimOne(screen, menu, changes, electionOne, electionGeo, 
         vizOne.render()
     }
     self.renderForeground = () => {
-        // electionSample.renderForeground()
         voterList.renderForeground()
         candidateSimList.renderForeground()
         sim.voterTest.renderForeground()

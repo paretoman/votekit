@@ -37,7 +37,12 @@ Create a 2D spatial model.
         * voterShape is a component of VoterSim.
     * VoterSimList manages a list of VoterSim objects for each sim. It provides a count of the VoterShapes and renders the VoterShapes. It is important because the "exists" property of a VoterShape can be toggled, so we have to filter the list of voters
         * VoterGeoList is a variation on VoterSimList with more functionality for districts. 
-    * Viz\* draws the voters because there is more context to draw them as a group than individually. There are specialized drawing functions for each viz type:
+    * Viz\* draws the voters because there is more context to draw them as a group than individually. 
+        * VizOneVoronoi - for votes cast like plurality.
+        * VizOneGrid - for votes cast like score.
+        * VizGeo - for votes cast in districts.
+        * All implement an abstract class of Viz, where there is an update and a render function.
+    * Viz\* calls specialized drawing functions for each viz type:
         * GeoMaps draws the voters in tracts and districts.
         * Voronoi1D/2D draws voronoi diagrams.
         * Grid1D/2D draws grids of votes.
