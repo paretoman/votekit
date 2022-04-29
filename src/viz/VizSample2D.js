@@ -31,16 +31,6 @@ export default function VizSample2D(sampleVoters, screen, changes) {
         if (pointsChanged) {
             self.updatePoints(newPoints, points)
         }
-
-        // if (changes.checkNone()) {
-        //     const { pointsChanged, newPoints, points } = addResult
-
-        //     if (pointsChanged) {
-        //         self.updatePoints(newPoints, points)
-        //     }
-        // } else {
-        //     self.start()
-        // }
     }
 
     self.updatePoints = function (newPoints, points) {

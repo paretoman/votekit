@@ -26,14 +26,6 @@ export default function ElectionSample(election) {
 
         const addResult = self.addSim(sampleVoters, candidateSimList)
         return addResult
-
-        // if (changes.checkNone()) {
-        //     const addResult = self.addSim(sampleVoters, candidateSimList)
-        //     return addResult
-        // }
-
-        // self.startSim()
-        // return { pointsChanged: true }
     }
 
     self.startSim = function () {
