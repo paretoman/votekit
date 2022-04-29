@@ -5,8 +5,10 @@ import CandidateSimList from '../../candidates/CandidateSimList.js'
 import VoterGeoList from '../../voters/VoterGeoList.js'
 import SimBase from './SimBase.js'
 import VoterSim from '../../voters/VoterSim.js'
-import VizOne from '../../viz/VizOne.js'
 import VoterSimList from '../../voters/VoterSimList.js'
+import VizGeo from '../../viz/VizGeo.js'
+import VizOneVoronoi from '../../viz/VizOneVoronoi.js'
+import VizOneGrid from '../../viz/VizOneGrid.js'
 
 /**
  * Simulate one election with
@@ -33,17 +35,23 @@ export default function SimOne(screen, menu, changes, electionOne, electionGeo, 
     let voterList
     const voterGeoList = new VoterGeoList(screen, electionGeo, sim, changes)
     const oneVoters = new VoterSimList(sim)
-
     function updateVoterListStrategy() {
         voterList = (sim.geo) ? voterGeoList : oneVoters
     }
+
+    const candidateSimList = new CandidateSimList(sim)
 
     let electionStrategy
     function updateElectionStrategy() {
         electionStrategy = (sim.geo) ? electionGeo : electionOne
     }
 
-    const candidateSimList = new CandidateSimList(sim)
+    let vizOne
+    function updateVizStrategy() {
+        const VizOneOnly = (sim.election.countVotes.caster === 'castPlurality') ? VizOneVoronoi : VizOneGrid
+        const VizOne = (sim.geo === true) ? VizGeo : VizOneOnly
+        vizOne = new VizOne(voterGeoList, candidateSimList, screen, sim)
+    }
 
     self.addSimCandidate = (candidate) => {
         candidateSimList.newCandidate(new CandidateSim(candidate, self.dragm))
@@ -54,8 +62,6 @@ export default function SimOne(screen, menu, changes, electionOne, electionGeo, 
         oneVoters.newVoterSim(new VoterSim(voterShape, self.dragm))
     }
 
-    const vizOne = new VizOne(voterGeoList, candidateSimList, screen, sim)
-
     changes.add(['districts'])
 
     const superEnter = self.enter
@@ -64,6 +70,7 @@ export default function SimOne(screen, menu, changes, electionOne, electionGeo, 
         sim.candidateAdd.canButton.show()
         updateVoterListStrategy()
         updateElectionStrategy()
+        updateVizStrategy()
         voterList.updateXY()
         candidateSimList.updateXY()
         sim.voterTest.updateXY()
