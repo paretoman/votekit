@@ -8,10 +8,12 @@ import CandidateDistributionSampler from '../election/CandidateDistributionSampl
  * It also checks if that member exists. Alternatively, it was deleted.
  * @constructor
  */
-export default function CandidateDnSimList(sim) {
+export default function CandidateDnSimList(sim, changes) {
     const self = this
 
     const simCanDns = []
+
+    // Data Setters and Getters //
 
     self.newCandidate = function (simCanDn) {
         simCanDns.push(simCanDn)
@@ -30,6 +32,14 @@ export default function CandidateDnSimList(sim) {
     }
     self.getCandidateDistributionsAll = () => simCanDns.map((simCanDn) => simCanDn.canDn)
 
+    // Update //
+
+    self.update = () => {
+        if (changes.checkNone()) return
+
+        self.startSampler()
+    }
+
     self.startSampler = () => {
         const canDnsList = self.getCandidateDistributions()
         if (canDnsList.length === 0) return
@@ -38,6 +48,9 @@ export default function CandidateDnSimList(sim) {
     self.updateXY = () => {
         simCanDns.forEach((simCanDn) => simCanDn.canDn.updateXY())
     }
+
+    // Render //
+
     self.render = () => {
         const canDnsList = self.getCandidateDistributions()
         canDnsList.forEach((canDn) => canDn.render())

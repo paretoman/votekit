@@ -19,6 +19,23 @@ export default function ElectionSample(election) {
 
     let points = []
 
+    self.update = function (sampleVoters, candidateSimList, changes) {
+        if (changes.checkNone() === false) {
+            self.startSim()
+        }
+
+        const addResult = self.addSim(sampleVoters, candidateSimList)
+        return addResult
+
+        // if (changes.checkNone()) {
+        //     const addResult = self.addSim(sampleVoters, candidateSimList)
+        //     return addResult
+        // }
+
+        // self.startSim()
+        // return { noChange: false }
+    }
+
     self.startSim = function () {
         points = []
     }

@@ -23,7 +23,7 @@ export default function SimSample(screen, menu, changes, electionSample, sim) {
 
     SimBase.call(self, screen, changes, sim)
 
-    const candidateSimList = new CandidateDnSimList(sim)
+    const candidateSimList = new CandidateDnSimList(sim, changes)
 
     self.addSimCandidateDistribution = (canDn) => {
         candidateSimList.newCandidate(new CandidateDnSim(canDn, self.dragm))
@@ -35,7 +35,7 @@ export default function SimSample(screen, menu, changes, electionSample, sim) {
         sampleVoters.newVoterSim(new VoterSim(voterShape, self.dragm))
     }
 
-    const vizSample2D = new VizSample2D(sampleVoters, screen)
+    const vizSample2D = new VizSample2D(sampleVoters, screen, changes)
 
     const superEnter = self.enter
     self.enter = () => {
@@ -50,22 +50,17 @@ export default function SimSample(screen, menu, changes, electionSample, sim) {
     }
 
     self.update = () => {
-        if (changes.checkNone()) {
-            const addResult = electionSample.addSim(sampleVoters, candidateSimList)
-            const { noChange, newPoints, points } = addResult
-            // changes.clear()
-            if (!noChange) {
-                vizSample2D.update(newPoints, points)
-                // changed, so re-render
-                screen.clear()
-                self.render()
-            }
-        } else {
-            // clear changes, reset to []
-            changes.clear()
-            candidateSimList.startSampler()
-            vizSample2D.start()
-            electionSample.startSim()
+        // Update players. Run an election. Get result. Visualize result.
+        // The election handles any changes.
+        // The electionResult communicates how to visualize the election.
+
+        candidateSimList.update()
+        const addResult = electionSample.update(sampleVoters, candidateSimList, changes)
+        vizSample2D.update(addResult)
+        changes.clear()
+
+        const { noChange } = addResult
+        if (!noChange) {
             screen.clear()
             self.render()
         }

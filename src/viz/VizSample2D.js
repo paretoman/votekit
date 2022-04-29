@@ -6,7 +6,7 @@
  * @param {screen} screen - draw to the screen
  * @constructor
  */
-export default function VizSample2D(sampleVoters, screen) {
+export default function VizSample2D(sampleVoters, screen, changes) {
     const self = this
 
     // Candidates //
@@ -21,7 +21,29 @@ export default function VizSample2D(sampleVoters, screen) {
         clearBuffer()
     }
 
-    self.update = function (newPoints, points) {
+    self.update = function (addResult) {
+        if (changes.checkNone() === false) {
+            self.start()
+        }
+
+        const { noChange, newPoints, points } = addResult
+
+        if (!noChange) {
+            self.updatePoints(newPoints, points)
+        }
+
+        // if (changes.checkNone()) {
+        //     const { noChange, newPoints, points } = addResult
+
+        //     if (!noChange) {
+        //         self.updatePoints(newPoints, points)
+        //     }
+        // } else {
+        //     self.start()
+        // }
+    }
+
+    self.updatePoints = function (newPoints, points) {
         self.points = points
         renderToBuffer(newPoints)
     }
