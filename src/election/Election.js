@@ -18,7 +18,7 @@ export default function Election(menu) {
 
     // Dimensions //
 
-    /** Get the correct geometry, depending on dimension. */
+    /** Get the correct geometry, depending on number of dimensions. */
     const mapVoters = (voterShapes) => {
         if (self.dimensions === 1) {
             return voterShapes.map((vg) => (vg.shape1))
@@ -26,7 +26,7 @@ export default function Election(menu) {
         return voterShapes.map((vg) => (vg.shape2))
     }
 
-    /** Get the correct geometry, depending on dimension. */
+    /** Get the correct geometry, depending on number of dimensions. */
     const mapCans = (canList) => {
         if (self.dimensions === 1) {
             return canList.map((can) => (can.shape1))
