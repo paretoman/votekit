@@ -33,7 +33,7 @@ export default function ElectionSample(election) {
         // }
 
         // self.startSim()
-        // return { noChange: false }
+        // return { pointsChanged: true }
     }
 
     self.startSim = function () {
@@ -43,10 +43,12 @@ export default function ElectionSample(election) {
     self.addSim = function (sampleVoters, sampleCandidates) {
         // add more points
 
-        if (sampleVoters.getVoterShapes().length === 0) return { noChange: 1 }
-        if (sampleCandidates.getCandidateDistributions().length === 0) return { noChange: 1 }
+        if (sampleVoters.getVoterShapes().length === 0) return { pointsChanged: false }
+        if (sampleCandidates.getCandidateDistributions().length === 0) {
+            return { pointsChanged: false }
+        }
 
-        if (points.length > maxPoints) return { noChange: 1 }
+        if (points.length > maxPoints) return { pointsChanged: false }
         // this limit right now is about graphics rendering.
         // todo: render to a buffer
 
@@ -115,6 +117,6 @@ export default function ElectionSample(election) {
                 }
             }
         }
-        return { noChange: 0, newPoints, points }
+        return { pointsChanged: true, newPoints, points }
     }
 }

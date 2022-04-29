@@ -59,8 +59,8 @@ export default function SimSample(screen, menu, changes, electionSample, sim) {
         vizSample2D.update(addResult)
         changes.clear()
 
-        const { noChange } = addResult
-        if (!noChange) {
+        const { pointsChanged } = addResult
+        if (pointsChanged) {
             screen.clear()
             self.render()
         }
