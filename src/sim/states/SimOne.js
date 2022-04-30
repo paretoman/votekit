@@ -64,8 +64,8 @@ export default function SimOne(screen, menu, changes, electionOne, electionGeo, 
 
     let vizOne
     function updateVizStrategy() {
-        const VizOneOnly = (sim.election.countVotes.caster === 'castPlurality') ? VizOneVoronoi : VizOneGrid
-        const VizOne = (sim.geo === true) ? VizGeo : VizOneOnly
+        const VizNoGeo = (sim.election.countVotes.caster === 'castPlurality') ? VizOneVoronoi : VizOneGrid
+        const VizOne = (sim.geo === true) ? VizGeo : VizNoGeo
         vizOne = new VizOne(voterGeoList, candidateSimList, screen, sim, changes)
     }
 

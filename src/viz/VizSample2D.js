@@ -17,10 +17,6 @@ export default function VizSample2D(sampleVoters, screen, changes) {
     canvas2.height = screen.canvas.height
     const context2 = canvas2.getContext('2d')
 
-    self.start = function () {
-        clearBuffer()
-    }
-
     self.update = function (addResult) {
         if (changes.checkNone() === false) {
             self.start()
@@ -31,6 +27,10 @@ export default function VizSample2D(sampleVoters, screen, changes) {
         if (pointsChanged) {
             self.updatePoints(newPoints, points)
         }
+    }
+
+    self.start = function () {
+        clearBuffer()
     }
 
     self.updatePoints = function (newPoints, points) {
