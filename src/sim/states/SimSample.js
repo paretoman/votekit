@@ -6,6 +6,8 @@ import VizSample2D from '../../viz/VizSample2D.js'
 import VoterSimList from '../../voters/VoterSimList.js'
 import SimBase from './SimBase.js'
 import VoterSim from '../../voters/VoterSim.js'
+import VoterGeoList from '../../voters/VoterGeoList.js'
+import VizSampleGeo from '../../viz/VizSampleGeo.js'
 
 /**
  * Simulate many sample elections with
@@ -15,33 +17,60 @@ import VoterSim from '../../voters/VoterSim.js'
  * @param {Menu} menu
  * @param {Changes} changes
  * @param {ElectionSample} electionSample
+ * @param {ElectionSampleGeo} electionSampleGeo
  * @param {Sim} sim
  * @constructor
  */
-export default function SimSample(screen, menu, changes, electionSample, sim) {
+export default function SimSample(screen, menu, changes, electionSample, electionSampleGeo, sim) {
     const self = this
 
     SimBase.call(self, screen, changes, sim)
 
+    // Entities //
+
     const candidateSimList = new CandidateDnSimList(sim, changes)
+    const voterSimList = new VoterSimList(sim)
+    const voterGeoList = new VoterGeoList(screen, sim, changes)
 
     self.addSimCandidateDistribution = (canDn) => {
         candidateSimList.newCandidate(new CandidateDnSim(canDn, self.dragm))
     }
 
-    const sampleVoters = new VoterSimList(sim)
-
     self.addSimVoterCircle = (voterShape) => {
-        sampleVoters.newVoterSim(new VoterSim(voterShape, self.dragm))
+        voterGeoList.newVoterSim(new VoterSim(voterShape, self.dragm))
+        voterSimList.newVoterSim(new VoterSim(voterShape, self.dragm))
     }
 
-    const vizSample2D = new VizSample2D(sampleVoters, screen, changes)
+    changes.add(['districts'])
+
+    // Strategies //
+
+    let voterList
+    function updateVoterListStrategy() {
+        voterList = (sim.geo) ? voterGeoList : voterSimList
+    }
+
+    let electionStrategy
+    function updateElectionStrategy() {
+        electionStrategy = (sim.geo) ? electionSampleGeo : electionSample
+    }
+
+    let vizSample
+    function updateVizStrategy() {
+        const VizSample = (sim.geo === true) ? VizSampleGeo : VizSample2D
+        vizSample = new VizSample(voterList, screen, changes, sim)
+    }
+
+    // Main State Machine Functions //
 
     const superEnter = self.enter
     self.enter = () => {
         superEnter()
         sim.candidateDnAdd.canDnButton.show()
-        sampleVoters.updateXY()
+        updateVoterListStrategy()
+        updateElectionStrategy()
+        updateVizStrategy()
+        voterList.updateXY()
         candidateSimList.updateXY()
     }
 
@@ -54,9 +83,10 @@ export default function SimSample(screen, menu, changes, electionSample, sim) {
         // The election handles any changes.
         // The electionResult communicates how to visualize the election.
 
+        voterList.update()
         candidateSimList.update()
-        const addResult = electionSample.update(sampleVoters, candidateSimList, changes)
-        vizSample2D.update(addResult)
+        const addResult = electionStrategy.update(voterList, candidateSimList, changes)
+        vizSample.update(addResult)
         changes.clear()
 
         const { pointsChanged } = addResult
@@ -67,11 +97,11 @@ export default function SimSample(screen, menu, changes, electionSample, sim) {
     }
 
     self.render = () => {
-        vizSample2D.render()
+        vizSample.render()
         candidateSimList.render()
     }
     self.renderForeground = () => {
-        sampleVoters.renderForeground()
+        voterList.renderForeground()
         candidateSimList.renderForeground()
     }
 }

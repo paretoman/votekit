@@ -19,7 +19,7 @@ export default function VoterGeoList(screen, sim, changes) {
     VoterSimList.call(self, sim)
 
     /** Number of districts */
-    const nd = 20
+    self.nd = 20
 
     /** Number of census tracts in x and y */
     self.nx = 20
@@ -54,7 +54,7 @@ export default function VoterGeoList(screen, sim, changes) {
 
     /** Make districts and update voter sets */
     self.updateDistricts = () => {
-        self.districtMaker.make(self.nx, self.ny, nd)
+        self.districtMaker.make(self.nx, self.ny, self.nd)
     }
     self.updateVoters = () => {
         voterSims = self.getVoterSims()
@@ -88,7 +88,7 @@ export default function VoterGeoList(screen, sim, changes) {
     self.updateVotersByDistrict = () => {
         const { census } = self.districtMaker
         const { sn } = self.geoNoise
-        self.voterGroupsByDistrict = range(nd).map(
+        self.voterGroupsByDistrict = range(self.nd).map(
             (iDistrict) => voterSims.map(
                 (vb) => census[iDistrict].map((g) => {
                     const [gx, gy, gf] = g

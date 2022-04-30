@@ -20,18 +20,21 @@ export default function ElectionGeo(election) {
     self.runElectionAndUpdateTallies = (voterGeoList, candidateSimList) => {
         const canList = candidateSimList.getCandidates()
 
-        if (voterGeoList.getVoterSims().length === 0) return { error: 'no voters' }
-        if (canList.length === 0) return { error: 'no candidates' }
+        const geoMethodResults = self.runElection(voterGeoList, canList)
 
-        const resultsStatewide = runStatewideElection(voterGeoList, canList)
+        const {
+            resultsStatewide,
+            resultsByTract,
+            resultsByDistrict,
+            winsByDistrict,
+            error,
+        } = geoMethodResults
 
-        const resultsByTract = runTractElections(voterGeoList, canList)
+        if (error !== undefined) return { error }
+
         const colorByTract = colorTracts(resultsByTract, canList)
-
-        const resultsByDistrict = runDistrictElections(voterGeoList, canList)
         const colorOfWinsByDistrict = colorDistrictWins(resultsByDistrict, canList)
         const colorOfVoteByDistrict = colorDistrictVote(resultsByDistrict, canList)
-        const winsByDistrict = updateWins(resultsByDistrict, canList)
 
         candidateSimList.setCandidateWins(winsByDistrict)
         candidateSimList.setCandidateFractions(resultsStatewide.votes.tallyFractions)
@@ -45,7 +48,28 @@ export default function ElectionGeo(election) {
             winsByDistrict,
             colorOfWinsByDistrict,
         }
+
         return geoElectionResults
+    }
+
+    self.runElection = (voterGeoList, canList) => {
+        if (voterGeoList.getVoterSims().length === 0) return { error: 'no voters' }
+        if (canList.length === 0) return { error: 'no candidates' }
+
+        const resultsStatewide = runStatewideElection(voterGeoList, canList)
+
+        const resultsByTract = runTractElections(voterGeoList, canList)
+
+        const resultsByDistrict = runDistrictElections(voterGeoList, canList)
+        const winsByDistrict = updateWins(resultsByDistrict, canList)
+
+        const geoMethodResults = {
+            resultsStatewide,
+            resultsByTract,
+            resultsByDistrict,
+            winsByDistrict,
+        }
+        return geoMethodResults
     }
 
     /** Show tallies over all the districts

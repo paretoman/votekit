@@ -31,7 +31,7 @@ export default function GeoMaps(voterGeoList, screen, sim) {
     // screen.setMapsHeight((1 / 3) * screen.height)
     /** Render all maps and  */
     self.render = () => {
-        renderPolicyNoise()
+        self.renderPolicyNoise()
         self.renderTractVotes()
         self.renderDistrictWins()
         self.renderDistrictVotes()
@@ -53,7 +53,7 @@ export default function GeoMaps(voterGeoList, screen, sim) {
     }
 
     /** Draw dots to represent the political diversity across census tracts. */
-    function renderPolicyNoise() {
+    self.renderPolicyNoise = () => {
         voterGeoList.voterGroupsByTract.forEach((row) => {
             row.forEach((cell) => {
                 cell.forEach((voterGroup) => {
