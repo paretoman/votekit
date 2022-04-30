@@ -8,10 +8,9 @@ import VoterSimList from './VoterSimList.js'
 /**
  * VoterGeoList inherits from VoterSimList.
  * @param {Screen} screen
- * @param {ElectionGeo} electionGeo
  * @constructor
  */
-export default function VoterGeoList(screen, electionGeo, sim, changes) {
+export default function VoterGeoList(screen, sim, changes) {
     const self = this
 
     // VoterGeoList inherits from VoterSimList
@@ -43,7 +42,7 @@ export default function VoterGeoList(screen, electionGeo, sim, changes) {
 
     self.update = () => {
         if (changes.checkNone()) return
-        if (changes.check(['districts', 'geo', 'dimensions'])) {
+        if (changes.check(['districts', 'geo', 'viz', 'dimensions'])) {
             self.updateDistricts()
         }
         self.updateVoters() // todo: maybe make this only trigger when voters change

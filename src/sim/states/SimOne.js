@@ -34,10 +34,9 @@ export default function SimOne(screen, menu, changes, electionOne, electionGeo, 
 
     // Entities //
 
-    const voterGeoList = new VoterGeoList(screen, electionGeo, sim, changes)
-    const oneVoters = new VoterSimList(sim)
-
     const candidateSimList = new CandidateSimList(sim)
+    const voterSimList = new VoterSimList(sim)
+    const voterGeoList = new VoterGeoList(screen, sim, changes)
 
     self.addSimCandidate = (candidate) => {
         candidateSimList.newCandidate(new CandidateSim(candidate, self.dragm))
@@ -45,7 +44,7 @@ export default function SimOne(screen, menu, changes, electionOne, electionGeo, 
 
     self.addSimVoterCircle = (voterShape) => {
         voterGeoList.newVoterSim(new VoterSim(voterShape, self.dragm))
-        oneVoters.newVoterSim(new VoterSim(voterShape, self.dragm))
+        voterSimList.newVoterSim(new VoterSim(voterShape, self.dragm))
     }
 
     changes.add(['districts'])
@@ -54,7 +53,7 @@ export default function SimOne(screen, menu, changes, electionOne, electionGeo, 
 
     let voterList
     function updateVoterListStrategy() {
-        voterList = (sim.geo) ? voterGeoList : oneVoters
+        voterList = (sim.geo) ? voterGeoList : voterSimList
     }
 
     let electionStrategy
@@ -66,7 +65,7 @@ export default function SimOne(screen, menu, changes, electionOne, electionGeo, 
     function updateVizStrategy() {
         const VizNoGeo = (sim.election.countVotes.caster === 'castPlurality') ? VizOneVoronoi : VizOneGrid
         const VizOne = (sim.geo === true) ? VizGeo : VizNoGeo
-        vizOne = new VizOne(voterGeoList, candidateSimList, screen, sim, changes)
+        vizOne = new VizOne(voterList, candidateSimList, screen, sim, changes)
     }
 
     // Main State Machine Functions //
