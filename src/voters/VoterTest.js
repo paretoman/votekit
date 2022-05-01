@@ -1,6 +1,7 @@
 import CircleGraphic from './CircleGraphic.js'
 import hideOnClickOutside from '../tooltips/hideOnClickOutside.js'
 import tooltipForTestVoter from '../tooltips/tooltipForTestVoter.js'
+import colorBlend from '../election/colorBlend.js'
 
 export default function VoterTest(screen, sims, sim) {
     const self = this
@@ -39,7 +40,7 @@ export default function VoterTest(screen, sims, sim) {
         } else {
             self.setAction.shape2p(p)
         }
-        self.update()
+        sim.testVote()
     }
     /** Do this when entering a state because x and y change. */
     self.updateXY = () => {
@@ -78,12 +79,16 @@ export default function VoterTest(screen, sims, sim) {
 
     let tooltip = {}
 
-    self.update = () => {
+    self.update = (vote, candidateSimList) => {
         // who would this test point vote for?
-        const vote = sim.testVote()
         if (vote === undefined) return null
 
-        self.color = vote.color
+        const canList = candidateSimList.getCandidates()
+        const colorSet = canList.map((can) => can.color)
+
+        const { tallyFractions } = vote
+        self.color = colorBlend(tallyFractions, colorSet)
+        vote.color = self.color
 
         if (tooltip.box) {
             tooltip.update(vote)
@@ -93,7 +98,9 @@ export default function VoterTest(screen, sims, sim) {
     }
 
     self.click = () => {
-        const vote = self.update()
+        const vote = sim.testVote()
+        if (vote === null) return
+
         if (tooltip.box) tooltip.box.remove()
         tooltip = tooltipForTestVoter(self, screen, vote)
     }

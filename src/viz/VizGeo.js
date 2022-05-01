@@ -16,11 +16,16 @@ export default function VizGeo(voterGeoList, candidateSimList, screen, sim, chan
     const self = this
 
     const geoMaps = new GeoMaps(voterGeoList, candidateSimList, screen, sim)
-    let renderers
+    let renderers = []
+    let flagNoRender = false
 
     self.update = function (voterList, geoElectionResults) {
         const { error } = geoElectionResults
-        if (error !== undefined) return
+        if (error !== undefined) {
+            flagNoRender = true
+            return
+        }
+        flagNoRender = false
 
         geoMaps.update(geoElectionResults)
 
@@ -44,6 +49,8 @@ export default function VizGeo(voterGeoList, candidateSimList, screen, sim, chan
     }
 
     self.render = function () {
+        if (flagNoRender) return
+
         geoMaps.render()
 
         renderers.forEach(

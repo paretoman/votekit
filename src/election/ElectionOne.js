@@ -1,7 +1,5 @@
 /** @module */
 
-import colorBlend from './colorBlend.js'
-
 /**
  * A simple election.
  * Voters are in shaped distributions.
@@ -15,7 +13,9 @@ export default function ElectionOne(election) {
 
     const optionCast = { usr: 4 }
 
-    self.runElectionSim = function (oneVoters, candidateSimList) {
+    self.runElectionSim = function (oneVoters, candidateSimList, changes) {
+        if (changes.checkNone()) return { error: 'No Changes' }
+
         // Voters cast votes for candidates.
         // There is also a separate graphical representation in Voronoi2D.js
         const canList = candidateSimList.getCandidates()
@@ -31,14 +31,6 @@ export default function ElectionOne(election) {
 
     self.testVote = (voterTest, candidateSimList) => {
         const vote = election.testVote(voterTest, candidateSimList)
-
-        const canList = candidateSimList.getCandidates()
-        const colorSet = canList.map((can) => can.color)
-
-        const { tallyFractions } = vote
-        const color = colorBlend(tallyFractions, colorSet)
-
-        vote.color = color
         return vote
     }
 }

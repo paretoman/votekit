@@ -14,7 +14,7 @@ import Voronoi2D from './Voronoi2D.js'
 export default function VizOneVoronoi(voterGeoList, candidateSimList, screen, sim, changes) {
     const self = this
 
-    let renderers
+    let renderers = []
 
     self.update = function (voterList, electionResults) {
         if (changes.check(['viz', 'electionMethod', 'dimensions'])) {

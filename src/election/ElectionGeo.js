@@ -17,7 +17,9 @@ export default function ElectionGeo(election) {
 
     const optionCast = { usr: 32 }
 
-    self.runElectionSim = (voterGeoList, candidateSimList) => {
+    self.runElectionSim = (voterGeoList, candidateSimList, changes) => {
+        if (changes.checkNone()) return { error: 'No Changes' }
+
         const canList = candidateSimList.getCandidates()
 
         const geoElectionResults = self.runElection2(voterGeoList, canList)
@@ -165,9 +167,6 @@ export default function ElectionGeo(election) {
 
     self.testVote = (voterTest, candidateSimList) => {
         const vote = election.testVote(voterTest, candidateSimList)
-        const i = vote.tallyFractions.indexOf(1)
-        const canList = candidateSimList.getCandidates()
-        vote.color = canList[i].color
         return vote
     }
 }

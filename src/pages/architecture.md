@@ -27,6 +27,9 @@ Create a 2D spatial model.
     * The Sim class manages voter entities and candidate entities.
     * Entities are visual objects that can be controlled by the user. These include voters and candidates.
     * Sim is a state machine with the following states: SimGeoOne, SimOne1D, SimOne2D, and SimSample. Each state is like a different game. Entities are shared between states. Wrappers use the entities as components to provide additional functionality to the states.
+    * State Updates
+        The basic process is: Run an election. Get result. Visualize result. The election code handles any changes. The electionResults communicates how to visualize the election.
+
 * Voters
     * VoterShape represents a continuous population of voters. 
         * The other classes below are responsible for managing interactions between voterShapes, as opposed to managing an individual voterShape.
