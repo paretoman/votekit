@@ -1,3 +1,4 @@
+import { textPercent } from '../utilities/graphicsUtilities.js'
 import tooltipBox from './tooltipBox.js'
 
 export default function tooltipForTestVoter(entity, screen) {
@@ -32,11 +33,15 @@ export default function tooltipForTestVoter(entity, screen) {
     }
     box.appendChild(button2)
 
+    const voteText = document.createElement('div')
+    box.append(voteText)
+
     // box.style['pointer-events'] = 'none'
     screen.tooltips.appendChild(box)
 
     function update(vote, color) {
         box.style.backgroundColor = color
+        voteText.innerText = vote.tallyFractions.map(textPercent).join('\n')
         tbox.update()
     }
 
