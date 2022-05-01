@@ -1,5 +1,6 @@
 /** @module */
 
+import { range } from '../utilities/jsHelpers.js'
 import colorBlend, { toRGBA } from './colorBlend.js'
 
 /**
@@ -56,11 +57,13 @@ export default function ElectionGeo(election) {
         if (voterGeoList.getVoterSims().length === 0) return { error: 'no voters' }
         if (canList.length === 0) return { error: 'no candidates' }
 
-        const resultsStatewide = runStatewideElection(voterGeoList, canList)
+        const votesByTract = castVotesByTract(voterGeoList, canList)
 
-        const resultsByTract = runTractElections(voterGeoList, canList)
+        const resultsStatewide = countStatewideElection(votesByTract, canList)
 
-        const resultsByDistrict = runDistrictElections(voterGeoList, canList)
+        const resultsByTract = countTractElections(votesByTract, canList)
+
+        const resultsByDistrict = countDistrictElections(votesByTract, canList, voterGeoList)
         const winsByDistrict = updateWins(resultsByDistrict, canList)
 
         const geoMethodResults = {
@@ -72,24 +75,53 @@ export default function ElectionGeo(election) {
         return geoMethodResults
     }
 
+    function castVotesByTract(voterGeoList, canList) {
+        const { voterGroupsByTract } = voterGeoList
+
+        const votesByTract = voterGroupsByTract.map(
+            (row) => row.map(
+                (voterGroups) => election.castVotes2(voterGroups, canList, optionCast),
+            ),
+        )
+        return votesByTract
+    }
+
     /** Show tallies over all the districts
      * Find statewide support for candidates (parties).
      */
-    function runStatewideElection(voterGeoList, canList) {
-        const { allVoterGroups } = voterGeoList
-        const resultsStatewide = election.runElection(allVoterGroups, canList, optionCast)
+    function countStatewideElection(votesByTract, canList) {
+        const numCans = canList.length
+        const allVotes = combineVotes(votesByTract, numCans)
+
+        const resultsStatewide = election.countVotes.run(canList, allVotes)
         return resultsStatewide
+    }
+
+    function combineVotes(votesByTract, numCans) {
+        // sum tallyFractions
+        const totals = Array(numCans).fill(0)
+        votesByTract.forEach(
+            (row) => row.forEach(
+                (votes) => {
+                    const { tallyFractions } = votes
+                    for (let k = 0; k < numCans; k++) {
+                        totals[k] += tallyFractions[k]
+                    }
+                },
+            ),
+        )
+        const norm = 1 / totals.reduce((p, c) => p + c)
+        const tallyFractions = totals.map((t) => t * norm)
+        return { tallyFractions }
     }
 
     /** Visualize voter demographics according to votes for candidates within a tract.
      * Hold mini-elections within a tract.
      */
-    function runTractElections(voterGeoList, canList) {
-        const { voterGroupsByTract } = voterGeoList
-
-        const resultsByTract = voterGroupsByTract.map(
+    function countTractElections(votesByTract, canList) {
+        const resultsByTract = votesByTract.map(
             (row) => row.map(
-                (voterGroups) => election.runElection(voterGroups, canList, optionCast),
+                (votes) => election.countVotes.run(canList, votes),
             ),
         )
         return resultsByTract
@@ -111,17 +143,46 @@ export default function ElectionGeo(election) {
     }
 
     /** Run separate elections in each district. */
-    function runDistrictElections(voterGeoList, canList) {
+    function countDistrictElections(votesByTract, canList, voterGeoList) {
         // Loop through districts.
         // Find who won.
 
-        const { voterGroupsByDistrict } = voterGeoList
+        const votesByDistrict = combineVotesByDistrict(votesByTract, canList, voterGeoList)
 
-        const resultsByDistrict = voterGroupsByDistrict.map(
-            (voterGroups) => election.runElection(voterGroups, canList, optionCast),
+        const resultsByDistrict = votesByDistrict.map(
+            (votes) => election.countVotes.run(canList, votes),
         )
         return resultsByDistrict
     }
+
+    function combineVotesByDistrict(votesByTract, canList, voterGeoList) {
+        const { census } = voterGeoList.districtMaker
+        const { nd } = voterGeoList
+        const numCans = canList.length
+
+        // loop through districts
+        // each district has a census with a list of tracts with weights
+        // tracts are listed by index
+        // This is the same index as the votes list uses.
+        const votesByDistrict = range(nd).map((iDistrict) => {
+            const cen = census[iDistrict]
+
+            // sum tallyFractions
+            const totals = Array(numCans).fill(0)
+            for (let j = 0; j < cen.length; j++) {
+                const [gx, gy, gf] = cen[j]
+                const { tallyFractions } = votesByTract[gx][gy]
+                for (let k = 0; k < numCans; k++) {
+                    totals[k] += tallyFractions[k] * gf
+                }
+            }
+            const norm = 1 / totals.reduce((p, c) => p + c)
+            const tallyFractions = totals.map((t) => t * norm)
+            return { tallyFractions }
+        })
+        return votesByDistrict
+    }
+
     function colorDistrictWins(resultsByDistrict, canList) {
         // calculate color for win map
         let colorOfWinsByDistrict
