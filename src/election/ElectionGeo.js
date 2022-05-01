@@ -17,7 +17,7 @@ export default function ElectionGeo(election) {
 
     const optionCast = { usr: 32 }
 
-    self.runElection = (voterGeoList, candidateSimList) => {
+    self.runElectionSim = (voterGeoList, candidateSimList) => {
         const canList = candidateSimList.getCandidates()
 
         const geoElectionResults = self.runElection2(voterGeoList, canList)
@@ -52,7 +52,7 @@ export default function ElectionGeo(election) {
 
         const votesByTract = voterGroupsByTract.map(
             (row) => row.map(
-                (voterGroups) => election.castVotes2(voterGroups, canList, optionCast),
+                (voterGroups) => election.castVotes(voterGroups, canList, optionCast),
             ),
         )
         return votesByTract

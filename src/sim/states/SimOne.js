@@ -96,7 +96,7 @@ export default function SimOne(screen, menu, changes, electionOne, electionGeo, 
 
         voterList.update()
         const electionResults = electionStrategy
-            .runElection(voterList, candidateSimList)
+            .runElectionSim(voterList, candidateSimList)
         vizOne.update(voterList, electionResults)
         sim.voterTest.update()
         changes.clear()
