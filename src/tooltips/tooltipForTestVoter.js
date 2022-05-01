@@ -39,9 +39,11 @@ export default function tooltipForTestVoter(entity, screen) {
     // box.style['pointer-events'] = 'none'
     screen.tooltips.appendChild(box)
 
-    function update(vote, color) {
-        box.style.backgroundColor = color
-        voteText.innerText = vote.tallyFractions.map(textPercent).join('\n')
+    function update(vote, color, colorSet) {
+        // box.style.backgroundColor = color
+        // const makeSpan = (c) => `<span style="background-color:${c};">&#9638;</span>`
+        const makeSpan = (c) => `<span style="color:${c};">&#9632;</span>` // crosshatch: &#9638; square: &#9632; large black square: &#11035;
+        voteText.innerHTML = vote.tallyFractions.map(textPercent).map((c, i) => makeSpan(colorSet[i]) + c).join('<br />')
         tbox.update()
     }
 

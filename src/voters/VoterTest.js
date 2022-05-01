@@ -85,12 +85,13 @@ export default function VoterTest(screen, sims, sim) {
 
         const canList = candidateSimList.getCandidates()
         const colorSet = canList.map((can) => can.color)
+        self.colorSet = colorSet
 
         const { tallyFractions } = vote
         self.color = colorBlend(tallyFractions, colorSet)
 
         if (tooltip.box) {
-            tooltip.update(vote, self.color)
+            tooltip.update(vote, self.color, self.colorSet)
         }
 
         return vote
@@ -102,7 +103,7 @@ export default function VoterTest(screen, sims, sim) {
 
         if (tooltip.box) tooltip.box.remove()
         tooltip = tooltipForTestVoter(self, screen)
-        tooltip.update(vote, self.color)
+        tooltip.update(vote, self.color, self.colorSet)
     }
 
     self.renderForeground = () => {
