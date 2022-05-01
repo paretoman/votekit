@@ -8,10 +8,10 @@ import GeoMaps from './GeoMaps.js'
  * @param {screen} screen - draw to the screen
  * @constructor
  */
-export default function VizSampleGeo(sampleVoters, screen, changes, sim) {
+export default function VizSampleGeo(sampleVoters, candidateSimList, screen, changes, sim) {
     const self = this
 
-    const geoMaps = new GeoMaps(sampleVoters, screen, sim)
+    const geoMaps = new GeoMaps(sampleVoters, candidateSimList, screen, sim)
 
     // Candidates //
 

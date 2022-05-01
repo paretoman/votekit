@@ -58,7 +58,7 @@ export default function SimSample(screen, menu, changes, electionSample, electio
     let vizSample
     function updateVizStrategy() {
         const VizSample = (sim.geo === true) ? VizSampleGeo : VizSample2D
-        vizSample = new VizSample(voterList, screen, changes, sim)
+        vizSample = new VizSample(voterList, candidateSimList, screen, changes, sim)
     }
 
     // Main State Machine Functions //

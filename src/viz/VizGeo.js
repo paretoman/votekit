@@ -15,7 +15,7 @@ import VoterRender2D from './VoterRender2D.js'
 export default function VizGeo(voterGeoList, candidateSimList, screen, sim, changes) {
     const self = this
 
-    const geoMaps = new GeoMaps(voterGeoList, screen, sim)
+    const geoMaps = new GeoMaps(voterGeoList, candidateSimList, screen, sim)
     let renderers
 
     self.update = function (voterList, electionResults) {

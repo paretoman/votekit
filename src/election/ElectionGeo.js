@@ -1,7 +1,6 @@
 /** @module */
 
 import { range } from '../utilities/jsHelpers.js'
-import colorBlend, { toRGBA } from './colorBlend.js'
 
 /**
  * An election with many districts.
@@ -21,34 +20,18 @@ export default function ElectionGeo(election) {
     self.runElectionAndUpdateTallies = (voterGeoList, candidateSimList) => {
         const canList = candidateSimList.getCandidates()
 
-        const geoMethodResults = self.runElection(voterGeoList, canList)
+        const geoElectionResults = self.runElection(voterGeoList, canList)
 
         const {
             resultsStatewide,
-            resultsByTract,
-            resultsByDistrict,
             winsByDistrict,
             error,
-        } = geoMethodResults
+        } = geoElectionResults
 
         if (error !== undefined) return { error }
 
-        const colorByTract = colorTracts(resultsByTract, canList)
-        const colorOfWinsByDistrict = colorDistrictWins(resultsByDistrict, canList)
-        const colorOfVoteByDistrict = colorDistrictVote(resultsByDistrict, canList)
-
         candidateSimList.setCandidateWins(winsByDistrict)
         candidateSimList.setCandidateFractions(resultsStatewide.votes.tallyFractions)
-
-        const geoElectionResults = {
-            resultsStatewide,
-            resultsByTract,
-            colorByTract,
-            resultsByDistrict,
-            colorOfVoteByDistrict,
-            winsByDistrict,
-            colorOfWinsByDistrict,
-        }
 
         return geoElectionResults
     }
@@ -66,13 +49,13 @@ export default function ElectionGeo(election) {
         const resultsByDistrict = countDistrictElections(votesByTract, canList, voterGeoList)
         const winsByDistrict = updateWins(resultsByDistrict, canList)
 
-        const geoMethodResults = {
+        const geoElectionResults = {
             resultsStatewide,
             resultsByTract,
             resultsByDistrict,
             winsByDistrict,
         }
-        return geoMethodResults
+        return geoElectionResults
     }
 
     function castVotesByTract(voterGeoList, canList) {
@@ -127,21 +110,6 @@ export default function ElectionGeo(election) {
         return resultsByTract
     }
 
-    function colorTracts(resultsByTract, canList) {
-        // get color
-        const colorSet = canList.map((can) => can.color)
-        const colorByTract = resultsByTract.map(
-            (row) => row.map(
-                (electionResults) => {
-                    const { tallyFractions } = electionResults.votes
-                    const color = toRGBA(colorBlend(tallyFractions, colorSet))
-                    return color
-                },
-            ),
-        )
-        return colorByTract
-    }
-
     /** Run separate elections in each district. */
     function countDistrictElections(votesByTract, canList, voterGeoList) {
         // Loop through districts.
@@ -183,28 +151,6 @@ export default function ElectionGeo(election) {
         return votesByDistrict
     }
 
-    function colorDistrictWins(resultsByDistrict, canList) {
-        // calculate color for win map
-        let colorOfWinsByDistrict
-        if (election.countVotes.checkElectionType() === 'singleWinner') {
-            colorOfWinsByDistrict = resultsByDistrict.map(
-                (electionResults) => electionResults.winner.color,
-            )
-        } else {
-            const colorSet = canList.map((can) => can.color)
-            colorOfWinsByDistrict = resultsByDistrict.map(
-                (electionResults) => {
-                    const { allocation } = electionResults
-                    const sum = allocation.reduce((p, c) => p + c)
-                    const fractions = allocation.map((x) => x / sum)
-                    const color = colorBlend(fractions, colorSet)
-                    return color
-                },
-            )
-        }
-        return colorOfWinsByDistrict
-    }
-
     // Show wins across all districts for each candidate
     function updateWins(resultsByDistrict, canList) {
         // make a histogram of winsByDistrict
@@ -226,19 +172,6 @@ export default function ElectionGeo(election) {
             )
         }
         return winsByDistrict
-    }
-
-    /** Update color for each district, based on votes for each candidate.
-     * Blend candidate colors in proportion to their votes.
-     */
-    function colorDistrictVote(resultsByDistrict, canList) {
-        const colorOfVoteByDistrict = resultsByDistrict.map((electionResults) => {
-            const { tallyFractions } = electionResults.votes
-            const colorSet = canList.map((can) => can.color)
-            const color = colorBlend(tallyFractions, colorSet)
-            return color
-        })
-        return colorOfVoteByDistrict
     }
 
     self.testVote = (voterTest, candidateSimList) => {
