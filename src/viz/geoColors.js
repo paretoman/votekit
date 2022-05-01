@@ -1,4 +1,4 @@
-import colorBlend, { toRGBA } from '../election/colorBlend.js'
+import colorBlend, { toRGBA } from './colorBlend.js'
 
 export default function geoColors(geoElectionResults, candidateSimList, sim) {
     const {

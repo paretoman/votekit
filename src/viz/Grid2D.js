@@ -1,4 +1,4 @@
-import colorBlend from '../election/colorBlend.js'
+import colorBlend from './colorBlend.js'
 import { toRGBA } from '../lib/colorBlendScript.js'
 
 /**

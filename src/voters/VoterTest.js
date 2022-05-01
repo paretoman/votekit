@@ -1,7 +1,7 @@
 import CircleGraphic from './CircleGraphic.js'
 import hideOnClickOutside from '../tooltips/hideOnClickOutside.js'
 import tooltipForTestVoter from '../tooltips/tooltipForTestVoter.js'
-import colorBlend from '../election/colorBlend.js'
+import colorBlend from '../viz/colorBlend.js'
 
 export default function VoterTest(screen, sims, sim) {
     const self = this

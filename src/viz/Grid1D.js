@@ -1,4 +1,4 @@
-import colorBlend from '../election/colorBlend.js'
+import colorBlend from './colorBlend.js'
 
 /**
  * Draw grid cells to show votes.
