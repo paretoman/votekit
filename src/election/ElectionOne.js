@@ -15,22 +15,16 @@ export default function ElectionOne(election) {
 
     const optionCast = { usr: 4 }
 
-    self.updateTallies = function (oneVoters, candidateSimList) {
-        // only update the tallies for each candidate so they can be shown
-
+    self.runElection = function (oneVoters, candidateSimList) {
         // Voters cast votes for candidates.
         // There is also a separate graphical representation in Voronoi2D.js
+        const canList = candidateSimList.getCandidates()
 
         if (oneVoters.getVoterShapes().length === 0) return { error: 'No Voters' }
-        if (candidateSimList.getCandidates().length === 0) return { error: 'No Candidates' }
+        if (canList.length === 0) return { error: 'No Candidates' }
         const votes = election.castVotes(oneVoters, candidateSimList, optionCast)
-        candidateSimList.setCandidateFractions(votes.tallyFractions)
-        return votes
-    }
-
-    self.runElectionAndUpdateTallies = function (oneVoters, candidateSimList) {
-        const votes = self.updateTallies(oneVoters, candidateSimList)
-        return { votes }
+        const electionResults = election.countVotes.run(canList, votes)
+        return electionResults
     }
 
     self.testVote = (voterTest, candidateSimList) => {

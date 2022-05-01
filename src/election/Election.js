@@ -36,7 +36,7 @@ export default function Election(menu) {
 
     // Election //
 
-    self.runElection = function (voterShapes, canList, optionCast) {
+    self.runElection3 = function (voterShapes, canList, optionCast) {
         const voterGeom = mapVoters(voterShapes)
         const canGeom = mapCans(canList)
         const casterFun = castVotes[self.countVotes.caster]

@@ -12,18 +12,20 @@ export default function CandidateSimList(sim) {
 
     const simCans = []
 
+    // Data Setters and Getters //
+
     self.newCandidate = function (simCan) {
         simCans.push(simCan)
     }
-
     self.getSimCandidates = () => simCans.filter((simCan) => simCan.candidate.exists)
 
     self.getCandidates = () => {
         const simCansEx = self.getSimCandidates()
         return simCansEx.map((simCan) => simCan.candidate)
     }
-
     self.getCandidatesAll = () => simCans.map((simCan) => simCan.candidate)
+
+    // Update //
 
     self.setCandidateFractions = (fractions) => {
         const canList = self.getCandidates()
@@ -42,6 +44,9 @@ export default function CandidateSimList(sim) {
     self.updateXY = () => {
         simCans.forEach((simCan) => simCan.candidate.updateXY())
     }
+
+    // Render //
+
     self.renderForeground = () => {
         if (sim.showGhosts) {
             self.renderForegroundAll()

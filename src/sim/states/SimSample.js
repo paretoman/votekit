@@ -81,7 +81,7 @@ export default function SimSample(screen, menu, changes, electionSample, electio
     self.update = () => {
         // Update players. Run an election. Get result. Visualize result.
         // The election handles any changes.
-        // The electionResult communicates how to visualize the election.
+        // The electionResults communicates how to visualize the election.
 
         voterList.update()
         candidateSimList.update()

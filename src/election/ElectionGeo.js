@@ -17,26 +17,15 @@ export default function ElectionGeo(election) {
 
     const optionCast = { usr: 32 }
 
-    self.runElectionAndUpdateTallies = (voterGeoList, candidateSimList) => {
+    self.runElection = (voterGeoList, candidateSimList) => {
         const canList = candidateSimList.getCandidates()
 
-        const geoElectionResults = self.runElection(voterGeoList, canList)
-
-        const {
-            resultsStatewide,
-            winsByDistrict,
-            error,
-        } = geoElectionResults
-
-        if (error !== undefined) return { error }
-
-        candidateSimList.setCandidateWins(winsByDistrict)
-        candidateSimList.setCandidateFractions(resultsStatewide.votes.tallyFractions)
+        const geoElectionResults = self.runElection2(voterGeoList, canList)
 
         return geoElectionResults
     }
 
-    self.runElection = (voterGeoList, canList) => {
+    self.runElection2 = (voterGeoList, canList) => {
         if (voterGeoList.getVoterSims().length === 0) return { error: 'no voters' }
         if (canList.length === 0) return { error: 'no candidates' }
 

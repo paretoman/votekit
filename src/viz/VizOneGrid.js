@@ -26,13 +26,17 @@ export default function VizOneGrid(voterGeoList, candidateSimList, screen, sim, 
             }
         }
 
+        const { error } = electionResults
+        if (error !== undefined) return
+
+        const { votes } = electionResults
+        candidateSimList.setCandidateFractions(votes.tallyFractions)
+
         // renderer factory //
 
         const Grid = (dimensions === 1) ? Grid1D : Grid2D
 
-        const { votes } = electionResults
         if (votes.error) renderers = []
-
         renderers = votes.gridData.map(
             (vo) => new Grid(vo, candidateSimList, screen),
         )

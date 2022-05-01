@@ -18,12 +18,19 @@ export default function VizGeo(voterGeoList, candidateSimList, screen, sim, chan
     const geoMaps = new GeoMaps(voterGeoList, candidateSimList, screen, sim)
     let renderers
 
-    self.update = function (voterList, electionResults) {
-        geoMaps.update(electionResults)
+    self.update = function (voterList, geoElectionResults) {
+        const { error } = geoElectionResults
+        if (error !== undefined) return
+
+        geoMaps.update(geoElectionResults)
 
         if (changes.check(['viz', 'geo'])) {
             screen.showMaps()
         }
+
+        const { resultsStatewide, winsByDistrict } = geoElectionResults
+        candidateSimList.setCandidateWins(winsByDistrict)
+        candidateSimList.setCandidateFractions(resultsStatewide.votes.tallyFractions)
 
         // renderer factory //
 

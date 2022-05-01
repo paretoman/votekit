@@ -16,10 +16,16 @@ export default function VizOneVoronoi(voterGeoList, candidateSimList, screen, si
 
     let renderers
 
-    self.update = function (voterList) {
+    self.update = function (voterList, electionResults) {
         if (changes.check(['viz', 'electionMethod', 'dimensions'])) {
             screen.hideMaps()
         }
+
+        const { error } = electionResults
+        if (error !== undefined) return
+
+        const { votes } = electionResults
+        candidateSimList.setCandidateFractions(votes.tallyFractions)
 
         // renderer factory //
 

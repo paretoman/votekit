@@ -72,7 +72,7 @@ export default function ElectionSampleGeo(election, electionGeo) {
             }
 
             // find winner position
-            const electionResults = electionGeo.runElection(sampleVoters, canList)
+            const electionResults = electionGeo.runElection2(sampleVoters, canList)
 
             const { resultsByDistrict } = electionResults
             const nDistricts = resultsByDistrict.length
