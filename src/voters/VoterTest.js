@@ -90,7 +90,7 @@ export default function VoterTest(screen, sims, sim) {
         self.color = colorBlend(tallyFractions, colorSet)
 
         if (tooltip.box) {
-            tooltip.update(self.color)
+            tooltip.update(vote, self.color)
         }
 
         return vote
@@ -101,7 +101,8 @@ export default function VoterTest(screen, sims, sim) {
         if (vote === null) return
 
         if (tooltip.box) tooltip.box.remove()
-        tooltip = tooltipForTestVoter(self, screen, vote, self.color)
+        tooltip = tooltipForTestVoter(self, screen)
+        tooltip.update(vote, self.color)
     }
 
     self.renderForeground = () => {
