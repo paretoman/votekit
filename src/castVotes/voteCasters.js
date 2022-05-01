@@ -7,6 +7,6 @@ import castScore from './CastScore.js'
  * a collection of ways to cast votes
  */
 
-const castVotes = { castPlurality, castScore }
+const voteCasters = { castPlurality, castScore }
 
-export default castVotes
+export default voteCasters

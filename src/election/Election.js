@@ -1,6 +1,6 @@
 /** @module */
 
-import castVotes from '../castVotes/castVotes.js'
+import voteCasters from '../castVotes/voteCasters.js'
 import CountVotes from './CountVotes.js'
 
 /**
@@ -39,8 +39,8 @@ export default function Election(menu) {
     self.runElection3 = function (voterShapes, canList, optionCast) {
         const voterGeom = mapVoters(voterShapes)
         const canGeom = mapCans(canList)
-        const casterFun = castVotes[self.countVotes.caster]
-        const votes = casterFun(canGeom, voterGeom, self.dimensions, optionCast)
+        const voteCaster = voteCasters[self.countVotes.casterName]
+        const votes = voteCaster(canGeom, voterGeom, self.dimensions, optionCast)
         const electionResults = self.countVotes.run(canList, votes)
         return electionResults
     }
@@ -50,8 +50,8 @@ export default function Election(menu) {
     self.castVotes2 = (voterShapes, canList, optionCast) => {
         const voterGeom = mapVoters(voterShapes)
         const canGeom = mapCans(canList)
-        const casterFun = castVotes[self.countVotes.caster]
-        const votes = casterFun(canGeom, voterGeom, self.dimensions, optionCast)
+        const voteCaster = voteCasters[self.countVotes.casterName]
+        const votes = voteCaster(canGeom, voterGeom, self.dimensions, optionCast)
         return votes
     }
 
@@ -62,8 +62,8 @@ export default function Election(menu) {
         const canList = candidateSimList.getCandidates()
         const voterGeom = mapVoters(voterShapes)
         const canGeom = mapCans(canList)
-        const casterFun = castVotes[self.countVotes.caster]
-        const votes = casterFun(canGeom, voterGeom, self.dimensions, optionCast)
+        const voteCaster = voteCasters[self.countVotes.casterName]
+        const votes = voteCaster(canGeom, voterGeom, self.dimensions, optionCast)
         return votes
     }
 
@@ -72,8 +72,8 @@ export default function Election(menu) {
         const canList = candidateSimList.getCandidates()
         const voterGeom = mapVoters(voterShapes)
         const canGeom = mapCans(canList)
-        const casterFun = castVotes[self.countVotes.caster]
-        const vote = casterFun(canGeom, voterGeom, self.dimensions, optionCast, true)
+        const voteCaster = voteCasters[self.countVotes.casterName]
+        const vote = voteCaster(canGeom, voterGeom, self.dimensions, optionCast, true)
         return vote
     }
 }

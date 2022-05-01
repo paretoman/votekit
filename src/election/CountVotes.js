@@ -45,16 +45,16 @@ export default function CountVotes(menu) {
     // a list of election methods
     self.electionMethodList = [
         {
-            name: 'Huntington Hill', value: 'huntingtonHill', type: 'allocation', caster: 'castPlurality',
+            name: 'Huntington Hill', value: 'huntingtonHill', type: 'allocation', casterName: 'castPlurality',
         },
         {
-            name: 'Plurality', value: 'plurality', type: 'singleWinner', caster: 'castPlurality',
+            name: 'Plurality', value: 'plurality', type: 'singleWinner', casterName: 'castPlurality',
         },
         {
-            name: 'Random Winner', value: 'randomWinner', type: 'singleWinner', caster: 'castPlurality',
+            name: 'Random Winner', value: 'randomWinner', type: 'singleWinner', casterName: 'castPlurality',
         },
         {
-            name: 'Score', value: 'score', type: 'singleWinner', caster: 'castScore',
+            name: 'Score', value: 'score', type: 'singleWinner', casterName: 'castScore',
         },
     ]
 
@@ -71,7 +71,7 @@ export default function CountVotes(menu) {
      */
     self.setElectionMethod = (value) => {
         self.electionMethod = value
-        self.caster = self.electionMethodListByFunctionName[value].caster
+        self.casterName = self.electionMethodListByFunctionName[value].casterName
 
         if (self.checkElectionType() === 'allocation') {
             self.seats = 5

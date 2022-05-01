@@ -30,7 +30,7 @@ When the dimensions change, we have to call updateXY to set x and y through the 
 Just draw midpoints between candidates to define the voronoi cell for each candidate. Then overlay the voter shape on that and find the intersection for each candidate.
 
 ## Ballot Dimension
-When casting a ballot, we need to know which coordinates to use for the candidates and voters. The summer will be chosen based on the number of dimensions. Only the relevant geometries will be passed to the ballot caster (member of castVotes).
+When casting a ballot, we need to know which coordinates to use for the candidates and voters. The summer will be chosen based on the number of dimensions. Only the relevant geometries will be passed to the ballot caster (member of voteCasters).
 
 ## Election Dimension
 The Election class handles deciding what geometry to send to the ballot caster. It will send p1 or p2, if 1D or 2D, respectively.
