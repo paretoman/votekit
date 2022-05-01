@@ -165,8 +165,8 @@ export default function ElectionGeo(election) {
         return winsByDistrict
     }
 
-    self.testVote = (voterTest, candidateSimList) => {
-        const vote = election.testVote(voterTest, candidateSimList)
+    self.testVoteES = (voterTest, candidateSimList) => {
+        const vote = election.testVoteE(voterTest, candidateSimList)
         return vote
     }
 }

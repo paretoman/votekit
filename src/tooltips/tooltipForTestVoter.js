@@ -1,6 +1,6 @@
 import tooltipBox from './tooltipBox.js'
 
-export default function tooltipForTestVoter(entity, screen, vote) {
+export default function tooltipForTestVoter(entity, screen, vote, color) {
     // make a html box appear
 
     const tbox = tooltipBox(entity, screen)
@@ -32,12 +32,12 @@ export default function tooltipForTestVoter(entity, screen, vote) {
     }
     box.appendChild(button2)
 
-    box.style.backgroundColor = vote.color
+    box.style.backgroundColor = color
     // box.style['pointer-events'] = 'none'
     screen.tooltips.appendChild(box)
 
-    function update(newVote) {
-        box.style.backgroundColor = newVote.color
+    function update(newColor) {
+        box.style.backgroundColor = newColor
         tbox.update()
     }
 

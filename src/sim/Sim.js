@@ -63,7 +63,7 @@ export default function Sim(
     self.candidateDnAdd = new CandidateDnAdd(screen, layout, changes, commander, sims, self)
 
     self.voterTest = new VoterTest(screen, sims, self)
-    self.testVote = () => sims[self.state].testVote()
+    self.testVote = () => sims[self.state].testVoteSim()
 
     // Default Entities //
 
