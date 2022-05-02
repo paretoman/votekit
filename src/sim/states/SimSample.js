@@ -2,12 +2,12 @@
 
 import CandidateDnSimList from '../../candidateDns/CandidateDnSimList.js'
 import CandidateDnSim from '../../candidateDns/CandidateDnSim.js'
-import VizSample2D from '../../viz/VizSample2D.js'
 import VoterSimList from '../../voters/VoterSimList.js'
 import SimBase from './SimBase.js'
 import VoterSim from '../../voters/VoterSim.js'
 import VoterGeoList from '../../voters/VoterGeoList.js'
 import VizSampleGeo from '../../viz/VizSampleGeo.js'
+import VizSampleBase from '../../viz/VizSampleBase.js'
 
 /**
  * Simulate many sample elections with
@@ -57,7 +57,7 @@ export default function SimSample(screen, menu, changes, electionSample, electio
 
     let vizSample
     function updateVizStrategy() {
-        const VizSample = (sim.geo === true) ? VizSampleGeo : VizSample2D
+        const VizSample = (sim.geo === true) ? VizSampleGeo : VizSampleBase
         vizSample = new VizSample(voterList, candidateSimList, screen, changes, sim)
     }
 
@@ -85,7 +85,8 @@ export default function SimSample(screen, menu, changes, electionSample, electio
 
         voterList.update()
         candidateSimList.update()
-        const addResult = electionStrategy.update(voterList, candidateSimList, changes)
+        const { dimensions } = sim.election
+        const addResult = electionStrategy.update(voterList, candidateSimList, changes, dimensions)
         vizSample.update(addResult)
         changes.clear()
 

@@ -17,7 +17,7 @@ export default function CandidateDnAdd(screen, layout, changes, commander, sims,
     }
     self.setNumberCandidateDnsAction = (num) => {
         while (candidateDnRegistrar.num() < num) {
-            self.addCandidateDistribution({ x: 50, y: 50, w: 200 }, { x: 50 }, false)
+            self.addCandidateDistribution({ x: 50, y: 50, w: 200 }, { x: 50, w: 200, densityProfile: 'gaussian' }, false)
         }
     }
 

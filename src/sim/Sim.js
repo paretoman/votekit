@@ -70,7 +70,7 @@ export default function Sim(
     self.candidateAdd.addCandidate({ x: 50, y: 100 }, { x: 50 }, '#e05020', true)
     self.candidateAdd.addCandidate({ x: 100, y: 50 }, { x: 100 }, '#50e020', true)
     self.candidateAdd.addCandidate({ x: 300 - 100, y: 300 - 50 }, { x: 200 }, '#2050e0', true)
-    self.candidateDnAdd.addCandidateDistribution({ x: 150, y: 150, w: 200 }, { x: 150 }, true)
+    self.candidateDnAdd.addCandidateDistribution({ x: 150, y: 150, w: 200 }, { x: 150, w: 200, densityProfile: 'gaussian' }, true)
     self.voterShapeAdd.addVoterCircle({ x: 50, y: 150, w: 200 }, { x: 50, w: 200, densityProfile: 'gaussian' }, true)
     self.voterShapeAdd.addVoterCircle({ x: 250, y: 150, w: 200 }, { x: 250, w: 200, densityProfile: 'gaussian' }, true)
 
@@ -105,9 +105,6 @@ export default function Sim(
         // combinations of these state variables.
         if (self.viz === 'one') {
             return 'one'
-        }
-        if (self.election.dimensions === 1) {
-            return 'base'
         }
         return 'sample'
     }

@@ -4,14 +4,14 @@ import GeoMaps from './GeoMaps.js'
 
 /**
  * Show Voters
- * @param {SampleVoters} sampleVoters
+ * @param {VoterSimList} voterSimList
  * @param {screen} screen - draw to the screen
  * @constructor
  */
-export default function VizSampleGeo(sampleVoters, candidateSimList, screen, changes, sim) {
+export default function VizSampleGeo(voterSimList, candidateSimList, screen, changes, sim) {
     const self = this
 
-    const geoMaps = new GeoMaps(sampleVoters, candidateSimList, screen, sim)
+    const geoMaps = new GeoMaps(voterSimList, candidateSimList, screen, sim)
 
     // Candidates //
 
@@ -92,7 +92,7 @@ export default function VizSampleGeo(sampleVoters, candidateSimList, screen, cha
 
     self.renderVoters = function () {
         const { ctx } = screen
-        const voterShapes = sampleVoters.getVoterShapes()
+        const voterShapes = voterSimList.getVoterShapes()
         voterShapes.forEach((voterGroup) => {
             // circle
             ctx.beginPath()

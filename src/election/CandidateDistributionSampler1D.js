@@ -6,7 +6,7 @@
  * @param {CandidateDn[]} candidateDistributions
  * @constructor
  */
-export default function CandidateDistributionSampler(candidateDistributions) {
+export default function CandidateDistributionSampler1D(candidateDistributions) {
     const self = this
     // cumulative distribution function
     const cdf = getCDF(candidateDistributions)
@@ -20,7 +20,9 @@ function samplePoint1(candidateDistributions, cdf) {
     const iDist = randomDistribution(cdf)
     const cd = candidateDistributions[iDist]
     // sample circle
-    const point = randomInsideCircle(cd.shape2.x, cd.shape2.y, cd.shape2.w * 0.5)
+    const isGaussian = cd.shape1.densityProfile === 'gaussian'
+    const sample = (isGaussian) ? sampleGaussian : randomInsideInterval
+    const point = sample(cd.shape1.x, cd.shape1.w * 0.5)
     return point
 }
 
@@ -34,12 +36,12 @@ function randomDistribution(cdf) {
 
 function getCDF(candidateDistributions) {
     // find the size of the voter distributions
-    const areasProportion = candidateDistributions.map((cd) => cd.shape2.w ** 2)
+    const proportion = candidateDistributions.map((cd) => cd.shape1.w)
 
-    const sumAreasProportion = areasProportion.reduce((p, c) => p + c)
+    const sumProportion = proportion.reduce((p, c) => p + c)
 
     // probability mass function
-    const pmf = areasProportion.map((p) => p / sumAreasProportion)
+    const pmf = proportion.map((p) => p / sumProportion)
 
     // https://stackoverflow.com/a/20477613
     // [5, 10, 3, 2];
@@ -55,14 +57,20 @@ function getCDF(candidateDistributions) {
     return cdf
 }
 
-function randomInsideCircle(X, Y, R) {
-    // https://stackoverflow.com/a/50746409
-    const r = R * Math.sqrt(Math.random())
-    const theta = Math.random() * 2 * Math.PI
+function randomInsideInterval(X, R) {
+    const x = (Math.random() * 2 - 1) * R + X
+    return { x }
+}
 
-    // convert to cartesian
+function sampleGaussian(X, R) {
+    // https://en.wikipedia.org/wiki/Box%E2%80%93Muller_transform
 
-    const x = X + r * Math.cos(theta)
-    const y = Y + r * Math.sin(theta)
-    return { x, y }
+    const u1 = Math.random()
+    const u2 = Math.random()
+
+    const sigma = (2 * R) / Math.sqrt(2 * Math.PI)
+    const mag = sigma * Math.sqrt(-2 * Math.log(u1))
+    const x = mag * Math.cos(2 * Math.PI * u2) + X
+    // const x2 = mag * Math.sin(2 * Math.PI * u2) + X
+    return { x }
 }

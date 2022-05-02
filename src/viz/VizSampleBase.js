@@ -2,11 +2,11 @@
 
 /**
  * Show Voters
- * @param {SampleVoters} sampleVoters
+ * @param {VoterSimList} voterSimList
  * @param {screen} screen - draw to the screen
  * @constructor
  */
-export default function VizSample2D(sampleVoters, candidateSimList, screen, changes) {
+export default function VizSampleBase(voterSimList, candidateSimList, screen, changes, sim) {
     const self = this
 
     // Candidates //
@@ -16,6 +16,8 @@ export default function VizSample2D(sampleVoters, candidateSimList, screen, chan
     canvas2.width = screen.canvas.width
     canvas2.height = screen.canvas.height
     const context2 = canvas2.getContext('2d')
+
+    const { dimensions } = sim.election
 
     self.update = function (addResult) {
         if (changes.checkNone() === false) {
@@ -67,7 +69,10 @@ export default function VizSample2D(sampleVoters, candidateSimList, screen, chan
             const p = newPoints[i]
             // dot
             ctx.beginPath()
-            ctx.arc(p.x, p.y, 3, 0, 2 * Math.PI)
+            const y = (dimensions === 1)
+                ? Math.random() * 100 + 50
+                : p.y
+            ctx.arc(p.x, y, 2, 0, 2 * Math.PI)
             ctx.fill()
         }
     }
@@ -87,7 +92,7 @@ export default function VizSample2D(sampleVoters, candidateSimList, screen, chan
 
     self.renderVoters = function () {
         const { ctx } = screen
-        const voterShapes = sampleVoters.getVoterShapes()
+        const voterShapes = voterSimList.getVoterShapes()
         voterShapes.forEach((voterGroup) => {
             // circle
             ctx.beginPath()

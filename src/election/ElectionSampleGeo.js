@@ -19,12 +19,12 @@ export default function ElectionSampleGeo(election, electionGeo) {
 
     let points = []
 
-    self.update = function (sampleVoters, candidateSimList, changes) {
+    self.update = function (voterSimList, candidateSimList, changes) {
         if (changes.checkNone() === false) {
             self.startSim()
         }
 
-        const addResult = self.addSim(sampleVoters, candidateSimList)
+        const addResult = self.addSim(voterSimList, candidateSimList)
         return addResult
     }
 
@@ -32,10 +32,10 @@ export default function ElectionSampleGeo(election, electionGeo) {
         points = []
     }
 
-    self.addSim = function (sampleVoters, sampleCandidates) {
+    self.addSim = function (voterSimList, sampleCandidates) {
         // add more points
 
-        if (sampleVoters.getVoterShapes().length === 0) return { pointsChanged: false }
+        if (voterSimList.getVoterShapes().length === 0) return { pointsChanged: false }
         if (sampleCandidates.getCandidateDistributions().length === 0) {
             return { pointsChanged: false }
         }
@@ -49,7 +49,7 @@ export default function ElectionSampleGeo(election, electionGeo) {
 
         // number of new points
         const { seats } = election.countVotes
-        const { nd } = sampleVoters
+        const { nd } = voterSimList
         const nnp = seats * ns * nd
         const newPoints = Array(nnp)
         let q = 0
@@ -72,7 +72,7 @@ export default function ElectionSampleGeo(election, electionGeo) {
             }
 
             // find winner position
-            const electionResults = electionGeo.runElection2(sampleVoters, canList)
+            const electionResults = electionGeo.runElection2(voterSimList, canList)
 
             const { resultsByDistrict } = electionResults
             const nDistricts = resultsByDistrict.length
