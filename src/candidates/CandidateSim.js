@@ -13,7 +13,7 @@ export default function CandidateSim(candidate, dragm) {
     const self = this
     self.candidate = candidate
 
-    dragm.newSquareHandle(candidate, candidate.square)
+    dragm.newSquareHandle(candidate, candidate.graphic.square)
 
     self.renderForeground = () => {
         self.candidate.renderForeground()

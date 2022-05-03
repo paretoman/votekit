@@ -1,4 +1,4 @@
-import CircleGraphic from './CircleGraphic.js'
+import CircleGraphic from '../vizEntities/CircleGraphic.js'
 import hideOnClickOutside from '../tooltips/hideOnClickOutside.js'
 import tooltipForTestVoter from '../tooltips/tooltipForTestVoter.js'
 import colorBlend from '../viz/colorBlend.js'

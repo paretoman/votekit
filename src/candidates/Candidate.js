@@ -1,8 +1,7 @@
 /** @module */
 
-import SquareGraphic from './SquareGraphic.js'
-import { drawStrokedColor, textPercent } from '../utilities/graphicsUtilities.js'
 import tooltipForEntity from '../tooltips/tooltipForEntity.js'
+import CandidateGraphic from '../vizEntities/CandidateGraphic.js'
 
 /**
  * Candidate class on top of handle.
@@ -127,28 +126,9 @@ export default function Candidate(
 
     // Rendering
 
-    const square = new SquareGraphic(self, wHandle, hHandle, screen)
-    self.square = square
+    self.graphic = new CandidateGraphic(self, wHandle, hHandle, screen)
 
-    self.fraction = 0
-    self.setFraction = function (fraction) {
-        self.fraction = fraction
-    }
-
-    self.setWins = (wins) => {
-        self.wins = wins
-    }
-
-    self.renderForeground = function () {
-        square.render()
-
-        // show minimal graphics when rendering as a ghost.
-        if (self.exists === 0) return
-
-        drawStrokedColor(textPercent(self.fraction), self.x, self.y - square.h * 0.5 - 2, 20, 2, '#222', 1, screen.fctx)
-
-        if (self.wins !== undefined) {
-            drawStrokedColor(self.wins, self.x, self.y + square.h * 0.5 + 20 + 2, 20, 2, '#222', 1, screen.fctx)
-        }
+    self.renderForeground = () => {
+        self.graphic.renderForeground()
     }
 }

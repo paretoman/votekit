@@ -13,7 +13,7 @@ export default function CandidateDnSim(canDn, dragm) {
     const self = this
     self.canDn = canDn
 
-    dragm.newSquareHandle(canDn, canDn.square)
+    dragm.newSquareHandle(canDn, canDn.graphic.square)
 
     self.renderForeground = () => {
         self.canDn.renderForeground()

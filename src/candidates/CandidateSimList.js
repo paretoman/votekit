@@ -31,14 +31,14 @@ export default function CandidateSimList(sim) {
         const canList = self.getCandidates()
         canList.forEach((can, index) => {
             const fraction = fractions[index]
-            can.setFraction(fraction)
+            can.graphic.setFraction(fraction)
         })
     }
     self.setCandidateWins = (winsByCandidate) => {
         const canList = self.getCandidates()
         canList.forEach((can, index) => {
             const win = winsByCandidate[index]
-            can.setWins(win)
+            can.graphic.setWins(win)
         })
     }
     self.updateXY = () => {

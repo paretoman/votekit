@@ -1,7 +1,7 @@
 /** @module */
 
 import tooltipForEntity from '../tooltips/tooltipForEntity.js'
-import SquareGraphic from '../candidates/SquareGraphic.js'
+import CandidateDnGraphic from '../vizEntities/CandidateDnGraphic.js'
 
 /**
  * This represents a spatial distribution of candidates.
@@ -146,10 +146,9 @@ export default function CandidateDistribution(
 
     self.color = '#ccc'
 
-    const square = new SquareGraphic(self, 21, 21, screen) // square is for rendering
-    self.square = square
+    self.graphic = new CandidateDnGraphic(self, screen)
 
     self.renderForeground = () => {
-        square.render()
+        self.graphic.renderForeground()
     }
 }

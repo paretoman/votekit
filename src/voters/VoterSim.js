@@ -16,7 +16,7 @@ export default function VoterSim(voterShape, dragm) {
     const self = this
     self.voterShape = voterShape
 
-    dragm.newCircleHandle(voterShape, voterShape.circle)
+    dragm.newCircleHandle(voterShape, voterShape.graphic.circle)
 
     self.renderForeground = () => {
         self.voterShape.renderForeground()

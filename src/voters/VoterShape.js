@@ -1,7 +1,7 @@
 /** @module */
 
-import CircleGraphic from './CircleGraphic.js'
 import tooltipForEntity from '../tooltips/tooltipForEntity.js'
+import VoterGraphic from '../vizEntities/VoterGraphic.js'
 
 /**
  * VoterShape class with Handle component to take care of dragging.
@@ -149,11 +149,10 @@ export default function VoterShape(
     // Rendering
 
     self.color = '#88888888'
-    const circle = new CircleGraphic(self, 13, screen)
-    self.circle = circle
+
+    self.graphic = new VoterGraphic(self, screen)
 
     self.renderForeground = () => {
-        // handle
-        circle.render()
+        self.graphic.renderForeground()
     }
 }
