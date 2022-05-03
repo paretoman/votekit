@@ -19,7 +19,7 @@ export default function VizGeo(voterGeoList, candidateSimList, screen, sim, chan
     let renderers = []
     let flagNoRender = false
 
-    self.update = function (voterList, geoElectionResults) {
+    self.update = function (geoElectionResults) {
         const { error } = geoElectionResults
         if (error !== undefined) {
             flagNoRender = true
@@ -33,8 +33,8 @@ export default function VizGeo(voterGeoList, candidateSimList, screen, sim, chan
             screen.showMaps()
         }
 
-        const { resultsStatewide, winsByDistrict } = geoElectionResults
-        candidateSimList.setCandidateWins(winsByDistrict)
+        const { resultsStatewide, allocation } = geoElectionResults
+        candidateSimList.setCandidateWins(allocation)
         candidateSimList.setCandidateFractions(resultsStatewide.votes.tallyFractions)
 
         // renderer factory //
@@ -42,7 +42,7 @@ export default function VizGeo(voterGeoList, candidateSimList, screen, sim, chan
         const { dimensions } = sim.election
         const VoterRenderer = (dimensions === 1) ? VoterRender1D : VoterRender2D
 
-        const voterShapes = voterList.getVoterShapes()
+        const voterShapes = voterGeoList.getVoterShapes()
         renderers = voterShapes.map(
             (voterShape) => new VoterRenderer(voterShape, screen),
         )

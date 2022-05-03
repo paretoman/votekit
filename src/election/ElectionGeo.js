@@ -38,13 +38,13 @@ export default function ElectionGeo(election) {
         const resultsByTract = countTractElections(votesByTract, canList)
 
         const resultsByDistrict = countDistrictElections(votesByTract, canList, voterGeoList)
-        const winsByDistrict = updateWins(resultsByDistrict, canList)
+        const allocation = sumAllocations(resultsByDistrict, canList)
 
         const geoElectionResults = {
             resultsStatewide,
             resultsByTract,
             resultsByDistrict,
-            winsByDistrict,
+            allocation,
         }
         return geoElectionResults
     }
@@ -143,26 +143,25 @@ export default function ElectionGeo(election) {
     }
 
     // Show wins across all districts for each candidate
-    function updateWins(resultsByDistrict, canList) {
-        // make a histogram of winsByDistrict
+    function sumAllocations(resultsByDistrict, canList) {
+        // make a histogram of allocation
         const numCandidates = canList.length
-        const winsByDistrict = Array(numCandidates).fill(0)
+        const allocation = Array(numCandidates).fill(0)
         if (election.countVotes.checkElectionType() === 'singleWinner') {
             const iWinners = resultsByDistrict.map((electionResults) => electionResults.iWinner)
             iWinners.forEach((iWinner) => {
-                winsByDistrict[iWinner] += 1
+                allocation[iWinner] += 1
             })
         } else {
             resultsByDistrict.forEach(
                 (electionResults) => {
-                    const { allocation } = electionResults
                     for (let i = 0; i < numCandidates; i++) {
-                        winsByDistrict[i] += allocation[i]
+                        allocation[i] += electionResults.allocation[i]
                     }
                 },
             )
         }
-        return winsByDistrict
+        return allocation
     }
 
     self.testVoteES = (voterTest, candidateSimList) => {

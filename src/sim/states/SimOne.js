@@ -52,17 +52,13 @@ export default function SimOne(screen, menu, changes, electionOne, electionGeo, 
     // Strategies //
 
     let voterList
-    function updateVoterListStrategy() {
-        voterList = (sim.geo) ? voterGeoList : voterSimList
-    }
-
     let electionStrategy
-    function updateElectionStrategy() {
-        electionStrategy = (sim.geo) ? electionGeo : electionOne
-    }
-
     let vizOne
-    function updateVizStrategy() {
+    function enterStrategy() {
+        voterList = (sim.geo) ? voterGeoList : voterSimList
+
+        electionStrategy = (sim.geo) ? electionGeo : electionOne
+
         const VizNoGeo = (sim.election.countVotes.casterName === 'castPlurality') ? VizOneVoronoi : VizOneGrid
         const VizOne = (sim.geo === true) ? VizGeo : VizNoGeo
         vizOne = new VizOne(voterList, candidateSimList, screen, sim, changes)
@@ -74,9 +70,7 @@ export default function SimOne(screen, menu, changes, electionOne, electionGeo, 
     self.enter = () => {
         superEnter()
         sim.candidateAdd.canButton.show()
-        updateVoterListStrategy()
-        updateElectionStrategy()
-        updateVizStrategy()
+        enterStrategy()
         voterList.updateXY()
         candidateSimList.updateXY()
         sim.voterTest.updateXY()
@@ -97,7 +91,7 @@ export default function SimOne(screen, menu, changes, electionOne, electionGeo, 
         voterList.update()
         const electionResults = electionStrategy
             .runElectionSim(voterList, candidateSimList, changes)
-        vizOne.update(voterList, electionResults)
+        vizOne.update(electionResults)
         self.testVoteSim()
         changes.clear()
 

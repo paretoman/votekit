@@ -5,17 +5,17 @@ import Grid2D from './Grid2D.js'
 
 /**
  * Show votes
- * @param {VoterGeoList} voterGeoList
+ * @param {VoterSimList} voterSimList
  * @param {CandidateSimList} candidateSimList
  * @param {Screen} screen
  * @param {Sim} sim
  * @constructor
  */
-export default function VizOneGrid(voterGeoList, candidateSimList, screen, sim, changes) {
+export default function VizOneGrid(voterSimList, candidateSimList, screen, sim, changes) {
     const self = this
     let renderers = []
 
-    self.update = function (voterList, electionResults) {
+    self.update = function (electionResults) {
         const { dimensions } = sim.election
 
         if (changes.check(['viz', 'electionMethod', 'dimensions'])) {

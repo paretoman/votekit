@@ -46,17 +46,13 @@ export default function SimSample(screen, menu, changes, electionSample, electio
     // Strategies //
 
     let voterList
-    function updateVoterListStrategy() {
-        voterList = (sim.geo) ? voterGeoList : voterSimList
-    }
-
     let electionStrategy
-    function updateElectionStrategy() {
-        electionStrategy = (sim.geo) ? electionSampleGeo : electionSample
-    }
-
     let vizSample
-    function updateVizStrategy() {
+    function enterStrategy() {
+        voterList = (sim.geo) ? voterGeoList : voterSimList
+
+        electionStrategy = (sim.geo) ? electionSampleGeo : electionSample
+
         const VizSample = (sim.geo === true) ? VizSampleGeo : VizSampleBase
         vizSample = new VizSample(voterList, candidateSimList, screen, changes, sim)
     }
@@ -67,9 +63,7 @@ export default function SimSample(screen, menu, changes, electionSample, electio
     self.enter = () => {
         superEnter()
         sim.candidateDnAdd.canDnButton.show()
-        updateVoterListStrategy()
-        updateElectionStrategy()
-        updateVizStrategy()
+        enterStrategy()
         voterList.updateXY()
         candidateSimList.updateXY()
     }

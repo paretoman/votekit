@@ -5,18 +5,18 @@ import Voronoi2D from './Voronoi2D.js'
 
 /**
  * Show votes
- * @param {VoterGeoList} voterGeoList
+ * @param {VoterSimList} voterSimList
  * @param {CandidateSimList} candidateSimList
  * @param {Screen} screen
  * @param {Sim} sim
  * @constructor
  */
-export default function VizOneVoronoi(voterGeoList, candidateSimList, screen, sim, changes) {
+export default function VizOneVoronoi(voterSimList, candidateSimList, screen, sim, changes) {
     const self = this
 
     let renderers = []
 
-    self.update = function (voterList, electionResults) {
+    self.update = function (electionResults) {
         if (changes.check(['viz', 'electionMethod', 'dimensions'])) {
             screen.hideMaps()
         }
@@ -32,7 +32,7 @@ export default function VizOneVoronoi(voterGeoList, candidateSimList, screen, si
         const { dimensions } = sim.election
         const Voronoi = (dimensions === 1) ? Voronoi1D : Voronoi2D
 
-        const voterShapes = voterList.getVoterShapes()
+        const voterShapes = voterSimList.getVoterShapes()
         renderers = voterShapes.map(
             (voterShape) => new Voronoi(voterShape, candidateSimList, screen),
         )
