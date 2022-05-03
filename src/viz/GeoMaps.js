@@ -62,7 +62,7 @@ export default function GeoMaps(voterGeoList, candidateSimList, screen, sim) {
                     if (sim.election.dimensions === 1) {
                         const { x } = voterGroup.shape1
                         const { y } = voterGroup.shape2
-                        const ym = (y % 100) + 100 // TODO: better visual
+                        const ym = (y % 100) + 0 // TODO: better visual
                         // const y = Math.random() * 100
                         smallCircle(x, ym)
                     } else {

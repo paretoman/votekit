@@ -1,6 +1,8 @@
 /** @module */
 
-import GeoMaps from './GeoMaps.js'
+// import GeoMaps from './GeoMaps.js'
+import VoterRender1D from './VoterRender1D.js'
+import VoterRender2D from './VoterRender2D.js'
 
 /**
  * Show Voters
@@ -8,10 +10,10 @@ import GeoMaps from './GeoMaps.js'
  * @param {screen} screen - draw to the screen
  * @constructor
  */
-export default function VizSampleGeo(voterSimList, candidateSimList, screen, changes, sim) {
+export default function VizSample(voterSimList, candidateDnSimList, screen, changes, sim) {
     const self = this
 
-    const geoMaps = new GeoMaps(voterSimList, candidateSimList, screen, sim)
+    // const geoMaps = new GeoMaps(voterSimList, candidateDnSimList, screen, sim)
 
     // Candidates //
 
@@ -20,6 +22,11 @@ export default function VizSampleGeo(voterSimList, candidateSimList, screen, cha
     canvas2.width = screen.canvas.width
     canvas2.height = screen.canvas.height
     const context2 = canvas2.getContext('2d')
+
+    const { dimensions } = sim.election
+
+    let candidateDnRenderers = []
+    let voterRenderers = []
 
     self.update = function (addResult) {
         if (changes.checkNone() === false) {
@@ -31,6 +38,19 @@ export default function VizSampleGeo(voterSimList, candidateSimList, screen, cha
         if (pointsChanged) {
             self.updatePoints(newPoints, points)
         }
+
+        // voter renderer factory //
+
+        const VoterRenderer = (dimensions === 1) ? VoterRender1D : VoterRender2D
+
+        const voterShapes = voterSimList.getVoterShapes()
+        voterRenderers = voterShapes.map(
+            (voterShape) => new VoterRenderer(voterShape, screen),
+        )
+        const candidateDns = candidateDnSimList.getCandidateDistributions()
+        candidateDnRenderers = candidateDns.map(
+            (candidateDn) => new VoterRenderer(candidateDn, screen),
+        )
     }
 
     self.start = function () {
@@ -43,9 +63,15 @@ export default function VizSampleGeo(voterSimList, candidateSimList, screen, cha
     }
 
     self.render = () => {
-        geoMaps.renderPolicyNoise()
+        // geoMaps.renderPolicyNoise()
         self.renderCans()
-        self.renderVoters()
+
+        voterRenderers.forEach(
+            (renderer) => renderer.render(),
+        )
+        candidateDnRenderers.forEach(
+            (renderer) => renderer.render(),
+        )
     }
 
     self.renderCans = function () {
@@ -72,7 +98,10 @@ export default function VizSampleGeo(voterSimList, candidateSimList, screen, cha
             const p = newPoints[i]
             // dot
             ctx.beginPath()
-            ctx.arc(p.x, p.y, 3, 0, 2 * Math.PI)
+            const y = (dimensions === 1)
+                ? Math.random() * 100 + 0
+                : p.y
+            ctx.arc(p.x, y, 2, 0, 2 * Math.PI)
             ctx.fill()
         }
     }
@@ -86,21 +115,5 @@ export default function VizSampleGeo(voterSimList, candidateSimList, screen, cha
     function noBufferRender() {
         const { ctx } = screen
         renderPoints(ctx, self.points)
-    }
-
-    // Voters //
-
-    self.renderVoters = function () {
-        const { ctx } = screen
-        const voterShapes = voterSimList.getVoterShapes()
-        voterShapes.forEach((voterGroup) => {
-            // circle
-            ctx.beginPath()
-            // ctx.fillStyle = "#eee"
-            const { x, y, shape2 } = voterGroup
-            ctx.arc(x, y, shape2.w * 0.5, 0, 2 * Math.PI)
-            // ctx.fill()
-            ctx.stroke()
-        })
     }
 }

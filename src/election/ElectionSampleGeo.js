@@ -19,12 +19,12 @@ export default function ElectionSampleGeo(election, electionGeo) {
 
     let points = []
 
-    self.update = function (voterSimList, candidateSimList, changes) {
+    self.update = function (voterSimList, candidateSimList, changes, dimensions) {
         if (changes.checkNone() === false) {
             self.startSim()
         }
 
-        const addResult = self.addSim(voterSimList, candidateSimList)
+        const addResult = self.addSim(voterSimList, candidateSimList, dimensions)
         return addResult
     }
 
@@ -32,7 +32,7 @@ export default function ElectionSampleGeo(election, electionGeo) {
         points = []
     }
 
-    self.addSim = function (voterSimList, sampleCandidates) {
+    self.addSim = function (voterSimList, sampleCandidates, dimensions) {
         // add more points
 
         if (voterSimList.getVoterShapes().length === 0) return { pointsChanged: false }
@@ -68,7 +68,11 @@ export default function ElectionSampleGeo(election, electionGeo) {
                 const point = sampleCandidates.sampler.samplePoint()
 
                 // make a candidate
-                canList.push({ shape2: point })
+                if (dimensions === 1) {
+                    canList.push({ shape1: point })
+                } else {
+                    canList.push({ shape2: point })
+                }
             }
 
             // find winner position
@@ -89,7 +93,12 @@ export default function ElectionSampleGeo(election, electionGeo) {
                     let winPoint
                     if (r === 0) {
                         // record point
-                        winPoint = winner.shape2
+                        winPoint = (dimensions === 1) ? winner.shape1 : winner.shape2
+                    } else if (dimensions === 1) {
+                        // add jitter
+                        winPoint = {
+                            x: winner.shape1.x + (Math.random() - 0.5) * jitterSize,
+                        }
                     } else {
                         // add jitter
                         winPoint = {
@@ -114,10 +123,15 @@ export default function ElectionSampleGeo(election, electionGeo) {
                         for (let m = 0; m < numPoints; m++) {
                             let winPoint
                             if (r === 0) {
-                            // record point
-                                winPoint = can.shape2
+                                // record point
+                                winPoint = (dimensions === 1) ? can.shape1 : can.shape2
+                            } else if (dimensions === 1) {
+                                // add jitter
+                                winPoint = {
+                                    x: can.shape1.x + (Math.random() - 0.5) * jitterSize,
+                                }
                             } else {
-                            // add jitter
+                                // add jitter
                                 winPoint = {
                                     x: can.shape2.x + (Math.random() - 0.5) * jitterSize,
                                     y: can.shape2.y + (Math.random() - 0.5) * jitterSize,

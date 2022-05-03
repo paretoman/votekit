@@ -6,8 +6,7 @@ import VoterSimList from '../../voters/VoterSimList.js'
 import SimBase from './SimBase.js'
 import VoterSim from '../../voters/VoterSim.js'
 import VoterGeoList from '../../voters/VoterGeoList.js'
-import VizSampleGeo from '../../viz/VizSampleGeo.js'
-import VizSampleBase from '../../viz/VizSampleBase.js'
+import VizSample from '../../viz/VizSample.js'
 
 /**
  * Simulate many sample elections with
@@ -28,12 +27,12 @@ export default function SimSample(screen, menu, changes, electionSample, electio
 
     // Entities //
 
-    const candidateSimList = new CandidateDnSimList(sim, changes)
+    const candidateDnSimList = new CandidateDnSimList(sim, changes)
     const voterSimList = new VoterSimList(sim)
     const voterGeoList = new VoterGeoList(screen, sim, changes)
 
     self.addSimCandidateDistribution = (canDn) => {
-        candidateSimList.newCandidate(new CandidateDnSim(canDn, self.dragm))
+        candidateDnSimList.newCandidate(new CandidateDnSim(canDn, self.dragm))
     }
 
     self.addSimVoterCircle = (voterShape) => {
@@ -53,8 +52,7 @@ export default function SimSample(screen, menu, changes, electionSample, electio
 
         electionStrategy = (sim.geo) ? electionSampleGeo : electionSample
 
-        const VizSample = (sim.geo === true) ? VizSampleGeo : VizSampleBase
-        vizSample = new VizSample(voterList, candidateSimList, screen, changes, sim)
+        vizSample = new VizSample(voterList, candidateDnSimList, screen, changes, sim)
     }
 
     // Main State Machine Functions //
@@ -65,7 +63,7 @@ export default function SimSample(screen, menu, changes, electionSample, electio
         sim.candidateDnAdd.canDnButton.show()
         enterStrategy()
         voterList.updateXY()
-        candidateSimList.updateXY()
+        candidateDnSimList.updateXY()
     }
 
     self.exit = () => {
@@ -78,9 +76,10 @@ export default function SimSample(screen, menu, changes, electionSample, electio
         // The electionResults communicates how to visualize the election.
 
         voterList.update()
-        candidateSimList.update()
+        candidateDnSimList.update()
         const { dimensions } = sim.election
-        const addResult = electionStrategy.update(voterList, candidateSimList, changes, dimensions)
+        const addResult = electionStrategy
+            .update(voterList, candidateDnSimList, changes, dimensions)
         vizSample.update(addResult)
         changes.clear()
 
@@ -93,10 +92,9 @@ export default function SimSample(screen, menu, changes, electionSample, electio
 
     self.render = () => {
         vizSample.render()
-        candidateSimList.render()
     }
     self.renderForeground = () => {
         voterList.renderForeground()
-        candidateSimList.renderForeground()
+        candidateDnSimList.renderForeground()
     }
 }

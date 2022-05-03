@@ -11,7 +11,7 @@ export default function VoterRender1D(voterShape, screen) {
         const { x, shape1 } = voterShape
         const { w, densityProfile } = shape1
         const h = 100
-        const middle = 50
+        const middle = 150
 
         ctx.save()
 

@@ -149,15 +149,6 @@ export default function CandidateDistribution(
     const square = new SquareGraphic(self, 21, 21, screen) // square is for rendering
     self.square = square
 
-    self.render = function () {
-        const { ctx } = screen
-
-        ctx.beginPath()
-        // ctx.fillStyle = "grey"
-        ctx.arc(self.x, self.y, self.shape2.w * 0.5, 0, 2 * Math.PI)
-        // ctx.fill()
-        ctx.stroke()
-    }
     self.renderForeground = () => {
         square.render()
     }
