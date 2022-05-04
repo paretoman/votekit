@@ -9,4 +9,7 @@ export default function CandidateDnGraphic(candidateDn, screen) {
     self.renderForeground = () => {
         square.render()
     }
+    self.setRenderer = (rendererMaker) => {
+        self.renderer = rendererMaker(candidateDn)
+    }
 }

@@ -13,11 +13,13 @@ export default function CandidateDnSimList(sim, changes) {
     const self = this
 
     const simCanDns = []
+    self.rendererMaker = () => ({ render: () => {} })
 
     // Data Setters and Getters //
 
     self.newCandidate = function (simCanDn) {
         simCanDns.push(simCanDn)
+        simCanDn.canDn.graphic.setRenderer(self.rendererMaker)
     }
 
     // get sim entities that exist
@@ -58,7 +60,12 @@ export default function CandidateDnSimList(sim, changes) {
 
     self.render = () => {
         const canDnsList = self.getCandidateDistributions()
-        canDnsList.forEach((canDn) => canDn.render())
+        canDnsList.forEach((canDn) => canDn.graphic.renderer.render())
+    }
+
+    self.setRendererMaker = (rendererMaker) => {
+        self.rendererMaker = rendererMaker
+        simCanDns.forEach((simCanDn) => simCanDn.canDn.graphic.setRenderer(rendererMaker))
     }
     self.renderForeground = () => {
         if (sim.showGhosts) {
