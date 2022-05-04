@@ -1,5 +1,6 @@
 /** @module */
 
+import addAllocation from './addAllocation.js'
 import Grid1D from './Grid1D.js'
 import Grid2D from './Grid2D.js'
 
@@ -29,17 +30,15 @@ export default function VizOneGrid(voterSimList, candidateSimList, screen, sim, 
         const { error } = electionResults
         if (error !== undefined) return
 
-        const { votes } = electionResults
-        const nk = votes.tallyFractions.length
-        const wins = Array(nk).fill(0)
-        wins[electionResults.iWinner] = 1
-        candidateSimList.setCandidateWins(wins)
-        candidateSimList.setCandidateFractions(votes.tallyFractions)
+        const { tallyFractions, allocation } = addAllocation(electionResults)
+        candidateSimList.setCandidateWins(allocation)
+        candidateSimList.setCandidateFractions(tallyFractions)
 
         // renderer factory //
 
         const Grid = (dimensions === 1) ? Grid1D : Grid2D
 
+        const { votes } = electionResults
         if (votes.error) renderers = []
         renderers = votes.gridData.map(
             (vo) => new Grid(vo, candidateSimList, screen),

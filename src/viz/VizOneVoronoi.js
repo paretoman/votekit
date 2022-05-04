@@ -1,5 +1,6 @@
 /** @module */
 
+import addAllocation from './addAllocation.js'
 import Voronoi1D from './Voronoi1D.js'
 import Voronoi2D from './Voronoi2D.js'
 
@@ -24,16 +25,9 @@ export default function VizOneVoronoi(voterSimList, candidateSimList, screen, si
         const { error } = electionResults
         if (error !== undefined) return
 
-        const { votes, allocation } = electionResults
-        if (allocation === undefined) {
-            const nk = votes.tallyFractions.length
-            const wins = Array(nk).fill(0)
-            wins[electionResults.iWinner] = 1
-            candidateSimList.setCandidateWins(wins)
-        } else {
-            candidateSimList.setCandidateWins(allocation)
-        }
-        candidateSimList.setCandidateFractions(votes.tallyFractions)
+        const { tallyFractions, allocation } = addAllocation(electionResults)
+        candidateSimList.setCandidateWins(allocation)
+        candidateSimList.setCandidateFractions(tallyFractions)
 
         // renderer factory //
 
