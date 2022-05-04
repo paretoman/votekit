@@ -1,6 +1,6 @@
 /** @module */
 
-import geoColors from './GeoColors.js'
+import geoColors from './geoColors.js'
 import NoiseImage from './NoiseImage.js'
 
 /**
