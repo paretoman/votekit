@@ -10,4 +10,8 @@ export default function VoterGraphic(voterShape, screen) {
         // handle
         circle.render()
     }
+
+    self.setRenderer = (rendererMaker) => {
+        self.renderer = rendererMaker(voterShape)
+    }
 }

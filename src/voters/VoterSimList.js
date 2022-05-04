@@ -13,9 +13,11 @@ export default function VoterSimList(sim) {
 
     const list = []
     self.list = list
+    self.rendererMaker = () => ({ render: () => {} })
 
     self.newVoterSim = function (voterSim) {
         list.push(voterSim)
+        voterSim.voterShape.graphic.setRenderer(self.rendererMaker)
     }
 
     self.getVoterShapes = () => list.filter((v) => v.voterShape.exists).map((v) => v.voterShape)
@@ -28,7 +30,12 @@ export default function VoterSimList(sim) {
     self.updateVoters = () => { } // strategy pattern. There is a similar function for VoterGeoList
 
     self.render = () => {
-        list.forEach((v) => { if (v.voterShape.exists) v.render() })
+        list.forEach((v) => { if (v.voterShape.exists) v.voterShape.graphic.renderer.render() })
+    }
+
+    self.setRendererMaker = (rendererMaker) => {
+        self.rendererMaker = rendererMaker
+        list.forEach((v) => v.voterShape.graphic.setRenderer(rendererMaker))
     }
 
     self.renderForeground = () => {
