@@ -85,7 +85,7 @@ export default function Sim(
 
     self.update = () => {
         // state change
-        if (changes.check(['geo', 'dimensions', 'viz'])) {
+        if (changes.check(['geo', 'dimensions', 'viz', 'electionMethod'])) {
             // exit states
             Object.keys(sims).forEach((k) => sims[k].exit())
             // compute state
