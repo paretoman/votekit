@@ -147,8 +147,4 @@ export default function CandidateDistribution(
     self.color = '#ccc'
 
     self.graphic = new CandidateDnGraphic(self, screen)
-
-    self.renderForeground = () => {
-        self.graphic.renderForeground()
-    }
 }

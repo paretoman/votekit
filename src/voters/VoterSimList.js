@@ -46,9 +46,9 @@ export default function VoterSimList(sim) {
         }
     }
     self.renderForegroundExisting = () => {
-        list.forEach((v) => { if (v.voterShape.exists) v.renderForeground() })
+        list.forEach((v) => { if (v.voterShape.exists) v.voterShape.graphic.renderForeground() })
     }
     self.renderForegroundAll = () => {
-        list.forEach((v) => { v.renderForeground() })
+        list.forEach((v) => { v.voterShape.graphic.renderForeground() })
     }
 }

@@ -17,8 +17,4 @@ export default function VoterSim(voterShape, dragm) {
     self.voterShape = voterShape
 
     dragm.newCircleHandle(voterShape, voterShape.graphic.circle)
-
-    self.renderForeground = () => {
-        self.voterShape.renderForeground()
-    }
 }

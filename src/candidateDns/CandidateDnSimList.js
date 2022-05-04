@@ -69,10 +69,10 @@ export default function CandidateDnSimList(sim, changes) {
     }
     self.renderForegroundExisting = () => {
         const canDnsList = self.getCandidateDistributions()
-        canDnsList.forEach((canDn) => canDn.renderForeground())
+        canDnsList.forEach((canDn) => canDn.graphic.renderForeground())
     }
     self.renderForegroundAll = () => {
         const canDnsList = self.getCandidateDistributionsAll()
-        canDnsList.forEach((can) => can.renderForeground())
+        canDnsList.forEach((can) => can.graphic.renderForeground())
     }
 }

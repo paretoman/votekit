@@ -151,8 +151,4 @@ export default function VoterShape(
     self.color = '#88888888'
 
     self.graphic = new VoterGraphic(self, screen)
-
-    self.renderForeground = () => {
-        self.graphic.renderForeground()
-    }
 }

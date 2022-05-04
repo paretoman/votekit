@@ -56,11 +56,11 @@ export default function CandidateSimList(sim) {
     }
     self.renderForegroundExisting = () => {
         const canList = self.getCandidates()
-        canList.forEach((can) => can.renderForeground())
+        canList.forEach((can) => can.graphic.renderForeground())
     }
     self.renderForegroundAll = () => {
         const canList = self.getCandidatesAll()
-        canList.forEach((can) => can.renderForeground())
+        canList.forEach((can) => can.graphic.renderForeground())
     }
     self.numCandidates = () => simCans.length
 }

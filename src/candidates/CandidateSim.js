@@ -14,8 +14,4 @@ export default function CandidateSim(candidate, dragm) {
     self.candidate = candidate
 
     dragm.newSquareHandle(candidate, candidate.graphic.square)
-
-    self.renderForeground = () => {
-        self.candidate.renderForeground()
-    }
 }

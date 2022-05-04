@@ -127,8 +127,4 @@ export default function Candidate(
     // Rendering
 
     self.graphic = new CandidateGraphic(self, wHandle, hHandle, screen)
-
-    self.renderForeground = () => {
-        self.graphic.renderForeground()
-    }
 }

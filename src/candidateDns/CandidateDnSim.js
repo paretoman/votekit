@@ -14,8 +14,4 @@ export default function CandidateDnSim(canDn, dragm) {
     self.canDn = canDn
 
     dragm.newSquareHandle(canDn, canDn.graphic.square)
-
-    self.renderForeground = () => {
-        self.canDn.renderForeground()
-    }
 }
