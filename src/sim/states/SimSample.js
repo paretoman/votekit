@@ -7,6 +7,7 @@ import SimBase from './SimBase.js'
 import VoterSim from '../../voters/VoterSim.js'
 import VoterGeoList from '../../voters/VoterGeoList.js'
 import VizSample from '../../viz/VizSample.js'
+import VizSampleDensity1D from '../../viz/VizSampleDensity1D.js'
 
 /**
  * Simulate many sample elections with
@@ -52,7 +53,8 @@ export default function SimSample(screen, menu, changes, electionSample, electio
 
         electionStrategy = (sim.geo) ? electionSampleGeo : electionSample
 
-        vizSample = new VizSample(voterList, candidateDnSimList, screen, changes, sim)
+        const VizSampleStrat = (sim.election.dimensions === 1) ? VizSampleDensity1D : VizSample
+        vizSample = new VizSampleStrat(voterList, candidateDnSimList, screen, changes, sim)
     }
 
     // Main State Machine Functions //
