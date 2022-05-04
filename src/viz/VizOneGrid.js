@@ -30,6 +30,10 @@ export default function VizOneGrid(voterSimList, candidateSimList, screen, sim, 
         if (error !== undefined) return
 
         const { votes } = electionResults
+        const nk = votes.tallyFractions.length
+        const wins = Array(nk).fill(0)
+        wins[electionResults.iWinner] = 1
+        candidateSimList.setCandidateWins(wins)
         candidateSimList.setCandidateFractions(votes.tallyFractions)
 
         // renderer factory //
