@@ -20,8 +20,7 @@ export default function VizGeo(voterGeoList, candidateSimList, screen, sim, chan
 
     const { dimensions } = sim.election
     const VoterRenderer = (dimensions === 1) ? VoterRender1D : VoterRender2D
-
-    voterGeoList.setRendererMaker((voterShape) => new VoterRenderer(voterShape, screen))
+    voterGeoList.setRenderer((voterShape) => new VoterRenderer(voterShape, screen))
 
     self.update = function (geoElectionResults) {
         const { error } = geoElectionResults

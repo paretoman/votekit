@@ -27,8 +27,8 @@ export default function VizSampleDensity1D(voterSimList, candidateDnSimList, scr
 
     // voter renderer factory //
     const VoterRenderer = (dimensions === 1) ? VoterRender1D : VoterRender2D
-    voterSimList.setRendererMaker((voterShape) => new VoterRenderer(voterShape, screen))
-    candidateDnSimList.setRendererMaker((voterShape) => new VoterRenderer(voterShape, screen))
+    voterSimList.setRenderer((voterShape) => new VoterRenderer(voterShape, screen))
+    candidateDnSimList.setRenderer((voterShape) => new VoterRenderer(voterShape, screen))
 
     self.update = function (addResult) {
         if (changes.checkNone() === false) {

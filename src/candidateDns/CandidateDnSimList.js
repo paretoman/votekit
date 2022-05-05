@@ -63,7 +63,7 @@ export default function CandidateDnSimList(sim, changes) {
         canDnsList.forEach((canDn) => canDn.graphic.renderer.render())
     }
 
-    self.setRendererMaker = (rendererMaker) => {
+    self.setRenderer = (rendererMaker) => {
         self.rendererMaker = rendererMaker
         simCanDns.forEach((simCanDn) => simCanDn.canDn.graphic.setRenderer(rendererMaker))
     }

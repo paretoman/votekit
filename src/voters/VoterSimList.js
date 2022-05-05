@@ -33,9 +33,12 @@ export default function VoterSimList(sim) {
         list.forEach((v) => { if (v.voterShape.exists) v.voterShape.graphic.renderer.render() })
     }
 
-    self.setRendererMaker = (rendererMaker) => {
+    self.setRenderer = (rendererMaker) => {
         self.rendererMaker = rendererMaker
         list.forEach((v) => v.voterShape.graphic.setRenderer(rendererMaker))
+    }
+    self.updateGraphic = () => {
+        list.forEach((v) => v.voterShape.graphic.renderer.update())
     }
 
     self.renderForeground = () => {

@@ -15,7 +15,11 @@ import Voronoi2D from './Voronoi2D.js'
 export default function VizOneVoronoi(voterSimList, candidateSimList, screen, sim, changes) {
     const self = this
 
-    let renderers = []
+    // renderer factory //
+    const { dimensions } = sim.election
+    const Voronoi = (dimensions === 1) ? Voronoi1D : Voronoi2D
+    const rendererMaker = (voterShape) => new Voronoi(voterShape, candidateSimList, screen)
+    voterSimList.setRenderer(rendererMaker)
 
     self.update = function (electionResults) {
         if (changes.check(['viz', 'electionMethod', 'dimensions'])) {
@@ -28,21 +32,10 @@ export default function VizOneVoronoi(voterSimList, candidateSimList, screen, si
         const { tallyFractions, allocation } = addAllocation(electionResults)
         candidateSimList.setCandidateWins(allocation)
         candidateSimList.setCandidateFractions(tallyFractions)
-
-        // renderer factory //
-
-        const { dimensions } = sim.election
-        const Voronoi = (dimensions === 1) ? Voronoi1D : Voronoi2D
-
-        const voterShapes = voterSimList.getVoterShapes()
-        renderers = voterShapes.map(
-            (voterShape) => new Voronoi(voterShape, candidateSimList, screen),
-        )
+        voterSimList.updateGraphic()
     }
 
     self.render = function () {
-        renderers.forEach(
-            (renderer) => renderer.render(),
-        )
+        voterSimList.render()
     }
 }
