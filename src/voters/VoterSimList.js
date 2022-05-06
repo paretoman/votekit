@@ -17,7 +17,7 @@ export default function VoterSimList(sim) {
 
     self.newVoterSim = function (voterSim) {
         list.push(voterSim)
-        voterSim.voterShape.graphic.setRenderer(self.rendererMaker)
+        voterSim.graphic.setRenderer(self.rendererMaker)
     }
 
     self.getVoterShapes = () => list.filter((v) => v.voterShape.exists).map((v) => v.voterShape)
@@ -30,15 +30,15 @@ export default function VoterSimList(sim) {
     self.updateVoters = () => { } // strategy pattern. There is a similar function for VoterGeoList
 
     self.render = () => {
-        list.forEach((v) => { if (v.voterShape.exists) v.voterShape.graphic.renderer.render() })
+        list.forEach((v) => { if (v.voterShape.exists) v.graphic.renderer.render() })
     }
 
     self.setRenderer = (rendererMaker) => {
         self.rendererMaker = rendererMaker
-        list.forEach((v) => v.voterShape.graphic.setRenderer(rendererMaker))
+        list.forEach((v) => v.graphic.setRenderer(rendererMaker))
     }
     self.updateGraphic = () => {
-        list.forEach((v) => v.voterShape.graphic.renderer.update())
+        list.forEach((v) => v.graphic.renderer.update())
     }
 
     self.renderForeground = () => {
@@ -49,9 +49,9 @@ export default function VoterSimList(sim) {
         }
     }
     self.renderForegroundExisting = () => {
-        list.forEach((v) => { if (v.voterShape.exists) v.voterShape.graphic.renderForeground() })
+        list.forEach((v) => { if (v.voterShape.exists) v.graphic.renderForeground() })
     }
     self.renderForegroundAll = () => {
-        list.forEach((v) => { v.voterShape.graphic.renderForeground() })
+        list.forEach((v) => { v.graphic.renderForeground() })
     }
 }

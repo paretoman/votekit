@@ -1,7 +1,6 @@
 /** @module */
 
 import tooltipForEntity from '../tooltips/tooltipForEntity.js'
-import VoterGraphic from '../vizEntities/VoterGraphic.js'
 
 /**
  * VoterShape class with Handle component to take care of dragging.
@@ -149,6 +148,4 @@ export default function VoterShape(
     // Rendering
 
     self.color = '#88888888'
-
-    self.graphic = new VoterGraphic(self, screen)
 }

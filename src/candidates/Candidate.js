@@ -1,7 +1,6 @@
 /** @module */
 
 import tooltipForEntity from '../tooltips/tooltipForEntity.js'
-import CandidateGraphic from '../vizEntities/CandidateGraphic.js'
 
 /**
  * Candidate class on top of handle.
@@ -124,7 +123,6 @@ export default function Candidate(
         tooltipForEntity(self, screen, sim)
     }
 
-    // Rendering
-
-    self.graphic = new CandidateGraphic(self, wHandle, hHandle, screen)
+    self.wHandle = wHandle
+    self.hHandle = hHandle
 }

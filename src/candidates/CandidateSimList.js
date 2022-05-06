@@ -28,17 +28,17 @@ export default function CandidateSimList(sim) {
     // Update //
 
     self.setCandidateFractions = (fractions) => {
-        const canList = self.getCandidates()
-        canList.forEach((can, index) => {
+        const simCansExisting = self.getSimCandidates()
+        simCansExisting.forEach((simCan, index) => {
             const fraction = fractions[index]
-            can.graphic.setFraction(fraction)
+            simCan.graphic.setFraction(fraction)
         })
     }
     self.setCandidateWins = (winsByCandidate) => {
-        const canList = self.getCandidates()
-        canList.forEach((can, index) => {
+        const simCansExisting = self.getSimCandidates()
+        simCansExisting.forEach((simCan, index) => {
             const win = winsByCandidate[index]
-            can.graphic.setWins(win)
+            simCan.graphic.setWins(win)
         })
     }
     self.updateXY = () => {
@@ -55,12 +55,11 @@ export default function CandidateSimList(sim) {
         }
     }
     self.renderForegroundExisting = () => {
-        const canList = self.getCandidates()
-        canList.forEach((can) => can.graphic.renderForeground())
+        const simCansExisting = self.getSimCandidates()
+        simCansExisting.forEach((simCan) => simCan.graphic.renderForeground())
     }
     self.renderForegroundAll = () => {
-        const canList = self.getCandidatesAll()
-        canList.forEach((can) => can.graphic.renderForeground())
+        simCans.forEach((simCan) => simCan.graphic.renderForeground())
     }
-    self.numCandidates = () => simCans.length
+    self.numSimCandidates = () => simCans.length
 }

@@ -19,7 +19,7 @@ export default function CandidateDnSimList(sim, changes) {
 
     self.newCandidate = function (simCanDn) {
         simCanDns.push(simCanDn)
-        simCanDn.canDn.graphic.setRenderer(self.rendererMaker)
+        simCanDn.graphic.setRenderer(self.rendererMaker)
     }
 
     // get sim entities that exist
@@ -59,13 +59,14 @@ export default function CandidateDnSimList(sim, changes) {
     // Render //
 
     self.render = () => {
-        const canDnsList = self.getCandidateDistributions()
-        canDnsList.forEach((canDn) => canDn.graphic.renderer.render())
+        simCanDns.forEach((simCanDn) => {
+            if (simCanDn.canDn.exists) simCanDn.graphic.renderer.render()
+        })
     }
 
     self.setRenderer = (rendererMaker) => {
         self.rendererMaker = rendererMaker
-        simCanDns.forEach((simCanDn) => simCanDn.canDn.graphic.setRenderer(rendererMaker))
+        simCanDns.forEach((simCanDn) => simCanDn.graphic.setRenderer(rendererMaker))
     }
     self.renderForeground = () => {
         if (sim.showGhosts) {
@@ -75,11 +76,11 @@ export default function CandidateDnSimList(sim, changes) {
         }
     }
     self.renderForegroundExisting = () => {
-        const canDnsList = self.getCandidateDistributions()
-        canDnsList.forEach((canDn) => canDn.graphic.renderForeground())
+        simCanDns.forEach((simCanDn) => {
+            if (simCanDn.canDn.exists) simCanDn.graphic.renderForeground()
+        })
     }
     self.renderForegroundAll = () => {
-        const canDnsList = self.getCandidateDistributionsAll()
-        canDnsList.forEach((can) => can.graphic.renderForeground())
+        simCanDns.forEach((simCanDn) => simCanDn.graphic.renderForeground())
     }
 }

@@ -1,10 +1,10 @@
 import { drawStrokedColor, textPercent } from '../utilities/graphicsUtilities.js'
 import SquareGraphic from './SquareGraphic.js'
 
-export default function CandidateGraphic(candidate, wHandle, hHandle, screen) {
+export default function CandidateGraphic(candidate, screen) {
     const self = this
 
-    const square = new SquareGraphic(candidate, wHandle, hHandle, screen)
+    const square = new SquareGraphic(candidate, candidate.wHandle, candidate.hHandle, screen)
     self.square = square
 
     self.fraction = 0

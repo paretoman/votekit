@@ -1,7 +1,6 @@
 /** @module */
 
 import tooltipForEntity from '../tooltips/tooltipForEntity.js'
-import CandidateDnGraphic from '../vizEntities/CandidateDnGraphic.js'
 
 /**
  * This represents a spatial distribution of candidates.
@@ -145,6 +144,4 @@ export default function CandidateDistribution(
     // Rendering
 
     self.color = '#ccc'
-
-    self.graphic = new CandidateDnGraphic(self, screen)
 }

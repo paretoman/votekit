@@ -39,12 +39,12 @@ export default function SimOne(screen, menu, changes, electionOne, electionGeo, 
     const voterGeoList = new VoterGeoList(screen, sim, changes)
 
     self.addSimCandidate = (candidate) => {
-        candidateSimList.newCandidate(new CandidateSim(candidate, self.dragm))
+        candidateSimList.newCandidate(new CandidateSim(candidate, self.dragm, screen))
     }
 
     self.addSimVoterCircle = (voterShape) => {
-        voterGeoList.newVoterSim(new VoterSim(voterShape, self.dragm))
-        voterSimList.newVoterSim(new VoterSim(voterShape, self.dragm))
+        voterGeoList.newVoterSim(new VoterSim(voterShape, self.dragm, screen))
+        voterSimList.newVoterSim(new VoterSim(voterShape, self.dragm, screen))
     }
 
     changes.add(['districts'])
@@ -80,7 +80,7 @@ export default function SimOne(screen, menu, changes, electionOne, electionGeo, 
         screen.hideMaps()
         sim.candidateAdd.canButton.hide()
         // clean up fractions
-        const fillUndefined = Array(candidateSimList.numCandidates()).fill(undefined)
+        const fillUndefined = Array(candidateSimList.numSimCandidates()).fill(undefined)
         candidateSimList.setCandidateWins(fillUndefined)
         sim.voterTest.setE(0)
     }

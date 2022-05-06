@@ -1,5 +1,7 @@
 /** @module */
 
+import VoterGraphic from '../vizEntities/VoterGraphic.js'
+
 /**
  * Super class
  * A VoterSim has functionality for a voter that is specific to a simulation.
@@ -12,9 +14,11 @@
  * @param {DraggableManager} dragm
  * @constructor
  */
-export default function VoterSim(voterShape, dragm) {
+export default function VoterSim(voterShape, dragm, screen) {
     const self = this
     self.voterShape = voterShape
 
-    dragm.newCircleHandle(voterShape, voterShape.graphic.circle)
+    self.graphic = new VoterGraphic(voterShape, screen)
+
+    dragm.newCircleHandle(voterShape, self.graphic.circle)
 }
