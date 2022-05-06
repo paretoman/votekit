@@ -10,31 +10,68 @@ import { toRGBA } from '../lib/colorBlendScript.js'
  * @param {Screen} screen
  * @constructor
  */
-export default function Grid2D(gridData, candidateSimList, screen) {
+export default function Grid2D(candidateSimList, screen) {
     const self = this
 
-    const canList = candidateSimList.getCandidates()
-    const { grid, voteSet, voterGeom } = gridData
-
-    const { x, y, w } = voterGeom
-
-    const canvases = []
+    let gridData
+    let canList
     let singleCanvas
-    // TODO: set up canvases ahead of time
+    const canvases = []
+    // TODO: set up canvases before update?
 
-    const nCans = canList.length
-    const nHeight = Math.floor((nCans - 1) / 3) + 1
-    screen.setMapsHeight(nHeight * (1 / 3) * screen.height)
+    self.update = (gridData0) => {
+        gridData = gridData0
+        canList = candidateSimList.getCandidates()
 
-    const isGauss = voterGeom.densityProfile === 'gaussian'
+        const { grid, voteSet, voterGeom } = gridData
 
-    fillDataSeparate()
-    fillDataBlend()
+        const nCans = canList.length
+        const nHeight = Math.floor((nCans - 1) / 3) + 1
+        screen.setMapsHeight(nHeight * (1 / 3) * screen.height)
 
-    function fillDataSeparate() {
-    // make image data
-        const { nx, ny, weight } = grid
-        for (let i = 0; i < canList.length; i++) {
+        const isGauss = voterGeom.densityProfile === 'gaussian'
+
+        fillDataSeparate()
+        fillDataBlend()
+
+        function fillDataSeparate() {
+            // make image data
+            const { nx, ny, weight } = grid
+            for (let i = 0; i < canList.length; i++) {
+                const canvas = document.createElement('canvas')
+                canvas.width = nx
+                canvas.height = ny
+                const offCtx = canvas.getContext('2d')
+                const imageData = offCtx.createImageData(nx, ny)
+
+                const { data } = imageData
+
+                const { color } = canList[i]
+                const [r, g, b] = toRGBA(color)
+
+                let k = 0
+                for (let yp = 0; yp < ny; yp++) {
+                    for (let xp = 0; xp < nx; xp++) {
+                        const support = voteSet[k].tallyFractions[i]
+                        const a = support * ((isGauss) ? weight[k] : 1) * 255
+
+                        data[(xp + yp * nx) * 4 + 0] = r
+                        data[(xp + yp * nx) * 4 + 1] = g
+                        data[(xp + yp * nx) * 4 + 2] = b
+                        data[(xp + yp * nx) * 4 + 3] = a
+                        k += 1
+                    }
+                }
+                canvases.push(canvas)
+                offCtx.putImageData(imageData, 0, 0)
+            }
+        }
+
+        function fillDataBlend() {
+        // make image data
+            const { nx, ny, weight } = grid
+            const colorSet = canList.map((can) => can.color)
+
             const canvas = document.createElement('canvas')
             canvas.width = nx
             canvas.height = ny
@@ -43,14 +80,14 @@ export default function Grid2D(gridData, candidateSimList, screen) {
 
             const { data } = imageData
 
-            const { color } = canList[i]
-            const [r, g, b] = toRGBA(color)
-
             let k = 0
             for (let yp = 0; yp < ny; yp++) {
                 for (let xp = 0; xp < nx; xp++) {
-                    const support = voteSet[k].tallyFractions[i]
-                    const a = support * ((isGauss) ? weight[k] : 1) * 255
+                    const { tallyFractions } = voteSet[k]
+                    const color = colorBlend(tallyFractions, colorSet)
+                    const [r, g, b] = toRGBA(color)
+
+                    const a = ((isGauss) ? weight[k] : 1) * 255
 
                     data[(xp + yp * nx) * 4 + 0] = r
                     data[(xp + yp * nx) * 4 + 1] = g
@@ -59,46 +96,15 @@ export default function Grid2D(gridData, candidateSimList, screen) {
                     k += 1
                 }
             }
-            canvases.push(canvas)
+            singleCanvas = canvas
             offCtx.putImageData(imageData, 0, 0)
         }
     }
 
-    function fillDataBlend() {
-        // make image data
-        const { nx, ny, weight } = grid
-        const colorSet = canList.map((can) => can.color)
-
-        const canvas = document.createElement('canvas')
-        canvas.width = nx
-        canvas.height = ny
-        const offCtx = canvas.getContext('2d')
-        const imageData = offCtx.createImageData(nx, ny)
-
-        const { data } = imageData
-
-        let k = 0
-        for (let yp = 0; yp < ny; yp++) {
-            for (let xp = 0; xp < nx; xp++) {
-                const { tallyFractions } = voteSet[k]
-                const color = colorBlend(tallyFractions, colorSet)
-                const [r, g, b] = toRGBA(color)
-
-                const a = ((isGauss) ? weight[k] : 1) * 255
-
-                data[(xp + yp * nx) * 4 + 0] = r
-                data[(xp + yp * nx) * 4 + 1] = g
-                data[(xp + yp * nx) * 4 + 2] = b
-                data[(xp + yp * nx) * 4 + 3] = a
-                k += 1
-            }
-        }
-        singleCanvas = canvas
-        offCtx.putImageData(imageData, 0, 0)
-    }
-
     self.render = function () {
         const { ctx, mctx } = screen
+
+        const { x, y, w } = gridData.voterGeom
 
         drawBlend()
 
@@ -106,6 +112,7 @@ export default function Grid2D(gridData, candidateSimList, screen) {
 
         function drawSeparate() {
             // draw each can separately
+            const nCans = canList.length
             for (let i = 0; i < nCans; i++) {
                 // draw image
                 // transform is t

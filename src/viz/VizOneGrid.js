@@ -14,11 +14,14 @@ import Grid2D from './Grid2D.js'
  */
 export default function VizOneGrid(voterSimList, candidateSimList, screen, sim, changes) {
     const self = this
-    let renderers = []
+
+    // renderer factory //
+    const { dimensions } = sim.election
+    const Grid = (dimensions === 1) ? Grid1D : Grid2D
+    const rendererMaker = () => new Grid(candidateSimList, screen)
+    voterSimList.setRenderer(rendererMaker)
 
     self.update = function (electionResults) {
-        const { dimensions } = sim.election
-
         if (changes.check(['viz', 'electionMethod', 'dimensions'])) {
             if (dimensions === 2) {
                 screen.showMaps()
@@ -34,25 +37,14 @@ export default function VizOneGrid(voterSimList, candidateSimList, screen, sim, 
         candidateSimList.setCandidateWins(allocation)
         candidateSimList.setCandidateFractions(tallyFractions)
 
-        // renderer factory //
-
-        const Grid = (dimensions === 1) ? Grid1D : Grid2D
-
-        const { votes } = electionResults
-        if (votes.error) renderers = []
-        renderers = votes.gridData.map(
-            (vo) => new Grid(vo, candidateSimList, screen),
-        )
+        const { gridData } = electionResults.votes
+        voterSimList.updateGraphic(gridData)
     }
     self.render = function () {
         if (sim.election.dimensions === 1) {
-            renderers.forEach(
-                (renderer) => renderer.renderBackground(),
-            )
+            voterSimList.renderBackground()
         }
 
-        renderers.forEach(
-            (renderer) => renderer.render(),
-        )
+        voterSimList.render()
     }
 }

@@ -37,8 +37,13 @@ export default function VoterSimList(sim) {
         self.rendererMaker = rendererMaker
         list.forEach((v) => v.graphic.setRenderer(rendererMaker))
     }
-    self.updateGraphic = () => {
-        list.forEach((v) => v.graphic.renderer.update())
+    self.updateGraphic = (data) => {
+        const voterSimsExisting = self.getVoterSims()
+        if (data === undefined) {
+            voterSimsExisting.forEach((v) => v.graphic.renderer.update())
+        } else {
+            voterSimsExisting.forEach((v, i) => v.graphic.renderer.update(data[i]))
+        }
     }
 
     self.renderForeground = () => {
@@ -53,5 +58,8 @@ export default function VoterSimList(sim) {
     }
     self.renderForegroundAll = () => {
         list.forEach((v) => { v.graphic.renderForeground() })
+    }
+    self.renderBackground = () => {
+        list.forEach((v) => { if (v.voterShape.exists) v.graphic.renderer.renderBackground() })
     }
 }
