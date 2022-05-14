@@ -32,7 +32,7 @@ export default function VizGeo(voterGeoList, candidateSimList, screen, sim, chan
 
         geoMaps.update(geoElectionResults)
 
-        if (changes.check(['viz', 'geo', 'dimensions'])) {
+        if (changes.check(['viz', 'geo', 'dimensions', 'electionMethod'])) {
             screen.showMaps()
         }
 
