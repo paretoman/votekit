@@ -115,6 +115,7 @@ export default function Screen(w, h, layout) {
     self.hideMaps = () => {
         self.maps.style.display = 'none'
     }
+    self.hideMaps()
 
     self.eventHandlers = new EventHandlers()
     const { handlers } = self.eventHandlers
