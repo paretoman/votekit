@@ -12,7 +12,7 @@ import Voronoi2D from './Voronoi2D.js'
  * @param {Sim} sim
  * @constructor
  */
-export default function VizOneVoronoi(voterSimList, candidateSimList, screen, sim, changes) {
+export default function VizOneVoronoi(voterSimList, candidateSimList, screen, sim) {
     const self = this
 
     // renderer factory //
@@ -21,11 +21,14 @@ export default function VizOneVoronoi(voterSimList, candidateSimList, screen, si
     const rendererMaker = (voterShape) => new Voronoi(voterShape, candidateSimList, screen)
     voterSimList.setRenderer(rendererMaker)
 
-    self.update = function (electionResults) {
-        if (changes.check(['viz', 'electionMethod', 'dimensions'])) {
-            screen.hideMaps()
-        }
+    self.enter = () => {}
+    self.exit = () => {
+        // clean up fractions
+        const fillUndefined = Array(candidateSimList.numSimCandidates()).fill(undefined)
+        candidateSimList.setCandidateWins(fillUndefined)
+    }
 
+    self.update = function (electionResults) {
         const { error } = electionResults
         if (error !== undefined) return
 

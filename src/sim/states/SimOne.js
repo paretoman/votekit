@@ -61,27 +61,27 @@ export default function SimOne(screen, menu, changes, electionOne, electionGeo, 
 
         const VizNoGeo = (sim.election.countVotes.casterName === 'castPlurality') ? VizOneVoronoi : VizOneGrid
         const VizOne = (sim.geo === true) ? VizGeo : VizNoGeo
-        vizOne = new VizOne(voterList, candidateSimList, screen, sim, changes)
+        vizOne = new VizOne(voterList, candidateSimList, screen, sim)
     }
+    enterStrategy()
 
     // Main State Machine Functions //
 
     const superEnter = self.enter
     self.enter = () => {
         superEnter()
-        sim.candidateAdd.canButton.show()
         enterStrategy()
+
+        sim.candidateAdd.canButton.show()
+        vizOne.enter()
         voterList.updateXY()
         candidateSimList.updateXY()
         sim.voterTest.updateXY()
     }
 
     self.exit = () => {
-        screen.hideMaps()
+        vizOne.exit()
         sim.candidateAdd.canButton.hide()
-        // clean up fractions
-        const fillUndefined = Array(candidateSimList.numSimCandidates()).fill(undefined)
-        candidateSimList.setCandidateWins(fillUndefined)
         sim.voterTest.setE(0)
     }
 

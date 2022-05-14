@@ -12,7 +12,7 @@ import VoterRender2D from './VoterRender2D.js'
  * @param {Sim} sim
  * @constructor
  */
-export default function VizGeo(voterGeoList, candidateSimList, screen, sim, changes) {
+export default function VizGeo(voterGeoList, candidateSimList, screen, sim) {
     const self = this
 
     const geoMaps = new GeoMaps(voterGeoList, candidateSimList, screen, sim)
@@ -21,6 +21,16 @@ export default function VizGeo(voterGeoList, candidateSimList, screen, sim, chan
     const { dimensions } = sim.election
     const VoterRenderer = (dimensions === 1) ? VoterRender1D : VoterRender2D
     voterGeoList.setRenderer((voterShape) => new VoterRenderer(voterShape, screen))
+
+    self.enter = () => {
+        screen.showMaps()
+    }
+    self.exit = () => {
+        screen.hideMaps()
+        // clean up fractions
+        const fillUndefined = Array(candidateSimList.numSimCandidates()).fill(undefined)
+        candidateSimList.setCandidateWins(fillUndefined)
+    }
 
     self.update = function (geoElectionResults) {
         const { error } = geoElectionResults
@@ -31,10 +41,6 @@ export default function VizGeo(voterGeoList, candidateSimList, screen, sim, chan
         flagNoRender = false
 
         geoMaps.update(geoElectionResults)
-
-        if (changes.check(['viz', 'geo', 'dimensions', 'electionMethod'])) {
-            screen.showMaps()
-        }
 
         const { resultsStatewide, allocation } = geoElectionResults
         candidateSimList.setCandidateWins(allocation)
