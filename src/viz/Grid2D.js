@@ -37,6 +37,7 @@ export default function Grid2D(candidateSimList, screen) {
         function fillDataSeparate() {
             // make image data
             const { nx, ny, weight } = grid
+            canvases.splice(0)
             for (let i = 0; i < canList.length; i++) {
                 const canvas = document.createElement('canvas')
                 canvas.width = nx
