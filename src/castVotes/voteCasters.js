@@ -1,7 +1,7 @@
 /** @module */
 
 import castPlurality from './castPlurality.js'
-import castScore from './CastScore.js'
+import castScore from './castScore.js'
 
 /**
  * a collection of ways to cast votes
