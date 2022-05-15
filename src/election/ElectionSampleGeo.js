@@ -48,7 +48,7 @@ export default function ElectionSampleGeo(election, electionGeo) {
         const ns = 1
 
         // number of new points
-        const { seats } = election.countVotes
+        const { seats } = election.socialChoice
         const { nd } = voterSimList
         const nnp = seats * ns * nd
         const newPoints = Array(nnp)
@@ -57,9 +57,9 @@ export default function ElectionSampleGeo(election, electionGeo) {
         for (let i = 0; i < ns; i++) {
             // choose a number of candidates
             let nk
-            if (election.countVotes.checkElectionType() === 'singleWinner') {
+            if (election.socialChoice.checkElectionType() === 'singleWinner') {
                 nk = 5
-            } else if (election.countVotes.checkElectionType() === 'allocation') {
+            } else if (election.socialChoice.checkElectionType() === 'allocation') {
                 nk = 10
             }
             const canList = []
@@ -84,7 +84,7 @@ export default function ElectionSampleGeo(election, electionGeo) {
             // adjustable parameter for visualization
             const jitterSize = 10
 
-            if (election.countVotes.checkElectionType() === 'singleWinner') {
+            if (election.socialChoice.checkElectionType() === 'singleWinner') {
                 let r = 0
                 for (let o = 0; o < nDistricts; o++) {
                     const { winner } = resultsByDistrict[o]

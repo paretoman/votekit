@@ -15,9 +15,9 @@ Do the math of the election, casting and counting votes.
 * CastVotes
     * Voters cast their ballots. 
     * A distribution of a population of voters is sampled. A 2D spatial model is used to make the decision of how to vote or who to vote for. 
-    * The vote is aggregated into a set. 
-* CountVotes
-    * The difference between CountVotes and Election is that Election is a mediator for all the aspects of an election such as casting a vote, or the number of dimensions, while CountVotes is a component of the Election that just considers the votes and the result of counting. Then CountVotes returns a summary of the results of the count.
+    * The vote is aggregated into a set that only contains the information needed to elect winners.
+* SocialChoice
+    * The difference between SocialChoice and Election is that Election is a mediator for all the aspects of an election such as casting a vote, or the number of dimensions, while SocialChoice is a component of the Election that just considers the votes and the result of running the election method. Then SocialChoice returns a summary of the results of the election method.
 
 ## Sim
 

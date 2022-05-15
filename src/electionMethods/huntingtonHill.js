@@ -10,7 +10,7 @@ import { range } from '../utilities/jsHelpers.js'
  * @param {number} electionMethodOptions.seats - The number of seats to fill.
  * @param {number} electionMethodOptions.threshold - The minimum fraction of voters
  * that a party needs to be eligible for a seat.
- * @returns {{allocation:number[]}} - countResults, with property allocation.
+ * @returns {{allocation:number[]}} - socialChoiceResults, with property allocation.
  * Allocation is an array of integers that say how many representatives each party gets.
  */
 
@@ -55,8 +55,8 @@ export default function huntingtonHill(votes, electionMethodOptions) {
         const allocation = pops2.map(
             (p) => ((p >= minPopulation) ? 1 : 0),
         )
-        const countResults = { allocation }
-        return countResults
+        const socialChoiceResults = { allocation }
+        return socialChoiceResults
     }
 
     // make a list of break points / divisors, independent of vote totals
@@ -96,8 +96,8 @@ export default function huntingtonHill(votes, electionMethodOptions) {
 
     // Todo: consider if there is a tie.
     // Right now, we give extra seats to all the tied parties if there is a tie.
-    const countResults = { allocation }
-    return countResults
+    const socialChoiceResults = { allocation }
+    return socialChoiceResults
 }
 
 function oldWay(seats, populations, signposts) {
@@ -132,6 +132,6 @@ function oldWay(seats, populations, signposts) {
     const allocation = quotients.map(
         (p) => Math.floor(p),
     )
-    const countResults = { allocation }
-    return countResults
+    const socialChoiceResults = { allocation }
+    return socialChoiceResults
 }

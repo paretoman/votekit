@@ -67,7 +67,7 @@ export default function ElectionGeo(election) {
         const numCans = canList.length
         const allVotes = combineVotes(votesByTract, numCans)
 
-        const resultsStatewide = election.countVotes.run(canList, allVotes)
+        const resultsStatewide = election.socialChoice.run(canList, allVotes)
         return resultsStatewide
     }
 
@@ -95,7 +95,7 @@ export default function ElectionGeo(election) {
     function countTractElections(votesByTract, canList) {
         const resultsByTract = votesByTract.map(
             (row) => row.map(
-                (votes) => election.countVotes.run(canList, votes),
+                (votes) => election.socialChoice.run(canList, votes),
             ),
         )
         return resultsByTract
@@ -109,7 +109,7 @@ export default function ElectionGeo(election) {
         const votesByDistrict = combineVotesByDistrict(votesByTract, canList, voterGeoList)
 
         const resultsByDistrict = votesByDistrict.map(
-            (votes) => election.countVotes.run(canList, votes),
+            (votes) => election.socialChoice.run(canList, votes),
         )
         return resultsByDistrict
     }
@@ -147,7 +147,7 @@ export default function ElectionGeo(election) {
         // make a histogram of allocation
         const numCandidates = canList.length
         const allocation = Array(numCandidates).fill(0)
-        if (election.countVotes.checkElectionType() === 'singleWinner') {
+        if (election.socialChoice.checkElectionType() === 'singleWinner') {
             const iWinners = resultsByDistrict.map((electionResults) => electionResults.iWinner)
             iWinners.forEach((iWinner) => {
                 allocation[iWinner] += 1
