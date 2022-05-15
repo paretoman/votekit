@@ -16,6 +16,9 @@ Do the math of the election, casting and counting votes.
     * Voters cast their ballots. 
     * A distribution of a population of voters is sampled. A 2D spatial model is used to make the decision of how to vote or who to vote for. 
     * The vote is aggregated into a set that only contains the information needed to elect winners.
+    * There are two ways to cast and count.
+        1. By voter.
+        2. By regions of voters.
 * SocialChoice
     * The difference between SocialChoice and Election is that Election is a mediator for all the aspects of an election such as casting a vote, or the number of dimensions, while SocialChoice is a component of the Election that just considers the votes and the result of running the election method. Then SocialChoice returns a summary of the results of the election method.
 
@@ -28,7 +31,7 @@ Create a 2D spatial model.
     * Entities are visual objects that can be controlled by the user. These include voters and candidates.
     * Sim is a state machine with the following states: SimGeoOne, SimOne1D, SimOne2D, and SimSample. Each state is like a different game. Entities are shared between states. Wrappers use the entities as components to provide additional functionality to the states.
     * State Updates
-        The basic process is: Run an election. Get result. Visualize result. The election code handles any changes. The electionResults communicates how to visualize the election.
+        * The basic process is: Run an election. Get result. Visualize result. The election code handles any changes. The electionResults communicates how to visualize the election.
 
 * Voters
     * VoterShape represents a continuous population of voters. 
