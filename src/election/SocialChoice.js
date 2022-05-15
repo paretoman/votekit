@@ -24,19 +24,18 @@ export default function SocialChoice(menu) {
         //   which has tallies go in and analysis come out
         // electionResults, the larger one,
         //   is in the context of candidate objects and voter objects.
-        let electionResults
         if (self.checkElectionType() === 'allocation') {
             const electionMethodOptions = { seats: self.seats, threshold: 0.1 }
             const electionMethod = electionMethods[self.electionMethod]
             const socialChoiceResults = electionMethod(votes, electionMethodOptions)
             const { allocation } = socialChoiceResults
-            electionResults = { allocation, canList, votes }
-        } else {
-            const socialChoiceResults = electionMethods[self.electionMethod](votes)
-            const { iWinner } = socialChoiceResults
-            const winner = canList[iWinner]
-            electionResults = { iWinner, winner, votes }
+            const electionResults = { allocation, canList, votes }
+            return electionResults
         }
+        const socialChoiceResults = electionMethods[self.electionMethod](votes)
+        const { iWinner } = socialChoiceResults
+        const winner = canList[iWinner]
+        const electionResults = { iWinner, winner, votes }
         return electionResults
     }
 
