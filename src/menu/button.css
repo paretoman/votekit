@@ -14,6 +14,15 @@
     margin: 2px 4px;
     line-height: 1.1em;
 }
+
+.sim-sandbox .button-group-label2{
+	font-weight: bold;
+    font-size: 15px;
+    margin-bottom: 2px;
+    margin: 2px 4px;
+    line-height: 1.1em;
+}
+
 .sim-sandbox .button2{
 
     height: 24px;
@@ -74,4 +83,24 @@
 }
 .button[on=yes]:active{
 	background: #111;
+}
+
+.button-group-label ~ div.button {
+    display: none;
+}
+.button-group-label.seeit ~ div.button {
+    display: block; 
+}
+
+.button-group-label::before {
+    content: ' \2B  '; /* Unicode character for "plus" sign (+) */
+    font-size: 10px;
+    color: black;
+    fill: black;
+    /* float: right; */
+    /* margin-left: 5px; */
+  
+}
+.seeit::before {
+    content: " \2212  "; /* Unicode character for "minus" sign (-) */
 }
