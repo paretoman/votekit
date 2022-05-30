@@ -6,6 +6,7 @@
     "d3-delaunay": "./d3-delaunay.js",
     "d3-geo": "./d3-geo.js",
     "d3-polygon": "./d3-polygon.js",
-    "simplex-noise": "./simplex-noise.js"
+    "simplex-noise": "./simplex-noise.js",
+    "split-polygon": "./split-polygon.js"
   }
 }

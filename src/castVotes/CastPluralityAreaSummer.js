@@ -74,7 +74,7 @@ export function testEquidistantLine(eq, assert) {
     ]
 }
 
-function equidistantLine(c1, c2) {
+export function equidistantLine(c1, c2) {
     // Ac < b
     // this is the condition that x counts for a candidate.
 
