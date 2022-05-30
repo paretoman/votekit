@@ -8,6 +8,7 @@ import VoterSim from '../../voters/VoterSim.js'
 import VoterSimList from '../../voters/VoterSimList.js'
 import VizGeo from '../../viz/VizGeo.js'
 import VizOneVoronoi from '../../viz/VizOneVoronoi.js'
+import VizOneVoronoiRanking from '../../viz/VizOneVoronoiRanking.js'
 import VizOneGrid from '../../viz/VizOneGrid.js'
 
 /**
@@ -59,7 +60,9 @@ export default function SimOne(screen, menu, changes, electionOne, electionGeo, 
 
         electionStrategy = (sim.geo) ? electionGeo : electionOne
 
-        const VizNoGeo = (sim.election.socialChoice.casterName === 'castPlurality') ? VizOneVoronoi : VizOneGrid
+        const { casterName } = sim.election.socialChoice
+        const VizOneVoronoiGeneral = (casterName === 'castRanking') ? VizOneVoronoiRanking : VizOneVoronoi
+        const VizNoGeo = (casterName === 'castScore') ? VizOneGrid : VizOneVoronoiGeneral
         const VizOne = (sim.geo === true) ? VizGeo : VizNoGeo
         vizOne = new VizOne(voterList, candidateSimList, screen, sim)
     }

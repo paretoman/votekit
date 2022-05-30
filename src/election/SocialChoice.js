@@ -55,6 +55,9 @@ export default function SocialChoice(menu) {
         {
             name: 'Score', value: 'score', type: 'singleWinner', casterName: 'castScore',
         },
+        {
+            name: 'Single Transferable', value: 'stv', type: 'allocation', casterName: 'castRanking',
+        },
     ]
 
     // utilities for looking up this list
