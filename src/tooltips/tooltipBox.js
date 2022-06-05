@@ -20,7 +20,7 @@ export default function tooltipBox(entity, screen) {
     // box.style.width = '10px'
     // box.style.height = '10px'
     box.style.border = '1px solid black'
-    box.style.padding = '4px'
+    box.style.padding = '8px'
     box.style.background = 'white'
 
     let pinned = false
