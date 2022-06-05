@@ -14,7 +14,8 @@ export default function castPluralityTestVote(canGeoms, voterGeom, dimensions) {
     const n = canGeoms.length
     const tally = (new Array(n)).fill(0)
     tally[i] = 1
-    return tally
+    const vote = { tallyFractions: tally }
+    return vote
 }
 function df1(a, b) {
     return (a.x - b.x) ** 2

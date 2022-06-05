@@ -2,7 +2,6 @@
 
 import CastRankingAreaSummer from './CastRankingAreaSummer.js'
 import CastRankingLineSummer from './CastRankingLineSummer.js'
-import castRankingTestVote from './castRankingTestVote.js'
 
 /**
  * Vote for one.
@@ -14,13 +13,7 @@ import castRankingTestVote from './castRankingTestVote.js'
  * For 1D, an array of objects: {x,w,densityProfile}.
  * @returns votes, an object
  */
-export default function castRanking(canGeoms, voterGeoms, dimensions, optionCast, isTestVoter) {
-    if (isTestVoter) {
-        const tallyFractions = castRankingTestVote(canGeoms, voterGeoms[0], dimensions)
-        const votes = { tallyFractions }
-        return votes
-    }
-
+export default function castRanking(canGeoms, voterGeoms, dimensions) {
     const summer = (dimensions === 1)
         ? new CastRankingLineSummer(canGeoms)
         : new CastRankingAreaSummer(canGeoms)

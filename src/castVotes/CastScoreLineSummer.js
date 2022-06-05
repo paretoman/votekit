@@ -25,8 +25,9 @@ export default function CastScoreLineSummer(canGeoms) {
         for (let i = 0; i < gridLength; i++) {
             const xi = grid.x[i]
             const testVoter = { x: xi }
-            const tallyFractions = castScoreTestVote(canGeoms, testVoter, 1)
-            voteSet[i] = { tallyFractions }
+            const vote = castScoreTestVote(canGeoms, testVoter, 1)
+            voteSet[i] = vote
+            const { tallyFractions } = vote
             const weight = findWeight(voterGeom, xi)
             totalArea += weight
             for (let k = 0; k < n; k++) {

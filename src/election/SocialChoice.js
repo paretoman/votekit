@@ -44,19 +44,19 @@ export default function SocialChoice(menu) {
     // a list of election methods
     self.electionMethodList = [
         {
-            name: 'Huntington Hill', value: 'huntingtonHill', type: 'allocation', casterName: 'castPlurality',
+            name: 'Huntington Hill', value: 'huntingtonHill', type: 'allocation', casterName: 'plurality',
         },
         {
-            name: 'Plurality', value: 'plurality', type: 'singleWinner', casterName: 'castPlurality',
+            name: 'Plurality', value: 'plurality', type: 'singleWinner', casterName: 'plurality',
         },
         {
-            name: 'Random Winner', value: 'randomWinner', type: 'singleWinner', casterName: 'castPlurality',
+            name: 'Random Winner', value: 'randomWinner', type: 'singleWinner', casterName: 'plurality',
         },
         {
-            name: 'Score', value: 'score', type: 'singleWinner', casterName: 'castScore',
+            name: 'Score', value: 'score', type: 'singleWinner', casterName: 'score',
         },
         {
-            name: 'Single Transferable', value: 'stv', type: 'allocation', casterName: 'castRanking',
+            name: 'Single Transferable', value: 'stv', type: 'allocation', casterName: 'ranking',
         },
     ]
 

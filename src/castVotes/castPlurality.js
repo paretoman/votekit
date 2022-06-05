@@ -2,7 +2,6 @@
 
 import CastPluralityAreaSummer from './CastPluralityAreaSummer.js'
 import CastPluralityLineSummer from './CastPluralityLineSummer.js'
-import castPluralityTestVote from './castPluralityTestVote.js'
 
 /**
  * Vote for one.
@@ -14,13 +13,7 @@ import castPluralityTestVote from './castPluralityTestVote.js'
  * For 1D, an array of objects: {x,w,densityProfile}.
  * @returns votes, an object
  */
-export default function castPlurality(canGeoms, voterGeoms, dimensions, optionCast, isTestVoter) {
-    if (isTestVoter) {
-        const tallyFractions = castPluralityTestVote(canGeoms, voterGeoms[0], dimensions)
-        const votes = { tallyFractions }
-        return votes
-    }
-
+export default function castPlurality(canGeoms, voterGeoms, dimensions) {
     const summer = (dimensions === 1)
         ? new CastPluralityLineSummer(canGeoms)
         : new CastPluralityAreaSummer(canGeoms)

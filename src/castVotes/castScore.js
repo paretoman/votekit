@@ -2,7 +2,6 @@
 
 import CastScoreAreaSummer from './CastScoreAreaSummer.js'
 import CastScoreLineSummer from './CastScoreLineSummer.js'
-import castScoreTestVote from './castScoreTestVote.js'
 
 // The main difference between this and plurality is we need to return a grid from here.
 // We also will return a set of votes from that grid.
@@ -17,14 +16,7 @@ import castScoreTestVote from './castScoreTestVote.js'
  * For 1D, an array of objects: {x,w,densityProfile}.
  * @returns votes, an object
  */
-export default function castScore(canGeoms, voterGeoms, dimensions, optionCast, isTestVoter) {
-    if (isTestVoter) {
-        const testVoter = voterGeoms[0]
-        const tallyFractions = castScoreTestVote(canGeoms, testVoter, dimensions)
-        const votes = { tallyFractions }
-        return votes
-    }
-
+export default function castScore(canGeoms, voterGeoms, dimensions, optionCast) {
     const summer = (dimensions === 1)
         ? new CastScoreLineSummer(canGeoms)
         : new CastScoreAreaSummer(canGeoms, optionCast)

@@ -31,7 +31,8 @@ export default function castScoreTestVote(canGeoms, voterGeom, dimensions) {
             tally[i] = minscore + (maxscore - minscore) * (1 - frac)
         }
     }
-    return tally
+    const vote = { tallyFractions: tally }
+    return vote
 }
 function df1(a, b) {
     return Math.abs(a.x - b.x)
