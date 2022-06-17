@@ -61,7 +61,7 @@ export default function SimOne(screen, menu, changes, electionOne, electionGeo, 
         electionStrategy = (sim.geo) ? electionGeo : electionOne
 
         const { casterName } = sim.election.socialChoice
-        const VizOneVoronoiGeneral = (casterName === 'ranking') ? VizOneVoronoiRanking : VizOneVoronoi
+        const VizOneVoronoiGeneral = (casterName === 'ranking' || casterName === 'pairwise') ? VizOneVoronoiRanking : VizOneVoronoi
         const VizNoGeo = (casterName === 'score') ? VizOneGrid : VizOneVoronoiGeneral
         const VizOne = (sim.geo === true) ? VizGeo : VizNoGeo
         vizOne = new VizOne(voterList, candidateSimList, screen, sim)

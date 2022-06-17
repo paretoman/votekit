@@ -13,6 +13,7 @@ export default function castRankingTestVote(canGeoms, voterGeom, dimensions) {
     const dist2 = canGeoms.map((c) => df(c, voterGeom))
     const n = canGeoms.length
     const indexInOrder = range(n).sort((a, b) => dist2[a] - dist2[b])
+    // Note that ties are not handled.
 
     const ranking = (new Array(n)).fill(0)
     const bordaScores = (new Array(n)).fill(0)

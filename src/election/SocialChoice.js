@@ -56,7 +56,10 @@ export default function SocialChoice(menu) {
             name: 'Score', value: 'score', type: 'singleWinner', casterName: 'score',
         },
         {
-            name: 'Single Transferable', value: 'stv', type: 'allocation', casterName: 'ranking',
+            name: 'Rank Rand', value: 'stv', type: 'singleWinner', casterName: 'ranking',
+        },
+        {
+            name: 'Pair Rand', value: 'minimax', type: 'singleWinner', casterName: 'pairwise',
         },
     ]
 

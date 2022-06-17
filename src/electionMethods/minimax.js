@@ -6,8 +6,8 @@
  * @param {Number[]} votes.tallyFractions
  * @returns {socialChoiceResults}
  */
-export default function stv(votes) {
-    const nk = votes.tallyFractions.length
+export default function minimax(votes) {
+    const nk = votes.pairwiseTallyFractions.length
     const iWinner = Math.floor(Math.random() * nk)
     const socialChoiceResults = { iWinner }
     return socialChoiceResults
