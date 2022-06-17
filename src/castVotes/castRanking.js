@@ -25,18 +25,20 @@ export default function castRanking(canGeoms, voterGeoms, dimensions) {
     let rankingAll = []
     const firstPreferences = Array(n).fill(0)
     let totalAreaAll = 0
+    const cellData = []
 
     // should ideally make a set of polygons for each ranking so that we avoid repeating rankings.
     voterGeoms.forEach((voterGeom) => {
         const weight = ((voterGeom.weight === undefined) ? 1 : voterGeom.weight)
 
         const {
-            ranking, cansRanked, area, totalArea,
+            ranking, cansRanked, area, totalArea, cells,
         } = summer.sumArea(voterGeom, weight)
 
         areaAll = areaAll.concat(area)
         rankingAll = rankingAll.concat(ranking)
         totalAreaAll += totalArea
+        cellData.push({ cells, ranking })
 
         for (let i = 0; i < cansRanked.length; i++) { // tally first preferences
             const cr0 = cansRanked[i][0]
@@ -49,6 +51,8 @@ export default function castRanking(canGeoms, voterGeoms, dimensions) {
     const rankingTallyFractions = areaAll.map((x) => x / totalAreaAll)
     const tallyFractions = firstPreferences.map((x) => x / totalAreaAll)
 
-    const votes = { ranking: rankingAll, rankingTallyFractions, tallyFractions }
+    const votes = {
+        ranking: rankingAll, rankingTallyFractions, tallyFractions, cellData,
+    }
     return votes
 }

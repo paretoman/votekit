@@ -1,8 +1,7 @@
 /** @module */
 
-import splitPolygon from '../lib/snowpack/build/snowpack/pkg/split-polygon.js'
-import { equidistantLine } from '../castVotes/CastPluralityAreaSummer.js'
-import { blend } from '../lib/colorBlendScript.js'
+import castRankingFindPolygons from '../castVotes/castRankingFindPolygons.js'
+import colorBlend from './colorBlend.js'
 
 /**
  * Draw Voronoi cells to show votes.
@@ -17,63 +16,31 @@ export default function VoronoiRanking2D(voterGroup, candidateSimList, screen) {
     let canList
     let colors
     let cells
-    self.update = function () {
-        // just keep dividing up the screen for each pair. Keep track of color, too.
+    self.update = function (cellData) {
+        // calculate colors
 
-        // start with screen rectangle
-        const screenRect = makeRect(0, 0, screen.width, screen.height)
-        colors = ['#000000']
-        cells = [screenRect]
-
-        let ncombo = 1 // level of cell combinations. Useful for color blending ratio.
+        let ranking
+        if (cellData === undefined) {
+            canList = candidateSimList.getCandidates()
+            const canGeoms = canList.map((can) => can.shape2)
+            const voterGeom = voterGroup.shape2
+            const cd = castRankingFindPolygons(voterGeom, canGeoms)
+            ranking = cd.ranking
+            cells = cd.cells
+        } else {
+            ranking = cellData.ranking
+            cells = cellData.cells
+        }
 
         canList = candidateSimList.getCandidates()
+
         const n = canList.length
-        for (let i = 0; i < n - 1; i++) {
-            for (let k = i + 1; k < n; k++) {
-                const cn = cells.length
-                // split cells with voronoi, guess how many cells
-                const newCells = Array(cn * 2)
-                const newColors = Array(cn * 2)
-
-                let o = 0
-                for (let m = 0; m < cn; m++) {
-                    const subject = cells[m]
-
-                    const plane = eqPlane(canList[i], canList[k])
-
-                    const newC = splitPolygon(subject, plane)
-
-                    const p = 1 / ncombo
-                    const color = colors[m]
-
-                    const pos = newC.positive
-                    if (pos !== undefined && pos.length > 2) {
-                        newCells[o] = pos
-
-                        const can = canList[k]
-                        const newColor = blend(color, can.color, p)
-                        newColors[o] = newColor
-
-                        o += 1
-                    }
-                    const neg = newC.negative
-                    if (neg !== undefined && neg.length > 2) {
-                        newCells[o] = neg
-
-                        const can = canList[i]
-                        const newColor = blend(color, can.color, p)
-                        newColors[o] = newColor
-
-                        o += 1
-                    }
-                }
-                newCells.splice(o)
-                newColors.splice(o)
-                cells = newCells
-                colors = newColors
-                ncombo += 1
-            }
+        const cn = cells.length
+        colors = Array(cn)
+        const colorList = canList.map((can) => can.color)
+        for (let i = 0; i < cn; i++) {
+            const bordaScores = ranking[i].map((r) => n - r)
+            colors[i] = colorBlend(bordaScores, colorList)
         }
     }
 
@@ -81,15 +48,6 @@ export default function VoronoiRanking2D(voterGroup, candidateSimList, screen) {
         const { ctx } = screen
 
         ctx.save()
-
-        // draw circle clip
-
-        // http://jsfiddle.net/jimrhoskins/dDUC3/1/
-        // https://dustinpfister.github.io/2019/10/08/canvas-clip/
-        ctx.beginPath()
-        ctx.arc(voterGroup.x, voterGroup.y, voterGroup.shape2.w * 0.5, 0, 2 * Math.PI)
-        // ctx.closePath()
-        ctx.clip()
 
         const cn = cells.length
         for (let i = 0; i < cn; i++) {
@@ -101,32 +59,14 @@ export default function VoronoiRanking2D(voterGroup, candidateSimList, screen) {
             ctx.stroke()
         }
 
+        // border
+        ctx.strokeStyle = '#222'
         ctx.beginPath()
         ctx.arc(voterGroup.x, voterGroup.y, voterGroup.shape2.w * 0.5, 0, 2 * Math.PI)
         ctx.stroke()
 
         ctx.restore()
     }
-}
-
-function makeRect(x, y, w, h) {
-    // the points are in counterclockwise order
-    // assuming a coordinate system where y points down and x points right.
-    // top left
-    // bottom left
-    // bottom right
-    // top right
-    const subject = [
-        [x, y],
-        [x, y + h],
-        [x + w, y + h],
-        [x + w, y],
-    ]
-    return subject
-}
-function eqPlane(c1, c2) {
-    const { A, b } = equidistantLine(c1, c2)
-    return [A.x, A.y, -b]
 }
 
 function cellPath(ctx, cell) {

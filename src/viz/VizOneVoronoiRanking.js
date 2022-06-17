@@ -35,7 +35,8 @@ export default function VizOneVoronoiRanking(voterSimList, candidateSimList, scr
         const { tallyFractions, allocation } = addAllocation(electionResults)
         candidateSimList.setCandidateWins(allocation)
         candidateSimList.setCandidateFractions(tallyFractions)
-        voterSimList.updateGraphic()
+        const { cellData } = electionResults.votes
+        voterSimList.updateGraphic(cellData)
     }
 
     self.render = function () {

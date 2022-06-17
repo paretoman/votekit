@@ -28,7 +28,7 @@ export default function CastRankingAreaSummer(canGeoms) {
             totalArea += theArea
         }
         return {
-            ranking, cansRanked, area, totalArea,
+            ranking, cansRanked, area, totalArea, cells,
         }
     }
 }
