@@ -1,17 +1,10 @@
 /** @module */
 
-// d3-voronoi
-// d3-select
-// d3-range
-
-import { Delaunay } from '../lib/snowpack/build/snowpack/pkg/d3-delaunay.js'
-// import { Delaunay } from 'd3-delaunay'
-// import { Delaunay } from 'https://cdn.skypack.dev/d3-delaunay@6'
-// https://github.com/d3/d3-delaunay
+import castRankingFindIntervals from '../castVotes/castRankingFindIntervals.js'
+import colorBlend from './colorBlend.js'
 
 /**
  * Draw Voronoi cells to show votes.
- * Voronoi1D is called by VizOne.
  * @param {VoterGroup} voterGroup
  * @param {CandidateSimList} candidateSimList
  * @param {Screen} screen
@@ -20,13 +13,37 @@ import { Delaunay } from '../lib/snowpack/build/snowpack/pkg/d3-delaunay.js'
 export default function VoronoiRanking1D(voterGroup, candidateSimList, screen) {
     const self = this
 
-    let voronoi
     let canList
-    self.update = function () {
+    let colors
+    let intervals
+    self.update = function (cellData) {
+        // calculate colors
+
+        let ranking
+        let intervalBorders
+        if (cellData === undefined) {
+            canList = candidateSimList.getCandidates()
+            const canGeoms = canList.map((can) => can.shape1)
+            const cd = castRankingFindIntervals(canGeoms)
+            ranking = cd.ranking
+            intervalBorders = cd.intervalBorders
+        } else {
+            ranking = cellData.ranking
+            intervalBorders = cellData.intervalBorders
+        }
+
         canList = candidateSimList.getCandidates()
-        const points = canList.map((e) => [e.x, e.y])
-        const delaunay = Delaunay.from(points)
-        voronoi = delaunay.voronoi([0, 0, screen.width, screen.height])
+        const n = canList.length
+        const colorList = canList.map((can) => can.color)
+
+        const ni = intervalBorders.length - 1
+        intervals = Array(ni)
+        colors = Array(ni)
+        for (let i = 0; i < ni; i++) {
+            intervals[i] = [intervalBorders[i], intervalBorders[i + 1]]
+            const bordaScores = ranking[i].map((r) => n - r)
+            colors[i] = colorBlend(bordaScores, colorList)
+        }
     }
 
     self.render = function () {
@@ -47,13 +64,9 @@ export default function VoronoiRanking1D(voterGroup, candidateSimList, screen) {
         // ctx.closePath()
         ctx.clip()
 
-        const n = canList.length
+        const n = intervals.length
         for (let i = 0; i < n; i++) {
-            ctx.beginPath()
-            voronoi.renderCell(i, ctx)
-            ctx.fillStyle = canList[i].color
-            ctx.fill()
-            ctx.stroke()
+            renderInterval(intervals[i], colors[i], ctx, screen)
         }
 
         ctx.beginPath()
@@ -91,4 +104,18 @@ export default function VoronoiRanking1D(voterGroup, candidateSimList, screen) {
             ctx.rect(x - w * 0.5, 150 - h * 0.5, w, h)
         }
     }
+}
+
+function renderInterval(interval, color, ctx, screen) {
+    const x = Math.max(0, interval[0])
+    const x2 = Math.min(screen.width, interval[1])
+    const w = x2 - x
+    const y = 0
+    const h = screen.height
+
+    ctx.beginPath()
+    ctx.rect(x, y, w, h)
+    ctx.fillStyle = color
+    ctx.fill()
+    ctx.stroke()
 }

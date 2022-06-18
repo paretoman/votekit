@@ -1,7 +1,7 @@
 /** @module */
 
+import CastPairwiseSummer1DIntervals from './CastPairwiseSummer1DIntervals.js'
 import CastPairwiseSummer2DPolygons from './CastPairwiseSummer2DPolygons.js'
-import CastRankingSummer1DInterval from './CastRankingSummer1DInterval.js'
 
 /**
  * Vote for one.
@@ -15,7 +15,7 @@ import CastRankingSummer1DInterval from './CastRankingSummer1DInterval.js'
  */
 export default function castPairwise(canGeoms, voterGeoms, dimensions) {
     const summer = (dimensions === 1)
-        ? new CastRankingSummer1DInterval(canGeoms)
+        ? new CastPairwiseSummer1DIntervals(canGeoms)
         : new CastPairwiseSummer2DPolygons(canGeoms)
 
     // get fraction of votes for each candidate so we can summarize results

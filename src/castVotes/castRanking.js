@@ -1,7 +1,7 @@
 /** @module */
 
 import CastRankingSummer2DPolygons from './CastRankingSummer2DPolygons.js'
-import CastRankingSummer1DInterval from './CastRankingSummer1DInterval.js'
+import CastRankingSummer1DIntervals from './CastRankingSummer1DIntervals.js'
 
 /**
  * Vote for one.
@@ -15,7 +15,7 @@ import CastRankingSummer1DInterval from './CastRankingSummer1DInterval.js'
  */
 export default function castRanking(canGeoms, voterGeoms, dimensions) {
     const summer = (dimensions === 1)
-        ? new CastRankingSummer1DInterval(canGeoms)
+        ? new CastRankingSummer1DIntervals(canGeoms)
         : new CastRankingSummer2DPolygons(canGeoms)
 
     const n = canGeoms.length
@@ -32,13 +32,13 @@ export default function castRanking(canGeoms, voterGeoms, dimensions) {
         const weight = ((voterGeom.weight === undefined) ? 1 : voterGeom.weight)
 
         const {
-            ranking, cansRanked, area, totalArea, cells,
+            ranking, cansRanked, area, totalArea, cellDatum,
         } = summer.sumArea(voterGeom, weight)
 
         areaAll = areaAll.concat(area)
         rankingAll = rankingAll.concat(ranking)
         totalAreaAll += totalArea
-        cellData.push({ cells, ranking })
+        cellData.push(cellDatum)
 
         for (let i = 0; i < cansRanked.length; i++) { // tally first preferences
             const cr0 = cansRanked[i][0]

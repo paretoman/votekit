@@ -28,7 +28,7 @@ export default function CastRankingSummer2DPolygons(canGeoms) {
             totalArea += theArea
         }
         return {
-            ranking, cansRanked, area, totalArea, cells,
+            ranking, cansRanked, area, totalArea, cellDatum: { cells, ranking },
         }
     }
 }

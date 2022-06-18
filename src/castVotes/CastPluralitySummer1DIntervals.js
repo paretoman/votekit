@@ -47,7 +47,7 @@ function findIntervals(canGeoms) {
     return intervals
 }
 
-function sumBlock(block, interval) {
+export function sumBlock(block, interval) {
     const { lower, upper } = interval
     const { x, w } = block
     const r = 0.5 * w
@@ -59,7 +59,7 @@ function sumBlock(block, interval) {
     return sum
 }
 
-function sumGaussian(block, interval) {
+export function sumGaussian(block, interval) {
     const { lower, upper } = interval
     const { x, w } = block
     const center = x
