@@ -8,7 +8,7 @@ import castScoreTestVote from './castScoreTestVote.js'
  * @param {Object[]} canGeoms
  * @constructor
  */
-export default function CastScoreAreaSummer(canGeoms, optionCast) {
+export default function CastScoreSummer2DGrid(canGeoms, optionCast) {
     const self = this
 
     self.sumArea = function sumArea(voterGeom) {

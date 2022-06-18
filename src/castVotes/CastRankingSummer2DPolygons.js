@@ -8,7 +8,7 @@ import castRankingFindPolygons from './castRankingFindPolygons.js'
  * @param {Object[]} canGeoms
  * @constructor
  */
-export default function CastRankingAreaSummer(canGeoms) {
+export default function CastRankingSummer2DPolygons(canGeoms) {
     const self = this
 
     self.sumArea = function sumArea(voterGeom, weight) {

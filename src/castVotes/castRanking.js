@@ -1,7 +1,7 @@
 /** @module */
 
-import CastRankingAreaSummer from './CastRankingAreaSummer.js'
-import CastRankingLineSummer from './CastRankingLineSummer.js'
+import CastRankingSummer2DPolygons from './CastRankingSummer2DPolygons.js'
+import CastRankingSummer1DInterval from './CastRankingSummer1DInterval.js'
 
 /**
  * Vote for one.
@@ -15,8 +15,8 @@ import CastRankingLineSummer from './CastRankingLineSummer.js'
  */
 export default function castRanking(canGeoms, voterGeoms, dimensions) {
     const summer = (dimensions === 1)
-        ? new CastRankingLineSummer(canGeoms)
-        : new CastRankingAreaSummer(canGeoms)
+        ? new CastRankingSummer1DInterval(canGeoms)
+        : new CastRankingSummer2DPolygons(canGeoms)
 
     const n = canGeoms.length
 

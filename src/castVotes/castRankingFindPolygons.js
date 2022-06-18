@@ -1,7 +1,7 @@
 /** @module */
 
 import splitPolygon from '../lib/snowpack/build/snowpack/pkg/split-polygon.js'
-import { equidistantLine } from './CastPluralityAreaSummer.js'
+import { equidistantLine } from './CastPluralitySummer2DQuadrature.js'
 
 /**
  * Make polygons for each group of voters that gives a unique ranking.

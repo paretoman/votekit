@@ -1,7 +1,7 @@
 /** @module */
 
-import CastPluralityAreaSummer from './CastPluralityAreaSummer.js'
-import CastPluralityLineSummer from './CastPluralityLineSummer.js'
+import CastPluralitySummer2DQuadrature from './CastPluralitySummer2DQuadrature.js'
+import CastPluralitySummer1DIntervals from './CastPluralitySummer1DIntervals.js'
 
 /**
  * Vote for one.
@@ -15,8 +15,8 @@ import CastPluralityLineSummer from './CastPluralityLineSummer.js'
  */
 export default function castPlurality(canGeoms, voterGeoms, dimensions) {
     const summer = (dimensions === 1)
-        ? new CastPluralityLineSummer(canGeoms)
-        : new CastPluralityAreaSummer(canGeoms)
+        ? new CastPluralitySummer1DIntervals(canGeoms)
+        : new CastPluralitySummer2DQuadrature(canGeoms)
 
     // get fraction of votes for each candidate so we can summarize results
     const n = canGeoms.length

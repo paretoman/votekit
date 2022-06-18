@@ -8,7 +8,7 @@ import castScoreTestVote from './castScoreTestVote.js'
  * @param {Object[]} canGeoms - position of each candidate {x}
  * @constructor
  */
-export default function CastScoreLineSummer(canGeoms) {
+export default function CastScoreSummer1DGrid(canGeoms) {
     const self = this
 
     self.sumArea = function sumArea(voterGeom) {

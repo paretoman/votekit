@@ -1,7 +1,7 @@
 /** @module */
 
 import { eq, assert, tests } from '../lib/tinytest.js'
-import { testEquidistantLine } from '../castVotes/CastPluralityAreaSummer.js'
+import { testEquidistantLine } from '../castVotes/CastPluralitySummer2DQuadrature.js'
 
 /**
  * Collects tests from test functions.

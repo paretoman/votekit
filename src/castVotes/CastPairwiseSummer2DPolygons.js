@@ -1,12 +1,12 @@
 /** @module */
 
-import { equidistantLine } from './CastPluralityAreaSummer.js'
+import { equidistantLine } from './CastPluralitySummer2DQuadrature.js'
 /**
  * Sum area of voter distributions to tally the votes.
  * @param {Object[]} canGeoms
  * @constructor
  */
-export default function CastPairwiseAreaSummer(canGeoms) {
+export default function CastPairwiseSummer2DPolygons(canGeoms) {
     const self = this
 
     self.sumArea = function sumArea(voterGeom, weight) {
