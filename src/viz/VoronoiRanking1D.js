@@ -1,7 +1,7 @@
 /** @module */
 
 import castRankingFindIntervals from '../castVotes/castRankingFindIntervals.js'
-import colorBlend from './colorBlend.js'
+import colorBlender, { rgbToString } from './colorBlender.js'
 
 /**
  * Draw Voronoi cells to show votes.
@@ -34,7 +34,7 @@ export default function VoronoiRanking1D(voterGroup, candidateSimList, screen) {
 
         canList = candidateSimList.getCandidates()
         const n = canList.length
-        const colorList = canList.map((can) => can.color)
+        const colorList = canList.map((can) => can.colorRGBA)
 
         const ni = intervalBorders.length - 1
         intervals = Array(ni)
@@ -42,7 +42,7 @@ export default function VoronoiRanking1D(voterGroup, candidateSimList, screen) {
         for (let i = 0; i < ni; i++) {
             intervals[i] = [intervalBorders[i], intervalBorders[i + 1]]
             const bordaScores = ranking[i].map((r) => n - r)
-            colors[i] = colorBlend(bordaScores, colorList)
+            colors[i] = rgbToString(colorBlender(bordaScores, colorList))
         }
     }
 

@@ -1,7 +1,7 @@
 import CircleGraphic from '../vizEntities/CircleGraphic.js'
 import hideOnClickOutside from '../tooltips/hideOnClickOutside.js'
 import tooltipForTestVoter from '../tooltips/tooltipForTestVoter.js'
-import colorBlend from '../viz/colorBlend.js'
+import colorBlender, { rgbToString } from '../viz/colorBlender.js'
 
 export default function VoterTest(screen, sims, sim) {
     const self = this
@@ -85,10 +85,11 @@ export default function VoterTest(screen, sims, sim) {
 
         const canList = candidateSimList.getCandidates()
         const colorSet = canList.map((can) => can.color)
+        const colorSetRGBA = canList.map((can) => can.colorRGBA)
         self.colorSet = colorSet
 
         const { tallyFractions } = vote
-        self.color = colorBlend(tallyFractions, colorSet)
+        self.color = rgbToString(colorBlender(tallyFractions, colorSetRGBA))
 
         if (tooltip.box) {
             tooltip.update(vote, self.color, self.colorSet)

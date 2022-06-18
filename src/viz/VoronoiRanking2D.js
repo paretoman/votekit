@@ -1,7 +1,7 @@
 /** @module */
 
 import castRankingFindPolygons from '../castVotes/castRankingFindPolygons.js'
-import colorBlend from './colorBlend.js'
+import colorBlender, { rgbToString } from './colorBlender.js'
 
 /**
  * Draw Voronoi cells to show votes.
@@ -37,10 +37,10 @@ export default function VoronoiRanking2D(voterGroup, candidateSimList, screen) {
         const n = canList.length
         const cn = cells.length
         colors = Array(cn)
-        const colorList = canList.map((can) => can.color)
+        const colorList = canList.map((can) => can.colorRGBA)
         for (let i = 0; i < cn; i++) {
             const bordaScores = ranking[i].map((r) => n - r)
-            colors[i] = colorBlend(bordaScores, colorList)
+            colors[i] = rgbToString(colorBlender(bordaScores, colorList))
         }
     }
 

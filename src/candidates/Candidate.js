@@ -1,5 +1,6 @@
 /** @module */
 
+import { toRGBA } from '../lib/colorBlendScript.js'
 import tooltipForEntity from '../tooltips/tooltipForEntity.js'
 
 /**
@@ -108,6 +109,7 @@ export default function Candidate(
 
     self.setAction.color = (newColor) => {
         self.color = newColor
+        self.colorRGBA = toRGBA(newColor)
         changes.add(['color'])
     }
     self.setColor = (e) => {

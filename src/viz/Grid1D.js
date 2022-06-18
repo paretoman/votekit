@@ -1,4 +1,4 @@
-import colorBlend from './colorBlend.js'
+import colorBlender, { rgbToString } from './colorBlender.js'
 
 /**
  * Draw grid cells to show votes.
@@ -43,7 +43,7 @@ export default function Grid1D(candidateSimList, screen) {
         for (let i = 0; i < nCans; i++) {
             // draw image
             ctx.fillStyle = canList[i].color
-            ctx.strokeStyle = colorBlend([0.8, 0.2], [canList[i].color, '#000000'])
+            ctx.strokeStyle = rgbToString(colorBlender([0.8, 0.2], [canList[i].color, '#000000']))
             ctx.beginPath()
             shapePath(ctx, i, false)
             ctx.fill()

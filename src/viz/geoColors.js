@@ -1,4 +1,4 @@
-import colorBlend, { toRGBA } from './colorBlend.js'
+import colorBlender, { rgbToString } from './colorBlender.js'
 
 export default function geoColors(geoElectionResults, candidateSimList, sim) {
     const {
@@ -22,12 +22,12 @@ export default function geoColors(geoElectionResults, candidateSimList, sim) {
 
 function colorTracts(resultsByTract, canList) {
     // get color
-    const colorSet = canList.map((can) => can.color)
+    const colorSet = canList.map((can) => can.colorRGBA)
     const colorByTract = resultsByTract.map(
         (row) => row.map(
             (electionResults) => {
                 const { tallyFractions } = electionResults.votes
-                const color = toRGBA(colorBlend(tallyFractions, colorSet))
+                const color = colorBlender(tallyFractions, colorSet)
                 return color
             },
         ),
@@ -43,13 +43,13 @@ function colorDistrictWins(resultsByDistrict, canList, sim) {
             (electionResults) => electionResults.winner.color,
         )
     } else {
-        const colorSet = canList.map((can) => can.color)
+        const colorSet = canList.map((can) => can.colorRGBA)
         colorOfWinsByDistrict = resultsByDistrict.map(
             (electionResults) => {
                 const { allocation } = electionResults
                 const sum = allocation.reduce((p, c) => p + c)
                 const fractions = allocation.map((x) => x / sum)
-                const color = colorBlend(fractions, colorSet)
+                const color = rgbToString(colorBlender(fractions, colorSet))
                 return color
             },
         )
@@ -63,8 +63,8 @@ function colorDistrictWins(resultsByDistrict, canList, sim) {
 function colorDistrictVote(resultsByDistrict, canList) {
     const colorOfVoteByDistrict = resultsByDistrict.map((electionResults) => {
         const { tallyFractions } = electionResults.votes
-        const colorSet = canList.map((can) => can.color)
-        const color = colorBlend(tallyFractions, colorSet)
+        const colorSet = canList.map((can) => can.colorRGBA)
+        const color = rgbToString(colorBlender(tallyFractions, colorSet))
         return color
     })
     return colorOfVoteByDistrict
