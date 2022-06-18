@@ -59,7 +59,7 @@ export default function SocialChoice(menu) {
             name: 'Rank Rand', value: 'stv', type: 'singleWinner', casterName: 'ranking',
         },
         {
-            name: 'Pair Rand', value: 'minimax', type: 'singleWinner', casterName: 'pairwise',
+            name: 'Minimax', value: 'minimax', type: 'singleWinner', casterName: 'pairwise',
         },
     ]
 
