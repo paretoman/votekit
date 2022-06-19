@@ -41,6 +41,8 @@ export default function castRankingFindPolygons(voterGeom, canGeoms) {
 
                 const newC = splitPolygon(subject, plane)
 
+                // sometimes near-zero-area polygons are formed that need to be removed
+                // because they also have rankings that don't make sense.
                 const pos = newC.positive
                 if (pos !== undefined && pos.length > 2) {
                     newCells[o] = pos

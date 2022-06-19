@@ -57,12 +57,7 @@ export default function ElectionSample(election) {
 
         for (let i = 0; i < ns; i++) {
             // choose a number of candidates
-            let nk
-            if (election.socialChoice.checkElectionType() === 'singleWinner') {
-                nk = 5
-            } else if (election.socialChoice.checkElectionType() === 'allocation') {
-                nk = 10
-            }
+            const nk = election.socialChoice.numSampleCandidates
             const canList = []
             for (let k = 0; k < nk; k++) {
                 // sample a point from the distribution of candidates

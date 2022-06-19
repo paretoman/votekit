@@ -24,7 +24,7 @@ export default function SocialChoice(menu) {
         //   which has tallies go in and analysis come out
         // electionResults, the larger one,
         //   is in the context of candidate objects and voter objects.
-        if (self.checkElectionType() === 'allocation') {
+        if (self.checkElectionType() === 'allocation' || self.checkElectionType() === 'multiWinner') {
             const electionMethodOptions = { seats: self.seats, threshold: 0.1 }
             const electionMethod = electionMethods[self.electionMethod]
             const socialChoiceResults = electionMethod(votes, electionMethodOptions)
@@ -56,7 +56,7 @@ export default function SocialChoice(menu) {
             name: 'Score', value: 'score', type: 'singleWinner', casterName: 'score',
         },
         {
-            name: 'Rank Rand', value: 'stv', type: 'singleWinner', casterName: 'ranking',
+            name: 'STV', value: 'stv', type: 'multiWinner', casterName: 'ranking',
         },
         {
             name: 'Minimax', value: 'minimax', type: 'singleWinner', casterName: 'pairwise',
@@ -78,10 +78,16 @@ export default function SocialChoice(menu) {
         self.electionMethod = value
         self.casterName = self.electionMethodListByFunctionName[value].casterName
 
-        if (self.checkElectionType() === 'allocation') {
+        const electionType = self.checkElectionType()
+        if (electionType === 'allocation') {
             self.seats = 5
+            self.numSampleCandidates = 10
+        } else if (electionType === 'multiWinner') {
+            self.seats = 3
+            self.numSampleCandidates = 10
         } else {
             self.seats = 1
+            self.numSampleCandidates = 5
         }
     }
 
