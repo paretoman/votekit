@@ -1,8 +1,8 @@
 /** @module */
 
-import splitPolygon from '../lib/snowpack/build/snowpack/pkg/split-polygon.js'
 import { copyArrayShallow } from '../utilities/jsHelpers.js'
 import { equidistantLine } from './CastPluralitySummer2DQuadrature.js'
+import splitConvex from './splitConvex.js'
 
 /**
  * Make polygons for each group of voters that gives a unique ranking.
@@ -40,7 +40,7 @@ export default function castRankingFindPolygons(voterGeom, canGeoms) {
 
                 const plane = eqPlane(canGeoms[i], canGeoms[k])
 
-                const newC = splitPolygon(subject, plane)
+                const newC = splitConvex(subject, plane)
 
                 // sometimes near-zero-area polygons are formed that need to be removed
                 // because they also have rankings that don't make sense.

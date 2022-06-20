@@ -47,7 +47,7 @@ export default function stv(votes, electionMethodOptions) {
     // has the ballot been exhausted?
     const exhausted = Array(nr).fill(false)
 
-    while (!resolved) {
+    while (!resolved && r < nk) {
         if (r !== 0) {
             // tally top preferences
             tally = Array(nk).fill(0)
@@ -126,6 +126,13 @@ export default function stv(votes, electionMethodOptions) {
 
         // increment round
         r += 1
+    }
+
+    // sanity check
+    // We eliminated all the candidates, r == nk, but didn't get enough winners
+    if (!resolved) {
+        // eslint-disable-next-line no-console
+        console.warn('warning: STV ran over - eliminated all candidates.')
     }
 
     const allocation = Array(nk).fill(0)
