@@ -1,6 +1,6 @@
 /** @module */
 
-import { range } from '../utilities/jsHelpers.js'
+import { copyArrayShallow, range } from '../utilities/jsHelpers.js'
 
 /**
  * Run the Huntington-Hill method of apportionment and return an allocation of seats.
@@ -31,7 +31,7 @@ export default function huntingtonHill(votes, electionMethodOptions) {
 
     // make an adjustment
     if (nPositiveParties === 0) {
-        populations = structuredClone(votes.tallyFractions)
+        populations = copyArrayShallow(votes.tallyFractions)
         positivePopulations = populations.map(
             (p) => ((p === 0) ? 0 : 1),
         )

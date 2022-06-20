@@ -1,6 +1,8 @@
 /** @module */
 
-import { maxIndex, minIndex, range } from '../utilities/jsHelpers.js'
+import {
+    copyArrayShallow, maxIndex, minIndex, range,
+} from '../utilities/jsHelpers.js'
 
 /**
  * Single Transferable Vote
@@ -34,7 +36,7 @@ export default function stv(votes, electionMethodOptions) {
     // Count the number of candidates elected
     const elected = []
     // the current tally of first preferences among candidates still remaining
-    let tally = structuredClone(tallyFractions)
+    let tally = copyArrayShallow(tallyFractions)
     // is the candidate still in the running? Alternatively, they have been eliminated.
     const stillIn = Array(nk).fill(true)
     let canInTally = range(nk)

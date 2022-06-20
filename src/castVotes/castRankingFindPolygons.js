@@ -1,6 +1,7 @@
 /** @module */
 
 import splitPolygon from '../lib/snowpack/build/snowpack/pkg/split-polygon.js'
+import { copyArrayShallow } from '../utilities/jsHelpers.js'
 import { equidistantLine } from './CastPluralitySummer2DQuadrature.js'
 
 /**
@@ -47,7 +48,7 @@ export default function castRankingFindPolygons(voterGeom, canGeoms) {
                 if (pos !== undefined && pos.length > 2) {
                     newCells[o] = pos
 
-                    newBordaScore[o] = structuredClone(bordaScore[m])
+                    newBordaScore[o] = copyArrayShallow(bordaScore[m])
                     newBordaScore[o][k] += 1
 
                     o += 1
@@ -56,7 +57,7 @@ export default function castRankingFindPolygons(voterGeom, canGeoms) {
                 if (neg !== undefined && neg.length > 2) {
                     newCells[o] = neg
 
-                    newBordaScore[o] = structuredClone(bordaScore[m])
+                    newBordaScore[o] = copyArrayShallow(bordaScore[m])
                     newBordaScore[o][i] += 1
 
                     o += 1

@@ -1,6 +1,6 @@
 /** @module */
 
-import { clamp, minIndex } from '../utilities/jsHelpers.js'
+import { clamp, copyObjectShallow, minIndex } from '../utilities/jsHelpers.js'
 
 /**
  * Draggable Manager gives draggable behavior to objects on a canvas.
@@ -188,7 +188,7 @@ export default function DraggableManager(screen, changes, sim) {
     let startPos
     function startClickDetect(mouse) {
         couldBeClick = true
-        startPos = structuredClone(mouse)
+        startPos = copyObjectShallow(mouse)
     }
     function moveClickDetect(mouse) {
         if (couldBeClick) {

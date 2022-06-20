@@ -2,7 +2,7 @@
 
 import GeoNoise from './geoNoise.js'
 import DistrictMaker from './DistrictMaker.js'
-import { range } from '../utilities/jsHelpers.js'
+import { copyObjectShallow, range } from '../utilities/jsHelpers.js'
 import VoterSimList from './VoterSimList.js'
 
 /**
@@ -73,8 +73,8 @@ export default function VoterGeoList(screen, sim, changes) {
                 (rowNoise) => rowNoise.map(
                     (cellNoise) => {
                         const [xNoise, yNoise] = cellNoise
-                        const shape1 = structuredClone(vb.voterShape.shape1)
-                        const shape2 = structuredClone(vb.voterShape.shape2)
+                        const shape1 = copyObjectShallow(vb.voterShape.shape1)
+                        const shape2 = copyObjectShallow(vb.voterShape.shape2)
                         shape1.x += xNoise
                         shape2.x += xNoise
                         shape2.y += yNoise
@@ -93,8 +93,8 @@ export default function VoterGeoList(screen, sim, changes) {
                 (vb) => census[iDistrict].map((g) => {
                     const [gx, gy, gf] = g
                     const [xNoise, yNoise] = sn[gx][gy]
-                    const shape1 = structuredClone(vb.voterShape.shape1)
-                    const shape2 = structuredClone(vb.voterShape.shape2)
+                    const shape1 = copyObjectShallow(vb.voterShape.shape1)
+                    const shape2 = copyObjectShallow(vb.voterShape.shape2)
                     shape1.x += xNoise
                     shape2.x += xNoise
                     shape2.y += yNoise
@@ -111,8 +111,8 @@ export default function VoterGeoList(screen, sim, changes) {
                 (cellNoise) => voterSims.map(
                     (vb) => {
                         const [xNoise, yNoise] = cellNoise
-                        const shape1 = structuredClone(vb.voterShape.shape1)
-                        const shape2 = structuredClone(vb.voterShape.shape2)
+                        const shape1 = copyObjectShallow(vb.voterShape.shape1)
+                        const shape2 = copyObjectShallow(vb.voterShape.shape2)
                         shape1.x += xNoise
                         shape2.x += xNoise
                         shape2.y += yNoise

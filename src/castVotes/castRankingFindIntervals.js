@@ -1,6 +1,6 @@
 /** @module */
 
-import { range } from '../utilities/jsHelpers.js'
+import { copyArrayShallow, range } from '../utilities/jsHelpers.js'
 
 /**
  * Find the intervals over which voters share a ranking.
@@ -50,12 +50,12 @@ export default function castRankingFindIntervals(canGeoms) {
     // compute all rankings
 
     const rankings = Array(mn + 1)
-    rankings[0] = structuredClone(ranking)
+    rankings[0] = copyArrayShallow(ranking)
     for (let i = 0; i < mn; i++) {
         const [ci, ck] = midpointPair[i]
         ranking[ci] += 1
         ranking[ck] -= 1
-        rankings[i + 1] = structuredClone(ranking)
+        rankings[i + 1] = copyArrayShallow(ranking)
     }
 
     const cansRanked = Array(mn + 1)
@@ -72,7 +72,7 @@ export default function castRankingFindIntervals(canGeoms) {
     }
 
     // Add endpoints
-    const intervalBorders = structuredClone(midpoints)
+    const intervalBorders = copyArrayShallow(midpoints)
     intervalBorders.unshift(-Infinity)
     intervalBorders.push(Infinity)
     return { intervalBorders, ranking: rankings, cansRanked }
