@@ -7,10 +7,19 @@ import {
 /**
  * Single Transferable Vote
  * @param {Object} votes
- * @param {Number[]} votes.tallyFractions
- * @param {Number[]} votes.tallyFractions
- * @returns {{allocation:number[]}} - socialChoiceResults, with property allocation.
- * Allocation is an array of integers that say how many representatives each party gets.
+ * @param {Number[]} votes.tallyFractions - A list of fractions of voters
+ * who ranked a candidate first, indexed by candidate.
+ * @param {Number[]} votes.rankingTallyFractions - A list of fractions of voters
+ * who share the same ranking.
+ * @param {Number[][][]} votes.cansRankedAll - A list of lists of lists.
+ * The first index is a group of voters who share the same ranking.
+ * The second index is the rank number.
+ * The third index is for a list of candidates at that rank.
+ * @param {Object} electionMethodOptions
+ * @param {number} electionMethodOptions.seats - The number of seats to fill.
+ * @returns {{allocation:number[]}} - A variable "socialChoiceResults",
+ * with the property "allocation".
+ * Allocation is an array of integers that say whether a candidate is elected (1) or not (0).
  */
 export default function stv(votes, electionMethodOptions) {
     const { tallyFractions, rankingTallyFractions, cansRankedAll } = votes
