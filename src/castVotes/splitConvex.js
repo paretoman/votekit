@@ -2,7 +2,8 @@
  * Beware, points are references to old points, so make sure to make a copy afterward.
  * @param {Number[][]} points
  * @param {Number[]} plane
- * @returns
+ * @returns {{positive:Number[][], negative:Number[][]}} - Object containing properties
+ * positive and negative, each being a set of points
  */
 export default function splitConvex(points, plane) {
     // put all points on either the positive or negative side of the plane.
