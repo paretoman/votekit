@@ -4,7 +4,8 @@
  * the candidate with the highest tally wins
  * @param {Object} votes
  * @param {Number[]} votes.tallyFractions
- * @returns {results}
+ * @returns {Object} results
+ * @returns {Number} iWinner - Index of winner. Indexing according to votes[].
  */
 export default function score(votes) {
     const max = Math.max(...votes.tallyFractions)
@@ -13,7 +14,3 @@ export default function score(votes) {
     const results = { iWinner }
     return results
 }
-/**
- * @typedef {Object} results
- * @property {Number} iWinner - Index of winner. Indexing according to votes[].
- */

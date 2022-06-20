@@ -4,7 +4,8 @@
  * pick a random candidate as the winner
  * @param {Object} votes
  * @param {Number} votes.tallyFractions.length - Number of candidates.
- * @returns {socialChoiceResults}
+ * @returns {Object} socialChoiceResults
+ * @returns {Number} socialChoiceResults.iWinner - Index of winner. Indexing according to votes[].
  */
 export default function randomWinner(votes) {
     const nk = votes.tallyFractions.length
@@ -12,7 +13,3 @@ export default function randomWinner(votes) {
     const socialChoiceResults = { iWinner }
     return socialChoiceResults
 }
-/**
- * @typedef {Object} socialChoiceResults
- * @property {Number} iWinner - Index of winner. Indexing according to votes[].
- */

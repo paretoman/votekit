@@ -7,7 +7,8 @@ import { maxIndex } from '../utilities/jsHelpers.js'
  * @param {Object} votes
  * @param {Number[]} votes.tallyFractions - A list of fractions of voters
  * who chose a candidate, indexed by candidate.
- * @returns {socialChoiceResults}
+ * @returns {Object} socialChoiceResults
+ * @returns {Number} socialChoiceResults.iWinner - Index of winner. Indexing according to votes[].
  */
 export default function plurality(votes) {
     const iWinner = maxIndex(votes.tallyFractions)
@@ -15,7 +16,3 @@ export default function plurality(votes) {
     const socialChoiceResults = { iWinner }
     return socialChoiceResults
 }
-/**
- * @typedef {Object} socialChoiceResults
- * @property {Number} iWinner - Index of winner. Indexing according to votes[].
- */

@@ -1,3 +1,5 @@
+/** @module */
+
 import colorBlender, { rgbToString } from './colorBlender.js'
 
 export default function geoColors(geoElectionResults, candidateSimList, sim) {
