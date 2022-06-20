@@ -198,17 +198,21 @@ export default function ElectionGeo(election) {
             const votes = {}
 
             if (votesByTract[0][0].tallyFractions !== undefined) {
+                // tf - tally fractions
                 const tf = districtTallyFractions(votesByTract, cen, numCans)
                 votes.tallyFractions = tf
             }
 
             if (votesByTract[0][0].pairwiseTallyFractions !== undefined) {
+                // pwtf - pairwise tally fractions
                 const pwtf = districtPairwiseTallyFractions(votesByTract, cen, numCans)
                 votes.pairwiseTallyFractions = pwtf
             }
             if (votesByTract[0][0].rankingTallyFractions !== undefined) {
-                const rtf = districtRankingTallyFractions(votesByTract, cen)
-                votes.rankingTallyFractions = rtf
+                // vrtf - votes ranked tally fractions
+                const vrtf = districtRankingTallyFractions(votesByTract, cen)
+                votes.rankingTallyFractions = vrtf.rankingTallyFractions
+                votes.cansRankedAll = vrtf.cansRankedAll
             }
             return votes
         })
@@ -272,7 +276,10 @@ export default function ElectionGeo(election) {
                 .concat(rankingTallyFractionsNorm)
             cansRankedAll2 = cansRankedAll2.concat(cansRankedAll)
         }
-        return cansRankedAll2
+        return {
+            rankingTallyFractions: rankingTallyFractionsAll,
+            cansRankedAll: cansRankedAll2,
+        }
     }
 
     // Show wins across all districts for each candidate
