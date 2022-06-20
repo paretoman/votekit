@@ -57,9 +57,13 @@ function colorDistrictWins(resultsByDistrict, canList, sim) {
     return colorOfWinsByDistrict
 }
 
-/** Update color for each district, based on votes for each candidate.
-     * Blend candidate colors in proportion to their votes.
-     */
+/**
+ * Update color for each district, based on votes for each candidate.
+ * Blend candidate colors in proportion to their votes.
+ * @param {Object[]} resultsByDistrict - An array of electionResults, indexed by district.
+ * @param {Candidate[]} canList - An array of Candidate objects.
+ * @returns {String[]} - List of color strings indexed by district.
+ */
 function colorDistrictVote(resultsByDistrict, canList) {
     const colorOfVoteByDistrict = resultsByDistrict.map((electionResults) => {
         const { tallyFractions } = electionResults.votes
