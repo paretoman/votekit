@@ -1,3 +1,4 @@
+/** @module */
 import { minIndex } from '../utilities/jsHelpers.js'
 
 /**

@@ -1,3 +1,5 @@
+/** @module */
+
 import { minMax } from '../utilities/jsHelpers.js'
 
 /**

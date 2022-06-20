@@ -1,3 +1,4 @@
+/** @module */
 /**
  * Graphics Component for voterShapes in 2D
  * @param {VoterShape} voterShape

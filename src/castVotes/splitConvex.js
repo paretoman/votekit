@@ -1,3 +1,4 @@
+/** @module */
 /**
  * Beware, points are references to old points, so make sure to make a copy afterward.
  * @param {Number[][]} points

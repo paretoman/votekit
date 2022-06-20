@@ -1,3 +1,4 @@
+/** @module */
 import colorBlender from './colorBlender.js'
 
 /**
