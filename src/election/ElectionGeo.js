@@ -86,6 +86,52 @@ export default function ElectionGeo(election) {
         )
         const norm = 1 / totals.reduce((p, c) => p + c)
         const tallyFractions = totals.map((t) => t * norm)
+        // sum pairwiseTallyFractions
+        if (votesByTract[0][0].pairwiseTallyFractions !== undefined) {
+            const pTotals = Array(numCans)
+            for (let k = 0; k < numCans; k++) {
+                pTotals[k] = Array(numCans).fill(0)
+            }
+            votesByTract.forEach(
+                (row) => row.forEach(
+                    (votes) => {
+                        const { pairwiseTallyFractions } = votes
+                        for (let i = 0; i < numCans; i++) {
+                            for (let k = 0; k < numCans; k++) {
+                                pTotals[i][k] += pairwiseTallyFractions[i][k]
+                            }
+                        }
+                    },
+                ),
+            )
+            const pNorm = 1 / (pTotals[0][1] + pTotals[1][0]) // sum wins and losses
+            const pairwiseTallyFractions = pTotals.map((row) => row.map((t) => t * pNorm))
+            return { tallyFractions, pairwiseTallyFractions }
+        } if (votesByTract[0][0].rankingTallyFractions !== undefined) {
+            // concatenate rankingTallyFractions
+            let rankingTallyFractionsAll = []
+            let cansRankedAll2 = []
+            votesByTract.forEach(
+                (row) => row.forEach(
+                    (votes) => {
+                        const { rankingTallyFractions, cansRankedAll } = votes
+                        rankingTallyFractionsAll = rankingTallyFractionsAll
+                            .concat(rankingTallyFractions)
+                        cansRankedAll2 = cansRankedAll2.concat(cansRankedAll)
+                    },
+                ),
+            )
+            const numRows = votesByTract.length
+            const numCols = votesByTract[0].length
+            const rNorm = 1 / (numRows * numCols)
+            rankingTallyFractionsAll = rankingTallyFractionsAll.map((t) => t * rNorm)
+            return {
+                tallyFractions,
+                rankingTallyFractions: rankingTallyFractionsAll,
+                cansRankedAll: cansRankedAll2,
+            }
+        }
+
         return { tallyFractions }
     }
 
@@ -137,6 +183,54 @@ export default function ElectionGeo(election) {
             }
             const norm = 1 / totals.reduce((p, c) => p + c)
             const tallyFractions = totals.map((t) => t * norm)
+
+            // sum pairwiseTallyFractions
+            if (votesByTract[0][0].pairwiseTallyFractions !== undefined) {
+                const pTotals = Array(numCans)
+                for (let k = 0; k < numCans; k++) {
+                    pTotals[k] = Array(numCans).fill(0)
+                }
+                for (let j = 0; j < cen.length; j++) {
+                    const [gx, gy, gf] = cen[j]
+                    const { pairwiseTallyFractions } = votesByTract[gx][gy]
+                    for (let i = 0; i < numCans; i++) {
+                        for (let k = 0; k < numCans; k++) {
+                            pTotals[i][k] += pairwiseTallyFractions[i][k] * gf
+                        }
+                    }
+                }
+                const pNorm = 1 / (pTotals[0][1] + pTotals[1][0]) // sum wins and losses
+                const pairwiseTallyFractions = pTotals.map((row) => row.map((t) => t * pNorm))
+                return { tallyFractions, pairwiseTallyFractions }
+            } if (votesByTract[0][0].rankingTallyFractions !== undefined) {
+                // concatenate rankingTallyFractions
+                let rankingTallyFractionsAll = []
+                let cansRankedAll2 = []
+
+                let gfSum = 0
+                for (let j = 0; j < cen.length; j++) {
+                    const [, , gf] = cen[j]
+                    gfSum += gf
+                }
+                const gfNorm = 1 / gfSum
+
+                for (let j = 0; j < cen.length; j++) {
+                    const [gx, gy, gf] = cen[j]
+                    gfSum += gf
+                    const { rankingTallyFractions, cansRankedAll } = votesByTract[gx][gy]
+                    const rankingTallyFractionsNorm = rankingTallyFractions
+                        .map((x) => x * gf * gfNorm)
+                    rankingTallyFractionsAll = rankingTallyFractionsAll
+                        .concat(rankingTallyFractionsNorm)
+                    cansRankedAll2 = cansRankedAll2.concat(cansRankedAll)
+                }
+                return {
+                    tallyFractions,
+                    rankingTallyFractions: rankingTallyFractionsAll,
+                    cansRankedAll: cansRankedAll2,
+                }
+            }
+
             return { tallyFractions }
         })
         return votesByDistrict
