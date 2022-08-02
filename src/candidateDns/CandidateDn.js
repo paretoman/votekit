@@ -49,6 +49,7 @@ export default function CandidateDistribution(
                 shape1.densityProfile,
                 shape1.densityProfile,
             ),
+            candidateDnCommander.setForListSenders.party.command(id, id, id),
         ]
         // Either load the commands because we don't want to create an item of history
         // Or do the commands because want to store an item in history, so that we can undo.
@@ -133,6 +134,16 @@ export default function CandidateDistribution(
         const cur = candidateDnCommander.setForListSenders.shape1densityProfile.getCurrentValue(id)
         candidateDnCommander.setForListSenders.shape1densityProfile.go(id, newDensityProfile1, cur)
     }
+
+    self.setAction.party = (newParty) => {
+        self.party = newParty
+        changes.add(['party'])
+    }
+    self.setParty = (e) => {
+        const cur = candidateDnCommander.setForListSenders.party.getCurrentValue(id)
+        candidateDnCommander.setForListSenders.party.go(id, e, cur)
+    }
+
     self.instantiate()
 
     // Click Handler

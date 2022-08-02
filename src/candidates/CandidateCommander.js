@@ -33,6 +33,7 @@ export default function CandidateCommander(candidateRegistrar, commander, sim) {
     makeSetForListSender('shape2p', 'shape2D-point', true)
     makeSetForListSender('shape1x', 'shape1D-x', true)
     makeSetForListSender('color', 'color', false)
+    makeSetForListSender('party', 'party', false)
 
     // This is kind of weird because this value is not a good measure of the number of entities.
     // An undo will reduce the number stored with the command name,

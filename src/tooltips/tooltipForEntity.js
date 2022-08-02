@@ -62,6 +62,17 @@ export default function tooltipForEntity(entity, screen, sim) {
         )
         box.appendChild(items.color.div)
     }
+    if (entity.setParty !== undefined) { // TODO: more parties, up to number of candidates etc
+        items.party = new Item(
+            'select',
+            'Party',
+            'Party: ',
+            (val) => entity.setParty(Number(val)),
+            entity.party,
+            [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
+        )
+        box.appendChild(items.party.div)
+    }
     items.showGhosts = new Item(
         'checkbox',
         'Show Ghosts',
