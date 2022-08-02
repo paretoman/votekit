@@ -50,7 +50,7 @@ export default function Candidate(
             candidateCommander.setForListSenders.shape2p.command(id, shape2p, shape2p),
             candidateCommander.setForListSenders.shape1x.command(id, shape1.x, shape1.x),
             candidateCommander.setForListSenders.color.command(id, color, color),
-            candidateCommander.setForListSenders.party.command(id, id, id),
+            candidateCommander.setForListSenders.party.command(id, [id], [id]),
         ]
         // Either load the commands because we don't want to create an item of history
         // Or do the commands because want to store an item in history, so that we can undo.

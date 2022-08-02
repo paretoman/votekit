@@ -49,7 +49,7 @@ export default function CandidateDistribution(
                 shape1.densityProfile,
                 shape1.densityProfile,
             ),
-            candidateDnCommander.setForListSenders.party.command(id, id, id),
+            candidateDnCommander.setForListSenders.party.command(id, [id], [id]),
         ]
         // Either load the commands because we don't want to create an item of history
         // Or do the commands because want to store an item in history, so that we can undo.

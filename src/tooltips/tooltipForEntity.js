@@ -67,7 +67,7 @@ export default function tooltipForEntity(entity, screen, sim) {
             'select',
             'Party',
             'Party: ',
-            (val) => entity.setParty(Number(val)),
+            (val) => entity.setParty([Number(val)]),
             entity.party,
             [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
         )
