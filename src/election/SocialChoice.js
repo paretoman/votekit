@@ -61,6 +61,9 @@ export default function SocialChoice(menu) {
         {
             name: 'Minimax', value: 'minimax', type: 'singleWinner', casterName: 'pairwise',
         },
+        {
+            name: 'OLPR A', value: 'olprA', type: 'multiWinner', casterName: 'olprA',
+        },
     ]
 
     // utilities for looking up this list
