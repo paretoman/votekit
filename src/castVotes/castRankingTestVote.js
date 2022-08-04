@@ -9,7 +9,7 @@ import { range } from '../utilities/jsHelpers.js'
  * @param {Number} dimensions
  * @returns {Number[]} Rank of each candidate
  */
-export default function castRankingTestVote(canGeoms, voterGeom, dimensions) {
+export default function castRankingTestVote({ canGeoms, voterGeom, dimensions }) {
     const df = (dimensions === 1) ? df1 : df2
     const dist2 = canGeoms.map((c) => df(c, voterGeom))
     const n = canGeoms.length

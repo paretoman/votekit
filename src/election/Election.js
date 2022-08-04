@@ -34,6 +34,8 @@ export default function Election(menu) {
         return canList.map((can) => (can.shape2))
     }
 
+    const getPartyByCan = (canList) => canList.map((can) => can.party)
+
     // Election //
 
     self.runElection = function (voterShapes, canList, optionCast) {
@@ -48,7 +50,10 @@ export default function Election(menu) {
         const voterGeoms = mapVoters(voterShapes)
         const canGeoms = mapCans(canList)
         const { cast } = voteCasters[self.socialChoice.casterName]
-        const votes = cast(canGeoms, voterGeoms, self.dimensions, optionCast)
+        const partiesByCan = getPartyByCan(canList)
+        const votes = cast({
+            canGeoms, voterGeoms, dimensions: self.dimensions, optionCast, partiesByCan,
+        })
         return votes
     }
 
@@ -56,9 +61,12 @@ export default function Election(menu) {
         const voterShapes = [voterTest]
         const canList = candidateSimList.getCandidates()
         const voterGeom = mapVoters(voterShapes)[0]
-        const canGeom = mapCans(canList)
+        const canGeoms = mapCans(canList)
+        const partiesByCan = getPartyByCan(canList)
         const { castTestVote } = voteCasters[self.socialChoice.casterName]
-        const vote = castTestVote(canGeom, voterGeom, self.dimensions, optionCast)
+        const vote = castTestVote({
+            canGeoms, voterGeom, dimensions: self.dimensions, optionCast, partiesByCan,
+        })
         return vote
     }
 }

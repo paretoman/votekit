@@ -8,7 +8,7 @@ import { minIndex } from '../utilities/jsHelpers.js'
  * @param {*} voterGeom
  * @param {*} dimensions
  */
-export default function castPluralityTestVote(canGeoms, voterGeom, dimensions) {
+export default function castPluralityTestVote({ canGeoms, voterGeom, dimensions }) {
     const df = (dimensions === 1) ? df1 : df2
     const dist2 = canGeoms.map((c) => df(c, voterGeom))
     const i = minIndex(dist2)

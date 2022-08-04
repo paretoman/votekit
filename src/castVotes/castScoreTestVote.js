@@ -9,7 +9,7 @@ import { minMax } from '../utilities/jsHelpers.js'
  * @param {*} voter
  * @param {*} dimensions
  */
-export default function castScoreTestVote(canGeoms, voterGeom, dimensions) {
+export default function castScoreTestVote({ canGeoms, voterGeom, dimensions }) {
     const lc = canGeoms.length
     const tally = (new Array(lc)).fill(0)
     const df = (dimensions === 1) ? df1 : df2

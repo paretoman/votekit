@@ -28,7 +28,7 @@ export default function CastScoreSummer2DGrid(canGeoms, optionCast) {
             const xi = grid.x[i]
             const yi = grid.y[i]
             const testVoter = { x: xi, y: yi }
-            const vote = castScoreTestVote(canGeoms, testVoter, 2)
+            const vote = castScoreTestVote({ canGeoms, voterGeom: testVoter, dimensions: 2 })
             voteSet[i] = vote
             const { tallyFractions } = vote
             totalArea += weight

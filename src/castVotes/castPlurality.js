@@ -13,7 +13,7 @@ import CastPluralitySummer1DIntervals from './CastPluralitySummer1DIntervals.js'
  * For 1D, an array of objects: {x,w,densityProfile}.
  * @returns votes, an object
  */
-export default function castPlurality(canGeoms, voterGeoms, dimensions) {
+export default function castPlurality({ canGeoms, voterGeoms, dimensions }) {
     const summer = (dimensions === 1)
         ? new CastPluralitySummer1DIntervals(canGeoms)
         : new CastPluralitySummer2DQuadrature(canGeoms)

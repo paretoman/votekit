@@ -16,7 +16,9 @@ import CastScoreSummer1DGrid from './CastScoreSummer1DGrid.js'
  * For 1D, an array of objects: {x,w,densityProfile}.
  * @returns votes, an object
  */
-export default function castScore(canGeoms, voterGeoms, dimensions, optionCast) {
+export default function castScore({
+    canGeoms, voterGeoms, dimensions, optionCast,
+}) {
     const summer = (dimensions === 1)
         ? new CastScoreSummer1DGrid(canGeoms)
         : new CastScoreSummer2DGrid(canGeoms, optionCast)
