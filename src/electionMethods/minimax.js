@@ -10,7 +10,7 @@ import { range } from '../utilities/jsHelpers.js'
  * @returns {{iWinner:Number}} iWinner - Index of winner.
  * Indexing according to candidates in votes.tallyFractions.
  */
-export default function minimax(votes) {
+export default function minimax({ votes }) {
     const { pairwiseTallyFractions } = votes
     const n = pairwiseTallyFractions.length
 

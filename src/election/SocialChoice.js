@@ -17,7 +17,7 @@ export default function SocialChoice(menu) {
 
     self.seats = 1
 
-    self.run = (canList, votes) => {
+    self.run = (canList, votes, parties) => {
         // why have two different kinds of results?
         // socialChoiceResults, the smaller one,
         //   is in the context of the election method,
@@ -27,12 +27,13 @@ export default function SocialChoice(menu) {
         if (self.checkElectionType() === 'allocation' || self.checkElectionType() === 'multiWinner') {
             const electionMethodOptions = { seats: self.seats, threshold: 0.1 }
             const electionMethod = electionMethods[self.electionMethod]
-            const socialChoiceResults = electionMethod(votes, electionMethodOptions)
+            const socialChoiceResults = electionMethod({ votes, parties, electionMethodOptions })
             const { allocation } = socialChoiceResults
             const electionResults = { allocation, canList, votes }
             return electionResults
         }
-        const socialChoiceResults = electionMethods[self.electionMethod](votes)
+        const electionMethod = electionMethods[self.electionMethod]
+        const socialChoiceResults = electionMethod({ votes, parties })
         const { iWinner } = socialChoiceResults
         const winner = canList[iWinner]
         const electionResults = { iWinner, winner, votes }

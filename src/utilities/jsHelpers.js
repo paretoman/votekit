@@ -150,3 +150,7 @@ export function copyObjectShallow(a) {
     const b = { ...a }
     return b
 }
+
+export function countUnique(iterable) {
+    return new Set(iterable).size
+}

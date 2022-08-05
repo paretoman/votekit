@@ -25,7 +25,7 @@ export default function CastScoreSummer1DGrid(canGeoms) {
         for (let i = 0; i < gridLength; i++) {
             const xi = grid.x[i]
             const testVoter = { x: xi }
-            const vote = castScoreTestVote(canGeoms, testVoter, 1)
+            const vote = castScoreTestVote({ canGeoms, voterGeom: testVoter, dimensions: 1 })
             voteSet[i] = vote
             const { tallyFractions } = vote
             const weight = findWeight(voterGeom, xi)

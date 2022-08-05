@@ -13,16 +13,9 @@ import castPlurality from './castPlurality.js'
  * @returns votes, an object
  */
 export default function castOLPRA({
-    canGeoms, voterGeoms, dimensions, partiesByCan,
+    canGeoms, voterGeoms, dimensions,
 }) {
     const votes = castPlurality({ canGeoms, voterGeoms, dimensions })
 
-    votes.partiesByCan = partiesByCan.map((c) => c[0])
-    votes.numParties = countUnique(votes.partiesByCan)
-
     return votes
-}
-
-function countUnique(iterable) {
-    return new Set(iterable).size
 }

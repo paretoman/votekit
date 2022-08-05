@@ -13,17 +13,9 @@ import castPluralityTestVote from './castPluralityTestVote.js'
  * @returns vote, an object
  */
 export default function castOLPRATestVote({
-    canGeoms, voterGeom, dimensions, partiesByCan,
+    canGeoms, voterGeom, dimensions,
 }) {
     const vote = castPluralityTestVote({ canGeoms, voterGeom, dimensions })
 
-    // TODO: consider more than one party for a candidate.
-    vote.partiesByCan = partiesByCan.map((c) => c[0])
-    vote.numParties = countUnique(vote.partiesByCan)
-
     return vote
-}
-
-function countUnique(iterable) {
-    return new Set(iterable).size
 }

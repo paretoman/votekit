@@ -13,7 +13,7 @@ import { range } from '../utilities/jsHelpers.js'
  * with the property "allocation".
  * Allocation is an array of integers that say whether a candidate is elected (1) or not (0).
  */
-export default function sntv(votes, electionMethodOptions) {
+export default function sntv({ votes, electionMethodOptions }) {
     const { tallyFractions } = votes
     const { seats } = electionMethodOptions
 

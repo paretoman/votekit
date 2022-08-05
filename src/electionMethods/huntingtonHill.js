@@ -14,7 +14,7 @@ import { copyArrayShallow, range } from '../utilities/jsHelpers.js'
  * Allocation is an array of integers that say how many representatives each party gets.
  */
 
-export default function huntingtonHill(votes, electionMethodOptions) {
+export default function huntingtonHill({ votes, electionMethodOptions }) {
     const { seats, threshold } = electionMethodOptions
 
     let populations = votes.tallyFractions.map(

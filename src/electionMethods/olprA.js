@@ -20,11 +20,12 @@ import sntv from './sntv.js'
  * Allocation is an array of integers that say whether a candidate is elected (1) or not (0).
  */
 
-export default function olprA(votes, electionMethodOptions) {
+export default function olprA({ votes, electionMethodOptions, parties }) {
     // Make a tally for each party.
 
     // TODO: provide these variables in votes
-    const { tallyFractions, partiesByCan, numParties } = votes
+    const { tallyFractions } = votes
+    const { partiesByCan, numParties } = parties
     const numCans = tallyFractions.length
     const partyVotes = Array(numParties).fill(0)
     for (let i = 0; i < numCans; i++) {
@@ -36,7 +37,10 @@ export default function olprA(votes, electionMethodOptions) {
 
     // Find out how many seats each party gets.
     // todo: change method
-    const partyResults = huntingtonHill({ tallyFractions: partyVotes }, electionMethodOptions)
+    const partyResults = huntingtonHill({
+        votes: { tallyFractions: partyVotes },
+        electionMethodOptions,
+    })
     const partyAllocation = partyResults.allocation
 
     // Which candidates get the seats?
@@ -48,7 +52,10 @@ export default function olprA(votes, electionMethodOptions) {
         const cansInParty = range(numCans).filter((k) => partiesByCan[k] === i)
         const tfWithinParty = cansInParty.map((k) => tallyFractions[k])
         // Run sntv.
-        const socialChoiceInParty = sntv({ tallyFractions: tfWithinParty }, electionMethodOptions2)
+        const socialChoiceInParty = sntv({
+            votes: { tallyFractions: tfWithinParty },
+            electionMethodOptions: electionMethodOptions2,
+        })
         const allocationInParty = socialChoiceInParty.allocation
         // Store sntv results in allocation list for all candidates.
         for (let k = 0; k < cansInParty.length; k++) {

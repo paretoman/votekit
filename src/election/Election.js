@@ -1,6 +1,7 @@
 /** @module */
 
 import voteCasters from '../castVotes/voteCasters.js'
+import { countUnique } from '../utilities/jsHelpers.js'
 import SocialChoice from './SocialChoice.js'
 
 /**
@@ -34,25 +35,32 @@ export default function Election(menu) {
         return canList.map((can) => (can.shape2))
     }
 
-    const getPartyByCan = (canList) => canList.map((can) => can.party)
+    // TODO: consider more than one party for a candidate.
+    const getPartyByCan = (canList) => canList.map((can) => can.party[0])
+    self.getParties = (canList) => {
+        const partiesByCan = getPartyByCan(canList)
+        const numParties = countUnique(partiesByCan)
+        const parties = { partiesByCan, numParties }
+        return parties
+    }
 
     // Election //
 
     self.runElection = function (voterShapes, canList, optionCast) {
-        const votes = self.castVotes(voterShapes, canList, optionCast)
-        const electionResults = self.socialChoice.run(canList, votes)
+        const parties = self.getParties(canList)
+        const votes = self.castVotes(voterShapes, canList, parties, optionCast)
+        const electionResults = self.socialChoice.run(canList, votes, parties)
         return electionResults
     }
 
     // Voters cast votes for candidates.
     // There is also a separate graphical representation in Voronoi2D.js
-    self.castVotes = (voterShapes, canList, optionCast) => {
+    self.castVotes = (voterShapes, canList, parties, optionCast) => {
         const voterGeoms = mapVoters(voterShapes)
         const canGeoms = mapCans(canList)
         const { cast } = voteCasters[self.socialChoice.casterName]
-        const partiesByCan = getPartyByCan(canList)
         const votes = cast({
-            canGeoms, voterGeoms, dimensions: self.dimensions, optionCast, partiesByCan,
+            canGeoms, voterGeoms, dimensions: self.dimensions, optionCast, parties,
         })
         return votes
     }
