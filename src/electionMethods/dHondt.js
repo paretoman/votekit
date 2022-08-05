@@ -3,7 +3,7 @@
 import divisorGeneral from './divisorGeneral.js'
 
 /**
- * Run the Huntington-Hill method of apportionment and return an allocation of seats.
+ * Run the d'Hondt / Jefferson method of apportionment and return an allocation of seats.
  * @param {Object} votes
  * @param {number[]} votes.tallyFractions - tallies for each party as a fraction of 1.
  * @param {Object} electionMethodOptions
@@ -14,7 +14,7 @@ import divisorGeneral from './divisorGeneral.js'
  * Allocation is an array of integers that say how many representatives each party gets.
  */
 
-export default function huntingtonHill({ votes, electionMethodOptions }) {
-    const socialChoiceResults = divisorGeneral({ votes, electionMethodOptions, typeOfDivisor: 'huntingtonHill' })
+export default function dHondt({ votes, electionMethodOptions }) {
+    const socialChoiceResults = divisorGeneral({ votes, electionMethodOptions, typeOfDivisor: 'dHondt' })
     return socialChoiceResults
 }
