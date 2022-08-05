@@ -20,7 +20,9 @@ function samplePoint1(candidateDistributions, cdf) {
     const iDist = randomDistribution(cdf)
     const cd = candidateDistributions[iDist]
     // sample circle
-    const point = randomInsideCircle(cd.shape2.x, cd.shape2.y, cd.shape2.w * 0.5)
+    const shape2 = randomInsideCircle(cd.shape2.x, cd.shape2.y, cd.shape2.w * 0.5)
+    const party = [iDist]
+    const point = { shape2, party }
     return point
 }
 

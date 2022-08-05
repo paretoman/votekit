@@ -22,22 +22,25 @@ export default function ElectionGeo(election) {
 
         const canList = candidateSimList.getCandidates()
 
-        const geoElectionResults = self.runElection2(voterGeoList, canList)
+        const geoElectionResults = self.runElectionGeo(voterGeoList, canList)
 
         return geoElectionResults
     }
 
-    self.runElection2 = (voterGeoList, canList) => {
+    self.runElectionGeo = (voterGeoList, canList) => {
         if (voterGeoList.getVoterSims().length === 0) return { error: 'no voters' }
         if (canList.length === 0) return { error: 'no candidates' }
 
-        const votesByTract = castVotesByTract(voterGeoList, canList)
+        const parties = election.getParties(canList)
 
-        const resultsStatewide = countStatewideElection(votesByTract, canList)
+        const votesByTract = castVotesByTract(voterGeoList, canList, parties)
 
-        const resultsByTract = countTractElections(votesByTract, canList)
+        const resultsStatewide = countStatewideElection(votesByTract, canList, parties)
 
-        const resultsByDistrict = countDistrictElections(votesByTract, canList, voterGeoList)
+        const resultsByTract = countTractElections(votesByTract, canList, parties)
+
+        // eslint-disable-next-line max-len
+        const resultsByDistrict = countDistrictElections(votesByTract, canList, voterGeoList, parties)
         const allocation = sumAllocations(resultsByDistrict, canList)
 
         const geoElectionResults = {
@@ -49,12 +52,12 @@ export default function ElectionGeo(election) {
         return geoElectionResults
     }
 
-    function castVotesByTract(voterGeoList, canList) {
+    function castVotesByTract(voterGeoList, canList, parties) {
         const { voterGroupsByTract } = voterGeoList
 
         const votesByTract = voterGroupsByTract.map(
             (row) => row.map(
-                (voterGroups) => election.castVotes(voterGroups, canList, optionCast),
+                (voterGroups) => election.castVotes(voterGroups, canList, parties, optionCast),
             ),
         )
         return votesByTract
@@ -63,11 +66,11 @@ export default function ElectionGeo(election) {
     /** Show tallies over all the districts
      * Find statewide support for candidates (parties).
      */
-    function countStatewideElection(votesByTract, canList) {
+    function countStatewideElection(votesByTract, canList, parties) {
         const numCans = canList.length
         const allVotes = combineVotes(votesByTract, numCans)
 
-        const resultsStatewide = election.socialChoice.run(canList, allVotes)
+        const resultsStatewide = election.socialChoice.run(canList, allVotes, parties)
         return resultsStatewide
     }
 
@@ -161,24 +164,24 @@ export default function ElectionGeo(election) {
     /** Visualize voter demographics according to votes for candidates within a tract.
      * Hold mini-elections within a tract.
      */
-    function countTractElections(votesByTract, canList) {
+    function countTractElections(votesByTract, canList, parties) {
         const resultsByTract = votesByTract.map(
             (row) => row.map(
-                (votes) => election.socialChoice.run(canList, votes),
+                (votes) => election.socialChoice.run(canList, votes, parties),
             ),
         )
         return resultsByTract
     }
 
     /** Run separate elections in each district. */
-    function countDistrictElections(votesByTract, canList, voterGeoList) {
+    function countDistrictElections(votesByTract, canList, voterGeoList, parties) {
         // Loop through districts.
         // Find who won.
 
         const votesByDistrict = combineVotesByDistrict(votesByTract, canList, voterGeoList)
 
         const resultsByDistrict = votesByDistrict.map(
-            (votes) => election.socialChoice.run(canList, votes),
+            (votes) => election.socialChoice.run(canList, votes, parties),
         )
         return resultsByDistrict
     }

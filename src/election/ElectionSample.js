@@ -64,15 +64,11 @@ export default function ElectionSample(election) {
                 const point = candidateDnSimList.sampler.samplePoint()
 
                 // make a candidate
-                if (dimensions === 1) {
-                    canList.push({ shape1: point })
-                } else {
-                    canList.push({ shape2: point })
-                }
+                canList.push(point)
             }
 
             // find winner position
-            const electionResults = election.runElection(voterShapes, canList, optionCast)
+            const electionResults = election.runElectionOne(voterShapes, canList, optionCast)
 
             if (election.socialChoice.checkElectionType() === 'singleWinner') {
                 const { winner } = electionResults

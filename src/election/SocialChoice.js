@@ -65,6 +65,12 @@ export default function SocialChoice(menu) {
         {
             name: 'OLPR A', value: 'olprA', type: 'multiWinner', casterName: 'olprA',
         },
+        {
+            name: 'Sainte-Lague', value: 'sainteLague', type: 'allocation', casterName: 'plurality',
+        },
+        {
+            name: "d'Hondt", value: 'dHondt', type: 'allocation', casterName: 'plurality',
+        },
     ]
 
     // utilities for looking up this list

@@ -63,15 +63,11 @@ export default function ElectionSampleGeo(election, electionGeo) {
                 const point = sampleCandidates.sampler.samplePoint()
 
                 // make a candidate
-                if (dimensions === 1) {
-                    canList.push({ shape1: point })
-                } else {
-                    canList.push({ shape2: point })
-                }
+                canList.push(point)
             }
 
             // find winner position
-            const electionResults = electionGeo.runElection2(voterSimList, canList)
+            const electionResults = electionGeo.runElectionGeo(voterSimList, canList)
 
             const { resultsByDistrict } = electionResults
             const nDistricts = resultsByDistrict.length
