@@ -46,7 +46,7 @@ export default function Election(menu) {
 
     // Election //
 
-    self.runElectionOne = function (voterShapes, canList, optionCast) {
+    self.runElection = function (voterShapes, canList, optionCast) {
         const parties = self.getParties(canList)
         const votes = self.castVotes(voterShapes, canList, parties, optionCast)
         const electionResults = self.socialChoice.run(canList, votes, parties)

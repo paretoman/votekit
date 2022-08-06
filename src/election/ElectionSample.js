@@ -68,7 +68,7 @@ export default function ElectionSample(election) {
             }
 
             // find winner position
-            const electionResults = election.runElectionOne(voterShapes, canList, optionCast)
+            const electionResults = election.runElection(voterShapes, canList, optionCast)
 
             if (election.socialChoice.checkElectionType() === 'singleWinner') {
                 const { winner } = electionResults

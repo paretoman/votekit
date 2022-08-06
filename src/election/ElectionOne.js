@@ -24,7 +24,7 @@ export default function ElectionOne(election) {
         if (voterShapes.length === 0) return { error: 'No Voters' }
         if (canList.length === 0) return { error: 'No Candidates' }
 
-        const electionResults = election.runElectionOne(voterShapes, canList, optionCast)
+        const electionResults = election.runElection(voterShapes, canList, optionCast)
 
         return electionResults
     }
