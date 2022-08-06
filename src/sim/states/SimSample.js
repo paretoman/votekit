@@ -16,13 +16,20 @@ import VizSampleDensity2D from '../../viz/VizSampleDensity2D.js'
  *   voters in a distribution that will be summed over.
  * @param {Screen} screen
  * @param {Menu} menu
- * @param {Changes} changes
  * @param {ElectionSample} electionSample
  * @param {ElectionSampleGeo} electionSampleGeo
  * @param {Sim} sim
  * @constructor
  */
-export default function SimSample(screen, menu, changes, electionSample, electionSampleGeo, sim) {
+export default function SimSample(
+    screen,
+    menu,
+    changes,
+    election,
+    electionSample,
+    electionSampleGeo,
+    sim,
+) {
     const self = this
 
     SimBase.call(self, screen, changes, sim)
@@ -34,7 +41,7 @@ export default function SimSample(screen, menu, changes, electionSample, electio
     const voterGeoList = new VoterGeoList(screen, sim, changes)
 
     self.addSimCandidateDistribution = (canDn) => {
-        candidateDnSimList.newCandidate(new CandidateDnSim(canDn, self.dragm, screen))
+        candidateDnSimList.newCandidate(new CandidateDnSim(canDn, self.dragm, screen, election))
     }
 
     self.addSimVoterCircle = (voterShape) => {

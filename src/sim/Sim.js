@@ -51,7 +51,7 @@ export default function Sim(
     const sims = {
         one: new SimOne(screen, menu, changes, election, electionOne, electionGeo, self),
         // eslint-disable-next-line max-len
-        sample: new SimSample(screen, menu, changes, electionSample, electionSampleGeo, self),
+        sample: new SimSample(screen, menu, changes, election, electionSample, electionSampleGeo, self),
         base: new SimBase(screen, changes, self),
     }
     self.sims = sims
