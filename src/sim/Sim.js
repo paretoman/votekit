@@ -49,7 +49,7 @@ export default function Sim(
     // States //
 
     const sims = {
-        one: new SimOne(screen, menu, changes, electionOne, electionGeo, self),
+        one: new SimOne(screen, menu, changes, election, electionOne, electionGeo, self),
         // eslint-disable-next-line max-len
         sample: new SimSample(screen, menu, changes, electionSample, electionSampleGeo, self),
         base: new SimBase(screen, changes, self),

@@ -28,7 +28,7 @@ import VizOneGrid from '../../viz/VizOneGrid.js'
  * @param {Sim} sim
  * @constructor
  */
-export default function SimOne(screen, menu, changes, electionOne, electionGeo, sim) {
+export default function SimOne(screen, menu, changes, election, electionOne, electionGeo, sim) {
     const self = this
 
     SimBase.call(self, screen, changes, sim)
@@ -40,7 +40,7 @@ export default function SimOne(screen, menu, changes, electionOne, electionGeo, 
     const voterGeoList = new VoterGeoList(screen, sim, changes)
 
     self.addSimCandidate = (candidate) => {
-        candidateSimList.newCandidate(new CandidateSim(candidate, self.dragm, screen))
+        candidateSimList.newCandidate(new CandidateSim(candidate, self.dragm, screen, election))
     }
 
     self.addSimVoterCircle = (voterShape) => {

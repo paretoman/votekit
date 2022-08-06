@@ -11,11 +11,11 @@ import CandidateGraphic from '../vizEntities/CandidateGraphic.js'
  * @param {DraggableManager} dragm
  * @constructor
  */
-export default function CandidateSim(candidate, dragm, screen) {
+export default function CandidateSim(candidate, dragm, screen, election) {
     const self = this
     self.candidate = candidate
 
-    self.graphic = new CandidateGraphic(candidate, screen)
+    self.graphic = new CandidateGraphic(candidate, screen, election)
 
     dragm.newSquareHandle(candidate, self.graphic.square)
 }
