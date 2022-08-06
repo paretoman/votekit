@@ -1,7 +1,6 @@
 /** @module */
 
 import voteCasters from '../castVotes/voteCasters.js'
-import { countUnique } from '../utilities/jsHelpers.js'
 import SocialChoice from './SocialChoice.js'
 
 /**
@@ -39,7 +38,8 @@ export default function Election(menu) {
     const getPartyByCan = (canList) => canList.map((can) => can.party[0])
     self.getParties = (canList) => {
         const partiesByCan = getPartyByCan(canList)
-        const numParties = countUnique(partiesByCan)
+        // TODO: figure out how to vary the number of parties, allow skipping etc.
+        const numParties = 10
         const parties = { partiesByCan, numParties }
         return parties
     }
