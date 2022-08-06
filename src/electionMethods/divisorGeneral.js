@@ -14,7 +14,9 @@ import { copyArrayShallow, range } from '../utilities/jsHelpers.js'
  * Allocation is an array of integers that say how many representatives each party gets.
  */
 
-export default function divisorGeneral({ votes, electionMethodOptions, typeOfDivisor }) {
+export default function divisorGeneral({
+    votes, electionMethodOptions, typeOfDivisor, seatLimits,
+}) {
     const { seats, threshold } = electionMethodOptions
 
     // find out how many parties pass the threshold
@@ -27,11 +29,25 @@ export default function divisorGeneral({ votes, electionMethodOptions, typeOfDiv
     let nPositiveParties = positivePopulations.reduce(
         (p, c) => p + c,
     )
+    let makeAdjustment = nPositiveParties === 0
+
+    // Do we have limits to how many candidates are available in a party?
+    if (seatLimits !== undefined) {
+        // count how many candidates are available to fill seats
+        const candidatesAvailable = positivePopulations.map(
+            (p, i) => p * seatLimits[i],
+        ).reduce(
+            (p, c) => p + c,
+        )
+        if (candidatesAvailable < seats) {
+            makeAdjustment = true
+        }
+    }
 
     // Make an adjustment.
     // Remove the threshold if there are no parties past the threshold.
     // Count the number of parties with positive populations.
-    if (nPositiveParties === 0) {
+    if (makeAdjustment) {
         populations = copyArrayShallow(votes.tallyFractions)
         positivePopulations = populations.map(
             (p) => ((p === 0) ? 0 : 1),
@@ -83,17 +99,26 @@ export default function divisorGeneral({ votes, electionMethodOptions, typeOfDiv
     // They are also a ratio of the representatives to the population
     // except that the divisorPattern is used to substitute a slightly different number
     // than the number of respresentatives.
-    const signposts = populations.map(
-        (p) => (p === 0 ? Array(seats).fill(Infinity) : divisorPattern.map((d) => d / p)),
-    ).flat()
+
+    const signposts = []
+    const ids = []
+    let o = 0
+    for (let i = 0; i < populations.length; i++) {
+        const pop = populations[i]
+        if (pop === 0) continue
+
+        const numPosts = (seatLimits === undefined) ? seats : seatLimits[i]
+        for (let k = 0; k < numPosts; k++) {
+            signposts[o] = divisorPattern[k] / pop
+            ids[o] = i
+            o += 1
+        }
+    }
 
     const doOld = false
     if (doOld) {
         return oldWay(seats, populations, signposts)
     }
-    const ids = populations.map(
-        (p, i) => Array(seats).fill(i),
-    ).flat()
 
     const order = range(ids.length).sort(
         (a, b) => signposts[a] - signposts[b],

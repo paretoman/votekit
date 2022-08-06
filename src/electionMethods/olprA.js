@@ -28,11 +28,13 @@ export default function olprA({ votes, electionMethodOptions, parties }) {
     const { partiesByCan, numParties } = parties
     const numCans = tallyFractions.length
     const partyVotes = Array(numParties).fill(0)
+    const seatLimits = Array(numParties).fill(0)
     for (let i = 0; i < numCans; i++) {
         // Find which party the candidate belongs to - index of party.
         const iParty = partiesByCan[i]
         // Add tally to party.
         partyVotes[iParty] += tallyFractions[i]
+        seatLimits[iParty] += 1
     }
 
     // Find out how many seats each party gets.
@@ -40,6 +42,7 @@ export default function olprA({ votes, electionMethodOptions, parties }) {
     const partyResults = sainteLague({
         votes: { tallyFractions: partyVotes },
         electionMethodOptions,
+        seatLimits,
     })
     const partyAllocation = partyResults.allocation
 
