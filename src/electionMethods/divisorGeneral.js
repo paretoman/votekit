@@ -107,7 +107,7 @@ export default function divisorGeneral({
         const pop = populations[i]
         if (pop === 0) continue
 
-        const numPosts = (seatLimits === undefined) ? seats : seatLimits[i]
+        const numPosts = (seatLimits === undefined) ? seats : Math.min(seatLimits[i], seats)
         for (let k = 0; k < numPosts; k++) {
             signposts[o] = divisorPattern[k] / pop
             ids[o] = i
