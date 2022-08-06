@@ -95,7 +95,7 @@ export default function SocialChoice(menu) {
         } else if (electionType === 'multiWinner') {
             self.seats = 3
             self.numSampleCandidates = 10
-        } else {
+        } else { // 'singleWinner'
             self.seats = 1
             self.numSampleCandidates = 5
         }
