@@ -1,7 +1,7 @@
 /** @module */
 
 import { range } from '../utilities/jsHelpers.js'
-import huntingtonHill from './huntingtonHill.js'
+import sainteLague from './sainteLague.js'
 import sntv from './sntv.js'
 
 /**
@@ -37,7 +37,7 @@ export default function olprA({ votes, electionMethodOptions, parties }) {
 
     // Find out how many seats each party gets.
     // todo: change method
-    const partyResults = huntingtonHill({
+    const partyResults = sainteLague({
         votes: { tallyFractions: partyVotes },
         electionMethodOptions,
     })
