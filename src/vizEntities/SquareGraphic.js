@@ -21,6 +21,7 @@ export default function SquareGraphic(parent, w, h, screen) {
     self.h = h
     self.trueW = w // true width, because we want to return to this width after animating.
     self.trueH = h
+    self.angleFraction = 0
 
     self.pickUp = function () {
         self.tweenSq = new Tween(self)
@@ -30,6 +31,16 @@ export default function SquareGraphic(parent, w, h, screen) {
     self.drop = function () {
         self.tweenSq = new Tween(self)
         self.tweenSq.to({ w: self.trueW, h: self.trueH }, 100)
+        self.tweenSq.start()
+    }
+    self.win = function () {
+        self.tweenSq = new Tween(self)
+        self.tweenSq.to({ angleFraction: 0.25 }, 300)
+        self.tweenSq.start()
+    }
+    self.lose = function () {
+        self.tweenSq = new Tween(self)
+        self.tweenSq.to({ angleFraction: -0.25 }, 300)
         self.tweenSq.start()
     }
 
@@ -44,6 +55,12 @@ export default function SquareGraphic(parent, w, h, screen) {
         }
 
         if (parent.exists === 0) { fctx.globalAlpha = 0.2 }
+
+        if (self.angleFraction !== 0) {
+            fctx.translate(parent.x, parent.y)
+            fctx.rotate(self.angleFraction * Math.PI * 2)
+            fctx.translate(-parent.x, -parent.y)
+        }
 
         fctx.beginPath()
         fctx.fillStyle = parent.color

@@ -12,7 +12,16 @@ export default function CandidateGraphic(candidate, screen, election) {
         self.fraction = fraction
     }
 
+    self.wins = 0
     self.setWins = (wins) => {
+        // animate the win or loss.
+        if (self.wins !== wins) {
+            if (wins > self.wins) {
+                square.win()
+            } else if (self.wins > wins) {
+                square.lose()
+            }
+        }
         self.wins = wins
     }
 
