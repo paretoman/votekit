@@ -52,6 +52,18 @@ export default function CandidateDnSimList(sim, changes) {
             : CandidateDistributionSampler2D
         self.sampler = new CDnSampler(canDnsList)
     }
+
+    // Update //
+
+    self.setCandidateDnWins = (partyWinFraction) => {
+        const simCanDnsExisting = self.getSimCandidateDistributions()
+        if (simCanDnsExisting.length > 1) {
+            simCanDnsExisting.forEach((simCanDn, index) => {
+                const winFraction = partyWinFraction[index]
+                simCanDn.graphic.setWinFraction(winFraction)
+            })
+        }
+    }
     self.updateXY = () => {
         simCanDns.forEach((simCanDn) => simCanDn.canDn.updateXY())
     }

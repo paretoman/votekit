@@ -35,10 +35,11 @@ export default function VizSampleDensity1D(voterSimList, candidateDnSimList, scr
             start()
         }
 
-        const { pointsChanged, newPoints } = addResult
+        const { pointsChanged, points, partyWinFraction } = addResult
 
         if (pointsChanged) {
-            updatePoints(newPoints)
+            updatePoints(points)
+            candidateDnSimList.setCandidateDnWins(partyWinFraction)
         }
     }
 

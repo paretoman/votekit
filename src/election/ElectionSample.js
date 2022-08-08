@@ -18,6 +18,7 @@ export default function ElectionSample(election) {
     const maxPoints = 5000
 
     let points = []
+    let partyWins
 
     self.update = function (voterSimList, candidateDnSimList, changes, dimensions) {
         if (changes.checkNone() === false) {
@@ -30,6 +31,7 @@ export default function ElectionSample(election) {
 
     self.startSim = function () {
         points = []
+        partyWins = Array(10).fill(0) // TODO: Use number of parties
     }
 
     self.addSim = function (voterSimList, candidateDnSimList, dimensions) {
@@ -75,6 +77,7 @@ export default function ElectionSample(election) {
 
                 // record point
                 const winPoint = (dimensions === 1) ? winner.shape1 : winner.shape2
+                partyWins[winner.party] += 1
                 points.push(winPoint)
                 newPoints[i] = winPoint
             } else {
@@ -102,6 +105,9 @@ export default function ElectionSample(election) {
                             }
                         }
                         // record point
+
+                        // calculate fractions of wins
+                        partyWins[can.party] += 1
                         points.push(winPoint)
                         newPoints[q] = winPoint
                         q += 1
@@ -109,6 +115,10 @@ export default function ElectionSample(election) {
                 }
             }
         }
-        return { pointsChanged: true, newPoints, points }
+
+        const partyWinFraction = partyWins.map((x) => x / points.length)
+        return {
+            pointsChanged: true, newPoints, points, partyWinFraction,
+        }
     }
 }

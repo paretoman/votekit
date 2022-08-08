@@ -35,10 +35,13 @@ export default function VizSample(voterSimList, candidateDnSimList, screen, chan
             self.start()
         }
 
-        const { pointsChanged, newPoints, points } = addResult
+        const {
+            pointsChanged, newPoints, points, partyWinFraction,
+        } = addResult
 
         if (pointsChanged) {
             self.updatePoints(newPoints, points)
+            candidateDnSimList.setCandidateDnWins(partyWinFraction)
         }
     }
 

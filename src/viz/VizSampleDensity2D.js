@@ -29,10 +29,11 @@ export default function VizSampleDensity2D(voterSimList, candidateDnSimList, scr
     candidateDnSimList.setRenderer((voterShape) => new VoterRenderer(voterShape, screen))
 
     self.update = function (addResult) {
-        const { pointsChanged, points } = addResult
+        const { pointsChanged, points, partyWinFraction } = addResult
 
         if (pointsChanged) {
             self.updatePoints(points)
+            candidateDnSimList.setCandidateDnWins(partyWinFraction)
         }
     }
 
