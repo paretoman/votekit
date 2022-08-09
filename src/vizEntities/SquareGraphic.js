@@ -46,7 +46,7 @@ export default function SquareGraphic(parent, w, h, screen) {
 
     // Graphics component
     self.render = function () {
-        const { fctx } = screen
+        const { fctx, darkMode } = screen
 
         fctx.save()
 
@@ -64,6 +64,8 @@ export default function SquareGraphic(parent, w, h, screen) {
 
         fctx.beginPath()
         fctx.fillStyle = parent.color
+        if (darkMode && parent.darkModeColor) fctx.fillStyle = parent.darkModeColor
+        if (darkMode) fctx.strokeStyle = 'white'
         fctx.rect(
             (parent.x - 0.5 * self.w) - 0.5,
             (parent.y - 0.5 * self.h) - 0.5,

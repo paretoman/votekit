@@ -155,4 +155,5 @@ export default function CandidateDistribution(
     // Rendering
 
     self.color = '#ccc'
+    self.darkModeColor = '#333'
 }

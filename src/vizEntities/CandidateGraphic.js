@@ -31,16 +31,24 @@ export default function CandidateGraphic(candidate, screen, election) {
         const {
             x, y, exists, party,
         } = candidate
+
+        const { fctx, darkMode } = screen
+        const color = (darkMode) ? '#fff' : '#222'
+
         // show minimal graphics when rendering as a ghost.
         if (exists === 0) return
 
-        drawStrokedColor(textPercent(self.fraction), x, y - square.h * 0.5 - 2, 20, 2, '#222', 1, screen.fctx)
+        const y1 = y - square.h * 0.5 - 2
+        drawStrokedColor(textPercent(self.fraction), x, y1, 20, 2, color, 1, fctx)
 
         if (self.wins !== undefined) {
-            drawStrokedColor(self.wins, x, y + square.h * 0.5 + 20 + 2, 20, 2, '#222', 1, screen.fctx)
+            const y2 = y + square.h * 0.5 + 20 + 2
+            drawStrokedColor(self.wins, x, y2, 20, 2, color, 1, fctx)
         }
         if (election.socialChoice.electionMethod === 'olprA') {
-            drawStrokedColor(`p${party}`, x + square.w * 0.1, y + 8, 13, 2, '#222', 1, screen.fctx)
+            const x3 = x + square.w * 0.1
+            const y3 = y + 8
+            drawStrokedColor(`p${party}`, x3, y3, 13, 2, color, 1, fctx)
         }
     }
 }

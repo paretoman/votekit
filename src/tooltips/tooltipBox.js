@@ -19,9 +19,9 @@ export default function tooltipBox(entity, screen) {
     update(entity)
     // box.style.width = '10px'
     // box.style.height = '10px'
-    box.style.border = '1px solid black'
+    box.style.border = (screen.darkMode) ? '1px solid white' : '1px solid black'
     box.style.padding = '8px'
-    box.style.background = 'white'
+    box.style.background = (screen.darkMode) ? '#222' : 'white'
 
     let pinned = false
     /**

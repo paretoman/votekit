@@ -85,6 +85,7 @@ export default function GeoMaps(voterGeoList, candidateSimList, screen, sim) {
         canvas.height = 10
         offCtx.beginPath()
         offCtx.fillStyle = '#555'
+
         offCtx.arc(5, 5, 1, 0, 2 * Math.PI)
         offCtx.fill()
     }

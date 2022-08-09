@@ -34,7 +34,7 @@ export default function CircleGraphic(parent, r, screen) {
 
     // Graphics component
     self.render = function () {
-        const { fctx } = screen
+        const { fctx, darkMode } = screen
         const { color } = parent
 
         fctx.save()
@@ -50,6 +50,7 @@ export default function CircleGraphic(parent, r, screen) {
         }
         fctx.beginPath()
         fctx.fillStyle = color
+        if (darkMode) fctx.strokeStyle = 'white'
         fctx.arc(parent.x, parent.y, self.r, 0, 2 * Math.PI)
         fctx.fill()
         fctx.stroke()

@@ -58,7 +58,7 @@ export default function MenuItem(object, prop, setProp, label, options, change, 
     }
 }
 
-function buttonWidth(numButtons) {
+export function buttonWidth(numButtons) {
     const padding = 4
     const border = 1
     const margin = 4

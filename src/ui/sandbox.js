@@ -12,6 +12,7 @@ import addSaveConfigToText from '../command/addSaveConfigToText.js'
 import addLoadConfigText from '../command/loadConfigText.js'
 import addSaveConfigToLink from '../command/addSaveConfigToLink.js'
 import * as TWEEN from '../lib/snowpack/build/snowpack/pkg/@tweenjs/tweenjs.js'
+import addDarkModeSwitch from './addDarkModeSwitch.js'
 
 /**
  * Set up a user interface to run a simulation.
@@ -23,6 +24,7 @@ export default function sandbox(config, comMessenger, sandboxURL) {
 
     const layout = new Layout([
         'menu',
+        'darkModeSwitch',
         'simControlsLabel',
         'undo',
         'redo',
@@ -53,6 +55,7 @@ export default function sandbox(config, comMessenger, sandboxURL) {
 
     addSVGOutput(screen, draw, layout)
 
+    addDarkModeSwitch(screen, draw, layout)
     const sim = new Sim(screen, menu, changes, commander, layout)
 
     commander.loadConfig(config)

@@ -40,3 +40,23 @@ textarea {
     -o-tab-size : 4;
     tab-size : 4;
 }
+
+
+
+.darkMode body { 
+	background:  #222; color: white; 
+}
+.darkMode a {
+	color: #dde;
+}
+.darkMode a:visited {
+	color: #bbe;
+}
+.darkMode textarea {
+	background:  #222; 
+	color: white;
+}
+
+.darkMode div.screenWrap, canvas.maps, div.svgDiv, div.mSvgDiv {
+	border-color: white;
+}

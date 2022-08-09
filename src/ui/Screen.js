@@ -18,6 +18,18 @@ export default function Screen(w, h, layout) {
     self.width = w // measured in browser pixels
     self.height = h
 
+    // dark mode
+    self.darkMode = false
+    self.setDarkMode = (val) => {
+        self.darkMode = val
+        const [add, remove] = (val) ? ['darkMode', 'lightMode'] : ['lightMode', 'darkMode']
+        const body = document.getElementsByTagName('html')[0]
+        body.classList.remove(remove)
+        body.classList.add(add)
+        // https://stackoverflow.com/a/71001410
+    }
+    self.setDarkMode(window.matchMedia('(prefers-color-scheme: dark)').matches)
+
     // canvas
     self.canvas = document.createElement('canvas')
     self.canvas.setAttribute('class', 'background')
@@ -90,12 +102,27 @@ export default function Screen(w, h, layout) {
 
     self.clear = function () {
         self.ctx.clearRect(0, 0, self.canvas.width, self.canvas.height)
+
+        if (self.darkMode && self.noBuffers) {
+            self.ctx.fillStyle = '#222'
+            self.ctx.fillRect(0, 0, self.canvas.width, self.canvas.height)
+
+            self.ctx.fillStyle = 'white'
+        }
     }
     self.clearForeground = function () {
         self.fctx.clearRect(0, 0, self.foreground.width, self.foreground.height)
+        if (self.darkMode && self.noBuffers) {
+            self.fctx.fillStyle = '#222'
+            self.fctx.fillRect(0, 0, self.foreground.width, self.foreground.height)
+
+            self.fctx.fillStyle = 'white'
+        }
     }
     self.clearMaps = function () {
-        self.mctx.clearRect(0, 0, self.maps.width, self.maps.height)
+        if (!self.darkMode) {
+            self.mctx.clearRect(0, 0, self.maps.width, self.maps.height)
+        }
     }
     self.setCtx = function (c) {
         self.ctx = c

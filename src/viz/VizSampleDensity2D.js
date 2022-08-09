@@ -59,7 +59,7 @@ export default function VizSampleDensity2D(voterSimList, candidateDnSimList, scr
     }
 
     self.renderCans = () => {
-        const { ctx } = screen
+        const { ctx, darkMode } = screen
         const gg = geoPath()
             .context(ctx)
 
@@ -70,7 +70,9 @@ export default function VizSampleDensity2D(voterSimList, candidateDnSimList, scr
         const alpha = 1
         const nd = densityData.length
         for (let i = 0; i < nd; i++) {
-            const co = 255 - i * (200 / nThresholds)
+            const col = 255 - i * (200 / nThresholds)
+            // 33 is #222, otherwise there is noise TODO: fix this workaround. Try to take out 33.
+            const co = (darkMode) ? 255 - col + 33 : col
             ctx.fillStyle = `rgba(${co},${co},${co}, ${alpha})`
             ctx.beginPath()
             gg(densityData[i])

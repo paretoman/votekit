@@ -30,9 +30,6 @@
     font-weight: bold;
 
 	cursor: pointer;
-    background: #fff;
-    border: 1px solid #888;
-    color: #888;
 	line-height: 20px;
     font-size: 15px;
     font-weight: bold;
@@ -85,6 +82,41 @@
 	background: #111;
 }
 
+.sim-sandbox .button2{
+    background: #fff;
+    border: 1px solid #888;
+    color: #888;
+}
+
+
+
+.darkMode .sim-sandbox .button:hover{
+    background: #222;
+    border-color: #777;
+}
+.darkMode .sim-sandbox .button:active{
+    background: #ddd;
+    border-color: #fff;
+}
+.darkMode .sim-sandbox .button[on=yes]{
+    background: #444;
+    color: #fff;
+}
+.darkMode .sim-sandbox .button[on=yes]:hover{
+    background: #222;
+}
+.darkMode .button[on=yes]:active{
+    background: #eee;
+}
+
+.darkMode .sim-sandbox .button2{
+    background: #000;
+    border: 1px solid #888;
+    color: #888;
+}
+
+
+
 .button-group-label ~ div.button {
     display: none;
 }
@@ -95,8 +127,6 @@
 .button-group-label::before {
     content: ' \2B  '; /* Unicode character for "plus" sign (+) */
     font-size: 10px;
-    color: black;
-    fill: black;
     /* float: right; */
     /* margin-left: 5px; */
   

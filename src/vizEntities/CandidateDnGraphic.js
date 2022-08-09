@@ -25,12 +25,18 @@ export default function CandidateDnGraphic(candidateDn, screen, election) {
             x, y, party,
         } = candidateDn
 
+        const { fctx, darkMode } = screen
+        const color = (darkMode) ? '#fff' : '#222'
+
         if (election.socialChoice.electionMethod === 'olprA') {
-            drawStrokedColor(`p${party}`, x + square.w * 0.1, y + 8, 13, 2, '#222', 1, screen.fctx)
+            const x3 = x + square.w * 0.1
+            const y3 = y + 8
+            drawStrokedColor(`p${party}`, x3, y3, 13, 2, color, 1, fctx)
         }
 
         if (self.winFraction !== undefined) {
-            drawStrokedColor(textPercent(self.winFraction), x, y + square.h * 0.5 + 20 + 2, 20, 2, '#222', 1, screen.fctx)
+            const y2 = y + square.h * 0.5 + 20 + 2
+            drawStrokedColor(textPercent(self.winFraction), x, y2, 20, 2, color, 1, fctx)
         }
     }
     self.setRenderer = (rendererMaker) => {
