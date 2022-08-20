@@ -90,9 +90,11 @@ Create a 2D spatial model.
 * Command
   * Implement configuration that can be saved to text.
   * Implement undo and redo.
+* Environments
+  * There is some basic jupyter functionality to output votes and results.
 * index.html
     * The main file that shows a sandbox.
-* lib
+* Lib
     * External libraries, copied here using snowpack.
 * Menu
     * Implementing a menu above the main screen.

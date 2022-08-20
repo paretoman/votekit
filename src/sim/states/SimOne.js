@@ -10,6 +10,7 @@ import VizGeo from '../../viz/VizGeo.js'
 import VizOneVoronoi from '../../viz/VizOneVoronoi.js'
 import VizOneVoronoiRanking from '../../viz/VizOneVoronoiRanking.js'
 import VizOneGrid from '../../viz/VizOneGrid.js'
+import jupyterUpdate, { jupyterClear } from '../../environments/jupyter.js'
 
 /**
  * Simulate one election with
@@ -91,9 +92,11 @@ export default function SimOne(screen, menu, changes, election, electionOne, ele
     self.update = () => {
         if (changes.checkNone()) return
 
+        jupyterClear()
         voterList.update()
         const electionResults = electionStrategy
             .runElectionSim(voterList, candidateSimList, changes)
+        jupyterUpdate({ electionResults })
         vizOne.update(electionResults)
         self.testVoteSim()
         changes.clear()

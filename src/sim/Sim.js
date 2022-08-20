@@ -98,11 +98,7 @@ export default function Sim(
         sims[self.state].update()
     }
     function computeState() {
-        // right now, we use combinations of these state variables
-        // to determine which state to take, as opposed to having
-        // nested states.
-        // Also, we don't yet have implementations of all the possible
-        // combinations of these state variables.
+        // Determine state of sim.
         if (self.viz === 'one') {
             return 'one'
         }

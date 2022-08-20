@@ -1,6 +1,7 @@
 /** @module */
 
 import voteCasters from '../castVotes/voteCasters.js'
+import jupyterUpdate from '../environments/jupyter.js'
 import SocialChoice from './SocialChoice.js'
 
 /**
@@ -50,6 +51,7 @@ export default function Election(menu) {
         const parties = self.getParties(canList)
         const votes = self.castVotes(voterShapes, canList, parties, optionCast)
         const electionResults = self.socialChoice.run(canList, votes, parties)
+        jupyterUpdate({ votes })
         return electionResults
     }
 

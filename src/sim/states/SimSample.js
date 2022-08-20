@@ -9,6 +9,7 @@ import VoterGeoList from '../../voters/VoterGeoList.js'
 import VizSample from '../../viz/VizSample.js'
 import VizSampleDensity1D from '../../viz/VizSampleDensity1D.js'
 import VizSampleDensity2D from '../../viz/VizSampleDensity2D.js'
+import jupyterUpdate, { jupyterClear } from '../../environments/jupyter.js'
 
 /**
  * Simulate many sample elections with
@@ -89,11 +90,13 @@ export default function SimSample(
         // The election handles any changes.
         // The electionResults communicates how to visualize the election.
 
+        jupyterClear()
         voterList.update()
         candidateDnSimList.update()
         const { dimensions } = sim.election
         const addResult = electionStrategy
             .update(voterList, candidateDnSimList, changes, dimensions)
+        jupyterUpdate({ addResult })
         vizSample.update(addResult)
         changes.clear()
 

@@ -1,5 +1,6 @@
 /** @module */
 
+import jupyterUpdate from '../environments/jupyter.js'
 import { range } from '../utilities/jsHelpers.js'
 
 /**
@@ -43,6 +44,8 @@ export default function ElectionGeo(election) {
         const resultsByDistrict = countDistrictElections(votesByTract, canList, voterGeoList, parties)
         const allocation = sumAllocations(resultsByDistrict, canList)
 
+        jupyterUpdate({ votesByTract })
+
         const geoElectionResults = {
             resultsStatewide,
             resultsByTract,
@@ -69,6 +72,8 @@ export default function ElectionGeo(election) {
     function countStatewideElection(votesByTract, canList, parties) {
         const numCans = canList.length
         const allVotes = combineVotes(votesByTract, numCans)
+
+        jupyterUpdate({ allVotes })
 
         const resultsStatewide = election.socialChoice.run(canList, allVotes, parties)
         return resultsStatewide
@@ -179,6 +184,8 @@ export default function ElectionGeo(election) {
         // Find who won.
 
         const votesByDistrict = combineVotesByDistrict(votesByTract, canList, voterGeoList)
+
+        jupyterUpdate({ votesByDistrict })
 
         const resultsByDistrict = votesByDistrict.map(
             (votes) => election.socialChoice.run(canList, votes, parties),
