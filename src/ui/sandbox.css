@@ -9,15 +9,17 @@ div.screenWrap, canvas.maps, div.svgDiv, div.mSvgDiv {
 
 canvas.background {	
 	position:absolute;
-	z-index:-1;
+	z-index:0;
 }
 
 div.tooltips {
 	position:absolute;
+	z-index:1;
 }
 
 canvas.foreground {
-	z-index:1;
+	position:relative;
+	z-index:2;
 }
 
 div.tooltips[data-cursor=grab]{
@@ -44,6 +46,9 @@ textarea {
 
 
 .darkMode body { 
+	background:  #222; color: white; 
+}
+.darkMode div.sim-container { 
 	background:  #222; color: white; 
 }
 .darkMode a {
