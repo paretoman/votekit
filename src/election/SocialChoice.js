@@ -71,6 +71,9 @@ export default function SocialChoice(menu) {
         {
             name: "d'Hondt", value: 'dHondt', type: 'allocation', casterName: 'plurality',
         },
+        {
+            name: 'AllocScore', value: 'allocatedScore', type: 'multiWinner', casterName: 'scoreLong',
+        },
     ]
 
     // utilities for looking up this list

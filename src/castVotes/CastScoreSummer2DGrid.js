@@ -22,6 +22,7 @@ export default function CastScoreSummer2DGrid(canGeoms, optionCast) {
         // find vote
         const gridLength = grid.x.length
         const voteSet = Array(gridLength)
+        const weightSet = grid.weight
         for (let i = 0; i < gridLength; i++) {
             const weight = grid.weight[i]
             // if (weight === 0) continue
@@ -37,7 +38,7 @@ export default function CastScoreSummer2DGrid(canGeoms, optionCast) {
             }
         }
         return {
-            grid, voteSet, area, totalArea,
+            grid, voteSet, area, totalArea, weightSet,
         }
     }
 }

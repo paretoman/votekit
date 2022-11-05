@@ -9,11 +9,21 @@ import minimax from './minimax.js'
 import olprA from './olprA.js'
 import dHondt from './dHondt.js'
 import sainteLague from './sainteLague.js'
+import allocatedScore from './allocatedScore.js'
 
 /** a collection of election methods
  *  */
 const electionMethods = {
-    plurality, randomWinner, huntingtonHill, score, stv, minimax, olprA, dHondt, sainteLague,
+    plurality,
+    randomWinner,
+    huntingtonHill,
+    score,
+    stv,
+    minimax,
+    olprA,
+    dHondt,
+    sainteLague,
+    allocatedScore,
 }
 
 export default electionMethods
