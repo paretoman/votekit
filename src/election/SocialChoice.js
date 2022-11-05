@@ -74,6 +74,9 @@ export default function SocialChoice(menu) {
         {
             name: 'AllocScore', value: 'allocatedScore', type: 'multiWinner', casterName: 'scoreLong',
         },
+        {
+            name: 'MES', value: 'methodOfEqualShares', type: 'multiWinner', casterName: 'scoreLong',
+        },
     ]
 
     // utilities for looking up this list

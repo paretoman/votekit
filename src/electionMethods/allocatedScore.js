@@ -33,7 +33,7 @@ export default function allocatedScore({ votes, electionMethodOptions }) {
 
     let nw = 0 // number of winners
     for (let r = 0; r < nk; r++) {
-        if (nw > seats) break
+        if (nw >= seats) break
 
         // Select Winner //
         // add up number of votes for each candidate and choose the one with the most

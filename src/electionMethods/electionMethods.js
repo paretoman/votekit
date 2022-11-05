@@ -10,6 +10,7 @@ import olprA from './olprA.js'
 import dHondt from './dHondt.js'
 import sainteLague from './sainteLague.js'
 import allocatedScore from './allocatedScore.js'
+import methodOfEqualShares from './methodOfEqualShares.js'
 
 /** a collection of election methods
  *  */
@@ -24,6 +25,7 @@ const electionMethods = {
     dHondt,
     sainteLague,
     allocatedScore,
+    methodOfEqualShares,
 }
 
 export default electionMethods
