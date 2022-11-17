@@ -22,7 +22,7 @@ export default function castRanking({ canGeoms, voterGeoms, dimensions }) {
 
     // get fraction of votes for each candidate so we can summarize results
     let areaAll = []
-    let rankingAll = []
+    let rankingVotes = []
     let cansRankedAll = []
     const firstPreferences = Array(n).fill(0)
     let totalAreaAll = 0
@@ -33,11 +33,11 @@ export default function castRanking({ canGeoms, voterGeoms, dimensions }) {
         const weight = ((voterGeom.weight === undefined) ? 1 : voterGeom.weight)
 
         const {
-            ranking, cansRanked, area, totalArea, cellDatum,
+            rankings, cansRanked, area, totalArea, cellDatum,
         } = summer.sumArea(voterGeom, weight)
 
         areaAll = areaAll.concat(area)
-        rankingAll = rankingAll.concat(ranking)
+        rankingVotes = rankingVotes.concat(rankings)
         cansRankedAll = cansRankedAll.concat(cansRanked)
         totalAreaAll += totalArea
         cellData.push(cellDatum)
@@ -54,7 +54,7 @@ export default function castRanking({ canGeoms, voterGeoms, dimensions }) {
     const tallyFractions = firstPreferences.map((x) => x / totalAreaAll)
 
     const votes = {
-        ranking: rankingAll, cansRankedAll, rankingTallyFractions, tallyFractions, cellData,
+        rankingVotes, cansRankedAll, rankingTallyFractions, tallyFractions, cellData,
     }
     return votes
 }
