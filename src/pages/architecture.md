@@ -19,6 +19,23 @@ Do the math of the election, casting, counting, and visualizing votes.
     * There are two ways to cast.
         1. By voter.
         2. By regions of voters. This is more complicated.
+    * Output:
+        * Some of the following is output.
+        * for electionMethods
+            * List of votes:
+                * votePop - the fraction of the population that voted.
+                * scoreVotes - a list of votes. Each vote has a score for each candidate.
+                * rankingVotes - a list of votes. Each vote has a rank for each candidate.
+                * cansByRank - a list of votes. Each vote is a list indexed by ranking. A list of candidates is at each ranking.
+            * preComputedTallies:
+                * tallyFractions
+                * pairwiseTallyFractions
+                * rankingTallyFractions
+        * for viz
+            * cellData:
+                * {ranking, cells}
+                * {ranking, intervalBorders}
+            * gridData: { grid, voteSet, voterGeom }
 * SocialChoice
     * The difference between SocialChoice and Election is that Election is a mediator for all the aspects of a spatial election model such as casting a vote, or the number of dimensions, while SocialChoice is a component of the Election that just considers the votes and the result of running the election method. Then SocialChoice returns a summary of the results of the election method.
 * ElectionMethods
@@ -26,6 +43,8 @@ Do the math of the election, casting, counting, and visualizing votes.
     * Input votes and some optional precomputed tallies. 
     * Output a social choice and any information for visualization.
 * Viz
+    * Input:
+        * cellData or gridData
     * This is preferred to having the voters and candidates draw themselves because there can be interactions and overlaps.
     * Viz\* draws the voters because there is more context to draw them as a group than individually. 
         * VizOneVoronoi - for votes cast like plurality.
@@ -59,7 +78,6 @@ Control a 2D spatial model.
     * VoterSimList manages a list of VoterSim objects for each sim. It provides a count of the VoterShapes and renders the VoterShapes. It is important because the "exists" property of a VoterShape can be toggled, so we have to filter the list of voters
         * VoterGeoList is a variation on VoterSimList with more functionality for districts. 
     * VoterTest is a copy of VoterShape, mostly. VoterTest exists outside of these other classes. It doesn't have command history and doesn't interact with other voters. It's just a test.
-    * CircleGraphic makes an animated circle.
     * Data types:
         * These are the standard ways of referring to voter objects that are not classes.
         * voterGroup: an object with a shape1, shape2, and weight (optional) property.
@@ -73,7 +91,6 @@ Control a 2D spatial model.
         * CandidateCommander is the component that handles commands for each Candidate.
     * CandidateSim deals with dragging the Candidate for a particular sim.
     * CandidateSimList manages a list of CandidateSim objects and tracks whether candidates exist and provides functions to return an array of Candidate objects. It also handles methods that apply to all the members of the list so you don't have to loop through the Candidate objects on your own.
-    * SquareGraphic makes an animated square and shows stats.
     * Data types: 
         * I made a standard way of referring to candidates as objects that are not classes.
         * canGeoms: 
@@ -85,6 +102,8 @@ Control a 2D spatial model.
     * Nearly identical mirrors of the classes for Candidates above exist for CandidateDns.
 * VizEntities
     * Draws handles for voters and candidates.
+    * CircleGraphic makes an animated circle.
+    * SquareGraphic makes an animated square and shows stats.
 
 ## UI
 
