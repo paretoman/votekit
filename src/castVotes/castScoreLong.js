@@ -43,9 +43,9 @@ export default function castScore({
     // tally votes
     let tallyFractions = (new Array(n)).fill(0)
     const gridData = []
-    // flatten voteSets into voteList
+    // flatten voteSets into scoreVotes
     // votePop is number of voters with that vote (usually 1 or lower)
-    const voteList = []
+    const scoreVotes = []
     const votePop = []
     let k = 0
     for (let i = 0; i < voterGeoms.length; i++) {
@@ -59,7 +59,7 @@ export default function castScore({
         const voteIndex = []
 
         for (let j = 0; j < voteSet.length; j++) {
-            voteList[k] = voteSet[j].tallyFractions
+            scoreVotes[k] = voteSet[j].tallyFractions
             voteIndex[j] = k
             votePop[k] = weightSet[j] * invTotalWeight
             k += 1
@@ -76,7 +76,7 @@ export default function castScore({
         tallyFractions = tallyFractions.map((f, index) => f + area[index] * weight * invTotalWeight)
     }
     const votes = {
-        tallyFractions, gridData, voteList, votePop, numCandidates: n,
+        tallyFractions, gridData, scoreVotes, votePop,
     }
     return votes
 }

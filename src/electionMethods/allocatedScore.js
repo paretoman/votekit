@@ -11,21 +11,20 @@ import { range } from '../utilities/jsHelpers.js'
  * The voters' weight is spent, starting from the top scores.
  * Weight is spent until the weight of voters included is equal to 1/seats, which is the quota.
  * @param {Object} votes - The object for vote data.
- * @param {Object[]} votes.voteList - A list of votes
- * @param {Number[]} votes.voteList[] - A score for each candidate. From 0 to 1.
+ * @param {Object[]} votes.scoreVotes - A list of votes
+ * @param {Number[]} votes.scoreVotes[] - A score for each candidate. From 0 to 1.
  * @param {Object} votes.votePop - The fraction of the population that voted that way.
- * @param {Object} votes.numCandidates - Number of candidates running.
  * @param {Object} electionMethodOptions.seats - Number of candidates to elect.
  * @returns {{allocation:number[]}} - socialChoiceResults, with property allocation.
  * Allocation is an array of integers that say whether a candidate is elected (1) or not (0).
  */
 export default function allocatedScore({ votes, electionMethodOptions }) {
-    const { voteList, votePop, numCandidates } = votes
+    const { scoreVotes, votePop } = votes
 
     const { seats } = electionMethodOptions
 
-    const nk = numCandidates
-    const nv = voteList.length
+    const nk = scoreVotes[0].length // number of candidates
+    const nv = scoreVotes.length // number of votes
     const quota = 1 / seats // fraction of voters in a quota
 
     const weight = Array(nv).fill(1)
@@ -42,7 +41,7 @@ export default function allocatedScore({ votes, electionMethodOptions }) {
         for (let k = 0; k < nk; k++) {
             if (allocation[k] === 1) continue // no clones
             for (let i = 0; i < nv; i++) {
-                tally[k] += weight[i] * votePop[i] * voteList[i][k]
+                tally[k] += weight[i] * votePop[i] * scoreVotes[i][k]
             }
         }
 
@@ -57,7 +56,7 @@ export default function allocatedScore({ votes, electionMethodOptions }) {
         // sort scores for winner, find indices of sorted scores
         // sort descending
         const iSortVoters = range(nv).sort(
-            (a, b) => voteList[b][iWinner] - voteList[a][iWinner],
+            (a, b) => scoreVotes[b][iWinner] - scoreVotes[a][iWinner],
         )
 
         // add up to a quota
@@ -66,7 +65,7 @@ export default function allocatedScore({ votes, electionMethodOptions }) {
         let sumTop = 0
         for (let i = 0; i < nv; i++) {
             const index = iSortVoters[i]
-            const score = voteList[index][iWinner]
+            const score = scoreVotes[index][iWinner]
             sumTop += score * weight[index] * votePop[i]
             weight[index] = 0 // remove vote
             if (sumTop >= quota) {

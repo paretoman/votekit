@@ -16,21 +16,20 @@ import { range } from '../utilities/jsHelpers.js'
  * Do this 10 times. That should be enough, maybe.
  * If there is any deficit remaining, then subtract it from everybody.
  * @param {Object} votes - The object for vote data.
- * @param {Object[]} votes.voteList - A list of votes
- * @param {Number[]} votes.voteList[] - A score for each candidate. From 0 to 1.
+ * @param {Object[]} votes.scoreVotes - A list of votes
+ * @param {Number[]} votes.scoreVotes[] - A score for each candidate. From 0 to 1.
  * @param {Object} votes.votePop - The fraction of the population that voted that way.
- * @param {Object} votes.numCandidates - Number of candidates running.
  * @param {Object} electionMethodOptions.seats - Number of candidates to elect.
  * @returns {{allocation:number[]}} - socialChoiceResults, with property allocation.
  * Allocation is an array of integers that say whether a candidate is elected (1) or not (0).
  */
 export default function methodOfEqualShares({ votes, electionMethodOptions }) {
-    const { voteList, votePop, numCandidates } = votes
+    const { scoreVotes, votePop } = votes
 
     const { seats } = electionMethodOptions
 
-    const nk = numCandidates
-    const nv = voteList.length
+    const nk = scoreVotes[0].length // number of candidates
+    const nv = scoreVotes.length // number of votes
     const groupCost = 1 / seats // fraction of voters in a groupCost
 
     const budget = Array(nv).fill(1)
@@ -82,7 +81,7 @@ export default function methodOfEqualShares({ votes, electionMethodOptions }) {
         for (let k = 0; k < nk; k++) {
             if (allocation[k] === 1) continue // no clones
             for (let i = 0; i < nv; i++) {
-                tally[k] += votePop[i] * voteList[i][k]
+                tally[k] += votePop[i] * scoreVotes[i][k]
             }
         }
 
@@ -115,7 +114,7 @@ export default function methodOfEqualShares({ votes, electionMethodOptions }) {
             const groupCostPerScore = groupCost / tally[can]
             let withinBudget = true
             for (let i = 0; i < nv; i++) {
-                const score = voteList[i][can]
+                const score = scoreVotes[i][can]
                 if (budget[i] < groupCostPerScore * score) {
                     withinBudget = false
                     break
@@ -141,7 +140,7 @@ export default function methodOfEqualShares({ votes, electionMethodOptions }) {
             const supporters = []
             for (let i = 0, j = 0; i < nv; i++) {
                 const bud = budget[i]
-                const score = voteList[i][can]
+                const score = scoreVotes[i][can]
                 maxCostPerScore[i] = bud / score
                 if (score > 0) {
                     totalBudget += bud * votePop[i]
@@ -182,7 +181,7 @@ export default function methodOfEqualShares({ votes, electionMethodOptions }) {
                 }
                 // remove voter
                 costLeft -= votePop[i] * budget[i]
-                scoreLeft -= votePop[i] * voteList[i][can]
+                scoreLeft -= votePop[i] * scoreVotes[i][can]
                 // if (scoreLeft < 0) {
                 //     console.log(Math.round(scoreLeft * 100))
                 // }
@@ -197,7 +196,7 @@ export default function methodOfEqualShares({ votes, electionMethodOptions }) {
                 curMaxCostPerScore = costLeft / scoreLeft
             }
             // const curMaxCostPerScore = (nearZero(scoreLeft) || nearZero(costLeft))
-            //     ? budget[supportersSorted[ns - 1]] / voteList[supportersSorted[ns - 1]][can]
+            //     ? budget[supportersSorted[ns - 1]] / scoreVotes[supportersSorted[ns - 1]][can]
             //     : costLeft / scoreLeft
 
             // const maxCostPerScore = price / util
@@ -236,7 +235,7 @@ export default function methodOfEqualShares({ votes, electionMethodOptions }) {
         //             budget[i] -= min(budget[i], lowest_rho * u[next_candidate][i])
         // console.log(lowestMaxCostPerScore)
         for (let i = 0; i < nv; i++) {
-            const score = voteList[i][bestCandidate]
+            const score = scoreVotes[i][bestCandidate]
             const cost = lowestMaxCostPerScore * score
             budget[i] = Math.max(0, budget[i] - cost)
         }
