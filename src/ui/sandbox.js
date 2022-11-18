@@ -1,6 +1,6 @@
 /** @module */
 
-import Changes from './Changes.js'
+import Changes from '../sim/Changes.js'
 import Screen from './Screen.js'
 import addSVGOutput from './addSVGOutput.js'
 import Menu from '../menu/Menu.js'
