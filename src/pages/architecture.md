@@ -28,9 +28,10 @@ Control a 2D spatial model.
     * Make a tooltip appear when an entity is clicked or a blank space is clicked.
 * UI
     * Sandbox is the main user interface.
-    * Screen is a context for drawing. [code_screen](code_screen.md)
+    * Screen is a context for drawing. See [screen](code_screen.md).
     * Layout puts divs in order.
     * doubleSandbox provides two sandboxes that are linked.
+* More UI elements are in additional folders specific to their context.
 
 ## Game Commands
 
@@ -42,13 +43,13 @@ Control a 2D spatial model.
   * ComMessenger: link two sandboxes.
   * UI elements for text input and undo and redo buttons.
   * Add to the Changes class to trigger Sim updates.
-  * See [code_commands](code_commands.md)
+  * See [commands](code_commands.md).
 
 ## Game Model
 
 * Sim
     * The Sim class manages voter entities and candidate entities.
-    * [code_sim](code_sim.md)
+    * See [sim](code_sim.md).
     * Entities are visual objects that can be controlled by the user. These include voters and candidates.
     * Sim is a state machine with the following states: SimGeoOne, SimOne1D, SimOne2D, and SimSample. Each state is like a different game. Entities are shared between states. Wrappers use the entities as components to provide additional functionality to the states.
     * State Updates
@@ -108,14 +109,13 @@ Do the math of the election: casting and counting votes.
         * Some of the following is output.
         * for electionMethods
             * List of votes:
-                * votePop - the fraction of the population that voted.
+                * votePop - the fraction of the population that voted as listed.
                 * scoreVotes - a list of votes. Each vote has a score for each candidate.
                 * rankingVotes - a list of votes. Each vote has a rank for each candidate.
                 * cansByRank - a list of votes. Each vote is a list indexed by ranking. A list of candidates is at each ranking.
             * preComputedTallies:
-                * tallyFractions
-                * pairwiseTallyFractions
-                * rankingTallyFractions
+                * tallyFractions - a tally for each candidate.
+                * pairwiseTallyFractions - a tally for each pair of candidates.
         * for viz
             * cellData:
                 * {ranking, cells}

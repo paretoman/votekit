@@ -92,11 +92,11 @@ export default function ElectionGeo(election) {
             const pwtf = statewidePairwiseTallyFractions(votesByTract, numCans)
             votes.pairwiseTallyFractions = pwtf
         }
-        if (votesByTract[0][0].rankingTallyFractions !== undefined) {
+        if (votesByTract[0][0].cansByRank !== undefined) {
             // vrtf - votes ranked tally fractions
             const vrtf = statewideRankingTallyFractions(votesByTract)
-            votes.rankingTallyFractions = vrtf.rankingTallyFractions
-            votes.cansRankedAll = vrtf.cansRankedAll
+            votes.votePop = vrtf.votePop
+            votes.cansByRank = vrtf.cansByRank
         }
         return votes
     }
@@ -143,26 +143,26 @@ export default function ElectionGeo(election) {
     }
 
     function statewideRankingTallyFractions(votesByTract) {
-        // concatenate rankingTallyFractions
-        let rankingTallyFractionsAll = []
+        // concatenate cansByRank
+        let votePopAll = []
         let cansRankedAll2 = []
         votesByTract.forEach(
             (row) => row.forEach(
                 (votes) => {
-                    const { rankingTallyFractions, cansRankedAll } = votes
-                    rankingTallyFractionsAll = rankingTallyFractionsAll
-                        .concat(rankingTallyFractions)
-                    cansRankedAll2 = cansRankedAll2.concat(cansRankedAll)
+                    const { votePop, cansByRank } = votes
+                    votePopAll = votePopAll
+                        .concat(votePop)
+                    cansRankedAll2 = cansRankedAll2.concat(cansByRank)
                 },
             ),
         )
         const numRows = votesByTract.length
         const numCols = votesByTract[0].length
         const rNorm = 1 / (numRows * numCols)
-        rankingTallyFractionsAll = rankingTallyFractionsAll.map((t) => t * rNorm)
+        votePopAll = votePopAll.map((t) => t * rNorm)
         return {
-            rankingTallyFractions: rankingTallyFractionsAll,
-            cansRankedAll: cansRankedAll2,
+            votePop: votePopAll,
+            cansByRank: cansRankedAll2,
         }
     }
 
@@ -218,11 +218,11 @@ export default function ElectionGeo(election) {
                 const pwtf = districtPairwiseTallyFractions(votesByTract, cen, numCans)
                 votes.pairwiseTallyFractions = pwtf
             }
-            if (votesByTract[0][0].rankingTallyFractions !== undefined) {
+            if (votesByTract[0][0].cansByRank !== undefined) {
                 // vrtf - votes ranked tally fractions
                 const vrtf = districtRankingTallyFractions(votesByTract, cen)
-                votes.rankingTallyFractions = vrtf.rankingTallyFractions
-                votes.cansRankedAll = vrtf.cansRankedAll
+                votes.votePop = vrtf.votePop
+                votes.cansByRank = vrtf.cansByRank
             }
             return votes
         })
@@ -265,9 +265,9 @@ export default function ElectionGeo(election) {
     }
 
     function districtRankingTallyFractions(votesByTract, cen) {
-        // concatenate rankingTallyFractions
-        let rankingTallyFractionsAll = []
-        let cansRankedAll2 = []
+        // concatenate cansByRank
+        let votePopAll = []
+        let cansByRankAll = []
 
         let gfSum = 0
         for (let j = 0; j < cen.length; j++) {
@@ -279,16 +279,16 @@ export default function ElectionGeo(election) {
         for (let j = 0; j < cen.length; j++) {
             const [gx, gy, gf] = cen[j]
             gfSum += gf
-            const { rankingTallyFractions, cansRankedAll } = votesByTract[gx][gy]
-            const rankingTallyFractionsNorm = rankingTallyFractions
+            const { votePop, cansByRank } = votesByTract[gx][gy]
+            const rankingTallyFractionsNorm = votePop
                 .map((x) => x * gf * gfNorm)
-            rankingTallyFractionsAll = rankingTallyFractionsAll
+            votePopAll = votePopAll
                 .concat(rankingTallyFractionsNorm)
-            cansRankedAll2 = cansRankedAll2.concat(cansRankedAll)
+            cansByRankAll = cansByRankAll.concat(cansByRank)
         }
         return {
-            rankingTallyFractions: rankingTallyFractionsAll,
-            cansRankedAll: cansRankedAll2,
+            votePop: votePopAll,
+            cansByRank: cansByRankAll,
         }
     }
 

@@ -50,11 +50,11 @@ export default function castRanking({ canGeoms, voterGeoms, dimensions }) {
             }
         }
     })
-    const rankingTallyFractions = areaAll.map((x) => x / totalAreaAll)
+    const votePop = areaAll.map((x) => x / totalAreaAll)
     const tallyFractions = firstPreferences.map((x) => x / totalAreaAll)
 
     const votes = {
-        rankingVotes, cansByRank, rankingTallyFractions, tallyFractions, cellData,
+        rankingVotes, cansByRank, votePop, tallyFractions, cellData,
     }
     return votes
 }
