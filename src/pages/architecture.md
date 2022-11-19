@@ -5,6 +5,8 @@ layout: default
 
 The architecture tries to be context-oriented toward the task to be performed. The client level has uses of the application. The application has five main parts: user input, game commands, game model, election model, and visualization. These are roughly in order of program control. Input gets processed to output. Also, this is a Model-View-Controller architecture. The first two parts are kind of like controllers, the next two are models, and the last one is view. Also, there are libraries and documentation. That is a high level overview of the contents of the src folder.
 
+Todo: update.
+
 ## Client
 
 * index.html
@@ -108,14 +110,14 @@ Do the math of the election: casting and counting votes.
     * Output:
         * Some of the following is output.
         * for electionMethods
+            * votePop - the fraction of the population that voted as listed.
             * List of votes:
-                * votePop - the fraction of the population that voted as listed.
                 * scoreVotes - a list of votes. Each vote has a score for each candidate.
                 * rankingVotes - a list of votes. Each vote has a rank for each candidate.
                 * cansByRank - a list of votes. Each vote is a list indexed by ranking. A list of candidates is at each ranking.
             * preComputedTallies:
-                * tallyFractions - a tally for each candidate.
-                * pairwiseTallyFractions - a tally for each pair of candidates.
+                * tallyFractions - a number for each candidate.
+                * pairwiseTallyFractions - a fraction for each pair of candidates.
         * for viz
             * cellData:
                 * {ranking, cells}
