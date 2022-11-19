@@ -98,6 +98,12 @@ export default function ElectionGeo(election) {
             votes.votePop = vrtf.votePop
             votes.cansByRank = vrtf.cansByRank
         }
+        if (votesByTract[0][0].scoreVotes !== undefined) {
+            // vstf - votes score tally fractions
+            const vstf = statewideScoreTallyFractions(votesByTract)
+            votes.votePop = vstf.votePop
+            votes.scoreVotes = vstf.scoreVotes
+        }
         return votes
     }
 
@@ -145,14 +151,14 @@ export default function ElectionGeo(election) {
     function statewideRankingTallyFractions(votesByTract) {
         // concatenate cansByRank
         let votePopAll = []
-        let cansRankedAll2 = []
+        let cansByRankAll = []
         votesByTract.forEach(
             (row) => row.forEach(
                 (votes) => {
                     const { votePop, cansByRank } = votes
                     votePopAll = votePopAll
                         .concat(votePop)
-                    cansRankedAll2 = cansRankedAll2.concat(cansByRank)
+                    cansByRankAll = cansByRankAll.concat(cansByRank)
                 },
             ),
         )
@@ -162,7 +168,31 @@ export default function ElectionGeo(election) {
         votePopAll = votePopAll.map((t) => t * rNorm)
         return {
             votePop: votePopAll,
-            cansByRank: cansRankedAll2,
+            cansByRank: cansByRankAll,
+        }
+    }
+
+    function statewideScoreTallyFractions(votesByTract) {
+        // concatenate cansByRank
+        let votePopAll = []
+        let scoreVoteAll = []
+        votesByTract.forEach(
+            (row) => row.forEach(
+                (votes) => {
+                    const { votePop, scoreVotes } = votes
+                    votePopAll = votePopAll
+                        .concat(votePop)
+                    scoreVoteAll = scoreVoteAll.concat(scoreVotes)
+                },
+            ),
+        )
+        const numRows = votesByTract.length
+        const numCols = votesByTract[0].length
+        const rNorm = 1 / (numRows * numCols)
+        votePopAll = votePopAll.map((t) => t * rNorm)
+        return {
+            votePop: votePopAll,
+            scoreVotes: scoreVoteAll,
         }
     }
 
@@ -224,6 +254,12 @@ export default function ElectionGeo(election) {
                 votes.votePop = vrtf.votePop
                 votes.cansByRank = vrtf.cansByRank
             }
+            if (votesByTract[0][0].scoreVotes !== undefined) {
+                // vstf - votes score tally fractions
+                const vstf = districtScoreTallyFractions(votesByTract, cen)
+                votes.votePop = vstf.votePop
+                votes.scoreVotes = vstf.scoreVotes
+            }
             return votes
         })
         return votesByDistrict
@@ -280,15 +316,43 @@ export default function ElectionGeo(election) {
             const [gx, gy, gf] = cen[j]
             gfSum += gf
             const { votePop, cansByRank } = votesByTract[gx][gy]
-            const rankingTallyFractionsNorm = votePop
+            const votePopNorm = votePop
                 .map((x) => x * gf * gfNorm)
             votePopAll = votePopAll
-                .concat(rankingTallyFractionsNorm)
+                .concat(votePopNorm)
             cansByRankAll = cansByRankAll.concat(cansByRank)
         }
         return {
             votePop: votePopAll,
             cansByRank: cansByRankAll,
+        }
+    }
+
+    function districtScoreTallyFractions(votesByTract, cen) {
+        // concatenate scoreVotes
+        let votePopAll = []
+        let scoreVotesAll = []
+
+        let gfSum = 0
+        for (let j = 0; j < cen.length; j++) {
+            const [, , gf] = cen[j]
+            gfSum += gf
+        }
+        const gfNorm = 1 / gfSum
+
+        for (let j = 0; j < cen.length; j++) {
+            const [gx, gy, gf] = cen[j]
+            gfSum += gf
+            const { votePop, scoreVotes } = votesByTract[gx][gy]
+            const votePopNorm = votePop
+                .map((x) => x * gf * gfNorm)
+            votePopAll = votePopAll
+                .concat(votePopNorm)
+            scoreVotesAll = scoreVotesAll.concat(scoreVotes)
+        }
+        return {
+            votePop: votePopAll,
+            scoreVotes: scoreVotesAll,
         }
     }
 
