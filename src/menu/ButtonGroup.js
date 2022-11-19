@@ -51,10 +51,6 @@ export default function ButtonGroup(config) {
         self.labelDOM = document.createElement('div')
         self.labelDOM.setAttribute('class', 'button-group-label')
         self.draw()
-        self.labelDOM.classList.toggle('seeit')
-        self.labelDOM.onclick = () => {
-            self.labelDOM.classList.toggle('seeit')
-        }
         self.dom.appendChild(self.labelDOM)
 
         // Create & place buttons!

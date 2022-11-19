@@ -114,23 +114,3 @@
     border: 1px solid #888;
     color: #888;
 }
-
-
-
-.button-group-label ~ div.button {
-    display: none;
-}
-.button-group-label.seeit ~ div.button {
-    display: block; 
-}
-
-.button-group-label::before {
-    content: ' \2B  '; /* Unicode character for "plus" sign (+) */
-    font-size: 10px;
-    /* float: right; */
-    /* margin-left: 5px; */
-  
-}
-.seeit::before {
-    content: " \2212  "; /* Unicode character for "minus" sign (-) */
-}
