@@ -1,7 +1,7 @@
 /** @module */
 
 import { drawStrokedColor } from '../../utilities/graphicsUtilities.js'
-import DraggableManager from '../DraggableManager.js'
+import DraggableManager from '../../ui/DraggableManager.js'
 
 /**
  * The super class for each sim. Provides some basic required functionality.
