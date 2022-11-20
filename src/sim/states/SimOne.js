@@ -11,6 +11,8 @@ import VizOneVoronoi from '../../viz/VizOneVoronoi.js'
 import VizOneVoronoiRanking from '../../viz/VizOneVoronoiRanking.js'
 import VizOneGrid from '../../viz/VizOneGrid.js'
 import jupyterUpdate, { jupyterClear } from '../../environments/jupyter.js'
+import VizExplanationBudgetMES from '../../viz/VizExplanationBudgetMES.js'
+import BaseExplanation from '../../viz/BaseExplanation.js'
 
 /**
  * Simulate one election with
@@ -56,6 +58,7 @@ export default function SimOne(screen, menu, changes, election, electionOne, ele
     let voterList
     let electionStrategy
     let vizOne
+    let vizExplanation
     function enterStrategy() {
         voterList = (sim.geo) ? voterGeoList : voterSimList
 
@@ -66,6 +69,12 @@ export default function SimOne(screen, menu, changes, election, electionOne, ele
         const VizNoGeo = (casterName === 'score' || casterName === 'scoreLong') ? VizOneGrid : VizOneVoronoiGeneral
         const VizOne = (sim.geo === true) ? VizGeo : VizNoGeo
         vizOne = new VizOne(voterList, candidateSimList, screen, sim)
+
+        const { electionMethod } = sim.election.socialChoice
+        const noGeo = !sim.geo
+        const { dimensions } = sim.election
+        const VizExplanation = (electionMethod === 'methodOfEqualShares' && noGeo && dimensions === 1) ? VizExplanationBudgetMES : BaseExplanation
+        vizExplanation = new VizExplanation(screen)
     }
     enterStrategy()
 
@@ -78,6 +87,7 @@ export default function SimOne(screen, menu, changes, election, electionOne, ele
 
         sim.candidateAdd.canButton.show()
         vizOne.enter()
+        vizExplanation.enter()
         voterList.updateXY()
         candidateSimList.updateXY()
         sim.voterTest.updateXY()
@@ -85,6 +95,7 @@ export default function SimOne(screen, menu, changes, election, electionOne, ele
 
     self.exit = () => {
         vizOne.exit()
+        vizExplanation.exit()
         sim.candidateAdd.canButton.hide()
         sim.voterTest.setE(0)
     }
@@ -98,6 +109,7 @@ export default function SimOne(screen, menu, changes, election, electionOne, ele
             .runElectionSim(voterList, candidateSimList, changes)
         jupyterUpdate({ electionResults })
         vizOne.update(electionResults)
+        vizExplanation.update(electionResults)
         self.testVoteSim()
         changes.clear()
 
@@ -114,6 +126,7 @@ export default function SimOne(screen, menu, changes, election, electionOne, ele
 
     self.render = () => {
         vizOne.render()
+        vizExplanation.render()
     }
     self.renderForeground = () => {
         voterList.renderForeground()

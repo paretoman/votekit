@@ -24,19 +24,24 @@ export default function SocialChoice(menu) {
         //   which has tallies go in and analysis come out
         // electionResults, the larger one,
         //   is in the context of candidate objects and voter objects.
+        const colorRGBAOfCandidates = canList.map((c) => c.colorRGBA)
         if (self.checkElectionType() === 'allocation' || self.checkElectionType() === 'multiWinner') {
             const electionMethodOptions = { seats: self.seats, threshold: 0.1 }
             const electionMethod = electionMethods[self.electionMethod]
             const socialChoiceResults = electionMethod({ votes, parties, electionMethodOptions })
-            const { allocation } = socialChoiceResults
-            const electionResults = { allocation, canList, votes }
+            const { allocation, explanation } = socialChoiceResults
+            const electionResults = {
+                allocation, explanation, canList, votes, colorRGBAOfCandidates,
+            }
             return electionResults
         }
         const electionMethod = electionMethods[self.electionMethod]
         const socialChoiceResults = electionMethod({ votes, parties })
         const { iWinner } = socialChoiceResults
         const winner = canList[iWinner]
-        const electionResults = { iWinner, winner, votes }
+        const electionResults = {
+            iWinner, winner, votes, colorRGBAOfCandidates,
+        }
         return electionResults
     }
 

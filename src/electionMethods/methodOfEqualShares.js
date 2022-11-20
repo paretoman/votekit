@@ -35,6 +35,9 @@ export default function methodOfEqualShares({ votes, electionMethodOptions }) {
     const budget = Array(nv).fill(1)
     const allocation = Array(nk).fill(0)
 
+    const winnersByRound = []
+    const winnerMaxCostPerScoreByRound = []
+
     const small = 10 ** -4
 
     let nw = 0 // number of winners
@@ -230,6 +233,8 @@ export default function methodOfEqualShares({ votes, electionMethodOptions }) {
         //         W.add(next_candidate)
         allocation[bestCandidate] = 1
         nw += 1
+        winnersByRound[r] = bestCandidate
+        winnerMaxCostPerScoreByRound[r] = lowestMaxCostPerScore
 
         //         for i in N:
         //             budget[i] -= min(budget[i], lowest_rho * u[next_candidate][i])
@@ -242,7 +247,8 @@ export default function methodOfEqualShares({ votes, electionMethodOptions }) {
         //     return complete_utilitarian(N, C, cost, u, b, W)  # one of the possible completions
     }
 
-    const socialChoiceResults = { allocation }
+    const explanation = { winnersByRound, winnerMaxCostPerScoreByRound, electionMethodOptions }
+    const socialChoiceResults = { allocation, explanation }
     return socialChoiceResults
 }
 
