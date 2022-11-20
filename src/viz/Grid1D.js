@@ -45,7 +45,8 @@ export default function Grid1D(candidateSimList, screen) {
         for (let i = 0; i < nCans; i++) {
             // draw image
             ctx.fillStyle = canList[i].color
-            ctx.strokeStyle = rgbToString(colorBlender([0.8, 0.2], [canList[i].color, '#000000']))
+            const { colorRGBA } = canList[i]
+            ctx.strokeStyle = rgbToString(colorBlender([0.5, 0.5], [colorRGBA, [0, 0, 0]]))
             ctx.beginPath()
             shapePath(ctx, i, false)
             ctx.fill()
@@ -71,14 +72,14 @@ export default function Grid1D(candidateSimList, screen) {
         for (let i = 0; i < gl; i += 1) {
             const xg = gridX[i]
             if (xg < -1) continue
-            if (xg > screen.width + 1) continue
+            if (xg > screen.width) continue
             const voteMult = (drawOutline) ? 1 : voteSet[i].tallyFractions[iCan]
             const shapeMult = (isGauss) ? Math.exp(-0.5 * ((xg - x) / sigma) ** 2) : 1
             const y = bottom - amp * shapeMult * voteMult
             ctx.lineTo(xg, y)
         }
         // end bottom right
-        const right = Math.min(screen.width + 1, gridX[gl - 1])
+        const right = Math.min(screen.width, gridX[gl - 1])
         ctx.lineTo(right, bottom)
         // close path
         ctx.lineTo(left, bottom)
