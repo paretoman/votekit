@@ -5,7 +5,7 @@
  * @param {Screen} screen
  * @constructor
  */
-export default function BaseExplanation(screen) {
+export default function BaseExplanation() {
     const self = this
 
     self.enter = () => {
@@ -13,7 +13,7 @@ export default function BaseExplanation(screen) {
     self.exit = () => {
     }
 
-    self.update = function (electionResults) {
+    self.update = function () {
     }
 
     self.render = function () {

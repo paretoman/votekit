@@ -1,6 +1,7 @@
 /** @module */
 
-import vizMESChartsCalc from './VizMESChartsCalc.js'
+import vizMESChartsCalcBudget from './vizMESChartsCalcBudget.js'
+import vizMESChartsCalcShape from './vizMESChartsCalcShape.js'
 import vizMESChartsRender from './vizMESChartsRender.js'
 
 /**
@@ -29,7 +30,8 @@ export default function VizExplanationBudgetMES(screen) {
         }
         flagNoRender = false
 
-        chartDataMES = vizMESChartsCalc(electionResults, screen)
+        const budgetDataMES = vizMESChartsCalcBudget(electionResults)
+        chartDataMES = vizMESChartsCalcShape(electionResults, screen, budgetDataMES)
     }
 
     self.render = function () {

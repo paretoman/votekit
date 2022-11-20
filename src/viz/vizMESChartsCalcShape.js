@@ -1,14 +1,19 @@
 /** @module */
 
 /**
- * Calculate data for charts of budget for MES
- * @param {Object} electionResults - MES methodResults plus a little extra
+ * Calculate shape data for charts of budget for MES
+ * @param {Object} electionResults - MES methodResults plus a little extra candidate data
+ * @param {Object} screen
+ * @param {Object} budgetDataMES
+ * @returns chartDataMES
  */
-export default function vizMESChartsCalc(electionResults, screen) {
-    const { explanation, votes, colorRGBAOfCandidates } = electionResults
-    const { winnersByRound, winnerMaxCostPerScoreByRound } = explanation
+export default function vizMESChartsCalcShape(electionResults, screen, budgetDataMES) {
+    const { explanation, votes } = electionResults
+    const { winnersByRound } = explanation
 
-    const { scoreVotes, gridData } = votes
+    const { costsByGeom, budgetsByGeom, colorRGBAByGeom } = budgetDataMES
+
+    const { gridData } = votes
 
     const nRounds = winnersByRound.length
     const nGeoms = gridData.length
@@ -20,9 +25,7 @@ export default function vizMESChartsCalc(electionResults, screen) {
 
     const costShapesbyGeom = []
     const budgetShapesbyGeom = []
-    const colorRGBAByGeom = []
 
-    // We want to use the geometry rather than votePop because votePop normalizes to add to 1.
     for (let g = 0; g < nGeoms; g++) {
         const {
             grid, voteIndex, voterGeom,
@@ -36,23 +39,17 @@ export default function vizMESChartsCalc(electionResults, screen) {
 
         const nVotes = voteIndex.length
 
-        const budgets = []
-        budgets[0] = Array(nVotes).fill(1)
-
-        const costs = []
+        const budgets = budgetsByGeom[g]
+        const costs = costsByGeom[g]
 
         const budgetShapes = []
         const costShapes = []
-        const colorRGBA = []
 
         for (let r = 0; r < nRounds; r++) {
             const curBudget = budgets[r]
-            const nextBudget = Array(nVotes)
-            const curCost = Array(nVotes)
+            const curCost = costs[r]
             const budgetShape = []
             const costShape = []
-            const winner = winnersByRound[r]
-            const maxCostPerScore = winnerMaxCostPerScoreByRound[r]
 
             // Place graph in row and column
             const idCol = r % cols
@@ -71,18 +68,13 @@ export default function vizMESChartsCalc(electionResults, screen) {
             p += 1
 
             for (let i = 0; i < nVotes; i++) {
-                const vi = voteIndex[i]
-
                 const xg = gridX[i]
                 if (xg < -1) continue
                 if (xg > screen.width + 1) continue
                 const shapeMult = (isGauss) ? Math.exp(-0.5 * ((xg - xCenter) / sigma) ** 2) : 1
 
-                const score = scoreVotes[vi][winner]
-                const cost = maxCostPerScore * score
-                curCost[i] = Math.min(curBudget[i], cost)
+                // The shape is affected by the density of voters.
                 const dCurCosti = curCost[i] * shapeMult
-                nextBudget[i] = Math.max(0, curBudget[i] - cost)
                 const dCurBudgeti = curBudget[i] * shapeMult
 
                 // add point
@@ -106,17 +98,11 @@ export default function vizMESChartsCalc(electionResults, screen) {
             costShape[p] = [left, bottom]
             p += 1
 
-            costs[r] = curCost
             costShapes[r] = costShape
             budgetShapes[r] = budgetShape
-            colorRGBA[r] = colorRGBAOfCandidates[winner]
-            if (r < (nRounds - 1)) {
-                budgets[r + 1] = nextBudget
-            }
         }
         costShapesbyGeom[g] = costShapes
         budgetShapesbyGeom[g] = budgetShapes
-        colorRGBAByGeom[g] = colorRGBA
     }
 
     const chartDataMES = { costShapesbyGeom, budgetShapesbyGeom, colorRGBAByGeom }

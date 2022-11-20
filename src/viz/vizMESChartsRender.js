@@ -4,7 +4,8 @@ import colorBlender, { rgbToString } from './colorBlender.js'
 
 /**
  * Render data for charts of budget for MES
- * @param {Object} chartData - MES methodResults plus a little extra
+ * @param {*} screen
+ * @param {*} chartDataMES  - MES methodResults plus a little extra
  */
 export default function vizMESChartsRender(screen, chartDataMES) {
     const { costShapesbyGeom, budgetShapesbyGeom, colorRGBAByGeom } = chartDataMES
