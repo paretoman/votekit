@@ -23,9 +23,7 @@ export default function VizOneVoronoi(voterSimList, candidateSimList, screen, si
 
     self.enter = () => {}
     self.exit = () => {
-        // clean up fractions
-        const fillUndefined = Array(candidateSimList.numSimCandidates()).fill(undefined)
-        candidateSimList.setCandidateWins(fillUndefined)
+        candidateSimList.unsetCandidateWins() // clean up fractions
     }
 
     self.update = function (electionResults) {

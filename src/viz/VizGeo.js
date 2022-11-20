@@ -27,9 +27,7 @@ export default function VizGeo(voterGeoList, candidateSimList, screen, sim) {
     }
     self.exit = () => {
         screen.hideMaps()
-        // clean up fractions
-        const fillUndefined = Array(candidateSimList.numSimCandidates()).fill(undefined)
-        candidateSimList.setCandidateWins(fillUndefined)
+        candidateSimList.unsetCandidateWins() // clean up fractions
     }
 
     self.update = function (geoElectionResults) {

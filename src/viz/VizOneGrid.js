@@ -28,9 +28,7 @@ export default function VizOneGrid(voterSimList, candidateSimList, screen, sim) 
     }
     self.exit = function () {
         screen.hideMaps()
-        // clean up fractions
-        const fillUndefined = Array(candidateSimList.numSimCandidates()).fill(undefined)
-        candidateSimList.setCandidateWins(fillUndefined)
+        candidateSimList.unsetCandidateWins() // clean up fractions
     }
 
     self.update = function (electionResults) {

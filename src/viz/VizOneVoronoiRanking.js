@@ -23,9 +23,7 @@ export default function VizOneVoronoiRanking(voterSimList, candidateSimList, scr
 
     self.enter = () => {}
     self.exit = () => {
-        // clean up fractions
-        const fillUndefined = Array(candidateSimList.numSimCandidates()).fill(undefined)
-        candidateSimList.setCandidateWins(fillUndefined)
+        candidateSimList.unsetCandidateWins() // clean up fractions
     }
 
     self.update = function (electionResults) {

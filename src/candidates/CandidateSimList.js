@@ -41,6 +41,11 @@ export default function CandidateSimList(sim) {
             simCan.graphic.setWins(win)
         })
     }
+    self.unsetCandidateWins = () => {
+        const nk = self.numSimCandidates()
+        const fillUndefined = Array(nk).fill(undefined)
+        self.setCandidateWins(fillUndefined)
+    }
     self.updateXY = () => {
         simCans.forEach((simCan) => simCan.candidate.updateXY())
     }
