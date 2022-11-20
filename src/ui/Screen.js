@@ -120,9 +120,7 @@ export default function Screen(w, h, layout) {
         }
     }
     self.clearMaps = function () {
-        if (!self.darkMode) {
-            self.mctx.clearRect(0, 0, self.maps.width, self.maps.height)
-        }
+        self.mctx.clearRect(0, 0, self.maps.width, self.maps.height)
     }
     self.setCtx = function (c) {
         self.ctx = c
