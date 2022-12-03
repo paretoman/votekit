@@ -5,7 +5,7 @@ import CandidateAddMakeButton from '../sim/CandidateAddMakeButton.js'
 import Registrar from '../sim/Registrar.js'
 
 /** A component of sim.js that deals with adding candidates. */
-export default function CandidateAdd(screen, layout, changes, commander, sim) {
+export default function CandidateList(screen, layout, changes, commander, sim) {
     const self = this
     self.canButton = new CandidateAddMakeButton(layout, self)
     const candidateRegistrar = new Registrar()

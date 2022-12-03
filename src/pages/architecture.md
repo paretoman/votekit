@@ -69,7 +69,7 @@ Control a 2D spatial model.
 * Voters
     * VoterShape represents a continuous population of voters. 
         * The other classes below are responsible for managing interactions between voterShapes, as opposed to managing an individual voterShape.
-    * VoterShapeAdd manages a list of these VoterShape objects and adds new ones. 
+    * VoterShapeList manages a list of these VoterShape objects and adds new ones. 
         * Registrar is the component that manages the list.
         * VoterCommander is the component that handles commands for each VoterShape.
     * VoterSim deals with dragging the VoterShape for a particular sim.
@@ -85,7 +85,7 @@ Control a 2D spatial model.
             * For 1D, an array of objects: {x,w,densityProfile}.
 * Candidates
     * Candidate represents a single candidate. It keeps its state, works with undo, and has render functions.
-    * CandidateAdd manages a list of candidates and adds new ones.
+    * CandidateList manages a list of candidates and adds new ones.
         * Registrar is the component that manages the list.
         * CandidateCommander is the component that handles commands for each Candidate.
     * CandidateSim deals with dragging the Candidate for a particular sim.

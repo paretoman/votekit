@@ -4,7 +4,7 @@ import CandidateDnAddMakeButton from '../sim/CandidateDnAddMakeButton.js'
 import Registrar from '../sim/Registrar.js'
 
 /** A component of sim.js that deals with adding candidate distributions. */
-export default function CandidateDnAdd(screen, layout, changes, commander, sim) {
+export default function CandidateDnList(screen, layout, changes, commander, sim) {
     const self = this
 
     self.canDnButton = new CandidateDnAddMakeButton(layout, self)

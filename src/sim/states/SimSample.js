@@ -68,14 +68,14 @@ export default function SimSample(
     const superEnter = self.enter
     self.enter = () => {
         superEnter()
-        sim.candidateDnAdd.canDnButton.show()
+        sim.candidateDnList.canDnButton.show()
         enterStrategy()
         voterList.updateXY()
         candidateDnSimList.updateXY()
     }
 
     self.exit = () => {
-        sim.candidateDnAdd.canDnButton.hide()
+        sim.candidateDnList.canDnButton.hide()
     }
 
     self.update = () => {

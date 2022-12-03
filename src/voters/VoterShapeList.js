@@ -4,7 +4,7 @@ import VoterShape from './VoterShape.js'
 import VoterCommander from './VoterCommander.js'
 
 /** A component of sim.js that deals with adding voters. */
-export default function VoterShapeAdd(screen, layout, changes, commander, sim) {
+export default function VoterShapeList(screen, layout, changes, commander, sim) {
     const self = this
 
     VoterShapeAddMakeButton(layout, self)

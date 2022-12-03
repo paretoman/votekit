@@ -23,7 +23,7 @@ export default function VoterSimList(sim, screen) {
     const updateObservers = (g) => { observers.forEach((o) => o.updateNewG(g)) }
 
     // Subscriber //
-    sim.voterShapeAdd.attachNewE(self)
+    sim.voterShapeList.attachNewE(self)
     self.updateNewE = (voterShape) => {
         self.newVoterShape(voterShape)
     }

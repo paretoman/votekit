@@ -22,7 +22,7 @@ export default function CandidateDnSimList(sim, changes, screen, election) {
     const updateObservers = (g) => { observers.forEach((o) => o.updateNewG(g)) }
 
     // Subscriber //
-    sim.candidateDnAdd.attachNewE(self)
+    sim.candidateDnList.attachNewE(self)
     self.updateNewE = (candidateDn) => {
         self.newCandidateDn(candidateDn)
     }

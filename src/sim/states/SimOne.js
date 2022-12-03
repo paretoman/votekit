@@ -78,7 +78,7 @@ export default function SimOne(screen, menu, changes, election, electionOne, ele
         superEnter()
         enterStrategy()
 
-        sim.candidateAdd.canButton.show()
+        sim.candidateList.canButton.show()
         vizOne.enter()
         vizExplanation.enter()
         voterList.updateXY()
@@ -89,7 +89,7 @@ export default function SimOne(screen, menu, changes, election, electionOne, ele
     self.exit = () => {
         vizOne.exit()
         vizExplanation.exit()
-        sim.candidateAdd.canButton.hide()
+        sim.candidateList.canButton.hide()
         sim.voterTest.setE(0)
     }
 
