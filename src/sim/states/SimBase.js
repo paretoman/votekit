@@ -2,6 +2,7 @@
 
 import { drawStrokedColor } from '../../utilities/graphicsUtilities.js'
 import DraggableManager from '../../ui/DraggableManager.js'
+import ClickDrag from '../../ui/ClickDrag.js'
 
 /**
  * The super class for each sim. Provides some basic required functionality.
@@ -11,9 +12,10 @@ import DraggableManager from '../../ui/DraggableManager.js'
  */
 export default function SimBase(screen, changes, sim) {
     const self = this
-    self.dragm = new DraggableManager(screen, changes, sim)
+    self.dragm = new DraggableManager()
+    self.clickDrag = new ClickDrag(self.dragm, screen, changes, sim)
     self.enter = () => {
-        screen.eventHandlers.set(self.dragm.eventHandlers)
+        screen.eventHandlers.set(self.clickDrag.eventHandlers)
     }
     self.exit = () => {}
     self.update = () => {
