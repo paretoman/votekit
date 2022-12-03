@@ -11,14 +11,11 @@ import VoterGraphic from '../vizEntities/VoterGraphic.js'
  * An example of a VoterSim is a VoterGeoBasis.
  * This is an inheritance structure.
  * @param {VoterShape} voterShape - a voter component that VoterSim builds upon.
- * @param {DraggableManager} dragm
  * @constructor
  */
-export default function VoterSim(voterShape, dragm, screen) {
+export default function VoterSim(voterShape, screen) {
     const self = this
     self.voterShape = voterShape
 
     self.graphic = new VoterGraphic(voterShape, screen)
-
-    dragm.newCircleHandle(voterShape, self.graphic.circle)
 }

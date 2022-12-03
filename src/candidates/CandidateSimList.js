@@ -2,7 +2,7 @@
 
 /**
  *
- * A simple list of candidateDnSim instances.
+ * A simple list of candidateSim instances.
  * It really just passes along function calls to each member of the list.
  * It also checks if that member exists. Alternatively, it was deleted.
  * @constructor
@@ -12,11 +12,18 @@ export default function CandidateSimList(sim) {
 
     const simCans = []
 
+    // Publisher //
+    const observers = []
+    self.attachNewG = (o) => { observers.push(o) }
+    const updateObservers = (g) => { observers.forEach((o) => o.updateNewG(g)) }
+
     // Data Setters and Getters //
 
     self.newCandidate = function (simCan) {
         simCans.push(simCan)
+        updateObservers(simCan)
     }
+
     self.getSimCandidates = () => simCans.filter((simCan) => simCan.candidate.exists)
 
     self.getCandidates = () => {

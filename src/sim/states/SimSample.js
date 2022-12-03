@@ -42,13 +42,17 @@ export default function SimSample(
     const voterGeoList = new VoterGeoList(screen, sim, changes)
 
     self.addSimCandidateDistribution = (canDn) => {
-        candidateDnSimList.newCandidate(new CandidateDnSim(canDn, self.dragm, screen, election))
+        candidateDnSimList.newCandidateDn(new CandidateDnSim(canDn, screen, election))
     }
 
     self.addSimVoterCircle = (voterShape) => {
-        voterGeoList.newVoterSim(new VoterSim(voterShape, self.dragm, screen))
-        voterSimList.newVoterSim(new VoterSim(voterShape, self.dragm, screen))
+        voterGeoList.newVoterSim(new VoterSim(voterShape, screen))
+        voterSimList.newVoterSim(new VoterSim(voterShape, screen))
     }
+
+    candidateDnSimList.attachNewG(self.dragm)
+    voterGeoList.attachNewG(self.dragm)
+    voterSimList.attachNewG(self.dragm)
 
     changes.add(['districts'])
 

@@ -3,13 +3,13 @@ title: Architecture
 layout: default
 ---
 
-The architecture tries to be context-oriented toward the task to be performed. The client level has uses of the application. The application has five main parts: user input, game commands, game model, election model, and visualization. These are roughly in order of program control. Input gets processed to output. Also, this is a Model-View-Controller (MVC) architecture. The first four have a controller-model relationship. The last one is a view. Also, there are libraries and documentation. That is a high level overview and below we address each item in the src folder.
+The architecture tries to be context-oriented toward the task to be performed. The client level has uses of the application. The application has five main parts: user input, game commands, game model, election model, and visualization. These are roughly in order of program control. Input gets processed to output. Also, there is a Model-View-Controller (MVC) architecture. Sim is a mix of model and view right now. DraggableManager and Menu are controllers. Viz is view. Also, there are libraries and documentation. That is a high level overview and below we address each item in the src folder.
 
 A good reference for MVC is the first chapter of Pattern-Oriented Software Architecture by Buschmann in 1996.
 
 [Program Flow Diagram](program_flow.drawio)
 
-Todo: update.
+Todo: update this architecture page with a more accurate description.
 
 ## Client
 

@@ -15,11 +15,17 @@ export default function CandidateDnSimList(sim, changes) {
     const simCanDns = []
     self.rendererMaker = () => ({ render: () => {} })
 
+    // Publisher //
+    const observers = []
+    self.attachNewG = (o) => { observers.push(o) }
+    const updateObservers = (g) => { observers.forEach((o) => o.updateNewG(g)) }
+
     // Data Setters and Getters //
 
-    self.newCandidate = function (simCanDn) {
+    self.newCandidateDn = function (simCanDn) {
         simCanDns.push(simCanDn)
         simCanDn.graphic.setRenderer(self.rendererMaker)
+        updateObservers(simCanDn)
     }
 
     // get sim entities that exist

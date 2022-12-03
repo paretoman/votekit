@@ -19,15 +19,29 @@ export default function DraggableManager(screen, changes, sim) {
 
     const grabCanvas = screen.tooltips
 
+    self.updateNewG = (g) => { self.add(g) }
+
     // add draggable objects
-    self.newSquareHandle = function (o, g) {
-        // set properties here so that we don't set properties on the actual object
-        const p = { isSquare: true }
-        draggables.push({ o, g, p })
-    }
-    self.newCircleHandle = function (o, g) { // object, graphic
-        const p = { isCircle: true }
-        draggables.push({ o, g, p })
+    self.add = (s) => {
+        const d = { }
+        if (s.voterShape) {
+            d.g = s.graphic.circle
+            d.o = s.voterShape
+            d.p = { isCircle: true }
+        } else if (s.candidate) {
+            d.g = s.graphic.square
+            d.o = s.candidate
+            d.p = { isSquare: true }
+        } else if (s.canDn) {
+            d.g = s.graphic.square
+            d.o = s.canDn
+            d.p = { isSquare: true }
+        } else {
+            d.g = s.circle
+            d.o = s
+            d.p = { isCircle: true }
+        }
+        draggables.push(d)
     }
 
     // Mouse Listeners

@@ -43,13 +43,17 @@ export default function SimOne(screen, menu, changes, election, electionOne, ele
     const voterGeoList = new VoterGeoList(screen, sim, changes)
 
     self.addSimCandidate = (candidate) => {
-        candidateSimList.newCandidate(new CandidateSim(candidate, self.dragm, screen, election))
+        candidateSimList.newCandidate(new CandidateSim(candidate, screen, election))
     }
 
     self.addSimVoterCircle = (voterShape) => {
-        voterGeoList.newVoterSim(new VoterSim(voterShape, self.dragm, screen))
-        voterSimList.newVoterSim(new VoterSim(voterShape, self.dragm, screen))
+        voterGeoList.newVoterSim(new VoterSim(voterShape, screen))
+        voterSimList.newVoterSim(new VoterSim(voterShape, screen))
     }
+
+    candidateSimList.attachNewG(self.dragm)
+    voterGeoList.attachNewG(self.dragm)
+    voterSimList.attachNewG(self.dragm)
 
     changes.add(['districts'])
 

@@ -15,9 +15,15 @@ export default function VoterSimList(sim) {
     self.list = list
     self.rendererMaker = () => ({ render: () => {} })
 
+    // Publisher //
+    const observers = []
+    self.attachNewG = (o) => { observers.push(o) }
+    const updateObservers = (g) => { observers.forEach((o) => o.updateNewG(g)) }
+
     self.newVoterSim = function (voterSim) {
         list.push(voterSim)
         voterSim.graphic.setRenderer(self.rendererMaker)
+        updateObservers(voterSim)
     }
 
     self.getVoterShapes = () => list.filter((v) => v.voterShape.exists).map((v) => v.voterShape)

@@ -8,14 +8,11 @@ import CandidateGraphic from '../vizEntities/CandidateGraphic.js'
  * The candidate component is a Candidate, for now.
 
  * @param {Candidate} candidate - a candidate component that CandidateSim builds upon.
- * @param {DraggableManager} dragm
  * @constructor
  */
-export default function CandidateSim(candidate, dragm, screen, election) {
+export default function CandidateSim(candidate, screen, election) {
     const self = this
     self.candidate = candidate
 
     self.graphic = new CandidateGraphic(candidate, screen, election)
-
-    dragm.newSquareHandle(candidate, self.graphic.square)
 }
