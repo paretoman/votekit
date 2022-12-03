@@ -16,7 +16,7 @@ export default function VoterGeoList(screen, sim, changes) {
     // VoterGeoList inherits from VoterSimList
     // because we need to make a list instances of voterGeoBasis,
     // and voterGeoBasis has a component called voter.
-    VoterSimList.call(self, sim)
+    VoterSimList.call(self, sim, screen)
 
     /** Number of districts */
     self.nd = 20

@@ -2,6 +2,7 @@
 
 import CandidateDistributionSampler1D from '../election/CandidateDistributionSampler1D.js'
 import CandidateDistributionSampler2D from '../election/CandidateDistributionSampler2D.js'
+import CandidateDnSim from './CandidateDnSim.js'
 
 /**
  * A simple list of candidateDnSim instances.
@@ -9,7 +10,7 @@ import CandidateDistributionSampler2D from '../election/CandidateDistributionSam
  * It also checks if that member exists. Alternatively, it was deleted.
  * @constructor
  */
-export default function CandidateDnSimList(sim, changes) {
+export default function CandidateDnSimList(sim, changes, screen, election) {
     const self = this
 
     const simCanDns = []
@@ -20,9 +21,16 @@ export default function CandidateDnSimList(sim, changes) {
     self.attachNewG = (o) => { observers.push(o) }
     const updateObservers = (g) => { observers.forEach((o) => o.updateNewG(g)) }
 
+    // Subscriber //
+    sim.candidateDnAdd.attachNewE(self)
+    self.updateNewE = (candidateDn) => {
+        self.newCandidateDn(candidateDn)
+    }
+
     // Data Setters and Getters //
 
-    self.newCandidateDn = function (simCanDn) {
+    self.newCandidateDn = function (candidateDn) {
+        const simCanDn = new CandidateDnSim(candidateDn, screen, election)
         simCanDns.push(simCanDn)
         simCanDn.graphic.setRenderer(self.rendererMaker)
         updateObservers(simCanDn)

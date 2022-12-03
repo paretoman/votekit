@@ -1,10 +1,8 @@
 /** @module */
 
 import CandidateDnSimList from '../../candidateDns/CandidateDnSimList.js'
-import CandidateDnSim from '../../candidateDns/CandidateDnSim.js'
 import VoterSimList from '../../voters/VoterSimList.js'
 import SimBase from './SimBase.js'
-import VoterSim from '../../voters/VoterSim.js'
 import VoterGeoList from '../../voters/VoterGeoList.js'
 import VizSample from '../../viz/VizSample.js'
 import VizSampleDensity1D from '../../viz/VizSampleDensity1D.js'
@@ -37,18 +35,9 @@ export default function SimSample(
 
     // Entities //
 
-    const candidateDnSimList = new CandidateDnSimList(sim, changes)
-    const voterSimList = new VoterSimList(sim)
+    const candidateDnSimList = new CandidateDnSimList(sim, changes, screen, election)
+    const voterSimList = new VoterSimList(sim, screen)
     const voterGeoList = new VoterGeoList(screen, sim, changes)
-
-    self.addSimCandidateDistribution = (canDn) => {
-        candidateDnSimList.newCandidateDn(new CandidateDnSim(canDn, screen, election))
-    }
-
-    self.addSimVoterCircle = (voterShape) => {
-        voterGeoList.newVoterSim(new VoterSim(voterShape, screen))
-        voterSimList.newVoterSim(new VoterSim(voterShape, screen))
-    }
 
     candidateDnSimList.attachNewG(self.dragm)
     voterGeoList.attachNewG(self.dragm)

@@ -1,10 +1,8 @@
 /** @module */
 
-import CandidateSim from '../../candidates/CandidateSim.js'
 import CandidateSimList from '../../candidates/CandidateSimList.js'
 import VoterGeoList from '../../voters/VoterGeoList.js'
 import SimBase from './SimBase.js'
-import VoterSim from '../../voters/VoterSim.js'
 import VoterSimList from '../../voters/VoterSimList.js'
 import VizGeo from '../../viz/VizGeo.js'
 import VizOneVoronoi from '../../viz/VizOneVoronoi.js'
@@ -38,18 +36,9 @@ export default function SimOne(screen, menu, changes, election, electionOne, ele
 
     // Entities //
 
-    const candidateSimList = new CandidateSimList(sim)
-    const voterSimList = new VoterSimList(sim)
+    const candidateSimList = new CandidateSimList(sim, screen, election)
+    const voterSimList = new VoterSimList(sim, screen)
     const voterGeoList = new VoterGeoList(screen, sim, changes)
-
-    self.addSimCandidate = (candidate) => {
-        candidateSimList.newCandidate(new CandidateSim(candidate, screen, election))
-    }
-
-    self.addSimVoterCircle = (voterShape) => {
-        voterGeoList.newVoterSim(new VoterSim(voterShape, screen))
-        voterSimList.newVoterSim(new VoterSim(voterShape, screen))
-    }
 
     candidateSimList.attachNewG(self.dragm)
     voterGeoList.attachNewG(self.dragm)

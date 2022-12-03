@@ -1,5 +1,7 @@
 /** @module */
 
+import CandidateSim from './CandidateSim.js'
+
 /**
  *
  * A simple list of candidateSim instances.
@@ -7,7 +9,7 @@
  * It also checks if that member exists. Alternatively, it was deleted.
  * @constructor
  */
-export default function CandidateSimList(sim) {
+export default function CandidateSimList(sim, screen, election) {
     const self = this
 
     const simCans = []
@@ -17,9 +19,16 @@ export default function CandidateSimList(sim) {
     self.attachNewG = (o) => { observers.push(o) }
     const updateObservers = (g) => { observers.forEach((o) => o.updateNewG(g)) }
 
+    // Subscriber //
+    sim.candidateAdd.attachNewE(self)
+    self.updateNewE = (candidate) => {
+        self.newCandidate(candidate)
+    }
+
     // Data Setters and Getters //
 
-    self.newCandidate = function (simCan) {
+    self.newCandidate = function (candidate) {
+        const simCan = new CandidateSim(candidate, screen, election)
         simCans.push(simCan)
         updateObservers(simCan)
     }

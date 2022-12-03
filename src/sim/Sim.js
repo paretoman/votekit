@@ -46,8 +46,12 @@ export default function Sim(
 
     self.election = election
 
-    // States //
+    // Entities //
+    self.candidateAdd = new CandidateAdd(screen, layout, changes, commander, self)
+    self.voterShapeAdd = new VoterShapeAdd(screen, layout, changes, commander, self)
+    self.candidateDnAdd = new CandidateDnAdd(screen, layout, changes, commander, self)
 
+    // States //
     const sims = {
         one: new SimOne(screen, menu, changes, election, electionOne, electionGeo, self),
         // eslint-disable-next-line max-len
@@ -57,16 +61,10 @@ export default function Sim(
     self.sims = sims
 
     // Entities //
-
-    self.voterShapeAdd = new VoterShapeAdd(screen, layout, changes, commander, sims, self)
-    self.candidateAdd = new CandidateAdd(screen, layout, changes, commander, sims, self)
-    self.candidateDnAdd = new CandidateDnAdd(screen, layout, changes, commander, sims, self)
-
     self.voterTest = new VoterTest(screen, sims, self)
     self.testVote = () => sims[self.state].testVoteSim()
 
     // Default Entities //
-
     self.candidateAdd.addCandidate({ x: 50, y: 100 }, { x: 50 }, '#e05020', true)
     self.candidateAdd.addCandidate({ x: 100, y: 50 }, { x: 100 }, '#50e020', true)
     self.candidateAdd.addCandidate({ x: 300 - 100, y: 300 - 50 }, { x: 200 }, '#2050e0', true)

@@ -5,7 +5,7 @@ import CandidateAddMakeButton from '../sim/CandidateAddMakeButton.js'
 import Registrar from '../sim/Registrar.js'
 
 /** A component of sim.js that deals with adding candidates. */
-export default function CandidateAdd(screen, layout, changes, commander, sims, sim) {
+export default function CandidateAdd(screen, layout, changes, commander, sim) {
     const self = this
     self.canButton = new CandidateAddMakeButton(layout, self)
     const candidateRegistrar = new Registrar()
@@ -23,10 +23,16 @@ export default function CandidateAdd(screen, layout, changes, commander, sims, s
         }
     }
 
+    // Observers are lists of graphics in views //
+    const observers = []
+    self.attachNewE = (observer) => { observers.push(observer) }
+    const updateObservers = (e) => { observers.forEach((o) => o.updateNewE(e)) }
+
     self.addCandidate = (shape2, shape1, c, doLoad) => {
         // eslint-disable-next-line no-new, max-len
         const candidate = new Candidate(shape2, shape1, 21, 21, c, screen, candidateRegistrar, commander, changes, doLoad, candidateCommander, sim)
-        sims.one.addSimCandidate(candidate)
+
+        updateObservers(candidate)
 
         const num = candidateRegistrar.num()
         candidateCommander.setNumberCandidates(num)

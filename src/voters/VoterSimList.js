@@ -1,5 +1,7 @@
 /** @module */
 
+import VoterSim from './VoterSim.js'
+
 /**
  * Made a super class, VoterSimList.
  * VoterGeoList inherits from VoterSimList.
@@ -8,7 +10,7 @@
  * because it is a list of VoterSim objects rather than VoterShape objects.
  * @constructor
  */
-export default function VoterSimList(sim) {
+export default function VoterSimList(sim, screen) {
     const self = this
 
     const list = []
@@ -20,7 +22,14 @@ export default function VoterSimList(sim) {
     self.attachNewG = (o) => { observers.push(o) }
     const updateObservers = (g) => { observers.forEach((o) => o.updateNewG(g)) }
 
-    self.newVoterSim = function (voterSim) {
+    // Subscriber //
+    sim.voterShapeAdd.attachNewE(self)
+    self.updateNewE = (voterShape) => {
+        self.newVoterShape(voterShape)
+    }
+
+    self.newVoterShape = function (voterShape) {
+        const voterSim = new VoterSim(voterShape, screen)
         list.push(voterSim)
         voterSim.graphic.setRenderer(self.rendererMaker)
         updateObservers(voterSim)

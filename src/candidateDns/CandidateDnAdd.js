@@ -4,7 +4,7 @@ import CandidateDnAddMakeButton from '../sim/CandidateDnAddMakeButton.js'
 import Registrar from '../sim/Registrar.js'
 
 /** A component of sim.js that deals with adding candidate distributions. */
-export default function CandidateDnAdd(screen, layout, changes, commander, sims, sim) {
+export default function CandidateDnAdd(screen, layout, changes, commander, sim) {
     const self = this
 
     self.canDnButton = new CandidateDnAddMakeButton(layout, self)
@@ -21,10 +21,16 @@ export default function CandidateDnAdd(screen, layout, changes, commander, sims,
         }
     }
 
+    // Observers are lists of graphics in views //
+    const observers = []
+    self.attachNewE = (observer) => { observers.push(observer) }
+    const updateObservers = (e) => { observers.forEach((o) => o.updateNewE(e)) }
+
     self.addCandidateDistribution = (shape2, shape1, doLoad) => {
         // eslint-disable-next-line no-new, max-len
         const candidateDn = new CandidateDn(shape2, shape1, screen, candidateDnRegistrar, commander, changes, doLoad, candidateDnCommander, sim)
-        sims.sample.addSimCandidateDistribution(candidateDn)
+
+        updateObservers(candidateDn)
 
         const num = candidateDnRegistrar.num()
         candidateDnCommander.setNumberCandidateDns(num)
