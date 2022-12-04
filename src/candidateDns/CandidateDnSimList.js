@@ -1,7 +1,5 @@
 /** @module */
 
-import CandidateDistributionSampler1D from '../election/CandidateDistributionSampler1D.js'
-import CandidateDistributionSampler2D from '../election/CandidateDistributionSampler2D.js'
 import CandidateDnSim from './CandidateDnSim.js'
 
 /**
@@ -48,24 +46,6 @@ export default function CandidateDnSimList(sim, changes, screen, election) {
         return simCanDnsEx.map((simCanDn) => simCanDn.canDn)
     }
     self.getCandidateDistributionsAll = () => simCanDns.map((simCanDn) => simCanDn.canDn)
-
-    // Update //
-
-    self.update = () => {
-        if (changes.checkNone()) return
-
-        self.startSampler()
-    }
-
-    self.startSampler = () => {
-        const canDnsList = self.getCandidateDistributions()
-        if (canDnsList.length === 0) return
-        const { dimensions } = sim.election
-        const CDnSampler = (dimensions === 1)
-            ? CandidateDistributionSampler1D
-            : CandidateDistributionSampler2D
-        self.sampler = new CDnSampler(canDnsList)
-    }
 
     // Update //
 

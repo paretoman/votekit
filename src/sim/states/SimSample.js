@@ -81,10 +81,10 @@ export default function SimSample(
 
         jupyterClear()
         if (sim.geo) voterGeo.update()
-        candidateDnSimList.update()
+        sim.candidateDnList.update()
         const { dimensions } = sim.election
         const addResult = electionStrategy
-            .update(sim.voterShapeList, candidateDnSimList, changes, dimensions)
+            .update(sim.voterShapeList, sim.candidateDnList, changes, dimensions)
         jupyterUpdate({ addResult })
         vizSample.update(addResult)
         changes.clear()

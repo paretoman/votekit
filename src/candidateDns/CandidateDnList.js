@@ -2,6 +2,8 @@ import CandidateDn from './CandidateDn.js'
 import CandidateDnCommander from './CandidateDnCommander.js'
 import CandidateDnAddMakeButton from '../sim/CandidateDnAddMakeButton.js'
 import Registrar from '../sim/Registrar.js'
+import CandidateDistributionSampler1D from '../election/CandidateDistributionSampler1D.js'
+import CandidateDistributionSampler2D from '../election/CandidateDistributionSampler2D.js'
 
 /** A component of sim.js that deals with adding candidate distributions. */
 export default function CandidateDnList(screen, layout, changes, commander, sim) {
@@ -34,5 +36,28 @@ export default function CandidateDnList(screen, layout, changes, commander, sim)
 
         const num = candidateDnRegistrar.num()
         candidateDnCommander.setNumberCandidateDns(num)
+    }
+
+    self.getCandidateDistributions = () => {
+        const canDns = candidateDnRegistrar.getList()
+        return canDns.filter((c) => c.exists)
+    }
+
+    // Update //
+
+    self.update = () => {
+        if (changes.checkNone()) return
+
+        self.startSampler()
+    }
+
+    self.startSampler = () => {
+        const canDnsList = self.getCandidateDistributions()
+        if (canDnsList.length === 0) return
+        const { dimensions } = sim.election
+        const CDnSampler = (dimensions === 1)
+            ? CandidateDistributionSampler1D
+            : CandidateDistributionSampler2D
+        self.sampler = new CDnSampler(canDnsList)
     }
 }
