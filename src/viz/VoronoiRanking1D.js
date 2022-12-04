@@ -6,11 +6,11 @@ import colorBlender, { rgbToString } from './colorBlender.js'
 /**
  * Draw Voronoi cells to show votes.
  * @param {VoterGroup} voterGroup
- * @param {CandidateSimList} candidateSimList
+ * @param {CandidateViewList} candidateViewList
  * @param {Screen} screen
  * @constructor
  */
-export default function VoronoiRanking1D(voterGroup, candidateSimList, screen) {
+export default function VoronoiRanking1D(voterGroup, candidateViewList, screen) {
     const self = this
 
     let canList
@@ -22,7 +22,7 @@ export default function VoronoiRanking1D(voterGroup, candidateSimList, screen) {
         let ranking
         let intervalBorders
         if (cellData === undefined) {
-            canList = candidateSimList.getCandidates()
+            canList = candidateViewList.getCandidates()
             const canGeoms = canList.map((can) => can.shape1)
             const cd = castRankingFindIntervals(canGeoms)
             ranking = cd.ranking
@@ -32,7 +32,7 @@ export default function VoronoiRanking1D(voterGroup, candidateSimList, screen) {
             intervalBorders = cellData.intervalBorders
         }
 
-        canList = candidateSimList.getCandidates()
+        canList = candidateViewList.getCandidates()
         const n = canList.length
         const colorList = canList.map((can) => can.colorRGBA)
 

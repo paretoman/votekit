@@ -1,13 +1,13 @@
 /** @module */
 
-import VoterSim from './VoterSim.js'
+import VoterView from './VoterView.js'
 
 /**
- * VoterSimList is different from voterShapeList
- * because it is a list of VoterSim objects rather than VoterShape objects.
+ * VoterViewList is different from voterShapeList
+ * because it is a list of VoterView objects rather than VoterShape objects.
  * @constructor
  */
-export default function VoterSimList(view, sim, screen) {
+export default function VoterViewList(view, sim, screen) {
     const self = this
 
     const list = []
@@ -27,14 +27,14 @@ export default function VoterSimList(view, sim, screen) {
 
     // Setters and Getters //
     self.newVoterShape = function (voterShape) {
-        const voterSim = new VoterSim(voterShape, screen, sim.election, view)
-        list.push(voterSim)
-        voterSim.graphic.setRenderer(self.rendererMaker)
-        updateObservers(voterSim)
+        const voterView = new VoterView(voterShape, screen, sim.election, view)
+        list.push(voterView)
+        voterView.graphic.setRenderer(self.rendererMaker)
+        updateObservers(voterView)
     }
 
     self.getVoterShapes = () => list.filter((v) => v.voterShape.exists).map((v) => v.voterShape)
-    self.getVoterSims = () => list.filter((v) => v.voterShape.exists)
+    self.getVoterViews = () => list.filter((v) => v.voterShape.exists)
 
     // Update //
     self.updateXY = () => {
@@ -45,11 +45,11 @@ export default function VoterSimList(view, sim, screen) {
         list.forEach((v) => v.graphic.setRenderer(rendererMaker))
     }
     self.updateGraphic = (data) => {
-        const voterSimsExisting = self.getVoterSims()
+        const voterViewsEx = self.getVoterViews()
         if (data === undefined) {
-            voterSimsExisting.forEach((v) => v.graphic.renderer.update())
+            voterViewsEx.forEach((v) => v.graphic.renderer.update())
         } else {
-            voterSimsExisting.forEach((v, i) => v.graphic.renderer.update(data[i]))
+            voterViewsEx.forEach((v, i) => v.graphic.renderer.update(data[i]))
         }
     }
 

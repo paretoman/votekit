@@ -72,9 +72,9 @@ Control a 2D spatial model.
     * VoterShapeList manages a list of these VoterShape objects and adds new ones. 
         * Registrar is the component that manages the list.
         * VoterCommander is the component that handles commands for each VoterShape.
-    * VoterSim deals with dragging the VoterShape for a particular sim.
-        * voterShape is a component of VoterSim.
-    * VoterSimList manages a list of VoterSim objects for each sim. It provides a count of the VoterShapes and renders the VoterShapes. It is important because the "exists" property of a VoterShape can be toggled, so we have to filter the list of voters
+    * VoterView deals with dragging the VoterShape for a particular sim.
+        * voterShape is a component of VoterView.
+    * VoterViewList manages a list of VoterView objects for each sim. It provides a count of the VoterShapes and renders the VoterShapes. It is important because the "exists" property of a VoterShape can be toggled, so we have to filter the list of voters
     * VoterTest is a copy of VoterShape, mostly. VoterTest exists outside of these other classes. It doesn't have command history and doesn't interact with other voters. It's just a test.
     * Data types:
         * These are the standard ways of referring to voter objects that are not classes.
@@ -87,15 +87,15 @@ Control a 2D spatial model.
     * CandidateList manages a list of candidates and adds new ones.
         * Registrar is the component that manages the list.
         * CandidateCommander is the component that handles commands for each Candidate.
-    * CandidateSim deals with dragging the Candidate for a particular sim.
-    * CandidateSimList manages a list of CandidateSim objects and tracks whether candidates exist and provides functions to return an array of Candidate objects. It also handles methods that apply to all the members of the list so you don't have to loop through the Candidate objects on your own.
+    * CandidateView deals with dragging the Candidate for a particular sim.
+    * CandidateViewList manages a list of CandidateView objects and tracks whether candidates exist and provides functions to return an array of Candidate objects. It also handles methods that apply to all the members of the list so you don't have to loop through the Candidate objects on your own.
     * Data types: 
         * I made a standard way of referring to candidates as objects that are not classes.
         * canGeoms: 
             * For 2D, an array of objects: {x,y}. 
             * For 1D, an array of objects: {x}.
         * canList: An array of Candidate objects.
-        * candidateSimList: a CandidateSimList object.
+        * candidateViewList: a CandidateViewList object.
 * CandidateDns
     * Nearly identical mirrors of the classes for Candidates above exist for CandidateDns.
 

@@ -6,20 +6,20 @@ import Grid2D from './Grid2D.js'
 
 /**
  * Show votes
- * @param {VoterSimList} voterSimList
- * @param {CandidateSimList} candidateSimList
+ * @param {VoterViewList} voterViewList
+ * @param {CandidateViewList} candidateViewList
  * @param {Screen} screen
  * @param {Sim} sim
  * @constructor
  */
-export default function VizOneGrid(voterSimList, candidateSimList, screen, sim) {
+export default function VizOneGrid(voterViewList, candidateViewList, screen, sim) {
     const self = this
 
     // renderer factory //
     const { dimensions } = sim.election
     const Grid = (dimensions === 1) ? Grid1D : Grid2D
-    const rendererMaker = () => new Grid(candidateSimList, screen)
-    voterSimList.setRenderer(rendererMaker)
+    const rendererMaker = () => new Grid(candidateViewList, screen)
+    voterViewList.setRenderer(rendererMaker)
 
     self.enter = function () {
         if (dimensions === 2) {
@@ -28,7 +28,7 @@ export default function VizOneGrid(voterSimList, candidateSimList, screen, sim) 
     }
     self.exit = function () {
         screen.hideMaps()
-        candidateSimList.unsetCandidateWins() // clean up fractions
+        candidateViewList.unsetCandidateWins() // clean up fractions
     }
 
     self.update = function (electionResults) {
@@ -36,17 +36,17 @@ export default function VizOneGrid(voterSimList, candidateSimList, screen, sim) 
         if (error !== undefined) return
 
         const { tallyFractions, allocation } = addAllocation(electionResults)
-        candidateSimList.setCandidateWins(allocation)
-        candidateSimList.setCandidateFractions(tallyFractions)
+        candidateViewList.setCandidateWins(allocation)
+        candidateViewList.setCandidateFractions(tallyFractions)
 
         const { gridData } = electionResults.votes
-        voterSimList.updateGraphic(gridData)
+        voterViewList.updateGraphic(gridData)
     }
     self.render = function () {
         if (sim.election.dimensions === 1) {
-            voterSimList.renderBackground()
+            voterViewList.renderBackground()
         }
 
-        voterSimList.render()
+        voterViewList.render()
     }
 }

@@ -10,7 +10,7 @@ import NoiseImage from './NoiseImage.js'
  * @param {Screen} screen
  * @constructor
  */
-export default function GeoMaps(voterGeo, candidateSimList, screen, sim) {
+export default function GeoMaps(voterGeo, candidateViewList, screen, sim) {
     const self = this
 
     const { districtMaker } = voterGeo
@@ -23,7 +23,7 @@ export default function GeoMaps(voterGeo, candidateSimList, screen, sim) {
     // Update //
 
     self.update = (geoElectionResults) => {
-        const gc = geoColors(geoElectionResults, candidateSimList, sim)
+        const gc = geoColors(geoElectionResults, candidateViewList, sim)
         const { colorByTract, colorOfVoteByDistrict, colorOfWinsByDistrict } = gc
         self.colorOfVoteByDistrict = colorOfVoteByDistrict
         self.winnerColors = colorOfWinsByDistrict

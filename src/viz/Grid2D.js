@@ -10,7 +10,7 @@ import colorBlender from './colorBlender.js'
  * @param {Screen} screen
  * @constructor
  */
-export default function Grid2D(candidateSimList, screen) {
+export default function Grid2D(candidateViewList, screen) {
     const self = this
 
     let gridData
@@ -21,7 +21,7 @@ export default function Grid2D(candidateSimList, screen) {
 
     self.update = (gridData0) => {
         gridData = gridData0
-        canList = candidateSimList.getCandidates()
+        canList = candidateViewList.getCandidates()
 
         const { grid, voteSet, voterGeom } = gridData
 

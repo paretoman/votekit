@@ -1,7 +1,7 @@
 /** @module */
 
-import CandidateDnSimList from '../../candidateDns/CandidateDnSimList.js'
-import VoterSimList from '../../voters/VoterSimList.js'
+import CandidateDnViewList from '../../candidateDns/CandidateDnViewList.js'
+import VoterViewList from '../../voters/VoterViewList.js'
 import VizSample from '../../viz/VizSample.js'
 import VizSampleDensity1D from '../../viz/VizSampleDensity1D.js'
 import VizSampleDensity2D from '../../viz/VizSampleDensity2D.js'
@@ -26,11 +26,11 @@ export default function ViewSample(screen, menu, changes, sim, view) {
 
     // Entities //
 
-    const candidateDnSimList = new CandidateDnSimList(view, sim, changes, screen, sim.election)
-    const voterSimList = new VoterSimList(view, sim, screen)
+    const candidateDnViewList = new CandidateDnViewList(view, sim, changes, screen, sim.election)
+    const voterViewList = new VoterViewList(view, sim, screen)
 
-    candidateDnSimList.attachNewG(self.dragm)
-    voterSimList.attachNewG(self.dragm)
+    candidateDnViewList.attachNewG(self.dragm)
+    voterViewList.attachNewG(self.dragm)
 
     // Strategies //
 
@@ -41,7 +41,7 @@ export default function ViewSample(screen, menu, changes, sim, view) {
             ? VizSampleDensity1D
             : VizSampleDensity2D
         const VizSampleStrat = (doDensity) ? VizSampleDensity : VizSample
-        vizSample = new VizSampleStrat(voterSimList, candidateDnSimList, screen, changes, sim)
+        vizSample = new VizSampleStrat(voterViewList, candidateDnViewList, screen, changes, sim)
     }
 
     // Main State Machine Functions //
@@ -51,8 +51,8 @@ export default function ViewSample(screen, menu, changes, sim, view) {
         superEnter()
         sim.candidateDnList.canDnButton.show()
         enterStrategy()
-        voterSimList.updateXY()
-        candidateDnSimList.updateXY()
+        voterViewList.updateXY()
+        candidateDnViewList.updateXY()
     }
 
     self.exit = () => {
@@ -81,7 +81,7 @@ export default function ViewSample(screen, menu, changes, sim, view) {
         vizSample.render()
     }
     self.renderForeground = () => {
-        voterSimList.renderForeground()
-        candidateDnSimList.renderForeground()
+        voterViewList.renderForeground()
+        candidateDnViewList.renderForeground()
     }
 }

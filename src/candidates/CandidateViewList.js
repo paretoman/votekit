@@ -1,18 +1,18 @@
 /** @module */
 
-import CandidateSim from './CandidateSim.js'
+import CandidateView from './CandidateView.js'
 
 /**
  *
- * A simple list of candidateSim instances.
+ * A simple list of candidateView instances.
  * It passes along function calls to each member of the list.
  * It also checks if that member exists. Alternatively, it was deleted.
  * @constructor
  */
-export default function CandidateSimList(view, sim, screen, election) {
+export default function CandidateViewList(view, sim, screen, election) {
     const self = this
 
-    const simCans = []
+    const canViews = []
 
     // Publish to DraggableManager //
     const observers = []
@@ -27,40 +27,40 @@ export default function CandidateSimList(view, sim, screen, election) {
 
     // Data Setters and Getters //
     self.newCandidate = function (candidate) {
-        const simCan = new CandidateSim(candidate, screen, election, 21, 21, view)
-        simCans.push(simCan)
-        updateObservers(simCan)
+        const canView = new CandidateView(candidate, screen, election, 21, 21, view)
+        canViews.push(canView)
+        updateObservers(canView)
     }
-    self.getSimCandidates = () => simCans.filter((simCan) => simCan.candidate.exists)
+    self.getCanViews = () => canViews.filter((canView) => canView.candidate.exists)
     self.getCandidates = () => {
-        const simCansEx = self.getSimCandidates()
-        return simCansEx.map((simCan) => simCan.candidate)
+        const canViewsEx = self.getCanViews()
+        return canViewsEx.map((canView) => canView.candidate)
     }
-    self.getCandidatesAll = () => simCans.map((simCan) => simCan.candidate)
+    self.getCandidatesAll = () => canViews.map((canView) => canView.candidate)
 
     // Update //
 
     self.setCandidateFractions = (fractions) => {
-        const simCansExisting = self.getSimCandidates()
-        simCansExisting.forEach((simCan, index) => {
+        const canViewsEx = self.getCanViews()
+        canViewsEx.forEach((canView, index) => {
             const fraction = fractions[index]
-            simCan.graphic.setFraction(fraction)
+            canView.graphic.setFraction(fraction)
         })
     }
     self.setCandidateWins = (winsByCandidate) => {
-        const simCansExisting = self.getSimCandidates()
-        simCansExisting.forEach((simCan, index) => {
+        const canViewsEx = self.getCanViews()
+        canViewsEx.forEach((canView, index) => {
             const win = winsByCandidate[index]
-            simCan.graphic.setWins(win)
+            canView.graphic.setWins(win)
         })
     }
     self.unsetCandidateWins = () => {
-        const nk = self.numSimCandidates()
+        const nk = canViews.length
         const fillUndefined = Array(nk).fill(undefined)
         self.setCandidateWins(fillUndefined)
     }
     self.updateXY = () => {
-        simCans.forEach((simCan) => simCan.candidate.updateXY())
+        canViews.forEach((canView) => canView.candidate.updateXY())
     }
 
     // Render //
@@ -73,11 +73,10 @@ export default function CandidateSimList(view, sim, screen, election) {
         }
     }
     self.renderForegroundExisting = () => {
-        const simCansExisting = self.getSimCandidates()
-        simCansExisting.forEach((simCan) => simCan.graphic.renderForeground())
+        const canViewsEx = self.getCanViews()
+        canViewsEx.forEach((canView) => canView.graphic.renderForeground())
     }
     self.renderForegroundAll = () => {
-        simCans.forEach((simCan) => simCan.graphic.renderForeground())
+        canViews.forEach((canView) => canView.graphic.renderForeground())
     }
-    self.numSimCandidates = () => simCans.length
 }

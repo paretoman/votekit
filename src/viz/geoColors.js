@@ -2,13 +2,13 @@
 
 import colorBlender, { rgbToString } from './colorBlender.js'
 
-export default function geoColors(geoElectionResults, candidateSimList, sim) {
+export default function geoColors(geoElectionResults, candidateViewList, sim) {
     const {
         resultsByTract,
         resultsByDistrict,
     } = geoElectionResults
 
-    const canList = candidateSimList.getCandidates()
+    const canList = candidateViewList.getCandidates()
 
     const colorByTract = colorTracts(resultsByTract, canList)
     const colorOfWinsByDistrict = colorDistrictWins(resultsByDistrict, canList, sim)

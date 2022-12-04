@@ -24,7 +24,7 @@ Here's a big list of things I want in the future.
 
 * Animate +1 rising from candidate when they become winner.
 * Budget charts. For MES, show budget being spent in each round. Also, maybe also show comparisons between candidates in each round.
-* We should not be using an object oriented approach like passing VoterSimList and CandidateSimList to a viz function. It's too confusing and it seems to cross the boundary between simulation model and visualization. We should instead pass data to a viz function.
+* We should not be using an object oriented approach like passing VoterViewList and CandidateViewList to a viz function. It's too confusing and it seems to cross the boundary between simulation model and visualization. We should instead pass data to a viz function.
 
 ## Organizing Code
 

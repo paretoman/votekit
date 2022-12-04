@@ -5,7 +5,6 @@ import DistrictMaker from './DistrictMaker.js'
 import { copyObjectShallow, range } from '../utilities/jsHelpers.js'
 
 /**
- * VoterGeoList inherits from VoterSimList.
  * @param {Screen} screen
  * @constructor
  */

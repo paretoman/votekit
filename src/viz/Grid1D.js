@@ -8,7 +8,7 @@ import colorBlender, { rgbToString } from './colorBlender.js'
  * @param {Screen} screen
  * @constructor
  */
-export default function Grid1D(candidateSimList, screen) {
+export default function Grid1D(candidateViewList, screen) {
     const self = this
 
     const h = 200
@@ -18,7 +18,7 @@ export default function Grid1D(candidateSimList, screen) {
     let canList
     self.update = (gridData0) => {
         gridData = gridData0
-        canList = candidateSimList.getCandidates()
+        canList = candidateViewList.getCandidates()
     }
 
     self.renderBackground = function () {

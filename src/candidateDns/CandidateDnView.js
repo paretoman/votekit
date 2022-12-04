@@ -3,14 +3,14 @@
 import CandidateDnGraphic from '../vizEntities/CandidateDnGraphic.js'
 
 /**
- * CandidateSim has functionality for a canDn that is specific to a simulation.
- * CandidateSim has a canDn component.
+ * CandidateDnView has functionality for a canDn that is specific to a view.
+ * CandidateDnView has a canDn component.
  * The canDn component is a CandidateDn, for now.
 
- * @param {CandidateDn} canDn - a canDn component that CandidateSim builds upon.
+ * @param {CandidateDn} canDn - a canDn component that CandidateView builds upon.
  * @constructor
  */
-export default function CandidateDnSim(canDn, screen, election, wHandle, hHandle, view) {
+export default function CandidateDnView(canDn, screen, election, wHandle, hHandle, view) {
     const self = this
     self.canDn = canDn
 

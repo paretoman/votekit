@@ -93,7 +93,7 @@ export default function Candidate(
         }
     }
     /** Do this when entering a state because x and y change.
-     *  Maybe x and y should be in the CandidateSim instead... just speculating. */
+     *  Maybe x and y should be in the CandidateView instead... just speculating. */
     self.updateXY = () => {
         if (sim.election.dimensions === 1) {
             self.setAction.shape1x(self.shape1.x)
