@@ -19,12 +19,12 @@ export default function ElectionSampleGeo(election, electionGeo, voterGeo) {
 
     let points = []
 
-    self.update = function (voterShapeList, candidateSimList, changes, dimensions) {
+    self.update = function (voterShapeList, candidateDnSimList, changes, dimensions) {
         if (changes.checkNone() === false) {
             self.startSim()
         }
 
-        const addResult = self.addSim(voterShapeList, candidateSimList, dimensions)
+        const addResult = self.addSim(voterShapeList, candidateDnSimList, dimensions)
         return addResult
     }
 

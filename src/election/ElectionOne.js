@@ -13,12 +13,12 @@ export default function ElectionOne(election) {
 
     const optionCast = { usr: 4 }
 
-    self.runElectionSim = function (voterShapeList, candidateSimList, changes) {
+    self.runElectionSim = function (voterShapeList, candidateList, changes) {
         if (changes.checkNone()) return { error: 'No Changes' }
 
         // Voters cast votes for candidates.
         // There is also a separate graphical representation in Voronoi2D.js
-        const canList = candidateSimList.getCandidates()
+        const canList = candidateList.getCandidates()
         const voterShapes = voterShapeList.getVoterShapes()
 
         if (voterShapes.length === 0) return { error: 'No Voters' }

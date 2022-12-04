@@ -97,7 +97,7 @@ export default function SimOne(screen, menu, changes, election, electionOne, ele
         jupyterClear()
         if (sim.geo) voterGeo.update()
         const electionResults = electionStrategy
-            .runElectionSim(sim.voterShapeList, candidateSimList, changes)
+            .runElectionSim(sim.voterShapeList, sim.candidateList, changes)
         jupyterUpdate({ electionResults })
         vizOne.update(electionResults)
         vizExplanation.update(electionResults)

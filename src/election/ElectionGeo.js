@@ -18,10 +18,10 @@ export default function ElectionGeo(election, voterGeo) {
 
     const optionCast = { usr: 32 }
 
-    self.runElectionSim = (voterShapeList, candidateSimList, changes) => {
+    self.runElectionSim = (voterShapeList, candidateList, changes) => {
         if (changes.checkNone()) return { error: 'No Changes' }
 
-        const canList = candidateSimList.getCandidates()
+        const canList = candidateList.getCandidates()
 
         const geoElectionResults = self.runElectionGeo(voterShapeList, canList)
 

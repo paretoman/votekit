@@ -37,4 +37,6 @@ export default function CandidateList(screen, layout, changes, commander, sim) {
         const num = candidateRegistrar.num()
         candidateCommander.setNumberCandidates(num)
     }
+
+    self.getCandidates = () => candidateRegistrar.getList().filter((c) => c.exists)
 }
