@@ -36,4 +36,6 @@ export default function VoterShapeList(screen, layout, changes, commander, sim) 
         const num = voterRegistrar.num()
         voterCommander.setNumberVoters(num)
     }
+
+    self.getVoterShapes = () => voterRegistrar.getList().filter((v) => v.exists)
 }

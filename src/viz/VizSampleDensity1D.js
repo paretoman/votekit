@@ -1,6 +1,5 @@
 /** @module */
 
-// import GeoMaps from './GeoMaps.js'
 import VoterRender1D from './VoterRender1D.js'
 import VoterRender2D from './VoterRender2D.js'
 
@@ -15,8 +14,6 @@ export default function VizSampleDensity1D(voterSimList, candidateDnSimList, scr
 
     // adjustable visual parameters
     const kw = 20
-
-    // const geoMaps = new GeoMaps(voterSimList, candidateDnSimList, screen, sim)
 
     // sum and total density
     const { width } = screen
@@ -67,7 +64,6 @@ export default function VizSampleDensity1D(voterSimList, candidateDnSimList, scr
     }
 
     self.render = () => {
-        // geoMaps.renderPolicyNoise()
         renderCans()
 
         voterSimList.render()

@@ -13,35 +13,35 @@ import { range } from '../utilities/jsHelpers.js'
  * @param {Election} election
  * @constructor
  */
-export default function ElectionGeo(election) {
+export default function ElectionGeo(election, voterGeo) {
     const self = this
 
     const optionCast = { usr: 32 }
 
-    self.runElectionSim = (voterGeoList, candidateSimList, changes) => {
+    self.runElectionSim = (voterSimList, candidateSimList, changes) => {
         if (changes.checkNone()) return { error: 'No Changes' }
 
         const canList = candidateSimList.getCandidates()
 
-        const geoElectionResults = self.runElectionGeo(voterGeoList, canList)
+        const geoElectionResults = self.runElectionGeo(voterSimList, canList)
 
         return geoElectionResults
     }
 
-    self.runElectionGeo = (voterGeoList, canList) => {
-        if (voterGeoList.getVoterSims().length === 0) return { error: 'no voters' }
+    self.runElectionGeo = (voterSimList, canList) => {
+        if (voterSimList.getVoterShapes().length === 0) return { error: 'no voters' }
         if (canList.length === 0) return { error: 'no candidates' }
 
         const parties = election.getParties(canList)
 
-        const votesByTract = castVotesByTract(voterGeoList, canList, parties)
+        const votesByTract = castVotesByTract(canList, parties)
 
         const resultsStatewide = countStatewideElection(votesByTract, canList, parties)
 
         const resultsByTract = countTractElections(votesByTract, canList, parties)
 
         // eslint-disable-next-line max-len
-        const resultsByDistrict = countDistrictElections(votesByTract, canList, voterGeoList, parties)
+        const resultsByDistrict = countDistrictElections(votesByTract, canList, parties)
         const allocation = sumAllocations(resultsByDistrict, canList)
 
         jupyterUpdate({ votesByTract })
@@ -55,8 +55,8 @@ export default function ElectionGeo(election) {
         return geoElectionResults
     }
 
-    function castVotesByTract(voterGeoList, canList, parties) {
-        const { voterGroupsByTract } = voterGeoList
+    function castVotesByTract(canList, parties) {
+        const { voterGroupsByTract } = voterGeo
 
         const votesByTract = voterGroupsByTract.map(
             (row) => row.map(
@@ -209,11 +209,11 @@ export default function ElectionGeo(election) {
     }
 
     /** Run separate elections in each district. */
-    function countDistrictElections(votesByTract, canList, voterGeoList, parties) {
+    function countDistrictElections(votesByTract, canList, parties) {
         // Loop through districts.
         // Find who won.
 
-        const votesByDistrict = combineVotesByDistrict(votesByTract, canList, voterGeoList)
+        const votesByDistrict = combineVotesByDistrict(votesByTract, canList)
 
         jupyterUpdate({ votesByDistrict })
 
@@ -223,9 +223,9 @@ export default function ElectionGeo(election) {
         return resultsByDistrict
     }
 
-    function combineVotesByDistrict(votesByTract, canList, voterGeoList) {
-        const { census } = voterGeoList.districtMaker
-        const { nd } = voterGeoList
+    function combineVotesByDistrict(votesByTract, canList) {
+        const { census } = voterGeo.districtMaker
+        const { nd } = voterGeo
         const numCans = canList.length
 
         // loop through districts

@@ -18,4 +18,5 @@ export default function Registrar() {
     }
     self.num = () => nextID
     self.get = (id) => entities[id]
+    self.getList = () => entities
 }

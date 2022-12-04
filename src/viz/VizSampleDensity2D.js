@@ -1,6 +1,5 @@
 /** @module */
 
-// import GeoMaps from './GeoMaps.js'
 import { contourDensity } from '../lib/snowpack/build/snowpack/pkg/d3-contour.js'
 import { geoPath } from '../lib/snowpack/build/snowpack/pkg/d3-geo.js'
 import { range } from '../utilities/jsHelpers.js'
@@ -16,8 +15,6 @@ import VoterRender2D from './VoterRender2D.js'
  */
 export default function VizSampleDensity2D(voterSimList, candidateDnSimList, screen, changes, sim) {
     const self = this
-
-    // const geoMaps = new GeoMaps(voterSimList, candidateDnSimList, screen, sim)
 
     // Candidates //
 
@@ -38,7 +35,6 @@ export default function VizSampleDensity2D(voterSimList, candidateDnSimList, scr
     }
 
     self.render = () => {
-        // geoMaps.renderPolicyNoise()
         self.renderCans()
 
         voterSimList.render()

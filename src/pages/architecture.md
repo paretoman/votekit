@@ -75,7 +75,6 @@ Control a 2D spatial model.
     * VoterSim deals with dragging the VoterShape for a particular sim.
         * voterShape is a component of VoterSim.
     * VoterSimList manages a list of VoterSim objects for each sim. It provides a count of the VoterShapes and renders the VoterShapes. It is important because the "exists" property of a VoterShape can be toggled, so we have to filter the list of voters
-        * VoterGeoList is a variation on VoterSimList with more functionality for districts. 
     * VoterTest is a copy of VoterShape, mostly. VoterTest exists outside of these other classes. It doesn't have command history and doesn't interact with other voters. It's just a test.
     * Data types:
         * These are the standard ways of referring to voter objects that are not classes.
@@ -109,6 +108,8 @@ Do the math of the election: casting and counting votes.
     * There are sim-type-specific classes that include Election as a component: ElectionOne, ElectionSample, and ElectionGeo.    
     * SocialChoice
         * The difference between SocialChoice and Election is that Election is a mediator for all the aspects of a spatial election model such as casting a vote, or the number of dimensions, while SocialChoice is a component of the Election that just considers the votes and the result of running the election method. Then SocialChoice returns a summary of the results of the election method.
+    * VoterGeo provides a modification of voter positions over a geographical space with districts
+    * ElectionGeo compiles district and statewide elections.
 * CastVotes
     * Voters cast their ballots. 
     * A distribution of a population of voters is sampled. A 2D spatial model is used to make the decision of how to vote or who to vote for. 

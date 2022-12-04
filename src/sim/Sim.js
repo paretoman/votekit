@@ -13,6 +13,7 @@ import Election from '../election/Election.js'
 import SimBase from './states/SimBase.js'
 import SimOne from './states/SimOne.js'
 import ElectionSampleGeo from '../election/ElectionSampleGeo.js'
+import VoterGeo from '../voters/VoterGeo.js'
 
 /**
  * Simulation is the main task we're trying to accomplish in this program.
@@ -38,12 +39,14 @@ export default function Sim(
 
     // Components //
 
+    const voterGeo = new VoterGeo(self, changes)
+    self.voterGeo = voterGeo
+
     const election = new Election(menu)
     const electionOne = new ElectionOne(election)
     const electionSample = new ElectionSample(election)
-    const electionGeo = new ElectionGeo(election)
-    const electionSampleGeo = new ElectionSampleGeo(election, electionGeo)
-
+    const electionGeo = new ElectionGeo(election, voterGeo)
+    const electionSampleGeo = new ElectionSampleGeo(election, electionGeo, voterGeo)
     self.election = election
 
     // Entities //
@@ -53,9 +56,9 @@ export default function Sim(
 
     // States //
     const sims = {
-        one: new SimOne(screen, menu, changes, election, electionOne, electionGeo, self),
+        one: new SimOne(screen, menu, changes, election, electionOne, electionGeo, voterGeo, self),
         // eslint-disable-next-line max-len
-        sample: new SimSample(screen, menu, changes, election, electionSample, electionSampleGeo, self),
+        sample: new SimSample(screen, menu, changes, election, electionSample, electionSampleGeo, voterGeo, self),
         base: new SimBase(screen, changes, self),
     }
     self.sims = sims

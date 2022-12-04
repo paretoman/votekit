@@ -1,6 +1,5 @@
 /** @module */
 
-// import GeoMaps from './GeoMaps.js'
 import VoterRender1D from './VoterRender1D.js'
 import VoterRender2D from './VoterRender2D.js'
 
@@ -12,8 +11,6 @@ import VoterRender2D from './VoterRender2D.js'
  */
 export default function VizSample(voterSimList, candidateDnSimList, screen, changes, sim) {
     const self = this
-
-    // const geoMaps = new GeoMaps(voterSimList, candidateDnSimList, screen, sim)
 
     // Candidates //
 
@@ -55,7 +52,6 @@ export default function VizSample(voterSimList, candidateDnSimList, screen, chan
     }
 
     self.render = () => {
-        // geoMaps.renderPolicyNoise()
         self.renderCans()
 
         voterSimList.render()

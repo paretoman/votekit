@@ -1,7 +1,6 @@
 /** @module */
 
 import CandidateSimList from '../../candidates/CandidateSimList.js'
-import VoterGeoList from '../../voters/VoterGeoList.js'
 import SimBase from './SimBase.js'
 import VoterSimList from '../../voters/VoterSimList.js'
 import VizGeo from '../../viz/VizGeo.js'
@@ -26,10 +25,11 @@ import BaseExplanation from '../../viz/BaseExplanation.js'
  * @param {Changes} changes
  * @param {ElectionOne} electionOne
  * @param {ElectionGeo} electionGeo
+ * @param {VoterGeo} voterGeo
  * @param {Sim} sim
  * @constructor
  */
-export default function SimOne(screen, menu, changes, election, electionOne, electionGeo, sim) {
+export default function SimOne(screen, menu, changes, election, electionOne, electionGeo, voterGeo, sim) {
     const self = this
 
     SimBase.call(self, screen, changes, sim)
@@ -38,30 +38,28 @@ export default function SimOne(screen, menu, changes, election, electionOne, ele
 
     const candidateSimList = new CandidateSimList(sim, screen, election)
     const voterSimList = new VoterSimList(sim, screen)
-    const voterGeoList = new VoterGeoList(screen, sim, changes)
 
     candidateSimList.attachNewG(self.dragm)
-    voterGeoList.attachNewG(self.dragm)
     voterSimList.attachNewG(self.dragm)
 
     changes.add(['districts'])
 
     // Strategies //
 
-    let voterList
     let electionStrategy
     let vizOne
     let vizExplanation
     function enterStrategy() {
-        voterList = (sim.geo) ? voterGeoList : voterSimList
-
         electionStrategy = (sim.geo) ? electionGeo : electionOne
 
         const { casterName } = sim.election.socialChoice
         const VizOneVoronoiGeneral = (casterName === 'ranking' || casterName === 'pairwise') ? VizOneVoronoiRanking : VizOneVoronoi
         const VizNoGeo = (casterName === 'score' || casterName === 'scoreLong') ? VizOneGrid : VizOneVoronoiGeneral
-        const VizOne = (sim.geo === true) ? VizGeo : VizNoGeo
-        vizOne = new VizOne(voterList, candidateSimList, screen, sim)
+        if (sim.geo === true) {
+            vizOne = new VizGeo(voterGeo, voterSimList, candidateSimList, screen, sim)
+        } else {
+            vizOne = new VizNoGeo(voterSimList, candidateSimList, screen, sim)
+        }
 
         const { electionMethod } = sim.election.socialChoice
         const noGeo = !sim.geo
@@ -81,7 +79,7 @@ export default function SimOne(screen, menu, changes, election, electionOne, ele
         sim.candidateList.canButton.show()
         vizOne.enter()
         vizExplanation.enter()
-        voterList.updateXY()
+        voterSimList.updateXY()
         candidateSimList.updateXY()
         sim.voterTest.updateXY()
     }
@@ -97,9 +95,9 @@ export default function SimOne(screen, menu, changes, election, electionOne, ele
         if (changes.checkNone()) return
 
         jupyterClear()
-        voterList.update()
+        if (sim.geo) voterGeo.update()
         const electionResults = electionStrategy
-            .runElectionSim(voterList, candidateSimList, changes)
+            .runElectionSim(voterSimList, candidateSimList, changes)
         jupyterUpdate({ electionResults })
         vizOne.update(electionResults)
         vizExplanation.update(electionResults)
@@ -122,7 +120,7 @@ export default function SimOne(screen, menu, changes, election, electionOne, ele
         vizExplanation.render()
     }
     self.renderForeground = () => {
-        voterList.renderForeground()
+        voterSimList.renderForeground()
         candidateSimList.renderForeground()
         sim.voterTest.renderForeground()
     }

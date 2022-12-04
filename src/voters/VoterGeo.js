@@ -3,20 +3,14 @@
 import GeoNoise from './geoNoise.js'
 import DistrictMaker from './DistrictMaker.js'
 import { copyObjectShallow, range } from '../utilities/jsHelpers.js'
-import VoterSimList from './VoterSimList.js'
 
 /**
  * VoterGeoList inherits from VoterSimList.
  * @param {Screen} screen
  * @constructor
  */
-export default function VoterGeoList(screen, sim, changes) {
+export default function VoterGeo(sim, changes) {
     const self = this
-
-    // VoterGeoList inherits from VoterSimList
-    // because we need to make a list instances of voterGeoBasis,
-    // and voterGeoBasis has a component called voter.
-    VoterSimList.call(self, sim, screen)
 
     /** Number of districts */
     self.nd = 20
@@ -26,7 +20,7 @@ export default function VoterGeoList(screen, sim, changes) {
     self.ny = 20
 
     // Code that handles drawing districts of equal number of voters.
-    self.districtMaker = new DistrictMaker(screen)
+    self.districtMaker = new DistrictMaker()
 
     // Code that handles making geographic noise.
     self.geoNoise = new GeoNoise(self.nx, self.ny)
@@ -40,24 +34,26 @@ export default function VoterGeoList(screen, sim, changes) {
 
     // Update call from sim //
 
+    let voterShapes = []
+
     self.update = () => {
         if (changes.checkNone()) return
+
+        voterShapes = sim.voterShapeList.getVoterShapes()
         if (changes.check(['districts', 'geo', 'viz', 'dimensions'])) {
             self.updateDistricts()
         }
+
         self.updateVoters() // todo: maybe make this only trigger when voters change
     }
 
     // Update VoterGroup Sets //
-
-    let voterSims = []
 
     /** Make districts and update voter sets */
     self.updateDistricts = () => {
         self.districtMaker.make(self.nx, self.ny, self.nd)
     }
     self.updateVoters = () => {
-        voterSims = self.getVoterSims()
         self.updateFullSet()
         self.updateVotersByDistrict()
         self.updateVotersByTract()
@@ -68,13 +64,13 @@ export default function VoterGeoList(screen, sim, changes) {
 
     self.updateFullSet = () => {
         const { sn } = self.geoNoise
-        self.allVoterGroups = voterSims.map(
+        self.allVoterGroups = voterShapes.map(
             (vb) => sn.map(
                 (rowNoise) => rowNoise.map(
                     (cellNoise) => {
                         const [xNoise, yNoise] = cellNoise
-                        const shape1 = copyObjectShallow(vb.voterShape.shape1)
-                        const shape2 = copyObjectShallow(vb.voterShape.shape2)
+                        const shape1 = copyObjectShallow(vb.shape1)
+                        const shape2 = copyObjectShallow(vb.shape2)
                         shape1.x += xNoise
                         shape2.x += xNoise
                         shape2.y += yNoise
@@ -89,12 +85,12 @@ export default function VoterGeoList(screen, sim, changes) {
         const { census } = self.districtMaker
         const { sn } = self.geoNoise
         self.voterGroupsByDistrict = range(self.nd).map(
-            (iDistrict) => voterSims.map(
+            (iDistrict) => voterShapes.map(
                 (vb) => census[iDistrict].map((g) => {
                     const [gx, gy, gf] = g
                     const [xNoise, yNoise] = sn[gx][gy]
-                    const shape1 = copyObjectShallow(vb.voterShape.shape1)
-                    const shape2 = copyObjectShallow(vb.voterShape.shape2)
+                    const shape1 = copyObjectShallow(vb.shape1)
+                    const shape2 = copyObjectShallow(vb.shape2)
                     shape1.x += xNoise
                     shape2.x += xNoise
                     shape2.y += yNoise
@@ -108,11 +104,11 @@ export default function VoterGeoList(screen, sim, changes) {
         const { sn } = self.geoNoise
         self.voterGroupsByTract = sn.map(
             (rowNoise) => rowNoise.map(
-                (cellNoise) => voterSims.map(
+                (cellNoise) => voterShapes.map(
                     (vb) => {
                         const [xNoise, yNoise] = cellNoise
-                        const shape1 = copyObjectShallow(vb.voterShape.shape1)
-                        const shape2 = copyObjectShallow(vb.voterShape.shape2)
+                        const shape1 = copyObjectShallow(vb.shape1)
+                        const shape2 = copyObjectShallow(vb.shape2)
                         shape1.x += xNoise
                         shape2.x += xNoise
                         shape2.y += yNoise

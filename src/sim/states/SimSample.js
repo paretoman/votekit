@@ -3,7 +3,6 @@
 import CandidateDnSimList from '../../candidateDns/CandidateDnSimList.js'
 import VoterSimList from '../../voters/VoterSimList.js'
 import SimBase from './SimBase.js'
-import VoterGeoList from '../../voters/VoterGeoList.js'
 import VizSample from '../../viz/VizSample.js'
 import VizSampleDensity1D from '../../viz/VizSampleDensity1D.js'
 import VizSampleDensity2D from '../../viz/VizSampleDensity2D.js'
@@ -17,6 +16,7 @@ import jupyterUpdate, { jupyterClear } from '../../environments/jupyter.js'
  * @param {Menu} menu
  * @param {ElectionSample} electionSample
  * @param {ElectionSampleGeo} electionSampleGeo
+ * @param {VoterGeo} voterGeo
  * @param {Sim} sim
  * @constructor
  */
@@ -27,6 +27,7 @@ export default function SimSample(
     election,
     electionSample,
     electionSampleGeo,
+    voterGeo,
     sim,
 ) {
     const self = this
@@ -37,22 +38,17 @@ export default function SimSample(
 
     const candidateDnSimList = new CandidateDnSimList(sim, changes, screen, election)
     const voterSimList = new VoterSimList(sim, screen)
-    const voterGeoList = new VoterGeoList(screen, sim, changes)
 
     candidateDnSimList.attachNewG(self.dragm)
-    voterGeoList.attachNewG(self.dragm)
     voterSimList.attachNewG(self.dragm)
 
     changes.add(['districts'])
 
     // Strategies //
 
-    let voterList
     let electionStrategy
     let vizSample
     function enterStrategy() {
-        voterList = (sim.geo) ? voterGeoList : voterSimList
-
         electionStrategy = (sim.geo) ? electionSampleGeo : electionSample
 
         const doDensity = true // TODO : make into an option, perhaps
@@ -60,7 +56,7 @@ export default function SimSample(
             ? VizSampleDensity1D
             : VizSampleDensity2D
         const VizSampleStrat = (doDensity) ? VizSampleDensity : VizSample
-        vizSample = new VizSampleStrat(voterList, candidateDnSimList, screen, changes, sim)
+        vizSample = new VizSampleStrat(voterSimList, candidateDnSimList, screen, changes, sim)
     }
 
     // Main State Machine Functions //
@@ -70,7 +66,7 @@ export default function SimSample(
         superEnter()
         sim.candidateDnList.canDnButton.show()
         enterStrategy()
-        voterList.updateXY()
+        voterSimList.updateXY()
         candidateDnSimList.updateXY()
     }
 
@@ -84,11 +80,11 @@ export default function SimSample(
         // The electionResults communicates how to visualize the election.
 
         jupyterClear()
-        voterList.update()
+        if (sim.geo) voterGeo.update()
         candidateDnSimList.update()
         const { dimensions } = sim.election
         const addResult = electionStrategy
-            .update(voterList, candidateDnSimList, changes, dimensions)
+            .update(voterSimList, candidateDnSimList, changes, dimensions)
         jupyterUpdate({ addResult })
         vizSample.update(addResult)
         changes.clear()
@@ -104,7 +100,7 @@ export default function SimSample(
         vizSample.render()
     }
     self.renderForeground = () => {
-        voterList.renderForeground()
+        voterSimList.renderForeground()
         candidateDnSimList.renderForeground()
     }
 }

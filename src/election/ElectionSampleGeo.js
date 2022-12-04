@@ -10,7 +10,7 @@
  * @param {Election} election
  * @constructor
  */
-export default function ElectionSampleGeo(election, electionGeo) {
+export default function ElectionSampleGeo(election, electionGeo, voterGeo) {
     const self = this
 
     // const optionCast = { usr: 16 }
@@ -49,7 +49,7 @@ export default function ElectionSampleGeo(election, electionGeo) {
 
         // number of new points
         const { seats } = election.socialChoice
-        const { nd } = voterSimList
+        const { nd } = voterGeo
         const nnp = seats * ns * nd
         const newPoints = Array(nnp)
         let q = 0

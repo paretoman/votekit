@@ -6,21 +6,22 @@ import VoterRender2D from './VoterRender2D.js'
 
 /**
  * Show votes
- * @param {VoterGeoList} voterGeoList
+ * @param {VoterGeo} voterGeo
+ * @param {VoterSimList} voterSimList
  * @param {CandidateSimList} candidateSimList
  * @param {Screen} screen
  * @param {Sim} sim
  * @constructor
  */
-export default function VizGeo(voterGeoList, candidateSimList, screen, sim) {
+export default function VizGeo(voterGeo, voterSimList, candidateSimList, screen, sim) {
     const self = this
 
-    const geoMaps = new GeoMaps(voterGeoList, candidateSimList, screen, sim)
+    const geoMaps = new GeoMaps(voterGeo, candidateSimList, screen, sim)
     let flagNoRender = false
 
     const { dimensions } = sim.election
     const VoterRenderer = (dimensions === 1) ? VoterRender1D : VoterRender2D
-    voterGeoList.setRenderer((voterShape) => new VoterRenderer(voterShape, screen))
+    voterSimList.setRenderer((voterShape) => new VoterRenderer(voterShape, screen))
 
     self.enter = () => {
         screen.showMaps()
@@ -50,6 +51,6 @@ export default function VizGeo(voterGeoList, candidateSimList, screen, sim) {
 
         geoMaps.render()
 
-        voterGeoList.render()
+        voterSimList.render()
     }
 }
