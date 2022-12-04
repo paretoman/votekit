@@ -4,7 +4,7 @@ import VoterShape from './VoterShape.js'
 import VoterCommander from './VoterCommander.js'
 
 /** A component of sim.js that deals with adding voters. */
-export default function VoterShapeList(screen, layout, changes, commander, sim) {
+export default function VoterShapeList(layout, changes, commander, sim) {
     const self = this
 
     VoterShapeAddMakeButton(layout, self)
@@ -29,7 +29,7 @@ export default function VoterShapeList(screen, layout, changes, commander, sim) 
 
     self.addVoterCircle = (shape2, shape1, doLoad) => {
         // eslint-disable-next-line max-len
-        const voterShape = new VoterShape(shape2, shape1, screen, voterRegistrar, commander, changes, doLoad, voterCommander, sim)
+        const voterShape = new VoterShape(shape2, shape1, voterRegistrar, commander, changes, doLoad, voterCommander, sim)
 
         updateObservers(voterShape)
 

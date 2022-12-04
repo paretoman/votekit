@@ -1,10 +1,11 @@
+import tooltipForEntity from '../tooltips/tooltipForEntity.js'
 import { drawStrokedColor, textPercent } from '../utilities/graphicsUtilities.js'
 import SquareGraphic from './SquareGraphic.js'
 
-export default function CandidateDnGraphic(candidateDn, screen, election) {
+export default function CandidateDnGraphic(candidateDn, screen, election, wHandle, hHandle, view) {
     const self = this
 
-    const square = new SquareGraphic(candidateDn, 21, 21, screen) // square is for rendering
+    const square = new SquareGraphic(candidateDn, wHandle, hHandle, screen)
     self.square = square
 
     self.setWinFraction = (winFraction) => {
@@ -41,5 +42,10 @@ export default function CandidateDnGraphic(candidateDn, screen, election) {
     }
     self.setRenderer = (rendererMaker) => {
         self.renderer = rendererMaker(candidateDn)
+    }
+
+    // Click Handler
+    self.click = () => {
+        tooltipForEntity(candidateDn, screen, election, view)
     }
 }

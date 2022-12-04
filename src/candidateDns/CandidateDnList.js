@@ -6,7 +6,7 @@ import CandidateDistributionSampler1D from '../election/CandidateDistributionSam
 import CandidateDistributionSampler2D from '../election/CandidateDistributionSampler2D.js'
 
 /** A component of sim.js that deals with adding candidate distributions. */
-export default function CandidateDnList(screen, layout, changes, commander, sim) {
+export default function CandidateDnList(layout, changes, commander, sim) {
     const self = this
 
     self.canDnButton = new CandidateDnAddMakeButton(layout, self)
@@ -30,7 +30,7 @@ export default function CandidateDnList(screen, layout, changes, commander, sim)
 
     self.addCandidateDistribution = (shape2, shape1, doLoad) => {
         // eslint-disable-next-line no-new, max-len
-        const candidateDn = new CandidateDn(shape2, shape1, screen, candidateDnRegistrar, commander, changes, doLoad, candidateDnCommander, sim)
+        const candidateDn = new CandidateDn(shape2, shape1, candidateDnRegistrar, commander, changes, doLoad, candidateDnCommander, sim)
 
         updateObservers(candidateDn)
 

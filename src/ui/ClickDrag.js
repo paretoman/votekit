@@ -10,7 +10,7 @@ import { clamp, copyObjectShallow, minIndex } from '../utilities/jsHelpers.js'
  * @param {Changes} changes
  * @constructor
  */
-export default function ClickDrag(dragm, screen, changes, sim) {
+export default function ClickDrag(dragm, screen, changes, view) {
     const self = this
 
     // private variables
@@ -35,7 +35,7 @@ export default function ClickDrag(dragm, screen, changes, sim) {
         const hitList = []
         for (let i = 0; i < nd; i++) {
             const d = draggables[i]
-            if ((d.o.exists || sim.showGhosts) && hitTest(d, mouse, extra)) {
+            if ((d.o.exists || view.showGhosts) && hitTest(d, mouse, extra)) {
                 hitList.push(i)
             }
         }
@@ -83,7 +83,7 @@ export default function ClickDrag(dragm, screen, changes, sim) {
             const nd = draggables.length
             for (let i = 0; i < nd; i++) {
                 const d = draggables[i]
-                if ((sim.showGhosts || d.o.exists) && hitTest(d, mouse, 0)) {
+                if ((view.showGhosts || d.o.exists) && hitTest(d, mouse, 0)) {
                     grabCanvas.dataset.cursor = 'grab'
                     return
                 }
@@ -192,7 +192,7 @@ export default function ClickDrag(dragm, screen, changes, sim) {
             couldBeClick = false
             if (drag.isDragging) { // because the mouse is moving
                 const dragging = draggables[drag.iDragging]
-                dragging.o.click()
+                dragging.r.click()
             } else {
                 // We are not dragging anything, and we clicked,
                 // and we're inside the screen because this could be a click,
@@ -205,6 +205,6 @@ export default function ClickDrag(dragm, screen, changes, sim) {
     // Test Point
 
     function clickEmpty(p) {
-        sim.voterTest.start(p)
+        view.voterTest.start(p)
     }
 }

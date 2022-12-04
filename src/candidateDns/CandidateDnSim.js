@@ -10,9 +10,9 @@ import CandidateDnGraphic from '../vizEntities/CandidateDnGraphic.js'
  * @param {CandidateDn} canDn - a canDn component that CandidateSim builds upon.
  * @constructor
  */
-export default function CandidateDnSim(canDn, screen, election) {
+export default function CandidateDnSim(canDn, screen, election, wHandle, hHandle, view) {
     const self = this
     self.canDn = canDn
 
-    self.graphic = new CandidateDnGraphic(canDn, screen, election)
+    self.graphic = new CandidateDnGraphic(canDn, screen, election, wHandle, hHandle, view)
 }

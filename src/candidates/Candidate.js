@@ -1,15 +1,12 @@
 /** @module */
 
 import { toRGBA } from '../lib/colorBlendScript.js'
-import tooltipForEntity from '../tooltips/tooltipForEntity.js'
 
 /**
  * Candidate class on top of handle.
  * Candidate adds candidate behavior on top of a draggable handle handle.
  * @param {Object} shape2
  * @param {Object} shape1
- * @param {Number} wHandle
- * @param {Number} hHandle
  * @param {String} color
  * @param {Screen} screen
  * @param {Registrar} candidateRegistrar
@@ -21,10 +18,7 @@ import tooltipForEntity from '../tooltips/tooltipForEntity.js'
 export default function Candidate(
     shape2,
     shape1,
-    wHandle,
-    hHandle,
     color,
-    screen,
     candidateRegistrar,
     commander,
     changes,
@@ -128,13 +122,4 @@ export default function Candidate(
     }
 
     self.instantiate()
-
-    // Click Handler
-
-    self.click = () => {
-        tooltipForEntity(self, screen, sim)
-    }
-
-    self.wHandle = wHandle
-    self.hHandle = hHandle
 }

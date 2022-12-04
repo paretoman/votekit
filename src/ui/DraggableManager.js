@@ -16,18 +16,22 @@ export default function DraggableManager() {
         const d = { }
         if (s.voterShape) {
             d.g = s.graphic.circle
+            d.r = s.graphic
             d.o = s.voterShape
             d.p = { isCircle: true }
         } else if (s.candidate) {
             d.g = s.graphic.square
+            d.r = s.graphic
             d.o = s.candidate
             d.p = { isSquare: true }
         } else if (s.canDn) {
             d.g = s.graphic.square
+            d.r = s.graphic
             d.o = s.canDn
             d.p = { isSquare: true }
         } else {
             d.g = s.circle
+            d.r = s
             d.o = s
             d.p = { isCircle: true }
         }

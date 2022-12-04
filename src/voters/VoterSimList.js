@@ -3,33 +3,31 @@
 import VoterSim from './VoterSim.js'
 
 /**
- * Made a super class, VoterSimList.
- * VoterGeoList inherits from VoterSimList.
- * There is no VoterOne because there isn't any additional functionality that VoterOne would need.
- * VoterSimList is different from voterRegistrar
+ * VoterSimList is different from voterShapeList
  * because it is a list of VoterSim objects rather than VoterShape objects.
  * @constructor
  */
-export default function VoterSimList(sim, screen) {
+export default function VoterSimList(view, sim, screen) {
     const self = this
 
     const list = []
     self.list = list
     self.rendererMaker = () => ({ render: () => {} })
 
-    // Publisher //
+    // Publish to DraggableManager //
     const observers = []
     self.attachNewG = (o) => { observers.push(o) }
     const updateObservers = (g) => { observers.forEach((o) => o.updateNewG(g)) }
 
-    // Subscriber //
+    // Subscribe to Sim //
     sim.voterShapeList.attachNewE(self)
     self.updateNewE = (voterShape) => {
         self.newVoterShape(voterShape)
     }
 
+    // Setters and Getters //
     self.newVoterShape = function (voterShape) {
-        const voterSim = new VoterSim(voterShape, screen)
+        const voterSim = new VoterSim(voterShape, screen, sim.election, view)
         list.push(voterSim)
         voterSim.graphic.setRenderer(self.rendererMaker)
         updateObservers(voterSim)
@@ -38,16 +36,10 @@ export default function VoterSimList(sim, screen) {
     self.getVoterShapes = () => list.filter((v) => v.voterShape.exists).map((v) => v.voterShape)
     self.getVoterSims = () => list.filter((v) => v.voterShape.exists)
 
-    self.update = () => { } // strategy pattern. There is a similar function for VoterGeoList
+    // Update //
     self.updateXY = () => {
         list.forEach((v) => v.voterShape.updateXY())
     }
-    self.updateVoters = () => { } // strategy pattern. There is a similar function for VoterGeoList
-
-    self.render = () => {
-        list.forEach((v) => { if (v.voterShape.exists) v.graphic.renderer.render() })
-    }
-
     self.setRenderer = (rendererMaker) => {
         self.rendererMaker = rendererMaker
         list.forEach((v) => v.graphic.setRenderer(rendererMaker))
@@ -61,8 +53,12 @@ export default function VoterSimList(sim, screen) {
         }
     }
 
+    // Render //
+    self.render = () => {
+        list.forEach((v) => { if (v.voterShape.exists) v.graphic.renderer.render() })
+    }
     self.renderForeground = () => {
-        if (sim.showGhosts) {
+        if (view.showGhosts) {
             self.renderForegroundAll()
         } else {
             self.renderForegroundExisting()

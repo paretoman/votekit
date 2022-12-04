@@ -28,9 +28,4 @@ export default function ElectionOne(election) {
 
         return electionResults
     }
-
-    self.testVoteES = (voterTest, candidateSimList) => {
-        const vote = election.testVoteE(voterTest, candidateSimList)
-        return vote
-    }
 }

@@ -3,7 +3,7 @@ import hideOnClickOutside from '../tooltips/hideOnClickOutside.js'
 import tooltipForTestVoter from '../tooltips/tooltipForTestVoter.js'
 import colorBlender, { rgbToString } from '../viz/colorBlender.js'
 
-export default function VoterTest(screen, sims, sim) {
+export default function VoterTest(screen, views, sim, view) {
     const self = this
 
     // Position
@@ -40,7 +40,7 @@ export default function VoterTest(screen, sims, sim) {
         } else {
             self.setAction.shape2p(p)
         }
-        sim.testVote()
+        view.testVote()
     }
     /** Do this when entering a state because x and y change. */
     self.updateXY = () => {
@@ -58,32 +58,32 @@ export default function VoterTest(screen, sims, sim) {
 
     // Start displaying testvoter
     self.start = (p) => {
-        sim.voterTest.setE(1)
-        sim.voterTest.setXY(p)
+        view.voterTest.setE(1)
+        view.voterTest.setXY(p)
         hideOnClickOutside(screen.wrap, removeTestPoint)
     }
     function removeTestPoint() {
-        sim.voterTest.setE(0)
+        view.voterTest.setE(0)
     }
 
     // Dragging
 
     self.color = '#999'
-    const circle = new CircleGraphic(self, 9, screen)
+    const circle = new CircleGraphic(self, 9, screen, sim.election, view)
     self.circle = circle
 
-    sims.one.dragm.add(self)
-    sims.sample.dragm.add(self)
+    views.one.dragm.add(self)
+    // views.sample.dragm.add(self)
 
     // Rendering
 
     let tooltip = {}
 
-    self.update = (vote, candidateSimList) => {
+    self.update = (vote, candidateList) => {
         // who would this test point vote for?
         if (vote === undefined) return null
 
-        const canList = candidateSimList.getCandidates()
+        const canList = candidateList.getCandidates()
         const colorSet = canList.map((can) => can.color)
         const colorSetRGBA = canList.map((can) => can.colorRGBA)
         self.colorSet = colorSet
@@ -99,7 +99,7 @@ export default function VoterTest(screen, sims, sim) {
     }
 
     self.click = () => {
-        const vote = sim.testVote()
+        const vote = view.testVote()
         if (vote === null) return
 
         if (tooltip.box) tooltip.box.remove()
@@ -109,7 +109,7 @@ export default function VoterTest(screen, sims, sim) {
 
     self.renderForeground = () => {
         // handle
-        if (self.exists || sim.showGhosts) {
+        if (self.exists || view.showGhosts) {
             circle.render()
         }
     }

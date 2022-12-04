@@ -10,9 +10,9 @@ import CandidateGraphic from '../vizEntities/CandidateGraphic.js'
  * @param {Candidate} candidate - a candidate component that CandidateSim builds upon.
  * @constructor
  */
-export default function CandidateSim(candidate, screen, election) {
+export default function CandidateSim(candidate, screen, election, wHandle, hHandle, view) {
     const self = this
     self.candidate = candidate
 
-    self.graphic = new CandidateGraphic(candidate, screen, election)
+    self.graphic = new CandidateGraphic(candidate, screen, election, wHandle, hHandle, view)
 }

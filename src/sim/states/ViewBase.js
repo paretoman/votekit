@@ -8,12 +8,13 @@ import ClickDrag from '../../ui/ClickDrag.js'
  * The super class for each sim. Provides some basic required functionality.
  * @param {Screen} screen
  * @param {Changes} changes
+ * @param {View} view
  * @constructor
  */
-export default function SimBase(screen, changes, sim) {
+export default function ViewBase(screen, changes, view) {
     const self = this
     self.dragm = new DraggableManager()
-    self.clickDrag = new ClickDrag(self.dragm, screen, changes, sim)
+    self.clickDrag = new ClickDrag(self.dragm, screen, changes, view)
     self.enter = () => {
         screen.eventHandlers.set(self.clickDrag.eventHandlers)
     }
@@ -26,5 +27,5 @@ export default function SimBase(screen, changes, sim) {
     }
     self.render = () => { }
     self.renderForeground = () => { }
-    self.testVoteSim = () => {}
+    self.testVoteView = () => null
 }

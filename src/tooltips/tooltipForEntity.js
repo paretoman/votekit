@@ -1,6 +1,6 @@
 import tooltipBox from './tooltipBox.js'
 
-export default function tooltipForEntity(entity, screen, sim) {
+export default function tooltipForEntity(entity, screen, election, view) {
     // make a html box appear
 
     const tbox = tooltipBox(entity, screen)
@@ -20,7 +20,7 @@ export default function tooltipForEntity(entity, screen, sim) {
         entity.exists === 1,
     )
     box.appendChild(items.exists.div)
-    if (sim.election.dimensions === 1) {
+    if (election.dimensions === 1) {
         if (entity.shape1.w) {
             items.w1 = new Item(
                 'range',
@@ -77,8 +77,8 @@ export default function tooltipForEntity(entity, screen, sim) {
         'checkbox',
         'Show Ghosts',
         'Show Ghosts: ',
-        (val) => sim.setShowNonExistingEntities(val),
-        sim.showGhosts,
+        (val) => view.setShowNonExistingEntities(val),
+        view.showGhosts,
     )
     box.appendChild(items.showGhosts.div)
 

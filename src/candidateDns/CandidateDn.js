@@ -1,7 +1,5 @@
 /** @module */
 
-import tooltipForEntity from '../tooltips/tooltipForEntity.js'
-
 /**
  * This represents a spatial distribution of candidates.
  * A draggable handle handle provides draggable behavior.
@@ -17,7 +15,6 @@ import tooltipForEntity from '../tooltips/tooltipForEntity.js'
 export default function CandidateDistribution(
     shape2,
     shape1,
-    screen,
     candidateDnRegistrar,
     commander,
     changes,
@@ -145,12 +142,6 @@ export default function CandidateDistribution(
     }
 
     self.instantiate()
-
-    // Click Handler
-
-    self.click = () => {
-        tooltipForEntity(self, screen, sim)
-    }
 
     // Rendering
 

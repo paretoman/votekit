@@ -8,18 +8,18 @@ import CandidateDnSim from './CandidateDnSim.js'
  * It also checks if that member exists. Alternatively, it was deleted.
  * @constructor
  */
-export default function CandidateDnSimList(sim, changes, screen, election) {
+export default function CandidateDnSimList(view, sim, changes, screen, election) {
     const self = this
 
     const simCanDns = []
     self.rendererMaker = () => ({ render: () => {} })
 
-    // Publisher //
+    // Publish to DraggableManager //
     const observers = []
     self.attachNewG = (o) => { observers.push(o) }
     const updateObservers = (g) => { observers.forEach((o) => o.updateNewG(g)) }
 
-    // Subscriber //
+    // Subscribe to Sim //
     sim.candidateDnList.attachNewE(self)
     self.updateNewE = (candidateDn) => {
         self.newCandidateDn(candidateDn)
@@ -28,7 +28,7 @@ export default function CandidateDnSimList(sim, changes, screen, election) {
     // Data Setters and Getters //
 
     self.newCandidateDn = function (candidateDn) {
-        const simCanDn = new CandidateDnSim(candidateDn, screen, election)
+        const simCanDn = new CandidateDnSim(candidateDn, screen, election, 21, 21, view)
         simCanDns.push(simCanDn)
         simCanDn.graphic.setRenderer(self.rendererMaker)
         updateObservers(simCanDn)
@@ -75,7 +75,7 @@ export default function CandidateDnSimList(sim, changes, screen, election) {
         simCanDns.forEach((simCanDn) => simCanDn.graphic.setRenderer(rendererMaker))
     }
     self.renderForeground = () => {
-        if (sim.showGhosts) {
+        if (view.showGhosts) {
             self.renderForegroundAll()
         } else {
             self.renderForegroundExisting()

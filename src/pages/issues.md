@@ -10,6 +10,7 @@ Here's a big list of things I want in the future.
 * Architecture.md document needs to be updated to match code.
 * Need to allow other strategies when casting vote. Perhaps judging on a universal scale is a strategy in some situation. Definitely need to consider polls.
 * Simpler intro example with just one voter shape for both 1D and 2D, and different candidate positions for 1D.
+* Tooltip text gets selected sometimes.
 
 ## UI
 

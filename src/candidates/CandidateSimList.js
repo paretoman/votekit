@@ -5,36 +5,33 @@ import CandidateSim from './CandidateSim.js'
 /**
  *
  * A simple list of candidateSim instances.
- * It really just passes along function calls to each member of the list.
+ * It passes along function calls to each member of the list.
  * It also checks if that member exists. Alternatively, it was deleted.
  * @constructor
  */
-export default function CandidateSimList(sim, screen, election) {
+export default function CandidateSimList(view, sim, screen, election) {
     const self = this
 
     const simCans = []
 
-    // Publisher //
+    // Publish to DraggableManager //
     const observers = []
     self.attachNewG = (o) => { observers.push(o) }
     const updateObservers = (g) => { observers.forEach((o) => o.updateNewG(g)) }
 
-    // Subscriber //
+    // Subscribe to Sim //
     sim.candidateList.attachNewE(self)
     self.updateNewE = (candidate) => {
         self.newCandidate(candidate)
     }
 
     // Data Setters and Getters //
-
     self.newCandidate = function (candidate) {
-        const simCan = new CandidateSim(candidate, screen, election)
+        const simCan = new CandidateSim(candidate, screen, election, 21, 21, view)
         simCans.push(simCan)
         updateObservers(simCan)
     }
-
     self.getSimCandidates = () => simCans.filter((simCan) => simCan.candidate.exists)
-
     self.getCandidates = () => {
         const simCansEx = self.getSimCandidates()
         return simCansEx.map((simCan) => simCan.candidate)
@@ -69,7 +66,7 @@ export default function CandidateSimList(sim, screen, election) {
     // Render //
 
     self.renderForeground = () => {
-        if (sim.showGhosts) {
+        if (view.showGhosts) {
             self.renderForegroundAll()
         } else {
             self.renderForegroundExisting()

@@ -377,9 +377,4 @@ export default function ElectionGeo(election, voterGeo) {
         }
         return allocation
     }
-
-    self.testVoteES = (voterTest, candidateSimList) => {
-        const vote = election.testVoteE(voterTest, candidateSimList)
-        return vote
-    }
 }

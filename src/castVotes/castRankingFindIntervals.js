@@ -4,7 +4,7 @@ import { copyArrayShallow, range } from '../utilities/jsHelpers.js'
 
 /**
  * Find the intervals over which voters share a ranking.
- * @param {CandidateSimList} canGeoms
+ * @param {Object[]} canGeoms
  * @constructor
  */
 export default function castRankingFindIntervals(canGeoms) {

@@ -1,7 +1,5 @@
 /** @module */
 
-import tooltipForEntity from '../tooltips/tooltipForEntity.js'
-
 /**
  * VoterShape class with Handle component to take care of dragging.
  * Voronoi2D component takes care of drawing votes.
@@ -17,7 +15,6 @@ import tooltipForEntity from '../tooltips/tooltipForEntity.js'
 export default function VoterShape(
     shape2,
     shape1,
-    screen,
     voterRegistrar,
     commander,
     changes,
@@ -138,12 +135,6 @@ export default function VoterShape(
     self.instantiate()
 
     // Done instantiating variables
-
-    // Click Handler
-
-    self.click = () => {
-        tooltipForEntity(self, screen, sim)
-    }
 
     // Rendering
 

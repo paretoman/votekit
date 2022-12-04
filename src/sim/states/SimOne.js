@@ -1,25 +1,10 @@
 /** @module */
 
-import CandidateSimList from '../../candidates/CandidateSimList.js'
-import SimBase from './SimBase.js'
-import VoterSimList from '../../voters/VoterSimList.js'
-import VizGeo from '../../viz/VizGeo.js'
-import VizOneVoronoi from '../../viz/VizOneVoronoi.js'
-import VizOneVoronoiRanking from '../../viz/VizOneVoronoiRanking.js'
-import VizOneGrid from '../../viz/VizOneGrid.js'
-import jupyterUpdate, { jupyterClear } from '../../environments/jupyter.js'
-import VizExplanationBudgetMES from '../../viz/VizExplanationBudgetMES.js'
-import BaseExplanation from '../../viz/BaseExplanation.js'
-
 /**
  * Simulate one election with
  *   candidates in defined positions, and
  *   voters in a distribution that will be summed over.
  * Create a geographical map with variations of voter center.
- * Plan:
- * * SimOne is a subclass of SimBase.
- * * VizOne is a subclass of VoterSim.
- * * Voronoi1D is called by VizOne.
  * @param {Screen} screen
  * @param {Menu} menu
  * @param {Changes} changes
@@ -29,99 +14,29 @@ import BaseExplanation from '../../viz/BaseExplanation.js'
  * @param {Sim} sim
  * @constructor
  */
-export default function SimOne(screen, menu, changes, election, electionOne, electionGeo, voterGeo, sim) {
+export default function SimOne(menu, changes, election, electionOne, electionGeo, voterGeo, sim) {
     const self = this
 
-    SimBase.call(self, screen, changes, sim)
-
     // Entities //
-
-    const candidateSimList = new CandidateSimList(sim, screen, election)
-    const voterSimList = new VoterSimList(sim, screen)
-
-    candidateSimList.attachNewG(self.dragm)
-    voterSimList.attachNewG(self.dragm)
 
     changes.add(['districts'])
 
     // Strategies //
-
     let electionStrategy
-    let vizOne
-    let vizExplanation
-    function enterStrategy() {
-        electionStrategy = (sim.geo) ? electionGeo : electionOne
-
-        const { casterName } = sim.election.socialChoice
-        const VizOneVoronoiGeneral = (casterName === 'ranking' || casterName === 'pairwise') ? VizOneVoronoiRanking : VizOneVoronoi
-        const VizNoGeo = (casterName === 'score' || casterName === 'scoreLong') ? VizOneGrid : VizOneVoronoiGeneral
-        if (sim.geo === true) {
-            vizOne = new VizGeo(voterGeo, voterSimList, candidateSimList, screen, sim)
-        } else {
-            vizOne = new VizNoGeo(voterSimList, candidateSimList, screen, sim)
-        }
-
-        const { electionMethod } = sim.election.socialChoice
-        const noGeo = !sim.geo
-        const { dimensions } = sim.election
-        const VizExplanation = (electionMethod === 'methodOfEqualShares' && noGeo && dimensions === 1) ? VizExplanationBudgetMES : BaseExplanation
-        vizExplanation = new VizExplanation(screen)
-    }
-    enterStrategy()
 
     // Main State Machine Functions //
-
-    const superEnter = self.enter
     self.enter = () => {
-        superEnter()
-        enterStrategy()
-
-        sim.candidateList.canButton.show()
-        vizOne.enter()
-        vizExplanation.enter()
-        voterSimList.updateXY()
-        candidateSimList.updateXY()
-        sim.voterTest.updateXY()
+        electionStrategy = (sim.geo) ? electionGeo : electionOne
     }
-
     self.exit = () => {
-        vizOne.exit()
-        vizExplanation.exit()
-        sim.candidateList.canButton.hide()
-        sim.voterTest.setE(0)
     }
-
     self.update = () => {
-        if (changes.checkNone()) return
+        if (changes.checkNone()) return {}
 
-        jupyterClear()
         if (sim.geo) voterGeo.update()
         const electionResults = electionStrategy
             .runElectionSim(sim.voterShapeList, sim.candidateList, changes)
-        jupyterUpdate({ electionResults })
-        vizOne.update(electionResults)
-        vizExplanation.update(electionResults)
-        self.testVoteSim()
-        changes.clear()
 
-        screen.clear()
-        screen.clearMaps()
-        self.render()
-    }
-
-    self.testVoteSim = () => {
-        const vote = electionStrategy.testVoteES(sim.voterTest, candidateSimList)
-        sim.voterTest.update(vote, candidateSimList)
-        return vote
-    }
-
-    self.render = () => {
-        vizOne.render()
-        vizExplanation.render()
-    }
-    self.renderForeground = () => {
-        voterSimList.renderForeground()
-        candidateSimList.renderForeground()
-        sim.voterTest.renderForeground()
+        return electionResults
     }
 }

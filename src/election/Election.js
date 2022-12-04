@@ -67,9 +67,9 @@ export default function Election(menu) {
         return votes
     }
 
-    self.testVoteE = (voterTest, candidateSimList, optionCast) => {
+    self.testVoteE = (voterTest, candidateList, optionCast) => {
         const voterShapes = [voterTest]
-        const canList = candidateSimList.getCandidates()
+        const canList = candidateList.getCandidates()
         const voterGeom = mapVoters(voterShapes)[0]
         const canGeoms = mapCans(canList)
         const partiesByCan = getPartyByCan(canList)

@@ -1,10 +1,11 @@
+import tooltipForEntity from '../tooltips/tooltipForEntity.js'
 import { drawStrokedColor, textPercent } from '../utilities/graphicsUtilities.js'
 import SquareGraphic from './SquareGraphic.js'
 
-export default function CandidateGraphic(candidate, screen, election) {
+export default function CandidateGraphic(candidate, screen, election, wHandle, hHandle, view) {
     const self = this
 
-    const square = new SquareGraphic(candidate, candidate.wHandle, candidate.hHandle, screen)
+    const square = new SquareGraphic(candidate, wHandle, hHandle, screen)
     self.square = square
 
     self.fraction = 0
@@ -50,5 +51,10 @@ export default function CandidateGraphic(candidate, screen, election) {
             const y3 = y + 8
             drawStrokedColor(`p${party}`, x3, y3, 13, 2, color, 1, fctx)
         }
+    }
+
+    // Click Handler
+    self.click = () => {
+        tooltipForEntity(candidate, screen, election, view)
     }
 }
