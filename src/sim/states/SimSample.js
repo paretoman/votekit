@@ -84,7 +84,7 @@ export default function SimSample(
         candidateDnSimList.update()
         const { dimensions } = sim.election
         const addResult = electionStrategy
-            .update(voterSimList, candidateDnSimList, changes, dimensions)
+            .update(sim.voterShapeList, candidateDnSimList, changes, dimensions)
         jupyterUpdate({ addResult })
         vizSample.update(addResult)
         changes.clear()
