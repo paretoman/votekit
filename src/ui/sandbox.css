@@ -32,6 +32,9 @@ div.tooltips[data-cursor=grabbing]{
 	cursor: -moz-grabbing;
 	cursor: grabbing;
 }
+div.tooltipBox{
+	user-select: none;
+}
 button {
 	margin: 2px;
 }
