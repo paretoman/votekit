@@ -8,13 +8,15 @@ export default function VoterRender1D(voterShape, screen) {
     const self = this
 
     self.render = function () {
-        const { ctx } = screen
-        const { x, shape1 } = voterShape
-        const { w, densityProfile } = shape1
+        const { ctx, darkMode } = screen
+        const { x, w, densityProfile } = voterShape.shape1
         const h = 100
         const middle = 150
 
         ctx.save()
+
+        ctx.strokeStyle = '#555'
+        if (darkMode) ctx.strokeStyle = '#ddd'
 
         ctx.beginPath()
         doPath()

@@ -59,8 +59,8 @@ export default function CandidateViewList(view, sim, screen, election) {
         const fillUndefined = Array(nk).fill(undefined)
         self.setCandidateWins(fillUndefined)
     }
-    self.updateXY = () => {
-        canViews.forEach((canView) => canView.candidate.updateXY())
+    self.updateViewXY = () => {
+        canViews.forEach((canView) => canView.graphic.updateViewXY())
     }
 
     // Render //

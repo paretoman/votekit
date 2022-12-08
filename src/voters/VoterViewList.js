@@ -37,8 +37,8 @@ export default function VoterViewList(view, sim, screen) {
     self.getVoterViews = () => list.filter((v) => v.voterShape.exists)
 
     // Update //
-    self.updateXY = () => {
-        list.forEach((v) => v.voterShape.updateXY())
+    self.updateViewXY = () => {
+        list.forEach((v) => v.graphic.updateViewXY())
     }
     self.setRenderer = (rendererMaker) => {
         self.rendererMaker = rendererMaker

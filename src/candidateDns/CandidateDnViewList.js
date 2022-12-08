@@ -58,8 +58,8 @@ export default function CandidateDnViewList(view, sim, changes, screen, election
             })
         }
     }
-    self.updateXY = () => {
-        canDnViews.forEach((canDnView) => canDnView.canDn.updateXY())
+    self.updateViewXY = () => {
+        canDnViews.forEach((canDnView) => canDnView.graphic.updateViewXY())
     }
 
     // Render //

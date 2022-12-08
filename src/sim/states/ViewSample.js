@@ -51,8 +51,8 @@ export default function ViewSample(screen, menu, changes, sim, view) {
         superEnter()
         sim.candidateDnList.canDnButton.show()
         enterStrategy()
-        voterViewList.updateXY()
-        candidateDnViewList.updateXY()
+        voterViewList.updateViewXY()
+        candidateDnViewList.updateViewXY()
     }
 
     self.exit = () => {

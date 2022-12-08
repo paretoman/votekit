@@ -71,18 +71,10 @@ export default function VoterShape(
     self.setAction.shape2p = (p) => {
         self.shape2.x = p.x
         self.shape2.y = p.y
-        if (sim.election.dimensions === 2) {
-            self.x = p.x
-            self.y = p.y
-        }
         changes.add(['draggables'])
     }
     self.setAction.shape1x = (p) => {
         self.shape1.x = p
-        if (sim.election.dimensions === 1) {
-            self.x = p
-            self.y = 250
-        }
         changes.add(['draggables'])
     }
     self.setXY = (p) => {
@@ -92,15 +84,6 @@ export default function VoterShape(
         } else {
             const cur = voterCommander.setForListSenders.shape2p.getCurrentValue(id)
             voterCommander.setForListSenders.shape2p.go(id, p, cur)
-        }
-    }
-    /** Do this when entering a state because x and y change.
-     *  Maybe x and y should be in the VoterView instead... just speculating. */
-    self.updateXY = () => {
-        if (sim.election.dimensions === 1) {
-            self.setAction.shape1x(self.shape1.x)
-        } else {
-            self.setAction.shape2p({ x: self.shape2.x, y: self.shape2.y })
         }
     }
 

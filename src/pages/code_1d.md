@@ -23,7 +23,7 @@ Forgot to name gf from geoCensus as weight in castPlurality. So now the overlap 
 So basically, our commands are only to set p1 and p2. While doing that, we also set x and y. When the user drags an entity, the xy position is sent to the entity, but the xy position is translated into a command that is appropriate for the current number of dimensions.
 
 ## Update XY
-When the dimensions change, we have to call updateXY to set x and y through the p1 or p2 action. To be clear, this is the action, not the command because we don't need to change the config.
+When the dimensions change, we have to call updateViewXY to set x and y through the p1 or p2 action. To be clear, this is the action, not the command because we don't need to change the config.
 
 ## Line Summer
 Just draw midpoints between candidates to define the voronoi cell for each candidate. Then overlay the voter shape on that and find the intersection for each candidate.

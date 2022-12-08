@@ -9,13 +9,13 @@ export default function VoterRender2D(voterShape, screen) {
 
     self.render = function () {
         const { ctx, darkMode } = screen
-        const { x, y, shape2 } = voterShape
+        const { x, y, w } = voterShape.shape2
         // circle
         ctx.beginPath()
         ctx.strokeStyle = '#555'
         if (darkMode) ctx.strokeStyle = '#ddd'
         // ctx.fillStyle = "#eee"
-        ctx.arc(x, y, shape2.w * 0.5, 0, 2 * Math.PI)
+        ctx.arc(x, y, w * 0.5, 0, 2 * Math.PI)
         // ctx.fill()
         ctx.stroke()
     }

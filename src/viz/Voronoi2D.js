@@ -23,13 +23,15 @@ export default function Voronoi2D(voterGroup, candidateViewList, screen) {
     let canList
     self.update = function () {
         canList = candidateViewList.getCandidates()
-        const points = canList.map((e) => [e.x, e.y])
+        const canViewList = candidateViewList.getCanViews()
+        const points = canViewList.map((e) => [e.graphic.x, e.graphic.y])
         const delaunay = Delaunay.from(points)
         voronoi = delaunay.voronoi([0, 0, screen.width, screen.height])
     }
 
     self.render = function () {
         const { ctx } = screen
+        const { x, y, w } = voterGroup.shape2
 
         ctx.save()
 
@@ -38,7 +40,7 @@ export default function Voronoi2D(voterGroup, candidateViewList, screen) {
         // http://jsfiddle.net/jimrhoskins/dDUC3/1/
         // https://dustinpfister.github.io/2019/10/08/canvas-clip/
         ctx.beginPath()
-        ctx.arc(voterGroup.x, voterGroup.y, voterGroup.shape2.w * 0.5, 0, 2 * Math.PI)
+        ctx.arc(x, y, w * 0.5, 0, 2 * Math.PI)
         // ctx.closePath()
         ctx.clip()
 
@@ -52,7 +54,7 @@ export default function Voronoi2D(voterGroup, candidateViewList, screen) {
         }
 
         ctx.beginPath()
-        ctx.arc(voterGroup.x, voterGroup.y, voterGroup.shape2.w * 0.5, 0, 2 * Math.PI)
+        ctx.arc(x, y, w * 0.5, 0, 2 * Math.PI)
         ctx.stroke()
 
         ctx.restore()

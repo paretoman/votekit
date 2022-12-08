@@ -1,12 +1,15 @@
 import tooltipForEntity from '../tooltips/tooltipForEntity.js'
 import { drawStrokedColor, textPercent } from '../utilities/graphicsUtilities.js'
+import EntityGraphic from './EntityGraphic.js'
 import SquareGraphic from './SquareGraphic.js'
 
 export default function CandidateDnGraphic(candidateDn, screen, election, wHandle, hHandle, view) {
     const self = this
 
-    const square = new SquareGraphic(candidateDn, wHandle, hHandle, screen)
+    const square = new SquareGraphic(self, candidateDn, wHandle, hHandle, screen)
     self.square = square
+
+    EntityGraphic.call(self, candidateDn, screen, election)
 
     self.setWinFraction = (winFraction) => {
         // animate the win or loss.
@@ -22,9 +25,8 @@ export default function CandidateDnGraphic(candidateDn, screen, election, wHandl
 
     self.renderForeground = () => {
         square.render()
-        const {
-            x, y, party,
-        } = candidateDn
+        const { party } = candidateDn
+        const { x, y } = self
 
         const { fctx, darkMode } = screen
         const color = (darkMode) ? '#fff' : '#222'
@@ -46,6 +48,6 @@ export default function CandidateDnGraphic(candidateDn, screen, election, wHandl
 
     // Click Handler
     self.click = () => {
-        tooltipForEntity(candidateDn, screen, election, view)
+        tooltipForEntity(self, candidateDn, screen, election, view)
     }
 }

@@ -72,9 +72,9 @@ export default function ViewOne(screen, menu, changes, sim, view) {
         sim.candidateList.canButton.show()
         vizOne.enter()
         vizExplanation.enter()
-        voterViewList.updateXY()
-        candidateViewList.updateXY()
-        view.voterTest.updateXY()
+        voterViewList.updateViewXY()
+        candidateViewList.updateViewXY()
+        view.voterTest.updateViewXY()
     }
 
     self.exit = () => {
@@ -92,7 +92,6 @@ export default function ViewOne(screen, menu, changes, sim, view) {
         vizOne.update(electionResults)
         vizExplanation.update(electionResults)
         self.testVoteView()
-        changes.clear()
 
         screen.clear()
         screen.clearMaps()

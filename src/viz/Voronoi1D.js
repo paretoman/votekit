@@ -23,16 +23,16 @@ export default function Voronoi1D(voterGroup, candidateViewList, screen) {
     let voronoi
     let canList
     self.update = function () {
+        const canViewList = candidateViewList.getCanViews()
         canList = candidateViewList.getCandidates()
-        const points = canList.map((e) => [e.x, e.y])
+        const points = canViewList.map((e) => [e.graphic.x, e.graphic.y])
         const delaunay = Delaunay.from(points)
         voronoi = delaunay.voronoi([0, 0, screen.width, screen.height])
     }
 
     self.render = function () {
         const { ctx } = screen
-        const { x, shape1 } = voterGroup
-        const { w, densityProfile } = shape1
+        const { x, w, densityProfile } = voterGroup.shape1
         const h = 100
 
         ctx.save()

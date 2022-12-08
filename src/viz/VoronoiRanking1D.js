@@ -48,8 +48,7 @@ export default function VoronoiRanking1D(voterGroup, candidateViewList, screen) 
 
     self.render = function () {
         const { ctx } = screen
-        const { x, shape1 } = voterGroup
-        const { w, densityProfile } = shape1
+        const { x, w, densityProfile } = voterGroup.shape1
         const h = 100
 
         ctx.save()

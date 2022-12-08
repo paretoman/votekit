@@ -15,7 +15,7 @@ import { Tween } from '../lib/snowpack/build/snowpack/pkg/@tweenjs/tweenjs.js'
  * @param {Screen} screen
  * @constructor
  */
-export default function SquareGraphic(parent, w, h, screen) {
+export default function SquareGraphic(parent, entity, w, h, screen) {
     const self = this
     self.w = w // display width, because we're going to make animations with it
     self.h = h
@@ -54,7 +54,7 @@ export default function SquareGraphic(parent, w, h, screen) {
             self.tweenSq.update()
         }
 
-        if (parent.exists === 0) { fctx.globalAlpha = 0.2 }
+        if (entity.exists === 0) { fctx.globalAlpha = 0.2 }
 
         if (self.angleFraction !== 0) {
             fctx.translate(parent.x, parent.y)
@@ -63,8 +63,8 @@ export default function SquareGraphic(parent, w, h, screen) {
         }
 
         fctx.beginPath()
-        fctx.fillStyle = parent.color
-        if (darkMode && parent.darkModeColor) fctx.fillStyle = parent.darkModeColor
+        fctx.fillStyle = entity.color
+        if (darkMode && entity.darkModeColor) fctx.fillStyle = entity.darkModeColor
         if (darkMode) fctx.strokeStyle = 'white'
         fctx.rect(
             (parent.x - 0.5 * self.w) - 0.5,

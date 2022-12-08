@@ -92,9 +92,8 @@ export default function castRankingFindPolygons(voterGeom, canGeoms) {
  * @param {Object} voterGeom
  */
 function makeCircle(voterGeom) {
-    const r = voterGeom.w / 2
-    const { x } = voterGeom
-    const { y } = voterGeom
+    const { x, y, w } = voterGeom
+    const r = w / 2
     const n = 100
     const circle = Array(n)
     for (let i = 0; i < n; i++) {

@@ -1,22 +1,23 @@
 import hideOnClickOutside from './hideOnClickOutside.js'
 
-export default function tooltipBox(entity, screen) {
+export default function tooltipBox(graphic, screen) {
     const box = document.createElement('div')
 
     box.className = 'tooltipBox'
     box.style.position = 'absolute'
 
     function update() {
-        if (entity.x > screen.width * 0.5) {
-            box.style.right = `${screen.width - entity.x}px`
+        const { x, y } = graphic
+        if (x > screen.width * 0.5) {
+            box.style.right = `${screen.width - x}px`
             box.style.left = 'unset'
         } else {
-            box.style.left = `${entity.x}px`
+            box.style.left = `${x}px`
             box.style.right = 'unset'
         }
-        box.style.top = `${entity.y}px`
+        box.style.top = `${y}px`
     }
-    update(entity)
+    update()
     // box.style.width = '10px'
     // box.style.height = '10px'
     box.style.border = (screen.darkMode) ? '1px solid white' : '1px solid black'

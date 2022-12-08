@@ -42,8 +42,8 @@ export default function ClickDrag(dragm, screen, changes, view) {
         if (hitList.length > 0) {
             const distances2 = hitList.map((i) => {
                 const d = draggables[i]
-                const offX = d.o.x - mouse.x
-                const offY = d.o.y - mouse.y
+                const offX = d.r.x - mouse.x
+                const offY = d.r.y - mouse.y
                 return offX ** 2 + offY ** 2
             })
             // pick up
@@ -53,8 +53,8 @@ export default function ClickDrag(dragm, screen, changes, view) {
             const d = draggables[iDraggableClosest]
             drag.iDragging = iDraggableClosest
             drag.isDragging = true
-            drag.offX = d.o.x - mouse.x
-            drag.offY = d.o.y - mouse.y
+            drag.offX = d.r.x - mouse.x
+            drag.offY = d.r.y - mouse.y
             d.g.pickUp()
             grabCanvas.dataset.cursor = 'grabbing' // CSS data attribute
         }
@@ -72,7 +72,7 @@ export default function ClickDrag(dragm, screen, changes, view) {
 
             const w = screen.width
             const h = screen.height
-            dragging.o.setXY({
+            dragging.r.setXYView({
                 x: clamp(mouse.x + drag.offX, 0, w),
                 y: clamp(mouse.y + drag.offY, 0, h),
             })
@@ -157,8 +157,8 @@ export default function ClickDrag(dragm, screen, changes, view) {
      */
     function hitTest(d, m, extra) {
         // Only drag an object if we're near it.
-        const x = d.o.x - m.x
-        const y = d.o.y - m.y
+        const x = d.r.x - m.x
+        const y = d.r.y - m.y
         if (d.p.isCircle) {
             const { r } = d.g
             const hit = x * x + y * y < (r + extra) * (r + extra)

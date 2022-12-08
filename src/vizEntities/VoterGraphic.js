@@ -1,11 +1,14 @@
 import tooltipForEntity from '../tooltips/tooltipForEntity.js'
 import CircleGraphic from './CircleGraphic.js'
+import EntityGraphic from './EntityGraphic.js'
 
 export default function VoterGraphic(voterShape, screen, election, view) {
     const self = this
 
-    const circle = new CircleGraphic(voterShape, 13, screen)
+    const circle = new CircleGraphic(self, voterShape, 13, screen)
     self.circle = circle
+
+    EntityGraphic.call(self, voterShape, screen, election)
 
     self.renderForeground = () => {
         // handle
@@ -18,6 +21,6 @@ export default function VoterGraphic(voterShape, screen, election, view) {
     // Click Handler
 
     self.click = () => {
-        tooltipForEntity(voterShape, screen, election, view)
+        tooltipForEntity(self, voterShape, screen, election, view)
     }
 }

@@ -46,6 +46,7 @@ export default function VoronoiRanking2D(voterGroup, candidateViewList, screen) 
 
     self.render = function () {
         const { ctx } = screen
+        const { x, y, w } = voterGroup.shape2
 
         ctx.save()
 
@@ -62,7 +63,7 @@ export default function VoronoiRanking2D(voterGroup, candidateViewList, screen) 
         // border
         ctx.strokeStyle = '#222'
         ctx.beginPath()
-        ctx.arc(voterGroup.x, voterGroup.y, voterGroup.shape2.w * 0.5, 0, 2 * Math.PI)
+        ctx.arc(x, y, w * 0.5, 0, 2 * Math.PI)
         ctx.stroke()
 
         ctx.restore()

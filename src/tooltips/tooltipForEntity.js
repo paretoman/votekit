@@ -1,9 +1,9 @@
 import tooltipBox from './tooltipBox.js'
 
-export default function tooltipForEntity(entity, screen, election, view) {
+export default function tooltipForEntity(graphic, entity, screen, election, view) {
     // make a html box appear
 
-    const tbox = tooltipBox(entity, screen)
+    const tbox = tooltipBox(graphic, screen)
     const { box } = tbox
 
     box.innerText = '- Properties -'
