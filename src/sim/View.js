@@ -46,7 +46,6 @@ export default function View(sim, screen, menu, changes) {
             views[self.state].enter()
         }
 
-        if (changes.checkNone()) return
         views[self.state].update(electionResults)
     }
     self.renderForeground = () => { views[self.state].renderForeground() }
