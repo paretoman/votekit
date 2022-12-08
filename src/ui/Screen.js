@@ -26,9 +26,11 @@ export default function Screen(w, h, layout) {
         const body = document.getElementsByTagName('html')[0]
         body.classList.remove(remove)
         body.classList.add(add)
+
+        self.ctx.strokeStyle = '#555'
+        if (self.darkMode) self.ctx.strokeStyle = '#ddd'
         // https://stackoverflow.com/a/71001410
     }
-    self.setDarkMode(window.matchMedia('(prefers-color-scheme: dark)').matches)
 
     // canvas
     self.canvas = document.createElement('canvas')
@@ -63,6 +65,8 @@ export default function Screen(w, h, layout) {
     layout.newElement('maps', self.maps)
 
     self.noBuffers = false
+
+    self.setDarkMode(window.matchMedia('(prefers-color-scheme: dark)').matches)
 
     // use scaling for high DPI devices instead of multiplying every time inside draw calls
     // https://www.html5rocks.com/en/tutorials/canvas/hidpi/
