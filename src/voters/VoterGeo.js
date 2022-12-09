@@ -8,7 +8,7 @@ import { copyObjectShallow, range } from '../utilities/jsHelpers.js'
  * @param {Screen} screen
  * @constructor
  */
-export default function VoterGeo(sim, changes) {
+export default function VoterGeo(voterShapeList, changes) {
     const self = this
 
     /** Number of districts */
@@ -38,7 +38,7 @@ export default function VoterGeo(sim, changes) {
     self.update = () => {
         if (changes.checkNone()) return
 
-        voterShapes = sim.voterShapeList.getVoterShapes()
+        voterShapes = voterShapeList.getVoterShapes()
         if (changes.check(['districts', 'geo', 'viz', 'dimensions'])) {
             self.updateDistricts()
         }

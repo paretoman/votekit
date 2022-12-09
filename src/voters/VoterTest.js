@@ -28,12 +28,12 @@ export default function VoterTest(screen, views, sim, view) {
     self.setAction.shape1x = (p) => {
         self.shape1.x = p
     }
-    self.setXY = (p) => {
-        if (sim.election.dimensions === 1) {
-            self.setAction.shape1x(p.x)
-        } else {
-            self.setAction.shape2p(p)
-        }
+    self.setXY1 = (p) => {
+        self.setAction.shape1x(p.x)
+        view.testVote()
+    }
+    self.setXY2 = (p) => {
+        self.setAction.shape2p(p)
         view.testVote()
     }
 

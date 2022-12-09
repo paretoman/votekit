@@ -20,7 +20,6 @@ export default function CandidateDistribution(
     changes,
     doLoad,
     candidateDnCommander,
-    sim,
 ) {
     const self = this
 
@@ -77,14 +76,13 @@ export default function CandidateDistribution(
         self.shape1.x = p
         changes.add(['draggables'])
     }
-    self.setXY = (p) => {
-        if (sim.election.dimensions === 1) {
-            const cur = candidateDnCommander.setForListSenders.shape1x.getCurrentValue(id)
-            candidateDnCommander.setForListSenders.shape1x.go(id, p.x, cur)
-        } else {
-            const cur = candidateDnCommander.setForListSenders.shape2p.getCurrentValue(id)
-            candidateDnCommander.setForListSenders.shape2p.go(id, p, cur)
-        }
+    self.setXY1 = (p) => {
+        const cur = candidateDnCommander.setForListSenders.shape1x.getCurrentValue(id)
+        candidateDnCommander.setForListSenders.shape1x.go(id, p.x, cur)
+    }
+    self.setXY2 = (p) => {
+        const cur = candidateDnCommander.setForListSenders.shape2p.getCurrentValue(id)
+        candidateDnCommander.setForListSenders.shape2p.go(id, p, cur)
     }
 
     self.setAction.shape2w = (newW) => {

@@ -5,7 +5,7 @@ import CandidateAddMakeButton from '../sim/CandidateAddMakeButton.js'
 import Registrar from '../sim/Registrar.js'
 
 /** A component of sim.js that deals with adding candidates. */
-export default function CandidateList(layout, changes, commander, sim) {
+export default function CandidateList(layout, changes, commander) {
     const self = this
     self.canButton = new CandidateAddMakeButton(layout, self)
     const candidateRegistrar = new Registrar()
@@ -30,7 +30,7 @@ export default function CandidateList(layout, changes, commander, sim) {
 
     self.addCandidate = (shape2, shape1, c, doLoad) => {
         // eslint-disable-next-line no-new, max-len
-        const candidate = new Candidate(shape2, shape1, c, candidateRegistrar, commander, changes, doLoad, candidateCommander, sim)
+        const candidate = new Candidate(shape2, shape1, c, candidateRegistrar, commander, changes, doLoad, candidateCommander)
 
         updateObservers(candidate)
 

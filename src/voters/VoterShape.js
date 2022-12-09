@@ -20,7 +20,6 @@ export default function VoterShape(
     changes,
     doLoad,
     voterCommander,
-    sim,
 ) {
     const self = this
 
@@ -77,14 +76,13 @@ export default function VoterShape(
         self.shape1.x = p
         changes.add(['draggables'])
     }
-    self.setXY = (p) => {
-        if (sim.election.dimensions === 1) {
-            const cur = voterCommander.setForListSenders.shape1x.getCurrentValue(id)
-            voterCommander.setForListSenders.shape1x.go(id, p.x, cur)
-        } else {
-            const cur = voterCommander.setForListSenders.shape2p.getCurrentValue(id)
-            voterCommander.setForListSenders.shape2p.go(id, p, cur)
-        }
+    self.setXY1 = (p) => {
+        const cur = voterCommander.setForListSenders.shape1x.getCurrentValue(id)
+        voterCommander.setForListSenders.shape1x.go(id, p.x, cur)
+    }
+    self.setXY2 = (p) => {
+        const cur = voterCommander.setForListSenders.shape2p.getCurrentValue(id)
+        voterCommander.setForListSenders.shape2p.go(id, p, cur)
     }
 
     self.setAction.shape2w = (newW) => {

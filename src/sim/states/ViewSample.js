@@ -19,15 +19,16 @@ import ViewBase from './ViewBase.js'
  * @param {View} view
  * @constructor
  */
-export default function ViewSample(screen, menu, changes, sim, view) {
+export default function ViewSample(entities, screen, menu, changes, sim, view) {
     const self = this
 
     ViewBase.call(self, screen, changes, view)
 
     // Entities //
+    const { candidateDnList, voterShapeList } = entities
 
-    const candidateDnViewList = new CandidateDnViewList(view, sim, changes, screen, sim.election)
-    const voterViewList = new VoterViewList(view, sim, screen)
+    const candidateDnViewList = new CandidateDnViewList(view, candidateDnList, screen, sim.election)
+    const voterViewList = new VoterViewList(view, voterShapeList, screen, sim.election)
 
     candidateDnViewList.attachNewG(self.dragm)
     voterViewList.attachNewG(self.dragm)
@@ -49,14 +50,14 @@ export default function ViewSample(screen, menu, changes, sim, view) {
     const superEnter = self.enter
     self.enter = () => {
         superEnter()
-        sim.candidateDnList.canDnButton.show()
+        candidateDnList.canDnButton.show()
         enterStrategy()
         voterViewList.updateViewXY()
         candidateDnViewList.updateViewXY()
     }
 
     self.exit = () => {
-        sim.candidateDnList.canDnButton.hide()
+        candidateDnList.canDnButton.hide()
     }
 
     self.update = (addResult) => {

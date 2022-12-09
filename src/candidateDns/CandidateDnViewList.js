@@ -8,7 +8,7 @@ import CandidateDnView from './CandidateDnView.js'
  * It also checks if that member exists. Alternatively, it was deleted.
  * @constructor
  */
-export default function CandidateDnViewList(view, sim, changes, screen, election) {
+export default function CandidateDnViewList(view, candidateDnList, screen, election) {
     const self = this
 
     const canDnViews = []
@@ -20,7 +20,7 @@ export default function CandidateDnViewList(view, sim, changes, screen, election
     const updateObservers = (g) => { observers.forEach((o) => o.updateNewG(g)) }
 
     // Subscribe to Sim //
-    sim.candidateDnList.attachNewE(self)
+    candidateDnList.attachNewE(self)
     self.updateNewE = (candidateDn) => {
         self.newCandidateDn(candidateDn)
     }

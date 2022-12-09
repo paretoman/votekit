@@ -28,14 +28,16 @@ import ViewBase from './ViewBase.js'
  * @param {View} view
  * @constructor
  */
-export default function ViewOne(screen, menu, changes, sim, view) {
+export default function ViewOne(entities, screen, menu, changes, sim, view) {
     const self = this
 
     ViewBase.call(self, screen, changes, view)
 
+    const { candidateList, voterShapeList } = entities
+
     // Entities //
-    const candidateViewList = new CandidateViewList(view, sim, screen, sim.election)
-    const voterViewList = new VoterViewList(view, sim, screen)
+    const candidateViewList = new CandidateViewList(view, candidateList, screen, sim.election)
+    const voterViewList = new VoterViewList(view, voterShapeList, screen, sim.election)
     candidateViewList.attachNewG(self.dragm)
     voterViewList.attachNewG(self.dragm)
 
@@ -69,7 +71,7 @@ export default function ViewOne(screen, menu, changes, sim, view) {
         superEnter()
         enterStrategy()
 
-        sim.candidateList.canButton.show()
+        candidateList.canButton.show()
         vizOne.enter()
         vizExplanation.enter()
         voterViewList.updateViewXY()
@@ -80,7 +82,7 @@ export default function ViewOne(screen, menu, changes, sim, view) {
     self.exit = () => {
         vizOne.exit()
         vizExplanation.exit()
-        sim.candidateList.canButton.hide()
+        candidateList.canButton.hide()
         view.voterTest.setE(0)
     }
 
@@ -99,8 +101,8 @@ export default function ViewOne(screen, menu, changes, sim, view) {
     }
 
     self.testVoteView = () => {
-        const vote = sim.election.testVoteE(view.voterTest, sim.candidateList)
-        view.voterTest.update(vote, sim.candidateList)
+        const vote = sim.election.testVoteE(view.voterTest, candidateList)
+        view.voterTest.update(vote, candidateList)
         return vote
     }
 

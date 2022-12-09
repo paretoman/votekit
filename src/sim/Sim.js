@@ -1,9 +1,6 @@
 /** @module */
 
 import SimSample from './states/SimSample.js'
-import VoterShapeList from '../voters/VoterShapeList.js'
-import CandidateList from '../candidates/CandidateList.js'
-import CandidateDnList from '../candidateDns/CandidateDnList.js'
 import ElectionOne from '../election/ElectionOne.js'
 import ElectionSample from '../election/ElectionSample.js'
 import ElectionGeo from '../election/ElectionGeo.js'
@@ -23,12 +20,13 @@ import VoterGeo from '../voters/VoterGeo.js'
  * @param {Changes} changes
  * @param {Commander} commander
  */
-export default function Sim(menu, changes, commander, layout) {
+export default function Sim(entities, menu, changes) {
     const self = this
 
     // Components //
 
-    const voterGeo = new VoterGeo(self, changes)
+    const { voterShapeList } = entities
+    const voterGeo = new VoterGeo(voterShapeList, changes)
     self.voterGeo = voterGeo
 
     const election = new Election(menu)
@@ -38,16 +36,12 @@ export default function Sim(menu, changes, commander, layout) {
     const electionSampleGeo = new ElectionSampleGeo(election, electionGeo, voterGeo)
     self.election = election
 
-    // Entities //
-    self.candidateList = new CandidateList(layout, changes, commander, self)
-    self.voterShapeList = new VoterShapeList(layout, changes, commander, self)
-    self.candidateDnList = new CandidateDnList(layout, changes, commander, self)
-
     // States //
     const sims = {
-        one: new SimOne(menu, changes, election, electionOne, electionGeo, voterGeo, self),
         // eslint-disable-next-line max-len
-        sample: new SimSample(menu, changes, election, electionSample, electionSampleGeo, voterGeo, self),
+        one: new SimOne(entities, menu, changes, election, electionOne, electionGeo, voterGeo, self),
+        // eslint-disable-next-line max-len
+        sample: new SimSample(entities, menu, changes, election, electionSample, electionSampleGeo, voterGeo, self),
     }
     self.sims = sims
 

@@ -7,7 +7,7 @@ import VoterView from './VoterView.js'
  * because it is a list of VoterView objects rather than VoterShape objects.
  * @constructor
  */
-export default function VoterViewList(view, sim, screen) {
+export default function VoterViewList(view, voterShapeList, screen, election) {
     const self = this
 
     const list = []
@@ -20,14 +20,14 @@ export default function VoterViewList(view, sim, screen) {
     const updateObservers = (g) => { observers.forEach((o) => o.updateNewG(g)) }
 
     // Subscribe to Sim //
-    sim.voterShapeList.attachNewE(self)
+    voterShapeList.attachNewE(self)
     self.updateNewE = (voterShape) => {
         self.newVoterShape(voterShape)
     }
 
     // Setters and Getters //
     self.newVoterShape = function (voterShape) {
-        const voterView = new VoterView(voterShape, screen, sim.election, view)
+        const voterView = new VoterView(voterShape, screen, election, view)
         list.push(voterView)
         voterView.graphic.setRenderer(self.rendererMaker)
         updateObservers(voterView)

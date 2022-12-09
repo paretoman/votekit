@@ -24,7 +24,6 @@ export default function Candidate(
     changes,
     doLoad,
     candidateCommander,
-    sim,
 ) {
     const self = this
 
@@ -75,14 +74,13 @@ export default function Candidate(
         self.shape1.x = p
         changes.add(['draggables'])
     }
-    self.setXY = (p) => {
-        if (sim.election.dimensions === 1) {
-            const cur = candidateCommander.setForListSenders.shape1x.getCurrentValue(id)
-            candidateCommander.setForListSenders.shape1x.go(id, p.x, cur)
-        } else {
-            const cur = candidateCommander.setForListSenders.shape2p.getCurrentValue(id)
-            candidateCommander.setForListSenders.shape2p.go(id, p, cur)
-        }
+    self.setXY1 = (p) => {
+        const cur = candidateCommander.setForListSenders.shape1x.getCurrentValue(id)
+        candidateCommander.setForListSenders.shape1x.go(id, p.x, cur)
+    }
+    self.setXY2 = (p) => {
+        const cur = candidateCommander.setForListSenders.shape2p.getCurrentValue(id)
+        candidateCommander.setForListSenders.shape2p.go(id, p, cur)
     }
 
     self.setAction.color = (newColor) => {

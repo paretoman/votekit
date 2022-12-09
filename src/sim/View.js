@@ -16,7 +16,7 @@ import ViewSample from './states/ViewSample.js'
  * @param {Menu} menu
  * @param {Changes} changes
  */
-export default function View(sim, screen, menu, changes) {
+export default function View(entities, sim, screen, menu, changes) {
     const self = this
 
     // Subscribe to Sim //
@@ -24,8 +24,8 @@ export default function View(sim, screen, menu, changes) {
 
     // States //
     const views = {
-        one: new ViewOne(screen, menu, changes, sim, self),
-        sample: new ViewSample(screen, menu, changes, sim, self),
+        one: new ViewOne(entities, screen, menu, changes, sim, self),
+        sample: new ViewSample(entities, screen, menu, changes, sim, self),
         base: new ViewBase(screen, changes, self),
     }
     self.views = views

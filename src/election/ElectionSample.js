@@ -20,12 +20,12 @@ export default function ElectionSample(election) {
     let points = []
     let partyWins
 
-    self.update = function (voterShapeList, candidateDnList, changes, dimensions) {
+    self.update = function (voterShapeList, candidateDnList, cDnSampler, changes, dimensions) {
         if (changes.checkNone() === false) {
             self.startSim()
         }
 
-        const addResult = self.addSim(voterShapeList, candidateDnList, dimensions)
+        const addResult = self.addSim(voterShapeList, candidateDnList, cDnSampler, dimensions)
         return addResult
     }
 
@@ -34,7 +34,7 @@ export default function ElectionSample(election) {
         partyWins = Array(10).fill(0) // TODO: Use number of parties
     }
 
-    self.addSim = function (voterShapeList, candidateDnList, dimensions) {
+    self.addSim = function (voterShapeList, candidateDnList, cDnSampler, dimensions) {
         // add more points
 
         if (voterShapeList.getVoterShapes().length === 0) return { pointsChanged: false }
@@ -63,7 +63,7 @@ export default function ElectionSample(election) {
             const canList = []
             for (let k = 0; k < nk; k++) {
                 // sample a point from the distribution of candidates
-                const point = candidateDnList.sampler.samplePoint()
+                const point = cDnSampler.samplePoint()
 
                 // make a candidate
                 canList.push(point)

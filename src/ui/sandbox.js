@@ -15,6 +15,7 @@ import * as TWEEN from '../lib/snowpack/build/snowpack/pkg/@tweenjs/tweenjs.js'
 import addDarkModeSwitch from './addDarkModeSwitch.js'
 import View from '../sim/View.js'
 import menuSim from '../sim/menuSim.js'
+import Entities from '../sim/Entities.js'
 
 /**
  * Set up a user interface to run a simulation.
@@ -58,17 +59,18 @@ export default function sandbox(config, comMessenger, sandboxURL) {
     addSVGOutput(screen, draw, layout)
 
     addDarkModeSwitch(screen, draw, layout)
-    const sim = new Sim(menu, changes, commander, layout)
+    const entities = new Entities(menu, changes, commander, layout)
+    const sim = new Sim(entities, menu, changes)
     menuSim(sim, menu, layout)
-    const view = new View(sim, screen, menu, changes, commander, layout)
+    const view = new View(entities, sim, screen, menu, changes)
 
     // Default Entities //
-    sim.candidateList.addCandidate({ x: 50, y: 100 }, { x: 50 }, '#e05020', true)
-    sim.candidateList.addCandidate({ x: 100, y: 50 }, { x: 100 }, '#50e020', true)
-    sim.candidateList.addCandidate({ x: 300 - 100, y: 300 - 50 }, { x: 200 }, '#2050e0', true)
-    sim.candidateDnList.addCandidateDistribution({ x: 150, y: 150, w: 200 }, { x: 150, w: 200, densityProfile: 'gaussian' }, true)
-    sim.voterShapeList.addVoterCircle({ x: 50, y: 150, w: 200 }, { x: 50, w: 200, densityProfile: 'gaussian' }, true)
-    sim.voterShapeList.addVoterCircle({ x: 250, y: 150, w: 200 }, { x: 250, w: 200, densityProfile: 'gaussian' }, true)
+    entities.candidateList.addCandidate({ x: 50, y: 100 }, { x: 50 }, '#e05020', true)
+    entities.candidateList.addCandidate({ x: 100, y: 50 }, { x: 100 }, '#50e020', true)
+    entities.candidateList.addCandidate({ x: 300 - 100, y: 300 - 50 }, { x: 200 }, '#2050e0', true)
+    entities.candidateDnList.addCandidateDistribution({ x: 150, y: 150, w: 200 }, { x: 150, w: 200, densityProfile: 'gaussian' }, true)
+    entities.voterShapeList.addVoterCircle({ x: 50, y: 150, w: 200 }, { x: 50, w: 200, densityProfile: 'gaussian' }, true)
+    entities.voterShapeList.addVoterCircle({ x: 250, y: 150, w: 200 }, { x: 250, w: 200, densityProfile: 'gaussian' }, true)
 
     commander.loadConfig(config)
     commander.clearHistory()

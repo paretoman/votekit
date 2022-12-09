@@ -1,5 +1,7 @@
 /** @module */
 
+import CandidateDistributionSampler from '../../election/CandidateDistributionSampler.js'
+
 /**
  * Simulate many sample elections with
  *   candidates in random positions within a distribution, and
@@ -13,6 +15,7 @@
  * @constructor
  */
 export default function SimSample(
+    entities,
     menu,
     changes,
     election,
@@ -22,6 +25,9 @@ export default function SimSample(
     sim,
 ) {
     const self = this
+
+    const { candidateDnList, voterShapeList } = entities
+    const canDnSampler = new CandidateDistributionSampler(candidateDnList, changes, election)
 
     changes.add(['districts'])
 
@@ -39,10 +45,11 @@ export default function SimSample(
         // The electionResults communicates how to visualize the election.
 
         if (sim.geo) voterGeo.update()
-        sim.candidateDnList.update()
+        canDnSampler.update()
+
         const { dimensions } = sim.election
         const addResult = electionStrategy
-            .update(sim.voterShapeList, sim.candidateDnList, changes, dimensions)
+            .update(voterShapeList, candidateDnList, canDnSampler.sampler, changes, dimensions)
         return addResult
     }
 }

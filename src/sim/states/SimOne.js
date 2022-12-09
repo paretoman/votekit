@@ -14,7 +14,8 @@
  * @param {Sim} sim
  * @constructor
  */
-export default function SimOne(menu, changes, election, electionOne, electionGeo, voterGeo, sim) {
+// eslint-disable-next-line max-len
+export default function SimOne(entities, menu, changes, election, electionOne, electionGeo, voterGeo, sim) {
     const self = this
 
     // Entities //
@@ -35,7 +36,7 @@ export default function SimOne(menu, changes, election, electionOne, electionGeo
 
         if (sim.geo) voterGeo.update()
         const electionResults = electionStrategy
-            .runElectionSim(sim.voterShapeList, sim.candidateList, changes)
+            .runElectionSim(entities.voterShapeList, entities.candidateList, changes)
 
         return electionResults
     }

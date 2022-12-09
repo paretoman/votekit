@@ -3,7 +3,11 @@ export default function EntityGraphic(entity, screen, election) {
 
     // View sets model
     self.setXYView = (p) => {
-        entity.setXY(p)
+        if (election.dimensions === 1) {
+            entity.setXY1(p)
+        } else {
+            entity.setXY2(p)
+        }
         self.updateViewXY()
     }
 
