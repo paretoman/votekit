@@ -42,9 +42,9 @@ Here's an interesting sourcemap visualizer: https://parceljs.org/plugin-system/s
 
 Tried a few different build steps during deployment to netlify. Build-2 worked. It keeps relative paths. I set the publish directory on netlify to "dist".
 
-    "build-1": "parcel build ./src/pages/*.html ./src/test/test.html --public-url ./",
-    "build-2": "parcel build ./src/pages/*.html ./src/test/test.html --public-url ../",
-    "build-3": "parcel build ./src/pages/*.html ./src/test/test.html"
+    "build-1": "parcel build ./tutorial/*.html ./src/test/test.html --public-url ./",
+    "build-2": "parcel build ./tutorial/*.html ./src/test/test.html --public-url ../",
+    "build-3": "parcel build ./tutorial/*.html ./src/test/test.html"
 
 # Codesandbox
 I had to get the babel package "@babel/plugin-proposal-class-properties" to get the codesandbox to work. This required a few changes, like adding a .babelrc and adding @babel/core as well. I only use babel for this, and I don't yet use babel for transpiling from the command line.

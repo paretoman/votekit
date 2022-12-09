@@ -21,9 +21,10 @@
   },
   "scripts": {
     "doc": "jsdoc -c jsdoc.json",
-    "build": "npm run parcel-build && npm run copy",
-    "parcel-build": "parcel build src/ui/addSandboxes.js --dist-dir dist/ui",
-    "copy": "copyfiles -u 1 \"src/**/*.{css,html}\" \"dist/\"",
+    "build": "npm run parcel-build && npm run copy1 && npm run copy2",
+    "parcel-build": "parcel build src/ui/addSandboxes.js --dist-dir dist/src/ui",
+    "copy1": "copyfiles -u 1 \"src/**/*.{css,html}\" \"dist/src/\"",
+    "copy2": "copyfiles -u 1 \"test/**/*.*\" \"dist/test/\"",
     "build-n-doc": "npm run build && npm run doc",
     "publish-docs": "cd docs && git add . && git commit && git push -u",
     "snowpack": "snowpack build"
