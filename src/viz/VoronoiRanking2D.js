@@ -6,11 +6,11 @@ import colorBlender, { rgbToString } from './colorBlender.js'
 /**
  * Draw Voronoi cells to show votes.
  * @param {VoterGroup} voterGroup
- * @param {CandidateViewList} candidateViewList
+ * @param {CandidateList} candidateList
  * @param {Screen} screen
  * @constructor
  */
-export default function VoronoiRanking2D(voterGroup, candidateViewList, screen) {
+export default function VoronoiRanking2D(voterGroup, candidateList, screen) {
     const self = this
 
     let canList
@@ -21,7 +21,7 @@ export default function VoronoiRanking2D(voterGroup, candidateViewList, screen) 
 
         let ranking
         if (cellData === undefined) {
-            canList = candidateViewList.getCandidates()
+            canList = candidateList.getCandidates()
             const canGeoms = canList.map((can) => can.shape2)
             const voterGeom = voterGroup.shape2
             const cd = castRankingFindPolygons(voterGeom, canGeoms)
@@ -32,7 +32,7 @@ export default function VoronoiRanking2D(voterGroup, candidateViewList, screen) 
             cells = cellData.cells
         }
 
-        canList = candidateViewList.getCandidates()
+        canList = candidateList.getCandidates()
 
         const n = canList.length
         const cn = cells.length

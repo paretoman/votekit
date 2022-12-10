@@ -13,6 +13,7 @@ import VoterRender2D from './VoterRender2D.js'
  * @param {screen} screen - draw to the screen
  * @constructor
  */
+// eslint-disable-next-line max-len
 export default function VizSampleDensity2D(voterRendererList, canDnRendererList, screen, changes, sim) {
     const self = this
 

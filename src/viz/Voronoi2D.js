@@ -12,19 +12,18 @@ import { Delaunay } from '../lib/snowpack/build/snowpack/pkg/d3-delaunay.js'
 /**
  * Draw Voronoi cells to show votes.
  * @param {VoterGroup} voterGroup
- * @param {CandidateViewList} candidateViewList
+ * @param {candidateList} candidateList
  * @param {Screen} screen
  * @constructor
  */
-export default function Voronoi2D(voterGroup, candidateViewList, screen) {
+export default function Voronoi2D(voterGroup, candidateList, screen) {
     const self = this
 
     let voronoi
     let canList
     self.update = function () {
-        canList = candidateViewList.getCandidates()
-        const canViewList = candidateViewList.getCanViews()
-        const points = canViewList.map((e) => [e.graphic.x, e.graphic.y])
+        canList = candidateList.getCandidates()
+        const points = canList.map((e) => [e.shape2.x, e.shape2.y])
         const delaunay = Delaunay.from(points)
         voronoi = delaunay.voronoi([0, 0, screen.width, screen.height])
     }

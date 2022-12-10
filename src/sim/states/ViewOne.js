@@ -8,6 +8,7 @@ import VizOneVoronoiRanking from '../../viz/VizOneVoronoiRanking.js'
 import VizOneGrid from '../../viz/VizOneGrid.js'
 import ViewBase from './ViewBase.js'
 import VoterRendererList from '../../voters/VoterRendererList.js'
+import addAllocation from '../../viz/addAllocation.js'
 
 /**
  * Simulate one election with
@@ -49,9 +50,9 @@ export default function ViewOne(entities, screen, menu, changes, sim, view) {
         const VizOneVoronoiGeneral = (casterName === 'ranking' || casterName === 'pairwise') ? VizOneVoronoiRanking : VizOneVoronoi
         const VizNoGeo = (casterName === 'score' || casterName === 'scoreLong') ? VizOneGrid : VizOneVoronoiGeneral
         if (sim.geo === true) {
-            vizOne = new VizGeo(sim.voterGeo, voterRendererList, candidateViewList, screen, sim)
+            vizOne = new VizGeo(sim.voterGeo, voterRendererList, candidateList, screen, sim)
         } else {
-            vizOne = new VizNoGeo(voterRendererList, candidateViewList, screen, sim)
+            vizOne = new VizNoGeo(voterRendererList, candidateList, screen, sim)
         }
     }
     enterStrategy()
@@ -71,6 +72,7 @@ export default function ViewOne(entities, screen, menu, changes, sim, view) {
     }
 
     self.exit = () => {
+        candidateViewList.unsetCandidateWins() // clean up fractions
         vizOne.exit()
         candidateList.canButton.hide()
         view.voterTest.setE(0)
@@ -83,6 +85,19 @@ export default function ViewOne(entities, screen, menu, changes, sim, view) {
             // this will trigger when undo moves entities
             voterViewList.updateViewXY()
             candidateViewList.updateViewXY()
+        }
+
+        const { error } = electionResults
+        if (error === undefined) {
+            if (sim.geo) {
+                const { resultsStatewide, allocation } = electionResults
+                candidateViewList.setCandidateWins(allocation)
+                candidateViewList.setCandidateFractions(resultsStatewide.votes.tallyFractions)
+            } else {
+                const { tallyFractions, allocation } = addAllocation(electionResults)
+                candidateViewList.setCandidateWins(allocation)
+                candidateViewList.setCandidateFractions(tallyFractions)
+            }
         }
 
         vizOne.update(electionResults)

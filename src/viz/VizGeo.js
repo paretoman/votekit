@@ -28,7 +28,6 @@ export default function VizGeo(voterGeo, voterRendererList, candidateViewList, s
     }
     self.exit = () => {
         screen.hideMaps()
-        candidateViewList.unsetCandidateWins() // clean up fractions
     }
 
     self.update = function (geoElectionResults) {
@@ -40,10 +39,6 @@ export default function VizGeo(voterGeo, voterRendererList, candidateViewList, s
         flagNoRender = false
 
         geoMaps.update(geoElectionResults)
-
-        const { resultsStatewide, allocation } = geoElectionResults
-        candidateViewList.setCandidateWins(allocation)
-        candidateViewList.setCandidateFractions(resultsStatewide.votes.tallyFractions)
     }
 
     self.render = function () {
