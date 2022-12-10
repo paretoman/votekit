@@ -5,7 +5,6 @@ import VoterViewList from '../../voters/VoterViewList.js'
 import VizSample from '../../viz/VizSample.js'
 import VizSampleDensity1D from '../../viz/VizSampleDensity1D.js'
 import VizSampleDensity2D from '../../viz/VizSampleDensity2D.js'
-import jupyterUpdate, { jupyterClear } from '../../environments/jupyter.js'
 import ViewBase from './ViewBase.js'
 
 /**
@@ -65,8 +64,6 @@ export default function ViewSample(entities, screen, menu, changes, sim, view) {
         // The election handles any changes.
         // The electionResults communicates how to visualize the election.
 
-        jupyterClear()
-        jupyterUpdate({ addResult })
         vizSample.update(addResult)
 
         const { pointsChanged } = addResult

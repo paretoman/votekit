@@ -6,7 +6,6 @@ import VizGeo from '../../viz/VizGeo.js'
 import VizOneVoronoi from '../../viz/VizOneVoronoi.js'
 import VizOneVoronoiRanking from '../../viz/VizOneVoronoiRanking.js'
 import VizOneGrid from '../../viz/VizOneGrid.js'
-import jupyterUpdate, { jupyterClear } from '../../environments/jupyter.js'
 import VizExplanationBudgetMES from '../../viz/VizExplanationBudgetMES.js'
 import BaseExplanation from '../../viz/BaseExplanation.js'
 import ViewBase from './ViewBase.js'
@@ -89,8 +88,6 @@ export default function ViewOne(entities, screen, menu, changes, sim, view) {
     self.update = (electionResults) => {
         if (changes.checkNone()) return
 
-        jupyterClear()
-        jupyterUpdate({ electionResults })
         vizOne.update(electionResults)
         vizExplanation.update(electionResults)
         self.testVoteView()
