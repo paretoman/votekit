@@ -12,7 +12,6 @@ export default function VoterViewList(view, voterShapeList, screen, election) {
 
     const list = []
     self.list = list
-    self.rendererMaker = () => ({ render: () => {} })
 
     // Publish to DraggableManager //
     const observers = []
@@ -29,7 +28,6 @@ export default function VoterViewList(view, voterShapeList, screen, election) {
     self.newVoterShape = function (voterShape) {
         const voterView = new VoterView(voterShape, screen, election, view)
         list.push(voterView)
-        voterView.graphic.setRenderer(self.rendererMaker)
         updateObservers(voterView)
     }
 
@@ -40,23 +38,8 @@ export default function VoterViewList(view, voterShapeList, screen, election) {
     self.updateViewXY = () => {
         list.forEach((v) => v.graphic.updateViewXY())
     }
-    self.setRenderer = (rendererMaker) => {
-        self.rendererMaker = rendererMaker
-        list.forEach((v) => v.graphic.setRenderer(rendererMaker))
-    }
-    self.updateGraphic = (data) => {
-        const voterViewsEx = self.getVoterViews()
-        if (data === undefined) {
-            voterViewsEx.forEach((v) => v.graphic.renderer.update())
-        } else {
-            voterViewsEx.forEach((v, i) => v.graphic.renderer.update(data[i]))
-        }
-    }
 
     // Render //
-    self.render = () => {
-        list.forEach((v) => { if (v.voterShape.exists) v.graphic.renderer.render() })
-    }
     self.renderForeground = () => {
         if (view.showGhosts) {
             self.renderForegroundAll()
@@ -69,8 +52,5 @@ export default function VoterViewList(view, voterShapeList, screen, election) {
     }
     self.renderForegroundAll = () => {
         list.forEach((v) => { v.graphic.renderForeground() })
-    }
-    self.renderBackground = () => {
-        list.forEach((v) => { if (v.voterShape.exists) v.graphic.renderer.renderBackground() })
     }
 }

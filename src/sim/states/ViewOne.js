@@ -7,6 +7,7 @@ import VizOneVoronoi from '../../viz/VizOneVoronoi.js'
 import VizOneVoronoiRanking from '../../viz/VizOneVoronoiRanking.js'
 import VizOneGrid from '../../viz/VizOneGrid.js'
 import ViewBase from './ViewBase.js'
+import VoterRendererList from '../../voters/VoterRendererList.js'
 
 /**
  * Simulate one election with
@@ -35,6 +36,7 @@ export default function ViewOne(entities, screen, menu, changes, sim, view) {
     // Entities //
     const candidateViewList = new CandidateViewList(view, candidateList, screen, sim.election)
     const voterViewList = new VoterViewList(view, voterShapeList, screen, sim.election)
+    const voterRendererList = new VoterRendererList(voterShapeList)
     candidateViewList.attachNewG(self.dragm)
     voterViewList.attachNewG(self.dragm)
 
@@ -47,9 +49,9 @@ export default function ViewOne(entities, screen, menu, changes, sim, view) {
         const VizOneVoronoiGeneral = (casterName === 'ranking' || casterName === 'pairwise') ? VizOneVoronoiRanking : VizOneVoronoi
         const VizNoGeo = (casterName === 'score' || casterName === 'scoreLong') ? VizOneGrid : VizOneVoronoiGeneral
         if (sim.geo === true) {
-            vizOne = new VizGeo(sim.voterGeo, voterViewList, candidateViewList, screen, sim)
+            vizOne = new VizGeo(sim.voterGeo, voterRendererList, candidateViewList, screen, sim)
         } else {
-            vizOne = new VizNoGeo(voterViewList, candidateViewList, screen, sim)
+            vizOne = new VizNoGeo(voterRendererList, candidateViewList, screen, sim)
         }
     }
     enterStrategy()

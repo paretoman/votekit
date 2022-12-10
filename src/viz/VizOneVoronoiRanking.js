@@ -6,20 +6,20 @@ import VoronoiRanking2D from './VoronoiRanking2D.js'
 
 /**
  * Show votes
- * @param {VoterViewList} voterViewList
+ * @param {VoterRendererList} voterRendererList
  * @param {CandidateViewList} candidateViewList
  * @param {Screen} screen
  * @param {Sim} sim
  * @constructor
  */
-export default function VizOneVoronoiRanking(voterViewList, candidateViewList, screen, sim) {
+export default function VizOneVoronoiRanking(voterRendererList, candidateViewList, screen, sim) {
     const self = this
 
     // renderer factory //
     const { dimensions } = sim.election
     const VoronoiRanking = (dimensions === 1) ? VoronoiRanking1D : VoronoiRanking2D
     const rendererMaker = (voterShape) => new VoronoiRanking(voterShape, candidateViewList, screen)
-    voterViewList.setRenderer(rendererMaker)
+    voterRendererList.setRenderer(rendererMaker)
 
     self.enter = () => {}
     self.exit = () => {
@@ -34,10 +34,10 @@ export default function VizOneVoronoiRanking(voterViewList, candidateViewList, s
         candidateViewList.setCandidateWins(allocation)
         candidateViewList.setCandidateFractions(tallyFractions)
         const { cellData } = electionResults.votes
-        voterViewList.updateGraphic(cellData)
+        voterRendererList.updateGraphic(cellData)
     }
 
     self.render = function () {
-        voterViewList.render()
+        voterRendererList.render()
     }
 }

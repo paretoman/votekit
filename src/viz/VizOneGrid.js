@@ -6,20 +6,20 @@ import Grid2D from './Grid2D.js'
 
 /**
  * Show votes
- * @param {VoterViewList} voterViewList
+ * @param {VoterRendererList} voterRendererList
  * @param {CandidateViewList} candidateViewList
  * @param {Screen} screen
  * @param {Sim} sim
  * @constructor
  */
-export default function VizOneGrid(voterViewList, candidateViewList, screen, sim) {
+export default function VizOneGrid(voterRendererList, candidateViewList, screen, sim) {
     const self = this
 
     // renderer factory //
     const { dimensions } = sim.election
     const Grid = (dimensions === 1) ? Grid1D : Grid2D
     const rendererMaker = () => new Grid(candidateViewList, screen)
-    voterViewList.setRenderer(rendererMaker)
+    voterRendererList.setRenderer(rendererMaker)
 
     self.enter = function () {
         if (dimensions === 2) {
@@ -40,13 +40,13 @@ export default function VizOneGrid(voterViewList, candidateViewList, screen, sim
         candidateViewList.setCandidateFractions(tallyFractions)
 
         const { gridData } = electionResults.votes
-        voterViewList.updateGraphic(gridData)
+        voterRendererList.updateGraphic(gridData)
     }
     self.render = function () {
         if (sim.election.dimensions === 1) {
-            voterViewList.renderBackground()
+            voterRendererList.renderBackground()
         }
 
-        voterViewList.render()
+        voterRendererList.render()
     }
 }

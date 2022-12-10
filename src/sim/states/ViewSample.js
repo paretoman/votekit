@@ -6,6 +6,7 @@ import VizSample from '../../viz/VizSample.js'
 import VizSampleDensity1D from '../../viz/VizSampleDensity1D.js'
 import VizSampleDensity2D from '../../viz/VizSampleDensity2D.js'
 import ViewBase from './ViewBase.js'
+import VoterRendererList from '../../voters/VoterRendererList.js'
 
 /**
  * Simulate many sample elections with
@@ -28,6 +29,7 @@ export default function ViewSample(entities, screen, menu, changes, sim, view) {
 
     const candidateDnViewList = new CandidateDnViewList(view, candidateDnList, screen, sim.election)
     const voterViewList = new VoterViewList(view, voterShapeList, screen, sim.election)
+    const voterRendererList = new VoterRendererList(voterShapeList)
 
     candidateDnViewList.attachNewG(self.dragm)
     voterViewList.attachNewG(self.dragm)
@@ -41,7 +43,7 @@ export default function ViewSample(entities, screen, menu, changes, sim, view) {
             ? VizSampleDensity1D
             : VizSampleDensity2D
         const VizSampleStrat = (doDensity) ? VizSampleDensity : VizSample
-        vizSample = new VizSampleStrat(voterViewList, candidateDnViewList, screen, changes, sim)
+        vizSample = new VizSampleStrat(voterRendererList, candidateDnViewList, screen, changes, sim)
     }
 
     // Main State Machine Functions //
