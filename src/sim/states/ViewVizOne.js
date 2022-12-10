@@ -17,9 +17,6 @@ import VoterRendererList from '../../voters/VoterRendererList.js'
  * @param {Screen} screen
  * @param {Menu} menu
  * @param {Changes} changes
- * @param {ElectionOne} electionOne
- * @param {ElectionGeo} electionGeo
- * @param {VoterGeo} voterGeo
  * @param {Sim} sim
  * @param {View} view
  * @constructor
@@ -40,13 +37,13 @@ export default function ViewVizOne(entities, screen, menu, changes, sim, view) {
     let vizOne
     function enterStrategy() {
         const { casterName } = sim.election.socialChoice
-        const VizOneVoronoiGeneral = (casterName === 'ranking' || casterName === 'pairwise') ? VizOneVoronoiRanking : VizOneVoronoi
-        const VizNoGeo = (casterName === 'score' || casterName === 'scoreLong') ? VizOneGrid : VizOneVoronoiGeneral
-        if (sim.geo === true) {
-            vizOne = new VizGeo(sim.voterGeo, voterRendererList, candidateList, screen, sim)
-        } else {
-            vizOne = new VizNoGeo(voterRendererList, candidateList, screen, sim)
-        }
+        const VizOneVoronoiGeneral = (casterName === 'ranking' || casterName === 'pairwise')
+            ? VizOneVoronoiRanking : VizOneVoronoi
+        const VizNoGeo = (casterName === 'score' || casterName === 'scoreLong')
+            ? VizOneGrid : VizOneVoronoiGeneral
+        const VizOne = (sim.geo === true)
+            ? VizGeo : VizNoGeo
+        vizOne = new VizOne(voterRendererList, candidateList, screen, sim)
     }
     enterStrategy()
 

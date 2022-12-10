@@ -10,9 +10,6 @@ import addAllocation from '../../viz/addAllocation.js'
  * @param {Screen} screen
  * @param {Menu} menu
  * @param {Changes} changes
- * @param {ElectionOne} electionOne
- * @param {ElectionGeo} electionGeo
- * @param {VoterGeo} voterGeo
  * @param {Sim} sim
  * @param {View} view
  * @constructor

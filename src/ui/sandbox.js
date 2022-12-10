@@ -21,6 +21,7 @@ import ViewJupyter from '../environments/ViewJupyter.js'
 import ViewVizBudget from '../sim/states/ViewVizBudget.js'
 import ViewVizOne from '../sim/states/ViewVizOne.js'
 import ViewVizSample from '../sim/states/ViewVizSample.js'
+import ViewGeoMaps from '../sim/states/ViewGeoMaps.js'
 
 /**
  * Set up a user interface to run a simulation.
@@ -72,6 +73,7 @@ export default function sandbox(config, comMessenger, sandboxURL) {
     new ViewVizBudget(screen, menu, changes, sim)
     new ViewVizOne(entities, screen, menu, changes, sim, view)
     new ViewVizSample(entities, screen, menu, changes, sim, view)
+    new ViewGeoMaps(entities, screen, sim)
 
     // Default Entities //
     entities.candidateList.addCandidate({ x: 50, y: 100 }, { x: 50 }, '#e05020', true)
