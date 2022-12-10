@@ -2,12 +2,7 @@
 
 import CandidateDnViewList from '../../candidateDns/CandidateDnViewList.js'
 import VoterViewList from '../../voters/VoterViewList.js'
-import VizSample from '../../viz/VizSample.js'
-import VizSampleDensity1D from '../../viz/VizSampleDensity1D.js'
-import VizSampleDensity2D from '../../viz/VizSampleDensity2D.js'
 import ViewBase from './ViewBase.js'
-import VoterRendererList from '../../voters/VoterRendererList.js'
-import CandidateDnRendererList from '../../candidateDns/CandidateDnRendererList.js'
 
 /**
  * Simulate many sample elections with
@@ -23,6 +18,8 @@ import CandidateDnRendererList from '../../candidateDns/CandidateDnRendererList.
 export default function ViewSample(entities, screen, menu, changes, sim, view) {
     const self = this
 
+    sim.sims.sample.pub.attach(self)
+
     ViewBase.call(self, screen, changes, view)
 
     // Entities //
@@ -30,23 +27,9 @@ export default function ViewSample(entities, screen, menu, changes, sim, view) {
 
     const candidateDnViewList = new CandidateDnViewList(view, candidateDnList, screen, sim.election)
     const voterViewList = new VoterViewList(view, voterShapeList, screen, sim.election)
-    const voterRendererList = new VoterRendererList(voterShapeList)
-    const canDnRendererList = new CandidateDnRendererList(candidateDnList)
 
     candidateDnViewList.attachNewG(self.dragm)
     voterViewList.attachNewG(self.dragm)
-
-    // Strategies //
-
-    let vizSample
-    function enterStrategy() {
-        const doDensity = true // TODO : make into an option, perhaps
-        const VizSampleDensity = (sim.election.dimensions === 1)
-            ? VizSampleDensity1D
-            : VizSampleDensity2D
-        const VizSampleStrat = (doDensity) ? VizSampleDensity : VizSample
-        vizSample = new VizSampleStrat(voterRendererList, canDnRendererList, screen, changes, sim)
-    }
 
     // Main State Machine Functions //
 
@@ -54,7 +37,6 @@ export default function ViewSample(entities, screen, menu, changes, sim, view) {
     self.enter = () => {
         superEnter()
         candidateDnList.canDnButton.show()
-        enterStrategy()
         voterViewList.updateViewXY()
         candidateDnViewList.updateViewXY()
     }
@@ -74,22 +56,15 @@ export default function ViewSample(entities, screen, menu, changes, sim, view) {
             candidateDnViewList.updateViewXY()
         }
 
-        vizSample.update(addResult)
-
         const { pointsChanged, partyWinFraction } = addResult
 
         if (pointsChanged) {
             candidateDnViewList.setCandidateDnWins(partyWinFraction)
-            screen.clear()
-            self.render()
         }
     }
 
     self.testVoteView = () => null
 
-    self.render = () => {
-        vizSample.render()
-    }
     self.renderForeground = () => {
         voterViewList.renderForeground()
         candidateDnViewList.renderForeground()

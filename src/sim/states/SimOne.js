@@ -22,8 +22,6 @@ export default function SimOne(entities, menu, changes, election, electionOne, e
 
     self.pub = new StatePublisher()
 
-    changes.add(['districts'])
-
     // Strategies //
     let electionStrategy
 
@@ -45,4 +43,6 @@ export default function SimOne(entities, menu, changes, election, electionOne, e
         self.pub.update(electionResults)
         return electionResults
     }
+    self.render = () => { self.pub.render() }
+    self.renderForeground = () => { self.pub.renderForeground() }
 }

@@ -1,6 +1,7 @@
 /** @module */
 
 import CandidateDistributionSampler from '../../election/CandidateDistributionSampler.js'
+import StatePublisher from './statePublisher.js'
 
 /**
  * Simulate many sample elections with
@@ -26,10 +27,10 @@ export default function SimSample(
 ) {
     const self = this
 
+    self.pub = new StatePublisher()
+
     const { candidateDnList, voterShapeList } = entities
     const canDnSampler = new CandidateDistributionSampler(candidateDnList, changes, election)
-
-    changes.add(['districts'])
 
     // Strategies //
     let electionStrategy
@@ -37,8 +38,9 @@ export default function SimSample(
     // Main State Machine Functions //
     self.enter = () => {
         electionStrategy = (sim.geo) ? electionSampleGeo : electionSample
+        self.pub.enter()
     }
-    self.exit = () => { }
+    self.exit = () => { self.pub.exit() }
     self.update = () => {
         // Update players. Run an election. Get result.
         // The election handles any changes.
@@ -50,6 +52,9 @@ export default function SimSample(
         const { dimensions } = sim.election
         const addResult = electionStrategy
             .update(voterShapeList, candidateDnList, canDnSampler.sampler, changes, dimensions)
+        self.pub.update(addResult)
         return addResult
     }
+    self.render = () => { self.pub.render() }
+    self.renderForeground = () => { self.pub.renderForeground() }
 }

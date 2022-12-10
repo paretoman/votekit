@@ -57,7 +57,8 @@ export default function Sim(entities, menu, changes) {
     self.viz = 'one'
     self.geo = false
     self.election.setDimensions(2)
-    changes.add(['geo', 'dimensions', 'viz'])
+
+    changes.add(['geo', 'dimensions', 'viz', 'districts'])
 
     // State Machine //
     self.update = () => {
@@ -72,4 +73,7 @@ export default function Sim(entities, menu, changes) {
         updateObservers(results)
         changes.clear()
     }
+
+    self.render = () => { sims[self.state].render() }
+    self.renderForeground = () => { sims[self.state].renderForeground() }
 }
