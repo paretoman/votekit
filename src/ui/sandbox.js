@@ -17,7 +17,7 @@ import addDarkModeSwitch from './addDarkModeSwitch.js'
 import View from '../sim/View.js'
 import menuSim from '../sim/menuSim.js'
 import Entities from '../sim/Entities.js'
-import JupyterView from '../environments/JupyterView.js'
+import ViewJupyter from '../environments/ViewJupyter.js'
 import ViewVizBudget from '../sim/states/ViewVizBudget.js'
 import ViewVizOne from '../sim/states/ViewVizOne.js'
 import ViewVizSample from '../sim/states/ViewVizSample.js'
@@ -68,7 +68,7 @@ export default function sandbox(config, comMessenger, sandboxURL) {
     const sim = new Sim(entities, menu, changes)
     menuSim(sim, menu, layout)
     const view = new View(entities, sim, screen, menu, changes)
-    new JupyterView(sim, changes)
+    new ViewJupyter(sim, changes)
     new ViewVizBudget(screen, menu, changes, sim)
     new ViewVizOne(entities, screen, menu, changes, sim, view)
     new ViewVizSample(entities, screen, menu, changes, sim, view)

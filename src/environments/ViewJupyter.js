@@ -1,6 +1,6 @@
 import jupyterUpdate, { jupyterClear } from './jupyter.js'
 
-export default function JupyterView(sim, changes) {
+export default function ViewJupyter(sim, changes) {
     const self = this
 
     sim.attach(self)
