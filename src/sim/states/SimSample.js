@@ -1,7 +1,7 @@
 /** @module */
 
 import CandidateDistributionSampler from '../../election/CandidateDistributionSampler.js'
-import StatePublisher from './statePublisher.js'
+import StatePublisher from './StatePublisher.js'
 
 /**
  * Simulate many sample elections with

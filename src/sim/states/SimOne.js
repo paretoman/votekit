@@ -1,6 +1,6 @@
 /** @module */
 
-import StatePublisher from './statePublisher.js'
+import StatePublisher from './StatePublisher.js'
 
 /**
  * Simulate one election with

@@ -6,10 +6,7 @@ import ViewBase from './ViewBase.js'
 import addAllocation from '../../viz/addAllocation.js'
 
 /**
- * Simulate one election with
- *   candidates in defined positions, and
- *   voters in a distribution that will be summed over.
- * Create a geographical map with variations of voter center.
+ * Draw entities: voters, candidates, test voters.
  * @param {Screen} screen
  * @param {Menu} menu
  * @param {Changes} changes
