@@ -8,15 +8,15 @@ import VoterRender2D from './VoterRender2D.js'
  * Show votes
  * @param {VoterGeo} voterGeo
  * @param {VoterRendererList} voterRendererList
- * @param {CandidateViewList} candidateViewList
+ * @param {CandidateList} candidateList
  * @param {Screen} screen
  * @param {Sim} sim
  * @constructor
  */
-export default function VizGeo(voterGeo, voterRendererList, candidateViewList, screen, sim) {
+export default function VizGeo(voterGeo, voterRendererList, candidateList, screen, sim) {
     const self = this
 
-    const geoMaps = new GeoMaps(voterGeo, candidateViewList, screen, sim)
+    const geoMaps = new GeoMaps(voterGeo, candidateList, screen, sim)
     let flagNoRender = false
 
     const { dimensions } = sim.election
