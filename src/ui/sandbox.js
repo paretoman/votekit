@@ -1,3 +1,4 @@
+/* eslint-disable no-new */
 /** @module */
 
 import Changes from '../sim/Changes.js'
@@ -17,6 +18,7 @@ import View from '../sim/View.js'
 import menuSim from '../sim/menuSim.js'
 import Entities from '../sim/Entities.js'
 import JupyterView from '../environments/JupyterView.js'
+import ViewVizBudget from '../sim/states/ViewVizBudget.js'
 
 /**
  * Set up a user interface to run a simulation.
@@ -65,6 +67,7 @@ export default function sandbox(config, comMessenger, sandboxURL) {
     menuSim(sim, menu, layout)
     const view = new View(entities, sim, screen, menu, changes)
     new JupyterView(sim, changes)
+    new ViewVizBudget(screen, menu, changes, sim)
 
     // Default Entities //
     entities.candidateList.addCandidate({ x: 50, y: 100 }, { x: 50 }, '#e05020', true)

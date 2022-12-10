@@ -6,8 +6,6 @@ import VizGeo from '../../viz/VizGeo.js'
 import VizOneVoronoi from '../../viz/VizOneVoronoi.js'
 import VizOneVoronoiRanking from '../../viz/VizOneVoronoiRanking.js'
 import VizOneGrid from '../../viz/VizOneGrid.js'
-import VizExplanationBudgetMES from '../../viz/VizExplanationBudgetMES.js'
-import BaseExplanation from '../../viz/BaseExplanation.js'
 import ViewBase from './ViewBase.js'
 
 /**
@@ -44,7 +42,6 @@ export default function ViewOne(entities, screen, menu, changes, sim, view) {
 
     // Strategies //
     let vizOne
-    let vizExplanation
     function enterStrategy() {
         const { casterName } = sim.election.socialChoice
         const VizOneVoronoiGeneral = (casterName === 'ranking' || casterName === 'pairwise') ? VizOneVoronoiRanking : VizOneVoronoi
@@ -54,12 +51,6 @@ export default function ViewOne(entities, screen, menu, changes, sim, view) {
         } else {
             vizOne = new VizNoGeo(voterViewList, candidateViewList, screen, sim)
         }
-
-        const { electionMethod } = sim.election.socialChoice
-        const noGeo = !sim.geo
-        const { dimensions } = sim.election
-        const VizExplanation = (electionMethod === 'methodOfEqualShares' && noGeo && dimensions === 1) ? VizExplanationBudgetMES : BaseExplanation
-        vizExplanation = new VizExplanation(screen)
     }
     enterStrategy()
 
@@ -72,7 +63,6 @@ export default function ViewOne(entities, screen, menu, changes, sim, view) {
 
         candidateList.canButton.show()
         vizOne.enter()
-        vizExplanation.enter()
         voterViewList.updateViewXY()
         candidateViewList.updateViewXY()
         view.voterTest.updateViewXY()
@@ -80,7 +70,6 @@ export default function ViewOne(entities, screen, menu, changes, sim, view) {
 
     self.exit = () => {
         vizOne.exit()
-        vizExplanation.exit()
         candidateList.canButton.hide()
         view.voterTest.setE(0)
     }
@@ -95,7 +84,6 @@ export default function ViewOne(entities, screen, menu, changes, sim, view) {
         }
 
         vizOne.update(electionResults)
-        vizExplanation.update(electionResults)
         self.testVoteView()
 
         screen.clear()
@@ -111,7 +99,6 @@ export default function ViewOne(entities, screen, menu, changes, sim, view) {
 
     self.render = () => {
         vizOne.render()
-        vizExplanation.render()
     }
     self.renderForeground = () => {
         voterViewList.renderForeground()

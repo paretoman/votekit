@@ -1,5 +1,7 @@
 /** @module */
 
+import StatePublisher from './statePublisher.js'
+
 /**
  * Simulate one election with
  *   candidates in defined positions, and
@@ -18,7 +20,7 @@
 export default function SimOne(entities, menu, changes, election, electionOne, electionGeo, voterGeo, sim) {
     const self = this
 
-    // Entities //
+    self.pub = new StatePublisher()
 
     changes.add(['districts'])
 
@@ -28,8 +30,10 @@ export default function SimOne(entities, menu, changes, election, electionOne, e
     // Main State Machine Functions //
     self.enter = () => {
         electionStrategy = (sim.geo) ? electionGeo : electionOne
+        self.pub.enter()
     }
     self.exit = () => {
+        self.pub.exit()
     }
     self.update = () => {
         if (changes.checkNone()) return {}
@@ -38,6 +42,7 @@ export default function SimOne(entities, menu, changes, election, electionOne, e
         const electionResults = electionStrategy
             .runElectionSim(entities.voterShapeList, entities.candidateList, changes)
 
+        self.pub.update(electionResults)
         return electionResults
     }
 }
