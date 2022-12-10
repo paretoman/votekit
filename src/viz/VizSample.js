@@ -9,7 +9,7 @@ import VoterRender2D from './VoterRender2D.js'
  * @param {screen} screen - draw to the screen
  * @constructor
  */
-export default function VizSample(voterRendererList, candidateDnViewList, screen, changes, sim) {
+export default function VizSample(voterRendererList, canDnRendererList, screen, changes, sim) {
     const self = this
 
     // Candidates //
@@ -25,7 +25,7 @@ export default function VizSample(voterRendererList, candidateDnViewList, screen
     // voter renderer factory //
     const VoterRenderer = (dimensions === 1) ? VoterRender1D : VoterRender2D
     voterRendererList.setRenderer((voterShape) => new VoterRenderer(voterShape, screen))
-    candidateDnViewList.setRenderer((voterShape) => new VoterRenderer(voterShape, screen))
+    canDnRendererList.setRenderer((voterShape) => new VoterRenderer(voterShape, screen))
 
     self.update = function (addResult) {
         if (changes.checkAny()) {
@@ -33,12 +33,11 @@ export default function VizSample(voterRendererList, candidateDnViewList, screen
         }
 
         const {
-            pointsChanged, newPoints, points, partyWinFraction,
+            pointsChanged, newPoints, points,
         } = addResult
 
         if (pointsChanged) {
             self.updatePoints(newPoints, points)
-            candidateDnViewList.setCandidateDnWins(partyWinFraction)
         }
     }
 
@@ -55,7 +54,7 @@ export default function VizSample(voterRendererList, candidateDnViewList, screen
         self.renderCans()
 
         voterRendererList.render()
-        candidateDnViewList.render()
+        canDnRendererList.render()
     }
 
     self.renderCans = function () {

@@ -13,7 +13,7 @@ import VoterRender2D from './VoterRender2D.js'
  * @param {screen} screen - draw to the screen
  * @constructor
  */
-export default function VizSampleDensity2D(voterRendererList, candidateDnViewList, screen, changes, sim) {
+export default function VizSampleDensity2D(voterRendererList, canDnRendererList, screen, changes, sim) {
     const self = this
 
     // Candidates //
@@ -23,14 +23,13 @@ export default function VizSampleDensity2D(voterRendererList, candidateDnViewLis
     // voter renderer factory //
     const VoterRenderer = (dimensions === 1) ? VoterRender1D : VoterRender2D
     voterRendererList.setRenderer((voterShape) => new VoterRenderer(voterShape, screen))
-    candidateDnViewList.setRenderer((voterShape) => new VoterRenderer(voterShape, screen))
+    canDnRendererList.setRenderer((voterShape) => new VoterRenderer(voterShape, screen))
 
     self.update = function (addResult) {
-        const { pointsChanged, points, partyWinFraction } = addResult
+        const { pointsChanged, points } = addResult
 
         if (pointsChanged) {
             self.updatePoints(points)
-            candidateDnViewList.setCandidateDnWins(partyWinFraction)
         }
     }
 
@@ -38,7 +37,7 @@ export default function VizSampleDensity2D(voterRendererList, candidateDnViewLis
         self.renderCans()
 
         voterRendererList.render()
-        candidateDnViewList.render()
+        canDnRendererList.render()
     }
 
     const nThresholds = 20

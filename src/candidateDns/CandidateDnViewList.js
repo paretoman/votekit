@@ -42,8 +42,8 @@ export default function CandidateDnViewList(view, candidateDnList, screen, elect
 
     // get the underlying entities of the above
     self.getCandidateDistributions = () => {
-        const simCanDnsEx = self.getCanDnViews()
-        return simCanDnsEx.map((canDnView) => canDnView.canDn)
+        const canDnViewsEx = self.getCanDnViews()
+        return canDnViewsEx.map((canDnView) => canDnView.canDn)
     }
     self.getCandidateDistributionsAll = () => canDnViews.map((canDnView) => canDnView.canDn)
 

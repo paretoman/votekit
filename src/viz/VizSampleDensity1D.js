@@ -10,7 +10,7 @@ import VoterRender2D from './VoterRender2D.js'
  * @constructor
  */
 // eslint-disable-next-line max-len
-export default function VizSampleDensity1D(voterRendererList, candidateDnViewList, screen, changes, sim) {
+export default function VizSampleDensity1D(voterRendererList, canDnRendererList, screen, changes, sim) {
     const self = this
 
     // adjustable visual parameters
@@ -26,18 +26,17 @@ export default function VizSampleDensity1D(voterRendererList, candidateDnViewLis
     // voter renderer factory //
     const VoterRenderer = (dimensions === 1) ? VoterRender1D : VoterRender2D
     voterRendererList.setRenderer((voterShape) => new VoterRenderer(voterShape, screen))
-    candidateDnViewList.setRenderer((voterShape) => new VoterRenderer(voterShape, screen))
+    canDnRendererList.setRenderer((voterShape) => new VoterRenderer(voterShape, screen))
 
     self.update = function (addResult) {
         if (changes.checkAny()) {
             start()
         }
 
-        const { pointsChanged, points, partyWinFraction } = addResult
+        const { pointsChanged, points } = addResult
 
         if (pointsChanged) {
             updatePoints(points)
-            candidateDnViewList.setCandidateDnWins(partyWinFraction)
         }
     }
 
@@ -68,7 +67,7 @@ export default function VizSampleDensity1D(voterRendererList, candidateDnViewLis
         renderCans()
 
         voterRendererList.render()
-        candidateDnViewList.render()
+        canDnRendererList.render()
     }
 
     function renderCans() {
