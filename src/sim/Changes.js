@@ -22,6 +22,7 @@ export default function Changes() {
         return n > 0
     }
     self.checkNone = () => (changes.length === 0)
+    self.checkAny = () => (changes.length !== 0)
     self.clear = () => {
         changes.splice(0, changes.length)
     }

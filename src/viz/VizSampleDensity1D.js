@@ -29,7 +29,7 @@ export default function VizSampleDensity1D(voterViewList, candidateDnViewList, s
     candidateDnViewList.setRenderer((voterShape) => new VoterRenderer(voterShape, screen))
 
     self.update = function (addResult) {
-        if (changes.checkNone() === false) {
+        if (changes.checkAny()) {
             start()
         }
 

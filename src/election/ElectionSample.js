@@ -21,7 +21,7 @@ export default function ElectionSample(election) {
     let partyWins
 
     self.update = function (voterShapeList, candidateDnList, cDnSampler, changes, dimensions) {
-        if (changes.checkNone() === false) {
+        if (changes.checkAny()) {
             self.startSim()
         }
 

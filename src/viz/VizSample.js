@@ -28,7 +28,7 @@ export default function VizSample(voterViewList, candidateDnViewList, screen, ch
     candidateDnViewList.setRenderer((voterShape) => new VoterRenderer(voterShape, screen))
 
     self.update = function (addResult) {
-        if (changes.checkNone() === false) {
+        if (changes.checkAny()) {
             self.start()
         }
 

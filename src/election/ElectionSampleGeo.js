@@ -20,7 +20,7 @@ export default function ElectionSampleGeo(election, electionGeo, voterGeo) {
     let points = []
 
     self.update = function (voterShapeList, candidateDnList, cDnSampler, changes, dimensions) {
-        if (changes.checkNone() === false) {
+        if (changes.checkAny()) {
             self.startSim()
         }
 
