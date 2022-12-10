@@ -88,6 +88,12 @@ export default function ViewOne(entities, screen, menu, changes, sim, view) {
     self.update = (electionResults) => {
         if (changes.checkNone()) return
 
+        if (changes.check(['draggables'])) {
+            // this will trigger when undo moves entities
+            voterViewList.updateViewXY()
+            candidateViewList.updateViewXY()
+        }
+
         vizOne.update(electionResults)
         vizExplanation.update(electionResults)
         self.testVoteView()

@@ -64,6 +64,12 @@ export default function ViewSample(entities, screen, menu, changes, sim, view) {
         // The election handles any changes.
         // The electionResults communicates how to visualize the election.
 
+        if (changes.check(['draggables'])) {
+            // this will trigger when undo moves entities
+            voterViewList.updateViewXY()
+            candidateDnViewList.updateViewXY()
+        }
+
         vizSample.update(addResult)
 
         const { pointsChanged } = addResult
