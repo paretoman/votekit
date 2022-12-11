@@ -8,7 +8,7 @@ import CandidateDnView from './CandidateDnView.js'
  * It also checks if that member exists. Alternatively, it was deleted.
  * @constructor
  */
-export default function CandidateDnViewList(viewGhosts, candidateDnList, screen, election) {
+export default function CandidateDnViewList(viewSettings, candidateDnList, screen, election) {
     const self = this
 
     const canDnViews = []
@@ -28,7 +28,7 @@ export default function CandidateDnViewList(viewGhosts, candidateDnList, screen,
     // Data Setters and Getters //
 
     self.newCandidateDn = function (candidateDn) {
-        const canDnView = new CandidateDnView(candidateDn, screen, election, 21, 21, viewGhosts)
+        const canDnView = new CandidateDnView(candidateDn, screen, election, 21, 21, viewSettings)
         canDnViews.push(canDnView)
         canDnView.graphic.setRenderer(self.rendererMaker)
         updateObservers(canDnView)
@@ -75,7 +75,7 @@ export default function CandidateDnViewList(viewGhosts, candidateDnList, screen,
         canDnViews.forEach((canDnView) => canDnView.graphic.setRenderer(rendererMaker))
     }
     self.renderForeground = () => {
-        if (viewGhosts.showGhosts) {
+        if (viewSettings.showGhosts) {
             self.renderForegroundAll()
         } else {
             self.renderForegroundExisting()

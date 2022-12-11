@@ -15,15 +15,15 @@ import CandidateDnRendererList from '../../candidateDns/CandidateDnRendererList.
  * @param {Menu} menu
  * @param {Changes} changes
  * @param {Sim} sim
- * @param {ViewGhosts} viewGhosts
+ * @param {ViewSettings} viewSettings
  * @constructor
  */
-export default function ViewVizSample(entities, screen, menu, changes, sim, viewGhosts) {
+export default function ViewVizSample(entities, screen, menu, changes, sim, viewSettings) {
     const self = this
 
     sim.sims.sample.pub.attach(self)
 
-    ViewBase.call(self, screen, changes, viewGhosts)
+    ViewBase.call(self, screen, changes, viewSettings)
 
     // Entities //
     const { candidateDnList, voterShapeList } = entities

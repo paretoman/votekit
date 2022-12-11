@@ -11,9 +11,9 @@ import VoterGraphic from '../vizEntities/VoterGraphic.js'
  * @param {VoterShape} voterShape - a voter component that VoterView builds upon.
  * @constructor
  */
-export default function VoterView(voterShape, screen, election, viewGhosts) {
+export default function VoterView(voterShape, screen, election, viewSettings) {
     const self = this
     self.voterShape = voterShape
 
-    self.graphic = new VoterGraphic(voterShape, screen, election, viewGhosts)
+    self.graphic = new VoterGraphic(voterShape, screen, election, viewSettings)
 }

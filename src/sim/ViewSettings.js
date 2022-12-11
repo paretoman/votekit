@@ -3,7 +3,7 @@
 /**
  * @param {Changes} changes
  */
-export default function ViewGhosts(changes) {
+export default function ViewSettings(changes) {
     const self = this
 
     self.setShowNonExistingEntities = (a) => {

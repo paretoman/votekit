@@ -12,25 +12,26 @@ import VoterTest from '../../voters/VoterTest.js'
  * @param {Menu} menu
  * @param {Changes} changes
  * @param {Sim} sim
- * @param {ViewGhosts} viewGhosts
+ * @param {ViewSettings} viewSettings
  * @constructor
  */
-export default function ViewOne(entities, screen, menu, changes, sim, viewGhosts) {
+export default function ViewOne(entities, screen, menu, changes, sim, viewSettings) {
     const self = this
 
     sim.sims.one.pub.attach(self)
 
-    ViewBase.call(self, screen, changes, viewGhosts)
+    ViewBase.call(self, screen, changes, viewSettings)
 
     const { candidateList, voterShapeList } = entities
+    const { election } = sim
 
     // Entities //
-    const candidateViewList = new CandidateViewList(viewGhosts, candidateList, screen, sim.election)
-    const voterViewList = new VoterViewList(viewGhosts, voterShapeList, screen, sim.election)
+    const candidateViewList = new CandidateViewList(viewSettings, candidateList, screen, election)
+    const voterViewList = new VoterViewList(viewSettings, voterShapeList, screen, election)
     candidateViewList.attachNewG(self.dragm)
     voterViewList.attachNewG(self.dragm)
 
-    self.voterTest = new VoterTest(screen, sim, self, viewGhosts)
+    self.voterTest = new VoterTest(screen, sim, self, viewSettings)
 
     // Main State Machine Functions //
 
@@ -80,7 +81,7 @@ export default function ViewOne(entities, screen, menu, changes, sim, viewGhosts
         self.voterTest.start(p)
     }
     self.testVoteView = () => {
-        const vote = sim.election.testVoteE(self.voterTest, candidateList)
+        const vote = election.testVoteE(self.voterTest, candidateList)
         self.voterTest.update(vote, candidateList)
         return vote
     }

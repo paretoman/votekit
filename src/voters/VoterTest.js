@@ -4,7 +4,7 @@ import tooltipForTestVoter from '../tooltips/tooltipForTestVoter.js'
 import colorBlender, { rgbToString } from '../viz/colorBlender.js'
 import EntityGraphic from '../vizEntities/EntityGraphic.js'
 
-export default function VoterTest(screen, sim, viewOne, viewGhosts) {
+export default function VoterTest(screen, sim, viewOne, viewSettings) {
     const self = this
 
     // Position
@@ -96,7 +96,7 @@ export default function VoterTest(screen, sim, viewOne, viewGhosts) {
 
     self.renderForeground = () => {
         // handle
-        if (self.exists || viewGhosts.showGhosts) {
+        if (self.exists || viewSettings.showGhosts) {
             circle.render()
         }
     }

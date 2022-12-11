@@ -4,7 +4,7 @@ import EntityGraphic from './EntityGraphic.js'
 import SquareGraphic from './SquareGraphic.js'
 
 // eslint-disable-next-line max-len
-export default function CandidateGraphic(candidate, screen, election, wHandle, hHandle, viewGhosts) {
+export default function CandidateGraphic(candidate, screen, election, wHandle, hHandle, viewSettings) {
     const self = this
 
     const square = new SquareGraphic(self, candidate, wHandle, hHandle, screen)
@@ -58,6 +58,6 @@ export default function CandidateGraphic(candidate, screen, election, wHandle, h
 
     // Click Handler
     self.click = () => {
-        tooltipForEntity(self, candidate, screen, election, viewGhosts)
+        tooltipForEntity(self, candidate, screen, election, viewSettings)
     }
 }

@@ -9,7 +9,7 @@ import CandidateView from './CandidateView.js'
  * It also checks if that member exists. Alternatively, it was deleted.
  * @constructor
  */
-export default function CandidateViewList(viewGhosts, candidateList, screen, election) {
+export default function CandidateViewList(viewSettings, candidateList, screen, election) {
     const self = this
 
     const canViews = []
@@ -27,7 +27,7 @@ export default function CandidateViewList(viewGhosts, candidateList, screen, ele
 
     // Data Setters and Getters //
     self.newCandidate = function (candidate) {
-        const canView = new CandidateView(candidate, screen, election, 21, 21, viewGhosts)
+        const canView = new CandidateView(candidate, screen, election, 21, 21, viewSettings)
         canViews.push(canView)
         updateObservers(canView)
     }
@@ -66,7 +66,7 @@ export default function CandidateViewList(viewGhosts, candidateList, screen, ele
     // Render //
 
     self.renderForeground = () => {
-        if (viewGhosts.showGhosts) {
+        if (viewSettings.showGhosts) {
             self.renderForegroundAll()
         } else {
             self.renderForegroundExisting()

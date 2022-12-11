@@ -10,7 +10,7 @@ import { clamp, copyObjectShallow, minIndex } from '../utilities/jsHelpers.js'
  * @param {Changes} changes
  * @constructor
  */
-export default function ClickDrag(dragm, viewEntities, screen, changes, viewGhosts) {
+export default function ClickDrag(dragm, viewEntities, screen, changes, viewSettings) {
     const self = this
 
     // private variables
@@ -35,7 +35,7 @@ export default function ClickDrag(dragm, viewEntities, screen, changes, viewGhos
         const hitList = []
         for (let i = 0; i < nd; i++) {
             const d = draggables[i]
-            if ((d.o.exists || viewGhosts.showGhosts) && hitTest(d, mouse, extra)) {
+            if ((d.o.exists || viewSettings.showGhosts) && hitTest(d, mouse, extra)) {
                 hitList.push(i)
             }
         }
@@ -83,7 +83,7 @@ export default function ClickDrag(dragm, viewEntities, screen, changes, viewGhos
             const nd = draggables.length
             for (let i = 0; i < nd; i++) {
                 const d = draggables[i]
-                if ((viewGhosts.showGhosts || d.o.exists) && hitTest(d, mouse, 0)) {
+                if ((viewSettings.showGhosts || d.o.exists) && hitTest(d, mouse, 0)) {
                     grabCanvas.dataset.cursor = 'grab'
                     return
                 }

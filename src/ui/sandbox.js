@@ -14,7 +14,7 @@ import addLoadConfigText from '../command/loadConfigText.js'
 import addSaveConfigToLink from '../command/addSaveConfigToLink.js'
 import * as TWEEN from '../lib/snowpack/build/snowpack/pkg/@tweenjs/tweenjs.js'
 import addDarkModeSwitch from './addDarkModeSwitch.js'
-import ViewGhosts from '../sim/ViewGhosts.js'
+import ViewSettings from '../sim/ViewSettings.js'
 import menuSim from '../sim/menuSim.js'
 import Entities from '../sim/Entities.js'
 import ViewJupyter from '../environments/ViewJupyter.js'
@@ -70,13 +70,13 @@ export default function sandbox(config, comMessenger, sandboxURL) {
     const entities = new Entities(menu, changes, commander, layout)
     const sim = new Sim(entities, menu, changes)
     menuSim(sim, menu, layout)
-    const viewGhosts = new ViewGhosts(changes)
-    new ViewOne(entities, screen, menu, changes, sim, viewGhosts)
-    new ViewSample(entities, screen, menu, changes, sim, viewGhosts)
+    const viewSettings = new ViewSettings(changes)
+    new ViewOne(entities, screen, menu, changes, sim, viewSettings)
+    new ViewSample(entities, screen, menu, changes, sim, viewSettings)
     new ViewJupyter(sim, changes)
     new ViewVizBudget(screen, menu, changes, sim)
-    new ViewVizOne(entities, screen, menu, changes, sim, viewGhosts)
-    new ViewVizSample(entities, screen, menu, changes, sim, viewGhosts)
+    new ViewVizOne(entities, screen, menu, changes, sim, viewSettings)
+    new ViewVizSample(entities, screen, menu, changes, sim, viewSettings)
     new ViewGeoMaps(entities, screen, sim)
 
     // Default Entities //
