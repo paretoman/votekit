@@ -74,9 +74,9 @@ export default function sandbox(config, comMessenger, sandboxURL) {
     new ViewOne(entities, screen, menu, changes, sim, viewSettings)
     new ViewSample(entities, screen, menu, changes, sim, viewSettings)
     new ViewJupyter(sim, changes)
-    new ViewVizBudget(screen, menu, changes, sim)
     new ViewVizOne(entities, screen, menu, changes, sim, viewSettings)
     new ViewVizSample(entities, screen, menu, changes, sim, viewSettings)
+    new ViewVizBudget(screen, menu, changes, sim)
     new ViewGeoMaps(entities, screen, sim)
 
     // Default Entities //

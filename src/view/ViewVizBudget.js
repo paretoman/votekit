@@ -18,6 +18,7 @@ export default function ViewVizBudget(screen, menu, changes, sim) {
     enterStrategy()
 
     self.enter = () => {
+        enterStrategy()
         vizExplanation.enter()
     }
 
@@ -27,6 +28,7 @@ export default function ViewVizBudget(screen, menu, changes, sim) {
     self.update = (electionResults) => {
         if (changes.checkNone()) return
         vizExplanation.update(electionResults)
+        self.render()
     }
 
     self.render = () => {
