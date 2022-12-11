@@ -1,5 +1,5 @@
-import BaseExplanation from '../../viz/BaseExplanation.js'
-import VizExplanationBudgetMES from '../../viz/VizExplanationBudgetMES.js'
+import BaseExplanation from '../viz/BaseExplanation.js'
+import VizExplanationBudgetMES from '../viz/VizExplanationBudgetMES.js'
 
 export default function ViewVizBudget(screen, menu, changes, sim) {
     const self = this

@@ -1,7 +1,7 @@
 /** @module */
 
-import CandidateDnViewList from '../../candidateDns/CandidateDnViewList.js'
-import VoterViewList from '../../voters/VoterViewList.js'
+import CandidateDnViewList from '../candidateDns/CandidateDnViewList.js'
+import VoterViewList from '../voters/VoterViewList.js'
 import ViewBase from './ViewBase.js'
 
 /**

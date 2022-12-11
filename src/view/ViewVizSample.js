@@ -1,11 +1,11 @@
 /** @module */
 
-import VizSample from '../../viz/VizSample.js'
-import VizSampleDensity1D from '../../viz/VizSampleDensity1D.js'
-import VizSampleDensity2D from '../../viz/VizSampleDensity2D.js'
+import VizSample from '../viz/VizSample.js'
+import VizSampleDensity1D from '../viz/VizSampleDensity1D.js'
+import VizSampleDensity2D from '../viz/VizSampleDensity2D.js'
 import ViewBase from './ViewBase.js'
-import VoterRendererList from '../../voters/VoterRendererList.js'
-import CandidateDnRendererList from '../../candidateDns/CandidateDnRendererList.js'
+import VoterRendererList from '../voters/VoterRendererList.js'
+import CandidateDnRendererList from '../candidateDns/CandidateDnRendererList.js'
 
 /**
  * Simulate many sample elections with

@@ -1,10 +1,10 @@
 /** @module */
 
-import CandidateViewList from '../../candidates/CandidateViewList.js'
-import VoterViewList from '../../voters/VoterViewList.js'
+import CandidateViewList from '../candidates/CandidateViewList.js'
+import VoterViewList from '../voters/VoterViewList.js'
 import ViewBase from './ViewBase.js'
-import addAllocation from '../../viz/addAllocation.js'
-import VoterTest from '../../voters/VoterTest.js'
+import addAllocation from '../viz/addAllocation.js'
+import VoterTest from '../voters/VoterTest.js'
 
 /**
  * Draw entities: voters, candidates, test voters.

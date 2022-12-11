@@ -1,6 +1,6 @@
 /** @module */
 
-import GeoMaps from '../../viz/GeoMaps.js'
+import GeoMaps from '../viz/GeoMaps.js'
 
 /**
  * Show votes

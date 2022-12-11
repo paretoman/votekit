@@ -1,11 +1,11 @@
 /** @module */
 
-import VizGeo from '../../viz/VizGeo.js'
-import VizOneVoronoi from '../../viz/VizOneVoronoi.js'
-import VizOneVoronoiRanking from '../../viz/VizOneVoronoiRanking.js'
-import VizOneGrid from '../../viz/VizOneGrid.js'
+import VizGeo from '../viz/VizGeo.js'
+import VizOneVoronoi from '../viz/VizOneVoronoi.js'
+import VizOneVoronoiRanking from '../viz/VizOneVoronoiRanking.js'
+import VizOneGrid from '../viz/VizOneGrid.js'
 import ViewBase from './ViewBase.js'
-import VoterRendererList from '../../voters/VoterRendererList.js'
+import VoterRendererList from '../voters/VoterRendererList.js'
 
 /**
  * Simulate one election with
