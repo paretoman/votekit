@@ -3,7 +3,8 @@ import { drawStrokedColor, textPercent } from '../utilities/graphicsUtilities.js
 import EntityGraphic from './EntityGraphic.js'
 import SquareGraphic from './SquareGraphic.js'
 
-export default function CandidateDnGraphic(candidateDn, screen, election, wHandle, hHandle, view) {
+// eslint-disable-next-line max-len
+export default function CandidateDnGraphic(candidateDn, screen, election, wHandle, hHandle, viewGhosts) {
     const self = this
 
     const square = new SquareGraphic(self, candidateDn, wHandle, hHandle, screen)
@@ -48,6 +49,6 @@ export default function CandidateDnGraphic(candidateDn, screen, election, wHandl
 
     // Click Handler
     self.click = () => {
-        tooltipForEntity(self, candidateDn, screen, election, view)
+        tooltipForEntity(self, candidateDn, screen, election, viewGhosts)
     }
 }

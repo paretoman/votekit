@@ -1,6 +1,6 @@
 import tooltipBox from './tooltipBox.js'
 
-export default function tooltipForEntity(graphic, entity, screen, election, view) {
+export default function tooltipForEntity(graphic, entity, screen, election, viewGhosts) {
     // make a html box appear
 
     const tbox = tooltipBox(graphic, screen)
@@ -77,8 +77,8 @@ export default function tooltipForEntity(graphic, entity, screen, election, view
         'checkbox',
         'Show Ghosts',
         'Show Ghosts: ',
-        (val) => view.setShowNonExistingEntities(val),
-        view.showGhosts,
+        (val) => viewGhosts.setShowNonExistingEntities(val),
+        viewGhosts.showGhosts,
     )
     box.appendChild(items.showGhosts.div)
 

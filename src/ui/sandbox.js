@@ -70,13 +70,13 @@ export default function sandbox(config, comMessenger, sandboxURL) {
     const entities = new Entities(menu, changes, commander, layout)
     const sim = new Sim(entities, menu, changes)
     menuSim(sim, menu, layout)
-    const view = new ViewGhosts(changes)
-    new ViewOne(entities, screen, menu, changes, sim, view)
-    new ViewSample(entities, screen, menu, changes, sim, view)
+    const viewGhosts = new ViewGhosts(changes)
+    new ViewOne(entities, screen, menu, changes, sim, viewGhosts)
+    new ViewSample(entities, screen, menu, changes, sim, viewGhosts)
     new ViewJupyter(sim, changes)
     new ViewVizBudget(screen, menu, changes, sim)
-    new ViewVizOne(entities, screen, menu, changes, sim, view)
-    new ViewVizSample(entities, screen, menu, changes, sim, view)
+    new ViewVizOne(entities, screen, menu, changes, sim, viewGhosts)
+    new ViewVizSample(entities, screen, menu, changes, sim, viewGhosts)
     new ViewGeoMaps(entities, screen, sim)
 
     // Default Entities //

@@ -18,15 +18,15 @@ import VoterRendererList from '../../voters/VoterRendererList.js'
  * @param {Menu} menu
  * @param {Changes} changes
  * @param {Sim} sim
- * @param {View} view
+ * @param {ViewGhosts} viewGhosts
  * @constructor
  */
-export default function ViewVizOne(entities, screen, menu, changes, sim, view) {
+export default function ViewVizOne(entities, screen, menu, changes, sim, viewGhosts) {
     const self = this
 
     sim.sims.one.pub.attach(self)
 
-    ViewBase.call(self, screen, changes, view)
+    ViewBase.call(self, screen, changes, viewGhosts)
 
     const { candidateList, voterShapeList } = entities
 

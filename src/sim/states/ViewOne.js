@@ -12,25 +12,25 @@ import VoterTest from '../../voters/VoterTest.js'
  * @param {Menu} menu
  * @param {Changes} changes
  * @param {Sim} sim
- * @param {View} view
+ * @param {ViewGhosts} viewGhosts
  * @constructor
  */
-export default function ViewOne(entities, screen, menu, changes, sim, view) {
+export default function ViewOne(entities, screen, menu, changes, sim, viewGhosts) {
     const self = this
 
     sim.sims.one.pub.attach(self)
 
-    ViewBase.call(self, screen, changes, view)
+    ViewBase.call(self, screen, changes, viewGhosts)
 
     const { candidateList, voterShapeList } = entities
 
     // Entities //
-    const candidateViewList = new CandidateViewList(view, candidateList, screen, sim.election)
-    const voterViewList = new VoterViewList(view, voterShapeList, screen, sim.election)
+    const candidateViewList = new CandidateViewList(viewGhosts, candidateList, screen, sim.election)
+    const voterViewList = new VoterViewList(viewGhosts, voterShapeList, screen, sim.election)
     candidateViewList.attachNewG(self.dragm)
     voterViewList.attachNewG(self.dragm)
 
-    self.voterTest = new VoterTest(screen, sim, self, view)
+    self.voterTest = new VoterTest(screen, sim, self, viewGhosts)
 
     // Main State Machine Functions //
 

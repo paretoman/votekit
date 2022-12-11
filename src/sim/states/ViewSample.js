@@ -12,21 +12,22 @@ import ViewBase from './ViewBase.js'
  * @param {Menu} menu
  * @param {Changes} changes
  * @param {Sim} sim
- * @param {View} view
+ * @param {ViewGhosts} viewGhosts
  * @constructor
  */
-export default function ViewSample(entities, screen, menu, changes, sim, view) {
+export default function ViewSample(entities, screen, menu, changes, sim, viewGhosts) {
     const self = this
 
     sim.sims.sample.pub.attach(self)
 
-    ViewBase.call(self, screen, changes, view)
+    ViewBase.call(self, screen, changes, viewGhosts)
 
     // Entities //
     const { candidateDnList, voterShapeList } = entities
 
-    const candidateDnViewList = new CandidateDnViewList(view, candidateDnList, screen, sim.election)
-    const voterViewList = new VoterViewList(view, voterShapeList, screen, sim.election)
+    // eslint-disable-next-line max-len
+    const candidateDnViewList = new CandidateDnViewList(viewGhosts, candidateDnList, screen, sim.election)
+    const voterViewList = new VoterViewList(viewGhosts, voterShapeList, screen, sim.election)
 
     candidateDnViewList.attachNewG(self.dragm)
     voterViewList.attachNewG(self.dragm)

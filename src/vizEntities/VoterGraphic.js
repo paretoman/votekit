@@ -2,7 +2,7 @@ import tooltipForEntity from '../tooltips/tooltipForEntity.js'
 import CircleGraphic from './CircleGraphic.js'
 import EntityGraphic from './EntityGraphic.js'
 
-export default function VoterGraphic(voterShape, screen, election, view) {
+export default function VoterGraphic(voterShape, screen, election, viewGhosts) {
     const self = this
 
     const circle = new CircleGraphic(self, voterShape, 13, screen)
@@ -21,6 +21,6 @@ export default function VoterGraphic(voterShape, screen, election, view) {
     // Click Handler
 
     self.click = () => {
-        tooltipForEntity(self, voterShape, screen, election, view)
+        tooltipForEntity(self, voterShape, screen, election, viewGhosts)
     }
 }
