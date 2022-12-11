@@ -10,7 +10,7 @@ import { clamp, copyObjectShallow, minIndex } from '../utilities/jsHelpers.js'
  * @param {Changes} changes
  * @constructor
  */
-export default function ClickDrag(dragm, screen, changes, view) {
+export default function ClickDrag(dragm, viewEntities, screen, changes, view) {
     const self = this
 
     // private variables
@@ -197,14 +197,8 @@ export default function ClickDrag(dragm, screen, changes, view) {
                 // We are not dragging anything, and we clicked,
                 // and we're inside the screen because this could be a click,
                 // so let's do the click action for blank space.
-                clickEmpty(startPos)
+                viewEntities.clickEmpty(startPos)
             }
         }
-    }
-
-    // Test Point
-
-    function clickEmpty(p) {
-        view.voterTest.start(p)
     }
 }

@@ -63,6 +63,7 @@ export default function ViewSample(entities, screen, menu, changes, sim, view) {
         }
     }
 
+    self.clickEmpty = () => { }
     self.testVoteView = () => null
 
     self.renderForeground = () => {

@@ -14,7 +14,7 @@ import addLoadConfigText from '../command/loadConfigText.js'
 import addSaveConfigToLink from '../command/addSaveConfigToLink.js'
 import * as TWEEN from '../lib/snowpack/build/snowpack/pkg/@tweenjs/tweenjs.js'
 import addDarkModeSwitch from './addDarkModeSwitch.js'
-import View from '../sim/View.js'
+import ViewGhosts from '../sim/ViewGhosts.js'
 import menuSim from '../sim/menuSim.js'
 import Entities from '../sim/Entities.js'
 import ViewJupyter from '../environments/ViewJupyter.js'
@@ -22,6 +22,8 @@ import ViewVizBudget from '../sim/states/ViewVizBudget.js'
 import ViewVizOne from '../sim/states/ViewVizOne.js'
 import ViewVizSample from '../sim/states/ViewVizSample.js'
 import ViewGeoMaps from '../sim/states/ViewGeoMaps.js'
+import ViewOne from '../sim/states/ViewOne.js'
+import ViewSample from '../sim/states/ViewSample.js'
 
 /**
  * Set up a user interface to run a simulation.
@@ -68,7 +70,9 @@ export default function sandbox(config, comMessenger, sandboxURL) {
     const entities = new Entities(menu, changes, commander, layout)
     const sim = new Sim(entities, menu, changes)
     menuSim(sim, menu, layout)
-    const view = new View(entities, sim, screen, menu, changes)
+    const view = new ViewGhosts(changes)
+    new ViewOne(entities, screen, menu, changes, sim, view)
+    new ViewSample(entities, screen, menu, changes, sim, view)
     new ViewJupyter(sim, changes)
     new ViewVizBudget(screen, menu, changes, sim)
     new ViewVizOne(entities, screen, menu, changes, sim, view)

@@ -4,6 +4,7 @@ import CandidateViewList from '../../candidates/CandidateViewList.js'
 import VoterViewList from '../../voters/VoterViewList.js'
 import ViewBase from './ViewBase.js'
 import addAllocation from '../../viz/addAllocation.js'
+import VoterTest from '../../voters/VoterTest.js'
 
 /**
  * Draw entities: voters, candidates, test voters.
@@ -29,6 +30,8 @@ export default function ViewOne(entities, screen, menu, changes, sim, view) {
     candidateViewList.attachNewG(self.dragm)
     voterViewList.attachNewG(self.dragm)
 
+    self.voterTest = new VoterTest(screen, sim, self, view)
+
     // Main State Machine Functions //
 
     const superEnter = self.enter
@@ -38,13 +41,13 @@ export default function ViewOne(entities, screen, menu, changes, sim, view) {
         candidateList.canButton.show()
         voterViewList.updateViewXY()
         candidateViewList.updateViewXY()
-        view.voterTest.updateViewXY()
+        self.voterTest.updateViewXY()
     }
 
     self.exit = () => {
         candidateViewList.unsetCandidateWins() // clean up fractions
         candidateList.canButton.hide()
-        view.voterTest.setE(0)
+        self.voterTest.setE(0)
     }
 
     self.update = (electionResults) => {
@@ -72,15 +75,19 @@ export default function ViewOne(entities, screen, menu, changes, sim, view) {
         self.testVoteView()
     }
 
+    // Test Point
+    self.clickEmpty = (p) => {
+        self.voterTest.start(p)
+    }
     self.testVoteView = () => {
-        const vote = sim.election.testVoteE(view.voterTest, candidateList)
-        view.voterTest.update(vote, candidateList)
+        const vote = sim.election.testVoteE(self.voterTest, candidateList)
+        self.voterTest.update(vote, candidateList)
         return vote
     }
 
     self.renderForeground = () => {
         voterViewList.renderForeground()
         candidateViewList.renderForeground()
-        view.voterTest.renderForeground()
+        self.voterTest.renderForeground()
     }
 }

@@ -14,7 +14,7 @@ import ClickDrag from '../../ui/ClickDrag.js'
 export default function ViewBase(screen, changes, view) {
     const self = this
     self.dragm = new DraggableManager()
-    self.clickDrag = new ClickDrag(self.dragm, screen, changes, view)
+    self.clickDrag = new ClickDrag(self.dragm, self, screen, changes, view)
     self.enter = () => {
         screen.eventHandlers.set(self.clickDrag.eventHandlers)
     }
