@@ -8,7 +8,8 @@ export default function VoterRender2D(voterShape, screen) {
     const self = this
 
     self.render = function () {
-        const { ctx, darkMode } = screen
+        const { ctx } = screen
+        const { darkMode } = screen.common
         const { x, y, w } = voterShape.shape2
         // circle
         ctx.beginPath()
@@ -20,7 +21,8 @@ export default function VoterRender2D(voterShape, screen) {
         ctx.stroke()
     }
     self.renderAt = function (newX, newY) {
-        const { ctx, darkMode } = screen
+        const { ctx } = screen
+        const { darkMode } = screen.common
         const { w } = voterShape.shape2
         // circle
         ctx.beginPath()
@@ -32,7 +34,8 @@ export default function VoterRender2D(voterShape, screen) {
         ctx.stroke()
     }
     self.renderCenterAt2 = function (newX, newY) {
-        const { ctx, darkMode } = screen
+        const { ctx } = screen
+        const { darkMode } = screen.common
         // circle
         ctx.beginPath()
         ctx.fillStyle = '#555'

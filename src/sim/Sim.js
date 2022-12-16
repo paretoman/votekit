@@ -76,4 +76,6 @@ export default function Sim(entities, menu, changes) {
 
     self.render = () => { sims[self.state].render() }
     self.renderForeground = () => { sims[self.state].renderForeground() }
+    self.clear = () => { sims[self.state].clear() }
+    self.clearForeground = () => { sims[self.state].clearForeground() }
 }

@@ -8,21 +8,19 @@ import C2S from '../lib/snowpack/build/snowpack/pkg/@mithrandirii/canvas2svg.js'
  * @param {Object} draw the drawing function that renders drawings to the context.
  * @param {Layout} layout
  */
-export default function addSVGOutput(screen, draw, layout) {
+export default function addSVGOutput(screen, draw, layout, divName) {
     const w = screen.width
     const h = screen.height
 
     const svgUIDiv = document.createElement('div')
-    layout.newElement('svgUIDiv', svgUIDiv)
+    layout.newElement(divName, svgUIDiv)
 
-    // svg output button
     const button = document.createElement('button')
     button.className = 'button2'
     button.innerText = 'Make SVG'
     button.onclick = makeSVG
     svgUIDiv.appendChild(button)
 
-    // svg download link
     const downloadLink = document.createElement('a')
     downloadLink.innerText = 'Download SVG'
     downloadLink.download = 'vote.svg'
@@ -30,15 +28,6 @@ export default function addSVGOutput(screen, draw, layout) {
     downloadLink.style.margin = '4px'
     svgUIDiv.appendChild(downloadLink)
 
-    // svg download link for maps
-    const mDownloadLink = document.createElement('a')
-    mDownloadLink.innerText = 'Download Map SVG'
-    mDownloadLink.download = 'vote_map.svg'
-    mDownloadLink.hidden = true
-    mDownloadLink.style.margin = '4px'
-    svgUIDiv.appendChild(mDownloadLink)
-
-    // svg hide button
     const svgHideButton = document.createElement('button')
     svgHideButton.className = 'button2'
     svgHideButton.innerText = 'Hide SVG'
@@ -54,23 +43,7 @@ export default function addSVGOutput(screen, draw, layout) {
     svgDiv.hidden = true
     svgUIDiv.appendChild(svgDiv)
 
-    // hidden svg output div for maps
-    const mSvgDiv = document.createElement('div')
-    mSvgDiv.setAttribute('class', 'mSvgDiv')
-    mSvgDiv.style.width = `${w}px`
-    mSvgDiv.style.height = `${Math.round(h / 3)}px`
-    mSvgDiv.hidden = true
-    svgUIDiv.appendChild(mSvgDiv)
-
     const svgCtx = new C2S(w, h)
-    const svgMCtx = new C2S(w, Math.round(h / 3))
-
-    function setHeightMCtx(height) {
-        mSvgDiv.style.height = `${Math.round(height)}px`
-        mSvgDiv.height = height
-        // eslint-disable-next-line no-underscore-dangle
-        svgMCtx.__root.setAttribute('height', height)
-    }
 
     function makeSVG() {
         // temporarily swap drawing context, render SVG,
@@ -83,24 +56,14 @@ export default function addSVGOutput(screen, draw, layout) {
         screen.setFCtx(svgCtx)
         screen.setNoBuffers(true)
 
-        const oldM = screen.mctx
-        screen.setMCtx(svgMCtx)
-
-        // update
-        const { heightBrowser } = screen.maps
-        setHeightMCtx(heightBrowser)
-
         // draw
         draw()
         outputSVG()
-        outputMSVG()
 
         // unset
         screen.setCtx(old)
         screen.setFCtx(oldF)
         screen.setNoBuffers(false)
-
-        screen.setMCtx(oldM)
     }
 
     function outputSVG() {
@@ -113,22 +76,11 @@ export default function addSVGOutput(screen, draw, layout) {
         const url = `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}`
         downloadLink.href = url
     }
-    function outputMSVG() {
-        const mSvg = svgMCtx.getSerializedSvg(true)
-        mSvgDiv.innerHTML = mSvg
-        mSvgDiv.hidden = false
-        mDownloadLink.hidden = false
-        const mUrl = `data:image/svg+xml;charset=utf-8,${encodeURIComponent(mSvg)}`
-        mDownloadLink.href = mUrl
-    }
 
     function hideSVG() {
         svgHideButton.hidden = true
 
         svgDiv.hidden = true
         downloadLink.hidden = true
-
-        mSvgDiv.hidden = true
-        mDownloadLink.hidden = true
     }
 }

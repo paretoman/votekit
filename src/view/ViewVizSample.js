@@ -63,12 +63,15 @@ export default function ViewVizSample(entities, screen, menu, changes, sim, view
         const { pointsChanged } = addResult
 
         if (pointsChanged) {
-            screen.clear()
+            self.clear()
             self.render()
         }
     }
 
     self.render = () => {
         vizSample.render()
+    }
+    self.clear = () => {
+        screen.clear()
     }
 }

@@ -11,7 +11,8 @@ import VoronoiRanking2D from './VoronoiRanking2D.js'
  * @param {Sim} sim
  * @constructor
  */
-export default function VizOneVoronoiRanking(voterRendererList, candidateList, screen, sim) {
+// eslint-disable-next-line max-len
+export default function VizOneVoronoiRanking(voterRendererList, candidateList, screen, screenMini, sim) {
     const self = this
 
     // renderer factory //

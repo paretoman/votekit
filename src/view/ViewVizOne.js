@@ -21,12 +21,13 @@ import VoterRendererList from '../voters/VoterRendererList.js'
  * @param {ViewSettings} viewSettings
  * @constructor
  */
-export default function ViewVizOne(entities, screen, menu, changes, sim, viewSettings) {
+// eslint-disable-next-line max-len
+export default function ViewVizOne(entities, screenMain, screenMini, menu, changes, sim, viewSettings) {
     const self = this
 
     sim.sims.one.pub.attach(self)
 
-    ViewBase.call(self, screen, changes, viewSettings)
+    ViewBase.call(self, screenMain, changes, viewSettings)
 
     const { candidateList, voterShapeList } = entities
 
@@ -43,7 +44,7 @@ export default function ViewVizOne(entities, screen, menu, changes, sim, viewSet
             ? VizOneGrid : VizOneVoronoiGeneral
         const VizOne = (sim.geo === true)
             ? VizGeo : VizNoGeo
-        vizOne = new VizOne(voterRendererList, candidateList, screen, sim)
+        vizOne = new VizOne(voterRendererList, candidateList, screenMain, screenMini, sim)
     }
     enterStrategy()
 
@@ -62,12 +63,15 @@ export default function ViewVizOne(entities, screen, menu, changes, sim, viewSet
 
         vizOne.update(electionResults)
 
-        screen.clear()
-        screen.clearMaps()
+        self.clear()
         self.render()
     }
 
     self.render = () => {
         vizOne.render()
+    }
+    self.clear = () => {
+        screenMain.clear()
+        screenMini.clear()
     }
 }

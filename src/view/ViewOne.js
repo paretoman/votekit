@@ -91,4 +91,7 @@ export default function ViewOne(entities, screen, menu, changes, sim, viewSettin
         candidateViewList.renderForeground()
         self.voterTest.renderForeground()
     }
+    self.clearForeground = () => {
+        screen.clearForeground()
+    }
 }

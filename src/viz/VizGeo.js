@@ -12,7 +12,7 @@ import VoterRender2D from './VoterRender2D.js'
  * @param {Sim} sim
  * @constructor
  */
-export default function VizGeo(voterRendererList, candidateList, screen, sim) {
+export default function VizGeo(voterRendererList, candidateList, screen, screenMini, sim) {
     const self = this
 
     const { dimensions } = sim.election

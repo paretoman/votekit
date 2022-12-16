@@ -20,9 +20,9 @@ export default function tooltipBox(graphic, screen) {
     update()
     // box.style.width = '10px'
     // box.style.height = '10px'
-    box.style.border = (screen.darkMode) ? '1px solid white' : '1px solid black'
+    box.style.border = (screen.common.darkMode) ? '1px solid white' : '1px solid black'
     box.style.padding = '8px'
-    box.style.background = (screen.darkMode) ? '#222' : 'white'
+    box.style.background = (screen.common.darkMode) ? '#222' : 'white'
 
     let pinned = false
     /**

@@ -29,7 +29,8 @@ export default function CandidateDnGraphic(candidateDn, screen, election, wHandl
         const { party } = candidateDn
         const { x, y } = self
 
-        const { fctx, darkMode } = screen
+        const { fctx } = screen
+        const { darkMode } = screen.common
         const color = (darkMode) ? '#fff' : '#222'
 
         if (election.socialChoice.electionMethod === 'olprA') {

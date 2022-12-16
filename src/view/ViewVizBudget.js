@@ -1,10 +1,17 @@
+import addSVGOutput from '../ui/addSVGOutput.js'
+import Screen from '../ui/Screen.js'
 import BaseExplanation from '../viz/BaseExplanation.js'
 import VizExplanationBudgetMES from '../viz/VizExplanationBudgetMES.js'
 
-export default function ViewVizBudget(screen, menu, changes, sim) {
+export default function ViewVizBudget(screenCommon, layout, menu, changes, sim) {
     const self = this
 
     sim.sims.one.pub.attach(self)
+
+    const screen = new Screen(screenCommon, layout, 'budget')
+    const { height } = screenCommon
+    screen.setHeight(height / 3)
+    screen.hide()
 
     let vizExplanation
 
@@ -28,10 +35,19 @@ export default function ViewVizBudget(screen, menu, changes, sim) {
     self.update = (electionResults) => {
         if (changes.checkNone()) return
         vizExplanation.update(electionResults)
+        self.clear()
         self.render()
     }
 
     self.render = () => {
         vizExplanation.render()
     }
+    self.clear = () => {
+        screen.clear()
+    }
+    self.draw = () => {
+        self.clear()
+        self.render()
+    }
+    addSVGOutput(screen, self.draw, layout, 'svgBudget')
 }

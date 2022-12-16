@@ -34,7 +34,8 @@ export default function CircleGraphic(parent, entity, r, screen) {
 
     // Graphics component
     self.render = function () {
-        const { fctx, darkMode } = screen
+        const { fctx } = screen
+        const { darkMode } = screen.common
         const { color } = entity
 
         fctx.save()

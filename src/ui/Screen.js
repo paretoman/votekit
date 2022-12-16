@@ -1,59 +1,32 @@
 /** @module */
 
 import EventHandlers from './EventHandlers.js'
+import getPixelRatio from './getPixelRatio.js'
 
 /**
- * Set up a screen to view some objects.
- * A detail here is that we have browser pixels and device pixels.
- * Broswer pixels feel about the same size on any device (visual arc length).
- * Device pixels can be much smaller for high-dpi devices.
- * @param {Number} w - width in browser pixels of the canvas.
- * @param {Number} h - height in browser pixels of the canvas.
  * @param {Layout} layout
  * @constructor
  */
-export default function Screen(w, h, layout) {
+export default function Screen(screenCommon, layout, layoutName) {
     const self = this
 
-    self.width = w // measured in browser pixels
-    self.height = h
+    self.common = screenCommon
 
-    // dark mode
-    self.darkMode = false
-    self.setDarkMode = (val) => {
-        self.darkMode = val
-        const [add, remove] = (val) ? ['darkMode', 'lightMode'] : ['lightMode', 'darkMode']
-        const body = document.getElementsByTagName('html')[0]
-        body.classList.remove(remove)
-        body.classList.add(add)
+    // Set up Canvasses //
 
-        self.ctx.strokeStyle = '#555'
-        if (self.darkMode) self.ctx.strokeStyle = '#ddd'
-        // https://stackoverflow.com/a/71001410
-    }
-
-    // canvas
     self.canvas = document.createElement('canvas')
     self.canvas.setAttribute('class', 'background')
     self.ctx = self.canvas.getContext('2d')
 
-    // tooltips
-    self.tooltips = document.createElement('div')
-    self.tooltips.setAttribute('class', 'tooltips')
-
-    // foreground
     self.foreground = document.createElement('canvas')
     self.foreground.setAttribute('class', 'foreground')
     self.fctx = self.foreground.getContext('2d')
 
-    // maps
-    self.maps = document.createElement('canvas')
-    self.maps.setAttribute('class', 'maps')
-    self.mctx = self.maps.getContext('2d')
+    self.tooltips = document.createElement('div')
+    self.tooltips.setAttribute('class', 'tooltips')
 
     const clearDiv = document.createElement('div')
 
-    // wrap
     self.wrap = document.createElement('div')
     self.wrap.setAttribute('class', 'screenWrap')
     self.wrap.appendChild(clearDiv)
@@ -61,53 +34,50 @@ export default function Screen(w, h, layout) {
     self.wrap.appendChild(self.tooltips)
     self.wrap.appendChild(self.foreground)
 
-    layout.newElement('screenWrap', self.wrap)
-    layout.newElement('maps', self.maps)
+    layout.newElement(layoutName, self.wrap)
 
-    self.noBuffers = false
-
-    self.setDarkMode(window.matchMedia('(prefers-color-scheme: dark)').matches)
-
-    // use scaling for high DPI devices instead of multiplying every time inside draw calls
-    // https://www.html5rocks.com/en/tutorials/canvas/hidpi/
     self.pixelRatio = getPixelRatio(self.ctx)
 
-    self.canvas.width = w * self.pixelRatio // measured in device pixels
-    self.canvas.height = h * self.pixelRatio
+    self.setSize = (w, h) => {
+        const wpx = `${w}px`
+        const hpx = `${h}px`
+        const r = self.pixelRatio
+        const wd = w * r // measured in device pixels
+        const hd = h * r
 
-    self.canvas.style.width = `${w}px`
-    self.canvas.style.height = `${h}px`
+        self.width = w // measured in browser pixels
+        self.height = h
+        self.canvas.width = wd
+        self.canvas.height = hd
+        self.canvas.style.width = wpx
+        self.canvas.style.height = hpx
+        self.foreground.width = wd
+        self.foreground.height = hd
+        self.foreground.style.width = wpx
+        self.foreground.style.height = hpx
+        self.tooltips.style.width = wpx
+        self.tooltips.style.height = hpx
+        self.wrap.style.width = wpx
+        self.wrap.style.height = hpx
 
-    self.wrap.style.width = `${w}px`
-    self.wrap.style.height = `${h}px`
-
-    self.tooltips.style.width = `${w}px`
-    self.tooltips.style.height = `${h}px`
-
-    self.foreground.width = w * self.pixelRatio // measured in device pixels
-    self.foreground.height = h * self.pixelRatio
-
-    self.foreground.style.width = `${w}px`
-    self.foreground.style.height = `${h}px`
-
-    self.maps.width = w * self.pixelRatio // measured in device pixels
-    self.maps.style.width = `${w}px`
-    self.setMapsHeight = (height) => {
-        const h3 = Math.round(height)
-        self.maps.heightBrowser = h3
-        self.maps.height = h3 * self.pixelRatio // measured in device pixels
-        self.maps.style.height = `${h3}px` // measured in browser pixels
-        self.mctx.scale(self.pixelRatio, self.pixelRatio)
+        self.ctx.scale(r, r)
+        self.fctx.scale(r, r)
     }
-    self.setMapsHeight((1 / 3) * h)
+    self.setWidth = (w) => {
+        self.setSize(w, self.height)
+    }
+    self.setHeight = (h) => {
+        self.setSize(self.width, h)
+    }
+    const { width, height } = screenCommon
+    self.setSize(width, height)
 
-    self.ctx.scale(self.pixelRatio, self.pixelRatio)
-    self.fctx.scale(self.pixelRatio, self.pixelRatio)
+    // Act on Canvasses //
 
     self.clear = function () {
         self.ctx.clearRect(0, 0, self.canvas.width, self.canvas.height)
 
-        if (self.darkMode && self.noBuffers) {
+        if (self.common.darkMode && self.noBuffers) {
             self.ctx.fillStyle = '#222'
             self.ctx.fillRect(0, 0, self.canvas.width, self.canvas.height)
 
@@ -116,35 +86,37 @@ export default function Screen(w, h, layout) {
     }
     self.clearForeground = function () {
         self.fctx.clearRect(0, 0, self.foreground.width, self.foreground.height)
-        if (self.darkMode && self.noBuffers) {
+        if (self.common.darkMode && self.noBuffers) {
             self.fctx.fillStyle = '#222'
             self.fctx.fillRect(0, 0, self.foreground.width, self.foreground.height)
 
             self.fctx.fillStyle = 'white'
         }
     }
-    self.clearMaps = function () {
-        self.mctx.clearRect(0, 0, self.maps.width, self.maps.height)
-    }
+
     self.setCtx = function (c) {
         self.ctx = c
     }
     self.setFCtx = function (c) {
         self.fctx = c
     }
-    self.setMCtx = function (c) {
-        self.mctx = c
-    }
     self.setNoBuffers = function (noBuffers) {
         self.noBuffers = noBuffers
     }
-    self.showMaps = () => {
-        self.maps.style.display = 'block'
+    self.noBuffers = false
+
+    self.setDisplayStyle = (displayStyle) => {
+        self.canvas.style.display = displayStyle
+        self.foreground.style.display = displayStyle
+        self.tooltips.style.display = displayStyle
+        self.wrap.style.display = displayStyle
     }
-    self.hideMaps = () => {
-        self.maps.style.display = 'none'
+    self.show = () => {
+        self.setDisplayStyle('block')
     }
-    self.hideMaps()
+    self.hide = () => {
+        self.setDisplayStyle('none')
+    }
 
     self.eventHandlers = new EventHandlers()
     const { handlers } = self.eventHandlers
@@ -162,15 +134,4 @@ export default function Screen(w, h, layout) {
         if (current) current(e)
         self.wrap.onmouseup(e)
     }
-}
-
-function getPixelRatio(context) {
-    const backingStore = context.backingStorePixelRatio
-          || context.webkitBackingStorePixelRatio
-          || context.mozBackingStorePixelRatio
-          || context.msBackingStorePixelRatio
-          || context.oBackingStorePixelRatio
-          || context.backingStorePixelRatio || 1
-
-    return (window.devicePixelRatio || 1) / backingStore
 }

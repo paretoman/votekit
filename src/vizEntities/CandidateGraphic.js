@@ -36,7 +36,8 @@ export default function CandidateGraphic(candidate, screen, election, wHandle, h
         const { exists, party } = candidate
         const { x, y } = self
 
-        const { fctx, darkMode } = screen
+        const { fctx } = screen
+        const { darkMode } = screen.common
         const color = (darkMode) ? '#fff' : '#222'
 
         // show minimal graphics when rendering as a ghost.

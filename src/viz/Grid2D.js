@@ -10,7 +10,7 @@ import colorBlender from './colorBlender.js'
  * @param {Screen} screen
  * @constructor
  */
-export default function Grid2D(candidateList, screen) {
+export default function Grid2D(candidateList, screenMain, screenMini) {
     const self = this
 
     let gridData
@@ -27,7 +27,7 @@ export default function Grid2D(candidateList, screen) {
 
         const nCans = canList.length
         const nHeight = Math.floor((nCans - 1) / 3) + 1
-        screen.setMapsHeight(nHeight * (1 / 3) * screen.height)
+        screenMini.setHeight(nHeight * (1 / 3) * screenMini.common.height)
 
         const isGauss = voterGeom.densityProfile === 'gaussian'
 
@@ -102,8 +102,6 @@ export default function Grid2D(candidateList, screen) {
     }
 
     self.render = function () {
-        const { ctx, mctx } = screen
-
         const { x, y, w } = gridData.voterGeom
 
         drawBlend()
@@ -111,13 +109,14 @@ export default function Grid2D(candidateList, screen) {
         drawSeparate()
 
         function drawSeparate() {
+            const { ctx } = screenMini
             // draw each can separately
             const nCans = canList.length
             for (let i = 0; i < nCans; i++) {
                 // draw image
                 // transform is t
-                mctx.save()
-                // mctx.globalAlpha = 0.7
+                ctx.save()
+                // ctx.globalAlpha = 0.7
                 const t = {
                     w: 1 / 3, h: 1 / 3, x: (i % 3) * 100, y: Math.floor(i / 3) * 100,
                 }
@@ -130,13 +129,13 @@ export default function Grid2D(candidateList, screen) {
                 }
 
                 // clip outline of shape
-                mctx.beginPath()
-                mctx.arc(sh.x, sh.y, sh.r, 0, 2 * Math.PI)
-                mctx.clip()
+                ctx.beginPath()
+                ctx.arc(sh.x, sh.y, sh.r, 0, 2 * Math.PI)
+                ctx.clip()
 
-                mctx.beginPath()
-                mctx.rect(t.x, t.y, 100, 100)
-                mctx.clip()
+                ctx.beginPath()
+                ctx.rect(t.x, t.y, 100, 100)
+                ctx.clip()
 
                 const canvas = canvases[i]
                 const im = {
@@ -145,17 +144,18 @@ export default function Grid2D(candidateList, screen) {
                     w: w * t.w,
                     h: w * t.h,
                 }
-                mctx.drawImage(canvas, im.x, im.y, im.w, im.h)
+                ctx.drawImage(canvas, im.x, im.y, im.w, im.h)
 
                 // draw outline of shape
-                mctx.beginPath()
-                mctx.arc(sh.x, sh.y, sh.r, 0, 2 * Math.PI)
-                mctx.stroke()
-                mctx.restore()
+                ctx.beginPath()
+                ctx.arc(sh.x, sh.y, sh.r, 0, 2 * Math.PI)
+                ctx.stroke()
+                ctx.restore()
             }
         }
 
         function drawBlend() {
+            const { ctx } = screenMain
             ctx.save()
             // ctx.globalAlpha = 0.7
 

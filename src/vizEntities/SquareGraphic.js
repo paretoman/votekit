@@ -46,7 +46,8 @@ export default function SquareGraphic(parent, entity, w, h, screen) {
 
     // Graphics component
     self.render = function () {
-        const { fctx, darkMode } = screen
+        const { fctx } = screen
+        const { darkMode } = screen.common
 
         fctx.save()
 

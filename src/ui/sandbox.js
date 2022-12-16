@@ -24,6 +24,7 @@ import ViewVizSample from '../view/ViewVizSample.js'
 import ViewGeoMaps from '../view/ViewGeoMaps.js'
 import ViewOne from '../view/ViewOne.js'
 import ViewSample from '../view/ViewSample.js'
+import ScreenCommon from './ScreenCommon.js'
 
 /**
  * Set up a user interface to run a simulation.
@@ -42,12 +43,17 @@ export default function sandbox(config, comMessenger, sandboxURL) {
         'addVoter',
         'addCandidate',
         'addCandidateDistribution',
-        'screenWrap',
+        'viz',
+        'vizMini',
         'maps',
+        'budget',
         'saveConfigToLink',
         'saveConfigToText',
         'loadConfigText',
-        'svgUIDiv',
+        'svgMainDiv',
+        'svgMiniDiv',
+        'svgMaps',
+        'svgBudget',
     ])
 
     const commander = new Commander(comMessenger)
@@ -62,22 +68,28 @@ export default function sandbox(config, comMessenger, sandboxURL) {
 
     addLoadConfigText(layout, commander)
 
-    const screen = new Screen(300, 300, layout)
+    const screenCommon = new ScreenCommon(300, 300)
+    const screenMain = new Screen(screenCommon, layout, 'viz')
+    const screenMini = new Screen(screenCommon, layout, 'vizMini')
+    screenMini.setHeight(screenCommon.height / 3)
+    screenMini.hide()
 
-    addSVGOutput(screen, draw, layout)
+    addSVGOutput(screenMain, draw, layout, 'svgMainDiv') // need to do something else
+    addSVGOutput(screenMini, draw, layout, 'svgMiniDiv')
 
-    addDarkModeSwitch(screen, draw, layout)
+    addDarkModeSwitch(screenCommon, draw, layout)
     const entities = new Entities(menu, changes, commander, layout)
     const sim = new Sim(entities, menu, changes)
     menuSim(sim, menu, layout)
     const viewSettings = new ViewSettings(changes)
-    new ViewOne(entities, screen, menu, changes, sim, viewSettings)
-    new ViewSample(entities, screen, menu, changes, sim, viewSettings)
+    new ViewOne(entities, screenMain, menu, changes, sim, viewSettings)
+    new ViewSample(entities, screenMain, menu, changes, sim, viewSettings)
     new ViewJupyter(sim, changes)
-    new ViewVizOne(entities, screen, menu, changes, sim, viewSettings)
-    new ViewVizSample(entities, screen, menu, changes, sim, viewSettings)
-    new ViewVizBudget(screen, menu, changes, sim)
-    new ViewGeoMaps(entities, screen, sim)
+    new ViewVizOne(entities, screenMain, screenMini, menu, changes, sim, viewSettings)
+    new ViewVizSample(entities, screenMain, menu, changes, sim, viewSettings)
+    new ViewVizBudget(screenCommon, layout, menu, changes, sim)
+
+    new ViewGeoMaps(entities, screenCommon, layout, sim)
 
     // Default Entities //
     entities.candidateList.addCandidate({ x: 50, y: 100 }, { x: 50 }, '#e05020', true)
@@ -108,14 +120,13 @@ export default function sandbox(config, comMessenger, sandboxURL) {
     }
 
     function drawForeground() {
-        screen.clearForeground()
+        sim.clearForeground()
         sim.renderForeground()
     }
 
     function draw() {
-        screen.clear()
-        screen.clearMaps()
-        screen.clearForeground()
+        sim.clear()
+        sim.clearForeground()
         sim.render()
         sim.renderForeground()
     }

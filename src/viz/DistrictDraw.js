@@ -39,37 +39,37 @@ export default function DistrictDraw(screen, districtMaker) {
      * @param {Function} textFunction - an option, defaults to undefined
      */
     self.renderVoronoiGeneral = (x, y, geoMapWidth, geoMapHeight, colors, textFunction) => {
-        const { mctx } = screen
+        const { ctx } = screen
         const {
             voronoi, nx, ny, nd,
         } = districtMaker
-        mctx.save()
+        ctx.save()
         const scaleX = geoMapWidth / nx
         const scaleY = geoMapHeight / ny
-        mctx.translate(x, y)
-        mctx.scale(scaleX, scaleY)
+        ctx.translate(x, y)
+        ctx.scale(scaleX, scaleY)
         for (let i = 0; i < nd; i++) {
-            mctx.beginPath()
-            mctx.strokeStyle = '#333'
-            mctx.lineWidth = 1 / scaleX
-            voronoi.renderCell(i, mctx)
+            ctx.beginPath()
+            ctx.strokeStyle = '#333'
+            ctx.lineWidth = 1 / scaleX
+            voronoi.renderCell(i, ctx)
             if (colors !== null) { // option
-                mctx.fillStyle = colors[i]
-                mctx.fill()
+                ctx.fillStyle = colors[i]
+                ctx.fill()
             }
-            mctx.stroke()
+            ctx.stroke()
             if (textFunction !== undefined) textFunction(i) // option
         }
-        mctx.restore()
+        ctx.restore()
     }
 
     function renderAreaText(i) {
-        const { mctx } = screen
+        const { ctx } = screen
         const { centroids, polygonAreas } = districtMaker
         const c = centroids[i]
         const textHeight = 1
         // const area = textPercent(polygonAreas[i] / (districtMaker.nx * districtMaker.ny))
         const area = polygonAreas[i].toFixed(0)
-        drawStrokedColor(area, c[0], c[1] + textHeight * 0.5 - 0.2, textHeight, 0.2, '#222', 1, mctx)
+        drawStrokedColor(area, c[0], c[1] + textHeight * 0.5 - 0.2, textHeight, 0.2, '#222', 1, ctx)
     }
 }

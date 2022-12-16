@@ -45,4 +45,6 @@ export default function SimOne(entities, menu, changes, election, electionOne, e
     }
     self.render = () => { self.pub.render() }
     self.renderForeground = () => { self.pub.renderForeground() }
+    self.clear = () => { self.pub.clear() }
+    self.clearForeground = () => { self.pub.clearForeground() }
 }

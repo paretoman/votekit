@@ -16,10 +16,10 @@ export default function VizExplanationBudgetMES(screen) {
     let chartDataMES
 
     self.enter = () => {
-        screen.showMaps()
+        screen.show()
     }
     self.exit = () => {
-        screen.hideMaps()
+        screen.hide()
     }
 
     self.update = function (electionResults) {

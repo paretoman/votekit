@@ -8,7 +8,8 @@ export default function VoterRender1D(voterShape, screen) {
     const self = this
 
     self.render = function () {
-        const { ctx, darkMode } = screen
+        const { ctx } = screen
+        const { darkMode } = screen.common
         const { x, w, densityProfile } = voterShape.shape1
         const h = 100
         const middle = 150

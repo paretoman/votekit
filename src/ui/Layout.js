@@ -33,6 +33,7 @@ export default function Layout(order) {
      */
     self.makeComponent = () => {
         const parent = document.createElement('div')
+        parent.className = 'sandbox'
         order.forEach((name) => {
             const div = divsByName[name]
             if (div !== undefined) {

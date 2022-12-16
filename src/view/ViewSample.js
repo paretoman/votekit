@@ -71,4 +71,8 @@ export default function ViewSample(entities, screen, menu, changes, sim, viewSet
         voterViewList.renderForeground()
         candidateDnViewList.renderForeground()
     }
+
+    self.clearForeground = () => {
+        screen.clearForeground()
+    }
 }
