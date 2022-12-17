@@ -44,9 +44,6 @@ export default function ScreenDownload(screen, view) {
 
         screen.setFCtx(screen.svg.fctx)
 
-        view.clear()
-        view.clearForeground()
-        view.render()
-        view.renderForeground()
+        view.rerender()
     }
 }

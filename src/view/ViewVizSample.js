@@ -58,12 +58,6 @@ export default function ViewVizSample(entities, screen, menu, changes, sim, view
         // The election handles any changes.
         // The electionResults communicates how to visualize the election.
 
-        if (changes.check(['rerender']) && changes.numChanges === 1) {
-            self.clear()
-            self.render()
-            return
-        }
-
         vizSample.update(addResult)
 
         const { pointsChanged } = addResult

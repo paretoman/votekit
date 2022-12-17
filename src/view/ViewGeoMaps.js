@@ -30,12 +30,6 @@ export default function ViewGeoMaps(entities, screenCommon, layout, changes, sim
     }
 
     self.update = function (geoElectionResults) {
-        if (changes.check(['rerender']) && changes.numChanges === 1) {
-            self.clear()
-            self.render()
-            return
-        }
-
         const { error } = geoElectionResults
         if (error !== undefined) {
             flagNoRender = true

@@ -83,11 +83,11 @@ export default function sandbox(config, comMessenger, sandboxURL) {
     screenMini.setHeight(screenCommon.height / 3)
     screenMini.hide()
 
-    addSvgSwitch(screenCommon, changes, layout)
+    addSvgSwitch(screenCommon, layout, view)
 
     addDownloadScreen(screenCommon, layout)
 
-    addDarkModeSwitch(screenCommon, changes, layout)
+    addDarkModeSwitch(screenCommon, layout, view)
     const viewSettings = new ViewSettings(changes)
     new ViewOne(entities, screenMain, menu, changes, sim, view, viewSettings)
     new ViewSample(entities, screenMain, menu, changes, sim, view, viewSettings)

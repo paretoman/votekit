@@ -19,4 +19,11 @@ export default function ViewStateMachine(sim) {
     self.renderForeground = () => { self.views[sim.state].renderForeground() }
     self.clear = () => { self.views[sim.state].clear() }
     self.clearForeground = () => { self.views[sim.state].clearForeground() }
+
+    self.rerender = () => {
+        self.clear()
+        self.clearForeground()
+        self.render()
+        self.renderForeground()
+    }
 }
