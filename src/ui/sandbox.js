@@ -1,8 +1,6 @@
-/* eslint-disable no-new */
 /** @module */
 
 import Changes from '../sim/Changes.js'
-import Screen from './Screen.js'
 import Menu from '../menu/Menu.js'
 import Sim from '../sim/Sim.js'
 import Layout from './Layout.js'
@@ -12,21 +10,11 @@ import addSaveConfigToText from '../command/addSaveConfigToText.js'
 import addLoadConfigText from '../command/loadConfigText.js'
 import addSaveConfigToLink from '../command/addSaveConfigToLink.js'
 import * as TWEEN from '../lib/snowpack/build/snowpack/pkg/@tweenjs/tweenjs.js'
-import addDarkModeSwitch from './addDarkModeSwitch.js'
-import ViewSettings from '../view/ViewSettings.js'
 import menuSim from '../sim/menuSim.js'
 import Entities from '../sim/Entities.js'
-import ViewJupyter from '../environments/ViewJupyter.js'
-import ViewVizBudget from '../view/ViewVizBudget.js'
-import ViewVizOne from '../view/ViewVizOne.js'
-import ViewVizSample from '../view/ViewVizSample.js'
-import ViewGeoMaps from '../view/ViewGeoMaps.js'
-import ViewOne from '../view/ViewOne.js'
-import ViewSample from '../view/ViewSample.js'
-import ScreenCommon from './ScreenCommon.js'
-import addSvgSwitch from './addSvgSwitch.js'
-import addDownloadScreen from './addDownloadScreen.js'
 import ViewStateMachine from '../view/ViewStateMachine.js'
+import sandboxScreenViews from './sandboxScreenViews.js'
+import layoutOrder from './layoutOrder.js'
 
 /**
  * Set up a user interface to run a simulation.
@@ -36,68 +24,25 @@ export default function sandbox(config, comMessenger, sandboxURL) {
     // manage dependent calculations because we only want to do calculations if we need to
     const changes = new Changes()
 
-    const layout = new Layout([
-        'menu',
-        'darkModeSwitch',
-        'simControlsLabel',
-        'undo',
-        'redo',
-        'addVoter',
-        'addCandidate',
-        'addCandidateDistribution',
-        'viz',
-        'vizMini',
-        'maps',
-        'budget',
-        'saveConfigToLink',
-        'saveConfigToText',
-        'loadConfigText',
-        'svgMainDiv',
-        'svgMiniDiv',
-        'svgMaps',
-        'svgBudget',
-        'svgSwitch',
-        'showDownloadScreenLink',
-    ])
+    const layout = new Layout(layoutOrder)
 
     const commander = new Commander(comMessenger)
+    addUndo(layout, commander)
+    addSaveConfigToLink(layout, commander, sandboxURL)
+    addSaveConfigToText(layout, commander)
+    addLoadConfigText(layout, commander)
 
     const menu = new Menu(changes, layout, commander)
-
-    addUndo(layout, commander)
-
-    addSaveConfigToLink(layout, commander, sandboxURL)
-
-    addSaveConfigToText(layout, commander)
-
-    addLoadConfigText(layout, commander)
 
     const entities = new Entities(menu, changes, commander, layout)
     const sim = new Sim(entities, menu, changes)
     menuSim(sim, menu, layout)
 
+    // View Screens
     const viewSM = new ViewStateMachine(sim)
-    const screenCommon = new ScreenCommon(300, 300)
-    const screenMain = new Screen(screenCommon, viewSM, layout, 'viz')
-    const screenMini = new Screen(screenCommon, viewSM, layout, 'vizMini')
-    screenMini.setHeight(screenCommon.height / 3)
-    screenMini.hide()
+    sandboxScreenViews(viewSM, entities, sim, changes, menu, layout)
 
-    addSvgSwitch(screenCommon, layout, viewSM)
-
-    addDownloadScreen(screenCommon, layout)
-
-    addDarkModeSwitch(screenCommon, layout, viewSM)
-    const viewSettings = new ViewSettings(changes)
-    new ViewOne(entities, screenMain, menu, changes, sim, viewSM, viewSettings)
-    new ViewSample(entities, screenMain, menu, changes, sim, viewSM, viewSettings)
-    new ViewJupyter(sim, viewSM, changes)
-    new ViewVizOne(entities, screenMain, screenMini, menu, changes, sim, viewSM, viewSettings)
-    new ViewVizSample(entities, screenMain, menu, changes, sim, viewSM, viewSettings)
-    new ViewVizBudget(screenCommon, layout, menu, changes, sim, viewSM)
-    new ViewGeoMaps(entities, screenCommon, layout, changes, sim, viewSM)
-
-    // Default Entities //
+    // Default Entities
     entities.candidateList.addCandidate({ x: 50, y: 100 }, { x: 50 }, '#e05020', true)
     entities.candidateList.addCandidate({ x: 100, y: 50 }, { x: 100 }, '#50e020', true)
     entities.candidateList.addCandidate({ x: 300 - 100, y: 300 - 50 }, { x: 200 }, '#2050e0', true)
