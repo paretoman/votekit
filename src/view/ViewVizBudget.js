@@ -1,4 +1,3 @@
-import addSVGOutput from '../ui/addSVGOutput.js'
 import Screen from '../ui/Screen.js'
 import BaseExplanation from '../viz/BaseExplanation.js'
 import VizExplanationBudgetMES from '../viz/VizExplanationBudgetMES.js'
@@ -34,6 +33,13 @@ export default function ViewVizBudget(screenCommon, layout, menu, changes, sim) 
     }
     self.update = (electionResults) => {
         if (changes.checkNone()) return
+
+        if (changes.check(['rerender']) && changes.numChanges === 1) {
+            self.clear()
+            self.render()
+            return
+        }
+
         vizExplanation.update(electionResults)
         self.clear()
         self.render()
@@ -49,5 +55,4 @@ export default function ViewVizBudget(screenCommon, layout, menu, changes, sim) 
         self.clear()
         self.render()
     }
-    addSVGOutput(screen, self.draw, layout, 'svgBudget')
 }

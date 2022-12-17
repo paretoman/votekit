@@ -26,4 +26,5 @@ export default function Changes() {
     self.clear = () => {
         changes.splice(0, changes.length)
     }
+    self.numChanges = () => changes.length
 }

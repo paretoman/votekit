@@ -55,7 +55,8 @@ export default function VizSampleDensity2D(voterRendererList, canDnRendererList,
     }
 
     self.renderCans = () => {
-        const { ctx, darkMode } = screen
+        const { ctx } = screen
+        const { darkMode } = screen.common
         const gg = geoPath()
             .context(ctx)
 

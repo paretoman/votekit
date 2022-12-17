@@ -51,6 +51,12 @@ export default function ViewSample(entities, screen, menu, changes, sim, viewSet
         // The election handles any changes.
         // The electionResults communicates how to visualize the election.
 
+        if (changes.check(['rerender'])) {
+            self.clearForeground()
+            self.renderForeground()
+            if (changes.numChanges === 1) return
+        }
+
         if (changes.check(['draggables'])) {
             // this will trigger when undo moves entities
             voterViewList.updateViewXY()

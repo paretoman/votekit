@@ -61,6 +61,12 @@ export default function ViewVizOne(entities, screenMain, screenMini, menu, chang
     self.update = (electionResults) => {
         if (changes.checkNone()) return
 
+        if (changes.check(['rerender']) && changes.numChanges === 1) {
+            self.clear()
+            self.render()
+            return
+        }
+
         vizOne.update(electionResults)
 
         self.clear()

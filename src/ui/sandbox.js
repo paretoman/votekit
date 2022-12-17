@@ -3,7 +3,6 @@
 
 import Changes from '../sim/Changes.js'
 import Screen from './Screen.js'
-import addSVGOutput from './addSVGOutput.js'
 import Menu from '../menu/Menu.js'
 import Sim from '../sim/Sim.js'
 import Layout from './Layout.js'
@@ -25,6 +24,8 @@ import ViewGeoMaps from '../view/ViewGeoMaps.js'
 import ViewOne from '../view/ViewOne.js'
 import ViewSample from '../view/ViewSample.js'
 import ScreenCommon from './ScreenCommon.js'
+import addSvgSwitch from './addSvgSwitch.js'
+import addDownloadScreen from './addDownloadScreen.js'
 
 /**
  * Set up a user interface to run a simulation.
@@ -54,6 +55,8 @@ export default function sandbox(config, comMessenger, sandboxURL) {
         'svgMiniDiv',
         'svgMaps',
         'svgBudget',
+        'svgSwitch',
+        'showDownloadScreenLink',
     ])
 
     const commander = new Commander(comMessenger)
@@ -74,10 +77,11 @@ export default function sandbox(config, comMessenger, sandboxURL) {
     screenMini.setHeight(screenCommon.height / 3)
     screenMini.hide()
 
-    addSVGOutput(screenMain, draw, layout, 'svgMainDiv') // need to do something else
-    addSVGOutput(screenMini, draw, layout, 'svgMiniDiv')
+    addSvgSwitch(screenCommon, changes, layout)
 
-    addDarkModeSwitch(screenCommon, draw, layout)
+    addDownloadScreen(screenCommon, layout)
+
+    addDarkModeSwitch(screenCommon, changes, layout)
     const entities = new Entities(menu, changes, commander, layout)
     const sim = new Sim(entities, menu, changes)
     menuSim(sim, menu, layout)
@@ -89,7 +93,7 @@ export default function sandbox(config, comMessenger, sandboxURL) {
     new ViewVizSample(entities, screenMain, menu, changes, sim, viewSettings)
     new ViewVizBudget(screenCommon, layout, menu, changes, sim)
 
-    new ViewGeoMaps(entities, screenCommon, layout, sim)
+    new ViewGeoMaps(entities, screenCommon, layout, changes, sim)
 
     // Default Entities //
     entities.candidateList.addCandidate({ x: 50, y: 100 }, { x: 50 }, '#e05020', true)
@@ -121,13 +125,6 @@ export default function sandbox(config, comMessenger, sandboxURL) {
 
     function drawForeground() {
         sim.clearForeground()
-        sim.renderForeground()
-    }
-
-    function draw() {
-        sim.clear()
-        sim.clearForeground()
-        sim.render()
         sim.renderForeground()
     }
 }

@@ -54,6 +54,12 @@ export default function ViewOne(entities, screen, menu, changes, sim, viewSettin
     self.update = (electionResults) => {
         if (changes.checkNone()) return
 
+        if (changes.check(['rerender'])) {
+            self.clearForeground()
+            self.renderForeground()
+            if (changes.numChanges === 1) return
+        }
+
         if (changes.check(['draggables'])) {
             // this will trigger when undo moves entities
             voterViewList.updateViewXY()

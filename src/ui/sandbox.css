@@ -7,7 +7,7 @@ div.screenWrap, canvas.maps, div.svgDiv, div.mSvgDiv {
 	margin: 4px;
 }
 
-canvas.background {	
+.background {	
 	position:absolute;
 	z-index:0;
 }
@@ -17,8 +17,8 @@ div.tooltips {
 	z-index:2;
 }
 
-canvas.foreground {
-	position:relative;
+.foreground {
+	position:absolute;
 	z-index:1;
 }
 

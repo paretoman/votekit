@@ -1,6 +1,5 @@
 /** @module */
 
-import addSVGOutput from '../ui/addSVGOutput.js'
 import Screen from '../ui/Screen.js'
 import GeoMaps from '../viz/GeoMaps.js'
 
@@ -10,7 +9,7 @@ import GeoMaps from '../viz/GeoMaps.js'
  * @param {Sim} sim
  * @constructor
  */
-export default function ViewGeoMaps(entities, screenCommon, layout, sim) {
+export default function ViewGeoMaps(entities, screenCommon, layout, changes, sim) {
     const self = this
 
     sim.sims.one.pub.attach(self)
@@ -31,6 +30,12 @@ export default function ViewGeoMaps(entities, screenCommon, layout, sim) {
     }
 
     self.update = function (geoElectionResults) {
+        if (changes.check(['rerender']) && changes.numChanges === 1) {
+            self.clear()
+            self.render()
+            return
+        }
+
         const { error } = geoElectionResults
         if (error !== undefined) {
             flagNoRender = true
@@ -57,5 +62,4 @@ export default function ViewGeoMaps(entities, screenCommon, layout, sim) {
         self.clear()
         self.render()
     }
-    addSVGOutput(screen, self.draw, layout, 'svgMaps')
 }

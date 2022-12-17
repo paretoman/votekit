@@ -9,6 +9,10 @@
 export default function ScreenCommon(w, h) {
     const self = this
 
+    // Publisher
+    const observers = []
+    self.attach = (observer) => { observers.push(observer) }
+
     self.width = w // measured in browser pixels
     self.height = h
 
@@ -21,9 +25,19 @@ export default function ScreenCommon(w, h) {
         body.classList.remove(remove)
         body.classList.add(add)
 
-        // self.ctx.strokeStyle = '#555'
-        // if (self.darkMode) self.ctx.strokeStyle = '#ddd'
+        observers.forEach((o) => { o.setDarkMode(val) })
+
         // https://stackoverflow.com/a/71001410
     }
     self.setDarkMode(window.matchMedia('(prefers-color-scheme: dark)').matches)
+    self.showDownloadScreenLink = false
+    self.setShowDownloadScreenLink = (val) => {
+        self.showDownloadScreenLink = val
+        observers.forEach((o) => { o.setShowDownloadScreenLink(val) })
+    }
+    self.svgMode = false
+    self.setSvgMode = (val) => {
+        self.svgMode = val
+        observers.forEach((o) => { o.setSvgMode(val) })
+    }
 }

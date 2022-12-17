@@ -140,7 +140,7 @@ export default function ClickDrag(dragm, viewEntities, screen, changes, viewSett
      *  https://stackoverflow.com/questions/2614461/javascript-get-mouse-position-relative-to-parent-element
      */
     function getMouse(e) {
-        const rect = screen.canvas.getBoundingClientRect()
+        const rect = screen.wrap.getBoundingClientRect()
         const c = (e.isTouch) ? e.changedTouches[0] : e
         const x = c.clientX - rect.left
         const y = c.clientY - rect.top
