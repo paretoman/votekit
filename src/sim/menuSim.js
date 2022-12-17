@@ -18,7 +18,7 @@ export default function menuSim(sim, menu, layout) {
         {
             label: 'Viz:',
             prop: 'viz',
-            setProp: (p) => { sim.viz = p },
+            setProp: (p) => { sim.setViz(p) },
             options: vizList,
             change: ['viz'],
         },
@@ -33,7 +33,7 @@ export default function menuSim(sim, menu, layout) {
         {
             label: 'Geo:',
             prop: 'geo',
-            setProp: (p) => { sim.geo = p },
+            setProp: (p) => { sim.setGeo(p) },
             options: geoList,
             change: ['geo'],
         },
