@@ -22,10 +22,10 @@ import VoterRendererList from '../voters/VoterRendererList.js'
  * @constructor
  */
 // eslint-disable-next-line max-len
-export default function ViewVizOne(entities, screenMain, screenMini, menu, changes, sim, view, viewSettings) {
+export default function ViewVizOne(entities, screenMain, screenMini, menu, changes, sim, viewSM, viewSettings) {
     const self = this
 
-    view.views.one.pub.attach(self)
+    viewSM.views.one.pub.attach(self)
 
     ViewBase.call(self, screenMain, changes, viewSettings)
 

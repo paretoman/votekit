@@ -76,26 +76,26 @@ export default function sandbox(config, comMessenger, sandboxURL) {
     const sim = new Sim(entities, menu, changes)
     menuSim(sim, menu, layout)
 
-    const view = new ViewStateMachine(sim)
+    const viewSM = new ViewStateMachine(sim)
     const screenCommon = new ScreenCommon(300, 300)
-    const screenMain = new Screen(screenCommon, view, layout, 'viz')
-    const screenMini = new Screen(screenCommon, view, layout, 'vizMini')
+    const screenMain = new Screen(screenCommon, viewSM, layout, 'viz')
+    const screenMini = new Screen(screenCommon, viewSM, layout, 'vizMini')
     screenMini.setHeight(screenCommon.height / 3)
     screenMini.hide()
 
-    addSvgSwitch(screenCommon, layout, view)
+    addSvgSwitch(screenCommon, layout, viewSM)
 
     addDownloadScreen(screenCommon, layout)
 
-    addDarkModeSwitch(screenCommon, layout, view)
+    addDarkModeSwitch(screenCommon, layout, viewSM)
     const viewSettings = new ViewSettings(changes)
-    new ViewOne(entities, screenMain, menu, changes, sim, view, viewSettings)
-    new ViewSample(entities, screenMain, menu, changes, sim, view, viewSettings)
-    new ViewJupyter(sim, view, changes)
-    new ViewVizOne(entities, screenMain, screenMini, menu, changes, sim, view, viewSettings)
-    new ViewVizSample(entities, screenMain, menu, changes, sim, view, viewSettings)
-    new ViewVizBudget(screenCommon, layout, menu, changes, sim, view)
-    new ViewGeoMaps(entities, screenCommon, layout, changes, sim, view)
+    new ViewOne(entities, screenMain, menu, changes, sim, viewSM, viewSettings)
+    new ViewSample(entities, screenMain, menu, changes, sim, viewSM, viewSettings)
+    new ViewJupyter(sim, viewSM, changes)
+    new ViewVizOne(entities, screenMain, screenMini, menu, changes, sim, viewSM, viewSettings)
+    new ViewVizSample(entities, screenMain, menu, changes, sim, viewSM, viewSettings)
+    new ViewVizBudget(screenCommon, layout, menu, changes, sim, viewSM)
+    new ViewGeoMaps(entities, screenCommon, layout, changes, sim, viewSM)
 
     // Default Entities //
     entities.candidateList.addCandidate({ x: 50, y: 100 }, { x: 50 }, '#e05020', true)
@@ -126,7 +126,7 @@ export default function sandbox(config, comMessenger, sandboxURL) {
     }
 
     function drawForeground() {
-        view.clearForeground()
-        view.renderForeground()
+        viewSM.clearForeground()
+        viewSM.renderForeground()
     }
 }

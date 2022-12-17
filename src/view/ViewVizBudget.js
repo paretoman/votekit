@@ -2,12 +2,12 @@ import Screen from '../ui/Screen.js'
 import BaseExplanation from '../viz/BaseExplanation.js'
 import VizExplanationBudgetMES from '../viz/VizExplanationBudgetMES.js'
 
-export default function ViewVizBudget(screenCommon, layout, menu, changes, sim, view) {
+export default function ViewVizBudget(screenCommon, layout, menu, changes, sim, viewSM) {
     const self = this
 
-    view.views.one.pub.attach(self)
+    viewSM.views.one.pub.attach(self)
 
-    const screen = new Screen(screenCommon, view, layout, 'budget')
+    const screen = new Screen(screenCommon, viewSM, layout, 'budget')
     const { height } = screenCommon
     screen.setHeight(height / 3)
     screen.hide()
