@@ -26,6 +26,7 @@ import ViewSample from '../view/ViewSample.js'
 import ScreenCommon from './ScreenCommon.js'
 import addSvgSwitch from './addSvgSwitch.js'
 import addDownloadScreen from './addDownloadScreen.js'
+import ViewStateMachine from '../view/ViewStateMachine.js'
 
 /**
  * Set up a user interface to run a simulation.
@@ -75,9 +76,10 @@ export default function sandbox(config, comMessenger, sandboxURL) {
     const sim = new Sim(entities, menu, changes)
     menuSim(sim, menu, layout)
 
+    const view = new ViewStateMachine(sim)
     const screenCommon = new ScreenCommon(300, 300)
-    const screenMain = new Screen(screenCommon, sim, layout, 'viz')
-    const screenMini = new Screen(screenCommon, sim, layout, 'vizMini')
+    const screenMain = new Screen(screenCommon, view, layout, 'viz')
+    const screenMini = new Screen(screenCommon, view, layout, 'vizMini')
     screenMini.setHeight(screenCommon.height / 3)
     screenMini.hide()
 
@@ -87,14 +89,13 @@ export default function sandbox(config, comMessenger, sandboxURL) {
 
     addDarkModeSwitch(screenCommon, changes, layout)
     const viewSettings = new ViewSettings(changes)
-    new ViewOne(entities, screenMain, menu, changes, sim, viewSettings)
-    new ViewSample(entities, screenMain, menu, changes, sim, viewSettings)
-    new ViewJupyter(sim, changes)
-    new ViewVizOne(entities, screenMain, screenMini, menu, changes, sim, viewSettings)
-    new ViewVizSample(entities, screenMain, menu, changes, sim, viewSettings)
-    new ViewVizBudget(screenCommon, layout, menu, changes, sim)
-
-    new ViewGeoMaps(entities, screenCommon, layout, changes, sim)
+    new ViewOne(entities, screenMain, menu, changes, sim, view, viewSettings)
+    new ViewSample(entities, screenMain, menu, changes, sim, view, viewSettings)
+    new ViewJupyter(sim, view, changes)
+    new ViewVizOne(entities, screenMain, screenMini, menu, changes, sim, view, viewSettings)
+    new ViewVizSample(entities, screenMain, menu, changes, sim, view, viewSettings)
+    new ViewVizBudget(screenCommon, layout, menu, changes, sim, view)
+    new ViewGeoMaps(entities, screenCommon, layout, changes, sim, view)
 
     // Default Entities //
     entities.candidateList.addCandidate({ x: 50, y: 100 }, { x: 50 }, '#e05020', true)
@@ -125,7 +126,7 @@ export default function sandbox(config, comMessenger, sandboxURL) {
     }
 
     function drawForeground() {
-        sim.clearForeground()
-        sim.renderForeground()
+        view.clearForeground()
+        view.renderForeground()
     }
 }

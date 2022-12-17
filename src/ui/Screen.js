@@ -10,7 +10,7 @@ import ScreenSvg from './ScreenSvg.js'
  * @param {Layout} layout
  * @constructor
  */
-export default function Screen(screenCommon, sim, layout, layoutName) {
+export default function Screen(screenCommon, view, layout, layoutName) {
     const self = this
 
     // Components //
@@ -20,7 +20,7 @@ export default function Screen(screenCommon, sim, layout, layoutName) {
 
     self.canvas = new ScreenCanvas()
     self.svg = new ScreenSvg()
-    self.download = new ScreenDownload(self, sim)
+    self.download = new ScreenDownload(self, view)
     self.setShowDownloadScreenLink = self.download.setShowDownloadScreenLink
 
     // Divs //

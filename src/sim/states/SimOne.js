@@ -34,17 +34,12 @@ export default function SimOne(entities, menu, changes, election, electionOne, e
         self.pub.exit()
     }
     self.update = () => {
-        if (changes.checkNone()) return {}
+        if (changes.checkNone()) return
 
         if (sim.geo) voterGeo.update()
         const electionResults = electionStrategy
             .runElectionSim(entities.voterShapeList, entities.candidateList, changes)
 
         self.pub.update(electionResults)
-        return electionResults
     }
-    self.render = () => { self.pub.render() }
-    self.renderForeground = () => { self.pub.renderForeground() }
-    self.clear = () => { self.pub.clear() }
-    self.clearForeground = () => { self.pub.clearForeground() }
 }

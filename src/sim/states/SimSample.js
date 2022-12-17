@@ -53,10 +53,5 @@ export default function SimSample(
         const addResult = electionStrategy
             .update(voterShapeList, candidateDnList, canDnSampler.sampler, changes, dimensions)
         self.pub.update(addResult)
-        return addResult
     }
-    self.render = () => { self.pub.render() }
-    self.renderForeground = () => { self.pub.renderForeground() }
-    self.clear = () => { self.pub.clear() }
-    self.clearForeground = () => { self.pub.clearForeground() }
 }

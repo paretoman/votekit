@@ -18,10 +18,10 @@ import CandidateDnRendererList from '../candidateDns/CandidateDnRendererList.js'
  * @param {ViewSettings} viewSettings
  * @constructor
  */
-export default function ViewVizSample(entities, screen, menu, changes, sim, viewSettings) {
+export default function ViewVizSample(entities, screen, menu, changes, sim, view, viewSettings) {
     const self = this
 
-    sim.sims.sample.pub.attach(self)
+    view.views.sample.pub.attach(self)
 
     ViewBase.call(self, screen, changes, viewSettings)
 

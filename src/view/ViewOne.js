@@ -15,10 +15,10 @@ import VoterTest from '../voters/VoterTest.js'
  * @param {ViewSettings} viewSettings
  * @constructor
  */
-export default function ViewOne(entities, screen, menu, changes, sim, viewSettings) {
+export default function ViewOne(entities, screen, menu, changes, sim, view, viewSettings) {
     const self = this
 
-    sim.sims.one.pub.attach(self)
+    view.views.one.pub.attach(self)
 
     ViewBase.call(self, screen, changes, viewSettings)
 

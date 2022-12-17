@@ -1,9 +1,13 @@
 import jupyterUpdate, { jupyterClear } from './jupyter.js'
 
-export default function ViewJupyter(sim, changes) {
+export default function ViewJupyter(sim, view, changes) {
     const self = this
 
-    sim.attach(self)
+    view.views.one.pub.attach(self)
+    view.views.sample.pub.attach(self)
+
+    self.enter = () => {}
+    self.exit = () => {}
 
     self.update = (electionResults) => {
         if (changes.checkNone()) return

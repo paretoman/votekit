@@ -45,13 +45,6 @@ export default function Sim(entities, menu, changes) {
     }
     self.sims = sims
 
-    // Publish for View //
-    const observers = []
-    self.attach = (observer) => { observers.push(observer) }
-    const updateObservers = (electionResults) => {
-        observers.forEach((o) => o.update(electionResults))
-    }
-
     // Defaults //
     self.state = 'one'
     self.viz = 'one'
@@ -68,14 +61,8 @@ export default function Sim(entities, menu, changes) {
             self.state = self.viz
             sims[self.state].enter()
         }
-        const results = sims[self.state].update()
+        sims[self.state].update()
 
-        updateObservers(results)
         changes.clear()
     }
-
-    self.render = () => { sims[self.state].render() }
-    self.renderForeground = () => { sims[self.state].renderForeground() }
-    self.clear = () => { sims[self.state].clear() }
-    self.clearForeground = () => { sims[self.state].clearForeground() }
 }
