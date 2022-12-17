@@ -14,7 +14,7 @@ export default function ViewGeoMaps(entities, screenCommon, layout, changes, sim
 
     sim.sims.one.pub.attach(self)
 
-    const screen = new Screen(screenCommon, layout, 'maps')
+    const screen = new Screen(screenCommon, sim, layout, 'maps')
     const { height } = screenCommon
     screen.setHeight(height / 3)
     screen.hide()

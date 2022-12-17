@@ -7,7 +7,7 @@ export default function ViewVizBudget(screenCommon, layout, menu, changes, sim) 
 
     sim.sims.one.pub.attach(self)
 
-    const screen = new Screen(screenCommon, layout, 'budget')
+    const screen = new Screen(screenCommon, sim, layout, 'budget')
     const { height } = screenCommon
     screen.setHeight(height / 3)
     screen.hide()

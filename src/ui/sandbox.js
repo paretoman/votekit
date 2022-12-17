@@ -71,9 +71,13 @@ export default function sandbox(config, comMessenger, sandboxURL) {
 
     addLoadConfigText(layout, commander)
 
+    const entities = new Entities(menu, changes, commander, layout)
+    const sim = new Sim(entities, menu, changes)
+    menuSim(sim, menu, layout)
+
     const screenCommon = new ScreenCommon(300, 300)
-    const screenMain = new Screen(screenCommon, layout, 'viz')
-    const screenMini = new Screen(screenCommon, layout, 'vizMini')
+    const screenMain = new Screen(screenCommon, sim, layout, 'viz')
+    const screenMini = new Screen(screenCommon, sim, layout, 'vizMini')
     screenMini.setHeight(screenCommon.height / 3)
     screenMini.hide()
 
@@ -82,9 +86,6 @@ export default function sandbox(config, comMessenger, sandboxURL) {
     addDownloadScreen(screenCommon, layout)
 
     addDarkModeSwitch(screenCommon, changes, layout)
-    const entities = new Entities(menu, changes, commander, layout)
-    const sim = new Sim(entities, menu, changes)
-    menuSim(sim, menu, layout)
     const viewSettings = new ViewSettings(changes)
     new ViewOne(entities, screenMain, menu, changes, sim, viewSettings)
     new ViewSample(entities, screenMain, menu, changes, sim, viewSettings)
