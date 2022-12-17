@@ -109,18 +109,11 @@ export default function Screen(screenCommon, layout, layoutName) {
     }
     self.setSvgMode(false)
 
-    self.setDisplayStyle = (displayStyle) => {
-        self.canvas.setDisplayStyle(displayStyle)
-        self.svg.setDisplayStyle(displayStyle)
-        self.tooltips.style.display = displayStyle
-        self.wrap.style.display = displayStyle
-        self.outer.style.display = displayStyle
-    }
     self.show = () => {
-        self.setDisplayStyle('block')
+        self.outer.style.display = 'block'
     }
     self.hide = () => {
-        self.setDisplayStyle('none')
+        self.outer.style.display = 'none'
     }
 
     self.setDarkMode = (doDarkMode) => {

@@ -14,12 +14,12 @@ export default function ScreenDownload(screen) {
 
     const downloadLink = document.createElement('a')
     downloadLink.innerText = 'Background'
-    downloadLink.download = 'vote.svg'
+    downloadLink.download = 'voteBackground.svg'
     downloadLink.style.margin = '4px'
 
     const downloadLinkF = document.createElement('a')
     downloadLinkF.innerText = 'Foreground'
-    downloadLinkF.download = 'vote.svg'
+    downloadLinkF.download = 'voteForeground.svg'
     downloadLinkF.style.margin = '4px'
 
     self.div.append(makeSvgButton)
