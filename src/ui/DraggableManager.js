@@ -30,9 +30,9 @@ export default function DraggableManager() {
             d.o = s.canDn
             d.p = { isSquare: true }
         } else {
-            d.g = s.circle
-            d.r = s
-            d.o = s
+            d.g = s.graphic.circle
+            d.r = s.graphic
+            d.o = s.voterTest
             d.p = { isCircle: true }
         }
         self.list.push(d)

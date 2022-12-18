@@ -1,10 +1,4 @@
-import CircleGraphic from '../vizEntities/CircleGraphic.js'
-import hideOnClickOutside from '../tooltips/hideOnClickOutside.js'
-import tooltipForTestVoter from '../tooltips/tooltipForTestVoter.js'
-import colorBlender, { rgbToString } from '../viz/colorBlender.js'
-import EntityGraphic from '../vizEntities/EntityGraphic.js'
-
-export default function VoterTest(screen, sim, viewOne, viewSettings) {
+export default function VoterTest(viewOne) {
     const self = this
 
     // Position
@@ -42,62 +36,12 @@ export default function VoterTest(screen, sim, viewOne, viewSettings) {
     self.setAction.shape1x(0)
     self.setAction.shape2p({ x: 0, y: 0 })
 
-    // Start displaying testvoter
-    self.start = (p) => {
-        viewOne.voterTest.setE(1)
-        viewOne.voterTest.setXYView(p)
-        hideOnClickOutside(screen.wrap, removeTestPoint)
-    }
-    function removeTestPoint() {
-        viewOne.voterTest.setE(0)
-    }
-
-    // Dragging
-
     self.color = '#999'
-    const circle = new CircleGraphic(self, self, 9, screen)
-    self.circle = circle
 
-    EntityGraphic.call(self, self, screen, sim.election)
-
-    viewOne.dragm.add(self)
-
-    // Rendering
-
-    let tooltip = {}
-
-    self.update = (vote, candidateList) => {
-        // who would this test point vote for?
-        if (vote === undefined) return null
-
-        const canList = candidateList.getCandidates()
-        const colorSet = canList.map((can) => can.color)
-        const colorSetRGBA = canList.map((can) => can.colorRGBA)
-        self.colorSet = colorSet
-
-        const { tallyFractions } = vote
-        self.color = rgbToString(colorBlender(tallyFractions, colorSetRGBA))
-
-        if (tooltip.box) {
-            tooltip.update(vote, self.color, self.colorSet)
-        }
-
-        return vote
+    self.setAction.color = (newColor) => {
+        self.color = newColor
     }
-
-    self.click = () => {
-        const vote = viewOne.testVoteView()
-        if (vote === null) return
-
-        if (tooltip.box) tooltip.box.remove()
-        tooltip = tooltipForTestVoter(self, screen)
-        tooltip.update(vote, self.color, self.colorSet)
-    }
-
-    self.renderForeground = () => {
-        // handle
-        if (self.exists || viewSettings.showGhosts) {
-            circle.render()
-        }
+    self.setColor = (e) => {
+        self.setAction.color(e)
     }
 }

@@ -1,10 +1,10 @@
 import tooltipBox from './tooltipBox.js'
 import TooltipVoteText from './TooltipVoteText.js'
 
-export default function tooltipForTestVoter(voterTest, screen) {
+export default function tooltipForTestVoter(voterTestGraphic, voterTest, screen) {
     // make a html box appear
 
-    const tbox = tooltipBox(voterTest, screen)
+    const tbox = tooltipBox(voterTestGraphic, screen)
     const { box, setPin } = tbox
 
     box.innerText = 'Vote'

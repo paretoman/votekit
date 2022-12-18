@@ -4,7 +4,7 @@ import CandidateViewList from '../candidates/CandidateViewList.js'
 import VoterViewList from '../voters/VoterViewList.js'
 import ViewBase from './ViewBase.js'
 import addAllocation from '../viz/addAllocation.js'
-import VoterTest from '../voters/VoterTest.js'
+import VoterTestView from '../voters/VoterTestView.js'
 
 /**
  * Draw entities: voters, candidates, test voters.
@@ -31,7 +31,7 @@ export default function ViewOne(entities, screen, menu, changes, sim, viewSM, vi
     candidateViewList.attachNewG(self.dragm)
     voterViewList.attachNewG(self.dragm)
 
-    self.voterTest = new VoterTest(screen, sim, self, viewSettings)
+    self.voterTestView = new VoterTestView(screen, sim, self, viewSettings)
 
     // Main State Machine Functions //
 
@@ -42,13 +42,13 @@ export default function ViewOne(entities, screen, menu, changes, sim, viewSM, vi
         candidateList.canButton.show()
         voterViewList.updateViewXY()
         candidateViewList.updateViewXY()
-        self.voterTest.updateViewXY()
+        self.voterTestView.graphic.updateViewXY()
     }
 
     self.exit = () => {
         candidateViewList.unsetCandidateWins() // clean up fractions
         candidateList.canButton.hide()
-        self.voterTest.setE(0)
+        self.voterTestView.voterTest.setE(0)
     }
 
     self.update = (electionResults) => {
@@ -78,18 +78,18 @@ export default function ViewOne(entities, screen, menu, changes, sim, viewSM, vi
 
     // Test Point
     self.clickEmpty = (p) => {
-        self.voterTest.start(p)
+        self.voterTestView.graphic.start(p)
     }
     self.testVoteView = () => {
-        const vote = election.testVoteE(self.voterTest, candidateList)
-        self.voterTest.update(vote, candidateList)
+        const vote = election.testVoteE(self.voterTestView.voterTest, candidateList)
+        self.voterTestView.graphic.update(vote, candidateList)
         return vote
     }
 
     self.renderForeground = () => {
         voterViewList.renderForeground()
         candidateViewList.renderForeground()
-        self.voterTest.renderForeground()
+        self.voterTestView.graphic.renderForeground()
     }
     self.clearForeground = () => {
         screen.clearForeground()
