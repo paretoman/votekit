@@ -16,7 +16,7 @@ import { range } from '../utilities/jsHelpers.js'
 export default function ElectionGeo(election, voterGeo) {
     const self = this
 
-    const optionCast = { usr: 32 }
+    const simCastOptions = { usr: 32 }
 
     self.runElectionSim = (voterShapeList, candidateList, changes) => {
         if (changes.checkNone()) return { error: 'No Changes' }
@@ -60,7 +60,7 @@ export default function ElectionGeo(election, voterGeo) {
 
         const votesByTract = voterGroupsByTract.map(
             (row) => row.map(
-                (voterGroups) => election.castVotes.run(voterGroups, canList, parties, optionCast),
+                (voterGroups) => election.castVotes.run(voterGroups, canList, parties, simCastOptions),
             ),
         )
         return votesByTract

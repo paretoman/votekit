@@ -13,7 +13,7 @@
 export default function ElectionSampleGeo(election, electionGeo, voterGeo) {
     const self = this
 
-    // const optionCast = { usr: 16 }
+    // const simCastOptions = { usr: 16 }
 
     const maxPoints = 5000
 

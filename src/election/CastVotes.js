@@ -10,17 +10,17 @@ export default function CastVotes(menu, socialChoice) {
 
     self.options = new CastOptions(menu)
 
-    self.run = (voterShapes, canList, parties, optionCast) => {
+    self.run = (voterShapes, canList, parties, simCastOptions) => {
         const voterGeoms = getGeoms(voterShapes)
         const canGeoms = getGeoms(canList)
         const { cast } = voteCasters[socialChoice.casterName]
         const votes = cast({
-            canGeoms, voterGeoms, dimensions: self.options.dimensions, optionCast, parties,
+            canGeoms, voterGeoms, dimensions: self.options.dimensions, simCastOptions, parties,
         })
         return votes
     }
 
-    self.runTest = (voterTest, candidateList, optionCast) => {
+    self.runTest = (voterTest, candidateList, simCastOptions) => {
         const voterShapes = [voterTest]
         const canList = candidateList.getCandidates()
         const voterGeom = getGeoms(voterShapes)[0]
@@ -28,7 +28,7 @@ export default function CastVotes(menu, socialChoice) {
         const partiesByCan = getPartyByCan(canList)
         const { castTestVote } = voteCasters[socialChoice.casterName]
         const vote = castTestVote({
-            canGeoms, voterGeom, dimensions: self.options.dimensions, optionCast, partiesByCan,
+            canGeoms, voterGeom, dimensions: self.options.dimensions, simCastOptions, partiesByCan,
         })
         return vote
     }

@@ -13,7 +13,7 @@
 export default function ElectionSample(election) {
     const self = this
 
-    const optionCast = { usr: 16 }
+    const simCastOptions = { usr: 16 }
 
     const maxPoints = 5000
 
@@ -70,7 +70,7 @@ export default function ElectionSample(election) {
             }
 
             // find winner position
-            const electionResults = election.runElection(voterShapes, canList, optionCast)
+            const electionResults = election.runElection(voterShapes, canList, simCastOptions)
 
             if (election.socialChoice.checkElectionType() === 'singleWinner') {
                 const { winner } = electionResults
