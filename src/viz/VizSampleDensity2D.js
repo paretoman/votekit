@@ -19,7 +19,7 @@ export default function VizSampleDensity2D(voterRendererList, canDnRendererList,
 
     // Candidates //
 
-    const { dimensions } = sim.election
+    const { dimensions } = sim.election.castVotes.options
 
     // voter renderer factory //
     const VoterRenderer = (dimensions === 1) ? VoterRender1D : VoterRender2D

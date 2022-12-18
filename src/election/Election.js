@@ -1,8 +1,8 @@
 /** @module */
 
-import voteCasters from '../castVotes/voteCasters.js'
 import jupyterUpdate from '../environments/jupyter.js'
 import SocialChoice from './SocialChoice.js'
+import CastVotes from './CastVotes.js'
 
 /**
  * Here we are in the context of a single election with voter objects and candidate objects.
@@ -13,30 +13,18 @@ export default function Election(menu) {
     const self = this
 
     self.socialChoice = new SocialChoice(menu)
-    self.dimensions = 1
+    self.castVotes = new CastVotes(menu, self.socialChoice)
 
-    self.setDimensions = (d) => { self.dimensions = d }
+    // Election //
 
-    // Dimensions //
-
-    /** Get the correct geometry, depending on number of dimensions. */
-    const mapVoters = (voterShapes) => {
-        if (self.dimensions === 1) {
-            return voterShapes.map((vg) => (vg.shape1))
-        }
-        return voterShapes.map((vg) => (vg.shape2))
+    self.runElection = function (voterShapes, canList, optionCast) {
+        const parties = self.getParties(canList)
+        const votes = self.castVotes.run(voterShapes, canList, parties, optionCast)
+        const electionResults = self.socialChoice.run(canList, votes, parties)
+        jupyterUpdate({ votes })
+        return electionResults
     }
 
-    /** Get the correct geometry, depending on number of dimensions. */
-    const mapCans = (canList) => {
-        if (self.dimensions === 1) {
-            return canList.map((can) => (can.shape1))
-        }
-        return canList.map((can) => (can.shape2))
-    }
-
-    // TODO: consider more than one party for a candidate.
-    const getPartyByCan = (canList) => canList.map((can) => can.party[0])
     self.getParties = (canList) => {
         const partiesByCan = getPartyByCan(canList)
         // TODO: figure out how to vary the number of parties, allow skipping etc.
@@ -45,38 +33,6 @@ export default function Election(menu) {
         return parties
     }
 
-    // Election //
-
-    self.runElection = function (voterShapes, canList, optionCast) {
-        const parties = self.getParties(canList)
-        const votes = self.castVotes(voterShapes, canList, parties, optionCast)
-        const electionResults = self.socialChoice.run(canList, votes, parties)
-        jupyterUpdate({ votes })
-        return electionResults
-    }
-
-    // Voters cast votes for candidates.
-    // There is also a separate graphical representation in Voronoi2D.js
-    self.castVotes = (voterShapes, canList, parties, optionCast) => {
-        const voterGeoms = mapVoters(voterShapes)
-        const canGeoms = mapCans(canList)
-        const { cast } = voteCasters[self.socialChoice.casterName]
-        const votes = cast({
-            canGeoms, voterGeoms, dimensions: self.dimensions, optionCast, parties,
-        })
-        return votes
-    }
-
-    self.testVoteE = (voterTest, candidateList, optionCast) => {
-        const voterShapes = [voterTest]
-        const canList = candidateList.getCandidates()
-        const voterGeom = mapVoters(voterShapes)[0]
-        const canGeoms = mapCans(canList)
-        const partiesByCan = getPartyByCan(canList)
-        const { castTestVote } = voteCasters[self.socialChoice.casterName]
-        const vote = castTestVote({
-            canGeoms, voterGeom, dimensions: self.dimensions, optionCast, partiesByCan,
-        })
-        return vote
-    }
+    // TODO: consider more than one party for a candidate.
+    function getPartyByCan(canList) { return canList.map((can) => can.party[0]) }
 }

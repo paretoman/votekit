@@ -49,7 +49,7 @@ export default function SimSample(
         if (sim.geo) voterGeo.update()
         canDnSampler.update()
 
-        const { dimensions } = sim.election
+        const { dimensions } = sim.election.castVotes.options
         const addResult = electionStrategy
             .update(voterShapeList, candidateDnList, canDnSampler.sampler, changes, dimensions)
         self.pub.update(addResult)

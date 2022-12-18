@@ -15,7 +15,7 @@ export default function VizOneGrid(voterRendererList, candidateList, screenMain,
     const self = this
 
     // renderer factory //
-    const { dimensions } = sim.election
+    const { dimensions } = sim.election.castVotes.options
     const Grid = (dimensions === 1) ? Grid1D : Grid2D
     const rendererMaker = () => new Grid(candidateList, screenMain, screenMini)
     voterRendererList.setRenderer(rendererMaker)
@@ -37,7 +37,7 @@ export default function VizOneGrid(voterRendererList, candidateList, screenMain,
         voterRendererList.updateGraphic(gridData)
     }
     self.render = function () {
-        if (sim.election.dimensions === 1) {
+        if (dimensions === 1) {
             voterRendererList.renderBackground()
         }
 

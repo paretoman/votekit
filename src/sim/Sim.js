@@ -49,7 +49,6 @@ export default function Sim(entities, menu, changes) {
     self.state = 'one'
     self.viz = 'one'
     self.geo = false
-    self.election.setDimensions(2)
     self.setViz = (v) => { self.viz = v }
     self.setGeo = (g) => { self.geo = g }
 

@@ -2,10 +2,11 @@ export default function VizGeoPolicyNoise(sim, screen) {
     const self = this
 
     self.render = () => {
+        const { dimensions } = sim.election.castVotes.options
         sim.voterGeo.voterGroupsByTract.forEach((row) => {
             row.forEach((cell) => {
                 cell.forEach((voterGroup) => {
-                    if (sim.election.dimensions === 1) {
+                    if (dimensions === 1) {
                         const { x } = voterGroup.shape1
                         const { y } = voterGroup.shape2
                         const ym = (y % 100) + 0 // TODO: better visual

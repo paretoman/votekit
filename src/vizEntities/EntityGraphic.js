@@ -3,7 +3,8 @@ export default function EntityGraphic(entity, screen, election) {
 
     // View sets model
     self.setXYView = (p) => {
-        if (election.dimensions === 1) {
+        const { dimensions } = election.castVotes.options
+        if (dimensions === 1) {
             entity.setXY1(p)
         } else {
             entity.setXY2(p)
@@ -13,7 +14,8 @@ export default function EntityGraphic(entity, screen, election) {
 
     /** Model sets view position when entering a view state */
     self.updateViewXY = () => {
-        if (election.dimensions === 1) {
+        const { dimensions } = election.castVotes.options
+        if (dimensions === 1) {
             self.x = entity.shape1.x
             self.y = 250
         } else {

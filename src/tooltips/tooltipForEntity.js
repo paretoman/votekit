@@ -20,7 +20,8 @@ export default function tooltipForEntity(graphic, entity, screen, election, view
         entity.exists === 1,
     )
     box.appendChild(items.exists.div)
-    if (election.dimensions === 1) {
+    const { dimensions } = election.castVotes.options
+    if (dimensions === 1) {
         if (entity.shape1.w) {
             items.w1 = new Item(
                 'range',

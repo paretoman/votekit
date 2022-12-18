@@ -11,7 +11,7 @@ export default function CandidateDistributionSampler(candidateDnList, changes, e
     }
 
     self.startSampler = () => {
-        const { dimensions } = election
+        const { dimensions } = election.castVotes.options
         const canDnsList = candidateDnList.getCandidateDistributions()
         if (canDnsList.length === 0) return
         const CDnSampler = (dimensions === 1)

@@ -38,19 +38,4 @@ export default function menuSim(sim, menu, layout) {
             change: ['geo'],
         },
     )
-
-    const dimensionList = [
-        { name: '1D', value: 1 },
-        { name: '2D', value: 2 },
-    ]
-    menu.addMenuItem(
-        sim.election,
-        {
-            label: 'Dimensions:',
-            prop: 'dimensions',
-            setProp: (p) => { sim.election.setDimensions(p) },
-            options: dimensionList,
-            change: ['dimensions'],
-        },
-    )
 }
