@@ -15,7 +15,7 @@ import VoterRender2D from './VoterRender2D.js'
 export default function VizGeo(voterRendererList, candidateList, screen, screenMini, sim) {
     const self = this
 
-    const { dimensions } = sim.election.castVotes.options
+    const { dimensions } = sim.election.castOptions
     const VoterRenderer = (dimensions === 1) ? VoterRender1D : VoterRender2D
     voterRendererList.setRenderer((voterShape) => new VoterRenderer(voterShape, screen))
 

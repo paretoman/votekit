@@ -36,7 +36,7 @@ export default function ViewVizSample(entities, screen, menu, changes, sim, view
     let vizSample
     function enterStrategy() {
         const doDensity = true // TODO : make into an option, perhaps
-        const { dimensions } = sim.election.castVotes.options
+        const { dimensions } = sim.election.castOptions
         const VizSampleDensity = (dimensions === 1)
             ? VizSampleDensity1D
             : VizSampleDensity2D

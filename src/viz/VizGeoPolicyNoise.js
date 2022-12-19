@@ -2,7 +2,7 @@ export default function VizGeoPolicyNoise(sim, screen) {
     const self = this
 
     self.render = () => {
-        const { dimensions } = sim.election.castVotes.options
+        const { dimensions } = sim.election.castOptions
         sim.voterGeo.voterGroupsByTract.forEach((row) => {
             row.forEach((cell) => {
                 cell.forEach((voterGroup) => {

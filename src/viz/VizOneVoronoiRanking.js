@@ -16,7 +16,7 @@ export default function VizOneVoronoiRanking(voterRendererList, candidateList, s
     const self = this
 
     // renderer factory //
-    const { dimensions } = sim.election.castVotes.options
+    const { dimensions } = sim.election.castOptions
     const VoronoiRanking = (dimensions === 1) ? VoronoiRanking1D : VoronoiRanking2D
     const rendererMaker = (voterShape) => new VoronoiRanking(voterShape, candidateList, screen)
     voterRendererList.setRenderer(rendererMaker)

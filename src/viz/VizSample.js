@@ -20,7 +20,7 @@ export default function VizSample(voterRendererList, canDnRendererList, screen, 
     canvas2.height = screen.canvas.height
     const context2 = canvas2.getContext('2d')
 
-    const { dimensions } = sim.election.castVotes.options
+    const { dimensions } = sim.election.castOptions
 
     // voter renderer factory //
     const VoterRenderer = (dimensions === 1) ? VoterRender1D : VoterRender2D

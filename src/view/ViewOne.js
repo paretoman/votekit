@@ -81,7 +81,8 @@ export default function ViewOne(entities, screen, menu, changes, sim, viewSM, vi
         self.voterTestView.graphic.start(p)
     }
     self.testVoteView = () => {
-        const vote = election.castVotes.runTest(self.voterTestView.voterTest, candidateList)
+        const { castOptions } = election
+        const vote = election.castVotes.runTest(self.voterTestView.voterTest, candidateList, castOptions)
         self.voterTestView.graphic.update(vote, candidateList)
         return vote
     }
