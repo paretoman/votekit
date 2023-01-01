@@ -14,12 +14,12 @@ import VoterRender2D from './VoterRender2D.js'
  * @constructor
  */
 // eslint-disable-next-line max-len
-export default function VizSampleDensity2D(voterRendererList, canDnRendererList, screen, changes, sim) {
+export default function VizSampleDensity2D(voterRendererList, canDnRendererList, screen, changes, sim, simOptions) {
     const self = this
 
     // Candidates //
 
-    const { dimensions } = sim.election.castOptions
+    const { dimensions } = simOptions
 
     // voter renderer factory //
     const VoterRenderer = (dimensions === 1) ? VoterRender1D : VoterRender2D

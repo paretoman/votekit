@@ -4,13 +4,13 @@ import EntityGraphic from './EntityGraphic.js'
 import SquareGraphic from './SquareGraphic.js'
 
 // eslint-disable-next-line max-len
-export default function CandidateGraphic(candidate, screen, election, wHandle, hHandle, viewSettings) {
+export default function CandidateGraphic(candidate, screen, election, wHandle, hHandle, viewSettings, simOptions) {
     const self = this
 
     const square = new SquareGraphic(self, candidate, wHandle, hHandle, screen)
     self.square = square
 
-    EntityGraphic.call(self, candidate, screen, election)
+    EntityGraphic.call(self, candidate, simOptions)
 
     self.fraction = 0
     self.setFraction = function (fraction) {
@@ -59,6 +59,6 @@ export default function CandidateGraphic(candidate, screen, election, wHandle, h
 
     // Click Handler
     self.click = () => {
-        tooltipForEntity(self, candidate, screen, election, viewSettings)
+        tooltipForEntity(self, candidate, screen, viewSettings, simOptions)
     }
 }

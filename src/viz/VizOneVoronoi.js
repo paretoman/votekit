@@ -11,11 +11,11 @@ import Voronoi2D from './Voronoi2D.js'
  * @param {Sim} sim
  * @constructor
  */
-export default function VizOneVoronoi(voterRendererList, candidateList, screen, screenMini, sim) {
+export default function VizOneVoronoi(voterRendererList, candidateList, screen, screenMini, sim, simOptions) {
     const self = this
 
     // renderer factory //
-    const { dimensions } = sim.election.castOptions
+    const { dimensions } = simOptions
     const Voronoi = (dimensions === 1) ? Voronoi1D : Voronoi2D
     const rendererMaker = (voterShape) => new Voronoi(voterShape, candidateList, screen)
     voterRendererList.setRenderer(rendererMaker)

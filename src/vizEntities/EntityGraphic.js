@@ -1,9 +1,9 @@
-export default function EntityGraphic(entity, screen, election) {
+export default function EntityGraphic(entity, simOptions) {
     const self = this
 
     // View sets model
     self.setXYView = (p) => {
-        const { dimensions } = election.castOptions
+        const { dimensions } = simOptions
         if (dimensions === 1) {
             entity.setXY1(p)
         } else {
@@ -14,7 +14,7 @@ export default function EntityGraphic(entity, screen, election) {
 
     /** Model sets view position when entering a view state */
     self.updateViewXY = () => {
-        const { dimensions } = election.castOptions
+        const { dimensions } = simOptions
         if (dimensions === 1) {
             self.x = entity.shape1.x
             self.y = 250

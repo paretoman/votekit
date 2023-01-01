@@ -18,7 +18,7 @@ import CandidateDnRendererList from '../candidateDns/CandidateDnRendererList.js'
  * @param {ViewSettings} viewSettings
  * @constructor
  */
-export default function ViewVizSample(entities, screen, menu, changes, sim, viewSM, viewSettings) {
+export default function ViewVizSample(entities, screen, menu, changes, sim, simOptions, viewSM, viewSettings) {
     const self = this
 
     viewSM.views.sample.pub.attach(self)
@@ -36,12 +36,12 @@ export default function ViewVizSample(entities, screen, menu, changes, sim, view
     let vizSample
     function enterStrategy() {
         const doDensity = true // TODO : make into an option, perhaps
-        const { dimensions } = sim.election.castOptions
+        const { dimensions } = simOptions
         const VizSampleDensity = (dimensions === 1)
             ? VizSampleDensity1D
             : VizSampleDensity2D
         const VizSampleStrat = (doDensity) ? VizSampleDensity : VizSample
-        vizSample = new VizSampleStrat(voterRendererList, canDnRendererList, screen, changes, sim)
+        vizSample = new VizSampleStrat(voterRendererList, canDnRendererList, screen, changes, sim, simOptions)
     }
     enterStrategy()
 

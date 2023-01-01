@@ -31,7 +31,7 @@ export default function SimSample(
     self.pub = new StatePublisher()
 
     const { candidateDnList, voterShapeList } = entities
-    const canDnSampler = new CandidateDistributionSampler(candidateDnList, changes, election)
+    const canDnSampler = new CandidateDistributionSampler(candidateDnList, changes, simOptions)
 
     // Strategies //
     let electionStrategy
@@ -50,7 +50,7 @@ export default function SimSample(
         if (simOptions.geo) voterGeo.update()
         canDnSampler.update()
 
-        const { dimensions } = sim.election.castOptions
+        const { dimensions } = simOptions
         const addResult = electionStrategy
             .update(voterShapeList, candidateDnList, canDnSampler.sampler, changes, dimensions)
         self.pub.update(addResult)

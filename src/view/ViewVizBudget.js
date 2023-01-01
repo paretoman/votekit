@@ -17,7 +17,7 @@ export default function ViewVizBudget(screenCommon, layout, menu, changes, sim, 
     function enterStrategy() {
         const { electionMethod } = sim.election.socialChoice
         const noGeo = !simOptions.geo
-        const { dimensions } = sim.election.castOptions
+        const { dimensions } = simOptions
         const VizExplanation = (electionMethod === 'methodOfEqualShares' && noGeo && dimensions === 1) ? VizExplanationBudgetMES : BaseExplanation
         vizExplanation = new VizExplanation(screen)
     }

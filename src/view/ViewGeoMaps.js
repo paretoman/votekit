@@ -9,7 +9,7 @@ import GeoMaps from '../viz/GeoMaps.js'
  * @param {Sim} sim
  * @constructor
  */
-export default function ViewGeoMaps(entities, screenCommon, layout, changes, sim, viewSM, simOptions) {
+export default function ViewGeoMaps(entities, screenCommon, layout, changes, sim, simOptions, viewSM) {
     const self = this
 
     viewSM.views.one.pub.attach(self)

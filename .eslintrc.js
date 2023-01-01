@@ -23,5 +23,6 @@ module.exports = {
         'func-names': 'off',
         'import/no-unresolved': 'off',
         'no-bitwise': 'off',
+        'max-len': 'off',
     },
 }

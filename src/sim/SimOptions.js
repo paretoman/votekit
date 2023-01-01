@@ -2,13 +2,18 @@
  * Add menu items to switch between types of sims.
  * @param {Menu} menu
  */
-export default function SimOptions(menu) {
+export default function SimOptions(menu, changes) {
     const self = this
 
-    self.viz = 'one'
-    self.geo = false
     self.setViz = (v) => { self.viz = v }
     self.setGeo = (g) => { self.geo = g }
+    self.setDimensions = (d) => { self.dimensions = d }
+
+    // Defaults
+    self.setViz('one')
+    self.setGeo(false)
+    self.setDimensions(2)
+    changes.add(['geo', 'dimensions', 'viz'])
 
     const vizList = [
         { name: 'One Election', value: 'one' },
@@ -37,6 +42,21 @@ export default function SimOptions(menu) {
             setProp: (p) => { self.setGeo(p) },
             options: geoList,
             change: ['geo'],
+        },
+    )
+
+    const dimensionList = [
+        { name: '1D', value: 1 },
+        { name: '2D', value: 2 },
+    ]
+    menu.addMenuItem(
+        self,
+        {
+            label: 'Dimensions:',
+            prop: 'dimensions',
+            setProp: (p) => { self.setDimensions(p) },
+            options: dimensionList,
+            change: ['dimensions'],
         },
     )
 }

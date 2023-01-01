@@ -4,11 +4,11 @@ import voteCasters from '../castVotes/voteCasters.js'
  * Voters cast votes for candidates.
  * @param {Menu} menu - add to menu options
  */
-export default function CastVotes(menu, socialChoice) {
+export default function CastVotes(menu, socialChoice, simOptions) {
     const self = this
 
-    self.run = (voterShapes, canList, parties, castOptions, simCastOptions) => {
-        const { dimensions } = castOptions
+    self.run = (voterShapes, canList, parties, simCastOptions) => {
+        const { dimensions } = simOptions
         const voterGeoms = getGeoms(voterShapes, dimensions)
         const canGeoms = getGeoms(canList, dimensions)
         const { cast } = voteCasters[socialChoice.casterName]
@@ -18,8 +18,8 @@ export default function CastVotes(menu, socialChoice) {
         return votes
     }
 
-    self.runTest = (voterTest, candidateList, castOptions, simCastOptions) => {
-        const { dimensions } = castOptions
+    self.runTest = (voterTest, candidateList) => {
+        const { dimensions } = simOptions
         const voterShapes = [voterTest]
         const canList = candidateList.getCandidates()
         const voterGeom = getGeoms(voterShapes, dimensions)[0]
@@ -27,7 +27,7 @@ export default function CastVotes(menu, socialChoice) {
         const partiesByCan = getPartyByCan(canList)
         const { castTestVote } = voteCasters[socialChoice.casterName]
         const vote = castTestVote({
-            canGeoms, voterGeom, dimensions, simCastOptions, partiesByCan,
+            canGeoms, voterGeom, dimensions, partiesByCan,
         })
         return vote
     }

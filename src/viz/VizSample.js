@@ -9,7 +9,7 @@ import VoterRender2D from './VoterRender2D.js'
  * @param {screen} screen - draw to the screen
  * @constructor
  */
-export default function VizSample(voterRendererList, canDnRendererList, screen, changes, sim) {
+export default function VizSample(voterRendererList, canDnRendererList, screen, changes, sim, simOptions) {
     const self = this
 
     // Candidates //
@@ -20,7 +20,7 @@ export default function VizSample(voterRendererList, canDnRendererList, screen, 
     canvas2.height = screen.canvas.height
     const context2 = canvas2.getContext('2d')
 
-    const { dimensions } = sim.election.castOptions
+    const { dimensions } = simOptions
 
     // voter renderer factory //
     const VoterRenderer = (dimensions === 1) ? VoterRender1D : VoterRender2D

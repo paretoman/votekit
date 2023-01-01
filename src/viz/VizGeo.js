@@ -12,14 +12,14 @@ import VoterRender2D from './VoterRender2D.js'
  * @param {Sim} sim
  * @constructor
  */
-export default function VizGeo(voterRendererList, candidateList, screen, screenMini, sim) {
+export default function VizGeo(voterRendererList, candidateList, screen, screenMini, sim, simOptions) {
     const self = this
 
-    const { dimensions } = sim.election.castOptions
+    const { dimensions } = simOptions
     const VoterRenderer = (dimensions === 1) ? VoterRender1D : VoterRender2D
     voterRendererList.setRenderer((voterShape) => new VoterRenderer(voterShape, screen))
 
-    const vizGeoPolicyNoise = new VizGeoPolicyNoise(sim, screen)
+    const vizGeoPolicyNoise = new VizGeoPolicyNoise(sim, simOptions, screen)
 
     self.enter = () => { }
     self.exit = () => { }

@@ -60,7 +60,7 @@ export default function ElectionGeo(election, voterGeo) {
 
         const votesByTract = voterGroupsByTract.map(
             (row) => row.map(
-                (voterGroups) => election.castVotes.run(voterGroups, canList, parties, election.castOptions, simCastOptions),
+                (voterGroups) => election.castVotes.run(voterGroups, canList, parties, simCastOptions),
             ),
         )
         return votesByTract

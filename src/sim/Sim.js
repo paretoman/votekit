@@ -29,7 +29,7 @@ export default function Sim(entities, menu, changes, simOptions) {
     const voterGeo = new VoterGeo(voterShapeList, changes)
     self.voterGeo = voterGeo
 
-    const election = new Election(menu)
+    const election = new Election(menu, simOptions)
     const electionOne = new ElectionOne(election)
     const electionSample = new ElectionSample(election)
     const electionGeo = new ElectionGeo(election, voterGeo)
@@ -46,8 +46,6 @@ export default function Sim(entities, menu, changes, simOptions) {
     self.sims = sims
 
     self.state = simOptions.viz
-
-    changes.add(['geo', 'dimensions', 'viz', 'districts'])
 
     // State Machine //
     self.update = () => {

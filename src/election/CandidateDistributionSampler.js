@@ -1,7 +1,7 @@
 import CandidateDistributionSampler1D from './CandidateDistributionSampler1D.js'
 import CandidateDistributionSampler2D from './CandidateDistributionSampler2D.js'
 
-export default function CandidateDistributionSampler(candidateDnList, changes, election) {
+export default function CandidateDistributionSampler(candidateDnList, changes, simOptions) {
     const self = this
 
     self.update = () => {
@@ -11,7 +11,7 @@ export default function CandidateDistributionSampler(candidateDnList, changes, e
     }
 
     self.startSampler = () => {
-        const { dimensions } = election.castOptions
+        const { dimensions } = simOptions
         const canDnsList = candidateDnList.getCandidateDistributions()
         if (canDnsList.length === 0) return
         const CDnSampler = (dimensions === 1)

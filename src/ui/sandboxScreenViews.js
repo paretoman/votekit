@@ -35,10 +35,10 @@ export default function sandboxScreenViews(viewSM, entities, sim, simOptions, ch
 
     const viewSettings = new ViewSettings(changes)
     new ViewOne(entities, screenMain, menu, changes, sim, simOptions, viewSM, viewSettings)
-    new ViewSample(entities, screenMain, menu, changes, sim, viewSM, viewSettings)
+    new ViewSample(entities, screenMain, menu, changes, sim, simOptions, viewSM, viewSettings)
     new ViewJupyter(sim, viewSM, changes)
     new ViewVizOne(entities, screenMain, screenMini, menu, changes, sim, simOptions, viewSM, viewSettings)
-    new ViewVizSample(entities, screenMain, menu, changes, sim, viewSM, viewSettings)
+    new ViewVizSample(entities, screenMain, menu, changes, sim, simOptions, viewSM, viewSettings)
     new ViewVizBudget(screenCommon, layout, menu, changes, sim, simOptions, viewSM)
-    new ViewGeoMaps(entities, screenCommon, layout, changes, sim, viewSM, simOptions)
+    new ViewGeoMaps(entities, screenCommon, layout, changes, sim, simOptions, viewSM)
 }

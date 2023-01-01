@@ -12,11 +12,11 @@ import VoronoiRanking2D from './VoronoiRanking2D.js'
  * @constructor
  */
 // eslint-disable-next-line max-len
-export default function VizOneVoronoiRanking(voterRendererList, candidateList, screen, screenMini, sim) {
+export default function VizOneVoronoiRanking(voterRendererList, candidateList, screen, screenMini, sim, simOptions) {
     const self = this
 
     // renderer factory //
-    const { dimensions } = sim.election.castOptions
+    const { dimensions } = simOptions
     const VoronoiRanking = (dimensions === 1) ? VoronoiRanking1D : VoronoiRanking2D
     const rendererMaker = (voterShape) => new VoronoiRanking(voterShape, candidateList, screen)
     voterRendererList.setRenderer(rendererMaker)

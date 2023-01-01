@@ -44,7 +44,7 @@ export default function ViewVizOne(entities, screenMain, screenMini, menu, chang
             ? VizOneGrid : VizOneVoronoiGeneral
         const VizOne = (simOptions.geo === true)
             ? VizGeo : VizNoGeo
-        vizOne = new VizOne(voterRendererList, candidateList, screenMain, screenMini, sim)
+        vizOne = new VizOne(voterRendererList, candidateList, screenMain, screenMini, sim, simOptions)
     }
     enterStrategy()
 

@@ -1,6 +1,6 @@
 import tooltipBox from './tooltipBox.js'
 
-export default function tooltipForEntity(graphic, entity, screen, election, viewSettings) {
+export default function tooltipForEntity(graphic, entity, screen, viewSettings, simOptions) {
     // make a html box appear
 
     const tbox = tooltipBox(graphic, screen)
@@ -20,7 +20,7 @@ export default function tooltipForEntity(graphic, entity, screen, election, view
         entity.exists === 1,
     )
     box.appendChild(items.exists.div)
-    const { dimensions } = election.castOptions
+    const { dimensions } = simOptions
     if (dimensions === 1) {
         if (entity.shape1.w) {
             items.w1 = new Item(

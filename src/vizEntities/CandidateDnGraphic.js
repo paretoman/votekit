@@ -4,13 +4,13 @@ import EntityGraphic from './EntityGraphic.js'
 import SquareGraphic from './SquareGraphic.js'
 
 // eslint-disable-next-line max-len
-export default function CandidateDnGraphic(candidateDn, screen, election, wHandle, hHandle, viewSettings) {
+export default function CandidateDnGraphic(candidateDn, screen, election, wHandle, hHandle, viewSettings, simOptions) {
     const self = this
 
     const square = new SquareGraphic(self, candidateDn, wHandle, hHandle, screen)
     self.square = square
 
-    EntityGraphic.call(self, candidateDn, screen, election)
+    EntityGraphic.call(self, candidateDn, simOptions)
 
     self.setWinFraction = (winFraction) => {
         // animate the win or loss.
@@ -50,6 +50,6 @@ export default function CandidateDnGraphic(candidateDn, screen, election, wHandl
 
     // Click Handler
     self.click = () => {
-        tooltipForEntity(self, candidateDn, screen, election, viewSettings)
+        tooltipForEntity(self, candidateDn, screen, viewSettings, simOptions)
     }
 }

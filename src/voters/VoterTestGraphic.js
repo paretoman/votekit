@@ -4,7 +4,7 @@ import tooltipForTestVoter from '../tooltips/tooltipForTestVoter.js'
 import colorBlender, { rgbToString } from '../viz/colorBlender.js'
 import EntityGraphic from '../vizEntities/EntityGraphic.js'
 
-export default function VoterTestGraphic(voterTest, screen, sim, viewOne, viewSettings) {
+export default function VoterTestGraphic(voterTest, screen, simOptions, viewOne, viewSettings) {
     const self = this
 
     // Start displaying testvoter
@@ -22,7 +22,7 @@ export default function VoterTestGraphic(voterTest, screen, sim, viewOne, viewSe
     const circle = new CircleGraphic(self, voterTest, 9, screen)
     self.circle = circle
 
-    EntityGraphic.call(self, voterTest, screen, sim.election)
+    EntityGraphic.call(self, voterTest, simOptions)
 
     // Rendering
 

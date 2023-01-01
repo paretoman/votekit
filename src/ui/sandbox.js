@@ -37,7 +37,7 @@ export default function sandbox(config, comMessenger, sandboxURL) {
 
     addSimControlsLabel(layout)
 
-    const simOptions = new SimOptions(menu)
+    const simOptions = new SimOptions(menu, changes)
 
     const entities = new Entities(menu, changes, commander, layout)
     const sim = new Sim(entities, menu, changes, simOptions)

@@ -26,12 +26,12 @@ export default function ViewOne(entities, screen, menu, changes, sim, simOptions
     const { election } = sim
 
     // Entities //
-    const candidateViewList = new CandidateViewList(viewSettings, candidateList, screen, election)
-    const voterViewList = new VoterViewList(viewSettings, voterShapeList, screen, election)
+    const candidateViewList = new CandidateViewList(viewSettings, candidateList, screen, election, simOptions)
+    const voterViewList = new VoterViewList(viewSettings, voterShapeList, screen, simOptions)
     candidateViewList.attachNewG(self.dragm)
     voterViewList.attachNewG(self.dragm)
 
-    self.voterTestView = new VoterTestView(screen, sim, self, viewSettings)
+    self.voterTestView = new VoterTestView(screen, simOptions, self, viewSettings)
 
     // Main State Machine Functions //
 
@@ -81,8 +81,7 @@ export default function ViewOne(entities, screen, menu, changes, sim, simOptions
         self.voterTestView.graphic.start(p)
     }
     self.testVoteView = () => {
-        const { castOptions } = election
-        const vote = election.castVotes.runTest(self.voterTestView.voterTest, candidateList, castOptions)
+        const vote = election.castVotes.runTest(self.voterTestView.voterTest, candidateList)
         self.voterTestView.graphic.update(vote, candidateList)
         return vote
     }

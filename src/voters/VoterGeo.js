@@ -39,7 +39,7 @@ export default function VoterGeo(voterShapeList, changes) {
         if (changes.checkNone()) return
 
         voterShapes = voterShapeList.getVoterShapes()
-        if (changes.check(['districts', 'geo', 'viz', 'dimensions'])) {
+        if (changes.check(['geo', 'viz', 'dimensions'])) {
             self.updateDistricts()
         }
 
