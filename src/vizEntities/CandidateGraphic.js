@@ -4,7 +4,7 @@ import EntityGraphic from './EntityGraphic.js'
 import SquareGraphic from './SquareGraphic.js'
 
 // eslint-disable-next-line max-len
-export default function CandidateGraphic(candidate, screen, election, wHandle, hHandle, viewSettings, simOptions) {
+export default function CandidateGraphic(candidate, screen, wHandle, hHandle, viewSettings, simOptions, electionOptions) {
     const self = this
 
     const square = new SquareGraphic(self, candidate, wHandle, hHandle, screen)
@@ -50,7 +50,7 @@ export default function CandidateGraphic(candidate, screen, election, wHandle, h
             const y2 = y + square.h * 0.5 + 20 + 2
             drawStrokedColor(self.wins, x, y2, 20, 2, color, 1, fctx)
         }
-        if (election.socialChoice.electionMethod === 'olprA') {
+        if (electionOptions.electionMethod === 'olprA') {
             const x3 = x + square.w * 0.1
             const y3 = y + 8
             drawStrokedColor(`p${party}`, x3, y3, 13, 2, color, 1, fctx)

@@ -10,7 +10,7 @@
  * @param {Election} election
  * @constructor
  */
-export default function ElectionSample(election) {
+export default function ElectionSample(election, electionOptions, socialChoiceOptions) {
     const self = this
 
     const simCastOptions = { usr: 16 }
@@ -50,7 +50,7 @@ export default function ElectionSample(election) {
         const ns = 20
 
         // number of new points
-        const { seats } = election.socialChoice
+        const { seats } = socialChoiceOptions
         const nnp = seats * ns
         const newPoints = Array(nnp)
         let q = 0
@@ -59,7 +59,7 @@ export default function ElectionSample(election) {
 
         for (let i = 0; i < ns; i++) {
             // choose a number of candidates
-            const nk = election.socialChoice.numSampleCandidates
+            const nk = socialChoiceOptions.numSampleCandidates
             const canList = []
             for (let k = 0; k < nk; k++) {
                 // sample a point from the distribution of candidates
@@ -72,7 +72,7 @@ export default function ElectionSample(election) {
             // find winner position
             const electionResults = election.runElection(voterShapes, canList, simCastOptions)
 
-            if (election.socialChoice.checkElectionType() === 'singleWinner') {
+            if (electionOptions.electionType === 'singleWinner') {
                 const { winner } = electionResults
 
                 // record point

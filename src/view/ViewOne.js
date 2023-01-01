@@ -15,7 +15,7 @@ import VoterTestView from '../voters/VoterTestView.js'
  * @param {ViewSettings} viewSettings
  * @constructor
  */
-export default function ViewOne(entities, screen, menu, changes, sim, simOptions, viewSM, viewSettings) {
+export default function ViewOne(entities, screen, menu, changes, sim, simOptions, electionOptions, viewSM, viewSettings) {
     const self = this
 
     viewSM.views.one.pub.attach(self)
@@ -26,7 +26,7 @@ export default function ViewOne(entities, screen, menu, changes, sim, simOptions
     const { election } = sim
 
     // Entities //
-    const candidateViewList = new CandidateViewList(viewSettings, candidateList, screen, election, simOptions)
+    const candidateViewList = new CandidateViewList(viewSettings, candidateList, screen, simOptions, electionOptions)
     const voterViewList = new VoterViewList(viewSettings, voterShapeList, screen, simOptions)
     candidateViewList.attachNewG(self.dragm)
     voterViewList.attachNewG(self.dragm)

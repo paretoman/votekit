@@ -17,7 +17,6 @@ import StatePublisher from './StatePublisher.js'
  */
 export default function SimSample(
     entities,
-    menu,
     changes,
     election,
     electionSample,
@@ -25,6 +24,8 @@ export default function SimSample(
     voterGeo,
     sim,
     simOptions,
+    electionOptions,
+    socialChoiceOptions,
 ) {
     const self = this
 
@@ -46,6 +47,9 @@ export default function SimSample(
         // Update players. Run an election. Get result.
         // The election handles any changes.
         // The electionResults communicates how to visualize the election.
+
+        electionOptions.update()
+        socialChoiceOptions.update()
 
         if (simOptions.geo) voterGeo.update()
         canDnSampler.update()

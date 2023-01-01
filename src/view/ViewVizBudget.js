@@ -2,7 +2,7 @@ import Screen from '../ui/Screen.js'
 import BaseExplanation from '../viz/BaseExplanation.js'
 import VizExplanationBudgetMES from '../viz/VizExplanationBudgetMES.js'
 
-export default function ViewVizBudget(screenCommon, layout, menu, changes, sim, simOptions, viewSM) {
+export default function ViewVizBudget(screenCommon, layout, menu, changes, sim, simOptions, electionOptions, viewSM) {
     const self = this
 
     viewSM.views.one.pub.attach(self)
@@ -15,7 +15,7 @@ export default function ViewVizBudget(screenCommon, layout, menu, changes, sim, 
     let vizExplanation
 
     function enterStrategy() {
-        const { electionMethod } = sim.election.socialChoice
+        const { electionMethod } = electionOptions
         const noGeo = !simOptions.geo
         const { dimensions } = simOptions
         const VizExplanation = (electionMethod === 'methodOfEqualShares' && noGeo && dimensions === 1) ? VizExplanationBudgetMES : BaseExplanation

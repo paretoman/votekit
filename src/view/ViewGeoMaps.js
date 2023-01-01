@@ -9,7 +9,7 @@ import GeoMaps from '../viz/GeoMaps.js'
  * @param {Sim} sim
  * @constructor
  */
-export default function ViewGeoMaps(entities, screenCommon, layout, changes, sim, simOptions, viewSM) {
+export default function ViewGeoMaps(entities, screenCommon, layout, changes, sim, simOptions, electionOptions, viewSM) {
     const self = this
 
     viewSM.views.one.pub.attach(self)
@@ -19,7 +19,7 @@ export default function ViewGeoMaps(entities, screenCommon, layout, changes, sim
     screen.setHeight(height / 3)
     screen.hide()
 
-    const geoMaps = new GeoMaps(sim.voterGeo, entities.candidateList, screen, sim)
+    const geoMaps = new GeoMaps(sim.voterGeo, entities.candidateList, screen, electionOptions)
     let flagNoRender = false
 
     self.enter = () => {

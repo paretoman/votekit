@@ -12,7 +12,7 @@ import electionMethods from '../electionMethods/electionMethods.js'
  * @param {Menu} menu
  * @constructor
  */
-export default function SocialChoice(menu) {
+export default function SocialChoice(electionOptions, socialChoiceOptions) {
     const self = this
 
     self.seats = 1
@@ -25,9 +25,9 @@ export default function SocialChoice(menu) {
         // electionResults, the larger one,
         //   is in the context of candidate objects and voter objects.
         const colorRGBAOfCandidates = canList.map((c) => c.colorRGBA)
-        if (self.checkElectionType() === 'allocation' || self.checkElectionType() === 'multiWinner') {
-            const electionMethodOptions = { seats: self.seats, threshold: 0.1 }
-            const electionMethod = electionMethods[self.electionMethod]
+        if (electionOptions.electionType === 'allocation' || electionOptions.electionType === 'multiWinner') {
+            const electionMethodOptions = socialChoiceOptions
+            const electionMethod = electionMethods[electionOptions.electionMethod]
             const socialChoiceResults = electionMethod({ votes, parties, electionMethodOptions })
             const { allocation, explanation } = socialChoiceResults
             const electionResults = {
@@ -35,7 +35,7 @@ export default function SocialChoice(menu) {
             }
             return electionResults
         }
-        const electionMethod = electionMethods[self.electionMethod]
+        const electionMethod = electionMethods[electionOptions.electionMethod]
         const socialChoiceResults = electionMethod({ votes, parties })
         const { iWinner } = socialChoiceResults
         const winner = canList[iWinner]
@@ -44,85 +44,4 @@ export default function SocialChoice(menu) {
         }
         return electionResults
     }
-
-    // -- Menu --
-
-    // a list of election methods
-    self.electionMethodList = [
-        {
-            name: 'Huntington Hill', value: 'huntingtonHill', type: 'allocation', casterName: 'plurality',
-        },
-        {
-            name: 'Plurality', value: 'plurality', type: 'singleWinner', casterName: 'plurality',
-        },
-        {
-            name: 'Random Winner', value: 'randomWinner', type: 'singleWinner', casterName: 'plurality',
-        },
-        {
-            name: 'Score', value: 'score', type: 'singleWinner', casterName: 'score',
-        },
-        {
-            name: 'STV', value: 'stv', type: 'multiWinner', casterName: 'ranking',
-        },
-        {
-            name: 'Minimax', value: 'minimax', type: 'singleWinner', casterName: 'pairwise',
-        },
-        {
-            name: 'OLPR A', value: 'olprA', type: 'multiWinner', casterName: 'olprA',
-        },
-        {
-            name: 'Sainte-Lague', value: 'sainteLague', type: 'allocation', casterName: 'plurality',
-        },
-        {
-            name: "d'Hondt", value: 'dHondt', type: 'allocation', casterName: 'plurality',
-        },
-        {
-            name: 'AllocScore', value: 'allocatedScore', type: 'multiWinner', casterName: 'scoreLong',
-        },
-        {
-            name: 'MES', value: 'methodOfEqualShares', type: 'multiWinner', casterName: 'scoreLong',
-        },
-    ]
-
-    // utilities for looking up this list
-    self.checkElectionType = () => self.electionMethodListByFunctionName[self.electionMethod].type
-    self.electionMethodListByFunctionName = []
-    self.electionMethodList.forEach(
-        (x) => { self.electionMethodListByFunctionName[x.value] = x },
-    )
-
-    /**
-     * Called in onclick.
-     * @param {(String|Number|Boolean)} value
-     */
-    self.setElectionMethod = (value) => {
-        self.electionMethod = value
-        self.casterName = self.electionMethodListByFunctionName[value].casterName
-
-        const electionType = self.checkElectionType()
-        if (electionType === 'allocation') {
-            self.seats = 5
-            self.numSampleCandidates = 10
-        } else if (electionType === 'multiWinner') {
-            self.seats = 3
-            self.numSampleCandidates = 10
-        } else { // 'singleWinner'
-            self.seats = 1
-            self.numSampleCandidates = 5
-        }
-    }
-
-    // add a menu item to switch between types of elections
-    self.setElectionMethod('plurality')
-
-    menu.addMenuItem(
-        self,
-        {
-            label: 'Election Method:',
-            prop: 'electionMethod',
-            setProp: self.setElectionMethod,
-            options: self.electionMethodList,
-            change: ['electionMethod'],
-        },
-    )
 }

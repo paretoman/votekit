@@ -1,5 +1,7 @@
 /** @module */
 
+import { jcopy } from '../utilities/jsHelpers.js'
+
 /**
  * keep track of changes that occur to a simulation's configuration.
  * @constructor
@@ -27,4 +29,5 @@ export default function Changes() {
         changes.splice(0, changes.length)
     }
     self.numChanges = () => changes.length
+    self.getChanges = () => jcopy(changes) // debugging
 }

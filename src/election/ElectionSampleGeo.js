@@ -10,7 +10,7 @@
  * @param {Election} election
  * @constructor
  */
-export default function ElectionSampleGeo(election, electionGeo, voterGeo) {
+export default function ElectionSampleGeo(electionGeo, voterGeo, electionOptions, socialChoiceOptions) {
     const self = this
 
     // const simCastOptions = { usr: 16 }
@@ -48,7 +48,7 @@ export default function ElectionSampleGeo(election, electionGeo, voterGeo) {
         const ns = 1
 
         // number of new points
-        const { seats } = election.socialChoice
+        const { seats } = socialChoiceOptions
         const { nd } = voterGeo
         const nnp = seats * ns * nd
         const newPoints = Array(nnp)
@@ -56,7 +56,7 @@ export default function ElectionSampleGeo(election, electionGeo, voterGeo) {
 
         for (let i = 0; i < ns; i++) {
             // choose a number of candidates
-            const nk = election.socialChoice.numSampleCandidates
+            const nk = socialChoiceOptions.numSampleCandidates
             const canList = []
             for (let k = 0; k < nk; k++) {
                 // sample a point from the distribution of candidates
@@ -75,7 +75,7 @@ export default function ElectionSampleGeo(election, electionGeo, voterGeo) {
             // adjustable parameter for visualization
             const jitterSize = 10
 
-            if (election.socialChoice.checkElectionType() === 'singleWinner') {
+            if (electionOptions.electionType === 'singleWinner') {
                 let r = 0
                 for (let o = 0; o < nDistricts; o++) {
                     const { winner } = resultsByDistrict[o]

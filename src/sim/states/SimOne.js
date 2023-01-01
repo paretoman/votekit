@@ -17,7 +17,7 @@ import StatePublisher from './StatePublisher.js'
  * @constructor
  */
 // eslint-disable-next-line max-len
-export default function SimOne(entities, menu, changes, election, electionOne, electionGeo, voterGeo, simOptions) {
+export default function SimOne(entities, changes, electionOne, electionGeo, voterGeo, simOptions, electionOptions, socialChoiceOptions) {
     const self = this
 
     self.pub = new StatePublisher()
@@ -35,6 +35,9 @@ export default function SimOne(entities, menu, changes, election, electionOne, e
     }
     self.update = () => {
         if (changes.checkNone()) return
+
+        electionOptions.update()
+        socialChoiceOptions.update()
 
         if (simOptions.geo) voterGeo.update()
         const electionResults = electionStrategy

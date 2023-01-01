@@ -20,7 +20,7 @@ import VoterGeo from '../voters/VoterGeo.js'
  * @param {Changes} changes
  * @param {Commander} commander
  */
-export default function Sim(entities, menu, changes, simOptions) {
+export default function Sim(entities, changes, simOptions, electionOptions, socialChoiceOptions) {
     const self = this
 
     // Components //
@@ -29,19 +29,19 @@ export default function Sim(entities, menu, changes, simOptions) {
     const voterGeo = new VoterGeo(voterShapeList, changes)
     self.voterGeo = voterGeo
 
-    const election = new Election(menu, simOptions)
+    const election = new Election(simOptions, electionOptions, socialChoiceOptions)
     const electionOne = new ElectionOne(election)
-    const electionSample = new ElectionSample(election)
-    const electionGeo = new ElectionGeo(election, voterGeo)
-    const electionSampleGeo = new ElectionSampleGeo(election, electionGeo, voterGeo)
+    const electionSample = new ElectionSample(election, electionOptions, socialChoiceOptions)
+    const electionGeo = new ElectionGeo(election, voterGeo, electionOptions)
+    const electionSampleGeo = new ElectionSampleGeo(electionGeo, voterGeo, electionOptions, socialChoiceOptions)
     self.election = election
 
     // States //
     const sims = {
         // eslint-disable-next-line max-len
-        one: new SimOne(entities, menu, changes, election, electionOne, electionGeo, voterGeo, simOptions),
+        one: new SimOne(entities, changes, electionOne, electionGeo, voterGeo, simOptions, electionOptions, socialChoiceOptions),
         // eslint-disable-next-line max-len
-        sample: new SimSample(entities, menu, changes, election, electionSample, electionSampleGeo, voterGeo, self, simOptions),
+        sample: new SimSample(entities, changes, election, electionSample, electionSampleGeo, voterGeo, self, simOptions, electionOptions, socialChoiceOptions),
     }
     self.sims = sims
 

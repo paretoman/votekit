@@ -13,7 +13,7 @@ import { range } from '../utilities/jsHelpers.js'
  * @param {Election} election
  * @constructor
  */
-export default function ElectionGeo(election, voterGeo) {
+export default function ElectionGeo(election, voterGeo, electionOptions) {
     const self = this
 
     const simCastOptions = { usr: 32 }
@@ -361,7 +361,7 @@ export default function ElectionGeo(election, voterGeo) {
         // make a histogram of allocation
         const numCandidates = canList.length
         const allocation = Array(numCandidates).fill(0)
-        if (election.socialChoice.checkElectionType() === 'singleWinner') {
+        if (electionOptions.electionType === 'singleWinner') {
             const iWinners = resultsByDistrict.map((electionResults) => electionResults.iWinner)
             iWinners.forEach((iWinner) => {
                 allocation[iWinner] += 1

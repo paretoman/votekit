@@ -2,7 +2,7 @@
 
 import colorBlender, { rgbToString } from './colorBlender.js'
 
-export default function geoColors(geoElectionResults, candidateList, sim) {
+export default function geoColors(geoElectionResults, candidateList, electionOptions) {
     const {
         resultsByTract,
         resultsByDistrict,
@@ -11,7 +11,7 @@ export default function geoColors(geoElectionResults, candidateList, sim) {
     const canList = candidateList.getCandidates()
 
     const colorByTract = colorTracts(resultsByTract, canList)
-    const colorOfWinsByDistrict = colorDistrictWins(resultsByDistrict, canList, sim)
+    const colorOfWinsByDistrict = colorDistrictWins(resultsByDistrict, canList, electionOptions)
     const colorOfVoteByDistrict = colorDistrictVote(resultsByDistrict, canList)
 
     const gc = {
@@ -37,10 +37,10 @@ function colorTracts(resultsByTract, canList) {
     return colorByTract
 }
 
-function colorDistrictWins(resultsByDistrict, canList, sim) {
+function colorDistrictWins(resultsByDistrict, canList, electionOptions) {
     // calculate color for win map
     let colorOfWinsByDistrict
-    if (sim.election.socialChoice.checkElectionType() === 'singleWinner') {
+    if (electionOptions.electionType === 'singleWinner') {
         colorOfWinsByDistrict = resultsByDistrict.map(
             (electionResults) => electionResults.winner.color,
         )

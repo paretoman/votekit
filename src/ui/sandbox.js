@@ -16,6 +16,8 @@ import sandboxScreenViews from './sandboxScreenViews.js'
 import layoutOrder from './layoutOrder.js'
 import addSimControlsLabel from '../sim/addSimControlsLabel.js'
 import SimOptions from '../sim/SimOptions.js'
+import ElectionOptions from '../election/ElectionOptions.js'
+import SocialChoiceOptions from '../election/SocialChoiceOptions.js'
 
 /**
  * Set up a user interface to run a simulation.
@@ -38,13 +40,15 @@ export default function sandbox(config, comMessenger, sandboxURL) {
     addSimControlsLabel(layout)
 
     const simOptions = new SimOptions(menu, changes)
+    const electionOptions = new ElectionOptions(menu, changes)
+    const socialChoiceOptions = new SocialChoiceOptions(changes, electionOptions)
 
     const entities = new Entities(menu, changes, commander, layout)
-    const sim = new Sim(entities, menu, changes, simOptions)
+    const sim = new Sim(entities, changes, simOptions, electionOptions, socialChoiceOptions)
 
     // View Screens
     const viewSM = new ViewStateMachine(sim)
-    sandboxScreenViews(viewSM, entities, sim, simOptions, changes, menu, layout)
+    sandboxScreenViews(viewSM, entities, sim, simOptions, electionOptions, changes, menu, layout)
 
     // Default Entities
     entities.candidateList.addCandidate({ x: 50, y: 100 }, { x: 50 }, '#e05020', true)
