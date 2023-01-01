@@ -1,24 +1,25 @@
-import addSimControlsLabel from './addSimControlsLabel.js'
+/**
+ * Add menu items to switch between types of sims.
+ * @param {Menu} menu
+ */
+export default function SimOptions(menu) {
+    const self = this
 
-export default function menuSim(sim, menu, layout) {
-    // Buttons //
+    self.viz = 'one'
+    self.geo = false
+    self.setViz = (v) => { self.viz = v }
+    self.setGeo = (g) => { self.geo = g }
 
-    addSimControlsLabel(layout)
-
-    // -- Menu -- //
-
-    // add a menu item to switch between types of sims
-    // a list of simulation types
     const vizList = [
         { name: 'One Election', value: 'one' },
         { name: 'Sample Elections', value: 'sample' },
     ]
     menu.addMenuItem(
-        sim,
+        self,
         {
             label: 'Viz:',
             prop: 'viz',
-            setProp: (p) => { sim.setViz(p) },
+            setProp: (p) => { self.setViz(p) },
             options: vizList,
             change: ['viz'],
         },
@@ -29,11 +30,11 @@ export default function menuSim(sim, menu, layout) {
         { name: 'Off', value: false },
     ]
     menu.addMenuItem(
-        sim,
+        self,
         {
             label: 'Geo:',
             prop: 'geo',
-            setProp: (p) => { sim.setGeo(p) },
+            setProp: (p) => { self.setGeo(p) },
             options: geoList,
             change: ['geo'],
         },

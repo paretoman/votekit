@@ -24,6 +24,7 @@ export default function SimSample(
     electionSampleGeo,
     voterGeo,
     sim,
+    simOptions,
 ) {
     const self = this
 
@@ -37,7 +38,7 @@ export default function SimSample(
 
     // Main State Machine Functions //
     self.enter = () => {
-        electionStrategy = (sim.geo) ? electionSampleGeo : electionSample
+        electionStrategy = (simOptions.geo) ? electionSampleGeo : electionSample
         self.pub.enter()
     }
     self.exit = () => { self.pub.exit() }
@@ -46,7 +47,7 @@ export default function SimSample(
         // The election handles any changes.
         // The electionResults communicates how to visualize the election.
 
-        if (sim.geo) voterGeo.update()
+        if (simOptions.geo) voterGeo.update()
         canDnSampler.update()
 
         const { dimensions } = sim.election.castOptions

@@ -22,7 +22,7 @@ import VoterRendererList from '../voters/VoterRendererList.js'
  * @constructor
  */
 // eslint-disable-next-line max-len
-export default function ViewVizOne(entities, screenMain, screenMini, menu, changes, sim, viewSM, viewSettings) {
+export default function ViewVizOne(entities, screenMain, screenMini, menu, changes, sim, simOptions, viewSM, viewSettings) {
     const self = this
 
     viewSM.views.one.pub.attach(self)
@@ -42,7 +42,7 @@ export default function ViewVizOne(entities, screenMain, screenMini, menu, chang
             ? VizOneVoronoiRanking : VizOneVoronoi
         const VizNoGeo = (casterName === 'score' || casterName === 'scoreLong')
             ? VizOneGrid : VizOneVoronoiGeneral
-        const VizOne = (sim.geo === true)
+        const VizOne = (simOptions.geo === true)
             ? VizGeo : VizNoGeo
         vizOne = new VizOne(voterRendererList, candidateList, screenMain, screenMini, sim)
     }

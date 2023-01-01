@@ -10,11 +10,12 @@ import addSaveConfigToText from '../command/addSaveConfigToText.js'
 import addLoadConfigText from '../command/loadConfigText.js'
 import addSaveConfigToLink from '../command/addSaveConfigToLink.js'
 import * as TWEEN from '../lib/snowpack/build/snowpack/pkg/@tweenjs/tweenjs.js'
-import menuSim from '../sim/menuSim.js'
 import Entities from '../sim/Entities.js'
 import ViewStateMachine from '../view/ViewStateMachine.js'
 import sandboxScreenViews from './sandboxScreenViews.js'
 import layoutOrder from './layoutOrder.js'
+import addSimControlsLabel from '../sim/addSimControlsLabel.js'
+import SimOptions from '../sim/SimOptions.js'
 
 /**
  * Set up a user interface to run a simulation.
@@ -34,13 +35,16 @@ export default function sandbox(config, comMessenger, sandboxURL) {
 
     const menu = new Menu(changes, layout, commander)
 
+    addSimControlsLabel(layout)
+
+    const simOptions = new SimOptions(menu)
+
     const entities = new Entities(menu, changes, commander, layout)
-    const sim = new Sim(entities, menu, changes)
-    menuSim(sim, menu, layout)
+    const sim = new Sim(entities, menu, changes, simOptions)
 
     // View Screens
     const viewSM = new ViewStateMachine(sim)
-    sandboxScreenViews(viewSM, entities, sim, changes, menu, layout)
+    sandboxScreenViews(viewSM, entities, sim, simOptions, changes, menu, layout)
 
     // Default Entities
     entities.candidateList.addCandidate({ x: 50, y: 100 }, { x: 50 }, '#e05020', true)

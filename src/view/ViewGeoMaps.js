@@ -9,7 +9,7 @@ import GeoMaps from '../viz/GeoMaps.js'
  * @param {Sim} sim
  * @constructor
  */
-export default function ViewGeoMaps(entities, screenCommon, layout, changes, sim, viewSM) {
+export default function ViewGeoMaps(entities, screenCommon, layout, changes, sim, viewSM, simOptions) {
     const self = this
 
     viewSM.views.one.pub.attach(self)
@@ -23,7 +23,7 @@ export default function ViewGeoMaps(entities, screenCommon, layout, changes, sim
     let flagNoRender = false
 
     self.enter = () => {
-        if (sim.geo) screen.show()
+        if (simOptions.geo) screen.show()
     }
     self.exit = () => {
         screen.hide()
@@ -37,7 +37,7 @@ export default function ViewGeoMaps(entities, screenCommon, layout, changes, sim
         }
         flagNoRender = false
 
-        if (sim.geo) {
+        if (simOptions.geo) {
             geoMaps.update(geoElectionResults)
             self.clear()
             self.render()
@@ -47,7 +47,7 @@ export default function ViewGeoMaps(entities, screenCommon, layout, changes, sim
     self.render = function () {
         if (flagNoRender) return
 
-        if (sim.geo) geoMaps.render()
+        if (simOptions.geo) geoMaps.render()
     }
     self.clear = () => {
         screen.clear()

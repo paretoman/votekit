@@ -15,7 +15,7 @@ import VoterTestView from '../voters/VoterTestView.js'
  * @param {ViewSettings} viewSettings
  * @constructor
  */
-export default function ViewOne(entities, screen, menu, changes, sim, viewSM, viewSettings) {
+export default function ViewOne(entities, screen, menu, changes, sim, simOptions, viewSM, viewSettings) {
     const self = this
 
     viewSM.views.one.pub.attach(self)
@@ -62,7 +62,7 @@ export default function ViewOne(entities, screen, menu, changes, sim, viewSM, vi
 
         const { error } = electionResults
         if (error === undefined) {
-            if (sim.geo) {
+            if (simOptions.geo) {
                 const { resultsStatewide, allocation } = electionResults
                 candidateViewList.setCandidateWins(allocation)
                 candidateViewList.setCandidateFractions(resultsStatewide.votes.tallyFractions)

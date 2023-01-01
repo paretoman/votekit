@@ -20,7 +20,7 @@ import VoterGeo from '../voters/VoterGeo.js'
  * @param {Changes} changes
  * @param {Commander} commander
  */
-export default function Sim(entities, menu, changes) {
+export default function Sim(entities, menu, changes, simOptions) {
     const self = this
 
     // Components //
@@ -39,18 +39,13 @@ export default function Sim(entities, menu, changes) {
     // States //
     const sims = {
         // eslint-disable-next-line max-len
-        one: new SimOne(entities, menu, changes, election, electionOne, electionGeo, voterGeo, self),
+        one: new SimOne(entities, menu, changes, election, electionOne, electionGeo, voterGeo, simOptions),
         // eslint-disable-next-line max-len
-        sample: new SimSample(entities, menu, changes, election, electionSample, electionSampleGeo, voterGeo, self),
+        sample: new SimSample(entities, menu, changes, election, electionSample, electionSampleGeo, voterGeo, self, simOptions),
     }
     self.sims = sims
 
-    // Defaults //
-    self.state = 'one'
-    self.viz = 'one'
-    self.geo = false
-    self.setViz = (v) => { self.viz = v }
-    self.setGeo = (g) => { self.geo = g }
+    self.state = simOptions.viz
 
     changes.add(['geo', 'dimensions', 'viz', 'districts'])
 
@@ -59,7 +54,7 @@ export default function Sim(entities, menu, changes) {
         // state: check for change, exit, set, enter, update.
         if (changes.check(['geo', 'dimensions', 'viz', 'electionMethod'])) {
             Object.keys(sims).forEach((k) => sims[k].exit())
-            self.state = self.viz
+            self.state = simOptions.viz
             sims[self.state].enter()
         }
         sims[self.state].update()

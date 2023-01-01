@@ -22,7 +22,7 @@ import addDownloadScreen from './addDownloadScreen.js'
  * @param {*} menu
  * @param {*} layout
  */
-export default function sandboxScreenViews(viewSM, entities, sim, changes, menu, layout) {
+export default function sandboxScreenViews(viewSM, entities, sim, simOptions, changes, menu, layout) {
     const screenCommon = new ScreenCommon(300, 300)
     const screenMain = new Screen(screenCommon, viewSM, layout, 'viz')
     const screenMini = new Screen(screenCommon, viewSM, layout, 'vizMini')
@@ -34,11 +34,11 @@ export default function sandboxScreenViews(viewSM, entities, sim, changes, menu,
     addDarkModeSwitch(screenCommon, layout, viewSM)
 
     const viewSettings = new ViewSettings(changes)
-    new ViewOne(entities, screenMain, menu, changes, sim, viewSM, viewSettings)
+    new ViewOne(entities, screenMain, menu, changes, sim, simOptions, viewSM, viewSettings)
     new ViewSample(entities, screenMain, menu, changes, sim, viewSM, viewSettings)
     new ViewJupyter(sim, viewSM, changes)
-    new ViewVizOne(entities, screenMain, screenMini, menu, changes, sim, viewSM, viewSettings)
+    new ViewVizOne(entities, screenMain, screenMini, menu, changes, sim, simOptions, viewSM, viewSettings)
     new ViewVizSample(entities, screenMain, menu, changes, sim, viewSM, viewSettings)
-    new ViewVizBudget(screenCommon, layout, menu, changes, sim, viewSM)
-    new ViewGeoMaps(entities, screenCommon, layout, changes, sim, viewSM)
+    new ViewVizBudget(screenCommon, layout, menu, changes, sim, simOptions, viewSM)
+    new ViewGeoMaps(entities, screenCommon, layout, changes, sim, viewSM, simOptions)
 }
