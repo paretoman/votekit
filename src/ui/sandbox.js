@@ -18,6 +18,7 @@ import addSimControlsLabel from '../sim/addSimControlsLabel.js'
 import SimOptions from '../sim/SimOptions.js'
 import ElectionOptions from '../election/ElectionOptions.js'
 import SocialChoiceOptions from '../election/SocialChoiceOptions.js'
+import CastOptions from '../election/CastOptions.js'
 
 /**
  * Set up a user interface to run a simulation.
@@ -42,9 +43,10 @@ export default function sandbox(config, comMessenger, sandboxURL) {
     const simOptions = new SimOptions(menu, changes)
     const electionOptions = new ElectionOptions(menu, changes)
     const socialChoiceOptions = new SocialChoiceOptions(changes, electionOptions)
+    const castOptions = new CastOptions(menu, changes, simOptions)
 
     const entities = new Entities(menu, changes, commander, layout)
-    const sim = new Sim(entities, changes, simOptions, electionOptions, socialChoiceOptions)
+    const sim = new Sim(entities, changes, simOptions, electionOptions, socialChoiceOptions, castOptions)
 
     // View Screens
     const viewSM = new ViewStateMachine(sim)

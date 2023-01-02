@@ -13,19 +13,17 @@
 export default function ElectionSample(election, electionOptions, socialChoiceOptions) {
     const self = this
 
-    const simCastOptions = { usr: 16 }
-
     const maxPoints = 5000
 
     let points = []
     let partyWins
 
-    self.update = function (voterShapeList, candidateDnList, cDnSampler, changes, dimensions) {
+    self.update = function (voterShapeList, candidateDnList, cDnSampler, changes, dimensions, castOptions) {
         if (changes.checkAny()) {
             self.startSim()
         }
 
-        const addResult = self.addSim(voterShapeList, candidateDnList, cDnSampler, dimensions)
+        const addResult = self.addSim(voterShapeList, candidateDnList, cDnSampler, dimensions, castOptions)
         return addResult
     }
 
@@ -34,7 +32,7 @@ export default function ElectionSample(election, electionOptions, socialChoiceOp
         partyWins = Array(10).fill(0) // TODO: Use number of parties
     }
 
-    self.addSim = function (voterShapeList, candidateDnList, cDnSampler, dimensions) {
+    self.addSim = function (voterShapeList, candidateDnList, cDnSampler, dimensions, castOptions) {
         // add more points
 
         if (voterShapeList.getVoterShapes().length === 0) return { pointsChanged: false }
@@ -70,7 +68,7 @@ export default function ElectionSample(election, electionOptions, socialChoiceOp
             }
 
             // find winner position
-            const electionResults = election.runElection(voterShapes, canList, simCastOptions)
+            const electionResults = election.runElection(voterShapes, canList, castOptions)
 
             if (electionOptions.electionType === 'singleWinner') {
                 const { winner } = electionResults

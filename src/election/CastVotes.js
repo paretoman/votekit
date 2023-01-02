@@ -7,13 +7,13 @@ import voteCasters from '../castVotes/voteCasters.js'
 export default function CastVotes(electionOptions, simOptions) {
     const self = this
 
-    self.run = (voterShapes, canList, parties, simCastOptions) => {
+    self.run = (voterShapes, canList, parties, castOptions) => {
         const { dimensions } = simOptions
         const voterGeoms = getGeoms(voterShapes, dimensions)
         const canGeoms = getGeoms(canList, dimensions)
         const { cast } = voteCasters[electionOptions.voteCasterName]
         const votes = cast({
-            canGeoms, voterGeoms, dimensions, simCastOptions, parties,
+            canGeoms, voterGeoms, dimensions, castOptions, parties,
         })
         return votes
     }

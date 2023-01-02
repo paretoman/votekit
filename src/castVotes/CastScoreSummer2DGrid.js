@@ -8,12 +8,12 @@ import castScoreTestVote from './castScoreTestVote.js'
  * @param {Object[]} canGeoms
  * @constructor
  */
-export default function CastScoreSummer2DGrid(canGeoms, simCastOptions) {
+export default function CastScoreSummer2DGrid(canGeoms, castOptions) {
     const self = this
 
     self.sumArea = function sumArea(voterGeom) {
         // just find the vote at each grid point and weight according to type
-        const grid = makeGrid(voterGeom, simCastOptions)
+        const grid = makeGrid(voterGeom, castOptions)
 
         const n = canGeoms.length
         const area = Array(n).fill(0)
@@ -43,13 +43,13 @@ export default function CastScoreSummer2DGrid(canGeoms, simCastOptions) {
     }
 }
 
-function makeGrid(voterGeom, simCastOptions) {
+function makeGrid(voterGeom, castOptions) {
     const isGauss = voterGeom.densityProfile === 'gaussian'
     const spread = (isGauss) ? 3 : 1
     const { x, y, w } = voterGeom
 
     const width = w * spread
-    const { usr } = simCastOptions // undersampling ratio
+    const { usr } = castOptions // undersampling ratio
     const iWidth = Math.round(width / usr)
 
     // TODO: sample from middle of square

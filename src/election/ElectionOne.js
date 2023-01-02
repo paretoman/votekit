@@ -11,9 +11,7 @@
 export default function ElectionOne(election) {
     const self = this
 
-    const simCastOptions = { usr: 4 }
-
-    self.runElectionSim = function (voterShapeList, candidateList, changes) {
+    self.runElectionSim = function (voterShapeList, candidateList, changes, castOptions) {
         if (changes.checkNone()) return { error: 'No Changes' }
 
         // Voters cast votes for candidates.
@@ -24,7 +22,7 @@ export default function ElectionOne(election) {
         if (voterShapes.length === 0) return { error: 'No Voters' }
         if (canList.length === 0) return { error: 'No Candidates' }
 
-        const electionResults = election.runElection(voterShapes, canList, simCastOptions)
+        const electionResults = election.runElection(voterShapes, canList, castOptions)
 
         return electionResults
     }

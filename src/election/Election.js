@@ -18,9 +18,9 @@ export default function Election(simOptions, electionOptions, socialChoiceOption
 
     // Election //
 
-    self.runElection = function (voterShapes, canList, simCastOptions) {
+    self.runElection = function (voterShapes, canList, castOptions) {
         const parties = self.getParties(canList)
-        const votes = self.castVotes.run(voterShapes, canList, parties, simCastOptions)
+        const votes = self.castVotes.run(voterShapes, canList, parties, castOptions)
         const electionResults = self.socialChoice.run(canList, votes, parties)
         jupyterUpdate({ votes })
         return electionResults

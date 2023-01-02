@@ -12,20 +12,18 @@ import StatePublisher from './StatePublisher.js'
  * @param {ElectionSample} electionSample
  * @param {ElectionSampleGeo} electionSampleGeo
  * @param {VoterGeo} voterGeo
- * @param {Sim} sim
  * @constructor
  */
 export default function SimSample(
     entities,
     changes,
-    election,
     electionSample,
     electionSampleGeo,
     voterGeo,
-    sim,
     simOptions,
     electionOptions,
     socialChoiceOptions,
+    castOptions,
 ) {
     const self = this
 
@@ -50,13 +48,14 @@ export default function SimSample(
 
         electionOptions.update()
         socialChoiceOptions.update()
+        castOptions.update()
 
         if (simOptions.geo) voterGeo.update()
         canDnSampler.update()
 
         const { dimensions } = simOptions
         const addResult = electionStrategy
-            .update(voterShapeList, candidateDnList, canDnSampler.sampler, changes, dimensions)
+            .update(voterShapeList, candidateDnList, canDnSampler.sampler, changes, dimensions, castOptions)
         self.pub.update(addResult)
     }
 }

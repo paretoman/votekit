@@ -17,11 +17,11 @@ import CastScoreSummer1DGrid from './CastScoreSummer1DGrid.js'
  * @returns votes, an object
  */
 export default function castScore({
-    canGeoms, voterGeoms, dimensions, simCastOptions,
+    canGeoms, voterGeoms, dimensions, castOptions,
 }) {
     const summer = (dimensions === 1)
         ? new CastScoreSummer1DGrid(canGeoms)
-        : new CastScoreSummer2DGrid(canGeoms, simCastOptions)
+        : new CastScoreSummer2DGrid(canGeoms, castOptions)
 
     // get fraction of votes for each candidate so we can summarize results
     const n = canGeoms.length

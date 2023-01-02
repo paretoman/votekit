@@ -16,25 +16,23 @@ import { range } from '../utilities/jsHelpers.js'
 export default function ElectionGeo(election, voterGeo, electionOptions) {
     const self = this
 
-    const simCastOptions = { usr: 32 }
-
-    self.runElectionSim = (voterShapeList, candidateList, changes) => {
+    self.runElectionSim = (voterShapeList, candidateList, changes, castOptions) => {
         if (changes.checkNone()) return { error: 'No Changes' }
 
         const canList = candidateList.getCandidates()
 
-        const geoElectionResults = self.runElectionGeo(voterShapeList, canList)
+        const geoElectionResults = self.runElectionGeo(voterShapeList, canList, castOptions)
 
         return geoElectionResults
     }
 
-    self.runElectionGeo = (voterShapeList, canList) => {
+    self.runElectionGeo = (voterShapeList, canList, castOptions) => {
         if (voterShapeList.getVoterShapes().length === 0) return { error: 'no voters' }
         if (canList.length === 0) return { error: 'no candidates' }
 
         const parties = election.getParties(canList)
 
-        const votesByTract = castVotesByTract(canList, parties)
+        const votesByTract = castVotesByTract(canList, parties, castOptions)
 
         const resultsStatewide = countStatewideElection(votesByTract, canList, parties)
 
@@ -55,12 +53,12 @@ export default function ElectionGeo(election, voterGeo, electionOptions) {
         return geoElectionResults
     }
 
-    function castVotesByTract(canList, parties) {
+    function castVotesByTract(canList, parties, castOptions) {
         const { voterGroupsByTract } = voterGeo
 
         const votesByTract = voterGroupsByTract.map(
             (row) => row.map(
-                (voterGroups) => election.castVotes.run(voterGroups, canList, parties, simCastOptions),
+                (voterGroups) => election.castVotes.run(voterGroups, canList, parties, castOptions),
             ),
         )
         return votesByTract
