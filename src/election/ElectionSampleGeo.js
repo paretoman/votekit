@@ -10,19 +10,19 @@
  * @param {Election} election
  * @constructor
  */
-export default function ElectionSampleGeo(electionGeo, voterGeo, electionOptions, socialChoiceOptions) {
+export default function ElectionSampleGeo(electionGeo, voterGeo) {
     const self = this
 
     const maxPoints = 5000
 
     let points = []
 
-    self.update = function (voterShapeList, candidateDnList, cDnSampler, changes, dimensions, castOptions) {
+    self.update = function (voterShapeList, candidateDnList, cDnSampler, changes, dimensions, electionOptions) {
         if (changes.checkAny()) {
             self.startSim()
         }
 
-        const addResult = self.addSim(voterShapeList, candidateDnList, cDnSampler, dimensions, castOptions)
+        const addResult = self.addSim(voterShapeList, candidateDnList, cDnSampler, dimensions, electionOptions)
         return addResult
     }
 
@@ -30,7 +30,8 @@ export default function ElectionSampleGeo(electionGeo, voterGeo, electionOptions
         points = []
     }
 
-    self.addSim = function (voterShapeList, candidateDnList, cDnSampler, dimensions, castOptions) {
+    self.addSim = function (voterShapeList, candidateDnList, cDnSampler, dimensions, electionOptions) {
+        const { socialChoiceOptions } = electionOptions
         // add more points
 
         if (voterShapeList.getVoterShapes().length === 0) return { pointsChanged: false }
@@ -65,7 +66,7 @@ export default function ElectionSampleGeo(electionGeo, voterGeo, electionOptions
             }
 
             // find winner position
-            const electionResults = electionGeo.runElectionGeo(voterShapeList, canList, castOptions)
+            const electionResults = electionGeo.runElectionGeo(voterShapeList, canList, electionOptions)
 
             const { resultsByDistrict } = electionResults
             const nDistricts = resultsByDistrict.length

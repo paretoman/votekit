@@ -13,22 +13,24 @@ import { range } from '../utilities/jsHelpers.js'
  * @param {Election} election
  * @constructor
  */
-export default function ElectionGeo(election, voterGeo, electionOptions) {
+export default function ElectionGeo(election, voterGeo) {
     const self = this
 
-    self.runElectionSim = (voterShapeList, candidateList, changes, castOptions) => {
+    self.runElectionSim = (voterShapeList, candidateList, changes, electionOptions) => {
         if (changes.checkNone()) return { error: 'No Changes' }
 
         const canList = candidateList.getCandidates()
 
-        const geoElectionResults = self.runElectionGeo(voterShapeList, canList, castOptions)
+        const geoElectionResults = self.runElectionGeo(voterShapeList, canList, electionOptions)
 
         return geoElectionResults
     }
 
-    self.runElectionGeo = (voterShapeList, canList, castOptions) => {
+    self.runElectionGeo = (voterShapeList, canList, electionOptions) => {
         if (voterShapeList.getVoterShapes().length === 0) return { error: 'no voters' }
         if (canList.length === 0) return { error: 'no candidates' }
+
+        const { castOptions } = electionOptions
 
         const parties = election.getParties(canList)
 
@@ -40,7 +42,7 @@ export default function ElectionGeo(election, voterGeo, electionOptions) {
 
         // eslint-disable-next-line max-len
         const resultsByDistrict = countDistrictElections(votesByTract, canList, parties)
-        const allocation = sumAllocations(resultsByDistrict, canList)
+        const allocation = sumAllocations(resultsByDistrict, canList, electionOptions)
 
         jupyterUpdate({ votesByTract })
 
@@ -355,7 +357,7 @@ export default function ElectionGeo(election, voterGeo, electionOptions) {
     }
 
     // Show wins across all districts for each candidate
-    function sumAllocations(resultsByDistrict, canList) {
+    function sumAllocations(resultsByDistrict, canList, electionOptions) {
         // make a histogram of allocation
         const numCandidates = canList.length
         const allocation = Array(numCandidates).fill(0)

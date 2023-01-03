@@ -1,12 +1,18 @@
 /** @module */
 
+import CastOptions from './CastOptions.js'
+import SocialChoiceOptions from './SocialChoiceOptions.js'
+
 /**
  * Here we are in the context of a single election.
  * @param {Menu} menu
  * @constructor
  */
-export default function ElectionOptions(menu, changes) {
+export default function ElectionOptions(menu, changes, simOptions) {
     const self = this
+
+    self.castOptions = new CastOptions(menu, changes, simOptions)
+    self.socialChoiceOptions = new SocialChoiceOptions(changes, self)
 
     // a list of election methods
     self.electionMethodList = [
@@ -62,7 +68,10 @@ export default function ElectionOptions(menu, changes) {
     self.setElectionMethod('plurality')
     changes.add(['electionMethod'])
 
-    self.update = () => {}
+    self.update = () => {
+        self.castOptions.update()
+        self.socialChoiceOptions.update()
+    }
 
     menu.addMenuItem(
         self,

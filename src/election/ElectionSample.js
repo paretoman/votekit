@@ -10,7 +10,7 @@
  * @param {Election} election
  * @constructor
  */
-export default function ElectionSample(election, electionOptions, socialChoiceOptions) {
+export default function ElectionSample(election) {
     const self = this
 
     const maxPoints = 5000
@@ -18,12 +18,12 @@ export default function ElectionSample(election, electionOptions, socialChoiceOp
     let points = []
     let partyWins
 
-    self.update = function (voterShapeList, candidateDnList, cDnSampler, changes, dimensions, castOptions) {
+    self.update = function (voterShapeList, candidateDnList, cDnSampler, changes, dimensions, electionOptions) {
         if (changes.checkAny()) {
             self.startSim()
         }
 
-        const addResult = self.addSim(voterShapeList, candidateDnList, cDnSampler, dimensions, castOptions)
+        const addResult = self.addSim(voterShapeList, candidateDnList, cDnSampler, dimensions, electionOptions)
         return addResult
     }
 
@@ -32,7 +32,7 @@ export default function ElectionSample(election, electionOptions, socialChoiceOp
         partyWins = Array(10).fill(0) // TODO: Use number of parties
     }
 
-    self.addSim = function (voterShapeList, candidateDnList, cDnSampler, dimensions, castOptions) {
+    self.addSim = function (voterShapeList, candidateDnList, cDnSampler, dimensions, electionOptions) {
         // add more points
 
         if (voterShapeList.getVoterShapes().length === 0) return { pointsChanged: false }
@@ -48,6 +48,7 @@ export default function ElectionSample(election, electionOptions, socialChoiceOp
         const ns = 20
 
         // number of new points
+        const { socialChoiceOptions, castOptions } = electionOptions
         const { seats } = socialChoiceOptions
         const nnp = seats * ns
         const newPoints = Array(nnp)

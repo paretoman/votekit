@@ -22,8 +22,6 @@ export default function SimSample(
     voterGeo,
     simOptions,
     electionOptions,
-    socialChoiceOptions,
-    castOptions,
 ) {
     const self = this
 
@@ -47,15 +45,13 @@ export default function SimSample(
         // The electionResults communicates how to visualize the election.
 
         electionOptions.update()
-        socialChoiceOptions.update()
-        castOptions.update()
 
         if (simOptions.geo) voterGeo.update()
         canDnSampler.update()
 
         const { dimensions } = simOptions
         const addResult = electionStrategy
-            .update(voterShapeList, candidateDnList, canDnSampler.sampler, changes, dimensions, castOptions)
+            .update(voterShapeList, candidateDnList, canDnSampler.sampler, changes, dimensions, electionOptions)
         self.pub.update(addResult)
     }
 }
