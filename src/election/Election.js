@@ -12,30 +12,19 @@ import CastVotes from './CastVotes.js'
 export default function Election(simOptions, electionOptions) {
     const self = this
 
-    const { socialChoiceOptions } = electionOptions
-
-    self.socialChoice = new SocialChoice(electionOptions, socialChoiceOptions)
+    self.socialChoice = new SocialChoice(electionOptions)
 
     self.castVotes = new CastVotes(electionOptions, simOptions)
 
     // Election //
 
-    self.runElection = function (voterShapes, canList, castOptions) {
-        const parties = self.getParties(canList)
-        const votes = self.castVotes.run(voterShapes, canList, parties, castOptions)
-        const electionResults = self.socialChoice.run(canList, votes, parties)
+    self.runElection = function (geometry) {
+        const { castOptions, socialChoiceOptions } = electionOptions
+
+        const votes = self.castVotes.run(geometry, castOptions)
+        const { parties } = geometry
+        const electionResults = self.socialChoice.run(votes, parties, socialChoiceOptions)
         jupyterUpdate({ votes })
         return electionResults
     }
-
-    self.getParties = (canList) => {
-        const partiesByCan = getPartyByCan(canList)
-        // TODO: figure out how to vary the number of parties, allow skipping etc.
-        const numParties = 10
-        const parties = { partiesByCan, numParties }
-        return parties
-    }
-
-    // TODO: consider more than one party for a candidate.
-    function getPartyByCan(canList) { return canList.map((can) => can.party[0]) }
 }

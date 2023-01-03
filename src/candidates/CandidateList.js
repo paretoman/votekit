@@ -39,4 +39,29 @@ export default function CandidateList(layout, changes, commander) {
     }
 
     self.getCandidates = () => candidateRegistrar.getList().filter((c) => c.exists)
+    self.getGeoms = (dimensions) => getGeoms(self.getCandidates(), dimensions)
+
+    function getGeoms(entities, dimensions) {
+        if (dimensions === 1) {
+            return entities.map((ent) => (ent.shape1))
+        }
+        return entities.map((ent) => (ent.shape2))
+    }
+
+    self.getParties = () => {
+        const canList = self.getCandidates()
+        const partiesByCan = getPartyByCan(canList)
+        // TODO: figure out how to vary the number of parties, allow skipping etc.
+        const numParties = 10
+        const parties = { partiesByCan, numParties }
+        return parties
+    }
+
+    // TODO: consider more than one party for a candidate.
+    function getPartyByCan(canList) { return canList.map((can) => can.party[0]) }
+
+    self.getRGBAList = () => {
+        const canList = self.getCandidates()
+        return canList.map((c) => c.colorRGBA)
+    }
 }

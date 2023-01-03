@@ -40,4 +40,24 @@ export default function CandidateDnList(layout, changes, commander) {
         const canDns = candidateDnRegistrar.getList()
         return canDns.filter((c) => c.exists)
     }
+    self.getGeoms = (dimensions) => getGeoms(self.getCandidateDistributions(), dimensions)
+
+    function getGeoms(entities, dimensions) {
+        if (dimensions === 1) {
+            return entities.map((ent) => (ent.shape1))
+        }
+        return entities.map((ent) => (ent.shape2))
+    }
+
+    self.getParties = () => {
+        const canList = self.getCandidateDistributions()
+        const partiesByCan = getPartyByCan(canList)
+        // TODO: figure out how to vary the number of parties, allow skipping etc.
+        const numParties = 10
+        const parties = { partiesByCan, numParties }
+        return parties
+    }
+
+    // TODO: consider more than one party for a candidate.
+    function getPartyByCan(canList) { return canList.map((can) => can.party[0]) }
 }

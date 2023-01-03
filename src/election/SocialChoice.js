@@ -12,35 +12,33 @@ import electionMethods from '../electionMethods/electionMethods.js'
  * @param {Menu} menu
  * @constructor
  */
-export default function SocialChoice(electionOptions, socialChoiceOptions) {
+export default function SocialChoice(electionOptions) {
     const self = this
 
     self.seats = 1
 
-    self.run = (canList, votes, parties) => {
+    self.run = (votes, parties, socialChoiceOptions) => {
         // why have two different kinds of results?
         // socialChoiceResults, the smaller one,
         //   is in the context of the election method,
         //   which has tallies go in and analysis come out
         // electionResults, the larger one,
         //   is in the context of candidate objects and voter objects.
-        const colorRGBAOfCandidates = canList.map((c) => c.colorRGBA)
         if (electionOptions.electionType === 'allocation' || electionOptions.electionType === 'multiWinner') {
             const electionMethodOptions = socialChoiceOptions
             const electionMethod = electionMethods[electionOptions.electionMethod]
             const socialChoiceResults = electionMethod({ votes, parties, electionMethodOptions })
             const { allocation, explanation } = socialChoiceResults
             const electionResults = {
-                allocation, explanation, canList, votes, colorRGBAOfCandidates,
+                allocation, explanation, votes,
             }
             return electionResults
         }
         const electionMethod = electionMethods[electionOptions.electionMethod]
         const socialChoiceResults = electionMethod({ votes, parties })
         const { iWinner } = socialChoiceResults
-        const winner = canList[iWinner]
         const electionResults = {
-            iWinner, winner, votes, colorRGBAOfCandidates,
+            iWinner, votes,
         }
         return electionResults
     }

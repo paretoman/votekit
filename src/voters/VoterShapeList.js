@@ -38,4 +38,12 @@ export default function VoterShapeList(layout, changes, commander) {
     }
 
     self.getVoterShapes = () => voterRegistrar.getList().filter((v) => v.exists)
+    self.getGeoms = (dimensions) => getGeoms(self.getVoterShapes(), dimensions)
+
+    function getGeoms(entities, dimensions) {
+        if (dimensions === 1) {
+            return entities.map((ent) => (ent.shape1))
+        }
+        return entities.map((ent) => (ent.shape2))
+    }
 }

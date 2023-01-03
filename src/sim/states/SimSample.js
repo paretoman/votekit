@@ -1,6 +1,7 @@
 /** @module */
 
 import CandidateDistributionSampler from '../../election/CandidateDistributionSampler.js'
+import getGeometry from '../getGeometry.js'
 import StatePublisher from './StatePublisher.js'
 
 /**
@@ -49,9 +50,10 @@ export default function SimSample(
         if (simOptions.geo) voterGeo.update()
         canDnSampler.update()
 
-        const { dimensions } = simOptions
+        const geometry = getGeometry(voterShapeList, candidateDnList, simOptions, voterGeo)
+
         const addResult = electionStrategy
-            .update(voterShapeList, candidateDnList, canDnSampler.sampler, changes, dimensions, electionOptions)
+            .update(geometry, canDnSampler.sampler, changes, electionOptions)
         self.pub.update(addResult)
     }
 }

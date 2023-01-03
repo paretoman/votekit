@@ -16,33 +16,30 @@ import { range } from '../utilities/jsHelpers.js'
 export default function ElectionGeo(election, voterGeo) {
     const self = this
 
-    self.runElectionSim = (voterShapeList, candidateList, changes, electionOptions) => {
-        if (changes.checkNone()) return { error: 'No Changes' }
-
-        const canList = candidateList.getCandidates()
-
-        const geoElectionResults = self.runElectionGeo(voterShapeList, canList, electionOptions)
+    self.runElectionSim = (geometry, electionOptions) => {
+        const geoElectionResults = self.runElectionGeo(geometry, electionOptions)
 
         return geoElectionResults
     }
 
-    self.runElectionGeo = (voterShapeList, canList, electionOptions) => {
-        if (voterShapeList.getVoterShapes().length === 0) return { error: 'no voters' }
-        if (canList.length === 0) return { error: 'no candidates' }
+    self.runElectionGeo = (geometry, electionOptions) => {
+        const {
+            voterGeoms, canGeoms, parties, dimensions,
+        } = geometry
+        if (voterGeoms.length === 0) return { error: 'no voters' }
+        if (canGeoms.length === 0) return { error: 'no candidates' }
 
-        const { castOptions } = electionOptions
+        const { castOptions, socialChoiceOptions } = electionOptions
 
-        const parties = election.getParties(canList)
+        const votesByTract = castVotesByTract(canGeoms, parties, dimensions, castOptions)
 
-        const votesByTract = castVotesByTract(canList, parties, castOptions)
+        const resultsStatewide = countStatewideElection(votesByTract, canGeoms, parties, socialChoiceOptions)
 
-        const resultsStatewide = countStatewideElection(votesByTract, canList, parties)
-
-        const resultsByTract = countTractElections(votesByTract, canList, parties)
+        const resultsByTract = countTractElections(votesByTract, canGeoms, parties, socialChoiceOptions)
 
         // eslint-disable-next-line max-len
-        const resultsByDistrict = countDistrictElections(votesByTract, canList, parties)
-        const allocation = sumAllocations(resultsByDistrict, canList, electionOptions)
+        const resultsByDistrict = countDistrictElections(votesByTract, canGeoms, parties, socialChoiceOptions)
+        const allocation = sumAllocations(resultsByDistrict, canGeoms, electionOptions)
 
         jupyterUpdate({ votesByTract })
 
@@ -55,27 +52,38 @@ export default function ElectionGeo(election, voterGeo) {
         return geoElectionResults
     }
 
-    function castVotesByTract(canList, parties, castOptions) {
+    function castVotesByTract(canGeoms, parties, dimensions, castOptions) {
         const { voterGroupsByTract } = voterGeo
 
         const votesByTract = voterGroupsByTract.map(
             (row) => row.map(
-                (voterGroups) => election.castVotes.run(voterGroups, canList, parties, castOptions),
+                (voterGroups) => {
+                    const voterGeoms = getGeoms(voterGroups, dimensions)
+                    const tractGeometry = { voterGeoms, canGeoms, parties }
+                    return election.castVotes.run(tractGeometry, castOptions)
+                },
             ),
         )
         return votesByTract
     }
 
+    function getGeoms(entities, dimensions) {
+        if (dimensions === 1) {
+            return entities.map((ent) => (ent.shape1))
+        }
+        return entities.map((ent) => (ent.shape2))
+    }
+
     /** Show tallies over all the districts
      * Find statewide support for candidates (parties).
      */
-    function countStatewideElection(votesByTract, canList, parties) {
-        const numCans = canList.length
+    function countStatewideElection(votesByTract, canGeoms, parties, socialChoiceOptions) {
+        const numCans = canGeoms.length
         const allVotes = combineVotes(votesByTract, numCans)
 
         jupyterUpdate({ allVotes })
 
-        const resultsStatewide = election.socialChoice.run(canList, allVotes, parties)
+        const resultsStatewide = election.socialChoice.run(allVotes, parties, socialChoiceOptions)
         return resultsStatewide
     }
 
@@ -199,34 +207,34 @@ export default function ElectionGeo(election, voterGeo) {
     /** Visualize voter demographics according to votes for candidates within a tract.
      * Hold mini-elections within a tract.
      */
-    function countTractElections(votesByTract, canList, parties) {
+    function countTractElections(votesByTract, canGeoms, parties, socialChoiceOptions) {
         const resultsByTract = votesByTract.map(
             (row) => row.map(
-                (votes) => election.socialChoice.run(canList, votes, parties),
+                (votes) => election.socialChoice.run(votes, parties, socialChoiceOptions),
             ),
         )
         return resultsByTract
     }
 
     /** Run separate elections in each district. */
-    function countDistrictElections(votesByTract, canList, parties) {
+    function countDistrictElections(votesByTract, canGeoms, parties, socialChoiceOptions) {
         // Loop through districts.
         // Find who won.
 
-        const votesByDistrict = combineVotesByDistrict(votesByTract, canList)
+        const votesByDistrict = combineVotesByDistrict(votesByTract, canGeoms)
 
         jupyterUpdate({ votesByDistrict })
 
         const resultsByDistrict = votesByDistrict.map(
-            (votes) => election.socialChoice.run(canList, votes, parties),
+            (votes) => election.socialChoice.run(votes, parties, socialChoiceOptions),
         )
         return resultsByDistrict
     }
 
-    function combineVotesByDistrict(votesByTract, canList) {
+    function combineVotesByDistrict(votesByTract, canGeoms) {
         const { census } = voterGeo.districtMaker
         const { nd } = voterGeo
-        const numCans = canList.length
+        const numCans = canGeoms.length
 
         // loop through districts
         // each district has a census with a list of tracts with weights
@@ -357,9 +365,9 @@ export default function ElectionGeo(election, voterGeo) {
     }
 
     // Show wins across all districts for each candidate
-    function sumAllocations(resultsByDistrict, canList, electionOptions) {
+    function sumAllocations(resultsByDistrict, canGeoms, electionOptions) {
         // make a histogram of allocation
-        const numCandidates = canList.length
+        const numCandidates = canGeoms.length
         const allocation = Array(numCandidates).fill(0)
         if (electionOptions.electionType === 'singleWinner') {
             const iWinners = resultsByDistrict.map((electionResults) => electionResults.iWinner)

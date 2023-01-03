@@ -42,7 +42,7 @@ function colorDistrictWins(resultsByDistrict, canList, electionOptions) {
     let colorOfWinsByDistrict
     if (electionOptions.electionType === 'singleWinner') {
         colorOfWinsByDistrict = resultsByDistrict.map(
-            (electionResults) => electionResults.winner.color,
+            (electionResults) => canList[electionResults.iWinner].color,
         )
     } else {
         const colorSet = canList.map((can) => can.colorRGBA)

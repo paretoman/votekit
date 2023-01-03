@@ -10,32 +10,38 @@
  * @param {Election} election
  * @constructor
  */
-export default function ElectionSampleGeo(electionGeo, voterGeo) {
+export default function ElectionSampleGeo(electionGeo) {
     const self = this
 
     const maxPoints = 5000
 
     let points = []
+    let partyWins
 
-    self.update = function (voterShapeList, candidateDnList, cDnSampler, changes, dimensions, electionOptions) {
+    self.update = function (geometry, cDnSampler, changes, electionOptions) {
         if (changes.checkAny()) {
             self.startSim()
         }
 
-        const addResult = self.addSim(voterShapeList, candidateDnList, cDnSampler, dimensions, electionOptions)
+        const addResult = self.addSim(geometry, cDnSampler, electionOptions)
         return addResult
     }
 
     self.startSim = function () {
         points = []
+        partyWins = Array(10).fill(0) // TODO: Use number of parties
     }
 
-    self.addSim = function (voterShapeList, candidateDnList, cDnSampler, dimensions, electionOptions) {
+    self.addSim = function (geometry, cDnSampler, electionOptions) {
         const { socialChoiceOptions } = electionOptions
         // add more points
 
-        if (voterShapeList.getVoterShapes().length === 0) return { pointsChanged: false }
-        if (candidateDnList.getCandidateDistributions().length === 0) {
+        const {
+            voterGeoms, canGeoms, dimensions, voterGeo,
+        } = geometry
+
+        if (voterGeoms.length === 0) return { pointsChanged: false }
+        if (canGeoms.length === 0) {
             return { pointsChanged: false }
         }
 
@@ -56,17 +62,24 @@ export default function ElectionSampleGeo(electionGeo, voterGeo) {
         for (let i = 0; i < ns; i++) {
             // choose a number of candidates
             const nk = socialChoiceOptions.numSampleCandidates
-            const canList = []
+            const sCanGeoms = []
+            const sParties = []
             for (let k = 0; k < nk; k++) {
                 // sample a point from the distribution of candidates
                 const point = cDnSampler.samplePoint()
 
                 // make a candidate
-                canList.push(point)
+                const { canGeom, party } = point
+                sCanGeoms.push(canGeom)
+                sParties.push(party[0])
             }
 
+            const sampleGeometry = {
+                voterGeoms, canGeoms: sCanGeoms, parties: { partiesByCan: sParties, numParties: 10 }, dimensions,
+            } // TODO: fix parties
+
             // find winner position
-            const electionResults = electionGeo.runElectionGeo(voterShapeList, canList, electionOptions)
+            const electionResults = electionGeo.runElectionGeo(sampleGeometry, electionOptions)
 
             const { resultsByDistrict } = electionResults
             const nDistricts = resultsByDistrict.length
@@ -77,66 +90,65 @@ export default function ElectionSampleGeo(electionGeo, voterGeo) {
             if (electionOptions.electionType === 'singleWinner') {
                 let r = 0
                 for (let o = 0; o < nDistricts; o++) {
-                    const { winner } = resultsByDistrict[o]
+                    const { iWinner } = resultsByDistrict[o]
 
+                    const winPoint = sCanGeoms[iWinner]
                     // record point
-                    let winPoint
                     if (r === 0) {
-                        // record point
-                        winPoint = (dimensions === 1) ? winner.shape1 : winner.shape2
+                        // no change
                     } else if (dimensions === 1) {
                         // add jitter
-                        winPoint = {
-                            x: winner.shape1.x + (Math.random() - 0.5) * jitterSize,
-                        }
+                        winPoint.x += (Math.random() - 0.5) * jitterSize
                     } else {
                         // add jitter
-                        winPoint = {
-                            x: winner.shape2.x + (Math.random() - 0.5) * jitterSize,
-                            y: winner.shape2.y + (Math.random() - 0.5) * jitterSize,
-                        }
+                        winPoint.x += (Math.random() - 0.5) * jitterSize
+                        winPoint.y += (Math.random() - 0.5) * jitterSize
                     }
 
                     points.push(winPoint)
                     newPoints[q] = winPoint
                     q += 1
                     r += 1
+
+                    const winParty = sParties[iWinner]
+                    partyWins[winParty] += 1
                 }
             } else {
                 let r = 0
                 for (let o = 0; o < nDistricts; o++) {
                     const { allocation } = resultsByDistrict[o]
 
-                    for (let k = 0; k < canList.length; k++) {
-                        const can = canList[k]
+                    for (let k = 0; k < sCanGeoms.length; k++) {
+                        const winPoint = sCanGeoms[k]
+                        const party = sParties[k]
                         const numPoints = allocation[k]
                         for (let m = 0; m < numPoints; m++) {
-                            let winPoint
+                            // add jitter
                             if (r === 0) {
-                                // record point
-                                winPoint = (dimensions === 1) ? can.shape1 : can.shape2
+                                // no change
                             } else if (dimensions === 1) {
-                                // add jitter
-                                winPoint = {
-                                    x: can.shape1.x + (Math.random() - 0.5) * jitterSize,
-                                }
+                                winPoint.x += (Math.random() - 0.5) * jitterSize
                             } else {
-                                // add jitter
-                                winPoint = {
-                                    x: can.shape2.x + (Math.random() - 0.5) * jitterSize,
-                                    y: can.shape2.y + (Math.random() - 0.5) * jitterSize,
-                                }
+                                winPoint.x += (Math.random() - 0.5) * jitterSize
+                                winPoint.y += (Math.random() - 0.5) * jitterSize
                             }
+
                             // record point
                             points.push(winPoint)
                             newPoints[q] = winPoint
                             q += 1
                             r += 1
+
+                            // calculate fractions of wins
+                            partyWins[party] += 1
                         }
                     }
                 }
             }
         }
-        return { pointsChanged: true, newPoints, points }
+        const partyWinFraction = partyWins.map((x) => x / points.length)
+        return {
+            pointsChanged: true, newPoints, points, partyWinFraction,
+        }
     }
 }

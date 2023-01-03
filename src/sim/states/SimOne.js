@@ -1,5 +1,6 @@
 /** @module */
 
+import getGeometry from '../getGeometry.js'
 import StatePublisher from './StatePublisher.js'
 
 /**
@@ -22,6 +23,8 @@ export default function SimOne(entities, changes, electionOne, electionGeo, vote
 
     self.pub = new StatePublisher()
 
+    const { voterShapeList, candidateList } = entities
+
     // Strategies //
     let electionStrategy
 
@@ -40,8 +43,12 @@ export default function SimOne(entities, changes, electionOne, electionGeo, vote
 
         if (simOptions.geo) voterGeo.update()
 
+        const geometry = getGeometry(voterShapeList, candidateList, simOptions, voterGeo)
+
         const electionResults = electionStrategy
-            .runElectionSim(entities.voterShapeList, entities.candidateList, changes, electionOptions)
+            .runElectionSim(geometry, electionOptions)
+
+        electionResults.colorRGBAOfCandidates = candidateList.getRGBAList()
 
         self.pub.update(electionResults)
     }
