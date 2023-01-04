@@ -36,7 +36,7 @@ export default function ElectionGeo(election) {
 
         const resultsStatewide = countStatewideElection(votesByTract, canGeoms, parties, socialChoiceOptions)
 
-        const resultsByTract = countTractElections(votesByTract, canGeoms, parties, socialChoiceOptions)
+        const resultsByTract = countTractElections(votesByTract, parties, socialChoiceOptions)
 
         // eslint-disable-next-line max-len
         const resultsByDistrict = countDistrictElections(votesByTract, canGeoms, voterGeo, parties, socialChoiceOptions)
@@ -206,7 +206,7 @@ export default function ElectionGeo(election) {
     /** Visualize voter demographics according to votes for candidates within a tract.
      * Hold mini-elections within a tract.
      */
-    function countTractElections(votesByTract, canGeoms, parties, socialChoiceOptions) {
+    function countTractElections(votesByTract, parties, socialChoiceOptions) {
         const resultsByTract = votesByTract.map(
             (row) => row.map(
                 (votes) => election.socialChoice.run(votes, parties, socialChoiceOptions),
