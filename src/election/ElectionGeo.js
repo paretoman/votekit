@@ -1,5 +1,6 @@
 /** @module */
 
+import voteCasters from '../castVotes/voteCasters.js'
 import getGeoms from '../entities.js/getGeoms.js'
 import jupyterUpdate from '../environments/jupyter.js'
 import { range } from '../utilities/jsHelpers.js'
@@ -30,9 +31,9 @@ export default function ElectionGeo(election) {
         if (voterGeoms.length === 0) return { error: 'no voters' }
         if (canGeoms.length === 0) return { error: 'no candidates' }
 
-        const { castOptions, socialChoiceOptions } = electionOptions
+        const { socialChoiceOptions } = electionOptions
 
-        const votesByTract = castVotesByTract(geometry, castOptions)
+        const votesByTract = castVotesByTract(geometry, electionOptions)
 
         const resultsStatewide = countStatewideElection(votesByTract, canGeoms, parties, socialChoiceOptions)
 
@@ -53,7 +54,8 @@ export default function ElectionGeo(election) {
         return geoElectionResults
     }
 
-    function castVotesByTract(geometry, castOptions) {
+    function castVotesByTract(geometry, electionOptions) {
+        const { castOptions } = electionOptions
         const {
             canGeoms, parties, dimensions, voterGeo,
         } = geometry
@@ -66,7 +68,7 @@ export default function ElectionGeo(election) {
                     const tractGeometry = {
                         voterGeoms, canGeoms, parties, dimensions, voterGeo,
                     }
-                    return election.castVotes.run(tractGeometry, castOptions)
+                    return voteCasters[electionOptions.voteCasterName].cast(tractGeometry, castOptions)
                 },
             ),
         )
