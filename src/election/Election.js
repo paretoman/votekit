@@ -9,12 +9,12 @@ import CastVotes from './CastVotes.js'
  * @param {Menu} menu
  * @constructor
  */
-export default function Election(simOptions, electionOptions) {
+export default function Election(electionOptions) {
     const self = this
 
     self.socialChoice = new SocialChoice(electionOptions)
 
-    self.castVotes = new CastVotes(electionOptions, simOptions)
+    self.castVotes = new CastVotes(electionOptions)
 
     // Election //
 

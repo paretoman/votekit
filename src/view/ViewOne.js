@@ -5,6 +5,7 @@ import VoterViewList from '../voters/VoterViewList.js'
 import ViewBase from './ViewBase.js'
 import addAllocation from '../viz/addAllocation.js'
 import VoterTestView from '../voters/VoterTestView.js'
+import getTestGeometry from '../sim/getTestGeometry.js'
 
 /**
  * Draw entities: voters, candidates, test voters.
@@ -81,7 +82,9 @@ export default function ViewOne(entities, screen, menu, changes, sim, simOptions
         self.voterTestView.graphic.start(p)
     }
     self.testVoteView = () => {
-        const vote = election.castVotes.runTest(self.voterTestView.voterTest, candidateList)
+        const geometry = getTestGeometry(self.voterTestView.voterTest, candidateList, simOptions)
+
+        const vote = election.castVotes.runTest(geometry)
         self.voterTestView.graphic.update(vote, candidateList)
         return vote
     }
