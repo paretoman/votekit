@@ -19,7 +19,7 @@ export default function ViewGeoMaps(entities, screenCommon, layout, changes, sim
     screen.setHeight(height / 3)
     screen.hide()
 
-    const geoMaps = new GeoMaps(sim.voterGeo, entities.candidateList, screen, electionOptions)
+    const geoMaps = new GeoMaps(entities.candidateList, screen, electionOptions, changes)
     let flagNoRender = false
 
     self.enter = () => {

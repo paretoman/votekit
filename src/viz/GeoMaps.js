@@ -6,23 +6,25 @@ import NoiseImage from './NoiseImage.js'
 
 /**
  * Show votes
- * @param {VoterGeo} voterGeo
  * @param {Screen} screen
  * @constructor
  */
-export default function GeoMaps(voterGeo, candidateList, screen, electionOptions) {
+export default function GeoMaps(candidateList, screen, electionOptions, changes) {
     const self = this
-
-    const { districtMaker } = voterGeo
-
-    self.districtDraw = new DistrictDraw(screen, districtMaker)
-
-    // Code that handles making images of geographic noise.
-    self.noiseImage = new NoiseImage(voterGeo.nx, voterGeo.ny, screen)
 
     // Update //
 
     self.update = (geoElectionResults) => {
+        const { voterGeo } = geoElectionResults.geometry
+
+        // todo: make this only run when we have new districts
+        if (changes.check(['geo']) && self.districtDraw === undefined) {
+            const { districtMaker } = voterGeo
+            self.districtDraw = new DistrictDraw(screen, districtMaker)
+            // Code that handles making images of geographic noise.
+            self.noiseImage = new NoiseImage(voterGeo.nx, voterGeo.ny, screen)
+        }
+
         const gc = geoColors(geoElectionResults, candidateList, electionOptions)
         const { colorByTract, colorOfVoteByDistrict, colorOfWinsByDistrict } = gc
         self.colorOfVoteByDistrict = colorOfVoteByDistrict
