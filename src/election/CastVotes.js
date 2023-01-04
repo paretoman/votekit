@@ -8,13 +8,8 @@ export default function CastVotes(electionOptions) {
     const self = this
 
     self.run = (geometry, castOptions) => {
-        const {
-            voterGeoms, canGeoms, parties, dimensions,
-        } = geometry
         const { cast } = voteCasters[electionOptions.voteCasterName]
-        const votes = cast({
-            canGeoms, voterGeoms, dimensions, castOptions, parties,
-        })
+        const votes = cast(geometry, castOptions)
         return votes
     }
 
