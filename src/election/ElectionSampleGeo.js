@@ -7,9 +7,6 @@ import electionGeoRun from './electionGeoRun.js'
  * Candidates are sampled from a distribution.
  * Winners are drawn as points.
  * The simulation is dynamic. More simulations are performed at each frame.
- * @param {Screen} screen
- * @param {Menu} menu
- * @param {Election} election
  * @constructor
  */
 export default function ElectionSampleGeo() {
@@ -35,7 +32,6 @@ export default function ElectionSampleGeo() {
     }
 
     self.addSim = function (geometry, cDnSampler, electionOptions) {
-        const { socialChoiceOptions } = electionOptions
         // add more points
 
         const {
@@ -55,6 +51,7 @@ export default function ElectionSampleGeo() {
         const ns = 1
 
         // number of new points
+        const { socialChoiceOptions } = electionOptions
         const { seats } = socialChoiceOptions
         const { nd } = voterGeo
         const nnp = seats * ns * nd
@@ -94,8 +91,8 @@ export default function ElectionSampleGeo() {
                 for (let o = 0; o < nDistricts; o++) {
                     const { iWinner } = resultsByDistrict[o]
 
-                    const winPoint = sCanGeoms[iWinner]
                     // record point
+                    const winPoint = sCanGeoms[iWinner]
                     if (r === 0) {
                         // no change
                     } else if (dimensions === 1) {
@@ -124,6 +121,7 @@ export default function ElectionSampleGeo() {
                         const winPoint = sCanGeoms[k]
                         const party = sParties[k]
                         const numPoints = allocation[k]
+
                         for (let m = 0; m < numPoints; m++) {
                             // add jitter
                             if (r === 0) {

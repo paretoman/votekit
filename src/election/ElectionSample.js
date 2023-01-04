@@ -22,7 +22,7 @@ export default function ElectionSample() {
             self.startSim()
         }
 
-        const addResult = self.addSim(geometry, cDnSampler, changes, electionOptions)
+        const addResult = self.addSim(geometry, cDnSampler, electionOptions)
         return addResult
     }
 
@@ -31,7 +31,7 @@ export default function ElectionSample() {
         partyWins = Array(10).fill(0) // TODO: Use number of parties
     }
 
-    self.addSim = function (geometry, cDnSampler, changes, electionOptions) {
+    self.addSim = function (geometry, cDnSampler, electionOptions) {
         // add more points
 
         const { voterGeoms, canGeoms, dimensions } = geometry
@@ -64,8 +64,8 @@ export default function ElectionSample() {
                 // sample a point from the distribution of candidates
                 const point = cDnSampler.samplePoint()
 
-                const { canGeom, party } = point
                 // make a candidate
+                const { canGeom, party } = point
                 sCanGeoms.push(canGeom)
                 sParties.push(party[0])
             }
@@ -75,6 +75,9 @@ export default function ElectionSample() {
             } // todo: fix parties
             // find winner position
             const electionResults = electionRun(sampleGeometry, electionOptions)
+
+            // adjustable parameter for visualization
+            const jitterSize = 10
 
             if (electionOptions.electionType === 'singleWinner') {
                 const { iWinner } = electionResults
@@ -89,13 +92,13 @@ export default function ElectionSample() {
             } else {
                 const { allocation } = electionResults
 
-                const jitterSize = 10
                 for (let k = 0; k < sCanGeoms.length; k++) {
                     const winPoint = sCanGeoms[k]
                     const party = sParties[k]
                     const numPoints = allocation[k]
 
                     for (let m = 0; m < numPoints; m++) {
+                        // add jitter
                         if (m === 0) {
                             // no change
                         } else if (dimensions === 1) {
@@ -105,12 +108,12 @@ export default function ElectionSample() {
                             winPoint.y += (Math.random() - 0.5) * jitterSize
                         }
                         // record point
-
-                        // calculate fractions of wins
-                        partyWins[party] += 1
                         points.push(winPoint)
                         newPoints[q] = winPoint
                         q += 1
+
+                        // calculate fractions of wins
+                        partyWins[party] += 1
                     }
                 }
             }
