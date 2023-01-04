@@ -23,7 +23,7 @@ function samplePoint1(candidateDistributions, cdf) {
     const isGaussian = cd.shape1.densityProfile === 'gaussian'
     const sample = (isGaussian) ? sampleGaussian : randomInsideInterval
     const canGeom = sample(cd.shape1.x, cd.shape1.w * 0.5)
-    const party = [iDist]
+    const { party } = cd
     const point = { canGeom, party }
     return point
 }

@@ -3,6 +3,7 @@ import CandidateCommander from './CandidateCommander.js'
 import { standardizeColor } from '../utilities/jsHelpers.js'
 import CandidateAddMakeButton from '../sim/CandidateAddMakeButton.js'
 import Registrar from '../sim/Registrar.js'
+import getGeoms from '../entities.js/getGeoms.js'
 
 /** A component of sim.js that deals with adding candidates. */
 export default function CandidateList(layout, changes, commander) {
@@ -40,13 +41,6 @@ export default function CandidateList(layout, changes, commander) {
 
     self.getCandidates = () => candidateRegistrar.getList().filter((c) => c.exists)
     self.getGeoms = (dimensions) => getGeoms(self.getCandidates(), dimensions)
-
-    function getGeoms(entities, dimensions) {
-        if (dimensions === 1) {
-            return entities.map((ent) => (ent.shape1))
-        }
-        return entities.map((ent) => (ent.shape2))
-    }
 
     self.getParties = () => {
         const canList = self.getCandidates()

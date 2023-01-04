@@ -2,6 +2,7 @@ import VoterShapeAddMakeButton from '../sim/VoterShapeAddMakeButton.js'
 import Registrar from '../sim/Registrar.js'
 import VoterShape from './VoterShape.js'
 import VoterCommander from './VoterCommander.js'
+import getGeoms from '../entities.js/getGeoms.js'
 
 /** A component of sim.js that deals with adding voters. */
 export default function VoterShapeList(layout, changes, commander) {
@@ -39,11 +40,4 @@ export default function VoterShapeList(layout, changes, commander) {
 
     self.getVoterShapes = () => voterRegistrar.getList().filter((v) => v.exists)
     self.getGeoms = (dimensions) => getGeoms(self.getVoterShapes(), dimensions)
-
-    function getGeoms(entities, dimensions) {
-        if (dimensions === 1) {
-            return entities.map((ent) => (ent.shape1))
-        }
-        return entities.map((ent) => (ent.shape2))
-    }
 }

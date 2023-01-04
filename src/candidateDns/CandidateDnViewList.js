@@ -52,8 +52,9 @@ export default function CandidateDnViewList(viewSettings, candidateDnList, scree
     self.setCandidateDnWins = (partyWinFraction) => {
         const canDnViewsExisting = self.getCanDnViews()
         if (canDnViewsExisting.length > 1) {
-            canDnViewsExisting.forEach((canDnView, index) => {
-                const winFraction = partyWinFraction[index]
+            canDnViewsExisting.forEach((canDnView) => {
+                const party0 = canDnView.canDn.party[0]
+                const winFraction = partyWinFraction[party0]
                 canDnView.graphic.setWinFraction(winFraction)
             })
         }

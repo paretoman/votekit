@@ -1,5 +1,6 @@
 /** @module */
 
+import getGeoms from '../entities.js/getGeoms.js'
 import jupyterUpdate from '../environments/jupyter.js'
 import { range } from '../utilities/jsHelpers.js'
 
@@ -65,13 +66,6 @@ export default function ElectionGeo(election, voterGeo) {
             ),
         )
         return votesByTract
-    }
-
-    function getGeoms(entities, dimensions) {
-        if (dimensions === 1) {
-            return entities.map((ent) => (ent.shape1))
-        }
-        return entities.map((ent) => (ent.shape2))
     }
 
     /** Show tallies over all the districts

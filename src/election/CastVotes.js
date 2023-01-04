@@ -1,4 +1,5 @@
 import voteCasters from '../castVotes/voteCasters.js'
+import getGeoms from '../entities.js/getGeoms.js'
 
 /**
  * Voters cast votes for candidates.
@@ -29,13 +30,6 @@ export default function CastVotes(electionOptions, simOptions) {
             canGeoms, voterGeom, dimensions, partiesByCan,
         })
         return vote
-    }
-
-    function getGeoms(entities, dimensions) {
-        if (dimensions === 1) {
-            return entities.map((ent) => (ent.shape1))
-        }
-        return entities.map((ent) => (ent.shape2))
     }
 
     // TODO: consider more than one party for a candidate.

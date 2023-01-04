@@ -2,6 +2,7 @@ import CandidateDn from './CandidateDn.js'
 import CandidateDnCommander from './CandidateDnCommander.js'
 import CandidateDnAddMakeButton from '../sim/CandidateDnAddMakeButton.js'
 import Registrar from '../sim/Registrar.js'
+import getGeoms from '../entities.js/getGeoms.js'
 
 /** A component of sim.js that deals with adding candidate distributions. */
 export default function CandidateDnList(layout, changes, commander) {
@@ -41,13 +42,6 @@ export default function CandidateDnList(layout, changes, commander) {
         return canDns.filter((c) => c.exists)
     }
     self.getGeoms = (dimensions) => getGeoms(self.getCandidateDistributions(), dimensions)
-
-    function getGeoms(entities, dimensions) {
-        if (dimensions === 1) {
-            return entities.map((ent) => (ent.shape1))
-        }
-        return entities.map((ent) => (ent.shape2))
-    }
 
     self.getParties = () => {
         const canList = self.getCandidateDistributions()
