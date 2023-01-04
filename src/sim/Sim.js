@@ -32,8 +32,8 @@ export default function Sim(entities, changes, simOptions, electionOptions) {
     const election = new Election(simOptions, electionOptions)
     const electionOne = new ElectionOne(election)
     const electionSample = new ElectionSample(election)
-    const electionGeo = new ElectionGeo(election, voterGeo)
-    const electionSampleGeo = new ElectionSampleGeo(electionGeo, voterGeo)
+    const electionGeo = new ElectionGeo(election)
+    const electionSampleGeo = new ElectionSampleGeo(electionGeo)
     self.election = election
 
     // States //

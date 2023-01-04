@@ -14,7 +14,7 @@ import { range } from '../utilities/jsHelpers.js'
  * @param {Election} election
  * @constructor
  */
-export default function ElectionGeo(election, voterGeo) {
+export default function ElectionGeo(election) {
     const self = this
 
     self.runElectionSim = (geometry, electionOptions) => {
@@ -25,21 +25,21 @@ export default function ElectionGeo(election, voterGeo) {
 
     self.runElectionGeo = (geometry, electionOptions) => {
         const {
-            voterGeoms, canGeoms, parties, dimensions,
+            voterGeoms, canGeoms, parties, voterGeo,
         } = geometry
         if (voterGeoms.length === 0) return { error: 'no voters' }
         if (canGeoms.length === 0) return { error: 'no candidates' }
 
         const { castOptions, socialChoiceOptions } = electionOptions
 
-        const votesByTract = castVotesByTract(canGeoms, parties, dimensions, castOptions)
+        const votesByTract = castVotesByTract(geometry, castOptions)
 
         const resultsStatewide = countStatewideElection(votesByTract, canGeoms, parties, socialChoiceOptions)
 
         const resultsByTract = countTractElections(votesByTract, canGeoms, parties, socialChoiceOptions)
 
         // eslint-disable-next-line max-len
-        const resultsByDistrict = countDistrictElections(votesByTract, canGeoms, parties, socialChoiceOptions)
+        const resultsByDistrict = countDistrictElections(votesByTract, canGeoms, voterGeo, parties, socialChoiceOptions)
         const allocation = sumAllocations(resultsByDistrict, canGeoms, electionOptions)
 
         jupyterUpdate({ votesByTract })
@@ -53,14 +53,19 @@ export default function ElectionGeo(election, voterGeo) {
         return geoElectionResults
     }
 
-    function castVotesByTract(canGeoms, parties, dimensions, castOptions) {
+    function castVotesByTract(geometry, castOptions) {
+        const {
+            canGeoms, parties, dimensions, voterGeo,
+        } = geometry
         const { voterGroupsByTract } = voterGeo
 
         const votesByTract = voterGroupsByTract.map(
             (row) => row.map(
                 (voterGroups) => {
                     const voterGeoms = getGeoms(voterGroups, dimensions)
-                    const tractGeometry = { voterGeoms, canGeoms, parties }
+                    const tractGeometry = {
+                        voterGeoms, canGeoms, parties, dimensions, voterGeo,
+                    }
                     return election.castVotes.run(tractGeometry, castOptions)
                 },
             ),
@@ -211,11 +216,11 @@ export default function ElectionGeo(election, voterGeo) {
     }
 
     /** Run separate elections in each district. */
-    function countDistrictElections(votesByTract, canGeoms, parties, socialChoiceOptions) {
+    function countDistrictElections(votesByTract, canGeoms, voterGeo, parties, socialChoiceOptions) {
         // Loop through districts.
         // Find who won.
 
-        const votesByDistrict = combineVotesByDistrict(votesByTract, canGeoms)
+        const votesByDistrict = combineVotesByDistrict(votesByTract, canGeoms, voterGeo)
 
         jupyterUpdate({ votesByDistrict })
 
@@ -225,7 +230,7 @@ export default function ElectionGeo(election, voterGeo) {
         return resultsByDistrict
     }
 
-    function combineVotesByDistrict(votesByTract, canGeoms) {
+    function combineVotesByDistrict(votesByTract, canGeoms, voterGeo) {
         const { census } = voterGeo.districtMaker
         const { nd } = voterGeo
         const numCans = canGeoms.length

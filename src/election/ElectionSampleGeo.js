@@ -75,8 +75,8 @@ export default function ElectionSampleGeo(electionGeo) {
             }
 
             const sampleGeometry = {
-                voterGeoms, canGeoms: sCanGeoms, parties: { partiesByCan: sParties, numParties: 10 }, dimensions,
-            } // TODO: fix parties
+                voterGeoms, canGeoms: sCanGeoms, parties: { partiesByCan: sParties, numParties: 10 }, dimensions, voterGeo,
+            }
 
             // find winner position
             const electionResults = electionGeo.runElectionGeo(sampleGeometry, electionOptions)
