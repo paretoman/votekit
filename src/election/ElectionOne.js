@@ -14,9 +14,6 @@ export default function ElectionOne(election) {
     self.runElectionSim = function (geometry) {
         // Voters cast votes for candidates.
         // There is also a separate graphical representation in Voronoi2D.js
-        const { canGeoms, voterGeoms } = geometry
-        if (voterGeoms.length === 0) return { error: 'No Voters' }
-        if (canGeoms.length === 0) return { error: 'No Candidates' }
 
         const electionResults = election.runElection(geometry)
 

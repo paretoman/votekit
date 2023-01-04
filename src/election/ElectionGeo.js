@@ -4,6 +4,7 @@ import voteCasters from '../castVotes/voteCasters.js'
 import getGeoms from '../entities.js/getGeoms.js'
 import jupyterUpdate from '../environments/jupyter.js'
 import { range } from '../utilities/jsHelpers.js'
+import socialChoiceRun from './socialChoiceRun.js'
 
 /**
  * An election with many districts.
@@ -15,7 +16,7 @@ import { range } from '../utilities/jsHelpers.js'
  * @param {Election} election
  * @constructor
  */
-export default function ElectionGeo(election) {
+export default function ElectionGeo() {
     const self = this
 
     self.runElectionSim = (geometry, electionOptions) => {
@@ -31,16 +32,14 @@ export default function ElectionGeo(election) {
         if (voterGeoms.length === 0) return { error: 'no voters' }
         if (canGeoms.length === 0) return { error: 'no candidates' }
 
-        const { socialChoiceOptions } = electionOptions
-
         const votesByTract = castVotesByTract(geometry, electionOptions)
 
-        const resultsStatewide = countStatewideElection(votesByTract, canGeoms, parties, socialChoiceOptions)
+        const resultsStatewide = countStatewideElection(votesByTract, canGeoms, parties, electionOptions)
 
-        const resultsByTract = countTractElections(votesByTract, parties, socialChoiceOptions)
+        const resultsByTract = countTractElections(votesByTract, parties, electionOptions)
 
         // eslint-disable-next-line max-len
-        const resultsByDistrict = countDistrictElections(votesByTract, canGeoms, voterGeo, parties, socialChoiceOptions)
+        const resultsByDistrict = countDistrictElections(votesByTract, canGeoms, voterGeo, parties, electionOptions)
         const allocation = sumAllocations(resultsByDistrict, canGeoms, electionOptions)
 
         jupyterUpdate({ votesByTract })
@@ -78,13 +77,13 @@ export default function ElectionGeo(election) {
     /** Show tallies over all the districts
      * Find statewide support for candidates (parties).
      */
-    function countStatewideElection(votesByTract, canGeoms, parties, socialChoiceOptions) {
+    function countStatewideElection(votesByTract, canGeoms, parties, electionOptions) {
         const numCans = canGeoms.length
         const allVotes = combineVotes(votesByTract, numCans)
 
         jupyterUpdate({ allVotes })
 
-        const resultsStatewide = election.socialChoice.run(allVotes, parties, socialChoiceOptions)
+        const resultsStatewide = socialChoiceRun(allVotes, parties, electionOptions)
         return resultsStatewide
     }
 
@@ -208,17 +207,17 @@ export default function ElectionGeo(election) {
     /** Visualize voter demographics according to votes for candidates within a tract.
      * Hold mini-elections within a tract.
      */
-    function countTractElections(votesByTract, parties, socialChoiceOptions) {
+    function countTractElections(votesByTract, parties, electionOptions) {
         const resultsByTract = votesByTract.map(
             (row) => row.map(
-                (votes) => election.socialChoice.run(votes, parties, socialChoiceOptions),
+                (votes) => socialChoiceRun(votes, parties, electionOptions),
             ),
         )
         return resultsByTract
     }
 
     /** Run separate elections in each district. */
-    function countDistrictElections(votesByTract, canGeoms, voterGeo, parties, socialChoiceOptions) {
+    function countDistrictElections(votesByTract, canGeoms, voterGeo, parties, electionOptions) {
         // Loop through districts.
         // Find who won.
 
@@ -227,7 +226,7 @@ export default function ElectionGeo(election) {
         jupyterUpdate({ votesByDistrict })
 
         const resultsByDistrict = votesByDistrict.map(
-            (votes) => election.socialChoice.run(votes, parties, socialChoiceOptions),
+            (votes) => socialChoiceRun(votes, parties, electionOptions),
         )
         return resultsByDistrict
     }
