@@ -1,16 +1,15 @@
 /** @module */
 
+import electionRun from './electionRun.js'
+
 /**
  * Simulate winners from many sampled elections.
  * Candidates are sampled from a distribution.
  * Winners are drawn as points.
  * The simulation is dynamic. More simulations are performed at each frame.
- * @param {Screen} screen
- * @param {Menu} menu
- * @param {Election} election
  * @constructor
  */
-export default function ElectionSample(election) {
+export default function ElectionSample() {
     const self = this
 
     const maxPoints = 5000
@@ -75,7 +74,7 @@ export default function ElectionSample(election) {
                 voterGeoms, canGeoms: sCanGeoms, parties: { partiesByCan: sParties, numParties: 10 }, dimensions,
             } // todo: fix parties
             // find winner position
-            const electionResults = election.runElection(sampleGeometry)
+            const electionResults = electionRun(sampleGeometry, electionOptions)
 
             if (electionOptions.electionType === 'singleWinner') {
                 const { iWinner } = electionResults

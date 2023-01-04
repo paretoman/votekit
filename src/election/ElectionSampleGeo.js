@@ -1,5 +1,7 @@
 /** @module */
 
+import electionGeoRun from './electionGeoRun.js'
+
 /**
  * Simulate winners from many sampled elections.
  * Candidates are sampled from a distribution.
@@ -10,7 +12,7 @@
  * @param {Election} election
  * @constructor
  */
-export default function ElectionSampleGeo(electionGeo) {
+export default function ElectionSampleGeo() {
     const self = this
 
     const maxPoints = 5000
@@ -79,7 +81,7 @@ export default function ElectionSampleGeo(electionGeo) {
             }
 
             // find winner position
-            const electionResults = electionGeo.runElectionGeo(sampleGeometry, electionOptions)
+            const electionResults = electionGeoRun(sampleGeometry, electionOptions)
 
             const { resultsByDistrict } = electionResults
             const nDistricts = resultsByDistrict.length

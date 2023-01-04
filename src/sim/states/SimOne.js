@@ -1,5 +1,7 @@
 /** @module */
 
+import electionGeoRun from '../../election/electionGeoRun.js'
+import electionRun from '../../election/electionRun.js'
 import getGeometry from '../getGeometry.js'
 import StatePublisher from './StatePublisher.js'
 
@@ -11,14 +13,12 @@ import StatePublisher from './StatePublisher.js'
  * @param {Screen} screen
  * @param {Menu} menu
  * @param {Changes} changes
- * @param {ElectionOne} electionOne
- * @param {ElectionGeo} electionGeo
  * @param {VoterGeo} voterGeo
  * @param {Sim} sim
  * @constructor
  */
 // eslint-disable-next-line max-len
-export default function SimOne(entities, changes, electionOne, electionGeo, voterGeo, simOptions, electionOptions) {
+export default function SimOne(entities, changes, voterGeo, simOptions, electionOptions) {
     const self = this
 
     self.pub = new StatePublisher()
@@ -30,7 +30,7 @@ export default function SimOne(entities, changes, electionOne, electionGeo, vote
 
     // Main State Machine Functions //
     self.enter = () => {
-        electionStrategy = (simOptions.geo) ? electionGeo : electionOne
+        electionStrategy = (simOptions.geo) ? electionGeoRun : electionRun
         self.pub.enter()
     }
     self.exit = () => {
@@ -45,8 +45,7 @@ export default function SimOne(entities, changes, electionOne, electionGeo, vote
 
         const geometry = getGeometry(voterShapeList, candidateList, simOptions, voterGeo)
 
-        const electionResults = electionStrategy
-            .runElectionSim(geometry, electionOptions)
+        const electionResults = electionStrategy(geometry, electionOptions)
 
         electionResults.colorRGBAOfCandidates = candidateList.getRGBAList()
         electionResults.geometry = geometry

@@ -1,6 +1,8 @@
 /** @module */
 
 import CandidateDistributionSampler from '../../election/CandidateDistributionSampler.js'
+import ElectionSample from '../../election/ElectionSample.js'
+import ElectionSampleGeo from '../../election/ElectionSampleGeo.js'
 import getGeometry from '../getGeometry.js'
 import StatePublisher from './StatePublisher.js'
 
@@ -18,8 +20,6 @@ import StatePublisher from './StatePublisher.js'
 export default function SimSample(
     entities,
     changes,
-    electionSample,
-    electionSampleGeo,
     voterGeo,
     simOptions,
     electionOptions,
@@ -33,6 +33,9 @@ export default function SimSample(
 
     // Strategies //
     let electionStrategy
+
+    const electionSample = new ElectionSample()
+    const electionSampleGeo = new ElectionSampleGeo()
 
     // Main State Machine Functions //
     self.enter = () => {
