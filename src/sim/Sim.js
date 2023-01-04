@@ -27,7 +27,6 @@ export default function Sim(entities, changes, simOptions, electionOptions) {
 
     const { voterShapeList } = entities
     const voterGeo = new VoterGeo(voterShapeList, changes)
-    self.voterGeo = voterGeo
 
     const election = new Election(simOptions, electionOptions)
     const electionOne = new ElectionOne(election)

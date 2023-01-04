@@ -19,11 +19,13 @@ export default function VizGeo(voterRendererList, candidateList, screen, screenM
     const VoterRenderer = (dimensions === 1) ? VoterRender1D : VoterRender2D
     voterRendererList.setRenderer((voterShape) => new VoterRenderer(voterShape, screen))
 
-    const vizGeoPolicyNoise = new VizGeoPolicyNoise(sim, simOptions, screen)
+    const vizGeoPolicyNoise = new VizGeoPolicyNoise(screen)
 
     self.enter = () => { }
     self.exit = () => { }
-    self.update = () => { }
+    self.update = (geoElectionResults) => {
+        vizGeoPolicyNoise.update(geoElectionResults)
+    }
     self.render = () => {
         voterRendererList.render()
         vizGeoPolicyNoise.render()
