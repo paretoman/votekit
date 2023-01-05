@@ -1,6 +1,6 @@
 /** @module */
 
-import electionGeoRun from './electionGeoRun.js'
+import electionGeoRun from '../electionGeo/electionGeoRun.js'
 
 /**
  * Simulate winners from many sampled elections.

@@ -1,6 +1,6 @@
 /** @module */
 
-import electionGeoRun from '../../election/electionGeoRun.js'
+import electionGeoRun from '../../electionGeo/electionGeoRun.js'
 import electionRun from '../../election/electionRun.js'
 import getGeometry from '../getGeometry.js'
 import StatePublisher from './StatePublisher.js'
