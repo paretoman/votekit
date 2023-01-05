@@ -13,7 +13,9 @@ import CastRankingSummer1DIntervals from './CastRankingSummer1DIntervals.js'
  * For 1D, an array of objects: {x,w,densityProfile}.
  * @returns votes, an object
  */
-export default function castRanking({ canGeoms, voterGeoms, dimensions }) {
+export default function castRanking({
+    canGeoms, voterGeoms, dimensions, parties,
+}) {
     const summer = (dimensions === 1)
         ? new CastRankingSummer1DIntervals(canGeoms)
         : new CastRankingSummer2DPolygons(canGeoms)
@@ -54,7 +56,7 @@ export default function castRanking({ canGeoms, voterGeoms, dimensions }) {
     const tallyFractions = firstPreferences.map((x) => x / totalAreaAll)
 
     const votes = {
-        rankingVotes, cansByRank, votePop, tallyFractions, cellData,
+        rankingVotes, cansByRank, votePop, tallyFractions, cellData, parties,
     }
     return votes
 }

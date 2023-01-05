@@ -13,7 +13,9 @@ import CastPluralitySummer1DIntervals from './CastPluralitySummer1DIntervals.js'
  * For 1D, an array of objects: {x,w,densityProfile}.
  * @returns votes, an object
  */
-export default function castPlurality({ canGeoms, voterGeoms, dimensions }) {
+export default function castPlurality({
+    canGeoms, voterGeoms, dimensions, parties,
+}) {
     const summer = (dimensions === 1)
         ? new CastPluralitySummer1DIntervals(canGeoms)
         : new CastPluralitySummer2DQuadrature(canGeoms)
@@ -28,6 +30,6 @@ export default function castPlurality({ canGeoms, voterGeoms, dimensions }) {
     })
     const total = tally.reduce((p, c) => p + c)
     const tallyFractions = tally.map((x) => x / total)
-    const votes = { tallyFractions }
+    const votes = { tallyFractions, parties }
     return votes
 }

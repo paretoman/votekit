@@ -15,8 +15,7 @@ export default function electionRun(geometry, electionOptions) {
     const { castOptions } = electionOptions
 
     const votes = voteCasters[electionOptions.voteCasterName].cast(geometry, castOptions)
-    const { parties } = geometry
-    const electionResults = socialChoiceRun(votes, parties, electionOptions)
+    const electionResults = socialChoiceRun(votes, electionOptions)
     jupyterUpdate({ votes })
     return electionResults
 }

@@ -16,7 +16,9 @@ import CastScoreSummer1DGrid from './CastScoreSummer1DGrid.js'
  * For 1D, an array of objects: {x,w,densityProfile}.
  * @returns votes, an object
  */
-export default function castScore({ canGeoms, voterGeoms, dimensions }, castOptions) {
+export default function castScore({
+    canGeoms, voterGeoms, dimensions, parties,
+}, castOptions) {
     const summer = (dimensions === 1)
         ? new CastScoreSummer1DGrid(canGeoms)
         : new CastScoreSummer2DGrid(canGeoms, castOptions)
@@ -74,7 +76,7 @@ export default function castScore({ canGeoms, voterGeoms, dimensions }, castOpti
         tallyFractions = tallyFractions.map((f, index) => f + area[index] * weight * invTotalWeight)
     }
     const votes = {
-        tallyFractions, gridData, scoreVotes, votePop,
+        tallyFractions, gridData, scoreVotes, votePop, parties,
     }
     return votes
 }

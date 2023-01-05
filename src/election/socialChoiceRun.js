@@ -2,7 +2,7 @@
 
 import electionMethods from '../electionMethods/electionMethods.js'
 
-export default function socialChoiceRun(votes, parties, electionOptions) {
+export default function socialChoiceRun(votes, electionOptions) {
     // why have two different kinds of results?
     // socialChoiceResults, the smaller one,
     //   is in the context of the election method,
@@ -13,7 +13,7 @@ export default function socialChoiceRun(votes, parties, electionOptions) {
     const { socialChoiceOptions } = electionOptions
     const electionMethodOptions = socialChoiceOptions
     const electionMethod = electionMethods[electionOptions.electionMethod]
-    const electionResults = electionMethod({ votes, parties, electionMethodOptions })
+    const electionResults = electionMethod({ votes, electionMethodOptions })
     electionResults.votes = votes
     return electionResults
 }

@@ -20,11 +20,11 @@ import sntv from './sntv.js'
  * Allocation is an array of integers that say whether a candidate is elected (1) or not (0).
  */
 
-export default function olprA({ votes, electionMethodOptions, parties }) {
+export default function olprA({ votes, electionMethodOptions }) {
     // Make a tally for each party.
 
     // TODO: provide these variables in votes
-    const { tallyFractions } = votes
+    const { tallyFractions, parties } = votes
     const { partiesByCan, numParties } = parties
     const numCans = tallyFractions.length
     const partyVotes = Array(numParties).fill(0)

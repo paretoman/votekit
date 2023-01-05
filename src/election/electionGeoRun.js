@@ -71,7 +71,7 @@ function countStatewideElection(votesByTract, canGeoms, parties, electionOptions
 
     jupyterUpdate({ allVotes })
 
-    const resultsStatewide = socialChoiceRun(allVotes, parties, electionOptions)
+    const resultsStatewide = socialChoiceRun(allVotes, electionOptions)
     return resultsStatewide
 }
 
@@ -100,6 +100,7 @@ function combineVotes(votesByTract, numCans) {
         votes.votePop = vstf.votePop
         votes.scoreVotes = vstf.scoreVotes
     }
+    votes.parties = votesByTract[0][0].parties
     return votes
 }
 
@@ -198,7 +199,7 @@ function statewideScoreTallyFractions(votesByTract) {
 function countTractElections(votesByTract, parties, electionOptions) {
     const resultsByTract = votesByTract.map(
         (row) => row.map(
-            (votes) => socialChoiceRun(votes, parties, electionOptions),
+            (votes) => socialChoiceRun(votes, electionOptions),
         ),
     )
     return resultsByTract
@@ -214,7 +215,7 @@ function countDistrictElections(votesByTract, canGeoms, voterGeo, parties, elect
     jupyterUpdate({ votesByDistrict })
 
     const resultsByDistrict = votesByDistrict.map(
-        (votes) => socialChoiceRun(votes, parties, electionOptions),
+        (votes) => socialChoiceRun(votes, electionOptions),
     )
     return resultsByDistrict
 }
@@ -256,6 +257,7 @@ function combineVotesByDistrict(votesByTract, canGeoms, voterGeo) {
             votes.votePop = vstf.votePop
             votes.scoreVotes = vstf.scoreVotes
         }
+        votes.parties = votesByTract[0][0].parties
         return votes
     })
     return votesByDistrict

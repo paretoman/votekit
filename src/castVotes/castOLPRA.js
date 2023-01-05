@@ -12,10 +12,8 @@ import castPlurality from './castPlurality.js'
  * For 1D, an array of objects: {x,w,densityProfile}.
  * @returns votes, an object
  */
-export default function castOLPRA({
-    canGeoms, voterGeoms, dimensions,
-}) {
-    const votes = castPlurality({ canGeoms, voterGeoms, dimensions })
+export default function castOLPRA(geometry) {
+    const votes = castPlurality(geometry)
 
     return votes
 }

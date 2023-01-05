@@ -13,7 +13,9 @@ import CastPairwiseSummer2DPolygons from './CastPairwiseSummer2DPolygons.js'
  * For 1D, an array of objects: {x,w,densityProfile}.
  * @returns votes, an object
  */
-export default function castPairwise({ canGeoms, voterGeoms, dimensions }) {
+export default function castPairwise({
+    canGeoms, voterGeoms, dimensions, parties,
+}) {
     const summer = (dimensions === 1)
         ? new CastPairwiseSummer1DIntervals(canGeoms)
         : new CastPairwiseSummer2DPolygons(canGeoms)
@@ -56,6 +58,6 @@ export default function castPairwise({ canGeoms, voterGeoms, dimensions }) {
         }
     }
     const tallyFractions = tallyWins.map((x) => x / (n - 1))
-    const votes = { pairwiseTallyFractions, tallyFractions }
+    const votes = { pairwiseTallyFractions, tallyFractions, parties }
     return votes
 }
