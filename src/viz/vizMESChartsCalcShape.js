@@ -8,8 +8,8 @@
  * @returns chartDataMES
  */
 export default function vizMESChartsCalcShape(electionResults, screen, budgetDataMES) {
-    const { explanation, votes } = electionResults
-    const { winnersByRound } = explanation
+    const { socialChoiceResults, votes } = electionResults
+    const { winnersByRound } = socialChoiceResults.explanation
 
     const { costsByGeom, budgetsByGeom, colorRGBAByGeom } = budgetDataMES
 

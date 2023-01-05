@@ -8,14 +8,14 @@
  * @returns {Object} electionResults
  */
 export default function addAllocation(electionResults) {
-    const { allocation, votes } = electionResults
-    const { tallyFractions } = votes
+    const { socialChoiceResults, votes } = electionResults
+    const { allocation } = socialChoiceResults
     if (allocation === undefined) {
+        const { tallyFractions } = votes
+        const { iWinner } = socialChoiceResults
         const nk = tallyFractions.length
         const wins = Array(nk).fill(0)
-        wins[electionResults.iWinner] = 1
-
-        return { tallyFractions, allocation: wins }
+        wins[iWinner] = 1
+        socialChoiceResults.allocation = wins
     }
-    return { tallyFractions, allocation }
 }

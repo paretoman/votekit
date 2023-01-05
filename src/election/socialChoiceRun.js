@@ -13,7 +13,6 @@ export default function socialChoiceRun(votes, electionOptions) {
     const { socialChoiceOptions } = electionOptions
     const electionMethodOptions = socialChoiceOptions
     const electionMethod = electionMethods[electionOptions.electionMethod]
-    const electionResults = electionMethod({ votes, electionMethodOptions })
-    electionResults.votes = votes
-    return electionResults
+    const socialChoiceResults = electionMethod({ votes, electionMethodOptions })
+    return socialChoiceResults
 }

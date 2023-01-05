@@ -1,6 +1,5 @@
 /** @module */
 
-import jupyterUpdate from '../environments/jupyter.js'
 import voteCasters from '../castVotes/voteCasters.js'
 import socialChoiceRun from './socialChoiceRun.js'
 
@@ -15,7 +14,9 @@ export default function electionRun(geometry, electionOptions) {
     const { castOptions } = electionOptions
 
     const votes = voteCasters[electionOptions.voteCasterName].cast(geometry, castOptions)
-    const electionResults = socialChoiceRun(votes, electionOptions)
-    jupyterUpdate({ votes })
+    const socialChoiceResults = socialChoiceRun(votes, electionOptions)
+    const electionResults = {
+        electionOptions, geometry, votes, socialChoiceResults,
+    }
     return electionResults
 }

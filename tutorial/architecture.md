@@ -117,26 +117,55 @@ Do the math of the election: casting and counting votes.
     * There are two ways to cast.
         1. By voter.
         2. By regions of voters. This is more complicated.
-    * Output:
-        * Some of the following is output.
-        * for electionMethods
-            * votePop - the fraction of the population that voted as listed.
-            * List of votes:
-                * scoreVotes - a list of votes. Each vote has a score for each candidate.
-                * rankingVotes - a list of votes. Each vote has a rank for each candidate.
-                * cansByRank - a list of votes. Each vote is a list indexed by ranking. A list of candidates is at each ranking.
-            * preComputedTallies:
-                * tallyFractions - a number for each candidate.
-                * pairwiseTallyFractions - a fraction for each pair of candidates.
-        * for viz
-            * cellData:
-                * {ranking, cells}
-                * {ranking, intervalBorders}
-            * gridData: { grid, voteSet, voterGeom }
+    * The votes data structure is described below.
 * ElectionMethods
     * A list of election methods with the same interface.
     * Input votes and some optional precomputed tallies. 
     * Output a social choice and any information for visualization.
+
+## Votes
+
+Some of the following is output.
+
+* for electionMethods
+  * votePop - the fraction of the population that voted as listed.
+  * List of votes:
+    * scoreVotes - a list of votes. Each vote has a score for each candidate.
+    * rankingVotes - a list of votes. Each vote has a rank for each candidate.
+    * cansByRank - a list of votes. Each vote is a list indexed by ranking. A list of candidates is at each ranking.
+  * preComputedTallies:
+    * tallyFractions - a number for each candidate.
+    * pairwiseTallyFractions - a fraction for each pair of candidates.
+* for viz
+  * cellData:
+    * {ranking, cells}
+    * {ranking, intervalBorders}
+  * gridData: { grid, voteSet, voterGeom }
+
+## Election Results
+
+The election results are all the data you need for making explanations. They are output by the election step in the sim. They are input for the visualizers. They are composed of several parts:
+
+* electionOptions
+* geometry
+* votes
+  * tallyFractions
+* socialChoiceResults
+  * iWinner - sometimes
+  * allocation
+* colorRGBAofCandidates
+* error
+  * An error message string or undefined.
+* future
+  * simOptions
+  * voter labels
+  * candidate labels
+
+The geoElectionResults have additional variables by tract and district.
+
+* votesByTract
+* votesByDistrict
+* scResultsByDistrict
 
 ## Visualize
 

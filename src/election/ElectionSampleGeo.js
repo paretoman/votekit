@@ -78,10 +78,10 @@ export default function ElectionSampleGeo() {
             }
 
             // find winner position
-            const electionResults = electionGeoRun(sampleGeometry, electionOptions)
+            const geoElectionResults = electionGeoRun(sampleGeometry, electionOptions)
 
-            const { resultsByDistrict } = electionResults
-            const nDistricts = resultsByDistrict.length
+            const { scResultsByDistrict } = geoElectionResults
+            const nDistricts = scResultsByDistrict.length
 
             // adjustable parameter for visualization
             const jitterSize = 10
@@ -89,7 +89,7 @@ export default function ElectionSampleGeo() {
             if (electionOptions.electionType === 'singleWinner') {
                 let r = 0
                 for (let o = 0; o < nDistricts; o++) {
-                    const { iWinner } = resultsByDistrict[o]
+                    const { iWinner } = scResultsByDistrict[o]
 
                     // record point
                     const winPoint = sCanGeoms[iWinner]
@@ -115,7 +115,7 @@ export default function ElectionSampleGeo() {
             } else {
                 let r = 0
                 for (let o = 0; o < nDistricts; o++) {
-                    const { allocation } = resultsByDistrict[o]
+                    const { allocation } = scResultsByDistrict[o]
 
                     for (let k = 0; k < sCanGeoms.length; k++) {
                         const winPoint = sCanGeoms[k]

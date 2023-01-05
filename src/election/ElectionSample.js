@@ -75,12 +75,13 @@ export default function ElectionSample() {
             } // todo: fix parties
             // find winner position
             const electionResults = electionRun(sampleGeometry, electionOptions)
+            const { socialChoiceResults } = electionResults
 
             // adjustable parameter for visualization
             const jitterSize = 10
 
             if (electionOptions.electionType === 'singleWinner') {
-                const { iWinner } = electionResults
+                const { iWinner } = socialChoiceResults
 
                 // record point
                 const winPoint = sCanGeoms[iWinner]
@@ -90,7 +91,7 @@ export default function ElectionSample() {
                 const winParty = sParties[iWinner]
                 partyWins[winParty] += 1
             } else {
-                const { allocation } = electionResults
+                const { allocation } = socialChoiceResults
 
                 for (let k = 0; k < sCanGeoms.length; k++) {
                     const winPoint = sCanGeoms[k]

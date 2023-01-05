@@ -6,8 +6,8 @@
  * @returns budgetDataMES
  */
 export default function vizMESChartsCalcBudget(electionResults) {
-    const { explanation, votes, colorRGBAOfCandidates } = electionResults
-    const { winnersByRound, winnerMaxCostPerScoreByRound } = explanation
+    const { socialChoiceResults, votes, colorRGBAOfCandidates } = electionResults
+    const { winnersByRound, winnerMaxCostPerScoreByRound } = socialChoiceResults.explanation
 
     const { scoreVotes, gridData } = votes
 

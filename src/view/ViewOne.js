@@ -63,15 +63,10 @@ export default function ViewOne(entities, screen, menu, changes, sim, simOptions
 
         const { error } = electionResults
         if (error === undefined) {
-            if (simOptions.geo) {
-                const { resultsStatewide, allocation } = electionResults
-                candidateViewList.setCandidateWins(allocation)
-                candidateViewList.setCandidateFractions(resultsStatewide.votes.tallyFractions)
-            } else {
-                const { tallyFractions, allocation } = addAllocation(electionResults)
-                candidateViewList.setCandidateWins(allocation)
-                candidateViewList.setCandidateFractions(tallyFractions)
-            }
+            addAllocation(electionResults)
+            const { votes, socialChoiceResults } = electionResults
+            candidateViewList.setCandidateWins(socialChoiceResults.allocation)
+            candidateViewList.setCandidateFractions(votes.tallyFractions)
         }
 
         self.testVoteView()
