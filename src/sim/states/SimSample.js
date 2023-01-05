@@ -1,8 +1,8 @@
 /** @module */
 
-import CandidateDistributionSampler from '../../election/CandidateDistributionSampler.js'
-import ElectionSample from '../../election/ElectionSample.js'
-import ElectionSampleGeo from '../../election/ElectionSampleGeo.js'
+import CandidateDistributionSampler from '../../electionSample/CandidateDistributionSampler.js'
+import ElectionSample from '../../electionSample/ElectionSample.js'
+import ElectionSampleGeo from '../../electionSample/ElectionSampleGeo.js'
 import getGeometry from '../getGeometry.js'
 import StatePublisher from './StatePublisher.js'
 
