@@ -5,28 +5,28 @@
 export default function SimOptions(menu, changes) {
     const self = this
 
-    self.setViz = (v) => { self.viz = v }
+    self.setMode = (m) => { self.mode = m }
     self.setUseDistricts = (g) => { self.useDistricts = g }
     self.setDimensions = (d) => { self.dimensions = d }
 
     // Defaults
-    self.setViz('one')
+    self.setMode('one')
     self.setUseDistricts(false)
     self.setDimensions(2)
-    changes.add(['design', 'dimensions', 'viz'])
+    changes.add(['design', 'dimensions', 'mode'])
 
-    const vizList = [
+    const modeList = [
         { name: 'One Election', value: 'one' },
         { name: 'Sample Elections', value: 'sample' },
     ]
     menu.addMenuItem(
         self,
         {
-            label: 'Viz:',
-            prop: 'viz',
-            setProp: (p) => { self.setViz(p) },
-            options: vizList,
-            change: ['viz'],
+            label: 'Mode:',
+            prop: 'mode',
+            setProp: (p) => { self.setMode(p) },
+            options: modeList,
+            change: ['mode'],
         },
     )
 

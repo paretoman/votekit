@@ -39,7 +39,7 @@ export default function VoterDistricts(voterShapeList, changes) {
         if (changes.checkNone()) return
 
         voterShapes = voterShapeList.getVoterShapes()
-        if (changes.check(['design', 'viz', 'dimensions'])) {
+        if (changes.check(['design', 'mode', 'dimensions'])) {
             self.updateDistricts()
         }
 

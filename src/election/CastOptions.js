@@ -4,8 +4,8 @@ export default function CastOptions(menu, changes, simOptions) {
     self.usr = 4
 
     self.update = () => {
-        if (changes.check(['viz']) || changes.check(['design'])) {
-            if (simOptions.viz === 'one') {
+        if (changes.check(['mode']) || changes.check(['design'])) {
+            if (simOptions.mode === 'one') {
                 if (simOptions.useDistricts === false) {
                     self.usr = 4
                 } else {

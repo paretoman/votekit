@@ -30,14 +30,14 @@ export default function Sim(entities, changes, simOptions, electionOptions) {
     }
     self.sims = sims
 
-    self.state = simOptions.viz
+    self.state = simOptions.mode
 
     // State Machine //
     self.update = () => {
         // state: check for change, exit, set, enter, update.
-        if (changes.check(['design', 'dimensions', 'viz', 'electionMethod'])) {
+        if (changes.check(['design', 'dimensions', 'mode', 'electionMethod'])) {
             Object.keys(sims).forEach((k) => sims[k].exit())
-            self.state = simOptions.viz
+            self.state = simOptions.mode
             sims[self.state].enter()
         }
         sims[self.state].update()
