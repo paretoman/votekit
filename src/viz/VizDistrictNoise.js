@@ -1,16 +1,16 @@
-export default function VizGeoPolicyNoise(screen) {
+export default function VizDistrictNoise(screen) {
     const self = this
 
-    let voterGeo
+    let voterDistricts
     let dimensions
 
-    self.update = (geoElectionResults) => {
-        voterGeo = geoElectionResults.geometry.voterGeo
-        dimensions = geoElectionResults.geometry.dimensions
+    self.update = (districtElectionResults) => {
+        voterDistricts = districtElectionResults.geometry.voterDistricts
+        dimensions = districtElectionResults.geometry.dimensions
     }
 
     self.render = () => {
-        voterGeo.voterGroupsByTract.forEach((row) => {
+        voterDistricts.voterGroupsByTract.forEach((row) => {
             row.forEach((cell) => {
                 cell.forEach((voterGroup) => {
                     if (dimensions === 1) {

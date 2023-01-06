@@ -1,6 +1,6 @@
 /** @module */
 
-import VizGeo from '../viz/VizGeo.js'
+import VizDistricts from '../viz/VizDistricts.js'
 import VizOneVoronoi from '../viz/VizOneVoronoi.js'
 import VizOneVoronoiRanking from '../viz/VizOneVoronoiRanking.js'
 import VizOneGrid from '../viz/VizOneGrid.js'
@@ -11,7 +11,7 @@ import VoterRendererList from '../voters/VoterRendererList.js'
  * Simulate one election with
  *   candidates in defined positions, and
  *   voters in a distribution that will be summed over.
- * Create a geographical map with variations of voter center.
+ * Create a geographical district map with variations of voter center.
  * Plan:
  * * Voronoi1D is called by VizOne.
  * @param {Screen} screen
@@ -40,10 +40,10 @@ export default function ViewVizOne(entities, screenMain, screenMini, menu, chang
         const { voteCasterName } = electionOptions
         const VizOneVoronoiGeneral = (voteCasterName === 'ranking' || voteCasterName === 'pairwise')
             ? VizOneVoronoiRanking : VizOneVoronoi
-        const VizNoGeo = (voteCasterName === 'score' || voteCasterName === 'scoreLong')
+        const VizNoDistricts = (voteCasterName === 'score' || voteCasterName === 'scoreLong')
             ? VizOneGrid : VizOneVoronoiGeneral
-        const VizOne = (simOptions.geo === true)
-            ? VizGeo : VizNoGeo
+        const VizOne = (simOptions.useDistricts === true)
+            ? VizDistricts : VizNoDistricts
         vizOne = new VizOne(voterRendererList, candidateList, screenMain, screenMini, sim, simOptions)
     }
     enterStrategy()

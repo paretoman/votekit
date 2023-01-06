@@ -3,17 +3,17 @@
  * @param {*} voterShapeList
  * @param {*} candidateList
  * @param {*} simOptions
- * @param {*} voterGeo
+ * @param {*} voterDistricts
  * @returns
  */
-export default function getGeometry(voterShapeList, candidateList, simOptions, voterGeo) {
-    const { dimensions, geo } = simOptions
+export default function getGeometry(voterShapeList, candidateList, simOptions, voterDistricts) {
+    const { dimensions, useDistricts } = simOptions
     const voterGeoms = voterShapeList.getGeoms(dimensions)
     const canGeoms = candidateList.getGeoms(dimensions)
     const parties = candidateList.getParties()
     const geometry = {
         voterGeoms, canGeoms, parties, dimensions,
     }
-    if (geo) geometry.voterGeo = voterGeo
+    if (useDistricts) geometry.voterDistricts = voterDistricts
     return geometry
 }

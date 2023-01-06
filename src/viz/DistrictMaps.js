@@ -1,7 +1,7 @@
 /** @module */
 
 import DistrictDraw from './DistrictDraw.js'
-import geoColors from './geoColors.js'
+import districtColors from './DistrictColors.js'
 import NoiseImage from './NoiseImage.js'
 
 /**
@@ -9,23 +9,23 @@ import NoiseImage from './NoiseImage.js'
  * @param {Screen} screen
  * @constructor
  */
-export default function GeoMaps(candidateList, screen, electionOptions, changes) {
+export default function DistrictMaps(candidateList, screen, electionOptions, changes) {
     const self = this
 
     // Update //
 
-    self.update = (geoElectionResults) => {
-        const { voterGeo } = geoElectionResults.geometry
+    self.update = (districtElectionResults) => {
+        const { voterDistricts } = districtElectionResults.geometry
 
         // todo: make this only run when we have new districts
-        if (changes.check(['geo']) && self.districtDraw === undefined) {
-            const { districtMaker } = voterGeo
+        if (changes.check(['design']) && self.districtDraw === undefined) {
+            const { districtMaker } = voterDistricts
             self.districtDraw = new DistrictDraw(screen, districtMaker)
             // Code that handles making images of geographic noise.
-            self.noiseImage = new NoiseImage(voterGeo.nx, voterGeo.ny, screen)
+            self.noiseImage = new NoiseImage(voterDistricts.nx, voterDistricts.ny, screen)
         }
 
-        const gc = geoColors(geoElectionResults, candidateList, electionOptions)
+        const gc = districtColors(districtElectionResults, candidateList, electionOptions)
         const { colorByTract, colorOfVoteByDistrict, colorOfWinsByDistrict } = gc
         self.colorOfVoteByDistrict = colorOfVoteByDistrict
         self.winnerColors = colorOfWinsByDistrict
@@ -34,8 +34,8 @@ export default function GeoMaps(candidateList, screen, electionOptions, changes)
 
     // Display //
 
-    const geoMapWidth = 100
-    const geoMapHeight = 100
+    const districtMapWidth = 100
+    const districtMapHeight = 100
 
     // screen.setMapsHeight((1 / 3) * screen.height)
     /** Render all maps and  */
@@ -46,17 +46,17 @@ export default function GeoMaps(candidateList, screen, electionOptions, changes)
     }
     // Render census tract votes.
     self.renderTractVotes = () => {
-        self.noiseImage.render(geoMapWidth, geoMapHeight)
-        self.districtDraw.renderVoronoi(geoMapWidth, geoMapHeight)
+        self.noiseImage.render(districtMapWidth, districtMapHeight)
+        self.districtDraw.renderVoronoi(districtMapWidth, districtMapHeight)
     }
     // Render district wins.
     self.renderDistrictWins = () => {
         const { renderVoronoiColors } = self.districtDraw
-        renderVoronoiColors(200, 0, geoMapWidth, geoMapHeight, self.winnerColors)
+        renderVoronoiColors(200, 0, districtMapWidth, districtMapHeight, self.winnerColors)
     }
     // render district votes.
     self.renderDistrictVotes = () => {
         const { renderVoronoiColors } = self.districtDraw
-        renderVoronoiColors(100, 0, geoMapWidth, geoMapHeight, self.colorOfVoteByDistrict)
+        renderVoronoiColors(100, 0, districtMapWidth, districtMapHeight, self.colorOfVoteByDistrict)
     }
 }

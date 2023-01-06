@@ -6,14 +6,14 @@ export default function SimOptions(menu, changes) {
     const self = this
 
     self.setViz = (v) => { self.viz = v }
-    self.setGeo = (g) => { self.geo = g }
+    self.setUseDistricts = (g) => { self.useDistricts = g }
     self.setDimensions = (d) => { self.dimensions = d }
 
     // Defaults
     self.setViz('one')
-    self.setGeo(false)
+    self.setUseDistricts(false)
     self.setDimensions(2)
-    changes.add(['geo', 'dimensions', 'viz'])
+    changes.add(['design', 'dimensions', 'viz'])
 
     const vizList = [
         { name: 'One Election', value: 'one' },
@@ -30,18 +30,18 @@ export default function SimOptions(menu, changes) {
         },
     )
 
-    const geoList = [
-        { name: 'On', value: true },
-        { name: 'Off', value: false },
+    const useDistrictsList = [
+        { name: 'Yes', value: true },
+        { name: 'No', value: false },
     ]
     menu.addMenuItem(
         self,
         {
-            label: 'Geo:',
-            prop: 'geo',
-            setProp: (p) => { self.setGeo(p) },
-            options: geoList,
-            change: ['geo'],
+            label: 'Use Districts:',
+            prop: 'useDistricts',
+            setProp: (p) => { self.setUseDistricts(p) },
+            options: useDistrictsList,
+            change: ['design'],
         },
     )
 

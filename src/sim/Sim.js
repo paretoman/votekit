@@ -2,7 +2,7 @@
 
 import SimSample from './states/SimSample.js'
 import SimOne from './states/SimOne.js'
-import VoterGeo from '../voters/VoterGeo.js'
+import VoterDistricts from '../voters/VoterDistricts.js'
 
 /**
  * Simulation is the main task we're trying to accomplish in this program.
@@ -21,12 +21,12 @@ export default function Sim(entities, changes, simOptions, electionOptions) {
     // Components //
 
     const { voterShapeList } = entities
-    const voterGeo = new VoterGeo(voterShapeList, changes)
+    const voterDistricts = new VoterDistricts(voterShapeList, changes)
 
     // States //
     const sims = {
-        one: new SimOne(entities, changes, voterGeo, simOptions, electionOptions),
-        sample: new SimSample(entities, changes, voterGeo, simOptions, electionOptions),
+        one: new SimOne(entities, changes, voterDistricts, simOptions, electionOptions),
+        sample: new SimSample(entities, changes, voterDistricts, simOptions, electionOptions),
     }
     self.sims = sims
 
@@ -35,7 +35,7 @@ export default function Sim(entities, changes, simOptions, electionOptions) {
     // State Machine //
     self.update = () => {
         // state: check for change, exit, set, enter, update.
-        if (changes.check(['geo', 'dimensions', 'viz', 'electionMethod'])) {
+        if (changes.check(['design', 'dimensions', 'viz', 'electionMethod'])) {
             Object.keys(sims).forEach((k) => sims[k].exit())
             self.state = simOptions.viz
             sims[self.state].enter()

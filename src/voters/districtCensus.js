@@ -15,7 +15,7 @@ import { range, jcopy } from '../utilities/jsHelpers.js'
  * @returns {Number[][][]} - an array of districts,
  * each with a list of census tract properties [x,y,overlap]
  */
-export default function geoCensus(districtMaker) {
+export default function districtCensus(districtMaker) {
     const {
         nd, nx, ny, polygons,
     } = districtMaker

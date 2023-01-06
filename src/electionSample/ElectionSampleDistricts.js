@@ -1,6 +1,6 @@
 /** @module */
 
-import electionGeoRun from '../electionGeo/electionGeoRun.js'
+import electionDistrictsRun from '../electionDistricts/electionDistrictsRun.js'
 
 /**
  * Simulate winners from many sampled elections.
@@ -9,7 +9,7 @@ import electionGeoRun from '../electionGeo/electionGeoRun.js'
  * The simulation is dynamic. More simulations are performed at each frame.
  * @constructor
  */
-export default function ElectionSampleGeo() {
+export default function ElectionSampleDistricts() {
     const self = this
 
     const maxPoints = 5000
@@ -35,7 +35,7 @@ export default function ElectionSampleGeo() {
         // add more points
 
         const {
-            voterGeoms, canGeoms, dimensions, voterGeo,
+            voterGeoms, canGeoms, dimensions, voterDistricts,
         } = geometry
 
         if (voterGeoms.length === 0) return { pointsChanged: false }
@@ -53,7 +53,7 @@ export default function ElectionSampleGeo() {
         // number of new points
         const { socialChoiceOptions } = electionOptions
         const { seats } = socialChoiceOptions
-        const { nd } = voterGeo
+        const { nd } = voterDistricts
         const nnp = seats * ns * nd
         const newPoints = Array(nnp)
         let q = 0
@@ -74,13 +74,13 @@ export default function ElectionSampleGeo() {
             }
 
             const sampleGeometry = {
-                voterGeoms, canGeoms: sCanGeoms, parties: { partiesByCan: sParties, numParties: 10 }, dimensions, voterGeo,
+                voterGeoms, canGeoms: sCanGeoms, parties: { partiesByCan: sParties, numParties: 10 }, dimensions, voterDistricts,
             }
 
             // find winner position
-            const geoElectionResults = electionGeoRun(sampleGeometry, electionOptions)
+            const districtElectionResults = electionDistrictsRun(sampleGeometry, electionOptions)
 
-            const { scResultsByDistrict } = geoElectionResults
+            const { scResultsByDistrict } = districtElectionResults
             const nDistricts = scResultsByDistrict.length
 
             // adjustable parameter for visualization

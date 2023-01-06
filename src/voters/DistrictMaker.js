@@ -2,7 +2,7 @@
 
 import { polygonArea } from '../lib/snowpack/build/snowpack/pkg/d3-polygon.js'
 import lloydVoronoi from './lloydVoronoi.js'
-import geoCensus from './geoCensus.js'
+import districtCensus from './districtCensus.js'
 /**
  * Makes and draws district boundaries.
  * Right now, just for a uniform square geography.
@@ -26,6 +26,6 @@ export default function DistrictMaker() {
         self.polygonAreas = self.polygons.map(polygonArea).map((x) => -x)
         self.totalArea = nx * ny
 
-        self.census = geoCensus(self)
+        self.census = districtCensus(self)
     }
 }

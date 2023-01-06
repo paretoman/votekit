@@ -19,33 +19,33 @@ export default function DistrictDraw(screen, districtMaker) {
 
     /**
      * Draw Voronoi cell boundaries.
-     * @param {Number} geoMapWidth - width of image
-     * @param {Number} geoMapHeight - height of image
+     * @param {Number} districtMapWidth - width of image
+     * @param {Number} districtMapHeight - height of image
      */
-    self.renderVoronoi = (geoMapWidth, geoMapHeight) => {
-        self.renderVoronoiGeneral(0, 0, geoMapWidth, geoMapHeight, null, renderAreaText)
+    self.renderVoronoi = (districtMapWidth, districtMapHeight) => {
+        self.renderVoronoiGeneral(0, 0, districtMapWidth, districtMapHeight, null, renderAreaText)
     }
 
-    self.renderVoronoiColors = (x, y, geoMapWidth, geoMapHeight, colors) => {
-        self.renderVoronoiGeneral(x, y, geoMapWidth, geoMapHeight, colors, undefined)
+    self.renderVoronoiColors = (x, y, districtMapWidth, districtMapHeight, colors) => {
+        self.renderVoronoiGeneral(x, y, districtMapWidth, districtMapHeight, colors, undefined)
     }
     /**
      * Draw a Voronoi Diagram
      * @param {Number} x - translate image
      * @param {Number} y - translate image
-     * @param {Number} geoMapWidth - width of image
-     * @param {Number} geoMapHeight - height of image
+     * @param {Number} districtMapWidth - width of image
+     * @param {Number} districtMapHeight - height of image
      * @param {string[]} colors - an option, say "null" if do not want colors
      * @param {Function} textFunction - an option, defaults to undefined
      */
-    self.renderVoronoiGeneral = (x, y, geoMapWidth, geoMapHeight, colors, textFunction) => {
+    self.renderVoronoiGeneral = (x, y, districtMapWidth, districtMapHeight, colors, textFunction) => {
         const { ctx } = screen
         const {
             voronoi, nx, ny, nd,
         } = districtMaker
         ctx.save()
-        const scaleX = geoMapWidth / nx
-        const scaleY = geoMapHeight / ny
+        const scaleX = districtMapWidth / nx
+        const scaleY = districtMapHeight / ny
         ctx.translate(x, y)
         ctx.scale(scaleX, scaleY)
         for (let i = 0; i < nd; i++) {

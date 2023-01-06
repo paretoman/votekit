@@ -12,20 +12,20 @@ import { SimplexNoise } from '../lib/snowpack/build/snowpack/pkg/simplex-noise.j
  * @param {Number} ny - Number of y pixels
  * @constructor
  */
-export default function GeoNoise(nx, ny) {
+export default function DistrictNoise(nx, ny) {
     const self = this
     // Simplex Noise Parameters
     self.sn = []
     const noiseWidth = 0.5
     const noiseHeight = 0.5
 
-    // Geographic Noise Parameters - amplitude of noise
+    // District Noise Parameters - amplitude of noise
     const xAmp = 100
     const yAmp = 100
 
     /** Generate simplex noise. */
     self.genNoise = () => {
-        self.sn = makeGeoNoise(nx, ny, noiseWidth, noiseHeight, xAmp, yAmp)
+        self.sn = makeDistrictNoise(nx, ny, noiseWidth, noiseHeight, xAmp, yAmp)
     }
 }
 
@@ -37,7 +37,7 @@ export default function GeoNoise(nx, ny) {
  * @param {Number} noiseHeight - A characteristic size of blobs, in pixels
  * @returns {Number[][][]} - Noise in pixel displacement, indexed by row, col, dimension
  */
-export function makeGeoNoise(nx, ny, noiseWidth, noiseHeight, xAmp, yAmp) {
+export function makeDistrictNoise(nx, ny, noiseWidth, noiseHeight, xAmp, yAmp) {
     const simplexX = new SimplexNoise('s')
     const simplexY = new SimplexNoise('seed')
     const map = zeros(nx, ny)

@@ -62,7 +62,7 @@ Control a 2D spatial model.
     * The Sim class manages voter entities and candidate entities.
     * See [sim](code_sim.md).
     * Entities are visual objects that can be controlled by the user. These include voters and candidates.
-    * Sim is a state machine with the following states: SimGeoOne, SimOne1D, SimOne2D, and SimSample. Each state is like a different game. Entities are shared between states. Wrappers use the entities as components to provide additional functionality to the states.
+    * Sim is a state machine with the following states: SimOne and SimSample. Each state is like a different game. Entities are shared between states. Wrappers use the entities as components to provide additional functionality to the states.
     * State Updates
         * The basic process is to run an election and visualize the result. The election code handles any changes. The electionResults communicates how to visualize the election.    
     * Changes is a class that keeps track of a list of changes. When the Sim's update method is called, the Sim checks if there are any changes and that controls the flow of the program. Updates are called on every animation frame.
@@ -103,13 +103,13 @@ Control a 2D spatial model.
 
 Do the math of the election: casting and counting votes.
 
-* Election
+* Election - todo: rewrite
     * The Election class just has code in the context of running a spatial election model. Geometries for voters and candidates are passed as arguments to functions in the Election class. 
-    * There are sim-type-specific classes that include Election as a component: ElectionOne, ElectionSample, and ElectionGeo.    
+    * There are sim-type-specific classes that include Election as a component: ElectionOne, ElectionSample, and ElectionDistricts.    
     * SocialChoice
         * The difference between SocialChoice and Election is that Election is a mediator for all the aspects of a spatial election model such as casting a vote, or the number of dimensions, while SocialChoice is a component of the Election that just considers the votes and the result of running the election method. Then SocialChoice returns a summary of the results of the election method.
-    * VoterGeo provides a modification of voter positions over a geographical space with districts
-    * ElectionGeo compiles district and statewide elections.
+    * VoterDistricts provides a modification of voter positions over a geographical space with districts
+    * ElectionDistricts compiles district and statewide elections.
 * CastVotes
     * Voters cast their ballots. 
     * A distribution of a population of voters is sampled. A 2D spatial model is used to make the decision of how to vote or who to vote for. 
@@ -117,7 +117,7 @@ Do the math of the election: casting and counting votes.
     * There are two ways to cast.
         1. By voter.
         2. By regions of voters. This is more complicated.
-    * The votes data structure is described below.
+    * The "votes" data structure is described below.
 * ElectionMethods
     * A list of election methods with the same interface.
     * Input votes and some optional precomputed tallies. 
@@ -125,7 +125,7 @@ Do the math of the election: casting and counting votes.
 
 ## Votes
 
-Some of the following is output.
+Some of the following is output from a vote caster.
 
 * for electionMethods
   * votePop - the fraction of the population that voted as listed.
@@ -161,7 +161,7 @@ The election results are all the data you need for making explanations. They are
   * voter labels
   * candidate labels
 
-The geoElectionResults have additional variables by tract and district.
+The districtElectionResults have additional variables by tract and district.
 
 * votesByTract
 * votesByDistrict
@@ -176,10 +176,10 @@ The geoElectionResults have additional variables by tract and district.
     * Viz\* draws the voters because there is more context to draw them as a group than individually. 
         * VizOneVoronoi - for votes cast like plurality.
         * VizOneGrid - for votes cast like score.
-        * VizGeo - for votes cast in districts.
+        * VizDistricts - for votes cast in districts.
         * All implement an abstract class of Viz, where there is an update and a render function.
     * Viz\* calls specialized drawing functions for each viz type:
-        * GeoMaps draws the voters in tracts and districts.
+        * DistrictMaps draws the voters in tracts and districts.
         * Voronoi1D/2D draws voronoi diagrams.
         * Grid1D/2D draws grids of votes.
         * VoterRender1D/2D has methods to draw the voters outside of any other context.

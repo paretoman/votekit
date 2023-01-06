@@ -1,6 +1,6 @@
 /** @module */
 
-import VizGeoPolicyNoise from './VizGeoPolicyNoise.js'
+import VizDistrictNoise from './VizDistrictNoise.js'
 import VoterRender1D from './VoterRender1D.js'
 import VoterRender2D from './VoterRender2D.js'
 
@@ -12,22 +12,22 @@ import VoterRender2D from './VoterRender2D.js'
  * @param {Sim} sim
  * @constructor
  */
-export default function VizGeo(voterRendererList, candidateList, screen, screenMini, sim, simOptions) {
+export default function VizDistricts(voterRendererList, candidateList, screen, screenMini, sim, simOptions) {
     const self = this
 
     const { dimensions } = simOptions
     const VoterRenderer = (dimensions === 1) ? VoterRender1D : VoterRender2D
     voterRendererList.setRenderer((voterShape) => new VoterRenderer(voterShape, screen))
 
-    const vizGeoPolicyNoise = new VizGeoPolicyNoise(screen)
+    const vizDistrictNoise = new VizDistrictNoise(screen)
 
     self.enter = () => { }
     self.exit = () => { }
-    self.update = (geoElectionResults) => {
-        vizGeoPolicyNoise.update(geoElectionResults)
+    self.update = (districtElectionResults) => {
+        vizDistrictNoise.update(districtElectionResults)
     }
     self.render = () => {
         voterRendererList.render()
-        vizGeoPolicyNoise.render()
+        vizDistrictNoise.render()
     }
 }

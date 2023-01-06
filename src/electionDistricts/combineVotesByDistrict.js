@@ -1,8 +1,8 @@
 import { range } from '../utilities/jsHelpers.js'
 
-export default function combineVotesByDistrict(votesByTract, canGeoms, voterGeo) {
-    const { census } = voterGeo.districtMaker
-    const { nd } = voterGeo
+export default function combineVotesByDistrict(votesByTract, canGeoms, voterDistricts) {
+    const { census } = voterDistricts.districtMaker
+    const { nd } = voterDistricts
     const numCans = canGeoms.length
 
     // loop through districts

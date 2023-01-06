@@ -2,7 +2,7 @@
 
 import CandidateDistributionSampler from '../../electionSample/CandidateDistributionSampler.js'
 import ElectionSample from '../../electionSample/ElectionSample.js'
-import ElectionSampleGeo from '../../electionSample/ElectionSampleGeo.js'
+import ElectionSampleDistricts from '../../electionSample/ElectionSampleDistricts.js'
 import getGeometry from '../getGeometry.js'
 import StatePublisher from './StatePublisher.js'
 
@@ -13,14 +13,14 @@ import StatePublisher from './StatePublisher.js'
  * @param {Screen} screen
  * @param {Menu} menu
  * @param {ElectionSample} electionSample
- * @param {ElectionSampleGeo} electionSampleGeo
- * @param {VoterGeo} voterGeo
+ * @param {ElectionSampleDistricts} electionSampleDistricts
+ * @param {VoterDistricts} voterDistricts
  * @constructor
  */
 export default function SimSample(
     entities,
     changes,
-    voterGeo,
+    voterDistricts,
     simOptions,
     electionOptions,
 ) {
@@ -35,11 +35,11 @@ export default function SimSample(
     let electionStrategy
 
     const electionSample = new ElectionSample()
-    const electionSampleGeo = new ElectionSampleGeo()
+    const electionSampleDistricts = new ElectionSampleDistricts()
 
     // Main State Machine Functions //
     self.enter = () => {
-        electionStrategy = (simOptions.geo) ? electionSampleGeo : electionSample
+        electionStrategy = (simOptions.useDistricts) ? electionSampleDistricts : electionSample
         self.pub.enter()
     }
     self.exit = () => { self.pub.exit() }
@@ -50,10 +50,10 @@ export default function SimSample(
 
         electionOptions.update()
 
-        if (simOptions.geo) voterGeo.update()
+        if (simOptions.useDistricts) voterDistricts.update()
         canDnSampler.update()
 
-        const geometry = getGeometry(voterShapeList, candidateDnList, simOptions, voterGeo)
+        const geometry = getGeometry(voterShapeList, candidateDnList, simOptions, voterDistricts)
 
         const addResult = electionStrategy
             .update(geometry, canDnSampler.sampler, changes, electionOptions)

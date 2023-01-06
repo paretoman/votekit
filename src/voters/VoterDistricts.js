@@ -1,6 +1,6 @@
 /** @module */
 
-import GeoNoise from './geoNoise.js'
+import DistrictNoise from './DistrictNoise.js'
 import DistrictMaker from './DistrictMaker.js'
 import { copyObjectShallow, range } from '../utilities/jsHelpers.js'
 
@@ -8,7 +8,7 @@ import { copyObjectShallow, range } from '../utilities/jsHelpers.js'
  * @param {Screen} screen
  * @constructor
  */
-export default function VoterGeo(voterShapeList, changes) {
+export default function VoterDistricts(voterShapeList, changes) {
     const self = this
 
     /** Number of districts */
@@ -21,13 +21,13 @@ export default function VoterGeo(voterShapeList, changes) {
     // Code that handles drawing districts of equal number of voters.
     self.districtMaker = new DistrictMaker()
 
-    // Code that handles making geographic noise.
-    self.geoNoise = new GeoNoise(self.nx, self.ny)
-    self.geoNoise.genNoise()
+    // Code that handles making geographic district noise.
+    self.districtNoise = new DistrictNoise(self.nx, self.ny)
+    self.districtNoise.genNoise()
 
     // Manage VoterBasisSet //
 
-    /** This voter basis is repeated at every census tract on the geo map.
+    /** This voter basis is repeated at every census tract on the district map.
      *  It is altered by translating it in policy space.
      *  */
 
@@ -39,7 +39,7 @@ export default function VoterGeo(voterShapeList, changes) {
         if (changes.checkNone()) return
 
         voterShapes = voterShapeList.getVoterShapes()
-        if (changes.check(['geo', 'viz', 'dimensions'])) {
+        if (changes.check(['design', 'viz', 'dimensions'])) {
             self.updateDistricts()
         }
 
@@ -62,7 +62,7 @@ export default function VoterGeo(voterShapeList, changes) {
     // Then we add a little noise to represent differences due to geography.
 
     self.updateFullSet = () => {
-        const { sn } = self.geoNoise
+        const { sn } = self.districtNoise
         self.allVoterGroups = voterShapes.map(
             (vb) => sn.map(
                 (rowNoise) => rowNoise.map(
@@ -82,7 +82,7 @@ export default function VoterGeo(voterShapeList, changes) {
 
     self.updateVotersByDistrict = () => {
         const { census } = self.districtMaker
-        const { sn } = self.geoNoise
+        const { sn } = self.districtNoise
         self.voterGroupsByDistrict = range(self.nd).map(
             (iDistrict) => voterShapes.map(
                 (vb) => census[iDistrict].map((g) => {
@@ -100,7 +100,7 @@ export default function VoterGeo(voterShapeList, changes) {
     }
 
     self.updateVotersByTract = () => {
-        const { sn } = self.geoNoise
+        const { sn } = self.districtNoise
         self.voterGroupsByTract = sn.map(
             (rowNoise) => rowNoise.map(
                 (cellNoise) => voterShapes.map(
