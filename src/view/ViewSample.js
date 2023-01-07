@@ -46,7 +46,8 @@ export default function ViewSample(entities, screen, menu, changes, sim, simOpti
         candidateDnList.canDnButton.hide()
     }
 
-    self.update = (addResult) => {
+    self.update = (simData) => {
+        const { addResult } = simData
         // Update players. Run an election. Get result. Visualize result.
         // The election handles any changes.
         // The electionResults communicates how to visualize the election.

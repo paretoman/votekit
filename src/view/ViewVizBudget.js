@@ -31,7 +31,8 @@ export default function ViewVizBudget(screenCommon, layout, menu, changes, sim, 
     self.exit = () => {
         vizExplanation.exit()
     }
-    self.update = (electionResults) => {
+    self.update = (simData) => {
+        const { electionResults } = simData
         if (changes.checkNone()) return
 
         vizExplanation.update(electionResults)

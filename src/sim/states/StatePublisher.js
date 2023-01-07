@@ -7,17 +7,17 @@ export default function StatePublisher() {
 
     self.enter = () => { observers.forEach((o) => o.enter()) }
     self.exit = () => { observers.forEach((o) => o.exit()) }
-    self.update = (e) => { observers.forEach((o) => o.update(e)) }
-    self.render = (e) => {
-        observers.forEach((o) => { if (o.render) o.render(e) })
+    self.update = (simData) => { observers.forEach((o) => o.update(simData)) }
+    self.render = () => {
+        observers.forEach((o) => { if (o.render) o.render() })
     }
-    self.renderForeground = (e) => {
-        observers.forEach((o) => { if (o.renderForeground) o.renderForeground(e) })
+    self.renderForeground = () => {
+        observers.forEach((o) => { if (o.renderForeground) o.renderForeground() })
     }
-    self.clear = (e) => {
-        observers.forEach((o) => { if (o.clear) o.clear(e) })
+    self.clear = () => {
+        observers.forEach((o) => { if (o.clear) o.clear() })
     }
-    self.clearForeground = (e) => {
-        observers.forEach((o) => { if (o.clearForeground) o.clearForeground(e) })
+    self.clearForeground = () => {
+        observers.forEach((o) => { if (o.clearForeground) o.clearForeground() })
     }
 }

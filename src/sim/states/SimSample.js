@@ -55,8 +55,8 @@ export default function SimSample(
 
         const geometry = getGeometry(voterShapeList, candidateDnList, simOptions, voterDistricts)
 
-        const addResult = electionStrategy
-            .update(geometry, canDnSampler.sampler, changes, electionOptions)
-        self.pub.update(addResult)
+        const addResult = electionStrategy.update(geometry, canDnSampler.sampler, changes, electionOptions)
+        const simData = { addResult }
+        self.pub.update(simData)
     }
 }

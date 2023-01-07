@@ -29,8 +29,9 @@ export default function ViewDistrictMaps(entities, screenCommon, layout, changes
         screen.hide()
     }
 
-    self.update = function (districtElectionResults) {
-        const { error } = districtElectionResults
+    self.update = function (simData) {
+        const { electionResults } = simData
+        const { error } = electionResults
         if (error !== undefined) {
             flagNoRender = true
             return
@@ -38,7 +39,7 @@ export default function ViewDistrictMaps(entities, screenCommon, layout, changes
         flagNoRender = false
 
         if (simOptions.useDistricts) {
-            districtMaps.update(districtElectionResults)
+            districtMaps.update(electionResults)
             self.clear()
             self.render()
         }

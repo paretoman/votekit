@@ -58,7 +58,8 @@ export default function ViewVizOne(entities, screenMain, screenMini, menu, chang
         vizOne.exit()
     }
 
-    self.update = (electionResults) => {
+    self.update = (simData) => {
+        const { electionResults } = simData
         if (changes.checkNone()) return
 
         vizOne.update(electionResults)

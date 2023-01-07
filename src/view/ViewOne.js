@@ -52,7 +52,8 @@ export default function ViewOne(entities, screen, menu, changes, sim, simOptions
         self.voterTestView.voterTest.setE(0)
     }
 
-    self.update = (electionResults) => {
+    self.update = (simData) => {
+        const { electionResults } = simData
         if (changes.checkNone()) return
 
         if (changes.check(['draggables'])) {

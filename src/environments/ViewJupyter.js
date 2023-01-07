@@ -9,10 +9,10 @@ export default function ViewJupyter(sim, viewSM, changes) {
     self.enter = () => {}
     self.exit = () => {}
 
-    self.update = (electionResults) => {
+    self.update = (simData) => {
         if (changes.checkNone()) return
 
         jupyterClear()
-        jupyterUpdate({ electionResults })
+        jupyterUpdate(simData)
     }
 }

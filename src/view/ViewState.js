@@ -14,7 +14,7 @@ export default function ViewState(simState) {
 
     self.enter = () => { self.pub.enter() }
     self.exit = () => { self.pub.exit() }
-    self.update = (electionResults) => { self.pub.update(electionResults) }
+    self.update = (simData) => { self.pub.update(simData) }
     self.render = () => { self.pub.render() }
     self.renderForeground = () => { self.pub.renderForeground() }
     self.clear = () => { self.pub.clear() }

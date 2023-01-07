@@ -49,6 +49,7 @@ export default function SimOne(entities, changes, voterDistricts, simOptions, el
 
         electionResults.colorRGBAOfCandidates = candidateList.getRGBAList()
 
-        self.pub.update(electionResults)
+        const simData = { electionResults }
+        self.pub.update(simData)
     }
 }
