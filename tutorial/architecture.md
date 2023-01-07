@@ -99,6 +99,13 @@ Control a 2D spatial model.
 * CandidateDns
     * Nearly identical mirrors of the classes for Candidates above exist for CandidateDns.
 
+## Sim Data
+
+This data structure is passed with sim's update calls to the views. The data changes based on sim mode. It is one of the following:
+
+* electionResults comes from simOne
+* samplingResults comes from simSample
+
 ## Election Model
 
 Do the math of the election: casting and counting votes.
