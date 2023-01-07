@@ -17,6 +17,7 @@ import layoutOrder from './layoutOrder.js'
 import addSimControlsLabel from '../sim/addSimControlsLabel.js'
 import SimOptions from '../sim/SimOptions.js'
 import ElectionOptions from '../election/ElectionOptions.js'
+import VoterDistricts from '../voters/VoterDistricts.js'
 
 /**
  * Set up a user interface to run a simulation.
@@ -42,7 +43,9 @@ export default function sandbox(config, comMessenger, sandboxURL) {
     const electionOptions = new ElectionOptions(menu, changes, simOptions)
 
     const entities = new Entities(menu, changes, commander, layout)
-    const sim = new Sim(entities, changes, simOptions, electionOptions)
+    const { voterShapeList } = entities
+    const voterDistricts = new VoterDistricts(voterShapeList, changes)
+    const sim = new Sim(entities, voterDistricts, changes, simOptions, electionOptions)
 
     // View Screens
     const viewSM = new ViewStateMachine(sim)

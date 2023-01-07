@@ -2,7 +2,6 @@
 
 import SimSample from './states/SimSample.js'
 import SimOne from './states/SimOne.js'
-import VoterDistricts from '../voters/VoterDistricts.js'
 
 /**
  * Simulation is the main task we're trying to accomplish in this program.
@@ -15,13 +14,8 @@ import VoterDistricts from '../voters/VoterDistricts.js'
  * @param {Changes} changes
  * @param {Commander} commander
  */
-export default function Sim(entities, changes, simOptions, electionOptions) {
+export default function Sim(entities, voterDistricts, changes, simOptions, electionOptions) {
     const self = this
-
-    // Components //
-
-    const { voterShapeList } = entities
-    const voterDistricts = new VoterDistricts(voterShapeList, changes)
 
     // States //
     const sims = {
