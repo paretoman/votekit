@@ -47,7 +47,7 @@ export default function ViewSample(entities, screen, menu, changes, sim, simOpti
     }
 
     self.update = (simData) => {
-        const { addResult } = simData
+        const { samplingResult } = simData
         // Update players. Run an election. Get result. Visualize result.
         // The election handles any changes.
         // The electionResults communicates how to visualize the election.
@@ -58,7 +58,7 @@ export default function ViewSample(entities, screen, menu, changes, sim, simOpti
             candidateDnViewList.updateViewXY()
         }
 
-        const { pointsChanged, partyWinFraction } = addResult
+        const { pointsChanged, partyWinFraction } = samplingResult
 
         if (pointsChanged) {
             candidateDnViewList.setCandidateDnWins(partyWinFraction)

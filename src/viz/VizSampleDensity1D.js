@@ -28,12 +28,12 @@ export default function VizSampleDensity1D(voterRendererList, canDnRendererList,
     voterRendererList.setRenderer((voterShape) => new VoterRenderer(voterShape, screen))
     canDnRendererList.setRenderer((voterShape) => new VoterRenderer(voterShape, screen))
 
-    self.update = function (addResult) {
+    self.update = function (samplingResult) {
         if (changes.checkAny()) {
             start()
         }
 
-        const { pointsChanged, points } = addResult
+        const { pointsChanged, points } = samplingResult
 
         if (pointsChanged) {
             updatePoints(points)

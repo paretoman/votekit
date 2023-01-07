@@ -22,8 +22,8 @@ export default function ElectionSample() {
             self.startSim()
         }
 
-        const addResult = self.addSim(geometry, cDnSampler, electionOptions)
-        return addResult
+        const samplingResult = self.addSim(geometry, cDnSampler, electionOptions)
+        return samplingResult
     }
 
     self.startSim = function () {
@@ -121,8 +121,9 @@ export default function ElectionSample() {
         }
 
         const partyWinFraction = partyWins.map((x) => x / points.length)
-        return {
+        const samplingResult = {
             pointsChanged: true, newPoints, points, partyWinFraction,
         }
+        return samplingResult
     }
 }

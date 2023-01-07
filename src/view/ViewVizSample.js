@@ -55,14 +55,14 @@ export default function ViewVizSample(entities, screen, menu, changes, sim, simO
     }
 
     self.update = (simData) => {
-        const { addResult } = simData
+        const { samplingResult } = simData
         // Update players. Run an election. Get result. Visualize result.
         // The election handles any changes.
         // The electionResults communicates how to visualize the election.
 
-        vizSample.update(addResult)
+        vizSample.update(samplingResult)
 
-        const { pointsChanged } = addResult
+        const { pointsChanged } = samplingResult
 
         if (pointsChanged) {
             self.clear()

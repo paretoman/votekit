@@ -27,14 +27,14 @@ export default function VizSample(voterRendererList, canDnRendererList, screen, 
     voterRendererList.setRenderer((voterShape) => new VoterRenderer(voterShape, screen))
     canDnRendererList.setRenderer((voterShape) => new VoterRenderer(voterShape, screen))
 
-    self.update = function (addResult) {
+    self.update = function (samplingResult) {
         if (changes.checkAny()) {
             self.start()
         }
 
         const {
             pointsChanged, newPoints, points,
-        } = addResult
+        } = samplingResult
 
         if (pointsChanged) {
             self.updatePoints(newPoints, points)
