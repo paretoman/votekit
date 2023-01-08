@@ -29,14 +29,8 @@ export default function sandbox(config, comMessenger, sandboxURL) {
     const layout = new Layout(layoutOrder)
 
     const commander = new Commander(comMessenger)
-    addUndo(layout, commander)
-    addSaveConfigToLink(layout, commander, sandboxURL)
-    addSaveConfigToText(layout, commander)
-    addLoadConfigText(layout, commander)
 
     const menu = new Menu(changes, layout, commander)
-
-    addSimControlsLabel(layout)
 
     const simOptions = new SimOptions(menu, changes)
     const electionOptions = new ElectionOptions(menu, changes, simOptions)
@@ -57,6 +51,12 @@ export default function sandbox(config, comMessenger, sandboxURL) {
 
     commander.loadConfig(config)
     commander.clearHistory()
+
+    addUndo(layout, commander)
+    addSaveConfigToLink(layout, commander, sandboxURL)
+    addSaveConfigToText(layout, commander)
+    addLoadConfigText(layout, commander)
+    addSimControlsLabel(layout)
 
     const div = layout.makeComponent()
     return div
