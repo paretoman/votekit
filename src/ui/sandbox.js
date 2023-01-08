@@ -9,9 +9,7 @@ import addUndo from '../command/addUndo.js'
 import addSaveConfigToText from '../command/addSaveConfigToText.js'
 import addLoadConfigText from '../command/loadConfigText.js'
 import addSaveConfigToLink from '../command/addSaveConfigToLink.js'
-import * as TWEEN from '../lib/snowpack/build/snowpack/pkg/@tweenjs/tweenjs.js'
 import Entities from '../sim/Entities.js'
-import ViewStateMachine from '../view/ViewStateMachine.js'
 import sandboxScreenViews from './sandboxScreenViews.js'
 import layoutOrder from './layoutOrder.js'
 import addSimControlsLabel from '../sim/addSimControlsLabel.js'
@@ -47,9 +45,13 @@ export default function sandbox(config, comMessenger, sandboxURL) {
     const { voterShapeList } = entities
     const voterDistricts = new VoterDistricts(voterShapeList, changes)
     const simMachine = new SimStateMachine(entities, voterDistricts, changes, simOptions, electionOptions)
+    window.requestAnimationFrame(simLoop)
+    function simLoop() {
+        simMachine.update()
+        window.requestAnimationFrame(simLoop)
+    }
 
-    const viewSM = new ViewStateMachine(simMachine)
-    sandboxScreenViews(viewSM, entities, simOptions, electionOptions, changes, menu, layout)
+    sandboxScreenViews(simMachine, entities, simOptions, electionOptions, changes, menu, layout)
 
     addDefaultEntities(entities)
 
@@ -57,25 +59,5 @@ export default function sandbox(config, comMessenger, sandboxURL) {
     commander.clearHistory()
 
     const div = layout.makeComponent()
-
-    window.requestAnimationFrame(gameLoop)
-
     return div
-
-    function gameLoop() {
-        update()
-        drawForeground()
-        window.requestAnimationFrame(gameLoop)
-    }
-
-    function update() {
-        simMachine.update()
-    }
-
-    function drawForeground() {
-        if (TWEEN.getAll().length === 0) return
-        TWEEN.update()
-        viewSM.clearForeground()
-        viewSM.renderForeground()
-    }
 }

@@ -13,6 +13,8 @@ import ViewSample from '../view/ViewSample.js'
 import ScreenCommon from './ScreenCommon.js'
 import addSvgSwitch from './addSvgSwitch.js'
 import addDownloadScreen from './addDownloadScreen.js'
+import ViewStateMachine from '../view/ViewStateMachine.js'
+import * as TWEEN from '../lib/snowpack/build/snowpack/pkg/@tweenjs/tweenjs.js'
 
 /**
  * Make all the screens and views with screens.
@@ -21,7 +23,9 @@ import addDownloadScreen from './addDownloadScreen.js'
  * @param {*} menu
  * @param {*} layout
  */
-export default function sandboxScreenViews(viewSM, entities, simOptions, electionOptions, changes, menu, layout) {
+export default function sandboxScreenViews(simMachine, entities, simOptions, electionOptions, changes, menu, layout) {
+    const viewSM = new ViewStateMachine(simMachine)
+
     const screenCommon = new ScreenCommon(300, 300)
     const screenMain = new Screen(screenCommon, viewSM, layout, 'viz')
     const screenMini = new Screen(screenCommon, viewSM, layout, 'vizMini')
@@ -40,4 +44,18 @@ export default function sandboxScreenViews(viewSM, entities, simOptions, electio
     new ViewVizSample(entities, screenMain, menu, changes, simOptions, viewSM, viewSettings)
     new ViewVizBudget(screenCommon, layout, menu, changes, simOptions, electionOptions, viewSM)
     new ViewDistrictMaps(entities, screenCommon, layout, changes, simOptions, electionOptions, viewSM)
+
+    window.requestAnimationFrame(viewLoop)
+
+    function viewLoop() {
+        drawForeground()
+        window.requestAnimationFrame(viewLoop)
+    }
+
+    function drawForeground() {
+        if (TWEEN.getAll().length === 0) return
+        TWEEN.update()
+        viewSM.clearForeground()
+        viewSM.renderForeground()
+    }
 }
