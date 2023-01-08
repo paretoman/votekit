@@ -34,10 +34,10 @@ export default function VizSampleDensity1D(voterRendererList, canDnRendererList,
             start()
         }
 
-        const { pointsChanged, points } = samplingResult
+        const { pointsChanged, newPoints } = samplingResult
 
         if (pointsChanged) {
-            updatePoints(points)
+            updatePoints(newPoints)
         }
     }
 
