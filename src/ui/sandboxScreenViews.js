@@ -14,7 +14,6 @@ import ScreenCommon from './ScreenCommon.js'
 import addSvgSwitch from './addSvgSwitch.js'
 import addDownloadScreen from './addDownloadScreen.js'
 import ViewStateMachine from '../view/ViewStateMachine.js'
-import * as TWEEN from '../lib/snowpack/build/snowpack/pkg/@tweenjs/tweenjs.js'
 
 /**
  * Make all the screens and views with screens.
@@ -53,8 +52,8 @@ export default function sandboxScreenViews(simMachine, entities, simOptions, ele
     }
 
     function drawForeground() {
-        if (TWEEN.getAll().length === 0) return
-        TWEEN.update()
+        if (screenMain.tweenGroup.getAll().length === 0) return
+        screenMain.tweenGroup.update()
         viewSM.clearForeground()
         viewSM.renderForeground()
     }

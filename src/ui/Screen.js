@@ -1,5 +1,6 @@
 /** @module */
 
+import * as TWEEN from '../lib/snowpack/build/snowpack/pkg/@tweenjs/tweenjs.js'
 import EventHandlers from './EventHandlers.js'
 
 import ScreenCanvas from './ScreenCanvas.js'
@@ -22,6 +23,8 @@ export default function Screen(screenCommon, viewSM, layout, layoutName) {
     self.svg = new ScreenSvg()
     self.download = new ScreenDownload(self, viewSM)
     self.setShowDownloadScreenLink = self.download.setShowDownloadScreenLink
+
+    self.tweenGroup = new TWEEN.Group()
 
     // Divs //
 

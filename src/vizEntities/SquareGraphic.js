@@ -24,22 +24,22 @@ export default function SquareGraphic(parent, entity, w, h, screen) {
     self.angleFraction = 0
 
     self.pickUp = function () {
-        self.tweenSq = new Tween(self)
+        self.tweenSq = new Tween(self, screen.tweenGroup)
         self.tweenSq.to({ w: self.trueW + 10, h: self.trueH + 10 }, 100)
         self.tweenSq.start()
     }
     self.drop = function () {
-        self.tweenSq = new Tween(self)
+        self.tweenSq = new Tween(self, screen.tweenGroup)
         self.tweenSq.to({ w: self.trueW, h: self.trueH }, 100)
         self.tweenSq.start()
     }
     self.win = function () {
-        self.tweenSq = new Tween(self)
+        self.tweenSq = new Tween(self, screen.tweenGroup)
         self.tweenSq.to({ angleFraction: 0.25 }, 300)
         self.tweenSq.start()
     }
     self.lose = function () {
-        self.tweenSq = new Tween(self)
+        self.tweenSq = new Tween(self, screen.tweenGroup)
         self.tweenSq.to({ angleFraction: -0.25 }, 300)
         self.tweenSq.start()
     }

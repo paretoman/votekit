@@ -22,12 +22,12 @@ export default function CircleGraphic(parent, entity, r, screen) {
     self.trueR = r
 
     self.pickUp = function () {
-        self.tween = new Tween(self)
+        self.tween = new Tween(self, screen.tweenGroup)
         self.tween.to({ r: self.trueR * 2 }, 100)
         self.tween.start()
     }
     self.drop = function () {
-        self.tween = new Tween(self)
+        self.tween = new Tween(self, screen.tweenGroup)
         self.tween.to({ r: self.trueR }, 100)
         self.tween.start()
     }
