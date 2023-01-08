@@ -70,6 +70,9 @@ export default function ViewOne(entities, screen, menu, changes, simOptions, ele
         }
 
         self.testVoteView()
+
+        self.clearForeground()
+        self.renderForeground()
     }
 
     // Test Point

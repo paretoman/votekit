@@ -62,6 +62,9 @@ export default function ViewSample(entities, screen, menu, changes, simOptions, 
         if (pointsChanged) {
             candidateDnViewList.setCandidateDnWins(partyWinFraction)
         }
+
+        self.clearForeground()
+        self.renderForeground()
     }
 
     self.clickEmpty = () => { }

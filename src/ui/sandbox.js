@@ -70,10 +70,11 @@ export default function sandbox(config, comMessenger, sandboxURL) {
 
     function update() {
         simMachine.update()
-        TWEEN.update()
     }
 
     function drawForeground() {
+        if (TWEEN.getAll().length === 0) return
+        TWEEN.update()
         viewSM.clearForeground()
         viewSM.renderForeground()
     }
