@@ -5,10 +5,10 @@
  * This is here because we need an action that takes an id.
  * @param {Registrar} candidateRegistrar
  * @param {Commander} commander
- * @param {Sim} sim
+ * @param {CandidateList} canList
  * @constructor
  */
-export default function CandidateCommander(candidateRegistrar, commander, sim) {
+export default function CandidateCommander(candidateRegistrar, commander, canList) {
     const self = this
 
     const prefix = 'candidates'
@@ -42,7 +42,7 @@ export default function CandidateCommander(candidateRegistrar, commander, sim) {
     // Well, actually we can just loadCommands in order to avoid undo.
     self.setNumberCandidatesSender = commander.addSender({
         action: (num) => {
-            sim.setNumberCandidatesAction(num)
+            canList.setNumberCandidatesAction(num)
         },
         currentValue: 0,
         name: `${prefix}-setNumberAtLeast`,

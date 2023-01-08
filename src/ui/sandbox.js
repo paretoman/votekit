@@ -2,7 +2,7 @@
 
 import Changes from '../sim/Changes.js'
 import Menu from '../menu/Menu.js'
-import Sim from '../sim/Sim.js'
+import SimStateMachine from '../sim/SimStateMachine.js'
 import Layout from './Layout.js'
 import Commander from '../command/Commander.js'
 import addUndo from '../command/addUndo.js'
@@ -45,11 +45,11 @@ export default function sandbox(config, comMessenger, sandboxURL) {
     const entities = new Entities(menu, changes, commander, layout)
     const { voterShapeList } = entities
     const voterDistricts = new VoterDistricts(voterShapeList, changes)
-    const sim = new Sim(entities, voterDistricts, changes, simOptions, electionOptions)
+    const simMachine = new SimStateMachine(entities, voterDistricts, changes, simOptions, electionOptions)
 
     // View Screens
-    const viewSM = new ViewStateMachine(sim)
-    sandboxScreenViews(viewSM, entities, sim, simOptions, electionOptions, changes, menu, layout)
+    const viewSM = new ViewStateMachine(simMachine)
+    sandboxScreenViews(viewSM, entities, simOptions, electionOptions, changes, menu, layout)
 
     // Default Entities
     entities.candidateList.addCandidate({ x: 50, y: 100 }, { x: 50 }, '#e05020', true)
@@ -75,7 +75,7 @@ export default function sandbox(config, comMessenger, sandboxURL) {
     }
 
     function update() {
-        sim.update()
+        simMachine.update()
         TWEEN.update()
     }
 

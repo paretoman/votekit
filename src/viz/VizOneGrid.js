@@ -8,10 +8,9 @@ import Grid2D from './Grid2D.js'
  * @param {VoterRendererList} voterRendererList
  * @param {CandidateList} candidateList
  * @param {Screen} screen
- * @param {Sim} sim
  * @constructor
  */
-export default function VizOneGrid(voterRendererList, candidateList, screenMain, screenMini, sim, simOptions) {
+export default function VizOneGrid(voterRendererList, candidateList, screenMain, screenMini, simOptions) {
     const self = this
 
     // renderer factory //

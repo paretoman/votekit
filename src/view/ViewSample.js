@@ -11,11 +11,10 @@ import ViewBase from './ViewBase.js'
  * @param {Screen} screen
  * @param {Menu} menu
  * @param {Changes} changes
- * @param {Sim} sim
  * @param {ViewSettings} viewSettings
  * @constructor
  */
-export default function ViewSample(entities, screen, menu, changes, sim, simOptions, electionOptions, viewSM, viewSettings) {
+export default function ViewSample(entities, screen, menu, changes, simOptions, electionOptions, viewSM, viewSettings) {
     const self = this
 
     viewSM.views.sample.pub.attach(self)

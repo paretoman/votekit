@@ -10,7 +10,7 @@ import VoterRender2D from './VoterRender2D.js'
  * @constructor
  */
 // eslint-disable-next-line max-len
-export default function VizSampleDensity1D(voterRendererList, canDnRendererList, screen, changes, sim, simOptions) {
+export default function VizSampleDensity1D(voterRendererList, canDnRendererList, screen, changes, simOptions) {
     const self = this
 
     // adjustable visual parameters

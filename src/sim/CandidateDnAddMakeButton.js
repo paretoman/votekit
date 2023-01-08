@@ -5,7 +5,7 @@
  * @param {Layout} layout
  * @param {Commander} commander
  */
-export default function CandidateDnAddMakeButton(layout, sim) {
+export default function CandidateDnAddMakeButton(layout, canDnList) {
     const self = this
     const addCandidateDistributionButton = document.createElement('button')
 
@@ -13,7 +13,7 @@ export default function CandidateDnAddMakeButton(layout, sim) {
     addCandidateDistributionButton.innerText = 'Add Candidate Distribution'
 
     addCandidateDistributionButton.onclick = () => {
-        sim.addCandidateDistributionPressed()
+        canDnList.addCandidateDistributionPressed()
     }
 
     layout.newElement('addCandidateDistribution', addCandidateDistributionButton)

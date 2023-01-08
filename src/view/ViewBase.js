@@ -5,7 +5,7 @@ import DraggableManager from '../ui/DraggableManager.js'
 import ClickDrag from '../ui/ClickDrag.js'
 
 /**
- * The super class for each sim. Provides some basic required functionality.
+ * The super class for each view state. Provides some basic required functionality.
  * @param {Screen} screen
  * @param {Changes} changes
  * @param {ViewSettings} viewSettings

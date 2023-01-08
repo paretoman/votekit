@@ -1,6 +1,6 @@
 import jupyterUpdate, { jupyterClear } from './jupyter.js'
 
-export default function ViewJupyter(sim, viewSM, changes) {
+export default function ViewJupyter(viewSM, changes) {
     const self = this
 
     viewSM.views.one.pub.attach(self)

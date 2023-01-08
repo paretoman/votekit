@@ -14,7 +14,6 @@ import StatePublisher from './StatePublisher.js'
  * @param {Menu} menu
  * @param {Changes} changes
  * @param {VoterDistricts} voterDistricts
- * @param {Sim} sim
  * @constructor
  */
 // eslint-disable-next-line max-len

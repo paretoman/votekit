@@ -9,7 +9,7 @@ import VoterRender2D from './VoterRender2D.js'
  * @param {screen} screen - draw to the screen
  * @constructor
  */
-export default function VizSample(voterRendererList, canDnRendererList, screen, changes, sim, simOptions) {
+export default function VizSample(voterRendererList, canDnRendererList, screen, changes, simOptions) {
     const self = this
 
     // Candidates //

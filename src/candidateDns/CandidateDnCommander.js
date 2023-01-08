@@ -5,10 +5,10 @@
  * This is here because we need an action that takes an id.
  * @param {Registrar} candidateDnRegistrar
  * @param {Commander} commander
- * @param {Sim} sim
+ * @param {CandidateDnList} canDnList
  * @constructor
  */
-export default function CandidateDnCommander(candidateDnRegistrar, commander, sim) {
+export default function CandidateDnCommander(candidateDnRegistrar, commander, canDnList) {
     const self = this
 
     const prefix = 'candidateDns'
@@ -43,7 +43,7 @@ export default function CandidateDnCommander(candidateDnRegistrar, commander, si
     // So we disable undo.
     self.setNumberCandidateDnsSender = commander.addSender({
         action: (num) => {
-            sim.setNumberCandidateDnsAction(num)
+            canDnList.setNumberCandidateDnsAction(num)
         },
         currentValue: 0,
         name: `${prefix}-setNumberAtLeast`,

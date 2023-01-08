@@ -17,12 +17,11 @@ import addDownloadScreen from './addDownloadScreen.js'
 /**
  * Make all the screens and views with screens.
  * @param {*} viewSM
- * @param {*} sim
  * @param {*} changes
  * @param {*} menu
  * @param {*} layout
  */
-export default function sandboxScreenViews(viewSM, entities, sim, simOptions, electionOptions, changes, menu, layout) {
+export default function sandboxScreenViews(viewSM, entities, simOptions, electionOptions, changes, menu, layout) {
     const screenCommon = new ScreenCommon(300, 300)
     const screenMain = new Screen(screenCommon, viewSM, layout, 'viz')
     const screenMini = new Screen(screenCommon, viewSM, layout, 'vizMini')
@@ -34,11 +33,11 @@ export default function sandboxScreenViews(viewSM, entities, sim, simOptions, el
     addDarkModeSwitch(screenCommon, layout, viewSM)
 
     const viewSettings = new ViewSettings(changes)
-    new ViewOne(entities, screenMain, menu, changes, sim, simOptions, electionOptions, viewSM, viewSettings)
-    new ViewSample(entities, screenMain, menu, changes, sim, simOptions, electionOptions, viewSM, viewSettings)
-    new ViewJupyter(sim, viewSM, changes)
-    new ViewVizOne(entities, screenMain, screenMini, menu, changes, sim, simOptions, electionOptions, viewSM, viewSettings)
-    new ViewVizSample(entities, screenMain, menu, changes, sim, simOptions, viewSM, viewSettings)
-    new ViewVizBudget(screenCommon, layout, menu, changes, sim, simOptions, electionOptions, viewSM)
-    new ViewDistrictMaps(entities, screenCommon, layout, changes, sim, simOptions, electionOptions, viewSM)
+    new ViewOne(entities, screenMain, menu, changes, simOptions, electionOptions, viewSM, viewSettings)
+    new ViewSample(entities, screenMain, menu, changes, simOptions, electionOptions, viewSM, viewSettings)
+    new ViewJupyter(viewSM, changes)
+    new ViewVizOne(entities, screenMain, screenMini, menu, changes, simOptions, electionOptions, viewSM, viewSettings)
+    new ViewVizSample(entities, screenMain, menu, changes, simOptions, viewSM, viewSettings)
+    new ViewVizBudget(screenCommon, layout, menu, changes, simOptions, electionOptions, viewSM)
+    new ViewDistrictMaps(entities, screenCommon, layout, changes, simOptions, electionOptions, viewSM)
 }

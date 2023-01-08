@@ -14,7 +14,7 @@ import SimOne from './states/SimOne.js'
  * @param {Changes} changes
  * @param {Commander} commander
  */
-export default function Sim(entities, voterDistricts, changes, simOptions, electionOptions) {
+export default function SimStateMachine(entities, voterDistricts, changes, simOptions, electionOptions) {
     const self = this
 
     // States //

@@ -5,11 +5,9 @@ import DistrictMaps from '../viz/DistrictMaps.js'
 
 /**
  * Show votes
- * @param {Screen} screen
- * @param {Sim} sim
  * @constructor
  */
-export default function ViewDistrictMaps(entities, screenCommon, layout, changes, sim, simOptions, electionOptions, viewSM) {
+export default function ViewDistrictMaps(entities, screenCommon, layout, changes, simOptions, electionOptions, viewSM) {
     const self = this
 
     viewSM.views.one.pub.attach(self)

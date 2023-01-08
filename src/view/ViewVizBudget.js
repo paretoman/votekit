@@ -2,7 +2,7 @@ import Screen from '../ui/Screen.js'
 import BaseExplanation from '../viz/BaseExplanation.js'
 import VizExplanationBudgetMES from '../viz/VizExplanationBudgetMES.js'
 
-export default function ViewVizBudget(screenCommon, layout, menu, changes, sim, simOptions, electionOptions, viewSM) {
+export default function ViewVizBudget(screenCommon, layout, menu, changes, simOptions, electionOptions, viewSM) {
     const self = this
 
     viewSM.views.one.pub.attach(self)

@@ -9,10 +9,9 @@ import VoterRender2D from './VoterRender2D.js'
  * @param {VoterRendererList} voterRendererList
  * @param {CandidateList} candidateList
  * @param {Screen} screen
- * @param {Sim} sim
  * @constructor
  */
-export default function VizDistricts(voterRendererList, candidateList, screen, screenMini, sim, simOptions) {
+export default function VizDistricts(voterRendererList, candidateList, screen, screenMini, simOptions) {
     const self = this
 
     const { dimensions } = simOptions
