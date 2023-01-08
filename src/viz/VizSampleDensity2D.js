@@ -47,8 +47,8 @@ export default function VizSampleDensity2D(voterRendererList, canDnRendererList,
         const btw = points.length / 10000
         const thresholds = range(nThresholds).map((x) => x * btw)
         const cd = contourDensity()
-            .x((d) => d.x)
-            .y((d) => d.y)
+            .x((d) => d[0])
+            .y((d) => d[1])
             .bandwidth(10)
             .thresholds(thresholds)
         densityData = cd(points)

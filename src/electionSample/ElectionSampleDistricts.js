@@ -92,16 +92,16 @@ export default function ElectionSampleDistricts() {
                     const { iWinner } = scResultsByDistrict[o]
 
                     // record point
-                    const winPoint = sCanGeoms[iWinner]
+                    const { x, y } = sCanGeoms[iWinner]
+                    const winPoint = [x, y]
+                    // add jitter
                     if (r === 0) {
                         // no change
                     } else if (dimensions === 1) {
-                        // add jitter
-                        winPoint.x += (Math.random() - 0.5) * jitterSize
+                        winPoint[0] += (Math.random() - 0.5) * jitterSize
                     } else {
-                        // add jitter
-                        winPoint.x += (Math.random() - 0.5) * jitterSize
-                        winPoint.y += (Math.random() - 0.5) * jitterSize
+                        winPoint[0] += (Math.random() - 0.5) * jitterSize
+                        winPoint[1] += (Math.random() - 0.5) * jitterSize
                     }
 
                     points.push(winPoint)
@@ -118,7 +118,8 @@ export default function ElectionSampleDistricts() {
                     const { allocation } = scResultsByDistrict[o]
 
                     for (let k = 0; k < sCanGeoms.length; k++) {
-                        const winPoint = sCanGeoms[k]
+                        const { x, y } = sCanGeoms[k]
+                        const winPoint = [x, y]
                         const party = sParties[k]
                         const numPoints = allocation[k]
 
@@ -127,10 +128,10 @@ export default function ElectionSampleDistricts() {
                             if (r === 0) {
                                 // no change
                             } else if (dimensions === 1) {
-                                winPoint.x += (Math.random() - 0.5) * jitterSize
+                                winPoint[0] += (Math.random() - 0.5) * jitterSize
                             } else {
-                                winPoint.x += (Math.random() - 0.5) * jitterSize
-                                winPoint.y += (Math.random() - 0.5) * jitterSize
+                                winPoint[0] += (Math.random() - 0.5) * jitterSize
+                                winPoint[1] += (Math.random() - 0.5) * jitterSize
                             }
 
                             // record point

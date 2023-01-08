@@ -51,7 +51,7 @@ export default function VizSampleDensity1D(voterRendererList, canDnRendererList,
         // add to sum for each point
         const nk = newPoints.length
         for (let k = 0; k < nk; k++) {
-            const { x } = newPoints[k]
+            const x = newPoints[k][0]
             for (let i = 0; i < width; i++) {
                 sum[i] += kernel(i - x)
             }

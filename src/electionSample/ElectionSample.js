@@ -84,7 +84,8 @@ export default function ElectionSample() {
                 const { iWinner } = socialChoiceResults
 
                 // record point
-                const winPoint = sCanGeoms[iWinner]
+                const { x, y } = sCanGeoms[iWinner]
+                const winPoint = [x, y]
                 points.push(winPoint)
                 newPoints[i] = winPoint
 
@@ -94,7 +95,8 @@ export default function ElectionSample() {
                 const { allocation } = socialChoiceResults
 
                 for (let k = 0; k < sCanGeoms.length; k++) {
-                    const winPoint = sCanGeoms[k]
+                    const { x, y } = sCanGeoms[k]
+                    const winPoint = [x, y]
                     const party = sParties[k]
                     const numPoints = allocation[k]
 
@@ -103,11 +105,12 @@ export default function ElectionSample() {
                         if (m === 0) {
                             // no change
                         } else if (dimensions === 1) {
-                            winPoint.x += (Math.random() - 0.5) * jitterSize
+                            winPoint[0] += (Math.random() - 0.5) * jitterSize
                         } else {
-                            winPoint.x += (Math.random() - 0.5) * jitterSize
-                            winPoint.y += (Math.random() - 0.5) * jitterSize
+                            winPoint[0] += (Math.random() - 0.5) * jitterSize
+                            winPoint[1] += (Math.random() - 0.5) * jitterSize
                         }
+
                         // record point
                         points.push(winPoint)
                         newPoints[q] = winPoint
@@ -121,6 +124,7 @@ export default function ElectionSample() {
         }
 
         const partyWinFraction = partyWins.map((x) => x / points.length)
+
         const samplingResult = {
             pointsChanged: true, newPoints, points, partyWinFraction,
         }
