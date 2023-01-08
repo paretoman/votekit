@@ -41,7 +41,7 @@ export default function sandbox(config, comMessenger, sandboxURL) {
     const simOptions = new SimOptions(menu, changes)
     const electionOptions = new ElectionOptions(menu, changes, simOptions)
 
-    const entities = new Entities(menu, changes, commander, layout)
+    const entities = new Entities(changes, commander, layout)
     const { voterShapeList } = entities
     const voterDistricts = new VoterDistricts(voterShapeList, changes)
     const simMachine = new SimStateMachine(entities, voterDistricts, changes, simOptions, electionOptions)

@@ -9,7 +9,7 @@ import CandidateDnList from '../candidateDns/CandidateDnList.js'
  * @param {Commander} commander
  * @param {Layout} layout
  */
-export default function Entities(menu, changes, commander, layout) {
+export default function Entities(changes, commander, layout) {
     const self = this
 
     // Entities //
