@@ -15,6 +15,7 @@ export default function VizSampleDensity1D(voterRendererList, canDnRendererList,
 
     // adjustable visual parameters
     const kw = 20
+    const ikw = 1 / kw
 
     // sum and total density
     const { width } = screen
@@ -60,7 +61,7 @@ export default function VizSampleDensity1D(voterRendererList, canDnRendererList,
 
     function kernel(x) {
         if (x > kw || x < -kw) return 0
-        return (1 - (x / kw) ** 2) / kw
+        return (1 - (x * ikw) ** 2) * ikw
     }
 
     self.render = () => {
