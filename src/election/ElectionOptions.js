@@ -8,10 +8,10 @@ import SocialChoiceOptions from './SocialChoiceOptions.js'
  * @param {Menu} menu
  * @constructor
  */
-export default function ElectionOptions(menu, changes, simOptions) {
+export default function ElectionOptions(changes, simOptions) {
     const self = this
 
-    self.castOptions = new CastOptions(menu, changes, simOptions)
+    self.castOptions = new CastOptions(changes, simOptions)
     self.socialChoiceOptions = new SocialChoiceOptions(changes, self)
 
     // a list of election methods
@@ -72,15 +72,4 @@ export default function ElectionOptions(menu, changes, simOptions) {
         self.castOptions.update()
         self.socialChoiceOptions.update()
     }
-
-    menu.addMenuItem(
-        self,
-        {
-            label: 'Election Method:',
-            prop: 'electionMethod',
-            setProp: self.setElectionMethod,
-            options: self.electionMethodList,
-            change: ['electionMethod'],
-        },
-    )
 }

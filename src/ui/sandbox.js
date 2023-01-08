@@ -18,6 +18,7 @@ import ElectionOptions from '../election/ElectionOptions.js'
 import VoterDistricts from '../voters/VoterDistricts.js'
 import addDefaultEntities from './addDefaultEntities.js'
 import menuSimOptions from '../view/MenuSimOptions.js'
+import menuElectionOptions from '../view/menuElectionOptions.js'
 
 /**
  * Set up a user interface to run a simulation.
@@ -31,10 +32,8 @@ export default function sandbox(config, comMessenger, sandboxURL) {
 
     const commander = new Commander(comMessenger)
 
-    const menu = new Menu(changes, layout, commander)
-
     const simOptions = new SimOptions(changes)
-    const electionOptions = new ElectionOptions(menu, changes, simOptions)
+    const electionOptions = new ElectionOptions(changes, simOptions)
 
     const entities = new Entities(changes, commander, layout)
     const { voterShapeList } = entities
@@ -46,11 +45,16 @@ export default function sandbox(config, comMessenger, sandboxURL) {
         window.requestAnimationFrame(simLoop)
     }
 
+    // View //
+
+    const menu = new Menu(changes, layout, commander)
+
+    menuSimOptions(simOptions, menu)
+    menuElectionOptions(electionOptions, menu)
+
     sandboxScreenViews(simMachine, entities, simOptions, electionOptions, changes, menu, layout)
 
     addDefaultEntities(entities)
-
-    menuSimOptions(simOptions, menu)
 
     commander.loadConfig(config)
     commander.clearHistory()

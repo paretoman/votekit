@@ -1,4 +1,4 @@
-export default function CastOptions(menu, changes, simOptions) {
+export default function CastOptions(changes, simOptions) {
     const self = this
 
     self.usr = 4
