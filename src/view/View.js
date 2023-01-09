@@ -3,7 +3,7 @@ import Layout from '../ui/Layout.js'
 import Menu from '../menu/Menu.js'
 import menuSimOptions from './MenuSimOptions.js'
 import menuElectionOptions from './menuElectionOptions.js'
-import sandboxScreenViews from '../ui/sandboxScreenViews.js'
+import viewScreens from '../ui/viewScreens.js'
 
 import addUndo from '../command/addUndo.js'
 import addSaveConfigToText from '../command/addSaveConfigToText.js'
@@ -22,7 +22,7 @@ export default function View(sim, sandboxURL) {
     menuSimOptions(simOptions, menu)
     menuElectionOptions(electionOptions, menu)
 
-    sandboxScreenViews(simMachine, entities, simOptions, electionOptions, changes, menu, layout)
+    viewScreens(simMachine, entities, simOptions, electionOptions, changes, menu, layout)
 
     addUndo(layout, commander)
     addSaveConfigToLink(layout, commander, sandboxURL)

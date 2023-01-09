@@ -23,7 +23,7 @@ import buttonsToAddEntities from '../view/buttonsToAddEntities.js'
  * @param {*} menu
  * @param {*} layout
  */
-export default function sandboxScreenViews(simMachine, entities, simOptions, electionOptions, changes, menu, layout) {
+export default function viewScreens(simMachine, entities, simOptions, electionOptions, changes, menu, layout) {
     const viewSM = new ViewStateMachine(simMachine)
 
     const screenCommon = new ScreenCommon(300, 300)
