@@ -1,14 +1,12 @@
 import CandidateDn from './CandidateDn.js'
 import CandidateDnCommander from './CandidateDnCommander.js'
-import CandidateDnAddMakeButton from '../sim/CandidateDnAddMakeButton.js'
 import Registrar from '../sim/Registrar.js'
 import getGeoms from '../entities.js/getGeoms.js'
 
 /** A component of sim.js that deals with adding candidate distributions. */
-export default function CandidateDnList(layout, changes, commander) {
+export default function CandidateDnList(changes, commander) {
     const self = this
 
-    self.canDnButton = new CandidateDnAddMakeButton(layout, self)
     const candidateDnRegistrar = new Registrar()
     const candidateDnCommander = new CandidateDnCommander(candidateDnRegistrar, commander, self)
 

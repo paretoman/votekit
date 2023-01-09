@@ -1,14 +1,11 @@
-import VoterShapeAddMakeButton from '../sim/VoterShapeAddMakeButton.js'
 import Registrar from '../sim/Registrar.js'
 import VoterShape from './VoterShape.js'
 import VoterCommander from './VoterCommander.js'
 import getGeoms from '../entities.js/getGeoms.js'
 
 /** A component of sim.js that deals with adding voters. */
-export default function VoterShapeList(layout, changes, commander) {
+export default function VoterShapeList(changes, commander) {
     const self = this
-
-    VoterShapeAddMakeButton(layout, self)
 
     const voterRegistrar = new Registrar()
     const voterCommander = new VoterCommander(voterRegistrar, commander, self)

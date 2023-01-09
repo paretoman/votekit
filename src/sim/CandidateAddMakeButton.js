@@ -5,9 +5,7 @@
  * @param {Layout} layout
  * @param {Sim} canList
  */
-export default function CandidateAddMakeButton(layout, canList) {
-    const self = this
-
+export default function CandidateAddMakeButton(viewSM, layout, canList) {
     const addCandidateButton = document.createElement('button')
 
     addCandidateButton.className = 'button2'
@@ -19,10 +17,16 @@ export default function CandidateAddMakeButton(layout, canList) {
 
     layout.newElement('addCandidate', addCandidateButton)
 
-    self.show = () => {
+    viewSM.views.one.pub.attach({
+        enter: show,
+        exit: hide,
+        update: () => {},
+    })
+
+    function show() {
         addCandidateButton.hidden = false
     }
-    self.hide = () => {
+    function hide() {
         addCandidateButton.hidden = true
     }
 }

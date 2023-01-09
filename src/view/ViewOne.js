@@ -39,7 +39,6 @@ export default function ViewOne(entities, screen, menu, changes, simOptions, ele
     self.enter = () => {
         superEnter()
 
-        candidateList.canButton.show()
         voterViewList.updateViewXY()
         candidateViewList.updateViewXY()
         self.voterTestView.graphic.updateViewXY()
@@ -47,7 +46,6 @@ export default function ViewOne(entities, screen, menu, changes, simOptions, ele
 
     self.exit = () => {
         candidateViewList.unsetCandidateWins() // clean up fractions
-        candidateList.canButton.hide()
         self.voterTestView.voterTest.setE(0)
     }
 

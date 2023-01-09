@@ -14,6 +14,7 @@ import ScreenCommon from './ScreenCommon.js'
 import addSvgSwitch from './addSvgSwitch.js'
 import addDownloadScreen from './addDownloadScreen.js'
 import ViewStateMachine from '../view/ViewStateMachine.js'
+import buttonsToAddEntities from '../view/buttonsToAddEntities.js'
 
 /**
  * Make all the screens and views with screens.
@@ -34,6 +35,7 @@ export default function sandboxScreenViews(simMachine, entities, simOptions, ele
     addSvgSwitch(screenCommon, layout, viewSM)
     addDownloadScreen(screenCommon, layout)
     addDarkModeSwitch(screenCommon, layout, viewSM)
+    buttonsToAddEntities(viewSM, entities, layout)
 
     const viewSettings = new ViewSettings(changes)
     new ViewOne(entities, screenMain, menu, changes, simOptions, electionOptions, viewSM, viewSettings)

@@ -1,14 +1,12 @@
 import Candidate from './Candidate.js'
 import CandidateCommander from './CandidateCommander.js'
 import { standardizeColor } from '../utilities/jsHelpers.js'
-import CandidateAddMakeButton from '../sim/CandidateAddMakeButton.js'
 import Registrar from '../sim/Registrar.js'
 import getGeoms from '../entities.js/getGeoms.js'
 
 /** A component of sim.js that deals with adding candidates. */
-export default function CandidateList(layout, changes, commander) {
+export default function CandidateList(changes, commander) {
     const self = this
-    self.canButton = new CandidateAddMakeButton(layout, self)
     const candidateRegistrar = new Registrar()
     const candidateCommander = new CandidateCommander(candidateRegistrar, commander, self)
 

@@ -28,14 +28,12 @@ export default function sandbox(config, comMessenger, sandboxURL) {
     // manage dependent calculations because we only want to do calculations if we need to
     const changes = new Changes()
 
-    const layout = new Layout(layoutOrder)
-
     const commander = new Commander(comMessenger)
 
     const simOptions = new SimOptions(changes)
     const electionOptions = new ElectionOptions(changes, simOptions)
 
-    const entities = new Entities(changes, commander, layout)
+    const entities = new Entities(changes, commander)
     const { voterShapeList } = entities
     const voterDistricts = new VoterDistricts(voterShapeList, changes)
     const simMachine = new SimStateMachine(entities, voterDistricts, changes, simOptions, electionOptions)
@@ -47,6 +45,7 @@ export default function sandbox(config, comMessenger, sandboxURL) {
 
     // View //
 
+    const layout = new Layout(layoutOrder)
     const menu = new Menu(changes, layout, commander)
 
     menuSimOptions(simOptions, menu)

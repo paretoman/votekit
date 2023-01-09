@@ -9,11 +9,11 @@ import CandidateDnList from '../candidateDns/CandidateDnList.js'
  * @param {Commander} commander
  * @param {Layout} layout
  */
-export default function Entities(changes, commander, layout) {
+export default function Entities(changes, commander) {
     const self = this
 
     // Entities //
-    self.candidateList = new CandidateList(layout, changes, commander, self)
-    self.voterShapeList = new VoterShapeList(layout, changes, commander, self)
-    self.candidateDnList = new CandidateDnList(layout, changes, commander, self)
+    self.candidateList = new CandidateList(changes, commander, self)
+    self.voterShapeList = new VoterShapeList(changes, commander, self)
+    self.candidateDnList = new CandidateDnList(changes, commander, self)
 }

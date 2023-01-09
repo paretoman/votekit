@@ -36,14 +36,11 @@ export default function ViewSample(entities, screen, menu, changes, simOptions, 
     const superEnter = self.enter
     self.enter = () => {
         superEnter()
-        candidateDnList.canDnButton.show()
         voterViewList.updateViewXY()
         candidateDnViewList.updateViewXY()
     }
 
-    self.exit = () => {
-        candidateDnList.canDnButton.hide()
-    }
+    self.exit = () => { }
 
     self.update = (simData) => {
         const { samplingResult } = simData
