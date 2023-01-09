@@ -2,19 +2,19 @@
 
 import Screen from '../screen/Screen.js'
 import addDarkModeSwitch from './addDarkModeSwitch.js'
-import ViewSettings from '../view/ViewSettings.js'
+import ViewSettings from './ViewSettings.js'
 import ViewJupyter from '../environments/ViewJupyter.js'
-import ViewVizBudget from '../view/ViewVizBudget.js'
-import ViewVizOne from '../view/ViewVizOne.js'
-import ViewVizSample from '../view/ViewVizSample.js'
-import ViewDistrictMaps from '../view/ViewDistrictMaps.js'
-import ViewOne from '../view/ViewOne.js'
-import ViewSample from '../view/ViewSample.js'
+import ViewVizBudget from './ViewVizBudget.js'
+import ViewVizOne from './ViewVizOne.js'
+import ViewVizSample from './ViewVizSample.js'
+import ViewDistrictMaps from './ViewDistrictMaps.js'
+import ViewOne from './ViewOne.js'
+import ViewSample from './ViewSample.js'
 import ScreenCommon from '../screen/ScreenCommon.js'
 import addSvgSwitch from './addSvgSwitch.js'
 import addDownloadScreen from './addDownloadScreen.js'
-import ViewStateMachine from '../view/ViewStateMachine.js'
-import buttonsToAddEntities from '../view/buttonsToAddEntities.js'
+import ViewStateMachine from './ViewStateMachine.js'
+import buttonsToAddEntities from './buttonsToAddEntities.js'
 
 /**
  * Make all the screens and views with screens.

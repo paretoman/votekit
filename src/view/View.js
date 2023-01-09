@@ -3,7 +3,7 @@ import Layout from '../ui/Layout.js'
 import Menu from '../menu/Menu.js'
 import menuSimOptions from './MenuSimOptions.js'
 import menuElectionOptions from './menuElectionOptions.js'
-import viewScreens from '../ui/viewScreens.js'
+import viewScreens from './viewScreens.js'
 
 import addUndo from '../command/addUndo.js'
 import addSaveConfigToText from '../command/addSaveConfigToText.js'
