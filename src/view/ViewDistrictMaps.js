@@ -1,6 +1,6 @@
 /** @module */
 
-import Screen from '../ui/Screen.js'
+import Screen from '../screen/Screen.js'
 import DistrictMaps from '../viz/DistrictMaps.js'
 
 /**

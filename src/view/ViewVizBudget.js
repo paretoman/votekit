@@ -1,4 +1,4 @@
-import Screen from '../ui/Screen.js'
+import Screen from '../screen/Screen.js'
 import BaseExplanation from '../viz/BaseExplanation.js'
 import VizExplanationBudgetMES from '../viz/VizExplanationBudgetMES.js'
 

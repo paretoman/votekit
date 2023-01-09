@@ -1,6 +1,6 @@
 /* eslint-disable no-new */
 
-import Screen from './Screen.js'
+import Screen from '../screen/Screen.js'
 import addDarkModeSwitch from './addDarkModeSwitch.js'
 import ViewSettings from '../view/ViewSettings.js'
 import ViewJupyter from '../environments/ViewJupyter.js'
@@ -10,7 +10,7 @@ import ViewVizSample from '../view/ViewVizSample.js'
 import ViewDistrictMaps from '../view/ViewDistrictMaps.js'
 import ViewOne from '../view/ViewOne.js'
 import ViewSample from '../view/ViewSample.js'
-import ScreenCommon from './ScreenCommon.js'
+import ScreenCommon from '../screen/ScreenCommon.js'
 import addSvgSwitch from './addSvgSwitch.js'
 import addDownloadScreen from './addDownloadScreen.js'
 import ViewStateMachine from '../view/ViewStateMachine.js'
