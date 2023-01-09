@@ -1,6 +1,6 @@
-import CandidateAddMakeButton from '../sim/CandidateAddMakeButton.js'
-import CandidateDnAddMakeButton from '../sim/CandidateDnAddMakeButton.js'
-import VoterShapeAddMakeButton from '../sim/VoterShapeAddMakeButton.js'
+import CandidateAddMakeButton from './CandidateAddMakeButton.js'
+import CandidateDnAddMakeButton from './CandidateDnAddMakeButton.js'
+import VoterShapeAddMakeButton from './VoterShapeAddMakeButton.js'
 
 export default function buttonsToAddEntities(viewSM, entities, layout) {
     CandidateAddMakeButton(viewSM, layout, entities.candidateList)

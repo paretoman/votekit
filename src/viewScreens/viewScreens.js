@@ -13,8 +13,6 @@ import ViewSample from './ViewSample.js'
 import ScreenCommon from '../screen/ScreenCommon.js'
 import addSvgSwitch from './addSvgSwitch.js'
 import addDownloadScreen from './addDownloadScreen.js'
-import ViewStateMachine from './ViewStateMachine.js'
-import buttonsToAddEntities from './buttonsToAddEntities.js'
 
 /**
  * Make all the screens and views with screens.
@@ -23,9 +21,7 @@ import buttonsToAddEntities from './buttonsToAddEntities.js'
  * @param {*} menu
  * @param {*} layout
  */
-export default function viewScreens(simMachine, entities, simOptions, electionOptions, changes, menu, layout) {
-    const viewSM = new ViewStateMachine(simMachine)
-
+export default function viewScreens(viewSM, entities, simOptions, electionOptions, changes, menu, layout) {
     const screenCommon = new ScreenCommon(300, 300)
     const screenMain = new Screen(screenCommon, viewSM, layout, 'viz')
     const screenMini = new Screen(screenCommon, viewSM, layout, 'vizMini')
@@ -35,7 +31,6 @@ export default function viewScreens(simMachine, entities, simOptions, electionOp
     addSvgSwitch(screenCommon, layout, viewSM)
     addDownloadScreen(screenCommon, layout)
     addDarkModeSwitch(screenCommon, layout, viewSM)
-    buttonsToAddEntities(viewSM, entities, layout)
 
     const viewSettings = new ViewSettings(changes)
     new ViewOne(entities, screenMain, menu, changes, simOptions, electionOptions, viewSM, viewSettings)
