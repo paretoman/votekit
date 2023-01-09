@@ -24,9 +24,10 @@ export default function View(sim, sandboxURL) {
     menuElectionOptions(electionOptions, menu)
 
     const viewSM = new ViewStateMachine(simMachine)
+
     buttonsToAddEntities(viewSM, entities, layout)
 
-    viewScreens(viewSM, entities, simOptions, electionOptions, changes, menu, layout)
+    viewScreens(simMachine, viewSM, entities, simOptions, electionOptions, changes, menu, layout)
 
     addUndo(layout, commander)
     addSaveConfigToLink(layout, commander, sandboxURL)

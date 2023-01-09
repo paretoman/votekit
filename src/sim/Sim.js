@@ -5,6 +5,7 @@ import ElectionOptions from '../election/ElectionOptions.js'
 import Entities from './Entities.js'
 import VoterDistricts from '../voters/VoterDistricts.js'
 import SimStateMachine from './SimStateMachine.js'
+import addDefaultEntities from '../ui/addDefaultEntities.js'
 
 export default function Sim(comMessenger) {
     const changes = new Changes()
@@ -17,13 +18,15 @@ export default function Sim(comMessenger) {
     const entities = new Entities(changes, commander)
     const voterDistricts = new VoterDistricts(entities.voterShapeList, changes)
     const simMachine = new SimStateMachine(entities, voterDistricts, changes, simOptions, electionOptions)
-    window.requestAnimationFrame(simLoop)
-    function simLoop() {
-        simMachine.update()
-        window.requestAnimationFrame(simLoop)
+
+    function init(config) {
+        addDefaultEntities(entities)
+
+        commander.loadConfig(config)
+        commander.clearHistory()
     }
 
     return {
-        changes, commander, simOptions, electionOptions, entities, voterDistricts, simMachine,
+        changes, commander, simOptions, electionOptions, entities, voterDistricts, simMachine, init,
     }
 }

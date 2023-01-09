@@ -21,7 +21,7 @@ import addDownloadScreen from './addDownloadScreen.js'
  * @param {*} menu
  * @param {*} layout
  */
-export default function viewScreens(viewSM, entities, simOptions, electionOptions, changes, menu, layout) {
+export default function viewScreens(simMachine, viewSM, entities, simOptions, electionOptions, changes, menu, layout) {
     const screenCommon = new ScreenCommon(300, 300)
     const screenMain = new Screen(screenCommon, viewSM, layout, 'viz')
     const screenMini = new Screen(screenCommon, viewSM, layout, 'vizMini')
@@ -44,6 +44,7 @@ export default function viewScreens(viewSM, entities, simOptions, electionOption
     window.requestAnimationFrame(viewLoop)
 
     function viewLoop() {
+        simMachine.update()
         drawForeground()
         window.requestAnimationFrame(viewLoop)
     }

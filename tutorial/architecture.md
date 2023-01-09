@@ -24,7 +24,7 @@ Todo: update this architecture page with a more accurate description.
 * test.html
     * Integration tests
 
-## User Input
+## User Input <todo: update>
 
 Control a 2D spatial model.
 
