@@ -1,8 +1,8 @@
 /** @module */
 
 import { drawStrokedColor } from '../utilities/graphicsUtilities.js'
-import DraggableManager from '../ui/DraggableManager.js'
-import ClickDrag from '../ui/ClickDrag.js'
+import DraggableManager from './DraggableManager.js'
+import ClickDrag from './ClickDrag.js'
 
 /**
  * The super class for each view state. Provides some basic required functionality.

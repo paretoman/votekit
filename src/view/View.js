@@ -1,5 +1,5 @@
-import layoutOrder from '../ui/layoutOrder.js'
-import Layout from '../ui/Layout.js'
+import layoutOrder from './layoutOrder.js'
+import Layout from './Layout.js'
 import Menu from '../menu/Menu.js'
 import menuSimOptions from './MenuSimOptions.js'
 import menuElectionOptions from './menuElectionOptions.js'
@@ -9,7 +9,7 @@ import addUndo from '../command/addUndo.js'
 import addSaveConfigToText from '../command/addSaveConfigToText.js'
 import addLoadConfigText from '../command/loadConfigText.js'
 import addSaveConfigToLink from '../command/addSaveConfigToLink.js'
-import addSimControlsLabel from '../sim/addSimControlsLabel.js'
+import addSimControlsLabel from './addSimControlsLabel.js'
 
 export default function View(sim, sandboxURL) {
     const {
