@@ -29,7 +29,7 @@ export default function SimStateMachine(entities, voterDistricts, changes, simOp
     // State Machine //
     self.update = () => {
         // state: check for change, exit, set, enter, update.
-        if (changes.check(['design', 'dimensions', 'mode', 'electionMethod'])) {
+        if (changes.check(['useDistricts', 'dimensions', 'mode', 'electionMethod'])) {
             Object.keys(sims).forEach((k) => sims[k].exit())
             self.state = simOptions.mode
             sims[self.state].enter()

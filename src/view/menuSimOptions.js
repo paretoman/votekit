@@ -30,7 +30,7 @@ export default function menuSimOptions(simOptions, menu) {
             prop: 'useDistricts',
             setProp: (p) => { simOptions.setUseDistricts(p) },
             options: useDistrictsList,
-            change: ['design'],
+            change: ['useDistricts'],
         },
     )
 

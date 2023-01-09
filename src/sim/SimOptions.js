@@ -13,5 +13,5 @@ export default function SimOptions(changes) {
     self.setMode('one')
     self.setUseDistricts(false)
     self.setDimensions(2)
-    changes.add(['design', 'dimensions', 'mode'])
+    changes.add(['useDistricts', 'dimensions', 'mode'])
 }
