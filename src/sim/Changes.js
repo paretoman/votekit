@@ -3,7 +3,8 @@
 import { jcopy } from '../utilities/jsHelpers.js'
 
 /**
- * keep track of changes that occur to a simulation's configuration.
+ * Keep track of changes that occur to a simulation's configuration.
+ * Manage dependent calculations because we only want to do calculations if we need to.
  * @constructor
  */
 export default function Changes() {

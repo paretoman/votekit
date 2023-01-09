@@ -25,7 +25,8 @@ import menuElectionOptions from '../view/menuElectionOptions.js'
  * @param {Object} config - An object containing commands. A command is a {name,value} pair.
  */
 export default function sandbox(config, comMessenger, sandboxURL) {
-    // manage dependent calculations because we only want to do calculations if we need to
+    // Sim //
+
     const changes = new Changes()
 
     const commander = new Commander(comMessenger)
@@ -34,8 +35,7 @@ export default function sandbox(config, comMessenger, sandboxURL) {
     const electionOptions = new ElectionOptions(changes, simOptions)
 
     const entities = new Entities(changes, commander)
-    const { voterShapeList } = entities
-    const voterDistricts = new VoterDistricts(voterShapeList, changes)
+    const voterDistricts = new VoterDistricts(entities.voterShapeList, changes)
     const simMachine = new SimStateMachine(entities, voterDistricts, changes, simOptions, electionOptions)
     window.requestAnimationFrame(simLoop)
     function simLoop() {
