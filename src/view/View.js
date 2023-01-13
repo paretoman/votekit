@@ -5,6 +5,14 @@ import ViewMode from './ViewMode.js'
 import viewScreens from '../viewScreens/viewScreens.js'
 import viewButtons from '../viewButtons/viewButtons.js'
 
+/**
+ * View observes the sim and adds a user interface.
+ * The foreground draws animations.
+ * The view loops as fast as the browser can refresh.
+ * @param {*} sim
+ * @param {String} sandboxURL
+ * @returns
+ */
 export default function View(sim, sandboxURL) {
     const {
         changes, commander, simOptions, simMode, pub, update,
@@ -15,7 +23,6 @@ export default function View(sim, sandboxURL) {
     const viewMode = new ViewMode(pub, simMode, simOptions, changes)
 
     viewButtons(sim, sandboxURL, layout, menu, viewMode)
-
     const { screenMain } = viewScreens(sim, viewMode, menu, layout)
 
     window.requestAnimationFrame(viewLoop)
