@@ -1,6 +1,7 @@
 /** @module */
 
 import CommandStore from './CommandStore.js'
+import ComMessenger from './ComMessenger.js'
 import ConfigKeeper from './ConfigKeeper.js'
 import History from './History.js'
 
@@ -40,12 +41,13 @@ import History from './History.js'
  * * [Mediator Pattern on refactoring.guru](https://refactoring.guru/design-patterns/mediator)
  * @constructor
  */
-export default function Commander(comMessenger) {
+export default function Commander(optComMessenger) {
     const self = this
 
     const commandStore = new CommandStore(self)
     const configKeeper = new ConfigKeeper(self)
     const history = new History(self)
+    const comMessenger = optComMessenger || new ComMessenger()
     comMessenger.addCommander(self)
 
     /**
