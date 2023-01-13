@@ -26,7 +26,11 @@ export default function Sim(comMessenger) {
         commander.clearHistory()
     }
 
+    function update() {
+        simMachine.update()
+    }
+
     return {
-        changes, commander, simOptions, electionOptions, entities, voterDistricts, simMachine, init,
+        changes, commander, simOptions, electionOptions, entities, voterDistricts, simMachine, init, update,
     }
 }

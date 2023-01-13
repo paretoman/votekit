@@ -27,7 +27,7 @@ export default function View(sim, sandboxURL) {
 
     buttonsToAddEntities(viewSM, entities, layout)
 
-    viewScreens(simMachine, viewSM, entities, simOptions, electionOptions, changes, menu, layout)
+    viewScreens(sim, viewSM, menu, layout)
 
     addUndo(layout, commander)
     addSaveConfigToLink(layout, commander, sandboxURL)
