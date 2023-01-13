@@ -10,7 +10,7 @@ import DistrictMaps from '../viz/DistrictMaps.js'
 export default function ViewDistrictMaps(entities, screenCommon, layout, changes, simOptions, electionOptions, viewSM) {
     const self = this
 
-    viewSM.views.one.pub.attach(self)
+    viewSM.views.one.attach(self)
 
     const screen = new Screen(screenCommon, viewSM, layout, 'maps')
     const { height } = screenCommon

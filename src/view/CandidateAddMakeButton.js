@@ -17,7 +17,7 @@ export default function CandidateAddMakeButton(viewSM, layout, canList) {
 
     layout.newElement('addCandidate', addCandidateButton)
 
-    viewSM.views.one.pub.attach({
+    viewSM.views.one.attach({
         enter: show,
         exit: hide,
         update: () => {},

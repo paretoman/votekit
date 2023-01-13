@@ -17,7 +17,7 @@ export default function CandidateDnAddMakeButton(viewSM, layout, canDnList) {
 
     layout.newElement('addCandidateDistribution', addCandidateDistributionButton)
 
-    viewSM.views.sample.pub.attach({
+    viewSM.views.sample.attach({
         enter: show,
         exit: hide,
         update: () => {},

@@ -19,7 +19,7 @@ import voteCasters from '../castVotes/voteCasters.js'
 export default function ViewOne(entities, screen, menu, changes, simOptions, electionOptions, viewSM, viewSettings) {
     const self = this
 
-    viewSM.views.one.pub.attach(self)
+    viewSM.views.one.attach(self)
 
     ViewBase.call(self, screen, changes, viewSettings)
 

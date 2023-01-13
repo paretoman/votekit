@@ -17,7 +17,7 @@ import ViewBase from './ViewBase.js'
 export default function ViewSample(entities, screen, menu, changes, simOptions, electionOptions, viewSM, viewSettings) {
     const self = this
 
-    viewSM.views.sample.pub.attach(self)
+    viewSM.views.sample.attach(self)
 
     ViewBase.call(self, screen, changes, viewSettings)
 

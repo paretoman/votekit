@@ -1,6 +1,6 @@
 /** @module */
 
-import ViewState from './ViewState.js'
+import ViewStatePublisher from './ViewStatePublisher.js'
 
 /**
  * Need to pass along the pub-sub pattern through view to specific views.
@@ -13,25 +13,25 @@ export default function ViewStateMachine(pub, simMode, simOptions, changes) {
     pub.attach(self)
 
     self.views = {
-        one: new ViewState(),
-        sample: new ViewState(),
+        one: new ViewStatePublisher(),
+        sample: new ViewStatePublisher(),
     }
-    self.state = 'one'
+    let viewState = self.views[simOptions.mode]
 
     self.update = (simData) => {
         // state: check for change, exit, set, enter, update.
         if (changes.check(['useDistricts', 'dimensions', 'mode', 'electionMethod'])) {
-            Object.keys(self.views).forEach((k) => self.views[k].exit())
-            self.state = simOptions.mode
-            self.views[self.state].enter()
+            viewState.exit()
+            viewState = self.views[simOptions.mode]
+            viewState.enter()
         }
-        self.views[self.state].update(simData)
+        viewState.update(simData)
     }
 
-    self.render = () => { self.views[self.state].render() }
-    self.renderForeground = () => { self.views[self.state].renderForeground() }
-    self.clear = () => { self.views[self.state].clear() }
-    self.clearForeground = () => { self.views[self.state].clearForeground() }
+    self.render = () => { viewState.render() }
+    self.renderForeground = () => { viewState.renderForeground() }
+    self.clear = () => { viewState.clear() }
+    self.clearForeground = () => { viewState.clearForeground() }
 
     self.rerender = () => {
         self.clear()

@@ -5,7 +5,7 @@ import VizExplanationBudgetMES from '../viz/VizExplanationBudgetMES.js'
 export default function ViewVizBudget(screenCommon, layout, menu, changes, simOptions, electionOptions, viewSM) {
     const self = this
 
-    viewSM.views.one.pub.attach(self)
+    viewSM.views.one.attach(self)
 
     const screen = new Screen(screenCommon, viewSM, layout, 'budget')
     const { height } = screenCommon
