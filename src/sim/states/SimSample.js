@@ -15,14 +15,7 @@ import getGeometry from '../getGeometry.js'
  * @param {VoterDistricts} voterDistricts
  * @constructor
  */
-export default function SimSample(
-    pub,
-    entities,
-    changes,
-    voterDistricts,
-    simOptions,
-    electionOptions,
-) {
+export default function SimSample(pub, entities, changes, voterDistricts, simOptions, electionOptions) {
     const self = this
 
     const { candidateDnList, voterShapeList } = entities

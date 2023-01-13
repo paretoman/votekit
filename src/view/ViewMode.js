@@ -5,7 +5,6 @@ import ViewStatePublisher from './ViewStatePublisher.js'
 /**
  * Need to pass along the pub-sub pattern through view to specific views.
  * The views attach to these view states.
- * @param {Sim} simMode
  */
 export default function ViewMode(pub, simMode, simOptions, changes) {
     const self = this
