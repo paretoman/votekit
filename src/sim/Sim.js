@@ -4,7 +4,7 @@ import SimOptions from './SimOptions.js'
 import ElectionOptions from '../election/ElectionOptions.js'
 import Entities from './Entities.js'
 import VoterDistricts from '../voters/VoterDistricts.js'
-import SimStateMachine from './SimStateMachine.js'
+import SimMode from './SimMode.js'
 import addDefaultEntities from '../ui/addDefaultEntities.js'
 import Publisher from './states/Publisher.js'
 
@@ -19,7 +19,7 @@ export default function Sim(comMessenger) {
     const entities = new Entities(changes, commander)
     const voterDistricts = new VoterDistricts(entities.voterShapeList, changes)
     const pub = new Publisher()
-    const simMode = new SimStateMachine(pub, entities, voterDistricts, changes, simOptions, electionOptions)
+    const simMode = new SimMode(pub, entities, voterDistricts, changes, simOptions, electionOptions)
 
     function init(config) {
         addDefaultEntities(entities)
