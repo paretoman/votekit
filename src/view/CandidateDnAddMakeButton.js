@@ -5,7 +5,7 @@
  * @param {Layout} layout
  * @param {Commander} commander
  */
-export default function CandidateDnAddMakeButton(viewSM, layout, canDnList) {
+export default function CandidateDnAddMakeButton(viewMode, layout, canDnList) {
     const addCandidateDistributionButton = document.createElement('button')
 
     addCandidateDistributionButton.className = 'button2'
@@ -17,7 +17,7 @@ export default function CandidateDnAddMakeButton(viewSM, layout, canDnList) {
 
     layout.newElement('addCandidateDistribution', addCandidateDistributionButton)
 
-    viewSM.views.sample.attach({
+    viewMode.views.sample.attach({
         enter: show,
         exit: hide,
         update: () => {},

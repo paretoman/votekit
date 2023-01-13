@@ -1,7 +1,7 @@
 import ButtonGroup from '../menu/ButtonGroup.js'
 import { buttonWidth } from '../menu/MenuItem.js'
 
-export default function addSvgSwitch(screenCommon, layout, viewSM) {
+export default function addSvgSwitch(screenCommon, layout, viewMode) {
     const choose = new ButtonGroup({
         label: 'Drawing Mode:',
         width: buttonWidth(3),
@@ -11,7 +11,7 @@ export default function addSvgSwitch(screenCommon, layout, viewSM) {
         ],
         onChoose: (data) => {
             screenCommon.setSvgMode(data.value)
-            viewSM.rerender()
+            viewMode.rerender()
         },
     })
     choose.highlight('value', screenCommon.svgMode)

@@ -17,10 +17,10 @@ import CandidateDnRendererList from '../candidateDns/CandidateDnRendererList.js'
  * @param {ViewSettings} viewSettings
  * @constructor
  */
-export default function ViewVizSample(entities, screen, menu, changes, simOptions, viewSM, viewSettings) {
+export default function ViewVizSample(entities, screen, menu, changes, simOptions, viewMode, viewSettings) {
     const self = this
 
-    viewSM.views.sample.attach(self)
+    viewMode.views.sample.attach(self)
 
     ViewBase.call(self, screen, changes, viewSettings)
 

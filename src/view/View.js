@@ -3,7 +3,7 @@ import Layout from './Layout.js'
 import Menu from '../menu/Menu.js'
 import menuSimOptions from './MenuSimOptions.js'
 import menuElectionOptions from './menuElectionOptions.js'
-import ViewStateMachine from './ViewStateMachine.js'
+import ViewMode from './ViewMode.js'
 import buttonsToAddEntities from './buttonsToAddEntities.js'
 import viewScreens from '../viewScreens/viewScreens.js'
 import addUndo from '../command/addUndo.js'
@@ -23,11 +23,11 @@ export default function View(sim, sandboxURL) {
     menuSimOptions(simOptions, menu)
     menuElectionOptions(electionOptions, menu)
 
-    const viewSM = new ViewStateMachine(pub, simMode, simOptions, changes)
+    const viewMode = new ViewMode(pub, simMode, simOptions, changes)
 
-    buttonsToAddEntities(viewSM, entities, layout)
+    buttonsToAddEntities(viewMode, entities, layout)
 
-    viewScreens(sim, viewSM, menu, layout)
+    viewScreens(sim, viewMode, menu, layout)
 
     addUndo(layout, commander)
     addSaveConfigToLink(layout, commander, sandboxURL)

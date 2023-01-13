@@ -7,7 +7,7 @@ import ViewStatePublisher from './ViewStatePublisher.js'
  * The views attach to these view states.
  * @param {Sim} simMode
  */
-export default function ViewStateMachine(pub, simMode, simOptions, changes) {
+export default function ViewMode(pub, simMode, simOptions, changes) {
     const self = this
 
     pub.attach(self)

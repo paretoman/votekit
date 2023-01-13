@@ -16,34 +16,34 @@ import addDownloadScreen from './addDownloadScreen.js'
 
 /**
  * Make all the screens and views with screens.
- * @param {*} viewSM
+ * @param {*} viewMode
  * @param {*} changes
  * @param {*} menu
  * @param {*} layout
  */
-export default function viewScreens(sim, viewSM, menu, layout) {
+export default function viewScreens(sim, viewMode, menu, layout) {
     const {
         entities, simOptions, electionOptions, changes, update,
     } = sim
 
     const screenCommon = new ScreenCommon(300, 300)
-    const screenMain = new Screen(screenCommon, viewSM, layout, 'viz')
-    const screenMini = new Screen(screenCommon, viewSM, layout, 'vizMini')
+    const screenMain = new Screen(screenCommon, viewMode, layout, 'viz')
+    const screenMini = new Screen(screenCommon, viewMode, layout, 'vizMini')
     screenMini.setHeight(screenCommon.height / 3)
     screenMini.hide()
 
-    addSvgSwitch(screenCommon, layout, viewSM)
+    addSvgSwitch(screenCommon, layout, viewMode)
     addDownloadScreen(screenCommon, layout)
-    addDarkModeSwitch(screenCommon, layout, viewSM)
+    addDarkModeSwitch(screenCommon, layout, viewMode)
 
     const viewSettings = new ViewSettings(changes)
-    new ViewOne(entities, screenMain, menu, changes, simOptions, electionOptions, viewSM, viewSettings)
-    new ViewSample(entities, screenMain, menu, changes, simOptions, electionOptions, viewSM, viewSettings)
-    new ViewJupyter(viewSM, changes)
-    new ViewVizOne(entities, screenMain, screenMini, menu, changes, simOptions, electionOptions, viewSM, viewSettings)
-    new ViewVizSample(entities, screenMain, menu, changes, simOptions, viewSM, viewSettings)
-    new ViewVizBudget(screenCommon, layout, menu, changes, simOptions, electionOptions, viewSM)
-    new ViewDistrictMaps(entities, screenCommon, layout, changes, simOptions, electionOptions, viewSM)
+    new ViewOne(entities, screenMain, menu, changes, simOptions, electionOptions, viewMode, viewSettings)
+    new ViewSample(entities, screenMain, menu, changes, simOptions, electionOptions, viewMode, viewSettings)
+    new ViewJupyter(viewMode, changes)
+    new ViewVizOne(entities, screenMain, screenMini, menu, changes, simOptions, electionOptions, viewMode, viewSettings)
+    new ViewVizSample(entities, screenMain, menu, changes, simOptions, viewMode, viewSettings)
+    new ViewVizBudget(screenCommon, layout, menu, changes, simOptions, electionOptions, viewMode)
+    new ViewDistrictMaps(entities, screenCommon, layout, changes, simOptions, electionOptions, viewMode)
 
     window.requestAnimationFrame(viewLoop)
 
@@ -56,7 +56,7 @@ export default function viewScreens(sim, viewSM, menu, layout) {
     function drawForeground() {
         if (screenMain.tweenGroup.getAll().length === 0) return
         screenMain.tweenGroup.update()
-        viewSM.clearForeground()
-        viewSM.renderForeground()
+        viewMode.clearForeground()
+        viewMode.renderForeground()
     }
 }

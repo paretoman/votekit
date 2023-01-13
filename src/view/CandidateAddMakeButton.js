@@ -5,7 +5,7 @@
  * @param {Layout} layout
  * @param {Sim} canList
  */
-export default function CandidateAddMakeButton(viewSM, layout, canList) {
+export default function CandidateAddMakeButton(viewMode, layout, canList) {
     const addCandidateButton = document.createElement('button')
 
     addCandidateButton.className = 'button2'
@@ -17,7 +17,7 @@ export default function CandidateAddMakeButton(viewSM, layout, canList) {
 
     layout.newElement('addCandidate', addCandidateButton)
 
-    viewSM.views.one.attach({
+    viewMode.views.one.attach({
         enter: show,
         exit: hide,
         update: () => {},

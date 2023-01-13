@@ -1,10 +1,10 @@
 import jupyterUpdate, { jupyterClear } from './jupyter.js'
 
-export default function ViewJupyter(viewSM, changes) {
+export default function ViewJupyter(viewMode, changes) {
     const self = this
 
-    viewSM.views.one.attach(self)
-    viewSM.views.sample.attach(self)
+    viewMode.views.one.attach(self)
+    viewMode.views.sample.attach(self)
 
     self.enter = () => {}
     self.exit = () => {}
