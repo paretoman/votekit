@@ -23,17 +23,17 @@ export default function View(sim, sandboxURL) {
     menuSimOptions(simOptions, menu)
     menuElectionOptions(electionOptions, menu)
 
-    const viewMode = new ViewMode(pub, simMode, simOptions, changes)
-
-    buttonsToAddEntities(viewMode, entities, layout)
-
-    viewScreens(sim, viewMode, menu, layout)
-
     addUndo(layout, commander)
     addSaveConfigToLink(layout, commander, sandboxURL)
     addSaveConfigToText(layout, commander)
     addLoadConfigText(layout, commander)
     addSimControlsLabel(layout)
+
+    const viewMode = new ViewMode(simMode, simOptions, changes)
+
+    buttonsToAddEntities(viewMode, entities, layout)
+
+    viewScreens(sim, viewMode, menu, layout)
 
     const div = layout.makeComponent()
 
