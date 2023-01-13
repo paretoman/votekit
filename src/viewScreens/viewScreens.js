@@ -23,7 +23,7 @@ import addDownloadScreen from './addDownloadScreen.js'
  */
 export default function viewScreens(sim, viewMode, menu, layout) {
     const {
-        entities, simOptions, electionOptions, changes, update,
+        entities, simOptions, electionOptions, changes,
     } = sim
 
     const screenCommon = new ScreenCommon(300, 300)
@@ -45,18 +45,5 @@ export default function viewScreens(sim, viewMode, menu, layout) {
     new ViewVizBudget(screenCommon, layout, menu, changes, simOptions, electionOptions, viewMode)
     new ViewDistrictMaps(entities, screenCommon, layout, changes, simOptions, electionOptions, viewMode)
 
-    window.requestAnimationFrame(viewLoop)
-
-    function viewLoop() {
-        update()
-        drawForeground()
-        window.requestAnimationFrame(viewLoop)
-    }
-
-    function drawForeground() {
-        if (screenMain.tweenGroup.getAll().length === 0) return
-        screenMain.tweenGroup.update()
-        viewMode.clearForeground()
-        viewMode.renderForeground()
-    }
+    return { screenMain }
 }

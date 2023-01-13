@@ -1,39 +1,37 @@
 import layoutOrder from './layoutOrder.js'
 import Layout from './Layout.js'
 import Menu from '../menu/Menu.js'
-import menuSimOptions from './MenuSimOptions.js'
-import menuElectionOptions from './menuElectionOptions.js'
 import ViewMode from './ViewMode.js'
-import buttonsToAddEntities from './buttonsToAddEntities.js'
 import viewScreens from '../viewScreens/viewScreens.js'
-import addUndo from '../command/addUndo.js'
-import addSaveConfigToText from '../command/addSaveConfigToText.js'
-import addLoadConfigText from '../command/loadConfigText.js'
-import addSaveConfigToLink from '../command/addSaveConfigToLink.js'
-import addSimControlsLabel from './addSimControlsLabel.js'
+import viewButtons from '../viewButtons/viewButtons.js'
 
 export default function View(sim, sandboxURL) {
     const {
-        changes, commander, simOptions, electionOptions, entities, simMode, pub,
+        changes, commander, simOptions, simMode, pub, update,
     } = sim
 
     const layout = new Layout(layoutOrder)
     const menu = new Menu(changes, layout, commander)
+    const viewMode = new ViewMode(pub, simMode, simOptions, changes)
 
-    menuSimOptions(simOptions, menu)
-    menuElectionOptions(electionOptions, menu)
+    viewButtons(sim, sandboxURL, layout, menu, viewMode)
 
-    addUndo(layout, commander)
-    addSaveConfigToLink(layout, commander, sandboxURL)
-    addSaveConfigToText(layout, commander)
-    addLoadConfigText(layout, commander)
-    addSimControlsLabel(layout)
+    const { screenMain } = viewScreens(sim, viewMode, menu, layout)
 
-    const viewMode = new ViewMode(simMode, simOptions, changes)
+    window.requestAnimationFrame(viewLoop)
 
-    buttonsToAddEntities(viewMode, entities, layout)
+    function viewLoop() {
+        update()
+        drawForeground()
+        window.requestAnimationFrame(viewLoop)
+    }
 
-    viewScreens(sim, viewMode, menu, layout)
+    function drawForeground() {
+        if (screenMain.tweenGroup.getAll().length === 0) return
+        screenMain.tweenGroup.update()
+        viewMode.clearForeground()
+        viewMode.renderForeground()
+    }
 
     const div = layout.makeComponent()
 
