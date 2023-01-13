@@ -1,5 +1,5 @@
 /**
- * Add menu items to switch between types of sims.
+ * Add menu items to switch between types of sim modes.
  * @param {Menu} menu
  */
 export default function SimOptions(changes) {

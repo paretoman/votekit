@@ -14,27 +14,19 @@ import SimOne from './states/SimOne.js'
  * @param {Changes} changes
  * @param {Commander} commander
  */
-export default function SimStateMachine(entities, voterDistricts, changes, simOptions, electionOptions) {
+export default function SimStateMachine(pub, entities, voterDistricts, changes, simOptions, electionOptions) {
     const self = this
 
     // States //
-    const sims = {
-        one: new SimOne(entities, changes, voterDistricts, simOptions, electionOptions),
-        sample: new SimSample(entities, changes, voterDistricts, simOptions, electionOptions),
+    const modes = {
+        one: new SimOne(pub, entities, changes, voterDistricts, simOptions, electionOptions),
+        sample: new SimSample(pub, entities, changes, voterDistricts, simOptions, electionOptions),
     }
-    self.sims = sims
-
-    self.state = simOptions.mode
+    self.modes = modes
 
     // State Machine //
     self.update = () => {
-        // state: check for change, exit, set, enter, update.
-        if (changes.check(['useDistricts', 'dimensions', 'mode', 'electionMethod'])) {
-            Object.keys(sims).forEach((k) => sims[k].exit())
-            self.state = simOptions.mode
-            sims[self.state].enter()
-        }
-        sims[self.state].update()
+        modes[simOptions.mode].update()
 
         changes.clear()
     }

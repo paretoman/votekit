@@ -4,7 +4,6 @@ import CandidateDistributionSampler from '../../electionSample/CandidateDistribu
 import ElectionSample from '../../electionSample/ElectionSample.js'
 import ElectionSampleDistricts from '../../electionSample/ElectionSampleDistricts.js'
 import getGeometry from '../getGeometry.js'
-import StatePublisher from './StatePublisher.js'
 
 /**
  * Simulate many sample elections with
@@ -18,6 +17,7 @@ import StatePublisher from './StatePublisher.js'
  * @constructor
  */
 export default function SimSample(
+    pub,
     entities,
     changes,
     voterDistricts,
@@ -26,23 +26,12 @@ export default function SimSample(
 ) {
     const self = this
 
-    self.pub = new StatePublisher()
-
     const { candidateDnList, voterShapeList } = entities
     const canDnSampler = new CandidateDistributionSampler(candidateDnList, changes, simOptions)
-
-    // Strategies //
-    let electionStrategy
 
     const electionSample = new ElectionSample()
     const electionSampleDistricts = new ElectionSampleDistricts()
 
-    // Main State Machine Functions //
-    self.enter = () => {
-        electionStrategy = (simOptions.useDistricts) ? electionSampleDistricts : electionSample
-        self.pub.enter()
-    }
-    self.exit = () => { self.pub.exit() }
     self.update = () => {
         // Update players. Run an election. Get result.
         // The election handles any changes.
@@ -55,8 +44,10 @@ export default function SimSample(
 
         const geometry = getGeometry(voterShapeList, candidateDnList, simOptions, voterDistricts)
 
+        const electionStrategy = (simOptions.useDistricts) ? electionSampleDistricts : electionSample
         const samplingResult = electionStrategy.update(geometry, canDnSampler.sampler, changes, electionOptions)
         const simData = { samplingResult }
-        self.pub.update(simData)
+        pub.update(simData)
+        changes.clear()
     }
 }

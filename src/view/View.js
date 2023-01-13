@@ -14,7 +14,7 @@ import addSimControlsLabel from './addSimControlsLabel.js'
 
 export default function View(sim, sandboxURL) {
     const {
-        changes, commander, simOptions, electionOptions, entities, simMachine,
+        changes, commander, simOptions, electionOptions, entities, simMode, pub,
     } = sim
 
     const layout = new Layout(layoutOrder)
@@ -23,7 +23,7 @@ export default function View(sim, sandboxURL) {
     menuSimOptions(simOptions, menu)
     menuElectionOptions(electionOptions, menu)
 
-    const viewSM = new ViewStateMachine(simMachine)
+    const viewSM = new ViewStateMachine(pub, simMode, simOptions, changes)
 
     buttonsToAddEntities(viewSM, entities, layout)
 

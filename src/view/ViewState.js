@@ -5,10 +5,8 @@ import ViewStatePublisher from './ViewStatePublisher.js'
 /**
  *
  */
-export default function ViewState(simState) {
+export default function ViewState() {
     const self = this
-
-    simState.pub.attach(self)
 
     self.pub = new ViewStatePublisher()
 
