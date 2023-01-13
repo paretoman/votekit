@@ -6,7 +6,7 @@ import Entities from './Entities.js'
 import VoterDistricts from '../voters/VoterDistricts.js'
 import SimMode from './SimMode.js'
 import addDefaultEntities from '../ui/addDefaultEntities.js'
-import Publisher from './states/Publisher.js'
+import Publisher from './Publisher.js'
 
 export default function Sim(comMessenger) {
     const changes = new Changes()

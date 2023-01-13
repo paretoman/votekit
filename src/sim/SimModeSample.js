@@ -1,8 +1,8 @@
 /** @module */
 
-import CandidateDistributionSampler from '../../electionSample/CandidateDistributionSampler.js'
-import ElectionSampleDistricts from '../../electionSample/ElectionSampleDistricts.js'
-import getGeometry from '../getGeometry.js'
+import CandidateDistributionSampler from '../electionSample/CandidateDistributionSampler.js'
+import ElectionSampleDistricts from '../electionSample/ElectionSampleDistricts.js'
+import getGeometry from './getGeometry.js'
 
 /**
  * Simulate many sample elections with
@@ -15,7 +15,7 @@ import getGeometry from '../getGeometry.js'
  * @param {VoterDistricts} voterDistricts
  * @constructor
  */
-export default function SimSample(pub, entities, changes, voterDistricts, simOptions, electionOptions) {
+export default function SimModeSample(pub, entities, changes, voterDistricts, simOptions, electionOptions) {
     const self = this
 
     const { candidateDnList, voterShapeList } = entities

@@ -1,8 +1,8 @@
 /** @module */
 
-import electionDistrictsRun from '../../electionDistricts/electionDistrictsRun.js'
-import electionRun from '../../election/electionRun.js'
-import getGeometry from '../getGeometry.js'
+import electionDistrictsRun from '../electionDistricts/electionDistrictsRun.js'
+import electionRun from '../election/electionRun.js'
+import getGeometry from './getGeometry.js'
 
 /**
  * Simulate one election with
@@ -16,7 +16,7 @@ import getGeometry from '../getGeometry.js'
  * @constructor
  */
 // eslint-disable-next-line max-len
-export default function SimOne(pub, entities, changes, voterDistricts, simOptions, electionOptions) {
+export default function SimModeOne(pub, entities, changes, voterDistricts, simOptions, electionOptions) {
     const self = this
 
     const { voterShapeList, candidateList } = entities

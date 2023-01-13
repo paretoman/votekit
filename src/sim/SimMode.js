@@ -1,7 +1,7 @@
 /** @module */
 
-import SimSample from './states/SimSample.js'
-import SimOne from './states/SimOne.js'
+import SimModeSample from './SimModeSample.js'
+import SimModeOne from './SimModeOne.js'
 
 /**
  * Simulation is the main task we're trying to accomplish in this program.
@@ -16,8 +16,8 @@ export default function SimMode(pub, entities, voterDistricts, changes, simOptio
     const self = this
 
     self.modes = {
-        one: new SimOne(pub, entities, changes, voterDistricts, simOptions, electionOptions),
-        sample: new SimSample(pub, entities, changes, voterDistricts, simOptions, electionOptions),
+        one: new SimModeOne(pub, entities, changes, voterDistricts, simOptions, electionOptions),
+        sample: new SimModeSample(pub, entities, changes, voterDistricts, simOptions, electionOptions),
     }
 
     self.update = () => {

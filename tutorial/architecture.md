@@ -62,7 +62,7 @@ Control a 2D spatial model.
     * The Sim class manages voter entities and candidate entities.
     * See [sim](code_sim.md).
     * Entities are visual objects that can be controlled by the user. These include voters and candidates.
-    * Sim is a state machine with the following states: SimOne and SimSample. Each state is like a different game. Entities are shared between states. Wrappers use the entities as components to provide additional functionality to the states.
+    * SimMode has the following states: SimModeOne and SimModeSample. Each state is like a different game. Entities are shared between states. Wrappers use the entities as components to provide additional functionality to the states.
     * State Updates
         * The basic process is to run an election and visualize the result. The election code handles any changes. The electionResults communicates how to visualize the election.    
     * Changes is a class that keeps track of a list of changes. When the Sim's update method is called, the Sim checks if there are any changes and that controls the flow of the program. Updates are called on every animation frame.
