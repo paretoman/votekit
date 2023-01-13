@@ -1,7 +1,6 @@
 /** @module */
 
 import CandidateDistributionSampler from '../../electionSample/CandidateDistributionSampler.js'
-import ElectionSample from '../../electionSample/ElectionSample.js'
 import ElectionSampleDistricts from '../../electionSample/ElectionSampleDistricts.js'
 import getGeometry from '../getGeometry.js'
 
@@ -29,7 +28,6 @@ export default function SimSample(
     const { candidateDnList, voterShapeList } = entities
     const canDnSampler = new CandidateDistributionSampler(candidateDnList, changes, simOptions)
 
-    const electionSample = new ElectionSample()
     const electionSampleDistricts = new ElectionSampleDistricts()
 
     self.update = () => {
@@ -44,8 +42,7 @@ export default function SimSample(
 
         const geometry = getGeometry(voterShapeList, candidateDnList, simOptions, voterDistricts)
 
-        const electionStrategy = (simOptions.useDistricts) ? electionSampleDistricts : electionSample
-        const samplingResult = electionStrategy.update(geometry, canDnSampler.sampler, changes, electionOptions)
+        const samplingResult = electionSampleDistricts.update(geometry, canDnSampler.sampler, changes, simOptions, electionOptions)
         const simData = { samplingResult }
         pub.update(simData)
         changes.clear()

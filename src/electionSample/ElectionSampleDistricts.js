@@ -1,5 +1,6 @@
 /** @module */
 
+import electionRun from '../election/electionRun.js'
 import electionDistrictsRun from '../electionDistricts/electionDistrictsRun.js'
 
 /**
@@ -17,12 +18,12 @@ export default function ElectionSampleDistricts() {
     let points = []
     let partyWins
 
-    self.update = function (geometry, cDnSampler, changes, electionOptions) {
+    self.update = function (geometry, cDnSampler, changes, simOptions, electionOptions) {
         if (changes.checkAny()) {
             self.startSim()
         }
 
-        const samplingResult = self.addSim(geometry, cDnSampler, electionOptions)
+        const samplingResult = self.addSim(geometry, cDnSampler, simOptions, electionOptions)
         return samplingResult
     }
 
@@ -31,7 +32,7 @@ export default function ElectionSampleDistricts() {
         partyWins = Array(10).fill(0) // TODO: Use number of parties
     }
 
-    self.addSim = function (geometry, cDnSampler, electionOptions) {
+    self.addSim = function (geometry, cDnSampler, simOptions, electionOptions) {
         // add more points
 
         const {
@@ -53,7 +54,7 @@ export default function ElectionSampleDistricts() {
         // number of new points
         const { socialChoiceOptions } = electionOptions
         const { seats } = socialChoiceOptions
-        const { nd } = voterDistricts
+        const nd = (voterDistricts === undefined) ? 1 : voterDistricts.nd
         const nnp = seats * ns * nd
         const newPoints = Array(nnp)
         let q = 0
@@ -77,10 +78,11 @@ export default function ElectionSampleDistricts() {
                 voterGeoms, canGeoms: sCanGeoms, parties: { partiesByCan: sParties, numParties: 10 }, dimensions, voterDistricts,
             }
 
-            // find winner position
-            const districtElectionResults = electionDistrictsRun(sampleGeometry, electionOptions)
-
-            const { scResultsByDistrict } = districtElectionResults
+            const election = (simOptions.useDistricts) ? electionDistrictsRun : electionRun
+            const electionResults = election(sampleGeometry, electionOptions)
+            const scResultsByDistrict = (simOptions.useDistricts)
+                ? electionResults.scResultsByDistrict
+                : [electionResults.socialChoiceResults]
             const nDistricts = scResultsByDistrict.length
 
             // adjustable parameter for visualization
