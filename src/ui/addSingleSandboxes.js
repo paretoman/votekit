@@ -1,6 +1,6 @@
 /** @module */
 
-import checkURL from '../command/checkURL.js'
+import checkURL from '../save/checkURL.js'
 import ComMessenger from '../command/ComMessenger.js'
 import sandbox from './sandbox.js'
 

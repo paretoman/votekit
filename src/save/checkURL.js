@@ -9,7 +9,8 @@ export default function checkURL() {
     const params = new URLSearchParams(search)
     const yes = params.has('a')
 
-    const config = yes ? configFromParams(params) : {}
+    let config = {}
+    if (yes) config = configFromParams(params)
 
     return { yes, config }
 }

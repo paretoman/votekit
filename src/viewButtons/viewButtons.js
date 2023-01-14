@@ -1,9 +1,9 @@
 import menuSimOptions from './MenuSimOptions.js'
 import menuElectionOptions from './menuElectionOptions.js'
 import addUndo from '../command/addUndo.js'
-import addSaveConfigToText from '../command/addSaveConfigToText.js'
-import addLoadConfigText from '../command/loadConfigText.js'
-import addSaveConfigToLink from '../command/addSaveConfigToLink.js'
+import addSaveConfigToText from '../save/addSaveConfigToText.js'
+import addLoadConfigText from '../save/loadConfigText.js'
+import addSaveConfigToLink from '../save/addSaveConfigToLink.js'
 import addSimControlsLabel from './addSimControlsLabel.js'
 import buttonsToAddEntities from './buttonsToAddEntities.js'
 /**

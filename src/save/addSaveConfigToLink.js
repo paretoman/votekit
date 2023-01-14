@@ -1,5 +1,7 @@
 /** @module */
 
+import getLink from './getLink.js'
+
 /**
  * Add buttons for saving the configuration to a link.
  * @param {Layout} layout
@@ -17,29 +19,14 @@ export default function addSaveConfigToLink(layout, commander, sandboxURL) {
     const text = document.createElement('textarea')
 
     button.onclick = () => {
-        const link = getLink()
+        const config = commander.getConfig()
+        const link = getLink(config, sandboxURL)
         text.value = link
     }
     button2.onclick = () => {
-        const link = getLink()
-        navigator.clipboard.writeText(link)
-    }
-    function getLink() {
         const config = commander.getConfig()
-        const string = JSON.stringify(config)
-        const encoded = encodeURIComponent(string)
-        const params = new URLSearchParams({ a: encoded })
-        const search = params.toString()
-        const currentUrlFolder = getFolder()
-
-        const link = `${currentUrlFolder}/${sandboxURL}?${search}`
-        return link
-    }
-    function getFolder() {
-        const sp = document.location.href.split('/')
-        const sl = sp.slice(0, sp.length - 1)
-        const folder = sl.join('/')
-        return folder
+        const link = getLink(config, sandboxURL)
+        navigator.clipboard.writeText(link)
     }
 
     const clearDiv = document.createElement('div')
