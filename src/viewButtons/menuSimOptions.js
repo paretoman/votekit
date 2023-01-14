@@ -21,6 +21,7 @@ export default function menuSimOptions(simOptions, menu) {
 
     const useDistrictsList = [
         { name: '20', value: 20 },
+        { name: '5', value: 5 },
         { name: '1', value: 1 },
     ]
     menu.addMenuItem(

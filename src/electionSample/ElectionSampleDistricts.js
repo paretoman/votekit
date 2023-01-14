@@ -54,7 +54,7 @@ export default function ElectionSampleDistricts() {
         // number of new points
         const { socialChoiceOptions } = electionOptions
         const { seats } = socialChoiceOptions
-        const nd = (voterDistricts === undefined) ? 1 : voterDistricts.nd
+        const nd = simOptions.numDistricts
         const nnp = seats * ns * nd
         const newPoints = Array(nnp)
         let q = 0
