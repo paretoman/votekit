@@ -21,7 +21,7 @@ import addDownloadScreen from './addDownloadScreen.js'
  * @param {*} menu
  * @param {*} layout
  */
-export default function viewScreens(sim, viewMode, menu, layout) {
+export default function viewScreens(sim, viewMode, menu, layout, viewChanges) {
     const {
         entities, simOptions, electionOptions, changes, pub,
     } = sim
@@ -37,7 +37,7 @@ export default function viewScreens(sim, viewMode, menu, layout) {
     addDarkModeSwitch(screenCommon, layout, viewMode)
 
     const viewSettings = new ViewSettings(changes)
-    new ViewOne(entities, screenMain, menu, changes, simOptions, electionOptions, viewMode, viewSettings)
+    new ViewOne(entities, screenMain, menu, changes, simOptions, electionOptions, viewMode, viewSettings, viewChanges)
     new ViewSample(entities, screenMain, menu, changes, simOptions, electionOptions, viewMode, viewSettings)
     new ViewJupyter(pub, changes)
     new ViewVizOne(entities, screenMain, screenMini, menu, changes, simOptions, electionOptions, viewMode, viewSettings)

@@ -16,7 +16,7 @@ import voteCasters from '../castVotes/voteCasters.js'
  * @param {ViewSettings} viewSettings
  * @constructor
  */
-export default function ViewOne(entities, screen, menu, changes, simOptions, electionOptions, viewMode, viewSettings) {
+export default function ViewOne(entities, screen, menu, changes, simOptions, electionOptions, viewMode, viewSettings, viewChanges) {
     const self = this
 
     viewMode.viewModes.one.attach(self)
@@ -86,6 +86,7 @@ export default function ViewOne(entities, screen, menu, changes, simOptions, ele
         const geometry = getTestGeometry(self.voterTestView.voterTest, candidateList, simOptions)
         const vote = voteCasters[electionOptions.voteCasterName].castTestVote(geometry)
         self.voterTestView.graphic.update(vote, candidateList)
+        viewChanges.add(['testVote'])
         return vote
     }
 
