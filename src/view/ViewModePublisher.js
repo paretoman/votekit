@@ -1,4 +1,4 @@
-export default function ViewStatePublisher() {
+export default function ViewModePublisher() {
     const self = this
 
     // Publish to View //

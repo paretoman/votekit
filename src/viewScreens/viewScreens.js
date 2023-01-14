@@ -16,34 +16,34 @@ import addDownloadScreen from './addDownloadScreen.js'
 
 /**
  * Make all the screens and views with screens.
- * @param {*} viewState
+ * @param {*} viewMode
  * @param {*} changes
  * @param {*} menu
  * @param {*} layout
  */
-export default function viewScreens(sim, viewState, menu, layout) {
+export default function viewScreens(sim, viewMode, menu, layout) {
     const {
         entities, simOptions, electionOptions, changes, pub,
     } = sim
 
     const screenCommon = new ScreenCommon(300, 300)
-    const screenMain = new Screen(screenCommon, viewState, layout, 'viz')
-    const screenMini = new Screen(screenCommon, viewState, layout, 'vizMini')
+    const screenMain = new Screen(screenCommon, viewMode, layout, 'viz')
+    const screenMini = new Screen(screenCommon, viewMode, layout, 'vizMini')
     screenMini.setHeight(screenCommon.height / 3)
     screenMini.hide()
 
-    addSvgSwitch(screenCommon, layout, viewState)
+    addSvgSwitch(screenCommon, layout, viewMode)
     addDownloadScreen(screenCommon, layout)
-    addDarkModeSwitch(screenCommon, layout, viewState)
+    addDarkModeSwitch(screenCommon, layout, viewMode)
 
     const viewSettings = new ViewSettings(changes)
-    new ViewOne(entities, screenMain, menu, changes, simOptions, electionOptions, viewState, viewSettings)
-    new ViewSample(entities, screenMain, menu, changes, simOptions, electionOptions, viewState, viewSettings)
+    new ViewOne(entities, screenMain, menu, changes, simOptions, electionOptions, viewMode, viewSettings)
+    new ViewSample(entities, screenMain, menu, changes, simOptions, electionOptions, viewMode, viewSettings)
     new ViewJupyter(pub, changes)
-    new ViewVizOne(entities, screenMain, screenMini, menu, changes, simOptions, electionOptions, viewState, viewSettings)
-    new ViewVizSample(entities, screenMain, menu, changes, simOptions, viewState, viewSettings)
-    new ViewVizBudget(screenCommon, layout, menu, changes, simOptions, electionOptions, viewState)
-    new ViewDistrictMaps(entities, screenCommon, layout, changes, simOptions, electionOptions, viewState)
+    new ViewVizOne(entities, screenMain, screenMini, menu, changes, simOptions, electionOptions, viewMode, viewSettings)
+    new ViewVizSample(entities, screenMain, menu, changes, simOptions, viewMode, viewSettings)
+    new ViewVizBudget(screenCommon, layout, menu, changes, simOptions, electionOptions, viewMode)
+    new ViewDistrictMaps(entities, screenCommon, layout, changes, simOptions, electionOptions, viewMode)
 
     return { screenMain }
 }

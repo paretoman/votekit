@@ -7,12 +7,12 @@ import DistrictMaps from '../viz/DistrictMaps.js'
  * Show votes
  * @constructor
  */
-export default function ViewDistrictMaps(entities, screenCommon, layout, changes, simOptions, electionOptions, viewState) {
+export default function ViewDistrictMaps(entities, screenCommon, layout, changes, simOptions, electionOptions, viewMode) {
     const self = this
 
-    viewState.viewModes.one.attach(self)
+    viewMode.viewModes.one.attach(self)
 
-    const screen = new Screen(screenCommon, viewState, layout, 'maps')
+    const screen = new Screen(screenCommon, viewMode, layout, 'maps')
     const { height } = screenCommon
     screen.setHeight(height / 3)
     screen.hide()
