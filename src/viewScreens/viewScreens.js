@@ -9,7 +9,7 @@ import ViewVizOne from './ViewVizOne.js'
 import ViewVizSample from './ViewVizSample.js'
 import ViewDistrictMaps from './ViewDistrictMaps.js'
 import ViewEntitiesOne from './ViewEntitiesOne.js'
-import ViewSample from './ViewSample.js'
+import ViewEntitiesSample from './ViewEntitiesSample.js'
 import ScreenCommon from '../screen/ScreenCommon.js'
 import addSvgSwitch from './addSvgSwitch.js'
 import addDownloadScreen from './addDownloadScreen.js'
@@ -38,7 +38,7 @@ export default function viewScreens(sim, viewMode, menu, layout, viewChanges) {
 
     const viewSettings = new ViewSettings(changes)
     new ViewEntitiesOne(entities, screenMain, menu, changes, simOptions, electionOptions, viewMode, viewSettings, viewChanges)
-    new ViewSample(entities, screenMain, menu, changes, simOptions, electionOptions, viewMode, viewSettings)
+    new ViewEntitiesSample(entities, screenMain, menu, changes, simOptions, electionOptions, viewMode, viewSettings)
     new ViewJupyter(pub, changes)
     new ViewVizOne(entities, screenMain, screenMini, menu, changes, simOptions, electionOptions, viewMode, viewSettings)
     new ViewVizSample(entities, screenMain, menu, changes, simOptions, viewMode, viewSettings)
