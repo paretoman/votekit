@@ -2,7 +2,7 @@
 /**
  * Make the download link part of the screen.
  */
-export default function ScreenDownload(screen, viewMode) {
+export default function ScreenDownload(screen, viewState) {
     const self = this
 
     self.div = document.createElement('div')
@@ -34,9 +34,9 @@ export default function ScreenDownload(screen, viewMode) {
     function makeSVG() {
         screen.setFCtx(screen.svg.ctx)
 
-        viewMode.clear()
-        viewMode.render()
-        viewMode.renderForeground()
+        viewState.clear()
+        viewState.render()
+        viewState.renderForeground()
 
         const svg = screen.svg.ctx.getSerializedSvg(true)
         const url = `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}`
@@ -44,6 +44,6 @@ export default function ScreenDownload(screen, viewMode) {
 
         screen.setFCtx(screen.svg.fctx)
 
-        viewMode.rerender()
+        viewState.rerender()
     }
 }

@@ -11,7 +11,7 @@ import ScreenSvg from './ScreenSvg.js'
  * @param {Layout} layout
  * @constructor
  */
-export default function Screen(screenCommon, viewMode, layout, layoutName) {
+export default function Screen(screenCommon, viewState, layout, layoutName) {
     const self = this
 
     // Components //
@@ -21,7 +21,7 @@ export default function Screen(screenCommon, viewMode, layout, layoutName) {
 
     self.canvas = new ScreenCanvas()
     self.svg = new ScreenSvg()
-    self.download = new ScreenDownload(self, viewMode)
+    self.download = new ScreenDownload(self, viewState)
     self.setShowDownloadScreenLink = self.download.setShowDownloadScreenLink
 
     self.tweenGroup = new TWEEN.Group()

@@ -12,9 +12,9 @@ import buttonsToAddEntities from './buttonsToAddEntities.js'
  * @param {*} sandboxURL
  * @param {*} layout
  * @param {*} menu
- * @param {*} viewMode
+ * @param {*} viewState
  */
-export default function viewButtons(sim, sandboxURL, layout, menu, viewMode) {
+export default function viewButtons(sim, sandboxURL, layout, menu, viewState) {
     const {
         commander, simOptions, electionOptions, entities,
     } = sim
@@ -28,5 +28,5 @@ export default function viewButtons(sim, sandboxURL, layout, menu, viewMode) {
     addLoadConfigText(layout, commander)
     addSimControlsLabel(layout)
 
-    buttonsToAddEntities(viewMode, entities, layout)
+    buttonsToAddEntities(viewState, entities, layout)
 }

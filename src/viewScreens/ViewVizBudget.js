@@ -2,12 +2,12 @@ import Screen from '../screen/Screen.js'
 import BaseExplanation from '../viz/BaseExplanation.js'
 import VizExplanationBudgetMES from '../viz/VizExplanationBudgetMES.js'
 
-export default function ViewVizBudget(screenCommon, layout, menu, changes, simOptions, electionOptions, viewMode) {
+export default function ViewVizBudget(screenCommon, layout, menu, changes, simOptions, electionOptions, viewState) {
     const self = this
 
-    viewMode.views.one.attach(self)
+    viewState.viewStates.one.attach(self)
 
-    const screen = new Screen(screenCommon, viewMode, layout, 'budget')
+    const screen = new Screen(screenCommon, viewState, layout, 'budget')
     const { height } = screenCommon
     screen.setHeight(height / 3)
     screen.hide()

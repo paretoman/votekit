@@ -1,7 +1,7 @@
 import ButtonGroup from '../menu/ButtonGroup.js'
 import { buttonWidth } from '../menu/MenuItem.js'
 
-export default function addDarkModeSwitch(screenCommon, layout, viewMode) {
+export default function addDarkModeSwitch(screenCommon, layout, viewState) {
     const choose = new ButtonGroup({
         label: 'Theme',
         width: buttonWidth(3),
@@ -11,7 +11,7 @@ export default function addDarkModeSwitch(screenCommon, layout, viewMode) {
         ],
         onChoose: (data) => {
             screenCommon.setDarkMode(data.value)
-            viewMode.rerender()
+            viewState.rerender()
         },
     })
     choose.highlight('value', screenCommon.darkMode)

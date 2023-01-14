@@ -3,25 +3,25 @@
 import ViewStatePublisher from './ViewStatePublisher.js'
 
 /**
- * Need to pass along the pub-sub pattern through view to specific views.
+ * Need to pass along the pub-sub pattern through view to specific viewStates.
  * The views attach to these view states.
  */
-export default function ViewMode(pub, simMode, simOptions, changes) {
+export default function ViewState(pub, simMode, simOptions, changes) {
     const self = this
 
     pub.attach(self)
 
-    self.views = {
+    self.viewStates = {
         one: new ViewStatePublisher(),
         sample: new ViewStatePublisher(),
     }
-    let viewState = self.views[simOptions.mode]
+    let viewState = self.viewStates[simOptions.mode]
 
     self.update = (simData) => {
         // state: check for change, exit, set, enter, update.
         if (changes.check(['useDistricts', 'dimensions', 'mode', 'electionMethod'])) {
             viewState.exit()
-            viewState = self.views[simOptions.mode]
+            viewState = self.viewStates[simOptions.mode]
             viewState.enter()
         }
         viewState.update(simData)

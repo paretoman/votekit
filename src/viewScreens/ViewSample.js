@@ -14,10 +14,10 @@ import ViewBase from './ViewBase.js'
  * @param {ViewSettings} viewSettings
  * @constructor
  */
-export default function ViewSample(entities, screen, menu, changes, simOptions, electionOptions, viewMode, viewSettings) {
+export default function ViewSample(entities, screen, menu, changes, simOptions, electionOptions, viewState, viewSettings) {
     const self = this
 
-    viewMode.views.sample.attach(self)
+    viewState.viewStates.sample.attach(self)
 
     ViewBase.call(self, screen, changes, viewSettings)
 
