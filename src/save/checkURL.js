@@ -1,23 +1,33 @@
 /** @module */
 
+import configFromParams from './configFromParams.js'
+import loadShortCode from './loadShortCode.js'
+
 /**
  * Check if the URL is giving a configuration.
- * @returns {Object} - Property yes means we have a config to use from the URL.
+ * Three cases:
+ * 1. No config in url
+ * 2. Long config in url
+ * 3. Short code in url that requires a database lookup.
+ * Then use a callback since we might have to wait for the database.
  */
-export default function checkURL() {
+export default function checkURL(checkUrlCallback) {
     const { search } = window.location
     const params = new URLSearchParams(search)
-    const yes = params.has('a')
+    const a = params.has('a')
+    const b = params.has('b')
+    const yes = a || b
 
-    let config = {}
-    if (yes) config = configFromParams(params)
-
-    return { yes, config }
-}
-
-function configFromParams(params) {
-    const encoded = params.get('a')
-    const string = decodeURIComponent(encoded)
-    const config = JSON.parse(string)
-    return config
+    if (a) {
+        const config = configFromParams(params)
+        checkUrlCallback({ yes, config })
+        return
+    }
+    if (b) {
+        const shortcode = params.get('b')
+        loadShortCode(shortcode, checkUrlCallback)
+        return
+    }
+    const config = {}
+    checkUrlCallback({ yes, config })
 }

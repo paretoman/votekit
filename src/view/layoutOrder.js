@@ -12,6 +12,7 @@ const layoutOrder = [
     'maps',
     'budget',
     'saveConfigToLink',
+    'saveConfigToShortLink',
     'saveConfigToText',
     'loadConfigText',
     'svgMainDiv',

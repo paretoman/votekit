@@ -9,17 +9,21 @@ import sandbox from './sandbox.js'
 export default function addSingleSandboxes() {
     const targets = Array.from(document.getElementsByClassName('sandbox'))
     targets.forEach((target) => {
-        const hasConfig = target.dataset.config !== undefined
-        const targetConfig = (hasConfig) ? JSON.parse(target.dataset.config) : {}
-        const cu = checkURL()
-        const config = (cu.yes) ? cu.config : targetConfig
+        checkURL(checkUrlCallback)
 
-        const hasSandboxURL = target.dataset.sandboxurl !== undefined
-        const sandboxURL = hasSandboxURL ? target.dataset.sandboxurl : ''
+        function checkUrlCallback(cu) {
+            const hasConfig = target.dataset.config !== undefined
+            const targetConfig = (hasConfig) ? JSON.parse(target.dataset.config) : {}
 
-        const comMessenger = new ComMessenger()
-        const div = sandbox(config, comMessenger, sandboxURL)
-        const parent = target.parentNode
-        parent.appendChild(div)
+            const config = (cu.yes) ? cu.config : targetConfig
+
+            const hasSandboxURL = target.dataset.sandboxurl !== undefined
+            const sandboxURL = hasSandboxURL ? target.dataset.sandboxurl : ''
+
+            const comMessenger = new ComMessenger()
+            const div = sandbox(config, comMessenger, sandboxURL)
+            const parent = target.parentNode
+            parent.appendChild(div)
+        }
     })
 }

@@ -154,3 +154,18 @@ export function copyObjectShallow(a) {
 export function countUnique(iterable) {
     return new Set(iterable).size
 }
+
+export function hashCode(s) { // https://stackoverflow.com/a/7616484
+    let hash = 0; let i; let
+        chr
+    for (i = 0; i < s.length; i++) {
+        chr = s.charCodeAt(i)
+        hash = ((hash << 5) - hash) + chr
+        hash |= 0 // Convert to 32bit integer
+    }
+
+    // I will only use non-negative integers because it might be easier.
+    // So basically, I'm setting the first bit to 0.
+    const half = 2147483648
+    return (hash + half) % half
+}
