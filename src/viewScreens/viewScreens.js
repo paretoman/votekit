@@ -23,7 +23,7 @@ import addDownloadScreen from './addDownloadScreen.js'
  */
 export default function viewScreens(sim, viewMode, menu, layout) {
     const {
-        entities, simOptions, electionOptions, changes,
+        entities, simOptions, electionOptions, changes, pub,
     } = sim
 
     const screenCommon = new ScreenCommon(300, 300)
@@ -39,7 +39,7 @@ export default function viewScreens(sim, viewMode, menu, layout) {
     const viewSettings = new ViewSettings(changes)
     new ViewOne(entities, screenMain, menu, changes, simOptions, electionOptions, viewMode, viewSettings)
     new ViewSample(entities, screenMain, menu, changes, simOptions, electionOptions, viewMode, viewSettings)
-    new ViewJupyter(viewMode, changes)
+    new ViewJupyter(pub, changes)
     new ViewVizOne(entities, screenMain, screenMini, menu, changes, simOptions, electionOptions, viewMode, viewSettings)
     new ViewVizSample(entities, screenMain, menu, changes, simOptions, viewMode, viewSettings)
     new ViewVizBudget(screenCommon, layout, menu, changes, simOptions, electionOptions, viewMode)
