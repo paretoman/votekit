@@ -20,7 +20,7 @@ import CandidateDnRendererList from '../candidateDns/CandidateDnRendererList.js'
 export default function ViewVizSample(entities, screen, menu, changes, simOptions, viewState, viewSettings) {
     const self = this
 
-    viewState.viewStates.sample.attach(self)
+    viewState.viewModes.sample.attach(self)
 
     ViewBase.call(self, screen, changes, viewSettings)
 

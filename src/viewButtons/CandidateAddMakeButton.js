@@ -17,7 +17,7 @@ export default function CandidateAddMakeButton(viewState, layout, canList) {
 
     layout.newElement('addCandidate', addCandidateButton)
 
-    viewState.viewStates.one.attach({
+    viewState.viewModes.one.attach({
         enter: show,
         exit: hide,
         update: () => {},

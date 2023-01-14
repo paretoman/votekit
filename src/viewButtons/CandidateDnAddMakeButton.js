@@ -17,7 +17,7 @@ export default function CandidateDnAddMakeButton(viewState, layout, canDnList) {
 
     layout.newElement('addCandidateDistribution', addCandidateDistributionButton)
 
-    viewState.viewStates.sample.attach({
+    viewState.viewModes.sample.attach({
         enter: show,
         exit: hide,
         update: () => {},

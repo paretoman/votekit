@@ -24,7 +24,7 @@ import VoterRendererList from '../voters/VoterRendererList.js'
 export default function ViewVizOne(entities, screenMain, screenMini, menu, changes, simOptions, electionOptions, viewState, viewSettings) {
     const self = this
 
-    viewState.viewStates.one.attach(self)
+    viewState.viewModes.one.attach(self)
 
     ViewBase.call(self, screenMain, changes, viewSettings)
 

@@ -3,7 +3,7 @@
 import ViewStatePublisher from './ViewStatePublisher.js'
 
 /**
- * Need to pass along the pub-sub pattern through view to specific viewStates.
+ * Need to pass along the pub-sub pattern through view to specific viewModes.
  * The views attach to these view states.
  */
 export default function ViewState(pub, simOptions, changes) {
@@ -11,26 +11,26 @@ export default function ViewState(pub, simOptions, changes) {
 
     pub.attach(self)
 
-    self.viewStates = {
+    self.viewModes = {
         one: new ViewStatePublisher(),
         sample: new ViewStatePublisher(),
     }
-    let viewState = self.viewStates[simOptions.mode]
+    let viewMode = self.viewModes[simOptions.mode]
 
     self.update = (simData) => {
         // state: check for change, exit, set, enter, update.
         if (changes.check(['useDistricts', 'dimensions', 'mode', 'electionMethod'])) {
-            viewState.exit()
-            viewState = self.viewStates[simOptions.mode]
-            viewState.enter()
+            viewMode.exit()
+            viewMode = self.viewModes[simOptions.mode]
+            viewMode.enter()
         }
-        viewState.update(simData)
+        viewMode.update(simData)
     }
 
-    self.render = () => { viewState.render() }
-    self.renderForeground = () => { viewState.renderForeground() }
-    self.clear = () => { viewState.clear() }
-    self.clearForeground = () => { viewState.clearForeground() }
+    self.render = () => { viewMode.render() }
+    self.renderForeground = () => { viewMode.renderForeground() }
+    self.clear = () => { viewMode.clear() }
+    self.clearForeground = () => { viewMode.clearForeground() }
 
     self.rerender = () => {
         self.clear()
