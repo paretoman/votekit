@@ -1,4 +1,4 @@
-export default function VoterTest(viewOne) {
+export default function VoterTest(viewEntitiesOne) {
     const self = this
 
     // Position
@@ -24,11 +24,11 @@ export default function VoterTest(viewOne) {
     }
     self.setXY1 = (p) => {
         self.setAction.shape1x(p.x)
-        viewOne.testVoteView()
+        viewEntitiesOne.testVoteView()
     }
     self.setXY2 = (p) => {
         self.setAction.shape2p(p)
-        viewOne.testVoteView()
+        viewEntitiesOne.testVoteView()
     }
 
     // Initialize

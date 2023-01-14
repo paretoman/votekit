@@ -4,7 +4,7 @@ import tooltipForTestVoter from '../tooltips/tooltipForTestVoter.js'
 import colorBlender, { rgbToString } from '../viz/colorBlender.js'
 import EntityGraphic from '../vizEntities/EntityGraphic.js'
 
-export default function VoterTestGraphic(voterTest, screen, simOptions, viewOne, viewSettings) {
+export default function VoterTestGraphic(voterTest, screen, simOptions, viewEntitiesOne, viewSettings) {
     const self = this
 
     // Start displaying testvoter
@@ -49,7 +49,7 @@ export default function VoterTestGraphic(voterTest, screen, simOptions, viewOne,
     }
 
     self.click = () => {
-        const vote = viewOne.testVoteView()
+        const vote = viewEntitiesOne.testVoteView()
         if (vote === null) return
 
         if (tooltip.box) tooltip.box.remove()

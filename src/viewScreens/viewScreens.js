@@ -8,7 +8,7 @@ import ViewVizBudget from './ViewVizBudget.js'
 import ViewVizOne from './ViewVizOne.js'
 import ViewVizSample from './ViewVizSample.js'
 import ViewDistrictMaps from './ViewDistrictMaps.js'
-import ViewOne from './ViewOne.js'
+import ViewEntitiesOne from './ViewEntitiesOne.js'
 import ViewSample from './ViewSample.js'
 import ScreenCommon from '../screen/ScreenCommon.js'
 import addSvgSwitch from './addSvgSwitch.js'
@@ -37,7 +37,7 @@ export default function viewScreens(sim, viewMode, menu, layout, viewChanges) {
     addDarkModeSwitch(screenCommon, layout, viewMode)
 
     const viewSettings = new ViewSettings(changes)
-    new ViewOne(entities, screenMain, menu, changes, simOptions, electionOptions, viewMode, viewSettings, viewChanges)
+    new ViewEntitiesOne(entities, screenMain, menu, changes, simOptions, electionOptions, viewMode, viewSettings, viewChanges)
     new ViewSample(entities, screenMain, menu, changes, simOptions, electionOptions, viewMode, viewSettings)
     new ViewJupyter(pub, changes)
     new ViewVizOne(entities, screenMain, screenMini, menu, changes, simOptions, electionOptions, viewMode, viewSettings)

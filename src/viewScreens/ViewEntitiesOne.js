@@ -16,7 +16,7 @@ import voteCasters from '../castVotes/voteCasters.js'
  * @param {ViewSettings} viewSettings
  * @constructor
  */
-export default function ViewOne(entities, screen, menu, changes, simOptions, electionOptions, viewMode, viewSettings, viewChanges) {
+export default function ViewEntitiesOne(entities, screen, menu, changes, simOptions, electionOptions, viewMode, viewSettings, viewChanges) {
     const self = this
 
     viewMode.viewModes.one.attach(self)
