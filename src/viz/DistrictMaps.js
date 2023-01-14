@@ -18,7 +18,7 @@ export default function DistrictMaps(candidateList, screen, electionOptions, cha
         const { voterDistricts } = districtElectionResults.geometry
 
         // todo: make this only run when we have new districts
-        if (changes.check(['useDistricts']) && self.districtDraw === undefined) {
+        if (changes.check(['numDistricts']) && self.districtDraw === undefined) {
             const { districtMaker } = voterDistricts
             self.districtDraw = new DistrictDraw(screen, districtMaker)
             // Code that handles making images of geographic noise.

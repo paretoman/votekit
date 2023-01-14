@@ -20,17 +20,17 @@ export default function menuSimOptions(simOptions, menu) {
     )
 
     const useDistrictsList = [
-        { name: 'Yes', value: true },
-        { name: 'No', value: false },
+        { name: '20', value: 20 },
+        { name: '1', value: 1 },
     ]
     menu.addMenuItem(
         simOptions,
         {
-            label: 'Use Districts:',
-            prop: 'useDistricts',
-            setProp: (p) => { simOptions.setUseDistricts(p) },
+            label: 'Number of Districts:',
+            prop: 'numDistricts',
+            setProp: (p) => { simOptions.setNumDistricts(p) },
             options: useDistrictsList,
-            change: ['useDistricts'],
+            change: ['numDistricts'],
         },
     )
 

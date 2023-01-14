@@ -28,7 +28,7 @@ export default function ViewDistrictMaps(entities, screenCommon, layout, changes
     }
 
     self.update = function (simData) {
-        if (changes.check(['useDistricts'])) {
+        if (changes.check(['numDistricts'])) {
             if (simOptions.useDistricts) {
                 screen.show()
             } else {

@@ -6,12 +6,15 @@ export default function SimOptions(changes) {
     const self = this
 
     self.setMode = (m) => { self.mode = m }
-    self.setUseDistricts = (g) => { self.useDistricts = g }
+    self.setNumDistricts = (n) => {
+        self.numDistricts = n
+        self.useDistricts = n > 1
+    }
     self.setDimensions = (d) => { self.dimensions = d }
 
     // Defaults
     self.setMode('one')
-    self.setUseDistricts(false)
+    self.setNumDistricts(1)
     self.setDimensions(2)
-    changes.add(['useDistricts', 'dimensions', 'mode'])
+    changes.add(['numDistricts', 'dimensions', 'mode'])
 }
