@@ -19,7 +19,7 @@ export default function ViewState(pub, simOptions, changes) {
 
     self.update = (simData) => {
         // state: check for change, exit, set, enter, update.
-        if (changes.check(['useDistricts', 'dimensions', 'mode', 'electionMethod'])) {
+        if (changes.check(['mode'])) {
             viewMode.exit()
             viewMode = self.viewModes[simOptions.mode]
             viewMode.enter()

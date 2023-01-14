@@ -28,6 +28,13 @@ export default function ViewDistrictMaps(entities, screenCommon, layout, changes
     }
 
     self.update = function (simData) {
+        if (changes.check(['useDistricts'])) {
+            if (simOptions.useDistricts) {
+                screen.show()
+            } else {
+                screen.hide()
+            }
+        }
         const { electionResults } = simData
         const { error } = electionResults
         if (error !== undefined) {

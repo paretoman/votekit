@@ -50,8 +50,12 @@ export default function ViewOne(entities, screen, menu, changes, simOptions, ele
     }
 
     self.update = (simData) => {
-        const { electionResults } = simData
         if (changes.checkNone()) return
+
+        if (changes.check(['dimensions'])) {
+            self.exit()
+            self.enter()
+        }
 
         if (changes.check(['draggables'])) {
             // this will trigger when undo moves entities
@@ -59,6 +63,7 @@ export default function ViewOne(entities, screen, menu, changes, simOptions, ele
             candidateViewList.updateViewXY()
         }
 
+        const { electionResults } = simData
         const { error } = electionResults
         if (error === undefined) {
             addAllocation(electionResults)
