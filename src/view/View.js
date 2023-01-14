@@ -15,12 +15,12 @@ import viewButtons from '../viewButtons/viewButtons.js'
  */
 export default function View(sim, sandboxURL) {
     const {
-        changes, commander, simOptions, simMode, pub, update,
+        changes, commander, simOptions, pub, update,
     } = sim
 
     const layout = new Layout(layoutOrder)
     const menu = new Menu(changes, layout, commander)
-    const viewState = new ViewState(pub, simMode, simOptions, changes)
+    const viewState = new ViewState(pub, simOptions, changes)
 
     viewButtons(sim, sandboxURL, layout, menu, viewState)
     const { screenMain } = viewScreens(sim, viewState, menu, layout)

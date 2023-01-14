@@ -6,7 +6,7 @@ import ViewStatePublisher from './ViewStatePublisher.js'
  * Need to pass along the pub-sub pattern through view to specific viewStates.
  * The views attach to these view states.
  */
-export default function ViewState(pub, simMode, simOptions, changes) {
+export default function ViewState(pub, simOptions, changes) {
     const self = this
 
     pub.attach(self)
