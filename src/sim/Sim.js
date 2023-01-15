@@ -5,7 +5,7 @@ import ElectionOptions from '../election/ElectionOptions.js'
 import Entities from './Entities.js'
 import VoterDistricts from '../voters/VoterDistricts.js'
 import SimMode from './SimMode.js'
-import addDefaultEntities from '../ui/addDefaultEntities.js'
+import addDefaultEntities from './addDefaultEntities.js'
 import Publisher from './Publisher.js'
 
 export default function Sim(comMessenger) {
