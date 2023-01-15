@@ -7,7 +7,7 @@ import addUpload from './addUpload.js'
  * @param {Layout} layout
  * @param {Commander} commander
  */
-export default function addLoadConfigText(layout, commander) {
+export default function addLoadConfigText(layout, commander, nameInput) {
     const button = document.createElement('button')
 
     button.className = 'button2'
@@ -22,7 +22,7 @@ export default function addLoadConfigText(layout, commander) {
         commander.loadConfig(config)
     }
 
-    const upload = addUpload(uploadCallback)
+    const upload = addUpload(uploadCallback, nameInput)
     function uploadCallback(event) {
         const { result } = event.target
         const config = JSON.parse(result)

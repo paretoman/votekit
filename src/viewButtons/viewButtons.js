@@ -29,7 +29,7 @@ export default function viewButtons(sim, sandboxPath, layout, menu, viewMode) {
     addSaveConfigToLink(layout, commander, sandboxPath, nameInput)
     addSaveConfigToShortLink(layout, commander, sandboxPath, nameInput)
     addSaveConfigToText(layout, commander, nameInput)
-    addLoadConfigText(layout, commander)
+    addLoadConfigText(layout, commander, nameInput)
     addSimControlsLabel(layout)
 
     buttonsToAddEntities(viewMode, entities, layout)

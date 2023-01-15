@@ -1,4 +1,4 @@
-export default function addUpload(uploadCallback) {
+export default function addUpload(uploadCallback, nameInput) {
     const input = document.createElement('input')
     input.type = 'file'
     input.accept = '.json'
@@ -8,6 +8,10 @@ export default function addUpload(uploadCallback) {
         const reader = new FileReader()
         reader.addEventListener('load', uploadCallback)
         reader.readAsText(file)
+
+        const { name } = file
+        const nameWithoutExtension = name.split('.').slice(0, -1).join('.')
+        nameInput.set(nameWithoutExtension)
     }
 
     const button = document.createElement('button')
