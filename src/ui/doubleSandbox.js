@@ -9,7 +9,7 @@ import sandbox from './sandbox.js'
  * @param {String} sandboxURL - String to add to the current url directory to get to the sandbox.
  * @returns {HTMLElement} - div containing the two sandboxes.
  */
-export default function doubleSandbox(config, sandboxURL) {
+export default function doubleSandbox(targetConfig, sandboxURL) {
     const comMessenger = new ComMessenger()
 
     const divLink = document.createElement('button')
@@ -29,8 +29,8 @@ export default function doubleSandbox(config, sandboxURL) {
     }
     divLink.onclick = toggle
 
-    const div1 = sandbox(config, comMessenger, sandboxURL)
-    const div2 = sandbox(config, comMessenger, sandboxURL)
+    const div1 = sandbox(targetConfig, sandboxURL, comMessenger)
+    const div2 = sandbox(targetConfig, sandboxURL, comMessenger)
     div1.style.display = 'inline-block'
     div2.style.display = 'inline-block'
 

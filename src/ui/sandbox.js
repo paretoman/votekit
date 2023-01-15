@@ -7,13 +7,13 @@ import View from '../view/View.js'
  * Set up a user interface to run a simulation.
  * @param {Object} config - An object containing commands. A command is a {name,value} pair.
  */
-export default function sandbox(config, comMessenger, sandboxURL) {
+export default function sandbox(targetConfig, sandboxURL, comMessenger) {
     const sim = Sim(comMessenger)
 
     const view = View(sim, sandboxURL)
-    const { div } = view
+    const { div, load } = view
 
-    sim.init(config)
+    load(targetConfig)
 
     return div
 }

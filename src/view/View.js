@@ -5,6 +5,7 @@ import ViewMode from './ViewMode.js'
 import viewScreens from '../viewScreens/viewScreens.js'
 import viewButtons from '../viewButtons/viewButtons.js'
 import Changes from '../sim/Changes.js'
+import loadView from '../save/loadView.js'
 
 /**
  * View observes the sim and adds a user interface.
@@ -16,7 +17,7 @@ import Changes from '../sim/Changes.js'
  */
 export default function View(sim, sandboxURL) {
     const {
-        changes, commander, simOptions, pub, update,
+        changes, commander, simOptions, pub, update, init,
     } = sim
 
     const layout = new Layout(layoutOrder)
@@ -26,6 +27,10 @@ export default function View(sim, sandboxURL) {
 
     viewButtons(sim, sandboxURL, layout, menu, viewMode)
     const { screenMain } = viewScreens(sim, viewMode, menu, layout, viewChanges)
+
+    function load(targetConfig) {
+        loadView(targetConfig, init)
+    }
 
     window.requestAnimationFrame(viewLoop)
 
@@ -44,5 +49,5 @@ export default function View(sim, sandboxURL) {
 
     const div = layout.makeComponent()
 
-    return { div }
+    return { div, load }
 }

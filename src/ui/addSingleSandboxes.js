@@ -1,7 +1,5 @@
 /** @module */
 
-import checkURL from '../save/checkURL.js'
-import ComMessenger from '../command/ComMessenger.js'
 import sandbox from './sandbox.js'
 
 /** Find all the divs of class "sandbox".
@@ -9,21 +7,14 @@ import sandbox from './sandbox.js'
 export default function addSingleSandboxes() {
     const targets = Array.from(document.getElementsByClassName('sandbox'))
     targets.forEach((target) => {
-        checkURL(checkUrlCallback)
+        const hasConfig = target.dataset.config !== undefined
+        const targetConfig = (hasConfig) ? JSON.parse(target.dataset.config) : {}
 
-        function checkUrlCallback(cu) {
-            const hasConfig = target.dataset.config !== undefined
-            const targetConfig = (hasConfig) ? JSON.parse(target.dataset.config) : {}
+        const hasSandboxURL = target.dataset.sandboxurl !== undefined
+        const sandboxURL = hasSandboxURL ? target.dataset.sandboxurl : ''
 
-            const config = (cu.yes) ? cu.config : targetConfig
-
-            const hasSandboxURL = target.dataset.sandboxurl !== undefined
-            const sandboxURL = hasSandboxURL ? target.dataset.sandboxurl : ''
-
-            const comMessenger = new ComMessenger()
-            const div = sandbox(config, comMessenger, sandboxURL)
-            const parent = target.parentNode
-            parent.appendChild(div)
-        }
+        const div = sandbox(targetConfig, sandboxURL)
+        const parent = target.parentNode
+        parent.appendChild(div)
     })
 }
