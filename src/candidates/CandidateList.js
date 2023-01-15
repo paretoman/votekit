@@ -2,7 +2,7 @@ import Candidate from './Candidate.js'
 import CandidateCommander from './CandidateCommander.js'
 import { standardizeColor } from '../utilities/jsHelpers.js'
 import Registrar from '../sim/Registrar.js'
-import getGeoms from '../entities.js/getGeoms.js'
+import getGeoms from '../entities/getGeoms.js'
 
 /** A component of sim.js that deals with adding candidates. */
 export default function CandidateList(changes, commander) {

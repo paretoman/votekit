@@ -1,5 +1,5 @@
 import voteCasters from '../castVotes/voteCasters.js'
-import getGeoms from '../entities.js/getGeoms.js'
+import getGeoms from '../entities/getGeoms.js'
 
 export default function castVotesByTract(geometry, electionOptions) {
     const { castOptions } = electionOptions

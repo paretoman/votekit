@@ -1,4 +1,4 @@
-import getGeoms from '../entities.js/getGeoms.js'
+import getGeoms from '../entities/getGeoms.js'
 
 /**
  * Get geometry inputs to election. Both candidateList and candidateDnList work here, though we call both canGeoms.

@@ -1,7 +1,7 @@
 import CandidateDn from './CandidateDn.js'
 import CandidateDnCommander from './CandidateDnCommander.js'
 import Registrar from '../sim/Registrar.js'
-import getGeoms from '../entities.js/getGeoms.js'
+import getGeoms from '../entities/getGeoms.js'
 
 /** A component of sim.js that deals with adding candidate distributions. */
 export default function CandidateDnList(changes, commander) {
