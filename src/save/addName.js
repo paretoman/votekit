@@ -6,6 +6,7 @@ export default function addName(layout) {
     const input = document.createElement('input')
     input.type = 'text'
     input.placeholder = ''
+    input.set = (n) => { input.value = n }
 
     const div = document.createElement('div')
     div.appendChild(label)

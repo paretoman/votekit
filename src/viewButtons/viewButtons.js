@@ -33,4 +33,5 @@ export default function viewButtons(sim, sandboxPath, layout, menu, viewMode) {
     addSimControlsLabel(layout)
 
     buttonsToAddEntities(viewMode, entities, layout)
+    return { nameInput }
 }

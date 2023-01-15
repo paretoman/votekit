@@ -25,11 +25,11 @@ export default function View(sim, sandboxPath) {
     const viewMode = new ViewMode(pub, simOptions, changes)
     const viewChanges = new Changes()
 
-    viewButtons(sim, sandboxPath, layout, menu, viewMode)
+    const { nameInput } = viewButtons(sim, sandboxPath, layout, menu, viewMode)
     const { screenMain } = viewScreens(sim, viewMode, menu, layout, viewChanges)
 
     function load(configURL, targetConfig) {
-        loadView(configURL, targetConfig, init)
+        loadView(configURL, targetConfig, init, nameInput)
     }
 
     window.requestAnimationFrame(viewLoop)

@@ -11,9 +11,13 @@ import loadShortCode from './loadShortCode.js'
  * 3. Short code in url that requires a database lookup.
  * Then use a callback since we might have to wait for the database.
  */
-export default function checkURL(configURL, checkUrlCallback) {
+export default function checkURL(configURL, nameInput, checkUrlCallback) {
     const { search } = configURL
     const params = new URLSearchParams(search)
+
+    const name = params.get('name')
+    if (name !== null) nameInput.set(name)
+
     const a = params.has('a')
     const b = params.has('b')
     const yes = a || b
