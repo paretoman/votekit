@@ -45,7 +45,7 @@ export default function ViewEntitiesOne(entities, screen, menu, changes, simOpti
     }
 
     self.exit = () => {
-        candidateViewList.unsetCandidateWins() // clean up fractions
+        candidateViewList.unsetCandidateWins()
         self.voterTestView.voterTest.setE(0)
     }
 
