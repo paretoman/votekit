@@ -11,6 +11,7 @@ const layoutOrder = [
     'vizMini',
     'maps',
     'budget',
+    'name',
     'saveConfigToLink',
     'saveConfigToShortLink',
     'saveConfigToText',

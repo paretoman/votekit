@@ -7,7 +7,7 @@ import publishShortLink from './publishShortLink.js'
  * @param {Layout} layout
  * @param {Commander} commander
  */
-export default function addSaveConfigToShortLink(layout, commander, sandboxURL) {
+export default function addSaveConfigToShortLink(layout, commander, sandboxURL, nameInput) {
     const button = document.createElement('button')
     button.className = 'button2'
     button.innerText = 'Publish Short Link'
@@ -20,13 +20,13 @@ export default function addSaveConfigToShortLink(layout, commander, sandboxURL) 
 
     button.onclick = () => {
         const config = commander.getConfig()
-        publishShortLink(config, sandboxURL, (link) => {
+        publishShortLink(config, sandboxURL, nameInput, (link) => {
             text.value = link
         })
     }
     button2.onclick = () => {
         const config = commander.getConfig()
-        publishShortLink(config, sandboxURL, (link) => {
+        publishShortLink(config, sandboxURL, nameInput, (link) => {
             navigator.clipboard.writeText(link)
         })
     }

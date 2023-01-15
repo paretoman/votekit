@@ -60,6 +60,11 @@ textarea {
 .darkMode a:visited {
 	color: #bbe;
 }
+.darkMode input {
+	background:  #222; 
+	color: white;
+    border: 1px solid #888;
+}
 .darkMode textarea {
 	background:  #222; 
 	color: white;

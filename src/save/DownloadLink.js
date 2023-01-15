@@ -1,11 +1,9 @@
-export default function DownloadLink(text) {
+export default function DownloadLink() {
     const self = this
 
     self.div = document.createElement('div')
 
     const downloadLink = document.createElement('a')
-    downloadLink.innerText = text
-    downloadLink.download = text
     downloadLink.style.margin = '4px'
     self.div.append(downloadLink)
 
@@ -27,6 +25,8 @@ export default function DownloadLink(text) {
         downloadLink.href = url
     }
     self.setFileName = (fn) => {
+        downloadLink.innerText = fn
         downloadLink.download = fn
     }
+    self.setFileName('download')
 }

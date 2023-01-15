@@ -7,6 +7,7 @@ import addSaveConfigToLink from '../save/addSaveConfigToLink.js'
 import addSimControlsLabel from './addSimControlsLabel.js'
 import buttonsToAddEntities from './buttonsToAddEntities.js'
 import addSaveConfigToShortLink from '../save/addSaveConfigToShortLink.js'
+import addName from '../save/addName.js'
 /**
  * Make buttons for the sandbox.
  * @param {*} sim
@@ -24,9 +25,10 @@ export default function viewButtons(sim, sandboxURL, layout, menu, viewMode) {
     menuElectionOptions(electionOptions, menu)
 
     addUndo(layout, commander)
-    addSaveConfigToLink(layout, commander, sandboxURL)
-    addSaveConfigToShortLink(layout, commander, sandboxURL)
-    addSaveConfigToText(layout, commander)
+    const nameInput = addName(layout)
+    addSaveConfigToLink(layout, commander, sandboxURL, nameInput)
+    addSaveConfigToShortLink(layout, commander, sandboxURL, nameInput)
+    addSaveConfigToText(layout, commander, nameInput)
     addLoadConfigText(layout, commander)
     addSimControlsLabel(layout)
 

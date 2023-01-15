@@ -8,7 +8,7 @@ import DownloadLink from './DownloadLink.js'
  * @param {Layout} layout
  * @param {Commander} commander
  */
-export default function addSaveConfigToText(layout, commander) {
+export default function addSaveConfigToText(layout, commander, nameInput) {
     const button = document.createElement('button')
     button.className = 'button2'
     button.innerText = 'Save Config To Text'
@@ -17,7 +17,8 @@ export default function addSaveConfigToText(layout, commander) {
     button2.className = 'button2'
     button2.innerText = 'Download Config Json'
 
-    const dLink = new DownloadLink('config.json')
+    const dLink = new DownloadLink()
+    dLink.setFileName('config.json')
     dLink.hide()
 
     const text = document.createElement('textarea')
@@ -31,6 +32,8 @@ export default function addSaveConfigToText(layout, commander) {
         button.onclick()
         const url = `data:text/json;charset=utf-8,${encodeURIComponent(text.value)}`
         dLink.setUrl(url)
+        const name = nameInput.value
+        if (name !== '') dLink.setFileName(`${name}.json`)
         dLink.show()
     }
 

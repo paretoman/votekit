@@ -7,7 +7,7 @@ import getLink from './getLink.js'
  * @param {Layout} layout
  * @param {Commander} commander
  */
-export default function addSaveConfigToLink(layout, commander, sandboxURL) {
+export default function addSaveConfigToLink(layout, commander, sandboxURL, nameInput) {
     const button = document.createElement('button')
     button.className = 'button2'
     button.innerText = 'Save Link'
@@ -20,13 +20,12 @@ export default function addSaveConfigToLink(layout, commander, sandboxURL) {
 
     button.onclick = () => {
         const config = commander.getConfig()
-        const link = getLink(config, sandboxURL)
+        const link = getLink(config, sandboxURL, nameInput)
         text.value = link
     }
     button2.onclick = () => {
-        const config = commander.getConfig()
-        const link = getLink(config, sandboxURL)
-        navigator.clipboard.writeText(link)
+        button.onclick()
+        navigator.clipboard.writeText(text.value)
     }
 
     const clearDiv = document.createElement('div')
