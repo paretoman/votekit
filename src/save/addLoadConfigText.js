@@ -1,5 +1,7 @@
 /** @module */
 
+import addUpload from './addUpload.js'
+
 /**
  * Add buttons to layout for undo and redo, and connect them to commander for functionality.
  * @param {Layout} layout
@@ -20,10 +22,18 @@ export default function addLoadConfigText(layout, commander) {
         commander.loadConfig(config)
     }
 
+    const upload = addUpload(uploadCallback)
+    function uploadCallback(event) {
+        const { result } = event.target
+        const config = JSON.parse(result)
+        commander.loadConfig(config)
+    }
+
     const clearDiv = document.createElement('div')
 
     const div = document.createElement('div')
     div.appendChild(button)
+    div.appendChild(upload)
     div.appendChild(clearDiv)
     div.appendChild(text)
 
