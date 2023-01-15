@@ -1,12 +1,14 @@
 import ajaxLite from '../utilities/ajaxLite.js'
-import { hashCode } from '../utilities/jsHelpers.js'
+import { hashCode, orderedJsonStringify } from '../utilities/jsHelpers.js'
 import getLink from './getLink.js'
 import linkFromParams from './linkFromParams.js'
 import shortLinkDatabaseUrl from './shortLinkDatabaseUrl.js'
 
 export default function publishShortLink(config, sandboxURL, nameInput, afterPublish) {
     const link = getLink(config, sandboxURL, nameInput)
-    const shortcode = hashCode(link)
+
+    const configString = orderedJsonStringify(config)
+    const shortcode = hashCode(configString)
 
     ajaxLite.get(shortLinkDatabaseUrl, { shortcode, link }, (res) => {
         if (res !== '') {
