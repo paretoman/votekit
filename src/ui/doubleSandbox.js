@@ -29,8 +29,9 @@ export default function doubleSandbox(targetConfig, sandboxURL) {
     }
     divLink.onclick = toggle
 
-    const div1 = sandbox(targetConfig, sandboxURL, comMessenger)
-    const div2 = sandbox(targetConfig, sandboxURL, comMessenger)
+    const configURL = window.location
+    const div1 = sandbox(configURL, targetConfig, sandboxURL, comMessenger)
+    const div2 = sandbox(configURL, targetConfig, sandboxURL, comMessenger)
     div1.style.display = 'inline-block'
     div2.style.display = 'inline-block'
 

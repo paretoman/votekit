@@ -13,7 +13,8 @@ export default function addSingleSandboxes() {
         const hasSandboxURL = target.dataset.sandboxurl !== undefined
         const sandboxURL = hasSandboxURL ? target.dataset.sandboxurl : ''
 
-        const div = sandbox(targetConfig, sandboxURL)
+        const configURL = window.location
+        const div = sandbox(configURL, targetConfig, sandboxURL)
         const parent = target.parentNode
         parent.appendChild(div)
     })

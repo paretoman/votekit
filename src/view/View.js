@@ -28,8 +28,8 @@ export default function View(sim, sandboxURL) {
     viewButtons(sim, sandboxURL, layout, menu, viewMode)
     const { screenMain } = viewScreens(sim, viewMode, menu, layout, viewChanges)
 
-    function load(targetConfig) {
-        loadView(targetConfig, init)
+    function load(configURL, targetConfig) {
+        loadView(configURL, targetConfig, init)
     }
 
     window.requestAnimationFrame(viewLoop)
