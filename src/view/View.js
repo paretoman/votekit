@@ -12,10 +12,10 @@ import loadView from '../save/loadView.js'
  * The foreground draws animations.
  * The view loops as fast as the browser can refresh.
  * @param {*} sim
- * @param {String} sandboxURL
+ * @param {String} sandboxPath
  * @returns
  */
-export default function View(sim, sandboxURL) {
+export default function View(sim, sandboxPath) {
     const {
         changes, commander, simOptions, pub, update, init,
     } = sim
@@ -25,7 +25,7 @@ export default function View(sim, sandboxURL) {
     const viewMode = new ViewMode(pub, simOptions, changes)
     const viewChanges = new Changes()
 
-    viewButtons(sim, sandboxURL, layout, menu, viewMode)
+    viewButtons(sim, sandboxPath, layout, menu, viewMode)
     const { screenMain } = viewScreens(sim, viewMode, menu, layout, viewChanges)
 
     function load(configURL, targetConfig) {

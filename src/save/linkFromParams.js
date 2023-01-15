@@ -1,8 +1,8 @@
-export default function linkFromParams(params, sandboxURL) {
+export default function linkFromParams(params, sandboxPath) {
     const search = urlSearchString(params)
     const currentUrlFolder = getFolder()
 
-    const link = `${currentUrlFolder}/${sandboxURL}?${search}`
+    const link = `${currentUrlFolder}/${sandboxPath}?${search}`
     return link
 }
 

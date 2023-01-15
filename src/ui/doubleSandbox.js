@@ -6,10 +6,10 @@ import sandbox from './sandbox.js'
 /**
  * Makes Two sandboxes and links their commands together.
  * @param {Object} config - To pass to commander to set the initial configuration of the sim.
- * @param {String} sandboxURL - String to add to the current url directory to get to the sandbox.
+ * @param {String} sandboxPath - String to add to the current url directory to get to the sandbox.
  * @returns {HTMLElement} - div containing the two sandboxes.
  */
-export default function doubleSandbox(targetConfig, sandboxURL) {
+export default function doubleSandbox(targetConfig, sandboxPath) {
     const comMessenger = new ComMessenger()
 
     const divLink = document.createElement('button')
@@ -30,8 +30,8 @@ export default function doubleSandbox(targetConfig, sandboxURL) {
     divLink.onclick = toggle
 
     const configURL = window.location
-    const div1 = sandbox(configURL, targetConfig, sandboxURL, comMessenger)
-    const div2 = sandbox(configURL, targetConfig, sandboxURL, comMessenger)
+    const div1 = sandbox(configURL, targetConfig, sandboxPath, comMessenger)
+    const div2 = sandbox(configURL, targetConfig, sandboxPath, comMessenger)
     div1.style.display = 'inline-block'
     div2.style.display = 'inline-block'
 

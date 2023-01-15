@@ -11,12 +11,12 @@ import addName from '../save/addName.js'
 /**
  * Make buttons for the sandbox.
  * @param {*} sim
- * @param {*} sandboxURL
+ * @param {*} sandboxPath
  * @param {*} layout
  * @param {*} menu
  * @param {*} viewMode
  */
-export default function viewButtons(sim, sandboxURL, layout, menu, viewMode) {
+export default function viewButtons(sim, sandboxPath, layout, menu, viewMode) {
     const {
         commander, simOptions, electionOptions, entities,
     } = sim
@@ -26,8 +26,8 @@ export default function viewButtons(sim, sandboxURL, layout, menu, viewMode) {
 
     addUndo(layout, commander)
     const nameInput = addName(layout)
-    addSaveConfigToLink(layout, commander, sandboxURL, nameInput)
-    addSaveConfigToShortLink(layout, commander, sandboxURL, nameInput)
+    addSaveConfigToLink(layout, commander, sandboxPath, nameInput)
+    addSaveConfigToShortLink(layout, commander, sandboxPath, nameInput)
     addSaveConfigToText(layout, commander, nameInput)
     addLoadConfigText(layout, commander)
     addSimControlsLabel(layout)

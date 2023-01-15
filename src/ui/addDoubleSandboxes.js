@@ -11,9 +11,9 @@ export default function addDoubleSandboxes() {
         const targetConfig = (hasConfig) ? JSON.parse(target.dataset.config) : {}
 
         const hasSandboxURL = target.dataset.sandboxurl !== undefined
-        const sandboxURL = hasSandboxURL ? target.dataset.sandboxurl : ''
+        const sandboxPath = hasSandboxURL ? target.dataset.sandboxurl : ''
 
-        const div = doubleSandbox(targetConfig, sandboxURL)
+        const div = doubleSandbox(targetConfig, sandboxPath)
         const parent = target.parentNode
         parent.appendChild(div)
     })
