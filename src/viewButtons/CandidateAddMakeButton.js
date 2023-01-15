@@ -17,6 +17,8 @@ export default function CandidateAddMakeButton(viewMode, layout, canList) {
 
     layout.newElement('addCandidate', addCandidateButton)
 
+    hide()
+
     viewMode.viewModes.one.attach({
         enter: show,
         exit: hide,
