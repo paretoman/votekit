@@ -1,6 +1,5 @@
 import layoutOrder from './layoutOrder.js'
 import Layout from './Layout.js'
-import Menu from '../menu/Menu.js'
 import ViewMode from './ViewMode.js'
 import viewScreens from '../viewScreens/viewScreens.js'
 import viewButtons from '../viewButtons/viewButtons.js'
@@ -17,15 +16,14 @@ import loadView from '../save/loadView.js'
  */
 export default function View(sim, sandboxPath) {
     const {
-        changes, commander, simOptions, pub, update, init,
+        changes, simOptions, pub, update, init,
     } = sim
 
     const viewMode = new ViewMode(pub, simOptions, changes)
     const viewChanges = new Changes()
     const layout = new Layout(layoutOrder)
 
-    const menu = new Menu(changes, layout, commander)
-    const { nameInput } = viewButtons(sim, sandboxPath, layout, menu, viewMode)
+    const { nameInput, menu } = viewButtons(sim, sandboxPath, layout, viewMode)
     const { screenMain } = viewScreens(sim, viewMode, menu, layout, viewChanges)
 
     function load(configURL, targetConfig) {
