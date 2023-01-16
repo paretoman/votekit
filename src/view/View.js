@@ -5,6 +5,7 @@ import viewScreens from '../viewScreens/viewScreens.js'
 import viewButtons from '../viewButtons/viewButtons.js'
 import Changes from '../sim/Changes.js'
 import loadView from '../save/loadView.js'
+import viewJupyter from '../environments/ViewJupyter.js'
 
 /**
  * View observes the sim and adds a user interface.
@@ -25,6 +26,7 @@ export default function View(sim, sandboxPath) {
 
     const { nameInput, menu } = viewButtons(sim, viewMode, layout, sandboxPath)
     const { screenMain } = viewScreens(sim, viewMode, layout, viewChanges, menu)
+    viewJupyter(pub, changes)
 
     function load(configURL, targetConfig) {
         loadView(configURL, targetConfig, init, nameInput)

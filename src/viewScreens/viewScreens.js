@@ -3,7 +3,6 @@
 import Screen from '../screen/Screen.js'
 import addDarkModeSwitch from './addDarkModeSwitch.js'
 import ViewSettings from './ViewSettings.js'
-import ViewJupyter from '../environments/ViewJupyter.js'
 import ViewVizBudget from './ViewVizBudget.js'
 import ViewVizOne from './ViewVizOne.js'
 import ViewVizSample from './ViewVizSample.js'
@@ -23,7 +22,7 @@ import addDownloadScreen from './addDownloadScreen.js'
  */
 export default function viewScreens(sim, viewMode, layout, viewChanges, menu) {
     const {
-        entities, simOptions, electionOptions, changes, pub,
+        entities, simOptions, electionOptions, changes,
     } = sim
 
     const screenCommon = new ScreenCommon(300, 300)
@@ -39,7 +38,6 @@ export default function viewScreens(sim, viewMode, layout, viewChanges, menu) {
     const viewSettings = new ViewSettings(changes)
     new ViewEntitiesOne(entities, screenMain, menu, changes, simOptions, electionOptions, viewMode, viewSettings, viewChanges)
     new ViewEntitiesSample(entities, screenMain, menu, changes, simOptions, electionOptions, viewMode, viewSettings)
-    new ViewJupyter(pub, changes)
     new ViewVizOne(entities, screenMain, screenMini, menu, changes, simOptions, electionOptions, viewMode, viewSettings)
     new ViewVizSample(entities, screenMain, menu, changes, simOptions, viewMode, viewSettings)
     new ViewVizBudget(screenCommon, layout, menu, changes, simOptions, electionOptions, viewMode)

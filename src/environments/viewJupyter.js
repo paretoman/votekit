@@ -1,14 +1,12 @@
 import jupyterUpdate, { jupyterClear } from './jupyter.js'
 
-export default function ViewJupyter(pub, changes) {
-    const self = this
+export default function viewJupyter(pub, changes) {
+    pub.attach({
+        update: (simData) => {
+            if (changes.checkNone()) return
 
-    pub.attach(self)
-
-    self.update = (simData) => {
-        if (changes.checkNone()) return
-
-        jupyterClear()
-        jupyterUpdate(simData)
-    }
+            jupyterClear()
+            jupyterUpdate(simData)
+        },
+    })
 }
