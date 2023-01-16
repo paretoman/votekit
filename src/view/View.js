@@ -20,11 +20,11 @@ export default function View(sim, sandboxPath) {
         changes, commander, simOptions, pub, update, init,
     } = sim
 
-    const layout = new Layout(layoutOrder)
-    const menu = new Menu(changes, layout, commander)
     const viewMode = new ViewMode(pub, simOptions, changes)
     const viewChanges = new Changes()
+    const layout = new Layout(layoutOrder)
 
+    const menu = new Menu(changes, layout, commander)
     const { nameInput } = viewButtons(sim, sandboxPath, layout, menu, viewMode)
     const { screenMain } = viewScreens(sim, viewMode, menu, layout, viewChanges)
 
