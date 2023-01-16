@@ -23,8 +23,8 @@ export default function View(sim, sandboxPath) {
     const viewChanges = new Changes()
     const layout = new Layout(layoutOrder)
 
-    const { nameInput, menu } = viewButtons(sim, sandboxPath, layout, viewMode)
-    const { screenMain } = viewScreens(sim, viewMode, menu, layout, viewChanges)
+    const { nameInput, menu } = viewButtons(sim, viewMode, layout, sandboxPath)
+    const { screenMain } = viewScreens(sim, viewMode, layout, viewChanges, menu)
 
     function load(configURL, targetConfig) {
         loadView(configURL, targetConfig, init, nameInput)

@@ -17,7 +17,7 @@ import Menu from '../menu/Menu.js'
  * @param {*} menu
  * @param {*} viewMode
  */
-export default function viewButtons(sim, sandboxPath, layout, viewMode) {
+export default function viewButtons(sim, viewMode, layout, sandboxPath) {
     const {
         commander, simOptions, electionOptions, entities, changes,
     } = sim

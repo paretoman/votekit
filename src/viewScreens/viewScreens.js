@@ -21,7 +21,7 @@ import addDownloadScreen from './addDownloadScreen.js'
  * @param {*} menu
  * @param {*} layout
  */
-export default function viewScreens(sim, viewMode, menu, layout, viewChanges) {
+export default function viewScreens(sim, viewMode, layout, viewChanges, menu) {
     const {
         entities, simOptions, electionOptions, changes, pub,
     } = sim
