@@ -4,7 +4,7 @@ import CandidateViewList from '../vizCandidates/CandidateViewList.js'
 import VoterViewList from '../vizVoters/VoterViewList.js'
 import ViewBase from './ViewBase.js'
 import addAllocation from '../viz/addAllocation.js'
-import VoterTestView from '../vizTestVoter/VoterTestView.js'
+import TestVoterView from '../vizTestVoter/TestVoterView.js'
 import getTestGeometry from '../sim/getTestGeometry.js'
 import voteCasters from '../castVotes/voteCasters.js'
 
@@ -31,7 +31,7 @@ export default function ViewEntitiesOne(entities, screen, menu, changes, simOpti
     candidateViewList.attachNewG(self.dragm)
     voterViewList.attachNewG(self.dragm)
 
-    self.voterTestView = new VoterTestView(screen, simOptions, self, viewSettings)
+    self.testVoterView = new TestVoterView(screen, simOptions, self, viewSettings)
 
     // Main State Machine Functions //
 
@@ -41,12 +41,12 @@ export default function ViewEntitiesOne(entities, screen, menu, changes, simOpti
 
         voterViewList.updateViewXY()
         candidateViewList.updateViewXY()
-        self.voterTestView.graphic.updateViewXY()
+        self.testVoterView.graphic.updateViewXY()
     }
 
     self.exit = () => {
         candidateViewList.unsetCandidateWins()
-        self.voterTestView.voterTest.setE(0)
+        self.testVoterView.testVoter.setE(0)
     }
 
     self.update = (simData) => {
@@ -80,12 +80,12 @@ export default function ViewEntitiesOne(entities, screen, menu, changes, simOpti
 
     // Test Point
     self.clickEmpty = (p) => {
-        self.voterTestView.graphic.start(p)
+        self.testVoterView.graphic.start(p)
     }
     self.testVoteView = () => {
-        const geometry = getTestGeometry(self.voterTestView.voterTest, candidateList, simOptions)
+        const geometry = getTestGeometry(self.testVoterView.testVoter, candidateList, simOptions)
         const vote = voteCasters[electionOptions.voteCasterName].castTestVote(geometry)
-        self.voterTestView.graphic.update(vote, candidateList)
+        self.testVoterView.graphic.update(vote, candidateList)
         viewChanges.add(['testVote'])
         return vote
     }
@@ -93,7 +93,7 @@ export default function ViewEntitiesOne(entities, screen, menu, changes, simOpti
     self.renderForeground = () => {
         voterViewList.renderForeground()
         candidateViewList.renderForeground()
-        self.voterTestView.graphic.renderForeground()
+        self.testVoterView.graphic.renderForeground()
     }
     self.clearForeground = () => {
         screen.clearForeground()

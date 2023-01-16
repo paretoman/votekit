@@ -32,7 +32,7 @@ export default function DraggableManager() {
         } else {
             d.g = s.graphic.circle
             d.r = s.graphic
-            d.o = s.voterTest
+            d.o = s.testVoter
             d.p = { isCircle: true }
         }
         self.list.push(d)

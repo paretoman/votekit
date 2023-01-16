@@ -4,25 +4,25 @@ import tooltipForTestVoter from '../tooltips/tooltipForTestVoter.js'
 import colorBlender, { rgbToString } from '../viz/colorBlender.js'
 import EntityGraphic from '../vizEntities/EntityGraphic.js'
 
-export default function VoterTestGraphic(voterTest, screen, simOptions, viewEntitiesOne, viewSettings) {
+export default function TestVoterGraphic(testVoter, screen, simOptions, viewEntitiesOne, viewSettings) {
     const self = this
 
     // Start displaying testvoter
     self.start = (p) => {
-        voterTest.setE(1)
+        testVoter.setE(1)
         self.setXYView(p)
         hideOnClickOutside(screen.wrap, removeTestPoint)
     }
     function removeTestPoint() {
-        voterTest.setE(0)
+        testVoter.setE(0)
     }
 
     // Dragging
 
-    const circle = new CircleGraphic(self, voterTest, 9, screen)
+    const circle = new CircleGraphic(self, testVoter, 9, screen)
     self.circle = circle
 
-    EntityGraphic.call(self, voterTest, simOptions)
+    EntityGraphic.call(self, testVoter, simOptions)
 
     // Rendering
 
@@ -39,7 +39,7 @@ export default function VoterTestGraphic(voterTest, screen, simOptions, viewEnti
 
         const { tallyFractions } = vote
         const color = rgbToString(colorBlender(tallyFractions, colorSetRGBA))
-        voterTest.setColor(color)
+        testVoter.setColor(color)
 
         if (tooltip.box) {
             tooltip.update(vote, self.colorSet)
@@ -53,13 +53,13 @@ export default function VoterTestGraphic(voterTest, screen, simOptions, viewEnti
         if (vote === null) return
 
         if (tooltip.box) tooltip.box.remove()
-        tooltip = tooltipForTestVoter(self, voterTest, screen)
+        tooltip = tooltipForTestVoter(self, testVoter, screen)
         tooltip.update(vote, self.colorSet)
     }
 
     self.renderForeground = () => {
         // handle
-        if (voterTest.exists || viewSettings.showGhosts) {
+        if (testVoter.exists || viewSettings.showGhosts) {
             circle.render()
         }
     }

@@ -8,9 +8,9 @@ import getGeoms from '../entities/getGeoms.js'
  * @param {*} voterDistricts
  * @returns
  */
-export default function getTestGeometry(voterTest, candidateList, simOptions) {
+export default function getTestGeometry(testVoter, candidateList, simOptions) {
     const { dimensions } = simOptions
-    const voterGeom = getGeoms([voterTest], dimensions)[0]
+    const voterGeom = getGeoms([testVoter], dimensions)[0]
     const canGeoms = candidateList.getGeoms(dimensions)
     const parties = candidateList.getParties()
     const geometry = {

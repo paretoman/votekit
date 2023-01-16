@@ -1,10 +1,10 @@
 import tooltipBox from './tooltipBox.js'
 import TooltipVoteText from './TooltipVoteText.js'
 
-export default function tooltipForTestVoter(voterTestGraphic, voterTest, screen) {
+export default function tooltipForTestVoter(testVoterGraphic, testVoter, screen) {
     // make a html box appear
 
-    const tbox = tooltipBox(voterTestGraphic, screen)
+    const tbox = tooltipBox(testVoterGraphic, screen)
     const { box, setPin } = tbox
 
     box.innerText = 'Vote'
@@ -36,7 +36,7 @@ export default function tooltipForTestVoter(voterTestGraphic, voterTest, screen)
     button2.innerHTML = '&#x2573;'
     button2.onclick = () => {
         box.remove()
-        voterTest.setE(0)
+        testVoter.setE(0)
     }
     box.appendChild(button2)
     box.appendChild(button)

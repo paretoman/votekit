@@ -1,4 +1,4 @@
-export default function VoterTest(viewEntitiesOne) {
+export default function TestVoter(viewEntitiesOne) {
     const self = this
 
     // Position
