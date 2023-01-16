@@ -5,7 +5,7 @@ import VizOneVoronoi from '../viz/VizOneVoronoi.js'
 import VizOneVoronoiRanking from '../viz/VizOneVoronoiRanking.js'
 import VizOneGrid from '../viz/VizOneGrid.js'
 import ViewBase from './ViewBase.js'
-import VoterRendererList from '../voters/VoterRendererList.js'
+import VoterRendererList from '../vizVoters/VoterRendererList.js'
 
 /**
  * Simulate one election with

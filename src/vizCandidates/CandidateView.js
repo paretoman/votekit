@@ -1,6 +1,6 @@
 /** @module */
 
-import CandidateGraphic from '../vizEntities/CandidateGraphic.js'
+import CandidateGraphic from './CandidateGraphic.js'
 
 /**
  * CandidateView has functionality for a candidate that is specific to a view.

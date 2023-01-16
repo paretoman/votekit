@@ -1,7 +1,7 @@
 import tooltipForEntity from '../tooltips/tooltipForEntity.js'
 import { drawStrokedColor, textPercent } from '../utilities/graphicsUtilities.js'
-import EntityGraphic from './EntityGraphic.js'
-import SquareGraphic from './SquareGraphic.js'
+import EntityGraphic from '../vizEntities/EntityGraphic.js'
+import SquareGraphic from '../vizEntities/SquareGraphic.js'
 
 // eslint-disable-next-line max-len
 export default function CandidateDnGraphic(candidateDn, screen, wHandle, hHandle, viewSettings, simOptions, electionOptions) {

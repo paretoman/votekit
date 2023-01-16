@@ -1,6 +1,6 @@
 /** @module */
 
-import VoterGraphic from '../vizEntities/VoterGraphic.js'
+import VoterGraphic from './VoterGraphic.js'
 
 /**
  * Super class

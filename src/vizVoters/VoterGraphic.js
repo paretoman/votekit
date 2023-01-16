@@ -1,6 +1,6 @@
 import tooltipForEntity from '../tooltips/tooltipForEntity.js'
-import CircleGraphic from './CircleGraphic.js'
-import EntityGraphic from './EntityGraphic.js'
+import CircleGraphic from '../vizEntities/CircleGraphic.js'
+import EntityGraphic from '../vizEntities/EntityGraphic.js'
 
 export default function VoterGraphic(voterShape, screen, viewSettings, simOptions) {
     const self = this

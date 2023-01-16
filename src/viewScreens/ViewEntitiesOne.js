@@ -1,10 +1,10 @@
 /** @module */
 
-import CandidateViewList from '../candidates/CandidateViewList.js'
-import VoterViewList from '../voters/VoterViewList.js'
+import CandidateViewList from '../vizCandidates/CandidateViewList.js'
+import VoterViewList from '../vizVoters/VoterViewList.js'
 import ViewBase from './ViewBase.js'
 import addAllocation from '../viz/addAllocation.js'
-import VoterTestView from '../voters/VoterTestView.js'
+import VoterTestView from '../vizTestVoter/VoterTestView.js'
 import getTestGeometry from '../sim/getTestGeometry.js'
 import voteCasters from '../castVotes/voteCasters.js'
 

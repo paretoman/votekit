@@ -1,6 +1,6 @@
 /** @module */
 
-import CandidateDnGraphic from '../vizEntities/CandidateDnGraphic.js'
+import CandidateDnGraphic from './CandidateDnGraphic.js'
 
 /**
  * CandidateDnView has functionality for a canDn that is specific to a view.
