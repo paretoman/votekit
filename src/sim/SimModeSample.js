@@ -1,7 +1,7 @@
 /** @module */
 
 import CandidateDistributionSampler from '../electionSample/CandidateDistributionSampler.js'
-import ElectionSampleDistricts from '../electionSample/ElectionSampleDistricts.js'
+import ElectionSampler from '../electionSample/ElectionSampler.js'
 import getGeometry from './getGeometry.js'
 
 /**
@@ -11,7 +11,7 @@ import getGeometry from './getGeometry.js'
  * @param {Screen} screen
  * @param {Menu} menu
  * @param {ElectionSample} electionSample
- * @param {ElectionSampleDistricts} electionSampleDistricts
+ * @param {ElectionSampler} electionSampler
  * @param {VoterDistricts} voterDistricts
  * @constructor
  */
@@ -21,7 +21,7 @@ export default function SimModeSample(pub, entities, changes, voterDistricts, si
     const { candidateDnList, voterShapeList } = entities
     const canDnSampler = new CandidateDistributionSampler(candidateDnList, changes, simOptions)
 
-    const electionSampleDistricts = new ElectionSampleDistricts()
+    const electionSampler = new ElectionSampler()
 
     self.update = () => {
         // Update players. Run an election. Get result.
@@ -35,7 +35,7 @@ export default function SimModeSample(pub, entities, changes, voterDistricts, si
 
         const geometry = getGeometry(voterShapeList, candidateDnList, simOptions, voterDistricts)
 
-        const samplingResult = electionSampleDistricts.update(geometry, canDnSampler.sampler, changes, simOptions, electionOptions)
+        const samplingResult = electionSampler.update(geometry, canDnSampler.sampler, changes, simOptions, electionOptions)
         const simData = { samplingResult }
         pub.update(simData)
         changes.clear()

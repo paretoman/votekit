@@ -10,7 +10,7 @@ import electionDistrictsRun from '../electionDistricts/electionDistrictsRun.js'
  * The simulation is dynamic. More simulations are performed at each frame.
  * @constructor
  */
-export default function ElectionSampleDistricts() {
+export default function ElectionSampler() {
     const self = this
 
     const maxPoints = 5000
