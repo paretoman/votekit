@@ -6,7 +6,7 @@ layout: default
 An ElectionSampler is run on the geometry to generate output data structures.
 
 - Parent Page: [SimMode](simMode.md)
-- Subpages: [election](election.md)
+- Sibling Page: [election](election.md)
 
 ## ElectionSampler
 
