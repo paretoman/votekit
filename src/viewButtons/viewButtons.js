@@ -1,6 +1,6 @@
 import menuSimOptions from './MenuSimOptions.js'
 import menuElectionOptions from './menuElectionOptions.js'
-import addUndo from '../command/addUndo.js'
+import addUndo from './addUndo.js'
 import addSaveConfigToText from '../save/addSaveConfigToText.js'
 import addLoadConfigText from '../save/addLoadConfigText.js'
 import addSaveConfigToLink from '../save/addSaveConfigToLink.js'
