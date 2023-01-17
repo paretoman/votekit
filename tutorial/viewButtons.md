@@ -1,8 +1,6 @@
 ---
 title: ViewButtons
 layout: default
-
-
 ---
 
 ## View Buttons

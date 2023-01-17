@@ -5,6 +5,8 @@ layout: default
 
 Here's a big list of things I want in the future.
 
+* Parent Page: [index](index.md)
+
 ## Bugs
 
 * Architecture.md document needs to be updated to match code.
@@ -23,9 +25,10 @@ Here's a big list of things I want in the future.
 ## Visuals
 
 * Animate +1 rising from candidate when they become winner.
-* Budget charts. For MES, show budget being spent in each round. Also, maybe also show comparisons between candidates in each round.
+* [x] Budget charts. For MES, show budget being spent in each round. 
+  * [ ] Also, maybe also show comparisons between candidates in each round.
 * We should not be using an object oriented approach like passing VoterViewList and CandidateViewList to a viz function. It's too confusing and it seems to cross the boundary between simulation model and visualization. We should instead pass data to a viz function.
 
 ## Organizing Code
 
-* Make test directory outside of src. maybe also put index.html there too, since that is the test I run when developing the code.
+* [x] Make test directory outside of src. maybe also put index.html there too, since that is the test I run when developing the code.

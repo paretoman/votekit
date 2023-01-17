@@ -3,10 +3,10 @@ title: View
 layout: default
 ---
 
-View sends browser inputs for geometry and election options into the Sim. Also, View displays visualizations of outputs of election results from the Sim.
+View sends browser inputs for geometry and election options into the Sim. Browser input includes menus, tooltips, and screens. Also, View displays visualizations of outputs of election results from the Sim. 
 
 * Parent page: [architecture](architecture.md) 
-* Subpages: [viewButtons](viewButtons.md) , [viewScreens](viewScreens.md)
+* Subpages: [viewMode](viewMode.md), [viewButtons](viewButtons.md) , [viewScreens](viewScreens.md)
 
 ## View
 
@@ -14,7 +14,7 @@ View sets up many views. The views hook into Sim. Then the views receive inputs 
 
 ### ViewMode
 
-Views hook into the Sim through the ViewMode. ViewMode has a state. The state calls the views: 
+Views hook into the Sim through the [ViewMode](viewMode.md). ViewMode has a state. The state calls the views: 
 
 - Sim -> ViewMode -> ViewMode state -> views
 
@@ -33,6 +33,10 @@ The [viewButtons](viewButtons.md) function aggregates button functionality: menu
 ## Screens
 
 The [viewScreens](viewScreens.md) function aggregates screen functionality.
+
+## Jupyter
+
+The viewJupyter function outputs sim data to the jupyter environment for python.
 
 ## Load
 

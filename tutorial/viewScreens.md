@@ -1,13 +1,12 @@
 ---
 title: ViewScreens
 layout: default
-
-
 ---
 
 The viewScreens function aggregates screen functionality.
 
 * Parent page: [view](view.md) 
+* Subpage: [viz](viz.md), [vizEntities](vizEntities.md), [screen](screen.md)
 
 ## ViewScreens
 
@@ -17,7 +16,7 @@ Set height and width. Set option for svg or canvas mode. Set option for showing 
 
 ### screenMain
 
-Display the entities and visualizations in policy space.
+Display the entities and visualizations in policy space. Calls [screen](screen.md)
 
 ### screenMini
 
@@ -29,7 +28,7 @@ A base class for ViewEntitiesOne and ViewEntitiesSample.
 
 #### ClickDrag
 
-ClickDrag handles mouse interactions with the entities on a screen. Switching modes changes which entities are moved.
+ClickDrag handles mouse interactions with the entities on a screen. Switching modes changes which entities are moved. Also, events happen on the screen wrap.
 
 ### ViewSettings
 
@@ -46,10 +45,6 @@ Test votes aren't part of sim. View calls sim's cast vote functions to cast one 
 ### ViewEntitiesSample
 
 Draw entities: voters, candidates.
-
-### ViewJupyter
-
-Output sim data to jupyter environment for python.
 
 ### ViewVizOne
 
@@ -69,19 +64,8 @@ Visualize districts in an additional screen.
 
 ### Viz
 
-Some views call visualizations, viz's.
+Some views call visualizations, [viz](viz.md)'s.
 
-The viz's for ViewMode state "one" are:
+### VizEntities
 
-* VizOneVoronoiRanking
-* VizOneVoronoi
-* VizOneGrid
-* VizDistricts
-
-The viz's for ViewMode state "sample" are:
-
-* VizSampleDensity1D
-* VizSampleDensity2D
-* VizSample
-
-Each of these viz's can have "renderer makers" for the 1D and 2D cases. Maybe in the future this part could be simplified, but it works for now. The idea was to make a renderer function that needed no arguments so it could be run from other functions.
+Other views call entity drawing functions, which are in [vizEntities](vizEntities.md).

@@ -13,15 +13,15 @@ In the future, it might be good to divide this project into two parts.
 
 |                   | Sim  | View |
 | ----------------- | ---- | ---- |
-| candidateDns      | Sim  | View |
-| candidates        | Sim  | View |
+| candidateDns      | Sim  |      |
+| candidates        | Sim  |      |
 | castVotes         | Sim  |      |
 | command           | Sim  |      |
 | election          | Sim  |      |
 | electionDistricts | Sim  |      |
 | electionMethods   | Sim  |      |
 | electionSample    | Sim  |      |
-| entities          |      | View |
+| entities          | Sim  |      |
 | environments      |      | View |
 | lib               | Sim  | View |
 | menu              |      | View |
@@ -35,5 +35,9 @@ In the future, it might be good to divide this project into two parts.
 | viewButtons       |      | View |
 | viewScreens       |      | View |
 | viz               |      | View |
+| vizCandidateDns   |      | View |
+| vizCandidates     |      | View |
 | vizEntities       |      | View |
-| voters            | Sim  | View |
+| vizTestVoter      |      | View |
+| vizVoters         |      | View |
+| voters            | Sim  |      |

@@ -1,9 +1,11 @@
 ---
-title: Commands
+title: CommandsDetailed
 layout: default
 ---
 
 # Command Pattern and Uses
+
+Parent page: [Commands](commands.md) 
 
 ## Commander.js
 

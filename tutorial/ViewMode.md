@@ -1,7 +1,6 @@
 ---
 title: ViewMode
 layout: default
-
 ---
 
 Views hook into the Sim through the ViewMode.
