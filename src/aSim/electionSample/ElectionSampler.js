@@ -1,7 +1,7 @@
 /** @module */
 
-import electionRun from '../election/electionRun.js'
-import electionDistrictsRun from '../electionDistricts/electionDistrictsRun.js'
+import electionRun from '../../election/election/electionRun.js'
+import electionDistrictsRun from '../../election/electionDistricts/electionDistrictsRun.js'
 
 /**
  * Simulate winners from many sampled elections.

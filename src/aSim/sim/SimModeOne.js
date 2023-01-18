@@ -1,7 +1,7 @@
 /** @module */
 
-import electionDistrictsRun from '../electionDistricts/electionDistrictsRun.js'
-import electionRun from '../election/electionRun.js'
+import electionDistrictsRun from '../../election/electionDistricts/electionDistrictsRun.js'
+import electionRun from '../../election/election/electionRun.js'
 import getGeometry from './getGeometry.js'
 
 /**

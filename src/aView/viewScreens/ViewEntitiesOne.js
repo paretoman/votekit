@@ -6,7 +6,7 @@ import ViewBase from './ViewBase.js'
 import addAllocation from '../viz/addAllocation.js'
 import TestVoterView from '../vizTestVoter/TestVoterView.js'
 import getTestGeometry from '../../aSim/sim/getTestGeometry.js'
-import voteCasters from '../../aSim/castVotes/voteCasters.js'
+import voteCasters from '../../election/castVotes/voteCasters.js'
 
 /**
  * Draw entities: voters, candidates, test voters.
