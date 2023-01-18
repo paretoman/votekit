@@ -3,9 +3,9 @@ title: Election
 layout: default
 ---
 
-An election is run on the geometry to generate output data structures.
+An election is run on the geometry to generate output data structures. It handles casting votes and applying a social choice function. 
 
-- Parent Page: [SimMode](simMode.md)
+- Parent Pages: [Architecture](architecture.md), [SimMode](simMode.md)
 - Subpages: [CastVotes](castVotes.md), [SocialChoice](socialChoice.md)
 
 ## Election

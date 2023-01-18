@@ -3,7 +3,7 @@ title: Folders
 layout: default
 ---
 
-Folders are mainly divided into Sim and View. 
+Folders are mainly divided into election, sim and view. 
 
 * Parent page: [architecture](architecture.md) 
 
@@ -15,21 +15,20 @@ sandbox
 
 utilities
 
+election
+
+- castVotes
+- election
+- electionDistricts
+- electionMethods
+
 sim
 
 - candidateDns
 
 - candidates
 
-- castVotes
-
 - command
-
-- election
-
-- electionDistricts
-
-- electionMethods
 
 - electionSample
 
