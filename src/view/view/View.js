@@ -3,7 +3,7 @@ import Layout from './Layout.js'
 import ViewMode from './ViewMode.js'
 import viewScreens from '../viewScreens/viewScreens.js'
 import viewButtons from '../viewButtons/viewButtons.js'
-import Changes from '../../aSim/sim/Changes.js'
+import Changes from '../../sim/sim/Changes.js'
 import loadView from '../save/loadView.js'
 import viewJupyter from '../environments/ViewJupyter.js'
 

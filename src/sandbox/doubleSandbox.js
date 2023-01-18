@@ -1,6 +1,6 @@
 /** @module */
 
-import ComMessenger from '../aSim/command/ComMessenger.js'
+import ComMessenger from '../sim/command/ComMessenger.js'
 import sandbox from './sandbox.js'
 
 /**

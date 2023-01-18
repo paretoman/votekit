@@ -1,7 +1,7 @@
 /** @module */
 
-import Sim from '../aSim/sim/Sim.js'
-import View from '../aView/view/View.js'
+import Sim from '../sim/sim/Sim.js'
+import View from '../view/view/View.js'
 
 /**
  * Set up a user interface to run a simulation.
