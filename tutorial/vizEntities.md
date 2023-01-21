@@ -1,5 +1,5 @@
 ---
-title: Viz
+title: VizEntities
 layout: default
 ---
 
