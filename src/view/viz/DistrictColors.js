@@ -41,7 +41,7 @@ function colorTracts(votesByTract, canList) {
 function colorDistrictWins(scResultsByDistrict, canList, electionOptions) {
     // calculate color for win map
     let colorOfWinsByDistrict
-    if (electionOptions.electionType === 'singleWinner') {
+    if (electionOptions.socialChoiceType === 'singleWinner') {
         colorOfWinsByDistrict = scResultsByDistrict.map(
             (socialChoiceResults) => canList[socialChoiceResults.iWinner].color,
         )

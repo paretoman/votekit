@@ -56,7 +56,7 @@ requestAnimationFrame (Unknown Source:0)
 
 Then we get to the counting of the votes, which is easy for plurality.
 
-plurality (electionMethods\plurality.js:14)
+plurality (socialChoiceMethods\plurality.js:14)
 SocialChoice.self.run (election\SocialChoice.js:39)
 Election.self.runElection (election\Election.js:53)
 ElectionOne.self.runElectionSim (election\ElectionOne.js:27)

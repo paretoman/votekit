@@ -21,7 +21,7 @@ CastVotes: Votes are cast.
 
 Some of the following is output from a vote caster.
 
-* for electionMethods
+* for socialChoiceMethods
   * votePop - the fraction of the population that voted as listed.
   * List of votes:
     * scoreVotes - a list of votes. Each vote has a score for each candidate.

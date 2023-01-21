@@ -14,8 +14,8 @@ export default function ElectionOptions(changes, simOptions) {
     self.castOptions = new CastOptions(changes, simOptions)
     self.socialChoiceOptions = new SocialChoiceOptions(changes, self)
 
-    // a list of election methods
-    self.electionMethodList = [
+    // a list of social choice methods
+    self.socialChoiceMethodList = [
         {
             name: 'Huntington Hill', value: 'huntingtonHill', type: 'allocation', casterName: 'plurality',
         },
@@ -52,21 +52,20 @@ export default function ElectionOptions(changes, simOptions) {
     ]
 
     // utilities for looking up this list
-    self.electionMethodListByFunctionName = []
-    self.electionMethodList.forEach(
-        (x) => { self.electionMethodListByFunctionName[x.value] = x },
+    self.socialChoiceMethodListByFunctionName = []
+    self.socialChoiceMethodList.forEach(
+        (x) => { self.socialChoiceMethodListByFunctionName[x.value] = x },
     )
-    self.checkElectionType = () => self.electionMethodListByFunctionName[self.electionMethod].type
 
-    self.setElectionMethod = (functionName) => {
-        self.electionMethod = functionName
-        self.voteCasterName = self.electionMethodListByFunctionName[self.electionMethod].casterName
-        self.electionType = self.electionMethodListByFunctionName[self.electionMethod].type
+    self.setSocialChoiceMethod = (functionName) => {
+        self.socialChoiceMethod = functionName
+        self.voteCasterName = self.socialChoiceMethodListByFunctionName[self.socialChoiceMethod].casterName
+        self.socialChoiceType = self.socialChoiceMethodListByFunctionName[self.socialChoiceMethod].type
     }
 
     // Defaults
-    self.setElectionMethod('plurality')
-    changes.add(['electionMethod'])
+    self.setSocialChoiceMethod('plurality')
+    changes.add(['socialChoiceMethod'])
 
     self.update = () => {
         self.castOptions.update()

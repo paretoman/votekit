@@ -7,15 +7,15 @@ import { range } from '../../utilities/jsHelpers.js'
  * @param {Object} votes
  * @param {Number[]} votes.tallyFractions - A list of fractions of voters
  * who picked a candidate, indexed by candidate.
- * @param {Object} electionMethodOptions
- * @param {number} electionMethodOptions.seats - The number of seats to fill.
+ * @param {Object} socialChoiceOptions
+ * @param {number} socialChoiceOptions.seats - The number of seats to fill.
  * @returns {{allocation:number[]}} - A variable "socialChoiceResults",
  * with the property "allocation".
  * Allocation is an array of integers that say whether a candidate is elected (1) or not (0).
  */
-export default function sntv({ votes, electionMethodOptions }) {
+export default function sntv({ votes, socialChoiceOptions }) {
     const { tallyFractions } = votes
-    const { seats } = electionMethodOptions
+    const { seats } = socialChoiceOptions
 
     const nk = tallyFractions.length
 

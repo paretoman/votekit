@@ -11,16 +11,16 @@ import sntv from './sntv.js'
  * Party lists are allocated seats. The most popular candidates in a party are elected.
  * @param {Object} votes
  * @param {number[]} votes.tallyFractions - tallies for each candidate as a fraction of 1.
- * @param {Object} electionMethodOptions
- * @param {number} electionMethodOptions.seats - The number of seats to fill.
- * @param {number} electionMethodOptions.threshold - The minimum fraction of voters
+ * @param {Object} socialChoiceOptions
+ * @param {number} socialChoiceOptions.seats - The number of seats to fill.
+ * @param {number} socialChoiceOptions.threshold - The minimum fraction of voters
  * that a party needs to be eligible for a seat.
  * @returns {{allocation:number[]}} - A variable "socialChoiceResults",
  * with the property "allocation".
  * Allocation is an array of integers that say whether a candidate is elected (1) or not (0).
  */
 
-export default function olprA({ votes, electionMethodOptions }) {
+export default function olprA({ votes, socialChoiceOptions }) {
     // Make a tally for each party.
 
     // TODO: provide these variables in votes
@@ -41,7 +41,7 @@ export default function olprA({ votes, electionMethodOptions }) {
     // todo: change method
     const partyResults = sainteLague({
         votes: { tallyFractions: partyVotes },
-        electionMethodOptions,
+        socialChoiceOptions,
         seatLimits,
     })
     const partyAllocation = partyResults.allocation
@@ -51,13 +51,13 @@ export default function olprA({ votes, electionMethodOptions }) {
     const allocation = Array(numCans).fill(0)
     for (let i = 0; i < numParties; i++) {
         // Set inputs for SNTV.
-        const electionMethodOptions2 = { seats: partyAllocation[i] }
+        const socialChoiceOptions2 = { seats: partyAllocation[i] }
         const cansInParty = range(numCans).filter((k) => partiesByCan[k] === i)
         const tfWithinParty = cansInParty.map((k) => tallyFractions[k])
         // Run sntv.
         const socialChoiceInParty = sntv({
             votes: { tallyFractions: tfWithinParty },
-            electionMethodOptions: electionMethodOptions2,
+            socialChoiceOptions: socialChoiceOptions2,
         })
         const allocationInParty = socialChoiceInParty.allocation
         // Store sntv results in allocation list for all candidates.

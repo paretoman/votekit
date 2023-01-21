@@ -3,7 +3,7 @@ export default function sumAllocations(scResultsByDistrict, canGeoms, electionOp
     // make a histogram of allocation
     const numCandidates = canGeoms.length
     const allocationsSum = Array(numCandidates).fill(0)
-    if (electionOptions.electionType === 'singleWinner') {
+    if (electionOptions.socialChoiceType === 'singleWinner') {
         const iWinners = scResultsByDistrict.map((socialChoiceResults) => socialChoiceResults.iWinner)
         iWinners.forEach((iWinner) => {
             allocationsSum[iWinner] += 1

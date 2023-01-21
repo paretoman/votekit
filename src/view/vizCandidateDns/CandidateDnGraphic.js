@@ -33,7 +33,7 @@ export default function CandidateDnGraphic(candidateDn, screen, wHandle, hHandle
         const { darkMode } = screen.common
         const color = (darkMode) ? '#fff' : '#222'
 
-        if (electionOptions.electionMethod === 'olprA') {
+        if (electionOptions.socialChoiceMethod === 'olprA') {
             const x3 = x + square.w * 0.1
             const y3 = y + 8
             drawStrokedColor(`p${party}`, x3, y3, 13, 2, color, 1, fctx)

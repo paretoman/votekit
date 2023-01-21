@@ -15,9 +15,9 @@ export default function ViewVizBudget(screenCommon, layout, menu, changes, simOp
     let vizExplanation
 
     function enterStrategy() {
-        const { electionMethod } = electionOptions
+        const { socialChoiceMethod } = electionOptions
         const { dimensions, numDistricts } = simOptions
-        const VizExplanation = (electionMethod === 'methodOfEqualShares' && numDistricts === 1 && dimensions === 1)
+        const VizExplanation = (socialChoiceMethod === 'methodOfEqualShares' && numDistricts === 1 && dimensions === 1)
             ? VizExplanationBudgetMES : BaseExplanation
         vizExplanation = new VizExplanation(screen)
     }
@@ -33,7 +33,7 @@ export default function ViewVizBudget(screenCommon, layout, menu, changes, simOp
     }
     self.update = (simData) => {
         if (changes.checkNone()) return
-        if (changes.check(['numDistricts', 'dimensions', 'electionMethod'])) {
+        if (changes.check(['numDistricts', 'dimensions', 'socialChoiceMethod'])) {
             self.exit()
             self.enter()
         }

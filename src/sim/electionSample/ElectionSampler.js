@@ -88,7 +88,7 @@ export default function ElectionSampler() {
             // adjustable parameter for visualization
             const jitterSize = 10
 
-            if (electionOptions.electionType === 'singleWinner') {
+            if (electionOptions.socialChoiceType === 'singleWinner') {
                 let r = 0
                 for (let o = 0; o < nDistricts; o++) {
                     const { iWinner } = scResultsByDistrict[o]

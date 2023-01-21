@@ -6,12 +6,12 @@ export default function SocialChoiceOptions(changes, electionOptions) {
     self.numSampleCandidates = 5
 
     self.update = () => {
-        if (changes.check(['electionMethod'])) {
-            const { electionType } = electionOptions
-            if (electionType === 'allocation') {
+        if (changes.check(['socialChoiceMethod'])) {
+            const { socialChoiceType } = electionOptions
+            if (socialChoiceType === 'allocation') {
                 self.seats = 5
                 self.numSampleCandidates = 10
-            } else if (electionType === 'multiWinner') {
+            } else if (socialChoiceType === 'multiWinner') {
                 self.seats = 3
                 self.numSampleCandidates = 10
             } else { // 'singleWinner'

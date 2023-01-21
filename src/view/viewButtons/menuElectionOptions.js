@@ -3,10 +3,10 @@ export default function menuElectionOptions(electionOptions, menu) {
         electionOptions,
         {
             label: 'Election Method:',
-            prop: 'electionMethod',
-            setProp: electionOptions.setElectionMethod,
-            options: electionOptions.electionMethodList,
-            change: ['electionMethod'],
+            prop: 'socialChoiceMethod',
+            setProp: electionOptions.setSocialChoiceMethod,
+            options: electionOptions.socialChoiceMethodList,
+            change: ['socialChoiceMethod'],
         },
     )
 }

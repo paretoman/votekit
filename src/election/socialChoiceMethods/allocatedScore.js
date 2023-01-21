@@ -14,14 +14,14 @@ import { range } from '../../utilities/jsHelpers.js'
  * @param {Object[]} votes.scoreVotes - A list of votes
  * @param {Number[]} votes.scoreVotes[] - A score for each candidate. From 0 to 1.
  * @param {Object} votes.votePop - The fraction of the population that voted that way.
- * @param {Object} electionMethodOptions.seats - Number of candidates to elect.
+ * @param {Object} socialChoiceOptions.seats - Number of candidates to elect.
  * @returns {{allocation:number[]}} - socialChoiceResults, with property allocation.
  * Allocation is an array of integers that say whether a candidate is elected (1) or not (0).
  */
-export default function allocatedScore({ votes, electionMethodOptions }) {
+export default function allocatedScore({ votes, socialChoiceOptions }) {
     const { scoreVotes, votePop } = votes
 
-    const { seats } = electionMethodOptions
+    const { seats } = socialChoiceOptions
 
     const nk = scoreVotes[0].length // number of candidates
     const nv = scoreVotes.length // number of votes

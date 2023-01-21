@@ -20,7 +20,7 @@ election
 - castVotes
 - election
 - electionDistricts
-- electionMethods
+- socialChoiceMethods
 
 sim
 

@@ -12,9 +12,9 @@ import sainteLague from './sainteLague.js'
 import allocatedScore from './allocatedScore.js'
 import methodOfEqualShares from './methodOfEqualShares.js'
 
-/** a collection of election methods
+/** a collection of social choice methods
  *  */
-const electionMethods = {
+const socialChoiceMethods = {
     plurality,
     randomWinner,
     huntingtonHill,
@@ -28,4 +28,4 @@ const electionMethods = {
     methodOfEqualShares,
 }
 
-export default electionMethods
+export default socialChoiceMethods
