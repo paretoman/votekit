@@ -1,6 +1,6 @@
 /** @module */
 
-import castRankingFindIntervals from '../../election/castVotes/castRankingFindIntervals.js'
+import castRankingFindIntervals from '../../election/voteCasters/castRankingFindIntervals.js'
 import colorBlender, { rgbToString } from './colorBlender.js'
 
 /**

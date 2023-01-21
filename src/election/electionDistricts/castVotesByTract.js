@@ -1,4 +1,4 @@
-import voteCasters from '../castVotes/voteCasters.js'
+import voteCasters from '../voteCasters/voteCasters.js'
 import getGeoms from '../../sim/entities/getGeoms.js'
 
 export default function castVotesByTract(geometry, electionOptions) {
