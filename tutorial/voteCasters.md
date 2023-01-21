@@ -1,13 +1,13 @@
 ---
-title: CastVotes
+title: VoteCasters
 layout: default
 ---
 
-CastVotes: Votes are cast.
+VoteCasters: Votes are cast.
 
 * Parent Page: [Election](election.md)
 
-## CastVotes
+## VoteCasters
 
 * Voters cast their ballots. 
 * A distribution of a population of voters is sampled. A 2D spatial model is used to make the decision of how to vote or who to vote for. 

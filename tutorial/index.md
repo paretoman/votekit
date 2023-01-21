@@ -8,7 +8,7 @@ Here are some pages describing the architecture of Votekit. Also, see [votekit o
 * [Architecture](architecture.md)
   * [folders](folders.md)
   * [Election](election.md)
-    * [CastVotes](castVotes.md)
+    * [VoteCasters](voteCasters.md)
     * [SocialChoice](socialChoice.md)
   * [Sim](sim.md)
     * [Commands](commands.md)

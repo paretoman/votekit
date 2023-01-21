@@ -41,11 +41,11 @@ Now, we still have to run the election and draw the visuals. That only happens w
 
 First we get to the vote casting phase, which for plurality is just finding the area of a geometric shape.
 
-sumCircle (castVotes\CastPluralitySummer2DQuadrature.js:113)
-sumArea (castVotes\CastPluralitySummer2DQuadrature.js:23)
-<anonymous> (castVotes\castPlurality.js:25)
-castPlurality (castVotes\castPlurality.js:24)
-Election.self.castVotes (election\Election.js:64)
+sumCircle (voteCasters\CastPluralitySummer2DQuadrature.js:113)
+sumArea (voteCasters\CastPluralitySummer2DQuadrature.js:23)
+<anonymous> (voteCasters\castPlurality.js:25)
+castPlurality (voteCasters\castPlurality.js:24)
+Election.self.voteCasters (election\Election.js:64)
 Election.self.runElection (election\Election.js:52)
 ElectionOne.self.runElectionSim (election\ElectionOne.js:27)
 SimModeOne.self.update (sim\states\SimModeOne.js:38)

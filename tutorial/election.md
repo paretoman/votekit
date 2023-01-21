@@ -6,7 +6,7 @@ layout: default
 An election is run on the geometry to generate output data structures. It handles casting votes and applying a social choice function. 
 
 - Parent Pages: [Architecture](architecture.md), [SimMode](simMode.md)
-- Subpages: [CastVotes](castVotes.md), [SocialChoice](socialChoice.md)
+- Subpages: [VoteCasters](voteCasters.md), [SocialChoice](socialChoice.md)
 
 ## Election
 
@@ -19,7 +19,7 @@ The function electionDistrictsRun compiles district and statewide votes and resu
 **Steps**:
 
 - If there are districts, then the geometry is run in several tracts, each with slight variations in geometry.
-- [CastVotes](castVotes.md): Votes are cast.
+- [VoteCasters](voteCasters.md): Votes are cast.
 - If there are districts, then votes from tracts are combined into districts.
 - A [social choice](socialChoice.md) function runs on the votes to determine winners.
 - Election results are assembled.

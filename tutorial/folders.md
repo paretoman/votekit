@@ -17,7 +17,7 @@ utilities
 
 election
 
-- castVotes
+- voteCasters
 - election
 - electionDistricts
 - socialChoiceMethods
