@@ -22,7 +22,7 @@
   "scripts": {
     "doc": "jsdoc -c jsdoc.json",
     "build": "npm run parcel-build && npm run copy1 && npm run copy2",
-    "parcel-build": "parcel build src/sandbox/addSandboxes.js --dist-dir dist/src/ui",
+    "parcel-build": "parcel build src/sandbox/addSandboxes.js --dist-dir dist/src/sandbox",
     "copy1": "copyfiles -u 1 \"src/**/*.{css,html}\" \"dist/src/\"",
     "copy2": "copyfiles -u 1 \"test/**/*.*\" \"dist/test/\"",
     "build-n-doc": "npm run build && npm run doc",
