@@ -18,10 +18,23 @@
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
 
-title: Votekit
+title: VoteKit
+email: smartvotingsimulator1@gmail.com
 baseurl: "/votekit" # the subpath of your site, e.g. /blog
 url: "https://paretoman.github.io" # the base hostname & protocol for your site, e.g. http://example.com
 description: "An explorable sandbox that shows how different voting methods work using a spatial opinion model."
+twitter_username: paretoman1
+github_username:  paretoman
+author: Paretoman
+minima:
+  social_links:
+    github: Paretoman
+    twitter: Paretoman1
+    youtube_channel: UCrwpT8YjxePjH0RxSCwbTlQ
+    youtube_channel_name: Paretoman
+thumbnail: "/img/VoteKit_Thumbnail.png"
+google_analytics: UA-172540609-1
+
 # Build settings
 theme: minima
 
