@@ -88,6 +88,14 @@
     color: #888;
 }
 
+.darkMode .sim-sandbox .button2:hover{
+    background: #222;
+    border-color: #777;
+}
+.darkMode .sim-sandbox .button2:active{
+    background: #ddd;
+    border-color: #fff;
+}
 
 
 .darkMode .sim-sandbox .button:hover{
