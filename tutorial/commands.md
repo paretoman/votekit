@@ -1,7 +1,6 @@
 ---
 title: Commands
 layout: default
-
 ---
 
 Commands change Sim and update a configuration. Undo and redo use commands.
