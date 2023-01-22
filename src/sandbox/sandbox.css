@@ -54,7 +54,7 @@ textarea {
 .darkMode div.sim-container { 
 	background:  #222; color: white; 
 }
-.darkMode a {
+.darkMode a:link {
 	color: #dde;
 }
 .darkMode a:visited {
