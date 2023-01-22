@@ -39,6 +39,9 @@ google_analytics: UA-172540609-1
 theme: minima
 plugins:
   - jekyll-relative-links
+header_pages:
+  - tutorial/index.md
+  - index.html
 
 # Exclude from processing.
 # The following items will not be processed, by default.
