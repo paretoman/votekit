@@ -5,7 +5,7 @@ import viewScreens from '../viewScreens/viewScreens.js'
 import viewButtons from '../viewButtons/viewButtons.js'
 import Changes from '../../sim/sim/Changes.js'
 import loadView from '../save/loadView.js'
-import viewJupyter from '../environments/ViewJupyter.js'
+import viewJupyter from '../environments/viewJupyter.js'
 
 /**
  * View observes the sim and adds a user interface.
