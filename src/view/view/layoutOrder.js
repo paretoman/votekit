@@ -16,10 +16,7 @@ const layoutOrder = [
     'saveConfigToShortLink',
     'saveConfigToText',
     'loadConfigText',
-    'svgMainDiv',
-    'svgMiniDiv',
-    'svgMaps',
-    'svgBudget',
+    'saveData',
     'svgSwitch',
     'showDownloadScreenLink',
 ]

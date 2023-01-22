@@ -9,6 +9,8 @@ import buttonsToAddEntities from './buttonsToAddEntities.js'
 import addSaveConfigToShortLink from '../save/addSaveConfigToShortLink.js'
 import addName from '../save/addName.js'
 import Menu from '../menu/Menu.js'
+import addSaveData from '../save/addSaveData.js'
+import ViewDownload from '../save/viewDownload.js'
 /**
  * Make buttons for the sandbox.
  * @param {*} sim
@@ -19,7 +21,7 @@ import Menu from '../menu/Menu.js'
  */
 export default function viewButtons(sim, viewMode, layout, sandboxPath) {
     const {
-        commander, simOptions, electionOptions, entities, changes,
+        commander, simOptions, electionOptions, entities, changes, pub,
     } = sim
 
     const menu = new Menu(changes, layout, commander)
@@ -33,6 +35,9 @@ export default function viewButtons(sim, viewMode, layout, sandboxPath) {
     addSaveConfigToText(layout, commander, nameInput)
     addLoadConfigText(layout, commander, nameInput)
     addSimControlsLabel(layout)
+
+    const viewDownload = new ViewDownload(pub, changes)
+    addSaveData(layout, nameInput, viewDownload)
 
     buttonsToAddEntities(viewMode, entities, layout)
     return { nameInput, menu }
