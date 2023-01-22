@@ -1,6 +1,6 @@
 /** @module */
 
-import socialChoiceMethods from '../socialChoiceMethods/socialChoiceMethods.js'
+import { socialChoiceMethods } from '../socialChoiceMethods/socialChoiceMethods.js'
 
 export default function socialChoiceRun(votes, electionOptions) {
     // why have two different kinds of results?

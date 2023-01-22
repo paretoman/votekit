@@ -7,7 +7,7 @@
  * @returns {Object} socialChoiceResults
  * @returns {Number} socialChoiceResults.iWinner - Index of winner. Indexing according to votes[].
  */
-export default function randomWinner({ votes }) {
+export default function randomCandidate({ votes }) {
     const nk = votes.tallyFractions.length
     const iWinner = Math.floor(Math.random() * nk)
     const socialChoiceResults = { iWinner }
@@ -15,10 +15,11 @@ export default function randomWinner({ votes }) {
 }
 
 /** @constant {Object} - an object: this function and descriptions of its name, input, and output */
-export const randomWinnerMetadata = {
-    name: 'Random Winner',
-    shortName: 'Random Winner',
-    functionName: 'randomWinner',
+export const randomCandidateMetadata = {
+    name: 'Random Candidate',
+    shortName: 'Rand Cand',
+    functionName: 'randomCandidate',
     voteCasterName: 'plurality',
     socialChoiceType: 'singleWinner',
+    elect: randomCandidate,
 }

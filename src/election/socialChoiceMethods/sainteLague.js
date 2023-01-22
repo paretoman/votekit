@@ -28,4 +28,5 @@ export const sainteLagueMetadata = {
     functionName: 'sainteLague',
     voteCasterName: 'plurality', // for input
     socialChoiceType: 'allocation',
+    elect: sainteLague,
 }

@@ -63,4 +63,5 @@ export const minimaxMetadata = {
     functionName: 'minimax',
     voteCasterName: 'pairwise', // for input
     socialChoiceType: 'singleWinner',
+    elect: minimax,
 }

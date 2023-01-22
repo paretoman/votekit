@@ -1,6 +1,6 @@
 /** @module */
 
-import { socialChoiceMethodMetadataByFunctionName } from '../socialChoiceMethods/socialChoiceMethodMetadata.js'
+import { socialChoiceMethodMetadataByFunctionName } from '../socialChoiceMethods/socialChoiceMethods.js'
 import CastOptions from './CastOptions.js'
 import SocialChoiceOptions from './SocialChoiceOptions.js'
 

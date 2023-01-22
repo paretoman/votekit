@@ -22,4 +22,5 @@ export const scoreMetadata = {
     functionName: 'score',
     voteCasterName: 'score', // for input
     socialChoiceType: 'singleWinner',
+    elect: score,
 }

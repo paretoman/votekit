@@ -24,4 +24,5 @@ export const pluralityMetadata = {
     functionName: 'plurality',
     voteCasterName: 'plurality',
     socialChoiceType: 'singleWinner',
+    elect: plurality,
 }

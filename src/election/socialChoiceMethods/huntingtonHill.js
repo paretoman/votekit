@@ -24,8 +24,9 @@ export default function huntingtonHill({ votes, socialChoiceOptions, seatLimits 
 /** @constant {Object} - an object: this function and descriptions of its name, input, and output */
 export const huntingtonHillMetadata = {
     name: 'Huntington Hill',
-    shortName: 'Huntington Hill',
+    shortName: 'Huntington',
     functionName: 'huntingtonHill',
     voteCasterName: 'plurality', // for input
     socialChoiceType: 'allocation', // for output
+    elect: huntingtonHill,
 }

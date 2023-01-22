@@ -155,9 +155,10 @@ export default function stv({ votes, socialChoiceOptions }) {
 
 /** @constant {Object} - an object: this function and descriptions of its name, input, and output */
 export const stvMetadata = {
-    name: 'STV',
+    name: 'Single Transferable Vote',
     shortName: 'STV',
     functionName: 'stv',
     voteCasterName: 'ranking', // for input
     socialChoiceType: 'multiWinner',
+    elect: stv,
 }

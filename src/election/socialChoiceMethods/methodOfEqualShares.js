@@ -258,9 +258,10 @@ export default function methodOfEqualShares({ votes, socialChoiceOptions }) {
 
 /** @constant {Object} - an object: this function and descriptions of its name, input, and output */
 export const methodOfEqualSharesMetadata = {
-    name: 'MES',
+    name: 'Method of Equal Shares',
     shortName: 'MES',
     functionName: 'methodOfEqualShares',
     voteCasterName: 'scoreLong', // for input
     socialChoiceType: 'multiWinner',
+    elect: methodOfEqualShares,
 }

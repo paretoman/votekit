@@ -74,9 +74,10 @@ export default function olprA({ votes, socialChoiceOptions }) {
 
 /** @constant {Object} - an object: this function and descriptions of its name, input, and output */
 export const olprAMetadata = {
-    name: 'OLPR A',
+    name: 'Open List Proportional Representation',
     shortName: 'OLPR A',
     functionName: 'olprA',
     voteCasterName: 'olprA', // for input
     socialChoiceType: 'multiWinner',
+    elect: olprA,
 }

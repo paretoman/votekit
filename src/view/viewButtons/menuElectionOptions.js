@@ -1,4 +1,4 @@
-import socialChoiceMethodMetadata from '../../election/socialChoiceMethods/socialChoiceMethodMetadata.js'
+import { socialChoiceMethodMetadata } from '../../election/socialChoiceMethods/socialChoiceMethods.js'
 
 export default function menuElectionOptions(electionOptions, menu) {
     // a list of social choice methods

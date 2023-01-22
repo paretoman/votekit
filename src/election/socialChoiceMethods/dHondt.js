@@ -28,4 +28,5 @@ export const dHondtMetadata = {
     functionName: 'dHondt',
     voteCasterName: 'plurality', // for input
     socialChoiceType: 'allocation',
+    elect: dHondt,
 }
