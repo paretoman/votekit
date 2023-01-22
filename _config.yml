@@ -37,6 +37,8 @@ google_analytics: UA-172540609-1
 
 # Build settings
 theme: minima
+plugins:
+  - jekyll-relative-links
 
 # Exclude from processing.
 # The following items will not be processed, by default.
