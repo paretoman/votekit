@@ -255,3 +255,12 @@ export default function methodOfEqualShares({ votes, socialChoiceOptions }) {
 // function nearZero(a) {
 //     return Math.abs(a) < 10 ** -7
 // }
+
+/** @constant {Object} - an object: this function and descriptions of its name, input, and output */
+export const methodOfEqualSharesMetadata = {
+    name: 'MES',
+    shortName: 'MES',
+    functionName: 'methodOfEqualShares',
+    voteCasterName: 'scoreLong', // for input
+    socialChoiceType: 'multiWinner',
+}

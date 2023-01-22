@@ -20,3 +20,12 @@ export default function dHondt({ votes, socialChoiceOptions, seatLimits }) {
     })
     return socialChoiceResults
 }
+
+/** @constant {Object} - an object: this function and descriptions of its name, input, and output */
+export const dHondtMetadata = {
+    name: "d'Hondt",
+    shortName: "d'Hondt",
+    functionName: 'dHondt',
+    voteCasterName: 'plurality', // for input
+    socialChoiceType: 'allocation',
+}

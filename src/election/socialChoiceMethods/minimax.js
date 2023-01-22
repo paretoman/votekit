@@ -55,3 +55,12 @@ export default function minimax({ votes }) {
     const socialChoiceResults = { iWinner }
     return socialChoiceResults
 }
+
+/** @constant {Object} - an object: this function and descriptions of its name, input, and output */
+export const minimaxMetadata = {
+    name: 'Minimax',
+    shortName: 'Minimax',
+    functionName: 'minimax',
+    voteCasterName: 'pairwise', // for input
+    socialChoiceType: 'singleWinner',
+}

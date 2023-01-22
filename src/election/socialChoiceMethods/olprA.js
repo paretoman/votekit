@@ -71,3 +71,12 @@ export default function olprA({ votes, socialChoiceOptions }) {
     const socialChoiceResults = { allocation }
     return socialChoiceResults
 }
+
+/** @constant {Object} - an object: this function and descriptions of its name, input, and output */
+export const olprAMetadata = {
+    name: 'OLPR A',
+    shortName: 'OLPR A',
+    functionName: 'olprA',
+    voteCasterName: 'olprA', // for input
+    socialChoiceType: 'multiWinner',
+}

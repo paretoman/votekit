@@ -14,3 +14,12 @@ export default function score({ votes }) {
     const results = { iWinner }
     return results
 }
+
+/** @constant {Object} - an object: this function and descriptions of its name, input, and output */
+export const scoreMetadata = {
+    name: 'Score',
+    shortName: 'Score',
+    functionName: 'score',
+    voteCasterName: 'score', // for input
+    socialChoiceType: 'singleWinner',
+}

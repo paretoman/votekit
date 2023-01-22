@@ -13,3 +13,12 @@ export default function randomWinner({ votes }) {
     const socialChoiceResults = { iWinner }
     return socialChoiceResults
 }
+
+/** @constant {Object} - an object: this function and descriptions of its name, input, and output */
+export const randomWinnerMetadata = {
+    name: 'Random Winner',
+    shortName: 'Random Winner',
+    functionName: 'randomWinner',
+    voteCasterName: 'plurality',
+    socialChoiceType: 'singleWinner',
+}

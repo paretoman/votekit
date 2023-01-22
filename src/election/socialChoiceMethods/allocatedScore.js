@@ -79,3 +79,12 @@ export default function allocatedScore({ votes, socialChoiceOptions }) {
     const socialChoiceResults = { allocation }
     return socialChoiceResults
 }
+
+/** @constant {Object} - an object: this function and descriptions of its name, input, and output */
+export const allocatedScoreMetadata = {
+    name: 'AllocScore',
+    shortName: 'AllocScore',
+    functionName: 'allocatedScore',
+    voteCasterName: 'scoreLong', // for input
+    socialChoiceType: 'multiWinner',
+}

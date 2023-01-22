@@ -20,3 +20,12 @@ export default function sainteLague({ votes, socialChoiceOptions, seatLimits }) 
     })
     return socialChoiceResults
 }
+
+/** @constant {Object} - an object: this function and descriptions of its name, input, and output */
+export const sainteLagueMetadata = {
+    name: 'Sainte-Lague',
+    shortName: 'Sainte-Lague',
+    functionName: 'sainteLague',
+    voteCasterName: 'plurality', // for input
+    socialChoiceType: 'allocation',
+}
