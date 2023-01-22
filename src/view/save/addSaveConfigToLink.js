@@ -1,6 +1,7 @@
 /** @module */
 
 import getLink from './getLink.js'
+import TextArea from './TextArea.js'
 
 /**
  * Add buttons for saving the configuration to a link.
@@ -16,12 +17,14 @@ export default function addSaveConfigToLink(layout, commander, sandboxPath, name
     button2.className = 'button2'
     button2.innerText = 'Copy Link to Clipboard'
 
-    const text = document.createElement('textarea')
+    const text = new TextArea()
+    text.hide()
 
     button.onclick = () => {
+        text.show()
         const config = commander.getConfig()
         const link = getLink(config, sandboxPath, nameInput)
-        text.value = link
+        text.setText(link)
     }
     button2.onclick = () => {
         button.onclick()
@@ -34,7 +37,7 @@ export default function addSaveConfigToLink(layout, commander, sandboxPath, name
     div.appendChild(button)
     div.appendChild(button2)
     div.appendChild(clearDiv)
-    div.appendChild(text)
+    div.appendChild(text.div)
 
     layout.newElement('saveConfigToLink', div)
 }

@@ -1,6 +1,7 @@
 /** @module */
 
 import publishShortLink from './publishShortLink.js'
+import TextArea from './TextArea.js'
 
 /**
  * Add buttons for saving the configuration to a link.
@@ -16,16 +17,23 @@ export default function addSaveConfigToShortLink(layout, commander, sandboxPath,
     button2.className = 'button2'
     button2.innerText = 'And Copy to Clipboard'
 
-    const text = document.createElement('textarea')
+    const text = new TextArea()
+    text.hide()
+
+    const requesting = 'requesting short link...'
 
     button.onclick = () => {
+        text.show()
         const config = commander.getConfig()
+        text.setText(requesting)
         publishShortLink(config, sandboxPath, nameInput, (link) => {
-            text.value = link
+            text.setText(link)
         })
     }
     button2.onclick = () => {
+        text.show()
         const config = commander.getConfig()
+        text.setText(requesting)
         publishShortLink(config, sandboxPath, nameInput, (link) => {
             navigator.clipboard.writeText(link)
         })
@@ -37,7 +45,7 @@ export default function addSaveConfigToShortLink(layout, commander, sandboxPath,
     div.appendChild(button)
     div.appendChild(button2)
     div.appendChild(clearDiv)
-    div.appendChild(text)
+    div.appendChild(text.div)
 
     layout.newElement('saveConfigToShortLink', div)
 }

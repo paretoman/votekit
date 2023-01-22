@@ -2,6 +2,7 @@
 
 import { orderedJsonStringify } from '../../utilities/jsHelpers.js'
 import DownloadLink from './DownloadLink.js'
+import TextArea from './TextArea.js'
 
 /**
  * Add buttons for saving the configuration to a textbox.
@@ -21,11 +22,14 @@ export default function addSaveConfigToText(layout, commander, nameInput) {
     dLink.setFileName('config.json')
     dLink.hide()
 
-    const text = document.createElement('textarea')
+    const text = new TextArea()
+    text.hide()
 
     button.onclick = () => {
+        text.show()
         const config = commander.getConfig()
-        text.value = orderedJsonStringify(config)
+        const jsonText = orderedJsonStringify(config)
+        text.setText(jsonText)
     }
 
     button2.onclick = () => {
@@ -44,7 +48,7 @@ export default function addSaveConfigToText(layout, commander, nameInput) {
     div.appendChild(button2)
     div.appendChild(dLink.div)
     div.appendChild(clearDiv)
-    div.appendChild(text)
+    div.appendChild(text.div)
 
     layout.newElement('saveConfigToText', div)
 }
