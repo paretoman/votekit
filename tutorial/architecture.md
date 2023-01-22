@@ -3,7 +3,7 @@ title: Architecture
 layout: default
 ---
 
-* Parent page: [index][index.md]
+* Parent page: [index](index.md)
 * Child pages:  [folders](folders.md), [Election](election.md). [Sim](sim.md), [View](view.md), [sandbox](sandbox.md), [Program flow](programFlow.md)
 
 There is a central model-view division that follows the observer pattern. Source [folders](folders.md) are loosely divided between election, sim, view, and sandbox. The tests folder is for the client.
