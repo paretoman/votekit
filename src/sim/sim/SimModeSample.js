@@ -35,7 +35,7 @@ export default function SimModeSample(pub, entities, changes, voterDistricts, si
 
         const geometry = getGeometry(voterShapeList, candidateDnList, simOptions, electionOptions, voterDistricts)
 
-        const samplingResult = electionSampler.update(geometry, canDnSampler.sampler, changes, simOptions, electionOptions)
+        const samplingResult = electionSampler.update(geometry, canDnSampler.sampler, changes, electionOptions)
         const simData = { samplingResult }
         pub.update(simData)
         changes.clear()

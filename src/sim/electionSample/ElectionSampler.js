@@ -1,7 +1,6 @@
 /** @module */
 
-import electionRun from '../../election/election/electionRun.js'
-import electionDistrictsRun from '../../election/electionDistricts/electionDistrictsRun.js'
+import election from '../../election/election/election.js'
 
 /**
  * Simulate winners from many sampled elections.
@@ -18,12 +17,12 @@ export default function ElectionSampler() {
     let points = []
     let partyWins
 
-    self.update = function (geometry, cDnSampler, changes, simOptions, electionOptions) {
+    self.update = function (geometry, cDnSampler, changes, electionOptions) {
         if (changes.checkAny()) {
             self.startSim()
         }
 
-        const samplingResult = self.addSim(geometry, cDnSampler, simOptions, electionOptions)
+        const samplingResult = self.addSim(geometry, cDnSampler, electionOptions)
         return samplingResult
     }
 
@@ -32,7 +31,7 @@ export default function ElectionSampler() {
         partyWins = Array(10).fill(0) // TODO: Use number of parties
     }
 
-    self.addSim = function (geometry, cDnSampler, simOptions, electionOptions) {
+    self.addSim = function (geometry, cDnSampler, electionOptions) {
         // add more points
 
         const {
@@ -77,7 +76,6 @@ export default function ElectionSampler() {
                 voterGeoms, canGeoms: sCanGeoms, parties: { partiesByCan: sParties, numParties: 10 }, dimensions, voterDistricts,
             }
 
-            const election = (electionOptions.useDistricts) ? electionDistrictsRun : electionRun
             const electionResults = election(sampleGeometry, electionOptions)
             const scResultsByDistrict = (electionOptions.useDistricts)
                 ? electionResults.scResultsByDistrict

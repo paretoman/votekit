@@ -1,8 +1,7 @@
 /** @module */
 
-import electionDistrictsRun from '../../election/electionDistricts/electionDistrictsRun.js'
-import electionRun from '../../election/election/electionRun.js'
 import getGeometry from './getGeometry.js'
+import election from '../../election/election/election.js'
 
 /**
  * Simulate one election with
@@ -30,8 +29,7 @@ export default function SimModeOne(pub, entities, changes, voterDistricts, simOp
 
         const geometry = getGeometry(voterShapeList, candidateList, simOptions, electionOptions, voterDistricts)
 
-        const electionStrategy = (electionOptions.useDistricts) ? electionDistrictsRun : electionRun
-        const electionResults = electionStrategy(geometry, electionOptions)
+        const electionResults = election(geometry, electionOptions)
 
         electionResults.colorRGBAOfCandidates = candidateList.getRGBAList()
 

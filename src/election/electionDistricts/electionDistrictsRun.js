@@ -14,9 +14,7 @@ import sumAllocations from './sumAllocations.js'
  * All the voter groups share the same voter basis.
  */
 export default function electionDistrictsRun(geometry, electionOptions) {
-    const { voterGeoms, canGeoms, voterDistricts } = geometry
-    if (voterGeoms.length === 0) return { error: 'no voters' }
-    if (canGeoms.length === 0) return { error: 'no candidates' }
+    const { canGeoms, voterDistricts } = geometry
 
     const votesByTract = castVotesByTract(geometry, electionOptions)
     const allVotes = combineVotes(votesByTract, canGeoms)
