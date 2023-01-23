@@ -6,13 +6,14 @@ layout: default
 An election is run on the geometry to generate output data structures. It handles casting votes and applying a social choice function. 
 
 - Parent Pages: [Architecture](architecture.md), [SimMode](simMode.md)
+- Sibling Page: [ElectionSampler](electionSampler.md)
 - Subpages: [VoteCasters](voteCasters.md), [SocialChoice](socialChoice.md)
 
 ## Election
 
 One of two election functions is run: electionRun or electionDistrictsRun.
 
-The sampling election function is more of a mode. It runs samples of one of the two other two election functions.
+The  [ElectionSampler](electionSampler.md) function is more of a mode. It runs samples of one of the two other two election functions.
 
 The function electionDistrictsRun compiles district and statewide votes and results.
 
