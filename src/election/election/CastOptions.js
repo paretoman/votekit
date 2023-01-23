@@ -1,4 +1,4 @@
-export default function CastOptions(changes, simOptions) {
+export default function CastOptions(changes, simOptions, electionOptions) {
     const self = this
 
     self.usr = 4
@@ -6,12 +6,12 @@ export default function CastOptions(changes, simOptions) {
     self.update = () => {
         if (changes.check(['mode']) || changes.check(['numDistricts'])) {
             if (simOptions.mode === 'one') {
-                if (simOptions.numDistricts === 1) {
+                if (electionOptions.numDistricts === 1) {
                     self.usr = 4
                 } else {
                     self.usr = 32
                 }
-            } else if (simOptions.numDistricts === 1) {
+            } else if (electionOptions.numDistricts === 1) {
                 self.usr = 16
             } else {
                 self.usr = 16

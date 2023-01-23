@@ -8,7 +8,7 @@ import { copyObjectShallow, range } from '../../utilities/jsHelpers.js'
  * @param {Screen} screen
  * @constructor
  */
-export default function VoterDistricts(voterShapeList, changes, simOptions) {
+export default function VoterDistricts(voterShapeList, changes, electionOptions) {
     const self = this
 
     /** Number of districts */
@@ -50,7 +50,7 @@ export default function VoterDistricts(voterShapeList, changes, simOptions) {
 
     /** Make districts and update voter sets */
     self.updateDistricts = () => {
-        self.nd = simOptions.numDistricts
+        self.nd = electionOptions.numDistricts
         self.districtMaker.make(self.nx, self.ny, self.nd)
     }
     self.updateVoters = () => {

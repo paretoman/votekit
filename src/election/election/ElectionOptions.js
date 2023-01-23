@@ -11,7 +11,7 @@ import SocialChoiceOptions from './SocialChoiceOptions.js'
 export default function ElectionOptions(changes, simOptions) {
     const self = this
 
-    self.castOptions = new CastOptions(changes, simOptions)
+    self.castOptions = new CastOptions(changes, simOptions, self)
     self.socialChoiceOptions = new SocialChoiceOptions(changes, self)
 
     self.setSocialChoiceMethod = (functionName) => {
@@ -20,10 +20,15 @@ export default function ElectionOptions(changes, simOptions) {
         self.voteCasterName = metadata.voteCasterName
         self.socialChoiceType = metadata.socialChoiceType
     }
+    self.setNumDistricts = (n) => {
+        self.numDistricts = n
+        self.useDistricts = n > 1
+    }
 
     // Defaults
     self.setSocialChoiceMethod('plurality')
-    changes.add(['socialChoiceMethod'])
+    self.setNumDistricts(1)
+    changes.add(['socialChoiceMethod', 'numDistricts'])
 
     self.update = () => {
         self.castOptions.update()

@@ -41,7 +41,7 @@ export default function ViewVizOne(entities, screenMain, screenMini, menu, chang
             ? VizOneVoronoiRanking : VizOneVoronoi
         const VizNoDistricts = (voteCasterName === 'score' || voteCasterName === 'scoreLong')
             ? VizOneGrid : VizOneVoronoiGeneral
-        const VizOne = (simOptions.useDistricts === true)
+        const VizOne = (electionOptions.useDistricts === true)
             ? VizDistricts : VizNoDistricts
         vizOne = new VizOne(voterRendererList, candidateList, screenMain, screenMini, simOptions)
     }

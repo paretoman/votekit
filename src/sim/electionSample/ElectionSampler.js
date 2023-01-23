@@ -52,10 +52,9 @@ export default function ElectionSampler() {
         const ns = 1
 
         // number of new points
-        const { socialChoiceOptions } = electionOptions
+        const { socialChoiceOptions, numDistricts } = electionOptions
         const { seats } = socialChoiceOptions
-        const nd = simOptions.numDistricts
-        const nnp = seats * ns * nd
+        const nnp = seats * ns * numDistricts
         const newPoints = Array(nnp)
         let q = 0
 
@@ -78,9 +77,9 @@ export default function ElectionSampler() {
                 voterGeoms, canGeoms: sCanGeoms, parties: { partiesByCan: sParties, numParties: 10 }, dimensions, voterDistricts,
             }
 
-            const election = (simOptions.useDistricts) ? electionDistrictsRun : electionRun
+            const election = (electionOptions.useDistricts) ? electionDistrictsRun : electionRun
             const electionResults = election(sampleGeometry, electionOptions)
-            const scResultsByDistrict = (simOptions.useDistricts)
+            const scResultsByDistrict = (electionOptions.useDistricts)
                 ? electionResults.scResultsByDistrict
                 : [electionResults.socialChoiceResults]
             const nDistricts = scResultsByDistrict.length
