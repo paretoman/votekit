@@ -6,7 +6,7 @@ layout: default
 View sends browser inputs for geometry and election options into the Sim. Browser input includes menus, tooltips, and screens. Also, View displays visualizations of outputs of election results from the Sim. 
 
 * Parent page: [architecture](architecture.md) 
-* Subpages: [viewMode](viewMode.md), [viewButtons](viewButtons.md) , [viewScreens](viewScreens.md)
+* Subpages: [viewMode](viewMode.md), [viewButtons](viewButtons.md), [save](save.md) , [viewScreens](viewScreens.md)
 
 ## View
 
@@ -28,7 +28,11 @@ A Layout organizes div components.
 
 ## Buttons
 
-The [viewButtons](viewButtons.md) function aggregates button functionality: menu, undo, redo, save, name, add entities.
+The [viewButtons](viewButtons.md) function aggregates buttons for configuring the sim: menu, undo, redo, add entities.
+
+## Save
+
+The [save](save.md) function adds buttons to save, name, and load configurations and download data.
 
 ## Screens
 
