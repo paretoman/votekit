@@ -24,5 +24,8 @@ module.exports = {
         'import/no-unresolved': 'off',
         'no-bitwise': 'off',
         'max-len': 'off',
+        'object-curly-newline': ['error', {
+            ObjectPattern: { consistent: true },
+        }],
     },
 }
