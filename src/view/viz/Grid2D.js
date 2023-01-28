@@ -21,7 +21,7 @@ export default function Grid2D(candidateList, screenMain, screenMini) {
 
     self.update = (gridData0) => {
         gridData = gridData0
-        canList = candidateList.getCandidates()
+        canList = candidateList.getEntities()
 
         const { grid, voteSet, voterGeom } = gridData
 

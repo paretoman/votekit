@@ -18,7 +18,7 @@ export default function Grid1D(candidateList, screen) {
     let canList
     self.update = (gridData0) => {
         gridData = gridData0
-        canList = candidateList.getCandidates()
+        canList = candidateList.getEntities()
     }
 
     self.renderBackground = function () {

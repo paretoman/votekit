@@ -12,7 +12,7 @@ export default function CandidateDistributionSampler(candidateDnList, changes, s
 
     self.startSampler = () => {
         const { dimensions } = simOptions
-        const canDnsList = candidateDnList.getCandidateDistributions()
+        const canDnsList = candidateDnList.getEntities()
         if (canDnsList.length === 0) return
         const CDnSampler = (dimensions === 1)
             ? CandidateDistributionSampler1D

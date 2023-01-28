@@ -12,7 +12,7 @@ export default function VoterShapeAddMakeButton(layout, voterShapeList) {
     addVoterButton.className = 'button2'
 
     addVoterButton.onclick = () => {
-        voterShapeList.addVoterPressed()
+        voterShapeList.addEntityPressed()
     }
 
     layout.newElement('addVoter', addVoterButton)

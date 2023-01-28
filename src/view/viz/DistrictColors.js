@@ -9,7 +9,7 @@ export default function districtColors(districtElectionResults, candidateList, e
         scResultsByDistrict,
     } = districtElectionResults
 
-    const canList = candidateList.getCandidates()
+    const canList = candidateList.getEntities()
 
     const colorByTract = colorTracts(votesByTract, canList)
     const colorOfWinsByDistrict = colorDistrictWins(scResultsByDistrict, canList, electionOptions)

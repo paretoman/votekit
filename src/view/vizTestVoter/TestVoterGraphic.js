@@ -32,7 +32,7 @@ export default function TestVoterGraphic(testVoter, screen, simOptions, viewEnti
         // who would this test point vote for?
         if (vote === undefined) return null
 
-        const canList = candidateList.getCandidates()
+        const canList = candidateList.getEntities()
         const colorSet = canList.map((can) => can.color)
         const colorSetRGBA = canList.map((can) => can.colorRGBA)
         self.colorSet = colorSet

@@ -22,7 +22,7 @@ export default function VoronoiRanking1D(voterGroup, candidateList, screen) {
         let ranking
         let intervalBorders
         if (cellData === undefined) {
-            canList = candidateList.getCandidates()
+            canList = candidateList.getEntities()
             const canGeoms = canList.map((can) => can.shape1)
             const cd = castRankingFindIntervals(canGeoms)
             ranking = cd.ranking
@@ -32,7 +32,7 @@ export default function VoronoiRanking1D(voterGroup, candidateList, screen) {
             intervalBorders = cellData.intervalBorders
         }
 
-        canList = candidateList.getCandidates()
+        canList = candidateList.getEntities()
         const n = canList.length
         const colorList = canList.map((can) => can.colorRGBA)
 

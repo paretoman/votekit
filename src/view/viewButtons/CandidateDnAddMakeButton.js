@@ -12,7 +12,7 @@ export default function CandidateDnAddMakeButton(viewMode, layout, canDnList) {
     addCandidateDistributionButton.innerText = 'Add Candidate Distribution'
 
     addCandidateDistributionButton.onclick = () => {
-        canDnList.addCandidateDistributionPressed()
+        canDnList.addEntityPressed()
     }
 
     layout.newElement('addCandidateDistribution', addCandidateDistributionButton)

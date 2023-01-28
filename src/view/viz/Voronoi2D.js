@@ -22,7 +22,7 @@ export default function Voronoi2D(voterGroup, candidateList, screen) {
     let voronoi
     let canList
     self.update = function () {
-        canList = candidateList.getCandidates()
+        canList = candidateList.getEntities()
         const points = canList.map((e) => [e.shape2.x, e.shape2.y])
         const delaunay = Delaunay.from(points)
         voronoi = delaunay.voronoi([0, 0, screen.width, screen.height])

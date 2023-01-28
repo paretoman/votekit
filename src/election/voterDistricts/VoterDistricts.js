@@ -38,7 +38,7 @@ export default function VoterDistricts(voterShapeList, changes, electionOptions)
     self.update = () => {
         if (changes.checkNone()) return
 
-        voterShapes = voterShapeList.getVoterShapes()
+        voterShapes = voterShapeList.getEntities()
         if (changes.check(['numDistricts', 'mode', 'dimensions'])) {
             self.updateDistricts()
         }

@@ -12,7 +12,7 @@ export default function CandidateAddMakeButton(viewMode, layout, canList) {
     addCandidateButton.innerText = 'Add Candidate'
 
     addCandidateButton.onclick = () => {
-        canList.addCandidatePressed()
+        canList.addEntityPressed()
     }
 
     layout.newElement('addCandidate', addCandidateButton)
