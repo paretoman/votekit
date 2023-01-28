@@ -17,8 +17,12 @@ export default function CandidateList(changes, commander) {
     }
     self.setNumberCandidatesAction = (num) => {
         while (candidateRegistrar.num() < num) {
-            const color = standardizeColor('yellow')
-            self.addCandidate({ x: 50, y: 50 }, { x: 50 }, color, false)
+            self.addCandidate({
+                shape2: { x: 50, y: 50 },
+                shape1: { x: 50 },
+                color: standardizeColor('yellow'),
+                doLoad: false,
+            })
         }
     }
 
@@ -27,9 +31,9 @@ export default function CandidateList(changes, commander) {
     self.attachNewE = (observer) => { observers.push(observer) }
     const updateObservers = (e) => { observers.forEach((o) => o.updateNewE(e)) }
 
-    self.addCandidate = (shape2, shape1, c, doLoad) => {
+    self.addCandidate = ({ shape2, shape1, color, doLoad }) => {
         // eslint-disable-next-line no-new, max-len
-        const candidate = new Candidate(shape2, shape1, c, candidateRegistrar, commander, changes, doLoad, candidateCommander)
+        const candidate = new Candidate(shape2, shape1, color, candidateRegistrar, commander, changes, doLoad, candidateCommander)
 
         updateObservers(candidate)
 

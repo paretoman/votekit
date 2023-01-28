@@ -16,7 +16,11 @@ export default function VoterShapeList(changes, commander) {
     }
     self.setNumberVotersAction = (num) => {
         while (voterRegistrar.num() < num) {
-            self.addVoterCircle({ x: 50, y: 50, w: 200 }, { x: 50, w: 200, densityProfile: 'gaussian' }, false)
+            self.addVoterCircle({
+                shape2: { x: 50, y: 50, w: 200 },
+                shape1: { x: 50, w: 200, densityProfile: 'gaussian' },
+                doLoad: false,
+            })
         }
     }
 
@@ -25,7 +29,7 @@ export default function VoterShapeList(changes, commander) {
     self.attachNewE = (observer) => { observers.push(observer) }
     const updateObservers = (e) => { observers.forEach((o) => o.updateNewE(e)) }
 
-    self.addVoterCircle = (shape2, shape1, doLoad) => {
+    self.addVoterCircle = ({ shape2, shape1, doLoad }) => {
         // eslint-disable-next-line max-len
         const voterShape = new VoterShape(shape2, shape1, voterRegistrar, commander, changes, doLoad, voterCommander)
 

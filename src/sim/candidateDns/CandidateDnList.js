@@ -16,7 +16,11 @@ export default function CandidateDnList(changes, commander) {
     }
     self.setNumberCandidateDnsAction = (num) => {
         while (candidateDnRegistrar.num() < num) {
-            self.addCandidateDistribution({ x: 50, y: 50, w: 200 }, { x: 50, w: 200, densityProfile: 'gaussian' }, false)
+            self.addCandidateDistribution({
+                shape2: { x: 50, y: 50, w: 200 },
+                shape1: { x: 50, w: 200, densityProfile: 'gaussian' },
+                doLoad: false,
+            })
         }
     }
 
@@ -25,7 +29,7 @@ export default function CandidateDnList(changes, commander) {
     self.attachNewE = (observer) => { observers.push(observer) }
     const updateObservers = (e) => { observers.forEach((o) => o.updateNewE(e)) }
 
-    self.addCandidateDistribution = (shape2, shape1, doLoad) => {
+    self.addCandidateDistribution = ({ shape2, shape1, doLoad }) => {
         // eslint-disable-next-line no-new, max-len
         const candidateDn = new CandidateDn(shape2, shape1, candidateDnRegistrar, commander, changes, doLoad, candidateDnCommander)
 
