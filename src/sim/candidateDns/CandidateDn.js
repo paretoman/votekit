@@ -57,12 +57,13 @@ export default function CandidateDistribution(
     }
 
     self.setAction = {}
+    self.setCommand = {}
 
     self.setAction.exists = (e) => {
         self.exists = e
         changes.add(['draggables'])
     }
-    self.setE = (e) => {
+    self.setCommand.exists = (e) => {
         const cur = candidateDnCommander.exists.getCurrentValue(id)
         candidateDnCommander.exists.go(id, e, cur)
     }
@@ -76,11 +77,11 @@ export default function CandidateDistribution(
         self.shape1.x = p
         changes.add(['draggables'])
     }
-    self.setXY1 = (p) => {
+    self.setCommand.shape1x = (p) => {
         const cur = candidateDnCommander.shape1x.getCurrentValue(id)
         candidateDnCommander.shape1x.go(id, p.x, cur)
     }
-    self.setXY2 = (p) => {
+    self.setCommand.shape2p = (p) => {
         const cur = candidateDnCommander.shape2p.getCurrentValue(id)
         candidateDnCommander.shape2p.go(id, p, cur)
     }
@@ -89,7 +90,7 @@ export default function CandidateDistribution(
         self.shape2.w = newW
         changes.add(['width'])
     }
-    self.setW2 = (newW) => {
+    self.setCommand.shape2w = (newW) => {
         const cur = candidateDnCommander.shape2w.getCurrentValue(id)
         candidateDnCommander.shape2w.go(id, newW, cur)
     }
@@ -98,7 +99,7 @@ export default function CandidateDistribution(
         self.shape1.w = newW
         changes.add(['width'])
     }
-    self.setW1 = (newW) => {
+    self.setCommand.shape1w = (newW) => {
         const cur = candidateDnCommander.shape1w.getCurrentValue(id)
         candidateDnCommander.shape1w.go(id, newW, cur)
     }
@@ -108,7 +109,7 @@ export default function CandidateDistribution(
         self.shape1.densityProfile = newDensityProfile1
         changes.add(['densityProfile'])
     }
-    self.setDensityProfile1 = (newDensityProfile1) => {
+    self.setCommand.shape1densityProfile = (newDensityProfile1) => {
         const cur = candidateDnCommander.shape1densityProfile.getCurrentValue(id)
         candidateDnCommander.shape1densityProfile.go(id, newDensityProfile1, cur)
     }
@@ -117,7 +118,7 @@ export default function CandidateDistribution(
         self.party = newParty
         changes.add(['party'])
     }
-    self.setParty = (e) => {
+    self.setCommand.party = (e) => {
         const cur = candidateDnCommander.party.getCurrentValue(id)
         candidateDnCommander.party.go(id, e, cur)
     }

@@ -7,10 +7,11 @@ export default function TestVoter(viewEntitiesOne) {
     self.shape2 = {}
 
     self.setAction = {}
+    self.setCommand = {}
     self.setAction.exists = (e) => {
         self.exists = e
     }
-    self.setE = (e) => {
+    self.setCommand.exists = (e) => {
         self.setAction.exists(e)
     }
 
@@ -22,11 +23,11 @@ export default function TestVoter(viewEntitiesOne) {
     self.setAction.shape1x = (p) => {
         self.shape1.x = p
     }
-    self.setXY1 = (p) => {
+    self.setCommand.shape1x = (p) => {
         self.setAction.shape1x(p.x)
         viewEntitiesOne.testVoteView()
     }
-    self.setXY2 = (p) => {
+    self.setCommand.shape2p = (p) => {
         self.setAction.shape2p(p)
         viewEntitiesOne.testVoteView()
     }
@@ -41,7 +42,7 @@ export default function TestVoter(viewEntitiesOne) {
     self.setAction.color = (newColor) => {
         self.color = newColor
     }
-    self.setColor = (e) => {
+    self.setCommand.color = (e) => {
         self.setAction.color(e)
     }
 }

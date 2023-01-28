@@ -55,12 +55,13 @@ export default function Candidate(
     }
 
     self.setAction = {}
+    self.setCommand = {}
 
     self.setAction.exists = (e) => {
         self.exists = e
         changes.add(['draggables'])
     }
-    self.setE = (e) => {
+    self.setCommand.exists = (e) => {
         const cur = candidateCommander.exists.getCurrentValue(id)
         candidateCommander.exists.go(id, e, cur)
     }
@@ -74,11 +75,11 @@ export default function Candidate(
         self.shape1.x = p
         changes.add(['draggables'])
     }
-    self.setXY1 = (p) => {
+    self.setCommand.shape1x = (p) => {
         const cur = candidateCommander.shape1x.getCurrentValue(id)
         candidateCommander.shape1x.go(id, p.x, cur)
     }
-    self.setXY2 = (p) => {
+    self.setCommand.shape2p = (p) => {
         const cur = candidateCommander.shape2p.getCurrentValue(id)
         candidateCommander.shape2p.go(id, p, cur)
     }
@@ -88,7 +89,7 @@ export default function Candidate(
         self.colorRGBA = toRGBA(newColor)
         changes.add(['color'])
     }
-    self.setColor = (e) => {
+    self.setCommand.color = (e) => {
         const cur = candidateCommander.color.getCurrentValue(id)
         candidateCommander.color.go(id, e, cur)
     }
@@ -97,7 +98,7 @@ export default function Candidate(
         self.party = newParty
         changes.add(['party'])
     }
-    self.setParty = (e) => {
+    self.setCommand.party = (e) => {
         const cur = candidateCommander.party.getCurrentValue(id)
         candidateCommander.party.go(id, e, cur)
     }
