@@ -9,12 +9,12 @@ export default function TestVoterGraphic(testVoter, screen, simOptions, viewEnti
 
     // Start displaying testvoter
     self.start = (p) => {
-        testVoter.setCommand.exists(1)
+        testVoter.doSetCommand.exists(1)
         self.setXYView(p)
         hideOnClickOutside(screen.wrap, removeTestPoint)
     }
     function removeTestPoint() {
-        testVoter.setCommand.exists(0)
+        testVoter.doSetCommand.exists(0)
     }
 
     // Dragging
@@ -39,7 +39,7 @@ export default function TestVoterGraphic(testVoter, screen, simOptions, viewEnti
 
         const { tallyFractions } = vote
         const color = rgbToString(colorBlender(tallyFractions, colorSetRGBA))
-        testVoter.setCommand.color(color)
+        testVoter.doSetCommand.color(color)
 
         if (tooltip.box) {
             tooltip.update(vote, self.colorSet)

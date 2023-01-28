@@ -36,7 +36,7 @@ export default function tooltipForTestVoter(testVoterGraphic, testVoter, screen)
     button2.innerHTML = '&#x2573;'
     button2.onclick = () => {
         box.remove()
-        testVoter.setCommand.exists(0)
+        testVoter.doSetCommand.exists(0)
     }
     box.appendChild(button2)
     box.appendChild(button)

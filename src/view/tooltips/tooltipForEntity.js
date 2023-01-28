@@ -16,7 +16,7 @@ export default function tooltipForEntity(graphic, entity, screen, viewSettings, 
         'checkbox',
         'Exists',
         'Exists: ',
-        (val) => entity.setCommand.exists(val ? 1 : 0),
+        (val) => entity.doSetCommand.exists(val ? 1 : 0),
         entity.exists === 1,
     )
     box.appendChild(items.exists.div)
@@ -27,7 +27,7 @@ export default function tooltipForEntity(graphic, entity, screen, viewSettings, 
                 'range',
                 'Width',
                 'Width: ',
-                (val) => entity.setCommand.shape1w(val),
+                (val) => entity.doSetCommand.shape1w(val),
                 entity.shape1.w,
             )
             box.appendChild(items.w1.div)
@@ -37,7 +37,7 @@ export default function tooltipForEntity(graphic, entity, screen, viewSettings, 
                 'select',
                 'Density Profile',
                 'Density Profile: ',
-                (val) => entity.setCommand.shape1densityProfile(val),
+                (val) => entity.doSetCommand.shape1densityProfile(val),
                 entity.shape1.densityProfile,
                 ['step', 'gaussian'],
             )
@@ -48,27 +48,27 @@ export default function tooltipForEntity(graphic, entity, screen, viewSettings, 
             'range',
             'Width',
             'Width: ',
-            (val) => entity.setCommand.shape2w(val),
+            (val) => entity.doSetCommand.shape2w(val),
             entity.shape2.w,
         )
         box.appendChild(items.w2.div)
     }
-    if (entity.setCommand.color !== undefined) {
+    if (entity.doSetCommand.color !== undefined) {
         items.color = new Item(
             'color',
             'Color',
             'Color: ',
-            (val) => entity.setCommand.color(val),
+            (val) => entity.doSetCommand.color(val),
             entity.color,
         )
         box.appendChild(items.color.div)
     }
-    if (entity.setCommand.party !== undefined) { // TODO: more parties, up to number of candidates etc
+    if (entity.doSetCommand.party !== undefined) { // TODO: more parties, up to number of candidates etc
         items.party = new Item(
             'select',
             'Party',
             'Party: ',
-            (val) => entity.setCommand.party([Number(val)]),
+            (val) => entity.doSetCommand.party([Number(val)]),
             entity.party,
             [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
         )

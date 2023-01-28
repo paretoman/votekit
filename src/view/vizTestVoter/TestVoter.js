@@ -27,11 +27,11 @@ export default function TestVoter(viewEntitiesOne) {
 
     // Make Commands //
 
-    self.setCommand = self.setAction
+    self.doSetCommand = self.setAction
 
     // Initialize
 
-    self.setCommand.shape1x(0)
-    self.setCommand.shape2p({ x: 0, y: 0 })
-    self.setCommand.color('#999')
+    self.doSetCommand.shape1x(0)
+    self.doSetCommand.shape2p({ x: 0, y: 0 })
+    self.doSetCommand.color('#999')
 }

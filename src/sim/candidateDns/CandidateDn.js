@@ -67,10 +67,10 @@ export default function CandidateDistribution(
 
     const id = candidateDnRegistrar.new(self)
 
-    self.setCommand = {}
+    self.doSetCommand = {}
     const actionKeys = Object.keys(self.setAction)
     actionKeys.forEach((key) => {
-        self.setCommand[key] = (e) => {
+        self.doSetCommand[key] = (e) => {
             const cur = candidateDnCommander[key].getCurrentValue(id)
             candidateDnCommander[key].go(id, e, cur)
         }

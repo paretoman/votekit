@@ -46,7 +46,7 @@ export default function ViewEntitiesOne(entities, screen, menu, changes, simOpti
 
     self.exit = () => {
         candidateViewList.unsetCandidateWins()
-        self.testVoterView.testVoter.setCommand.exists(0)
+        self.testVoterView.testVoter.doSetCommand.exists(0)
     }
 
     self.update = (simData) => {

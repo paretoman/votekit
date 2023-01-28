@@ -60,10 +60,10 @@ export default function VoterShape(
 
     const id = voterRegistrar.new(self)
 
-    self.setCommand = {}
+    self.doSetCommand = {}
     const actionKeys = Object.keys(self.setAction)
     actionKeys.forEach((key) => {
-        self.setCommand[key] = (e) => {
+        self.doSetCommand[key] = (e) => {
             const cur = voterCommander[key].getCurrentValue(id)
             voterCommander[key].go(id, e, cur)
         }

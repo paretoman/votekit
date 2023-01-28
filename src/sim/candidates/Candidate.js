@@ -59,10 +59,10 @@ export default function Candidate(
 
     const id = candidateRegistrar.new(self)
 
-    self.setCommand = {}
+    self.doSetCommand = {}
     const actionKeys = Object.keys(self.setAction)
     actionKeys.forEach((key) => {
-        self.setCommand[key] = (e) => {
+        self.doSetCommand[key] = (e) => {
             const cur = candidateCommander[key].getCurrentValue(id)
             candidateCommander[key].go(id, e, cur)
         }
