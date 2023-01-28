@@ -77,8 +77,10 @@ div.sandbox {
 	border-color: white;
 }
 
+/* jekyll site */
 .site-nav {z-index: 3;}
 .site-nav label[for="nav-trigger"] { z-index: 4;  }
 .darkMode .site-nav {
 	background:  #222; color: white; 
 }
+.u-email {overflow-wrap: break-word;}
