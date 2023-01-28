@@ -7,9 +7,16 @@ import getGeoms from '../entities/getGeoms.js'
 export default function CandidateDnList(changes, commander) {
     const self = this
 
+    // Publish //
+
+    const observers = []
+    self.attachNewE = (observer) => { observers.push(observer) }
+    const updateObservers = (e) => { observers.forEach((o) => o.updateNewE(e)) }
+
+    // Add Entity //
+
     const candidateDnRegistrar = new Registrar()
     const candidateDnCommander = new CandidateDnCommander(candidateDnRegistrar, commander, self)
-
     self.addCandidateDistributionPressed = () => {
         const num = candidateDnRegistrar.num() + 1
         candidateDnCommander.setNumberCandidateDns(num)
@@ -23,12 +30,6 @@ export default function CandidateDnList(changes, commander) {
             })
         }
     }
-
-    // Observers are lists of graphics in views //
-    const observers = []
-    self.attachNewE = (observer) => { observers.push(observer) }
-    const updateObservers = (e) => { observers.forEach((o) => o.updateNewE(e)) }
-
     self.addCandidateDistribution = ({ shape2, shape1, doLoad }) => {
         // eslint-disable-next-line no-new, max-len
         const candidateDn = new CandidateDn(shape2, shape1, candidateDnRegistrar, commander, changes, doLoad, candidateDnCommander)
@@ -38,6 +39,8 @@ export default function CandidateDnList(changes, commander) {
         const num = candidateDnRegistrar.num()
         candidateDnCommander.setNumberCandidateDns(num)
     }
+
+    // Getters //
 
     self.getCandidateDistributions = () => {
         const canDns = candidateDnRegistrar.getList()

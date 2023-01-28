@@ -7,9 +7,16 @@ import getGeoms from '../entities/getGeoms.js'
 export default function VoterShapeList(changes, commander) {
     const self = this
 
+    // Publish //
+
+    const observers = []
+    self.attachNewE = (observer) => { observers.push(observer) }
+    const updateObservers = (e) => { observers.forEach((o) => o.updateNewE(e)) }
+
+    // Add Entity //
+
     const voterRegistrar = new Registrar()
     const voterCommander = new VoterCommander(voterRegistrar, commander, self)
-
     self.addVoterPressed = () => {
         const num = voterRegistrar.num() + 1
         voterCommander.setNumberVoters(num)
@@ -23,12 +30,6 @@ export default function VoterShapeList(changes, commander) {
             })
         }
     }
-
-    // Observers are lists of graphics in views //
-    const observers = []
-    self.attachNewE = (observer) => { observers.push(observer) }
-    const updateObservers = (e) => { observers.forEach((o) => o.updateNewE(e)) }
-
     self.addVoterCircle = ({ shape2, shape1, doLoad }) => {
         // eslint-disable-next-line max-len
         const voterShape = new VoterShape(shape2, shape1, voterRegistrar, commander, changes, doLoad, voterCommander)
@@ -38,6 +39,8 @@ export default function VoterShapeList(changes, commander) {
         const num = voterRegistrar.num()
         voterCommander.setNumberVoters(num)
     }
+
+    // Getters //
 
     self.getVoterShapes = () => voterRegistrar.getList().filter((v) => v.exists)
     self.getGeoms = (dimensions) => getGeoms(self.getVoterShapes(), dimensions)
