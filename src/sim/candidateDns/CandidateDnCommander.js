@@ -14,7 +14,7 @@ export default function CandidateDnCommander(candidateDnRegistrar, commander, ca
     // a object with senders that set parameters for lists of entities.
     // Like if you want to set the exists property of the 2nd candidate to 1.
 
-    function makeSetForListSender(key, configKey, isChain) {
+    function makeSender(key, configKey, isChain) {
         self[key] = commander.addSenderForList({
             action: (id, e) => {
                 canDnList.setNumberCandidateDns(id + 1)
@@ -26,11 +26,11 @@ export default function CandidateDnCommander(candidateDnRegistrar, commander, ca
         })
     }
 
-    makeSetForListSender('exists', 'exists', false)
-    makeSetForListSender('shape2p', 'shape2D-point', true)
-    makeSetForListSender('shape1x', 'shape1D-x', true)
-    makeSetForListSender('shape2w', 'shape2D-width', true)
-    makeSetForListSender('shape1w', 'shape1D-width', true)
-    makeSetForListSender('shape1densityProfile', 'shape1D-densityProfile', false)
-    makeSetForListSender('party', 'party', false)
+    makeSender('exists', 'exists', false)
+    makeSender('shape2p', 'shape2D-point', true)
+    makeSender('shape1x', 'shape1D-x', true)
+    makeSender('shape2w', 'shape2D-width', true)
+    makeSender('shape1w', 'shape1D-width', true)
+    makeSender('shape1densityProfile', 'shape1D-densityProfile', false)
+    makeSender('party', 'party', false)
 }
