@@ -1,7 +1,7 @@
 import CandidateDn from './CandidateDn.js'
-import CandidateDnCommander from './CandidateDnCommander.js'
 import Registrar from '../sim/Registrar.js'
 import getGeoms from '../entities/getGeoms.js'
+import EntityCommander from '../entities/EntityCommander.js'
 
 /** A component of sim.js that deals with adding candidate distributions. */
 export default function CandidateDnList(changes, commander) {
@@ -16,8 +16,18 @@ export default function CandidateDnList(changes, commander) {
     // Add Entity //
 
     const prefix = 'candidateDns'
+    const canDnSenderList = [
+        // key, configKey, isChain
+        ['exists', 'exists', false],
+        ['shape2p', 'shape2D-point', true],
+        ['shape1x', 'shape1D-x', true],
+        ['shape2w', 'shape2D-width', true],
+        ['shape1w', 'shape1D-width', true],
+        ['shape1densityProfile', 'shape1D-densityProfile', false],
+        ['party', 'party', false],
+    ]
     const candidateDnRegistrar = new Registrar()
-    const candidateDnCommander = new CandidateDnCommander(candidateDnRegistrar, commander, self, prefix)
+    const candidateDnCommander = new EntityCommander(candidateDnRegistrar, commander, self, prefix, canDnSenderList)
     self.addCandidateDistribution = ({ shape2, shape1, doLoad }) => {
         // eslint-disable-next-line no-new, max-len
         const candidateDn = new CandidateDn(shape2, shape1, candidateDnRegistrar, commander, changes, doLoad, candidateDnCommander)
@@ -25,13 +35,13 @@ export default function CandidateDnList(changes, commander) {
         updateObservers(candidateDn)
 
         const num = candidateDnRegistrar.num()
-        self.setNumberCandidateDns(num)
+        self.setNumberEntities(num)
     }
     self.addCandidateDistributionPressed = () => {
         const num = candidateDnRegistrar.num() + 1
-        self.setNumberCandidateDns(num)
+        self.setNumberEntities(num)
     }
-    self.setNumberCandidateDns = commander.addSender({
+    self.setNumberEntities = commander.addSender({
         currentValue: 0,
         name: `${prefix}-setNumberAtLeast`,
         props: { isFirstAction: true },

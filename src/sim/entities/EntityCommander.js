@@ -3,32 +3,28 @@
 /**
  * Register senders with the commander for setting entity values.
  * This is here because we need an action that takes an id.
- * @param {Registrar} voterRegistrar
+ * @param {Registrar} registrar
  * @param {Commander} commander
- * @param {VoterShapeList} voterShapeList
+ * @param {EntityList} entityList
  * @constructor
  */
-export default function VoterCommander(voterRegistrar, commander, voterShapeList, prefix) {
+export default function EntityCommander(registrar, commander, entityList, prefix, senderList) {
     const self = this
 
     // a object with senders that set parameters for lists of entities.
     // Like if you want to set the exists property of the 2nd voter to 1.
 
+    senderList.forEach((x) => makeSender(...x))
+
     function makeSender(key, configKey, isChain) {
         self[key] = commander.addSenderForList({
             action: (id, e) => {
-                voterShapeList.setNumberVoters(id + 1)
-                const voter = voterRegistrar.get(id)
+                entityList.setNumberEntities(id + 1)
+                const voter = registrar.get(id)
                 voter.setAction[key](e)
             },
             name: `${prefix}-${configKey}`,
             props: { isChain },
         })
     }
-    makeSender('exists', 'exists', false)
-    makeSender('shape2p', 'shape2D-point', true)
-    makeSender('shape1x', 'shape1D-x', true)
-    makeSender('shape2w', 'shape2D-width', true)
-    makeSender('shape1w', 'shape1D-width', true)
-    makeSender('shape1densityProfile', 'shape1D-densityProfile', false)
 }

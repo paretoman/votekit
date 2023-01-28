@@ -1,7 +1,7 @@
 import Registrar from '../sim/Registrar.js'
 import VoterShape from './VoterShape.js'
-import VoterCommander from './VoterCommander.js'
 import getGeoms from '../entities/getGeoms.js'
+import EntityCommander from '../entities/EntityCommander.js'
 
 /** A component of sim.js that deals with adding voters. */
 export default function VoterShapeList(changes, commander) {
@@ -16,8 +16,17 @@ export default function VoterShapeList(changes, commander) {
     // Add Entity //
 
     const prefix = 'voters'
+    const voterSenderList = [
+        // key, configKey, isChain
+        ['exists', 'exists', false],
+        ['shape2p', 'shape2D-point', true],
+        ['shape1x', 'shape1D-x', true],
+        ['shape2w', 'shape2D-width', true],
+        ['shape1w', 'shape1D-width', true],
+        ['shape1densityProfile', 'shape1D-densityProfile', false],
+    ]
     const voterRegistrar = new Registrar()
-    const voterCommander = new VoterCommander(voterRegistrar, commander, self, prefix)
+    const voterCommander = new EntityCommander(voterRegistrar, commander, self, prefix, voterSenderList)
     self.addVoterCircle = ({ shape2, shape1, doLoad }) => {
         // eslint-disable-next-line max-len
         const voterShape = new VoterShape(shape2, shape1, voterRegistrar, commander, changes, doLoad, voterCommander)
@@ -25,13 +34,13 @@ export default function VoterShapeList(changes, commander) {
         updateObservers(voterShape)
 
         const num = voterRegistrar.num()
-        self.setNumberVoters(num)
+        self.setNumberEntities(num)
     }
     self.addVoterPressed = () => {
         const num = voterRegistrar.num() + 1
-        self.setNumberVoters(num)
+        self.setNumberEntities(num)
     }
-    self.setNumberVoters = commander.addSender({
+    self.setNumberEntities = commander.addSender({
         currentValue: 0,
         name: `${prefix}-setNumberAtLeast`,
         props: { isFirstAction: true },

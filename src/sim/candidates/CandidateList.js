@@ -1,8 +1,8 @@
 import Candidate from './Candidate.js'
-import CandidateCommander from './CandidateCommander.js'
 import { standardizeColor } from '../../utilities/jsHelpers.js'
 import Registrar from '../sim/Registrar.js'
 import getGeoms from '../entities/getGeoms.js'
+import EntityCommander from '../entities/EntityCommander.js'
 
 /** A component of sim.js that deals with adding candidates. */
 export default function CandidateList(changes, commander) {
@@ -17,8 +17,16 @@ export default function CandidateList(changes, commander) {
     // Add Entity //
 
     const prefix = 'candidates'
+    const candidateSenderList = [
+        // key, configKey, isChain
+        ['exists', 'exists', false],
+        ['shape2p', 'shape2D-point', true],
+        ['shape1x', 'shape1D-x', true],
+        ['color', 'color', false],
+        ['party', 'party', false],
+    ]
     const candidateRegistrar = new Registrar()
-    const candidateCommander = new CandidateCommander(candidateRegistrar, commander, self, prefix)
+    const candidateCommander = new EntityCommander(candidateRegistrar, commander, self, prefix, candidateSenderList)
     self.addCandidate = ({ shape2, shape1, color, doLoad }) => {
         // eslint-disable-next-line no-new, max-len
         const candidate = new Candidate(shape2, shape1, color, candidateRegistrar, commander, changes, doLoad, candidateCommander)
@@ -26,14 +34,14 @@ export default function CandidateList(changes, commander) {
         updateObservers(candidate)
 
         const num = candidateRegistrar.num()
-        self.setNumberCandidates(num)
+        self.setNumberEntities(num)
     }
     self.addCandidatePressed = () => {
         // really, we want to make a command to set numCandidates to at least an amount
         const num = candidateRegistrar.num() + 1
-        self.setNumberCandidates(num)
+        self.setNumberEntities(num)
     }
-    self.setNumberCandidates = commander.addSender({
+    self.setNumberEntities = commander.addSender({
         currentValue: 0,
         name: `${prefix}-setNumberAtLeast`,
         props: { isFirstAction: true },
