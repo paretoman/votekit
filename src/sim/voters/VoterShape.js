@@ -23,6 +23,8 @@ export default function VoterShape(
 ) {
     const self = this
 
+    // State //
+
     self.shape1 = {}
     self.shape2 = {}
 

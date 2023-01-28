@@ -27,6 +27,8 @@ export default function Candidate(
 ) {
     const self = this
 
+    // State //
+
     self.shape1 = {}
     self.shape2 = {}
 
