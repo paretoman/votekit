@@ -13,10 +13,9 @@ export default function VoterCommander(voterRegistrar, commander, voterShapeList
 
     // a object with senders that set parameters for lists of entities.
     // Like if you want to set the exists property of the 2nd voter to 1.
-    self.setForListSenders = {}
 
     function makeSetForListSender(key, configKey, isChain) {
-        self.setForListSenders[key] = commander.addSenderForList({
+        self[key] = commander.addSenderForList({
             action: (id, e) => {
                 voterShapeList.setNumberVoters(id + 1)
                 const voter = voterRegistrar.get(id)

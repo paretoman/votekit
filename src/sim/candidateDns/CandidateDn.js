@@ -35,17 +35,17 @@ export default function CandidateDistribution(
         const shape2p = { x: shape2.x, y: shape2.y }
 
         const commands = [
-            candidateDnCommander.setForListSenders.exists.command(id, 1, 0), // set alive flag
-            candidateDnCommander.setForListSenders.shape2p.command(id, shape2p, shape2p),
-            candidateDnCommander.setForListSenders.shape1x.command(id, shape1.x, shape1.x),
-            candidateDnCommander.setForListSenders.shape2w.command(id, shape2.w, shape2.w),
-            candidateDnCommander.setForListSenders.shape1w.command(id, shape1.w, shape1.w),
-            candidateDnCommander.setForListSenders.shape1densityProfile.command(
+            candidateDnCommander.exists.command(id, 1, 0), // set alive flag
+            candidateDnCommander.shape2p.command(id, shape2p, shape2p),
+            candidateDnCommander.shape1x.command(id, shape1.x, shape1.x),
+            candidateDnCommander.shape2w.command(id, shape2.w, shape2.w),
+            candidateDnCommander.shape1w.command(id, shape1.w, shape1.w),
+            candidateDnCommander.shape1densityProfile.command(
                 id,
                 shape1.densityProfile,
                 shape1.densityProfile,
             ),
-            candidateDnCommander.setForListSenders.party.command(id, [id], [id]),
+            candidateDnCommander.party.command(id, [id], [id]),
         ]
         // Either load the commands because we don't want to create an item of history
         // Or do the commands because want to store an item in history, so that we can undo.
@@ -63,8 +63,8 @@ export default function CandidateDistribution(
         changes.add(['draggables'])
     }
     self.setE = (e) => {
-        const cur = candidateDnCommander.setForListSenders.exists.getCurrentValue(id)
-        candidateDnCommander.setForListSenders.exists.go(id, e, cur)
+        const cur = candidateDnCommander.exists.getCurrentValue(id)
+        candidateDnCommander.exists.go(id, e, cur)
     }
 
     self.setAction.shape2p = (p) => {
@@ -77,12 +77,12 @@ export default function CandidateDistribution(
         changes.add(['draggables'])
     }
     self.setXY1 = (p) => {
-        const cur = candidateDnCommander.setForListSenders.shape1x.getCurrentValue(id)
-        candidateDnCommander.setForListSenders.shape1x.go(id, p.x, cur)
+        const cur = candidateDnCommander.shape1x.getCurrentValue(id)
+        candidateDnCommander.shape1x.go(id, p.x, cur)
     }
     self.setXY2 = (p) => {
-        const cur = candidateDnCommander.setForListSenders.shape2p.getCurrentValue(id)
-        candidateDnCommander.setForListSenders.shape2p.go(id, p, cur)
+        const cur = candidateDnCommander.shape2p.getCurrentValue(id)
+        candidateDnCommander.shape2p.go(id, p, cur)
     }
 
     self.setAction.shape2w = (newW) => {
@@ -90,8 +90,8 @@ export default function CandidateDistribution(
         changes.add(['width'])
     }
     self.setW2 = (newW) => {
-        const cur = candidateDnCommander.setForListSenders.shape2w.getCurrentValue(id)
-        candidateDnCommander.setForListSenders.shape2w.go(id, newW, cur)
+        const cur = candidateDnCommander.shape2w.getCurrentValue(id)
+        candidateDnCommander.shape2w.go(id, newW, cur)
     }
 
     self.setAction.shape1w = (newW) => {
@@ -99,8 +99,8 @@ export default function CandidateDistribution(
         changes.add(['width'])
     }
     self.setW1 = (newW) => {
-        const cur = candidateDnCommander.setForListSenders.shape1w.getCurrentValue(id)
-        candidateDnCommander.setForListSenders.shape1w.go(id, newW, cur)
+        const cur = candidateDnCommander.shape1w.getCurrentValue(id)
+        candidateDnCommander.shape1w.go(id, newW, cur)
     }
 
     /** Density Profile can be "gaussian" or "step" */
@@ -109,8 +109,8 @@ export default function CandidateDistribution(
         changes.add(['densityProfile'])
     }
     self.setDensityProfile1 = (newDensityProfile1) => {
-        const cur = candidateDnCommander.setForListSenders.shape1densityProfile.getCurrentValue(id)
-        candidateDnCommander.setForListSenders.shape1densityProfile.go(id, newDensityProfile1, cur)
+        const cur = candidateDnCommander.shape1densityProfile.getCurrentValue(id)
+        candidateDnCommander.shape1densityProfile.go(id, newDensityProfile1, cur)
     }
 
     self.setAction.party = (newParty) => {
@@ -118,8 +118,8 @@ export default function CandidateDistribution(
         changes.add(['party'])
     }
     self.setParty = (e) => {
-        const cur = candidateDnCommander.setForListSenders.party.getCurrentValue(id)
-        candidateDnCommander.setForListSenders.party.go(id, e, cur)
+        const cur = candidateDnCommander.party.getCurrentValue(id)
+        candidateDnCommander.party.go(id, e, cur)
     }
 
     self.instantiate()

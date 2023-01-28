@@ -39,11 +39,11 @@ export default function Candidate(
         const shape2p = { x: shape2.x, y: shape2.y }
 
         const commands = [
-            candidateCommander.setForListSenders.exists.command(id, 1, 0), // set alive flag
-            candidateCommander.setForListSenders.shape2p.command(id, shape2p, shape2p),
-            candidateCommander.setForListSenders.shape1x.command(id, shape1.x, shape1.x),
-            candidateCommander.setForListSenders.color.command(id, color, color),
-            candidateCommander.setForListSenders.party.command(id, [id], [id]),
+            candidateCommander.exists.command(id, 1, 0), // set alive flag
+            candidateCommander.shape2p.command(id, shape2p, shape2p),
+            candidateCommander.shape1x.command(id, shape1.x, shape1.x),
+            candidateCommander.color.command(id, color, color),
+            candidateCommander.party.command(id, [id], [id]),
         ]
         // Either load the commands because we don't want to create an item of history
         // Or do the commands because want to store an item in history, so that we can undo.
@@ -61,8 +61,8 @@ export default function Candidate(
         changes.add(['draggables'])
     }
     self.setE = (e) => {
-        const cur = candidateCommander.setForListSenders.exists.getCurrentValue(id)
-        candidateCommander.setForListSenders.exists.go(id, e, cur)
+        const cur = candidateCommander.exists.getCurrentValue(id)
+        candidateCommander.exists.go(id, e, cur)
     }
 
     self.setAction.shape2p = (p) => {
@@ -75,12 +75,12 @@ export default function Candidate(
         changes.add(['draggables'])
     }
     self.setXY1 = (p) => {
-        const cur = candidateCommander.setForListSenders.shape1x.getCurrentValue(id)
-        candidateCommander.setForListSenders.shape1x.go(id, p.x, cur)
+        const cur = candidateCommander.shape1x.getCurrentValue(id)
+        candidateCommander.shape1x.go(id, p.x, cur)
     }
     self.setXY2 = (p) => {
-        const cur = candidateCommander.setForListSenders.shape2p.getCurrentValue(id)
-        candidateCommander.setForListSenders.shape2p.go(id, p, cur)
+        const cur = candidateCommander.shape2p.getCurrentValue(id)
+        candidateCommander.shape2p.go(id, p, cur)
     }
 
     self.setAction.color = (newColor) => {
@@ -89,8 +89,8 @@ export default function Candidate(
         changes.add(['color'])
     }
     self.setColor = (e) => {
-        const cur = candidateCommander.setForListSenders.color.getCurrentValue(id)
-        candidateCommander.setForListSenders.color.go(id, e, cur)
+        const cur = candidateCommander.color.getCurrentValue(id)
+        candidateCommander.color.go(id, e, cur)
     }
 
     self.setAction.party = (newParty) => {
@@ -98,8 +98,8 @@ export default function Candidate(
         changes.add(['party'])
     }
     self.setParty = (e) => {
-        const cur = candidateCommander.setForListSenders.party.getCurrentValue(id)
-        candidateCommander.setForListSenders.party.go(id, e, cur)
+        const cur = candidateCommander.party.getCurrentValue(id)
+        candidateCommander.party.go(id, e, cur)
     }
 
     self.instantiate()

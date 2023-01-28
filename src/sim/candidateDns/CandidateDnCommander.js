@@ -13,10 +13,9 @@ export default function CandidateDnCommander(candidateDnRegistrar, commander, ca
 
     // a object with senders that set parameters for lists of entities.
     // Like if you want to set the exists property of the 2nd candidate to 1.
-    self.setForListSenders = {}
 
     function makeSetForListSender(key, configKey, isChain) {
-        self.setForListSenders[key] = commander.addSenderForList({
+        self[key] = commander.addSenderForList({
             action: (id, e) => {
                 canDnList.setNumberCandidateDns(id + 1)
                 const candidateDn = candidateDnRegistrar.get(id)

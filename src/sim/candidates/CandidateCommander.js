@@ -13,10 +13,9 @@ export default function CandidateCommander(candidateRegistrar, commander, canLis
 
     // a object with senders that set parameters for lists of entities.
     // Like if you want to set the exists property of the 2nd candidate to 1.
-    self.setForListSenders = {}
 
     function makeSetForListSender(key, configKey, isChain) {
-        self.setForListSenders[key] = commander.addSenderForList({
+        self[key] = commander.addSenderForList({
             action: (id, e) => {
                 canList.setNumberCandidates(id + 1)
                 const candidate = candidateRegistrar.get(id)
