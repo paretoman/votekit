@@ -8,10 +8,8 @@
  * @param {CandidateDnList} canDnList
  * @constructor
  */
-export default function CandidateDnCommander(candidateDnRegistrar, commander, canDnList) {
+export default function CandidateDnCommander(candidateDnRegistrar, commander, canDnList, prefix) {
     const self = this
-
-    const prefix = 'candidateDns'
 
     // a object with senders that set parameters for lists of entities.
     // Like if you want to set the exists property of the 2nd candidate to 1.
@@ -20,7 +18,7 @@ export default function CandidateDnCommander(candidateDnRegistrar, commander, ca
     function makeSetForListSender(key, configKey, isChain) {
         self.setForListSenders[key] = commander.addSenderForList({
             action: (id, e) => {
-                self.setNumberCandidateDns(id + 1)
+                canDnList.setNumberCandidateDns(id + 1)
                 const candidateDn = candidateDnRegistrar.get(id)
                 candidateDn.setAction[key](e)
             },
@@ -36,20 +34,4 @@ export default function CandidateDnCommander(candidateDnRegistrar, commander, ca
     makeSetForListSender('shape1w', 'shape1D-width', true)
     makeSetForListSender('shape1densityProfile', 'shape1D-densityProfile', false)
     makeSetForListSender('party', 'party', false)
-
-    // This is kind of weird because this value is not a good measure of the number of entities.
-    // An undo will reduce the number stored with the command name,
-    // but not reduce the number of entities.
-    // So we disable undo.
-    self.setNumberCandidateDnsSender = commander.addSender({
-        action: (num) => {
-            canDnList.setNumberCandidateDnsAction(num)
-        },
-        currentValue: 0,
-        name: `${prefix}-setNumberAtLeast`,
-        props: { isFirstAction: true },
-    })
-    self.setNumberCandidateDns = (num) => {
-        commander.loadCommands([self.setNumberCandidateDnsSender.command(num)])
-    }
 }

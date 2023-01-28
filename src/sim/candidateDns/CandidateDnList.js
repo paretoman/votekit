@@ -15,21 +15,9 @@ export default function CandidateDnList(changes, commander) {
 
     // Add Entity //
 
+    const prefix = 'candidateDns'
     const candidateDnRegistrar = new Registrar()
-    const candidateDnCommander = new CandidateDnCommander(candidateDnRegistrar, commander, self)
-    self.addCandidateDistributionPressed = () => {
-        const num = candidateDnRegistrar.num() + 1
-        candidateDnCommander.setNumberCandidateDns(num)
-    }
-    self.setNumberCandidateDnsAction = (num) => {
-        while (candidateDnRegistrar.num() < num) {
-            self.addCandidateDistribution({
-                shape2: { x: 50, y: 50, w: 200 },
-                shape1: { x: 50, w: 200, densityProfile: 'gaussian' },
-                doLoad: false,
-            })
-        }
-    }
+    const candidateDnCommander = new CandidateDnCommander(candidateDnRegistrar, commander, self, prefix)
     self.addCandidateDistribution = ({ shape2, shape1, doLoad }) => {
         // eslint-disable-next-line no-new, max-len
         const candidateDn = new CandidateDn(shape2, shape1, candidateDnRegistrar, commander, changes, doLoad, candidateDnCommander)
@@ -37,7 +25,30 @@ export default function CandidateDnList(changes, commander) {
         updateObservers(candidateDn)
 
         const num = candidateDnRegistrar.num()
-        candidateDnCommander.setNumberCandidateDns(num)
+        self.setNumberCandidateDns(num)
+    }
+    self.addCandidateDistributionPressed = () => {
+        const num = candidateDnRegistrar.num() + 1
+        self.setNumberCandidateDns(num)
+    }
+    self.setNumberCandidateDns = commander.addSender({
+        currentValue: 0,
+        name: `${prefix}-setNumberAtLeast`,
+        props: { isFirstAction: true },
+        action: (num) => {
+            while (candidateDnRegistrar.num() < num) {
+                self.addDefaultCandidateDistribution()
+            }
+        },
+        // load has no Undo. We can't undo creating an entity.
+        // We just set entity.exists to false.
+    }).load
+    self.addDefaultCandidateDistribution = () => {
+        self.addCandidateDistribution({
+            shape2: { x: 50, y: 50, w: 200 },
+            shape1: { x: 50, w: 200, densityProfile: 'gaussian' },
+            doLoad: false,
+        })
     }
 
     // Getters //

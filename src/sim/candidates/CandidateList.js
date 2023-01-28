@@ -16,23 +16,9 @@ export default function CandidateList(changes, commander) {
 
     // Add Entity //
 
+    const prefix = 'candidates'
     const candidateRegistrar = new Registrar()
-    const candidateCommander = new CandidateCommander(candidateRegistrar, commander, self)
-    self.addCandidatePressed = () => {
-        // really, we want to make a command to set numCandidates to at least an amount
-        const num = candidateRegistrar.num() + 1
-        candidateCommander.setNumberCandidates(num)
-    }
-    self.setNumberCandidatesAction = (num) => {
-        while (candidateRegistrar.num() < num) {
-            self.addCandidate({
-                shape2: { x: 50, y: 50 },
-                shape1: { x: 50 },
-                color: standardizeColor('yellow'),
-                doLoad: false,
-            })
-        }
-    }
+    const candidateCommander = new CandidateCommander(candidateRegistrar, commander, self, prefix)
     self.addCandidate = ({ shape2, shape1, color, doLoad }) => {
         // eslint-disable-next-line no-new, max-len
         const candidate = new Candidate(shape2, shape1, color, candidateRegistrar, commander, changes, doLoad, candidateCommander)
@@ -40,7 +26,32 @@ export default function CandidateList(changes, commander) {
         updateObservers(candidate)
 
         const num = candidateRegistrar.num()
-        candidateCommander.setNumberCandidates(num)
+        self.setNumberCandidates(num)
+    }
+    self.addCandidatePressed = () => {
+        // really, we want to make a command to set numCandidates to at least an amount
+        const num = candidateRegistrar.num() + 1
+        self.setNumberCandidates(num)
+    }
+    self.setNumberCandidates = commander.addSender({
+        currentValue: 0,
+        name: `${prefix}-setNumberAtLeast`,
+        props: { isFirstAction: true },
+        action: (num) => {
+            while (candidateRegistrar.num() < num) {
+                self.addDefaultCandidate()
+            }
+        },
+        // load has no Undo. We can't undo creating an entity.
+        // We just set entity.exists to false.
+    }).load
+    self.addDefaultCandidate = () => {
+        self.addCandidate({
+            shape2: { x: 50, y: 50 },
+            shape1: { x: 50 },
+            color: standardizeColor('yellow'),
+            doLoad: false,
+        })
     }
 
     // Getters //

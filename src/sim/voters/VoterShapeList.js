@@ -15,21 +15,9 @@ export default function VoterShapeList(changes, commander) {
 
     // Add Entity //
 
+    const prefix = 'voters'
     const voterRegistrar = new Registrar()
-    const voterCommander = new VoterCommander(voterRegistrar, commander, self)
-    self.addVoterPressed = () => {
-        const num = voterRegistrar.num() + 1
-        voterCommander.setNumberVoters(num)
-    }
-    self.setNumberVotersAction = (num) => {
-        while (voterRegistrar.num() < num) {
-            self.addVoterCircle({
-                shape2: { x: 50, y: 50, w: 200 },
-                shape1: { x: 50, w: 200, densityProfile: 'gaussian' },
-                doLoad: false,
-            })
-        }
-    }
+    const voterCommander = new VoterCommander(voterRegistrar, commander, self, prefix)
     self.addVoterCircle = ({ shape2, shape1, doLoad }) => {
         // eslint-disable-next-line max-len
         const voterShape = new VoterShape(shape2, shape1, voterRegistrar, commander, changes, doLoad, voterCommander)
@@ -37,7 +25,30 @@ export default function VoterShapeList(changes, commander) {
         updateObservers(voterShape)
 
         const num = voterRegistrar.num()
-        voterCommander.setNumberVoters(num)
+        self.setNumberVoters(num)
+    }
+    self.addVoterPressed = () => {
+        const num = voterRegistrar.num() + 1
+        self.setNumberVoters(num)
+    }
+    self.setNumberVoters = commander.addSender({
+        currentValue: 0,
+        name: `${prefix}-setNumberAtLeast`,
+        props: { isFirstAction: true },
+        action: (num) => {
+            while (voterRegistrar.num() < num) {
+                self.addDefaultVoterCircle()
+            }
+        },
+        // load has no Undo. We can't undo creating an entity.
+        // We just set entity.exists to false.
+    }).load
+    self.addDefaultVoterCircle = () => {
+        self.addVoterCircle({
+            shape2: { x: 50, y: 50, w: 200 },
+            shape1: { x: 50, w: 200, densityProfile: 'gaussian' },
+            doLoad: false,
+        })
     }
 
     // Getters //

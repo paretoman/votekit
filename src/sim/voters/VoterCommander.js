@@ -8,10 +8,8 @@
  * @param {VoterShapeList} voterShapeList
  * @constructor
  */
-export default function VoterCommander(voterRegistrar, commander, voterShapeList) {
+export default function VoterCommander(voterRegistrar, commander, voterShapeList, prefix) {
     const self = this
-
-    const prefix = 'voters'
 
     // a object with senders that set parameters for lists of entities.
     // Like if you want to set the exists property of the 2nd voter to 1.
@@ -20,7 +18,7 @@ export default function VoterCommander(voterRegistrar, commander, voterShapeList
     function makeSetForListSender(key, configKey, isChain) {
         self.setForListSenders[key] = commander.addSenderForList({
             action: (id, e) => {
-                self.setNumberVoters(id + 1)
+                voterShapeList.setNumberVoters(id + 1)
                 const voter = voterRegistrar.get(id)
                 voter.setAction[key](e)
             },
@@ -34,18 +32,4 @@ export default function VoterCommander(voterRegistrar, commander, voterShapeList
     makeSetForListSender('shape2w', 'shape2D-width', true)
     makeSetForListSender('shape1w', 'shape1D-width', true)
     makeSetForListSender('shape1densityProfile', 'shape1D-densityProfile', false)
-
-    // This is kind of weird because this value is not a good measure of the number of entities.
-    // An undo will reduce the number stored with the command name,
-    // but not reduce the number of entities.
-    // So we disable undo.
-    self.setNumberVotersSender = commander.addSender({
-        action: (num) => voterShapeList.setNumberVotersAction(num),
-        currentValue: 0,
-        name: `${prefix}-setNumberAtLeast`,
-        props: { isFirstAction: true },
-    })
-    self.setNumberVoters = (num) => {
-        commander.loadCommands([self.setNumberVotersSender.command(num)])
-    }
 }
