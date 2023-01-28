@@ -45,6 +45,9 @@ textarea {
     -o-tab-size : 4;
     tab-size : 4;
 }
+div.sandbox {
+	width:325px;
+}
 
 
 
