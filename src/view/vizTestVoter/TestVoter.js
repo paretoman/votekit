@@ -1,48 +1,37 @@
 export default function TestVoter(viewEntitiesOne) {
     const self = this
 
-    // Position
+    // State //
 
     self.shape1 = {}
     self.shape2 = {}
 
-    self.setAction = {}
-    self.setCommand = {}
-    self.setAction.exists = (e) => {
-        self.exists = e
-    }
-    self.setCommand.exists = (e) => {
-        self.setAction.exists(e)
+    self.setAction = {
+        exists(e) {
+            self.exists = e
+        },
+        shape2p(p) {
+            self.shape2.x = p.x
+            self.shape2.y = p.y
+            viewEntitiesOne.testVoteView()
+            // todo: maybe add a change
+        },
+        shape1x(x) {
+            self.shape1.x = x
+            viewEntitiesOne.testVoteView()
+        },
+        color(newColor) {
+            self.color = newColor
+        },
     }
 
-    self.setAction.shape2p = (p) => {
-        self.shape2.x = p.x
-        self.shape2.y = p.y
-        // todo: maybe add a change
-    }
-    self.setAction.shape1x = (x) => {
-        self.shape1.x = x
-    }
-    self.setCommand.shape1x = (x) => {
-        self.setAction.shape1x(x)
-        viewEntitiesOne.testVoteView()
-    }
-    self.setCommand.shape2p = (p) => {
-        self.setAction.shape2p(p)
-        viewEntitiesOne.testVoteView()
-    }
+    // Make Commands //
+
+    self.setCommand = self.setAction
 
     // Initialize
 
-    self.setAction.shape1x(0)
-    self.setAction.shape2p({ x: 0, y: 0 })
-
-    self.color = '#999'
-
-    self.setAction.color = (newColor) => {
-        self.color = newColor
-    }
-    self.setCommand.color = (e) => {
-        self.setAction.color(e)
-    }
+    self.setCommand.shape1x(0)
+    self.setCommand.shape2p({ x: 0, y: 0 })
+    self.setCommand.color('#999')
 }
