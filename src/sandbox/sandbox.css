@@ -47,6 +47,10 @@ textarea {
 }
 div.sandbox {
 	width: 311px;
+	margin: auto;
+}
+ul.top-links {
+	text-align: center;
 }
 
 
