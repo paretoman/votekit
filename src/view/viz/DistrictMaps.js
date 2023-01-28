@@ -9,7 +9,7 @@ import NoiseImage from './NoiseImage.js'
  * @param {Screen} screen
  * @constructor
  */
-export default function DistrictMaps(candidateList, screen, electionOptions, changes) {
+export default function DistrictMaps(candidateList, screen, electionOptions) {
     const self = this
 
     // Update //
@@ -18,7 +18,7 @@ export default function DistrictMaps(candidateList, screen, electionOptions, cha
         const { voterDistricts } = districtElectionResults.geometry
 
         // todo: make this only run when we have new districts
-        if (changes.check(['numDistricts']) && self.districtDraw === undefined) {
+        if (self.districtDraw === undefined) {
             const { districtMaker } = voterDistricts
             self.districtDraw = new DistrictDraw(screen, districtMaker)
             // Code that handles making images of geographic noise.
