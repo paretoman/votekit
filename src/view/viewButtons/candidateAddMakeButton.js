@@ -5,7 +5,7 @@
  * @param {Layout} layout
  * @param {Sim} canList
  */
-export default function CandidateAddMakeButton(viewMode, layout, canList) {
+export default function CandidateAddMakeButton(viewMode, canList) {
     const addCandidateButton = document.createElement('button')
 
     addCandidateButton.className = 'button2'
@@ -14,8 +14,6 @@ export default function CandidateAddMakeButton(viewMode, layout, canList) {
     addCandidateButton.onclick = () => {
         canList.addEntityPressed()
     }
-
-    layout.newElement('addCandidate', addCandidateButton)
 
     hide()
 
@@ -31,4 +29,6 @@ export default function CandidateAddMakeButton(viewMode, layout, canList) {
     function hide() {
         addCandidateButton.hidden = true
     }
+
+    return addCandidateButton
 }

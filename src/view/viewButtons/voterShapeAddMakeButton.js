@@ -5,7 +5,7 @@
  * @param {Layout} layout
  * @param {VoterShapeList} voterShapeList
  */
-export default function VoterShapeAddMakeButton(layout, voterShapeList) {
+export default function VoterShapeAddMakeButton(voterShapeList) {
     const addVoterButton = document.createElement('button')
 
     addVoterButton.innerText = 'Add Voter'
@@ -14,6 +14,5 @@ export default function VoterShapeAddMakeButton(layout, voterShapeList) {
     addVoterButton.onclick = () => {
         voterShapeList.addEntityPressed()
     }
-
-    layout.newElement('addVoter', addVoterButton)
+    return addVoterButton
 }

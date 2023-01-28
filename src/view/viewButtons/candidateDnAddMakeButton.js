@@ -5,7 +5,7 @@
  * @param {Layout} layout
  * @param {Commander} commander
  */
-export default function CandidateDnAddMakeButton(viewMode, layout, canDnList) {
+export default function CandidateDnAddMakeButton(viewMode, canDnList) {
     const addCandidateDistributionButton = document.createElement('button')
 
     addCandidateDistributionButton.className = 'button2'
@@ -14,8 +14,6 @@ export default function CandidateDnAddMakeButton(viewMode, layout, canDnList) {
     addCandidateDistributionButton.onclick = () => {
         canDnList.addEntityPressed()
     }
-
-    layout.newElement('addCandidateDistribution', addCandidateDistributionButton)
 
     hide()
 
@@ -31,4 +29,6 @@ export default function CandidateDnAddMakeButton(viewMode, layout, canDnList) {
     function hide() {
         addCandidateDistributionButton.hidden = true
     }
+
+    return addCandidateDistributionButton
 }
