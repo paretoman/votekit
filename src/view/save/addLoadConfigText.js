@@ -12,7 +12,7 @@ export default function addLoadConfigText(layout, commander, nameInput) {
 
     button.className = 'button2'
 
-    button.innerText = 'Load Config Text'
+    button.innerText = 'Load Pasted Config'
 
     const text = document.createElement('textarea')
 

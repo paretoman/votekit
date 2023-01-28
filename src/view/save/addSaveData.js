@@ -11,11 +11,11 @@ import TextArea from './TextArea.js'
 export default function addSaveData(layout, nameInput, viewDownload) {
     const button = document.createElement('button')
     button.className = 'button2'
-    button.innerText = 'Save Data To Text'
+    button.innerText = 'Show Data'
 
     const button2 = document.createElement('button')
     button2.className = 'button2'
-    button2.innerText = 'Download Data Json'
+    button2.innerText = 'Download Data'
 
     const dLink = new DownloadLink()
     dLink.setFileName('data.json')

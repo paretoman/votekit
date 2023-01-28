@@ -15,7 +15,7 @@ export default function addSaveConfigToShortLink(layout, commander, sandboxPath,
 
     const button2 = document.createElement('button')
     button2.className = 'button2'
-    button2.innerText = 'And Copy to Clipboard'
+    button2.innerText = 'Copy'
 
     const text = new TextArea()
     text.hide()

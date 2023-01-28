@@ -16,7 +16,7 @@ export default function addUpload(uploadCallback, nameInput) {
 
     const button = document.createElement('button')
     button.className = 'button2'
-    button.innerText = 'Upload Json'
+    button.innerText = 'Upload Config'
     button.onclick = () => { input.click() }
 
     return button

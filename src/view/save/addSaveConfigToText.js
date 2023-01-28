@@ -12,11 +12,11 @@ import TextArea from './TextArea.js'
 export default function addSaveConfigToText(layout, commander, nameInput) {
     const button = document.createElement('button')
     button.className = 'button2'
-    button.innerText = 'Save Config To Text'
+    button.innerText = 'Show Config'
 
     const button2 = document.createElement('button')
     button2.className = 'button2'
-    button2.innerText = 'Download Config Json'
+    button2.innerText = 'Download Config'
 
     const dLink = new DownloadLink()
     dLink.setFileName('config.json')

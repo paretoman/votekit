@@ -11,11 +11,11 @@ import TextArea from './TextArea.js'
 export default function addSaveConfigToLink(layout, commander, sandboxPath, nameInput) {
     const button = document.createElement('button')
     button.className = 'button2'
-    button.innerText = 'Save Link'
+    button.innerText = 'Save Long Link'
 
     const button2 = document.createElement('button')
     button2.className = 'button2'
-    button2.innerText = 'Copy Link to Clipboard'
+    button2.innerText = 'Copy'
 
     const text = new TextArea()
     text.hide()
