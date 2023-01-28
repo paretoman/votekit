@@ -4,33 +4,29 @@
  * @param {*} menu
  */
 export default function menuSimOptions(simOptions, menu) {
-    const modeList = [
-        { name: 'One Election', value: 'one' },
-        { name: 'Sample Elections', value: 'sample' },
-    ]
-    menu.addMenuItem(
-        simOptions,
-        {
-            label: 'Mode:',
-            prop: 'mode',
-            setProp: (p) => { simOptions.setMode(p) },
-            options: modeList,
-            change: ['mode'],
+    menu.addMenuItem({
+        label: 'Mode:',
+        options: [
+            { name: 'One Election', value: 'one' },
+            { name: 'Sample Elections', value: 'sample' },
+        ],
+        changeList: ['mode'],
+        getValue: () => simOptions.mode,
+        onChoose: (o) => {
+            simOptions.setMode(o.value)
         },
-    )
+    })
 
-    const dimensionList = [
-        { name: '1D', value: 1 },
-        { name: '2D', value: 2 },
-    ]
-    menu.addMenuItem(
-        simOptions,
-        {
-            label: 'Dimensions:',
-            prop: 'dimensions',
-            setProp: (p) => { simOptions.setDimensions(p) },
-            options: dimensionList,
-            change: ['dimensions'],
+    menu.addMenuItem({
+        label: 'Dimensions:',
+        options: [
+            { name: '1D', value: 1 },
+            { name: '2D', value: 2 },
+        ],
+        changeList: ['dimensions'],
+        getValue: () => simOptions.dimensions,
+        onChoose: (o) => {
+            simOptions.setDimensions(o.value)
         },
-    )
+    })
 }

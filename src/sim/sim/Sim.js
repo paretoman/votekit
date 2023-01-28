@@ -13,8 +13,8 @@ export default function Sim(comMessenger) {
 
     const commander = new Commander(comMessenger)
 
-    const simOptions = new SimOptions(changes)
-    const electionOptions = new ElectionOptions(changes, simOptions)
+    const simOptions = new SimOptions(changes, commander)
+    const electionOptions = new ElectionOptions(changes, simOptions, commander)
 
     const entities = new Entities(changes, commander)
     const voterDistricts = new VoterDistricts(entities.voterShapeList, changes, electionOptions)

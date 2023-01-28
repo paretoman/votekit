@@ -21,40 +21,27 @@ import ButtonGroup from './ButtonGroup.js'
  * @constructor
  */
 // eslint-disable-next-line max-len
-export default function MenuItem(object, prop, setProp, label, options, change, changes, commander) {
-    const self = this
-    self.list = options
-    self.onChoose = function (data) {
-        self.sender.go(data.value)
-    }
-    self.action = (value) => {
-        self.set(value)
-        self.select()
-    }
-    self.sender = commander.addSender({
-        name: prop,
-        action: self.action,
-        currentValue: object[prop],
-    })
-    self.set = function (value) {
-        // LOAD INPUT
+export default function MenuItem(pub, changes, choice) {
+    const {
+        label, options, changeList, getValue, onChoose,
+    } = choice
 
-        setProp(value)
-        // CONFIGURE
-        self.configure()
-        // UPDATE
-        changes.add(change)
-    }
+    const self = this
+    pub.attach(self)
+
     self.choose = new ButtonGroup({
         label,
         width: buttonWidth(3),
-        data: self.list,
-        onChoose: self.onChoose,
+        data: options,
+        onChoose,
     })
-    self.configure = function () {
+    self.update = () => {
+        if (changes.check(changeList)) {
+            self.select()
+        }
     }
     self.select = function () {
-        self.choose.highlight('value', object[prop])
+        self.choose.highlight('value', getValue())
     }
 }
 
