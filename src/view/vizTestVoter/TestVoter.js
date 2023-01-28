@@ -20,11 +20,11 @@ export default function TestVoter(viewEntitiesOne) {
         self.shape2.y = p.y
         // todo: maybe add a change
     }
-    self.setAction.shape1x = (p) => {
-        self.shape1.x = p
+    self.setAction.shape1x = (x) => {
+        self.shape1.x = x
     }
-    self.setCommand.shape1x = (p) => {
-        self.setAction.shape1x(p.x)
+    self.setCommand.shape1x = (x) => {
+        self.setAction.shape1x(x)
         viewEntitiesOne.testVoteView()
     }
     self.setCommand.shape2p = (p) => {

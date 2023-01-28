@@ -55,53 +55,38 @@ export default function Candidate(
     }
 
     self.setAction = {}
-    self.setCommand = {}
 
     self.setAction.exists = (e) => {
         self.exists = e
         changes.add(['draggables'])
     }
-    self.setCommand.exists = (e) => {
-        const cur = candidateCommander.exists.getCurrentValue(id)
-        candidateCommander.exists.go(id, e, cur)
-    }
-
     self.setAction.shape2p = (p) => {
         self.shape2.x = p.x
         self.shape2.y = p.y
         changes.add(['draggables'])
     }
-    self.setAction.shape1x = (p) => {
-        self.shape1.x = p
+    self.setAction.shape1x = (x) => {
+        self.shape1.x = x
         changes.add(['draggables'])
     }
-    self.setCommand.shape1x = (p) => {
-        const cur = candidateCommander.shape1x.getCurrentValue(id)
-        candidateCommander.shape1x.go(id, p.x, cur)
-    }
-    self.setCommand.shape2p = (p) => {
-        const cur = candidateCommander.shape2p.getCurrentValue(id)
-        candidateCommander.shape2p.go(id, p, cur)
-    }
-
     self.setAction.color = (newColor) => {
         self.color = newColor
         self.colorRGBA = toRGBA(newColor)
         changes.add(['color'])
     }
-    self.setCommand.color = (e) => {
-        const cur = candidateCommander.color.getCurrentValue(id)
-        candidateCommander.color.go(id, e, cur)
-    }
-
     self.setAction.party = (newParty) => {
         self.party = newParty
         changes.add(['party'])
     }
-    self.setCommand.party = (e) => {
-        const cur = candidateCommander.party.getCurrentValue(id)
-        candidateCommander.party.go(id, e, cur)
-    }
+
+    self.setCommand = {}
+    const actionKeys = Object.keys(self.setAction)
+    actionKeys.forEach((key) => {
+        self.setCommand[key] = (e) => {
+            const cur = candidateCommander[key].getCurrentValue(id)
+            candidateCommander[key].go(id, e, cur)
+        }
+    })
 
     self.instantiate()
 }

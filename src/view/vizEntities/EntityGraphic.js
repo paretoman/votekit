@@ -5,7 +5,7 @@ export default function EntityGraphic(entity, simOptions) {
     self.setXYView = (p) => {
         const { dimensions } = simOptions
         if (dimensions === 1) {
-            entity.setCommand.shape1x(p)
+            entity.setCommand.shape1x(p.x)
         } else {
             entity.setCommand.shape2p(p)
         }

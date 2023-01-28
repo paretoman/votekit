@@ -63,56 +63,37 @@ export default function VoterShape(
         self.exists = e
         changes.add(['draggables'])
     }
-    self.setCommand.exists = (e) => {
-        const cur = voterCommander.exists.getCurrentValue(id)
-        voterCommander.exists.go(id, e, cur)
-    }
-
     self.setAction.shape2p = (p) => {
         self.shape2.x = p.x
         self.shape2.y = p.y
         changes.add(['draggables'])
     }
-    self.setAction.shape1x = (p) => {
-        self.shape1.x = p
+    self.setAction.shape1x = (x) => {
+        self.shape1.x = x
         changes.add(['draggables'])
     }
-    self.setCommand.shape1x = (p) => {
-        const cur = voterCommander.shape1x.getCurrentValue(id)
-        voterCommander.shape1x.go(id, p.x, cur)
-    }
-    self.setCommand.shape2p = (p) => {
-        const cur = voterCommander.shape2p.getCurrentValue(id)
-        voterCommander.shape2p.go(id, p, cur)
-    }
-
     self.setAction.shape2w = (newW) => {
         self.shape2.w = newW
         changes.add(['width'])
     }
-    self.setCommand.shape2w = (newW) => {
-        const cur = voterCommander.shape2w.getCurrentValue(id)
-        voterCommander.shape2w.go(id, newW, cur)
-    }
-
     self.setAction.shape1w = (newW) => {
         self.shape1.w = newW
         changes.add(['width'])
     }
-    self.setCommand.shape1w = (newW) => {
-        const cur = voterCommander.shape1w.getCurrentValue(id)
-        voterCommander.shape1w.go(id, newW, cur)
-    }
-
     /** Density Profile can be "gaussian" or "step" */
     self.setAction.shape1densityProfile = (newDensityProfile1) => {
         self.shape1.densityProfile = newDensityProfile1
         changes.add(['densityProfile'])
     }
-    self.setCommand.shape1densityProfile = (newDensityProfile1) => {
-        const cur = voterCommander.shape1densityProfile.getCurrentValue(id)
-        voterCommander.shape1densityProfile.go(id, newDensityProfile1, cur)
-    }
+
+    self.setCommand = {}
+    const actionKeys = Object.keys(self.setAction)
+    actionKeys.forEach((key) => {
+        self.setCommand[key] = (e) => {
+            const cur = voterCommander[key].getCurrentValue(id)
+            voterCommander[key].go(id, e, cur)
+        }
+    })
 
     self.instantiate()
 
