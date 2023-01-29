@@ -35,6 +35,7 @@ export default function MenuItem(pub, changes, choice) {
         width: buttonWidth(3),
         data: options,
         onChoose,
+        // TODO: maybe do self.select here in onChoose rather than in update.
     })
     self.update = () => {
         if (changes.check(changeList)) {

@@ -8,7 +8,7 @@
 export default function VoterShapeAddMakeButton(voterShapeList) {
     const addVoterButton = document.createElement('button')
 
-    addVoterButton.innerText = 'Add Voter'
+    addVoterButton.innerText = 'Add Voter Group'
     addVoterButton.className = 'button2'
 
     addVoterButton.onclick = () => {

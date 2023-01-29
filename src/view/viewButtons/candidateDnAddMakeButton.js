@@ -9,7 +9,7 @@ export default function CandidateDnAddMakeButton(viewMode, canDnList) {
     const addCandidateDistributionButton = document.createElement('button')
 
     addCandidateDistributionButton.className = 'button2'
-    addCandidateDistributionButton.innerText = 'Add Candidate Distribution'
+    addCandidateDistributionButton.innerText = 'Add Candidate Group'
 
     addCandidateDistributionButton.onclick = () => {
         canDnList.addEntityPressed()
