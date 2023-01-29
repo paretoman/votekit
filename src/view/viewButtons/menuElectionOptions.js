@@ -26,7 +26,9 @@ export default function menuElectionOptions(electionOptions, menu) {
         label: 'Social Choice Method:',
         explain: 'The method of choosing winners from a set of prospective candidates.',
         options: socialChoiceMethodMetadata.map(
-            ({ shortName, functionName }) => ({ name: shortName, value: functionName }),
+            ({ shortName, functionName, name, explain }) => (
+                { name: shortName, value: functionName, explain: explain || name }
+            ),
         ),
         changeList: ['socialChoiceMethod'],
         getValue: () => electionOptions.socialChoiceMethod,
