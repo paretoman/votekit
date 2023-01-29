@@ -51,8 +51,8 @@ export default function Candidate(
             self.colorRGBA = toRGBA(newColor)
             changes.add(['color'])
         },
-        party(newParty) {
-            self.party = newParty
+        party(p) {
+            self.party = p
             changes.add(['party'])
         },
     }

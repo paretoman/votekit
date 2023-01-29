@@ -45,20 +45,20 @@ export default function CandidateDistribution(
             self.shape1.x = x
             changes.add(['draggables'])
         },
-        shape2w(newW) {
-            self.shape2.w = newW
+        shape2w(w) {
+            self.shape2.w = w
             changes.add(['width'])
         },
-        shape1w(newW) {
-            self.shape1.w = newW
+        shape1w(w) {
+            self.shape1.w = w
             changes.add(['width'])
         },
-        shape1densityProfile(newDensityProfile1) {
-            self.shape1.densityProfile = newDensityProfile1
+        shape1densityProfile(d) {
+            self.shape1.densityProfile = d
             changes.add(['densityProfile'])
         },
-        party(newParty) {
-            self.party = newParty
+        party(p) {
+            self.party = p
             changes.add(['party'])
         },
     }
