@@ -2,6 +2,7 @@
 
 import CastPairwiseSummer1DIntervals from './CastPairwiseSummer1DIntervals.js'
 import CastPairwiseSummer2DPolygons from './CastPairwiseSummer2DPolygons.js'
+import CastPairwiseSummerGrid from './CastPairwiseSummerGrid.js'
 
 /**
  * Vote for one.
@@ -13,12 +14,14 @@ import CastPairwiseSummer2DPolygons from './CastPairwiseSummer2DPolygons.js'
  * For 1D, an array of objects: {x,w,densityProfile}.
  * @returns votes, an object
  */
-export default function castPairwise({
-    canGeoms, voterGeoms, dimensions, parties,
-}) {
-    const summer = (dimensions === 1)
-        ? new CastPairwiseSummer1DIntervals(canGeoms)
-        : new CastPairwiseSummer2DPolygons(canGeoms)
+export default function castPairwise({ canGeoms, voterGeoms, dimensions, parties }, castOptions) {
+    const SummerLines = (dimensions === 1)
+        ? CastPairwiseSummer1DIntervals
+        : CastPairwiseSummer2DPolygons
+    const someGaussian2D = voterGeoms.some((v) => v.densityProfile === 'gaussian') && dimensions === 2
+
+    const Summer = (someGaussian2D) ? CastPairwiseSummerGrid : SummerLines
+    const summer = new Summer(canGeoms, castOptions, dimensions)
 
     // get fraction of votes for each candidate so we can summarize results
     let totalAreaAll = 0
@@ -30,9 +33,12 @@ export default function castPairwise({
     for (let i = 0; i < n; i++) {
         areaAll[i] = Array(n).fill(0)
     }
-    voterGeoms.forEach((voterGeom) => {
+    const gridData = []
+    voterGeoms.forEach((voterGeom, g) => {
         const weight = ((voterGeom.weight === undefined) ? 1 : voterGeom.weight)
-        const { area, totalArea } = summer.sumArea(voterGeom, weight)
+        const { area, totalArea, grid, voteSet } = summer.sumArea(voterGeom, weight)
+        const gridDataEntry = { grid, voteSet, voterGeom }
+        gridData[g] = gridDataEntry
 
         for (let i = 0; i < n; i++) {
             for (let k = 0; k < n; k++) {
@@ -58,6 +64,6 @@ export default function castPairwise({
         }
     }
     const tallyFractions = tallyWins.map((x) => x / (n - 1))
-    const votes = { pairwiseTallyFractions, tallyFractions, parties }
+    const votes = { pairwiseTallyFractions, tallyFractions, gridData, parties }
     return votes
 }
