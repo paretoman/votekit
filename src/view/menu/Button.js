@@ -30,7 +30,7 @@ export default function Button(buttonConfig, onChoose) {
         }
     }
     self.draw()
-    self.dom.setAttribute('title', buttonConfig.realname || '')
+    self.dom.setAttribute('title', buttonConfig.explain || '')
     self.onClick = function () {
         onChoose(self, buttonConfig)
     }

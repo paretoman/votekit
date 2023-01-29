@@ -23,7 +23,7 @@ import ButtonGroup from './ButtonGroup.js'
 // eslint-disable-next-line max-len
 export default function MenuItem(pub, changes, choice) {
     const {
-        label, options, changeList, getValue, onChoose,
+        label, options, changeList, getValue, onChoose, explain,
     } = choice
 
     const self = this
@@ -31,6 +31,7 @@ export default function MenuItem(pub, changes, choice) {
 
     self.choose = new ButtonGroup({
         label,
+        explain,
         width: buttonWidth(3),
         data: options,
         onChoose,

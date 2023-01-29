@@ -50,7 +50,7 @@ export default function ButtonGroup(config) {
         // Label!
         self.labelDOM = document.createElement('div')
         self.labelDOM.setAttribute('class', 'button-group-label')
-        self.draw()
+        self.labelDOM.setAttribute('title', config.explain || '')
         self.dom.appendChild(self.labelDOM)
 
         // Create & place buttons!
