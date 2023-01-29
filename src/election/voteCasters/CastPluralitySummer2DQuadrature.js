@@ -22,7 +22,7 @@ export default function AreaSummer(canGeoms) {
             // return area for each candidate
             area[i] = sumCircle(voterGeom, lineSet)
         }
-        return area
+        return { area }
     }
 }
 

@@ -25,7 +25,7 @@ export default function LineSummer(canGeoms) {
                 area[i] = sumBlock(voterGeom, intervals[i])
             }
         }
-        return area
+        return { area }
     }
 }
 

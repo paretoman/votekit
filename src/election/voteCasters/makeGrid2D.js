@@ -22,6 +22,7 @@ export default function makeGrid2D(voterGeom, castOptions) {
     const gridLength = nx * ny
     const gridX = Array(gridLength)
     const gridY = Array(gridLength)
+    const testVoter = Array(gridLength)
     const weight = Array(gridLength)
     let i = 0
 
@@ -33,13 +34,14 @@ export default function makeGrid2D(voterGeom, castOptions) {
             const gy = gridYMargin[iy]
             gridX[i] = gx
             gridY[i] = gy
+            testVoter[i] = { x: gx, y: gy }
             weight[i] = findWeight(voterGeom, gx, gy, invNorm)
             i += 1
         }
     }
 
     const grid = {
-        x: gridX, y: gridY, weight, nx, ny, width,
+        x: gridX, y: gridY, weight, nx, ny, width, testVoter,
     }
     return grid
 }

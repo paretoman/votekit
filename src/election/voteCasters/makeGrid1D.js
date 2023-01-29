@@ -7,7 +7,8 @@ export default function makeGrid1D(voterGeom) {
     const iGrid = range(iWidth)
     const gridX = iGrid.map((i) => i + 0.5 - iWidth * 0.5 + voterGeom.x)
     const weight = gridX.map((x) => findWeight(voterGeom, x))
-    const grid = { x: gridX, weight }
+    const testVoter = gridX.map((x) => ({ x }))
+    const grid = { x: gridX, weight, testVoter }
     return grid
 }
 

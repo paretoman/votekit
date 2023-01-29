@@ -37,12 +37,17 @@ export default function ViewVizOne(entities, screenMain, screenMini, menu, chang
     let vizOne
     function enterStrategy() {
         const { voteCasterName } = electionOptions
-        const VizOneVoronoiGeneral = (voteCasterName === 'ranking' || voteCasterName === 'pairwise')
-            ? VizOneVoronoiRanking : VizOneVoronoi
-        const VizNoDistricts = (voteCasterName === 'score' || voteCasterName === 'scoreLong')
-            ? VizOneGrid : VizOneVoronoiGeneral
-        const VizOne = (electionOptions.useDistricts === true)
-            ? VizDistricts : VizNoDistricts
+        const { dimensions } = simOptions
+
+        const voterGeoms = voterShapeList.getGeoms(dimensions)
+        const someGaussian2D = voterGeoms.some((v) => v.densityProfile === 'gaussian') && dimensions === 2
+        const doGrid = someGaussian2D || voteCasterName === 'score' || voteCasterName === 'scoreLong'
+
+        const doRanking = voteCasterName === 'ranking' || voteCasterName === 'pairwise'
+
+        const VizOneVoronoiGeneral = (doRanking) ? VizOneVoronoiRanking : VizOneVoronoi
+        const VizNoDistricts = (doGrid) ? VizOneGrid : VizOneVoronoiGeneral
+        const VizOne = (electionOptions.useDistricts === true) ? VizDistricts : VizNoDistricts
         vizOne = new VizOne(voterRendererList, candidateList, screenMain, screenMini, simOptions)
     }
     enterStrategy()
@@ -59,7 +64,7 @@ export default function ViewVizOne(entities, screenMain, screenMini, menu, chang
 
     self.update = (simData) => {
         if (changes.checkNone()) return
-        if (changes.check(['numDistricts', 'dimensions', 'socialChoiceMethod'])) {
+        if (changes.check(['numDistricts', 'dimensions', 'socialChoiceMethod', 'densityProfile'])) {
             self.exit()
             self.enter()
         }
