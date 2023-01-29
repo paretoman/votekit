@@ -41,9 +41,15 @@ export function orderedJsonStringify(obj) {
     return JSON.stringify(sortObjByKey(obj), null, '\t')
 }
 
+const coefInvSqrt2Pi = 1 / (Math.sqrt(2 * Math.PI))
+
 export function normPDF(x, mean, sd) {
-    const coef = 1 / (sd * Math.sqrt(2 * Math.PI))
+    const coef = coefInvSqrt2Pi / sd
     return coef * Math.exp(-0.5 * ((x - mean) / sd) ** 2)
+}
+
+export function standardNormPDF(x) {
+    return coefInvSqrt2Pi * Math.exp(-0.5 * x ** 2)
 }
 
 export function normCDF(x, mean, sd) {

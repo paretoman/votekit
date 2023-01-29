@@ -18,6 +18,7 @@ export default function VoterShapeList(changes, commander) {
         ['shape2w', 'shape2D-width', true],
         ['shape1w', 'shape1D-width', true],
         ['shape1densityProfile', 'shape1D-densityProfile', false],
+        ['shape2densityProfile', 'shape2D-densityProfile', false],
     ]
     const registrar = new Registrar()
     EntityList.call(self, commander, prefix, registrar)
@@ -30,7 +31,7 @@ export default function VoterShapeList(changes, commander) {
     }
     self.addDefaultEntity = () => {
         self.addVoterCircle({
-            shape2: { x: 50, y: 50, w: 200 },
+            shape2: { x: 50, y: 50, w: 200, densityProfile: 'step' },
             shape1: { x: 50, w: 200, densityProfile: 'gaussian' },
             doLoad: false,
         })

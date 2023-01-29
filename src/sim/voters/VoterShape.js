@@ -56,6 +56,10 @@ export default function VoterShape(
             self.shape1.densityProfile = d
             changes.add(['densityProfile'])
         },
+        shape2densityProfile(d) {
+            self.shape2.densityProfile = d
+            changes.add(['densityProfile'])
+        },
     }
 
     // Make Commands //
@@ -82,11 +86,8 @@ export default function VoterShape(
         voterCommander.shape1x.command(id, shape1.x, shape1.x),
         voterCommander.shape2w.command(id, shape2.w, shape2.w),
         voterCommander.shape1w.command(id, shape1.w, shape1.w),
-        voterCommander.shape1densityProfile.command(
-            id,
-            shape1.densityProfile,
-            shape1.densityProfile,
-        ),
+        voterCommander.shape1densityProfile.command(id, shape1.densityProfile, shape1.densityProfile),
+        voterCommander.shape2densityProfile.command(id, shape2.densityProfile, shape2.densityProfile),
     ]
     // Either load the commands because we don't want to create an item of history
     // Or do the commands because want to store an item in history, so that we can undo.

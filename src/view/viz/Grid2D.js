@@ -102,7 +102,8 @@ export default function Grid2D(candidateList, screenMain, screenMini) {
     }
 
     self.render = function () {
-        const { x, y, w } = gridData.voterGeom
+        const { x, y, w, densityProfile } = gridData.voterGeom
+        const { width } = gridData.grid
 
         drawBlend()
 
@@ -110,6 +111,7 @@ export default function Grid2D(candidateList, screenMain, screenMini) {
 
         function drawSeparate() {
             const { ctx } = screenMini
+            const { darkMode } = screenMini.common
             // draw each can separately
             const nCans = canList.length
             for (let i = 0; i < nCans; i++) {
@@ -127,10 +129,15 @@ export default function Grid2D(candidateList, screenMain, screenMini) {
                     y: y * t.h + t.y,
                     r: w * t.w * 0.5,
                 }
+                const clipShape = {
+                    x: x * t.w + t.x,
+                    y: y * t.h + t.y,
+                    r: width * t.w * 0.5,
+                }
 
                 // clip outline of shape
                 ctx.beginPath()
-                ctx.arc(sh.x, sh.y, sh.r, 0, 2 * Math.PI)
+                ctx.arc(clipShape.x, clipShape.y, clipShape.r, 0, 2 * Math.PI)
                 ctx.clip()
 
                 ctx.beginPath()
@@ -139,14 +146,20 @@ export default function Grid2D(candidateList, screenMain, screenMini) {
 
                 const canvas = canvases[i]
                 const im = {
-                    x: x * t.w - w * t.w * 0.5 + t.x,
-                    y: y * t.w - w * t.w * 0.5 + t.y,
-                    w: w * t.w,
-                    h: w * t.h,
+                    x: x * t.w - width * t.w * 0.5 + t.x,
+                    y: y * t.w - width * t.w * 0.5 + t.y,
+                    w: width * t.w,
+                    h: width * t.h,
                 }
                 ctx.drawImage(canvas, im.x, im.y, im.w, im.h)
 
                 // draw outline of shape
+                if (densityProfile === 'gaussian') {
+                    ctx.setLineDash([1 / 3, 9 / 3])
+                    ctx.lineWidth = 5 / 3
+                }
+                ctx.strokeStyle = '#555'
+                if (darkMode) ctx.strokeStyle = '#ddd'
                 ctx.beginPath()
                 ctx.arc(sh.x, sh.y, sh.r, 0, 2 * Math.PI)
                 ctx.stroke()
@@ -156,12 +169,13 @@ export default function Grid2D(candidateList, screenMain, screenMini) {
 
         function drawBlend() {
             const { ctx } = screenMain
+            const { darkMode } = screenMain.common
             ctx.save()
             // ctx.globalAlpha = 0.7
 
             // clip outline of shape
             ctx.beginPath()
-            ctx.arc(x, y, w * 0.5, 0, 2 * Math.PI)
+            ctx.arc(x, y, width * 0.5, 0, 2 * Math.PI)
             ctx.clip()
 
             // draw image
@@ -172,14 +186,20 @@ export default function Grid2D(candidateList, screenMain, screenMini) {
             const canvas = singleCanvas
             ctx.imageSmoothingEnabled = false
             const ov = {
-                x: x - w * 0.5 + t.x,
-                y: y - w * 0.5 + t.y,
-                w: w * t.w,
-                h: w * t.h,
+                x: x - width * 0.5 + t.x,
+                y: y - width * 0.5 + t.y,
+                w: width * t.w,
+                h: width * t.h,
             }
             ctx.drawImage(canvas, ov.x, ov.y, ov.w, ov.h)
 
             // draw outline of shape
+            if (densityProfile === 'gaussian') {
+                ctx.setLineDash([1, 9])
+                ctx.lineWidth = 5
+            }
+            ctx.strokeStyle = '#555'
+            if (darkMode) ctx.strokeStyle = '#ddd'
             ctx.beginPath()
             ctx.arc(x, y, w * 0.5, 0, 2 * Math.PI)
             ctx.stroke()

@@ -28,12 +28,12 @@ export default function addDefaultEntities(entities) {
         doLoad,
     })
     entities.voterShapeList.addVoterCircle({
-        shape2: { x: 50, y: 150, w: 200 },
+        shape2: { x: 50, y: 150, w: 200, densityProfile: 'step' },
         shape1: { x: 50, w: 200, densityProfile: 'gaussian' },
         doLoad,
     })
     entities.voterShapeList.addVoterCircle({
-        shape2: { x: 250, y: 150, w: 200 },
+        shape2: { x: 250, y: 150, w: 200, densityProfile: 'step' },
         shape1: { x: 250, w: 200, densityProfile: 'gaussian' },
         doLoad,
     })
