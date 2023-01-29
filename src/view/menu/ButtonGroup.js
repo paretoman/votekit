@@ -51,7 +51,24 @@ export default function ButtonGroup(config) {
         self.labelDOM = document.createElement('div')
         self.labelDOM.setAttribute('class', 'button-group-label')
         self.labelDOM.setAttribute('title', config.explain || '')
+
+        self.labelTip = document.createElement('div')
+        self.labelTip.setAttribute('class', 'label-tip')
+        self.labelTip.innerText = config.explain
+        let labelToggle = true
+        self.labelTip.hidden = labelToggle
+        self.labelDOM.onclick = () => {
+            labelToggle = !labelToggle
+            self.labelTip.hidden = labelToggle
+        }
         self.dom.appendChild(self.labelDOM)
+        self.dom.appendChild(self.labelTip)
+
+        self.draw()
+
+        self.buttonContainer = document.createElement('div')
+        self.buttonContainer.setAttribute('class', 'button-group-button-container')
+        self.dom.appendChild(self.buttonContainer)
 
         // Create & place buttons!
         for (let i = 0; i < self.buttonConfigs.length; i++) {
@@ -61,7 +78,7 @@ export default function ButtonGroup(config) {
             button.dom.style.width = `${config.width}px` // whatever
             if (conf.width) button.dom.style.width = `${conf.width}px` // whatever
             self.buttons.push(button)
-            self.dom.appendChild(button.dom)
+            self.buttonContainer.appendChild(button.dom)
             self.buttonDOMByValue[conf.value] = button.dom
         }
 

@@ -1,4 +1,8 @@
 .sim-sandbox .button-group{
+    position: relative;
+    margin-bottom: 10px;
+}
+.sim-sandbox .button-group-button-container{
 	overflow: hidden;
     margin-bottom: 0px;
 }
@@ -116,4 +120,20 @@
     background: #000;
     border: 1px solid #888;
     color: #888;
+}
+
+
+.label-tip {
+    position: absolute;
+    top: 20px;
+    padding: 4px;
+    left: 0;
+    background-color:white;
+    border:1px solid black;
+    z-index: 4;
+}
+
+.darkMode .label-tip {
+    background-color:#555;
+    border:1px solid white;
 }
