@@ -1,5 +1,7 @@
 /** @module */
 
+import getCDF, { randomIndexFromCDF } from '../../utilities/mathUtilities.js'
+
 /**
  * Use this to sample a random candidate from a collection of distributions of candidates.
  * Sample a point multiple times after the constructor call.
@@ -8,8 +10,12 @@
  */
 export default function CandidateDistributionSampler1D(candidateDistributions) {
     const self = this
+
     // cumulative distribution function
-    const cdf = getCDF(candidateDistributions)
+    // find the size of the voter distributions
+    const proportion = candidateDistributions.map((cd) => cd.shape1.w)
+    const cdf = getCDF(proportion)
+
     self.samplePoint = function () {
         return samplePoint1(candidateDistributions, cdf)
     }
@@ -17,7 +23,7 @@ export default function CandidateDistributionSampler1D(candidateDistributions) {
 
 function samplePoint1(candidateDistributions, cdf) {
     // pick a voter distribution
-    const iDist = randomDistribution(cdf)
+    const iDist = randomIndexFromCDF(cdf)
     const cd = candidateDistributions[iDist]
     // sample circle
     const isGaussian = cd.shape1.densityProfile === 'gaussian'
@@ -26,37 +32,6 @@ function samplePoint1(candidateDistributions, cdf) {
     const { party } = cd
     const point = { canGeom, party }
     return point
-}
-
-function randomDistribution(cdf) {
-    // sample from distribution
-    // pick a random number from 0 to 1
-    const random1 = Math.random()
-    const selectDistribution = cdf.findIndex((x) => x >= random1)
-    return selectDistribution
-}
-
-function getCDF(candidateDistributions) {
-    // find the size of the voter distributions
-    const proportion = candidateDistributions.map((cd) => cd.shape1.w)
-
-    const sumProportion = proportion.reduce((p, c) => p + c)
-
-    // probability mass function
-    const pmf = proportion.map((p) => p / sumProportion)
-
-    // https://stackoverflow.com/a/20477613
-    // [5, 10, 3, 2];
-    // [5, 15, 18, 20]
-    // cumulative distribution function
-    const cdf = []
-    pmf.reduce((p, c, i) => {
-        const a = p + c
-        cdf[i] = a
-        return a
-    }, 0)
-
-    return cdf
 }
 
 function randomInsideInterval(X, R) {

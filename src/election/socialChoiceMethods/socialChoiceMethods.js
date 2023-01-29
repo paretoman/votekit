@@ -11,6 +11,7 @@ import { dHondtMetadata } from './dHondt.js'
 import { sainteLagueMetadata } from './sainteLague.js'
 import { allocatedScoreMetadata } from './allocatedScore.js'
 import { methodOfEqualSharesMetadata } from './methodOfEqualShares.js'
+import { randomVoterMetadata } from './randomVoter.js'
 
 /** a collection of social choice methods in some order
  *  */
@@ -26,6 +27,7 @@ export const socialChoiceMethodMetadata = [
     sainteLagueMetadata,
     allocatedScoreMetadata,
     methodOfEqualSharesMetadata,
+    randomVoterMetadata,
 ]
 
 export const socialChoiceMethods = {}
