@@ -23,7 +23,7 @@ export default function addDefaultEntities(entities) {
         doLoad,
     })
     entities.candidateDnList.addCandidateDistribution({
-        shape2: { x: 150, y: 150, w: 200 },
+        shape2: { x: 150, y: 150, w: 200, densityProfile: 'step' },
         shape1: { x: 150, w: 200, densityProfile: 'gaussian' },
         doLoad,
     })

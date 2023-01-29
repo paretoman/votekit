@@ -64,15 +64,27 @@ function randomInsideInterval(X, R) {
     return { x }
 }
 
+const invSqrtHalfPi = 1 / Math.sqrt(Math.PI / 2)
+
 function sampleGaussian(X, R) {
-    // https://en.wikipedia.org/wiki/Box%E2%80%93Muller_transform
-
-    const u1 = Math.random()
-    const u2 = Math.random()
-
-    const sigma = (2 * R) / Math.sqrt(2 * Math.PI)
-    const mag = sigma * Math.sqrt(-2 * Math.log(u1))
-    const x = mag * Math.cos(2 * Math.PI * u2) + X
+    // to compare a block to a normal distribution
+    // set the block density to the normal density at 0.
+    // Then the radius R of the block is related to sigma.
+    // R is at sqrt(pi/2) * sigma
+    // sigma = R / sqrt(pi/2)
+    // The radius is half the width.
+    const a = sampleStandardNormal()
+    const sigma = R * invSqrtHalfPi
+    const x = a * sigma + X
     // const x2 = mag * Math.sin(2 * Math.PI * u2) + X
     return { x }
+}
+
+function sampleStandardNormal() {
+    // https://en.wikipedia.org/wiki/Box%E2%80%93Muller_transform
+    const u1 = Math.random()
+    const u2 = Math.random()
+    const mag = Math.sqrt(-2 * Math.log(u1))
+    const x = mag * Math.cos(2 * Math.PI * u2)
+    return x
 }

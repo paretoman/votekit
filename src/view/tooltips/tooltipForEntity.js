@@ -43,15 +43,28 @@ export default function tooltipForEntity(graphic, entity, screen, viewSettings, 
             )
             box.appendChild(items.densityProfile1.div)
         }
-    } else if (entity.shape2.w) {
-        items.w2 = new Item(
-            'range',
-            'Width',
-            'Width: ',
-            (val) => entity.doSetCommand.shape2w(val),
-            entity.shape2.w,
-        )
-        box.appendChild(items.w2.div)
+    } else {
+        if (entity.shape2.w) {
+            items.w2 = new Item(
+                'range',
+                'Width',
+                'Width: ',
+                (val) => entity.doSetCommand.shape2w(val),
+                entity.shape2.w,
+            )
+            box.appendChild(items.w2.div)
+        }
+        if (entity.shape2.densityProfile) {
+            items.densityProfile2 = new Item(
+                'select',
+                'Density Profile',
+                'Density Profile: ',
+                (val) => entity.doSetCommand.shape2densityProfile(val),
+                entity.shape2.densityProfile,
+                ['step', 'gaussian'],
+            )
+            box.appendChild(items.densityProfile2.div)
+        }
     }
     if (entity.doSetCommand.color !== undefined) {
         items.color = new Item(

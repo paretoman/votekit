@@ -57,6 +57,10 @@ export default function CandidateDistribution(
             self.shape1.densityProfile = d
             changes.add(['densityProfile'])
         },
+        shape2densityProfile(d) {
+            self.shape2.densityProfile = d
+            changes.add(['densityProfile'])
+        },
         party(p) {
             self.party = p
             changes.add(['party'])
@@ -88,6 +92,7 @@ export default function CandidateDistribution(
         candidateDnCommander.shape2w.command(id, shape2.w, shape2.w),
         candidateDnCommander.shape1w.command(id, shape1.w, shape1.w),
         candidateDnCommander.shape1densityProfile.command(id, shape1.densityProfile, shape1.densityProfile),
+        candidateDnCommander.shape2densityProfile.command(id, shape2.densityProfile, shape2.densityProfile),
         candidateDnCommander.party.command(id, [id], [id]),
     ]
     // Either load the commands because we don't want to create an item of history

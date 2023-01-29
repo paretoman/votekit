@@ -10,8 +10,13 @@ export default function VoterRender2D(voterShape, screen) {
     self.render = function () {
         const { ctx } = screen
         const { darkMode } = screen.common
-        const { x, y, w } = voterShape.shape2
+        const { x, y, w, densityProfile } = voterShape.shape2
         // circle
+        ctx.save()
+        if (densityProfile === 'gaussian') {
+            ctx.setLineDash([1, 9])
+            ctx.lineWidth = 10
+        }
         ctx.beginPath()
         ctx.strokeStyle = '#555'
         if (darkMode) ctx.strokeStyle = '#ddd'
@@ -19,6 +24,7 @@ export default function VoterRender2D(voterShape, screen) {
         ctx.arc(x, y, w * 0.5, 0, 2 * Math.PI)
         // ctx.fill()
         ctx.stroke()
+        ctx.restore()
     }
     self.renderAt = function (newX, newY) {
         const { ctx } = screen
