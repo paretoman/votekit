@@ -37,7 +37,10 @@ export default function SimModeSample(pub, entities, changes, voterDistricts, si
 
         const samplingResult = electionSampler.update(geometry, canDnSampler.sampler, changes, electionOptions)
         const simData = { samplingResult }
-        pub.update(simData)
+
+        if (samplingResult.pointsChanged === true || changes.checkAny()) {
+            pub.update(simData)
+        }
         changes.clear()
     }
 }

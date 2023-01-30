@@ -47,6 +47,7 @@ export default function View(sim, sandboxPath) {
         screenMain.tweenGroup.update()
         viewMode.clearForeground()
         viewMode.renderForeground()
+        viewChanges.clear()
     }
 
     const div = layout.makeComponent()
