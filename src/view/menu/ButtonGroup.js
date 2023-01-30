@@ -54,11 +54,12 @@ export default function ButtonGroup(config) {
 
         self.labelTip = document.createElement('div')
         self.labelTip.setAttribute('class', 'label-tip')
-        self.labelTip.innerText = config.explain
+        self.labelTip.innerText = config.explain || ''
         let labelToggle = true
         self.labelTip.hidden = labelToggle
         self.labelDOM.onclick = () => {
             labelToggle = !labelToggle
+            if (config.explain === undefined) labelToggle = true
             self.labelTip.hidden = labelToggle
         }
         self.dom.appendChild(self.labelDOM)
