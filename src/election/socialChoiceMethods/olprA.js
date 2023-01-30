@@ -77,7 +77,7 @@ export const olprAMetadata = {
     name: 'Open List Proportional Representation',
     shortName: 'OLPR A',
     functionName: 'olprA',
-    voteCasterName: 'olprA', // for input
+    voteCasterName: 'plurality', // for input
     socialChoiceType: 'multiWinner',
     elect: olprA,
 }
