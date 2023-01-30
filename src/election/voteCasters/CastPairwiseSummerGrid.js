@@ -59,7 +59,7 @@ export default function CastPairwiseSummerGrid(canGeoms, castOptions, dimensions
         )
 
         return {
-            grid, voteSet, weightSet: grid.weight, area, totalArea, tallyFractions,
+            grid, voteSet, area, totalArea, tallyFractions,
         }
     }
 }

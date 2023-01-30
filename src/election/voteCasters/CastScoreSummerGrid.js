@@ -37,7 +37,7 @@ export default function CastScoreSummerGrid(canGeoms, castOptions, dimensions) {
             }
         }
         return {
-            grid, voteSet, area, totalArea, weightSet: grid.weight,
+            grid, voteSet, area, totalArea,
         }
     }
 }

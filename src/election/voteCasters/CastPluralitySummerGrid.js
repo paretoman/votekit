@@ -36,7 +36,7 @@ export default function CastPluralitySummerGrid(canGeoms, castOptions, dimension
             }
         }
         return {
-            grid, voteSet, weightSet: grid.weight, area, totalArea,
+            grid, voteSet, area, totalArea,
         }
     }
 }

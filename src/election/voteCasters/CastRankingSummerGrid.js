@@ -54,7 +54,7 @@ export default function CastRankingSummerGrid(canGeoms, castOptions, dimensions)
         )
 
         return {
-            grid, voteSet, weightSet: grid.weight, area, totalArea, tallyFractions, ranking, cansRanked,
+            grid, voteSet, area, totalArea, tallyFractions, ranking, cansRanked,
         }
     }
 }

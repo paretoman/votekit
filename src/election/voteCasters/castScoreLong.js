@@ -46,7 +46,7 @@ export default function castScoreLong({ canGeoms, voterGeoms, dimensions, partie
     for (let i = 0; i < voterGeoms.length; i++) {
         const voterGeom = voterGeoms[i]
         const {
-            grid, voteSet, weightSet, area,
+            grid, voteSet, area,
         } = sums[i]
 
         // use voteIndex to find flattened index
@@ -56,7 +56,7 @@ export default function castScoreLong({ canGeoms, voterGeoms, dimensions, partie
         for (let j = 0; j < voteSet.length; j++) {
             scoreVotes[k] = voteSet[j].tallyFractions
             voteIndex[j] = k
-            votePop[k] = weightSet[j] * invTotalWeight
+            votePop[k] = grid.weight[j] * invTotalWeight
             k += 1
         }
 
