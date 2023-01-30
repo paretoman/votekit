@@ -2,18 +2,20 @@
 
 import castScoreTestVote from './castScoreTestVote.js'
 import makeGrid1D from './makeGrid1D.js'
+import makeGrid2D from './makeGrid2D.js'
 
 /**
  * Sum area of voter distributions to tally the votes.
- * @param {Object[]} canGeoms - position of each candidate {x}
+ * @param {Object[]} canGeoms
  * @constructor
  */
-export default function CastScoreSummer1DGrid(canGeoms) {
+export default function CastScoreSummerGrid(canGeoms, castOptions, dimensions) {
     const self = this
 
     self.sumArea = function sumArea(voterGeom) {
         // just find the vote at each grid point and weight according to type
-        const grid = makeGrid1D(voterGeom)
+        const makeGrid = (dimensions === 1) ? makeGrid1D : makeGrid2D
+        const grid = makeGrid(voterGeom, castOptions)
 
         const n = canGeoms.length
         const area = Array(n).fill(0)
@@ -24,9 +26,9 @@ export default function CastScoreSummer1DGrid(canGeoms) {
         const voteSet = Array(gridLength)
         for (let i = 0; i < gridLength; i++) {
             const weight = grid.weight[i]
-            const x = grid.x[i]
-            const testVoter = { x }
-            const vote = castScoreTestVote({ canGeoms, voterGeom: testVoter, dimensions: 1 })
+            // if (weight === 0) continue
+            const testVoter = grid.testVoter[i]
+            const vote = castScoreTestVote({ canGeoms, voterGeom: testVoter, dimensions })
             voteSet[i] = vote
             const { tallyFractions } = vote
             totalArea += weight
@@ -35,7 +37,7 @@ export default function CastScoreSummer1DGrid(canGeoms) {
             }
         }
         return {
-            grid, voteSet, weightSet: grid.weight, area, totalArea,
+            grid, voteSet, area, totalArea, weightSet: grid.weight,
         }
     }
 }

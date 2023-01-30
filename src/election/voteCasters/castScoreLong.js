@@ -1,7 +1,6 @@
 /** @module */
 
-import CastScoreSummer2DGrid from './CastScoreSummer2DGrid.js'
-import CastScoreSummer1DGrid from './CastScoreSummer1DGrid.js'
+import CastScoreSummerGrid from './CastScoreSummerGrid.js'
 
 // The main difference between this and plurality is we need to return a grid from here.
 // We also will return a set of votes from that grid.
@@ -16,12 +15,8 @@ import CastScoreSummer1DGrid from './CastScoreSummer1DGrid.js'
  * For 1D, an array of objects: {x,w,densityProfile}.
  * @returns votes, an object
  */
-export default function castScore({
-    canGeoms, voterGeoms, dimensions, parties,
-}, castOptions) {
-    const summer = (dimensions === 1)
-        ? new CastScoreSummer1DGrid(canGeoms)
-        : new CastScoreSummer2DGrid(canGeoms, castOptions)
+export default function castScoreLong({ canGeoms, voterGeoms, dimensions, parties }, castOptions) {
+    const summer = new CastScoreSummerGrid(canGeoms, castOptions, dimensions)
 
     // get fraction of votes for each candidate so we can summarize results
     const n = canGeoms.length
