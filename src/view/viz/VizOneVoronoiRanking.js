@@ -27,8 +27,8 @@ export default function VizOneVoronoiRanking(voterRendererList, candidateList, s
         const { error } = electionResults
         if (error !== undefined) return
 
-        const { cellData } = electionResults.votes
-        voterRendererList.updateGraphic(cellData)
+        const { votesByGeom } = electionResults.votes
+        voterRendererList.updateGraphic(votesByGeom)
     }
 
     self.render = function () {

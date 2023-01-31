@@ -27,7 +27,7 @@ export default function CastRankingSummer1DIntervals(canGeoms) {
             totalArea += theArea
         }
         return {
-            ranking, cansRanked, area, totalArea, cellDatum: { ranking, intervalBorders },
+            ranking, cansRanked, area, totalArea, intervalBorders,
         }
     }
 }

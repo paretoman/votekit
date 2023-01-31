@@ -16,20 +16,17 @@ export default function VoronoiRanking1D(voterGroup, candidateList, screen) {
     let canList
     let colors
     let intervals
-    self.update = function (cellData) {
+    self.update = function (votesForGeom) {
         // calculate colors
 
-        let ranking
-        let intervalBorders
-        if (cellData === undefined) {
+        let { ranking } = votesForGeom
+        let { intervalBorders } = votesForGeom
+        if (ranking === undefined || intervalBorders === undefined) {
             canList = candidateList.getEntities()
             const canGeoms = canList.map((can) => can.shape1)
             const cd = castRankingFindIntervals(canGeoms)
             ranking = cd.ranking
             intervalBorders = cd.intervalBorders
-        } else {
-            ranking = cellData.ranking
-            intervalBorders = cellData.intervalBorders
         }
 
         canList = candidateList.getEntities()

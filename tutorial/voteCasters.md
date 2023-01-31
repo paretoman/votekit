@@ -31,10 +31,10 @@ Some of the following is output from a vote caster.
     * tallyFractions - a number for each candidate.
     * pairwiseTallyFractions - a fraction for each pair of candidates.
 * for viz
-  * cellData:
-    * {ranking, cells}
-    * {ranking, intervalBorders}
-  * votesForGeom: { grid, voteSet, voterGeom }
+  * parts of votesForGeom:
+      * { ranking, cells }
+      * { ranking, intervalBorders }
+      * { grid, voteSet, voterGeom }
 
   
   

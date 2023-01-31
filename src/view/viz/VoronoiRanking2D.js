@@ -16,20 +16,18 @@ export default function VoronoiRanking2D(voterGroup, candidateList, screen) {
     let canList
     let colors
     let cells
-    self.update = function (cellData) {
+    self.update = function (votesForGeom) {
         // calculate colors
 
-        let ranking
-        if (cellData === undefined) {
+        let { ranking } = votesForGeom
+        cells = votesForGeom.cells
+        if (ranking === undefined || cells === undefined) {
             canList = candidateList.getEntities()
             const canGeoms = canList.map((can) => can.shape2)
             const voterGeom = voterGroup.shape2
             const cd = castRankingFindPolygons(voterGeom, canGeoms)
             ranking = cd.ranking
             cells = cd.cells
-        } else {
-            ranking = cellData.ranking
-            cells = cellData.cells
         }
 
         canList = candidateList.getEntities()
