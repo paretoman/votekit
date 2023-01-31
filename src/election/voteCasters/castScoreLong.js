@@ -69,8 +69,6 @@ export default function castScoreLong(geometry, castOptions) {
         if (tractInDistrict === undefined) tractInDistrict = 1
         tallyFractions = tallyFractions.map((f, index) => f + countByCanForGeom[index] * tractInDistrict * invTotalCount)
     }
-    const votes = {
-        tallyFractions, votesByGeom, scoreVotes, votePop, parties,
-    }
+    const votes = { tallyFractions, votesByGeom, scoreVotes, votePop, parties }
     return votes
 }

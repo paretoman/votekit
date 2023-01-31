@@ -40,8 +40,7 @@ export default function castScore(geometry, castOptions) {
         totalCount += totalCountForGeom
     }
     const tallyFractions = countByCan.map((x) => x / totalCount)
-    const votes = {
-        tallyFractions, parties, votesByGeom,
-    }
+
+    const votes = { tallyFractions, parties, votesByGeom }
     return votes
 }

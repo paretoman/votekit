@@ -36,8 +36,7 @@ export default function CastScoreSummerGrid(canGeoms, castOptions, dimensions) {
                 countByCanForGeom[k] += tallyFractions[k] * countByVote
             }
         }
-        return {
-            grid, voteSet, countByCanForGeom, totalCountForGeom, voterGeom,
-        }
+        const votesForGeom = { grid, voteSet, countByCanForGeom, totalCountForGeom, voterGeom }
+        return votesForGeom
     }
 }
