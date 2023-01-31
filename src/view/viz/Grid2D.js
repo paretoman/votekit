@@ -13,17 +13,17 @@ import colorBlender from './colorBlender.js'
 export default function Grid2D(candidateList, screenMain, screenMini) {
     const self = this
 
-    let gridData
+    let votesForGeom
     let canList
     let singleCanvas
     const canvases = []
     // TODO: set up canvases before update?
 
-    self.update = (gridData0) => {
-        gridData = gridData0
+    self.update = (votesForGeom0) => {
+        votesForGeom = votesForGeom0
         canList = candidateList.getEntities()
 
-        const { grid, voteSet, voterGeom } = gridData
+        const { grid, voteSet, voterGeom } = votesForGeom
 
         const nCans = canList.length
         const nHeight = Math.floor((nCans - 1) / 3) + 1
@@ -102,8 +102,8 @@ export default function Grid2D(candidateList, screenMain, screenMini) {
     }
 
     self.render = function () {
-        const { x, y, w, densityProfile } = gridData.voterGeom
-        const { width } = gridData.grid
+        const { x, y, w, densityProfile } = votesForGeom.voterGeom
+        const { width } = votesForGeom.grid
 
         drawBlend()
 

@@ -34,7 +34,7 @@ Some of the following is output from a vote caster.
   * cellData:
     * {ranking, cells}
     * {ranking, intervalBorders}
-  * gridData: { grid, voteSet, voterGeom }
+  * votesForGeom: { grid, voteSet, voterGeom }
 
   
   

@@ -14,10 +14,10 @@ export default function Grid1D(candidateList, screen) {
     const h = 200
     const center = 100
 
-    let gridData
+    let votesForGeom
     let canList
-    self.update = (gridData0) => {
-        gridData = gridData0
+    self.update = (votesForGeom0) => {
+        votesForGeom = votesForGeom0
         canList = candidateList.getEntities()
     }
 
@@ -55,7 +55,7 @@ export default function Grid1D(candidateList, screen) {
         ctx.restore()
     }
     function shapePath(ctx, iCan, drawOutline) {
-        const { grid, voteSet, voterGeom } = gridData
+        const { grid, voteSet, voterGeom } = votesForGeom
         const { x, w, densityProfile } = voterGeom
         const nCans = canList.length
 

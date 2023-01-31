@@ -26,16 +26,17 @@ export default function castPlurality({ canGeoms, voterGeoms, dimensions, partie
     // get fraction of votes for each candidate so we can summarize results
     const n = canGeoms.length
     let tally = (new Array(n)).fill(0)
-    const gridData = []
+    const votesByGeom = []
     voterGeoms.forEach((voterGeom, i) => {
-        const { area, grid, voteSet } = summer.sumArea(voterGeom)
-        const gridDataEntry = { grid, voteSet, voterGeom }
-        gridData[i] = gridDataEntry
+        const votesForGeom = summer.sumArea(voterGeom)
+        votesByGeom[i] = votesForGeom
+        const { area } = votesForGeom
+
         const weight = ((voterGeom.weight === undefined) ? 1 : voterGeom.weight)
         tally = tally.map((value, index) => value + area[index] * weight)
     })
     const total = tally.reduce((p, c) => p + c)
     const tallyFractions = tally.map((x) => x / total)
-    const votes = { tallyFractions, gridData, parties }
+    const votes = { tallyFractions, votesByGeom, parties }
     return votes
 }

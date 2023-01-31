@@ -13,7 +13,7 @@ A viz draws voters and sometimes candidate distributions. All have update and re
 
 Input:
 
-* cellData or gridData
+* cellData or votesForGeom
 
 Another group of functions, vizEntities, draws the handles for clicking and dragging these entities. 
 

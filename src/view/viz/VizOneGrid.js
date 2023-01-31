@@ -32,8 +32,8 @@ export default function VizOneGrid(voterRendererList, candidateList, screenMain,
         const { error } = electionResults
         if (error !== undefined) return
 
-        const { gridData } = electionResults.votes
-        voterRendererList.updateGraphic(gridData)
+        const { votesByGeom } = electionResults.votes
+        voterRendererList.updateGraphic(votesByGeom)
     }
     self.render = function () {
         if (dimensions === 1) {

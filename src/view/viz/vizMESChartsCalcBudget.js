@@ -9,10 +9,10 @@ export default function vizMESChartsCalcBudget(electionResults) {
     const { socialChoiceResults, votes, colorRGBAOfCandidates } = electionResults
     const { winnersByRound, winnerMaxCostPerScoreByRound } = socialChoiceResults.explanation
 
-    const { scoreVotes, gridData } = votes
+    const { scoreVotes, votesByGeom } = votes
 
     const nRounds = winnersByRound.length
-    const nGeoms = gridData.length
+    const nGeoms = votesByGeom.length
 
     const costsByGeom = []
     const budgetsByGeom = []
@@ -20,7 +20,7 @@ export default function vizMESChartsCalcBudget(electionResults) {
 
     // We want to use the geometry rather than votePop because votePop normalizes to add to 1.
     for (let g = 0; g < nGeoms; g++) {
-        const { voteIndex } = gridData[g]
+        const { voteIndex } = votesByGeom[g]
 
         const nVotes = voteIndex.length
 

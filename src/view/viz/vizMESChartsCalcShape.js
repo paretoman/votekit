@@ -13,10 +13,10 @@ export default function vizMESChartsCalcShape(electionResults, screen, budgetDat
 
     const { costsByGeom, budgetsByGeom, colorRGBAByGeom } = budgetDataMES
 
-    const { gridData } = votes
+    const { votesByGeom } = votes
 
     const nRounds = winnersByRound.length
-    const nGeoms = gridData.length
+    const nGeoms = votesByGeom.length
 
     const cols = 3
     const xScale = 1 / cols
@@ -29,7 +29,7 @@ export default function vizMESChartsCalcShape(electionResults, screen, budgetDat
     for (let g = 0; g < nGeoms; g++) {
         const {
             grid, voteIndex, voterGeom,
-        } = gridData[g]
+        } = votesByGeom[g]
         const { w, densityProfile } = voterGeom
         const xCenter = voterGeom.x
 

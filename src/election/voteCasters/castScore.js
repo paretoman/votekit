@@ -22,16 +22,13 @@ export default function castScore({ canGeoms, voterGeoms, dimensions, parties },
     const n = canGeoms.length
     let countByCan = (new Array(n)).fill(0)
     let totalCount = 0
-    const gridData = []
     const votesByGeom = []
     for (let i = 0; i < voterGeoms.length; i++) {
         const voterGeom = voterGeoms[i]
+
         const votesForGeom = summer.sumArea(voterGeom)
         votesByGeom[i] = votesForGeom
-        const { grid, voteSet, countByCanForGeom, totalCountForGeom } = votesForGeom
-
-        const gridDataEntry = { grid, voteSet, voterGeom }
-        gridData.push(gridDataEntry)
+        const { countByCanForGeom, totalCountForGeom } = votesForGeom
 
         let { tractInDistrict } = voterGeom
         if (tractInDistrict === undefined) tractInDistrict = 1
@@ -40,7 +37,7 @@ export default function castScore({ canGeoms, voterGeoms, dimensions, parties },
     }
     const tallyFractions = countByCan.map((x) => x / totalCount)
     const votes = {
-        tallyFractions, gridData, parties, votesByGeom,
+        tallyFractions, parties, votesByGeom,
     }
     return votes
 }

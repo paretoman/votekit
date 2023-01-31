@@ -33,12 +33,13 @@ export default function castPairwise({ canGeoms, voterGeoms, dimensions, parties
     for (let i = 0; i < n; i++) {
         areaAll[i] = Array(n).fill(0)
     }
-    const gridData = []
+    const votesByGeom = []
     voterGeoms.forEach((voterGeom, g) => {
         const weight = ((voterGeom.weight === undefined) ? 1 : voterGeom.weight)
-        const { area, totalArea, grid, voteSet } = summer.sumArea(voterGeom, weight)
-        const gridDataEntry = { grid, voteSet, voterGeom }
-        gridData[g] = gridDataEntry
+
+        const votesForGeom = summer.sumArea(voterGeom, weight)
+        votesByGeom[g] = votesForGeom
+        const { area, totalArea } = votesForGeom
 
         for (let i = 0; i < n; i++) {
             for (let k = 0; k < n; k++) {
@@ -64,6 +65,6 @@ export default function castPairwise({ canGeoms, voterGeoms, dimensions, parties
         }
     }
     const tallyFractions = tallyWins.map((x) => x / (n - 1))
-    const votes = { pairwiseTallyFractions, tallyFractions, gridData, parties }
+    const votes = { pairwiseTallyFractions, tallyFractions, votesByGeom, parties }
     return votes
 }

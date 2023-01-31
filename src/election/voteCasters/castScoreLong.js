@@ -24,11 +24,13 @@ export default function castScoreLong({ canGeoms, voterGeoms, dimensions, partie
     // find totalWeight of "voter area" over all the voterGeoms
     // then find normalization factor, which is just 1/totalWeight
     let totalCount = 0
-    const sums = []
+    const votesByGeom = []
     for (let i = 0; i < voterGeoms.length; i++) {
         const voterGeom = voterGeoms[i]
-        sums[i] = summer.sumArea(voterGeom)
-        const { totalCountForGeom } = sums[i]
+
+        const votesForGeom = summer.sumArea(voterGeom)
+        votesByGeom[i] = votesForGeom
+        const { totalCountForGeom } = votesForGeom
 
         let { tractInDistrict } = voterGeom
         if (tractInDistrict === undefined) tractInDistrict = 1
@@ -38,7 +40,6 @@ export default function castScoreLong({ canGeoms, voterGeoms, dimensions, partie
 
     // tally votes
     let tallyFractions = (new Array(n)).fill(0)
-    const gridData = []
     // flatten voteSets into scoreVotes
     // votePop is number of voters with that vote (usually 1 or lower)
     const scoreVotes = []
@@ -48,7 +49,7 @@ export default function castScoreLong({ canGeoms, voterGeoms, dimensions, partie
         const voterGeom = voterGeoms[i]
         const {
             grid, voteSet, countByCanForGeom,
-        } = sums[i]
+        } = votesByGeom[i]
 
         // use voteIndex to find flattened index
         // voteIndex = Number[] with first index as geometry and second index as grid index
@@ -60,18 +61,14 @@ export default function castScoreLong({ canGeoms, voterGeoms, dimensions, partie
             votePop[k] = grid.countByVote[j] * invTotalCount
             k += 1
         }
-
-        const gridDataEntry = {
-            grid, voteSet, voterGeom, voteIndex,
-        }
-        gridData[i] = gridDataEntry
+        votesByGeom[i].voteIndex = voteIndex
 
         let { tractInDistrict } = voterGeom
         if (tractInDistrict === undefined) tractInDistrict = 1
         tallyFractions = tallyFractions.map((f, index) => f + countByCanForGeom[index] * tractInDistrict * invTotalCount)
     }
     const votes = {
-        tallyFractions, gridData, scoreVotes, votePop, parties,
+        tallyFractions, votesByGeom, scoreVotes, votePop, parties,
     }
     return votes
 }
