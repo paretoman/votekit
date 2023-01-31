@@ -1,9 +1,9 @@
 import { normPDF } from '../../utilities/jsHelpers.js'
 
 export default function makeGrid1D(voterGeom) {
-    const { gridX, testVoter } = findGridX(voterGeom)
-    const density = findDensity(voterGeom, gridX)
-    const grid = { x: gridX, weight: density, testVoter }
+    const { gridX, testVoter, gridPointLength } = findGridX(voterGeom)
+    const { density, count } = findDensity(voterGeom, gridX, gridPointLength)
+    const grid = { x: gridX, weight: density, testVoter, count }
     return grid
 }
 
@@ -13,19 +13,21 @@ function findGridX(voterGeom) {
     const iWidth = Math.round(voterGeom.w * spread)
     const gridX = Array(iWidth)
     const testVoter = Array(iWidth)
+    const gridPointLength = 1
 
     for (let i = 0; i < iWidth; i++) {
         const x = i + 0.5 - iWidth * 0.5 + voterGeom.x
         gridX[i] = x
         testVoter[i] = { x }
     }
-    return { gridX, testVoter }
+    return { gridX, testVoter, gridPointLength }
 }
 
-function findDensity(voterGeom, gridX) {
+function findDensity(voterGeom, gridX, gridPointLength) {
     const { x, w, densityProfile } = voterGeom
     const isGauss = densityProfile === 'gaussian'
     const density = Array(gridX.length)
+    const count = Array(gridX.length)
 
     if (!isGauss) {
         return density.fill(1)
@@ -35,8 +37,10 @@ function findDensity(voterGeom, gridX) {
     const invNorm = 1 / normPDF(0, 0, sigma)
     for (let i = 0; i < gridX.length; i++) {
         const xi = gridX[i]
-        density[i] = normPDF(xi, x, sigma) * invNorm
+        const d = normPDF(xi, x, sigma) * invNorm
+        density[i] = d
+        count[i] = d * gridPointLength
     }
 
-    return density
+    return { density, count }
 }

@@ -14,6 +14,7 @@ export default function makeGrid2D(voterGeom, castOptions) {
     const iyGrid = range(iWidth)
     const gridXMargin = ixGrid.map((i) => (i + 0.5) * usr - width * 0.5 + x)
     const gridYMargin = iyGrid.map((i) => (i + 0.5) * usr - width * 0.5 + y)
+    const gridPointArea = usr * usr
 
     const nx = ixGrid.length
     const ny = iyGrid.length
@@ -35,19 +36,20 @@ export default function makeGrid2D(voterGeom, castOptions) {
     }
 
     const findDensity = (isGauss) ? findDensityGauss : findDensityCircle
-    const density = findDensity(voterGeom, gridX, gridY)
+    const { density, count } = findDensity(voterGeom, gridX, gridY, gridPointArea)
 
     const grid = {
-        x: gridX, y: gridY, weight: density, nx, ny, width, testVoter,
+        x: gridX, y: gridY, weight: density, nx, ny, width, testVoter, count,
     }
     return grid
 }
 
-function findDensityCircle(voterGeom, gridX, gridY) {
+function findDensityCircle(voterGeom, gridX, gridY, gridPointArea) {
     const { x, y, w } = voterGeom
 
     const ni = gridX.length
     const density = Array(ni).fill(0)
+    const count = Array(ni).fill(0)
     for (let i = 0; i < ni; i++) {
         const gx = gridX[i]
         const gy = gridY[i]
@@ -57,18 +59,19 @@ function findDensityCircle(voterGeom, gridX, gridY) {
         // TODO: for edges, determine how much of the area of the pixel is within the shape.
         if (d2 < r2) {
             density[i] = 1
+            count[i] = gridPointArea
         }
 
         // const density = (d2 < r2) ? 1 : 0
         // return density
     }
 
-    return density
+    return { density, count }
 }
 
 const invSqrt8 = 1 / Math.sqrt(8)
 
-function findDensityGauss(voterGeom, gridX, gridY) {
+function findDensityGauss(voterGeom, gridX, gridY, gridPointArea) {
     const { x, y, w } = voterGeom
 
     // To compare a circle to a 2D normal distribution,
@@ -86,10 +89,13 @@ function findDensityGauss(voterGeom, gridX, gridY) {
 
     const ni = gridX.length
     const density = Array(ni)
+    const count = Array(ni)
     for (let i = 0; i < ni; i++) {
         const gx = gridX[i]
         const gy = gridY[i]
-        density[i] = normPDF(gx, x, sigma) * normPDF(gy, y, sigma) * invNorm2
+        const d = normPDF(gx, x, sigma) * normPDF(gy, y, sigma) * invNorm2
+        density[i] = d
+        count[i] = d * gridPointArea
     }
-    return density
+    return { density, count }
 }
