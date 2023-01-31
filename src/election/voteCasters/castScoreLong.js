@@ -57,7 +57,7 @@ export default function castScoreLong({ canGeoms, voterGeoms, dimensions, partie
         for (let j = 0; j < voteSet.length; j++) {
             scoreVotes[k] = voteSet[j].tallyFractions
             voteIndex[j] = k
-            votePop[k] = grid.count[j] * invTotalCount
+            votePop[k] = grid.voteCount[j] * invTotalCount
             k += 1
         }
 
