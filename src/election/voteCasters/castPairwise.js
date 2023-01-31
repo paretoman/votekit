@@ -14,7 +14,9 @@ import CastPairwiseSummerGrid from './CastPairwiseSummerGrid.js'
  * For 1D, an array of objects: {x,w,densityProfile}.
  * @returns votes, an object
  */
-export default function castPairwise({ canGeoms, voterGeoms, dimensions, parties }, castOptions) {
+export default function castPairwise(geometry, castOptions) {
+    const { canGeoms, voterGeoms, dimensions, parties } = geometry
+
     const SummerLines = (dimensions === 1)
         ? CastPairwiseSummer1DIntervals
         : CastPairwiseSummer2DPolygons

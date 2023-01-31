@@ -14,7 +14,9 @@ import CastPluralitySummerGrid from './CastPluralitySummerGrid.js'
  * For 1D, an array of objects: {x,w,densityProfile}.
  * @returns votes, an object
  */
-export default function castPlurality({ canGeoms, voterGeoms, dimensions, parties }, castOptions) {
+export default function castPlurality(geometry, castOptions) {
+    const { canGeoms, voterGeoms, dimensions, parties } = geometry
+
     const SummerLines = (dimensions === 1)
         ? CastPluralitySummer1DIntervals
         : CastPluralitySummer2DQuadrature

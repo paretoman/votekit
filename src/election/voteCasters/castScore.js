@@ -15,7 +15,9 @@ import CastScoreSummerGrid from './CastScoreSummerGrid.js'
  * For 1D, an array of objects: {x,w,densityProfile}.
  * @returns votes, an object
  */
-export default function castScore({ canGeoms, voterGeoms, dimensions, parties }, castOptions) {
+export default function castScore(geometry, castOptions) {
+    const { canGeoms, voterGeoms, dimensions, parties } = geometry
+
     const summer = new CastScoreSummerGrid(canGeoms, castOptions, dimensions)
 
     // get fraction of votes for each candidate so we can summarize results
@@ -32,7 +34,9 @@ export default function castScore({ canGeoms, voterGeoms, dimensions, parties },
 
         let { tractInDistrict } = voterGeom
         if (tractInDistrict === undefined) tractInDistrict = 1
-        countByCan = countByCan.map((value, index) => value + countByCanForGeom[index] * tractInDistrict)
+        countByCan = countByCan.map(
+            (count, k) => count + countByCanForGeom[k] * tractInDistrict,
+        )
         totalCount += totalCountForGeom
     }
     const tallyFractions = countByCan.map((x) => x / totalCount)

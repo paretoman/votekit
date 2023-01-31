@@ -14,7 +14,9 @@ import CastRankingSummerGrid from './CastRankingSummerGrid.js'
  * For 1D, an array of objects: {x,w,densityProfile}.
  * @returns votes, an object
  */
-export default function castRanking({ canGeoms, voterGeoms, dimensions, parties }, castOptions) {
+export default function castRanking(geometry, castOptions) {
+    const { canGeoms, voterGeoms, dimensions, parties } = geometry
+
     const SummerLines = (dimensions === 1)
         ? CastRankingSummer1DIntervals
         : CastRankingSummer2DPolygons

@@ -15,7 +15,9 @@ import CastScoreSummerGrid from './CastScoreSummerGrid.js'
  * For 1D, an array of objects: {x,w,densityProfile}.
  * @returns votes, an object
  */
-export default function castScoreLong({ canGeoms, voterGeoms, dimensions, parties }, castOptions) {
+export default function castScoreLong(geometry, castOptions) {
+    const { canGeoms, voterGeoms, dimensions, parties } = geometry
+
     const summer = new CastScoreSummerGrid(canGeoms, castOptions, dimensions)
 
     // get fraction of votes for each candidate so we can summarize results
