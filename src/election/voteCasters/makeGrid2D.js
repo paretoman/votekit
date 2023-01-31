@@ -1,7 +1,5 @@
 import { normPDF, range } from '../../utilities/jsHelpers.js'
 
-const invSqrt8 = 1 / Math.sqrt(8)
-
 export default function makeGrid2D(voterGeom, castOptions) {
     const { x, y, w, densityProfile } = voterGeom
     const isGauss = densityProfile === 'gaussian'
@@ -23,10 +21,7 @@ export default function makeGrid2D(voterGeom, castOptions) {
     const gridX = Array(gridLength)
     const gridY = Array(gridLength)
     const testVoter = Array(gridLength)
-    const weight = Array(gridLength)
     let i = 0
-
-    const invNorm = (isGauss) ? 1 / normPDF(0, 0, w * invSqrt8) : 1
 
     for (let iy = 0; iy < iyGrid.length; iy++) {
         for (let ix = 0; ix < ixGrid.length; ix++) {
@@ -35,35 +30,46 @@ export default function makeGrid2D(voterGeom, castOptions) {
             gridX[i] = gx
             gridY[i] = gy
             testVoter[i] = { x: gx, y: gy }
-            weight[i] = findWeight(voterGeom, gx, gy, invNorm)
             i += 1
         }
     }
 
+    const findDensity = (isGauss) ? findDensityGauss : findDensityCircle
+    const density = findDensity(voterGeom, gridX, gridY)
+
     const grid = {
-        x: gridX, y: gridY, weight, nx, ny, width, testVoter,
+        x: gridX, y: gridY, weight: density, nx, ny, width, testVoter,
     }
     return grid
 }
 
-function findWeight(voterGeom, gx, gy, invNorm) {
-    // need to cut away circle
+function findDensityCircle(voterGeom, gridX, gridY) {
+    const { x, y, w } = voterGeom
 
-    const { x, y, w, densityProfile } = voterGeom
+    const ni = gridX.length
+    const density = Array(ni).fill(0)
+    for (let i = 0; i < ni; i++) {
+        const gx = gridX[i]
+        const gy = gridY[i]
 
-    const isGauss = densityProfile === 'gaussian'
-    if (!isGauss) {
         const d2 = (gx - x) ** 2 + (gy - y) ** 2
         const r2 = (0.5 * w) ** 2
         // TODO: for edges, determine how much of the area of the pixel is within the shape.
         if (d2 < r2) {
-            return 1
+            density[i] = 1
         }
-        return 0
 
-        // const weight = (d2 < r2) ? 1 : 0
-        // return weight
+        // const density = (d2 < r2) ? 1 : 0
+        // return density
     }
+
+    return density
+}
+
+const invSqrt8 = 1 / Math.sqrt(8)
+
+function findDensityGauss(voterGeom, gridX, gridY) {
+    const { x, y, w } = voterGeom
 
     // To compare a circle to a 2D normal distribution,
     // set the circle's density to the normal's density at 0.
@@ -75,6 +81,15 @@ function findWeight(voterGeom, gx, gy, invNorm) {
     const sigma = w * invSqrt8
 
     // normalize density to be 1 at the center.
-    const weight = normPDF(gx, x, sigma) * normPDF(gy, y, sigma) * invNorm * invNorm
-    return weight
+    const invNorm = 1 / normPDF(0, 0, sigma)
+    const invNorm2 = invNorm ** 2
+
+    const ni = gridX.length
+    const density = Array(ni)
+    for (let i = 0; i < ni; i++) {
+        const gx = gridX[i]
+        const gy = gridY[i]
+        density[i] = normPDF(gx, x, sigma) * normPDF(gy, y, sigma) * invNorm2
+    }
+    return density
 }
