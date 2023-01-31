@@ -23,9 +23,12 @@ export default function castScore({ canGeoms, voterGeoms, dimensions, parties },
     let countByCan = (new Array(n)).fill(0)
     let totalCount = 0
     const gridData = []
+    const votesByGeom = []
     for (let i = 0; i < voterGeoms.length; i++) {
         const voterGeom = voterGeoms[i]
-        const { grid, voteSet, countByCanForGeom, totalCountForGeom } = summer.sumArea(voterGeom)
+        const votesForGeom = summer.sumArea(voterGeom)
+        votesByGeom[i] = votesForGeom
+        const { grid, voteSet, countByCanForGeom, totalCountForGeom } = votesForGeom
 
         const gridDataEntry = { grid, voteSet, voterGeom }
         gridData.push(gridDataEntry)
@@ -37,7 +40,7 @@ export default function castScore({ canGeoms, voterGeoms, dimensions, parties },
     }
     const tallyFractions = countByCan.map((x) => x / totalCount)
     const votes = {
-        tallyFractions, gridData, parties,
+        tallyFractions, gridData, parties, votesByGeom,
     }
     return votes
 }
