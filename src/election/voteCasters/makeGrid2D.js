@@ -36,10 +36,10 @@ export default function makeGrid2D(voterGeom, castOptions) {
     }
 
     const findDensity = (isGauss) ? findDensityGauss : findDensityCircle
-    const { density, voteCount } = findDensity(voterGeom, gridX, gridY, gridPointArea)
+    const { density, countByVote } = findDensity(voterGeom, gridX, gridY, gridPointArea)
 
     const grid = {
-        x: gridX, y: gridY, weight: density, nx, ny, width, testVoter, voteCount,
+        x: gridX, y: gridY, weight: density, nx, ny, width, testVoter, countByVote,
     }
     return grid
 }
@@ -49,7 +49,7 @@ function findDensityCircle(voterGeom, gridX, gridY, gridPointArea) {
 
     const ni = gridX.length
     const density = Array(ni).fill(0)
-    const voteCount = Array(ni).fill(0)
+    const countByVote = Array(ni).fill(0)
     for (let i = 0; i < ni; i++) {
         const gx = gridX[i]
         const gy = gridY[i]
@@ -59,14 +59,14 @@ function findDensityCircle(voterGeom, gridX, gridY, gridPointArea) {
         // TODO: for edges, determine how much of the area of the pixel is within the shape.
         if (d2 < r2) {
             density[i] = 1
-            voteCount[i] = gridPointArea
+            countByVote[i] = gridPointArea
         }
 
         // const density = (d2 < r2) ? 1 : 0
         // return density
     }
 
-    return { density, voteCount }
+    return { density, countByVote }
 }
 
 const invSqrt8 = 1 / Math.sqrt(8)
@@ -89,13 +89,13 @@ function findDensityGauss(voterGeom, gridX, gridY, gridPointArea) {
 
     const ni = gridX.length
     const density = Array(ni)
-    const voteCount = Array(ni)
+    const countByVote = Array(ni)
     for (let i = 0; i < ni; i++) {
         const gx = gridX[i]
         const gy = gridY[i]
         const d = normPDF(gx, x, sigma) * normPDF(gy, y, sigma) * invNorm2
         density[i] = d
-        voteCount[i] = d * gridPointArea
+        countByVote[i] = d * gridPointArea
     }
-    return { density, voteCount }
+    return { density, countByVote }
 }
