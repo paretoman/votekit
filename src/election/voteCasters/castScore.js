@@ -20,23 +20,22 @@ export default function castScore({ canGeoms, voterGeoms, dimensions, parties },
 
     // get fraction of votes for each candidate so we can summarize results
     const n = canGeoms.length
-    let tally = (new Array(n)).fill(0)
-    let total = 0
+    let countByCan = (new Array(n)).fill(0)
+    let totalCount = 0
     const gridData = []
     for (let i = 0; i < voterGeoms.length; i++) {
         const voterGeom = voterGeoms[i]
-        const {
-            grid, voteSet, area, totalArea,
-        } = summer.sumArea(voterGeom)
+        const { grid, voteSet, countByCanForGeom, totalCountForGeom } = summer.sumArea(voterGeom)
 
         const gridDataEntry = { grid, voteSet, voterGeom }
         gridData.push(gridDataEntry)
 
-        const weight = ((voterGeom.weight === undefined) ? 1 : voterGeom.weight)
-        tally = tally.map((value, index) => value + area[index] * weight)
-        total += totalArea
+        let { tractInDistrict } = voterGeom
+        if (tractInDistrict === undefined) tractInDistrict = 1
+        countByCan = countByCan.map((value, index) => value + countByCanForGeom[index] * tractInDistrict)
+        totalCount += totalCountForGeom
     }
-    const tallyFractions = tally.map((x) => x / total)
+    const tallyFractions = countByCan.map((x) => x / totalCount)
     const votes = {
         tallyFractions, gridData, parties,
     }
