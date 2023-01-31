@@ -23,17 +23,18 @@ export default function castScoreLong({ canGeoms, voterGeoms, dimensions, partie
 
     // find totalWeight of "voter area" over all the voterGeoms
     // then find normalization factor, which is just 1/totalWeight
-    let totalWeight = 0
+    let totalCount = 0
     const sums = []
     for (let i = 0; i < voterGeoms.length; i++) {
         const voterGeom = voterGeoms[i]
         sums[i] = summer.sumArea(voterGeom)
-        const { totalArea } = sums[i]
+        const { totalCountForGeom } = sums[i]
 
-        const weight = ((voterGeom.weight === undefined) ? 1 : voterGeom.weight)
-        totalWeight += totalArea * weight
+        let { tractInDistrict } = voterGeom
+        if (tractInDistrict === undefined) tractInDistrict = 1
+        totalCount += totalCountForGeom * tractInDistrict
     }
-    const invTotalWeight = 1 / totalWeight
+    const invTotalCount = 1 / totalCount
 
     // tally votes
     let tallyFractions = (new Array(n)).fill(0)
@@ -46,7 +47,7 @@ export default function castScoreLong({ canGeoms, voterGeoms, dimensions, partie
     for (let i = 0; i < voterGeoms.length; i++) {
         const voterGeom = voterGeoms[i]
         const {
-            grid, voteSet, area,
+            grid, voteSet, countByCanForGeom,
         } = sums[i]
 
         // use voteIndex to find flattened index
@@ -56,7 +57,7 @@ export default function castScoreLong({ canGeoms, voterGeoms, dimensions, partie
         for (let j = 0; j < voteSet.length; j++) {
             scoreVotes[k] = voteSet[j].tallyFractions
             voteIndex[j] = k
-            votePop[k] = grid.weight[j] * invTotalWeight
+            votePop[k] = grid.count[j] * invTotalCount
             k += 1
         }
 
@@ -65,10 +66,9 @@ export default function castScoreLong({ canGeoms, voterGeoms, dimensions, partie
         }
         gridData[i] = gridDataEntry
 
-        const weight = ((voterGeom.weight === undefined) ? 1 : voterGeom.weight)
-        // area is relative to the geom
-        // weight is for the geom relative to the whole election
-        tallyFractions = tallyFractions.map((f, index) => f + area[index] * weight * invTotalWeight)
+        let { tractInDistrict } = voterGeom
+        if (tractInDistrict === undefined) tractInDistrict = 1
+        tallyFractions = tallyFractions.map((f, index) => f + countByCanForGeom[index] * tractInDistrict * invTotalCount)
     }
     const votes = {
         tallyFractions, gridData, scoreVotes, votePop, parties,

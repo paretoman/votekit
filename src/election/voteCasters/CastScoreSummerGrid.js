@@ -18,8 +18,6 @@ export default function CastScoreSummerGrid(canGeoms, castOptions, dimensions) {
         const grid = makeGrid(voterGeom, castOptions)
 
         const n = canGeoms.length
-        const area = Array(n).fill(0)
-        let totalArea = 0
         const countByCanForGeom = Array(n).fill(0)
         let totalCountForGeom = 0
 
@@ -27,22 +25,19 @@ export default function CastScoreSummerGrid(canGeoms, castOptions, dimensions) {
         const gridLength = grid.x.length
         const voteSet = Array(gridLength)
         for (let i = 0; i < gridLength; i++) {
-            const weight = grid.weight[i]
             const count = grid.count[i]
             // if (weight === 0) continue
             const testVoter = grid.testVoter[i]
             const vote = castScoreTestVote({ canGeoms, voterGeom: testVoter, dimensions })
             voteSet[i] = vote
             const { tallyFractions } = vote
-            totalArea += weight
             totalCountForGeom += count
             for (let k = 0; k < n; k++) {
-                area[k] += tallyFractions[k] * weight
                 countByCanForGeom[k] += tallyFractions[k] * count
             }
         }
         return {
-            grid, voteSet, area, totalArea, countByCanForGeom, totalCountForGeom,
+            grid, voteSet, countByCanForGeom, totalCountForGeom,
         }
     }
 }
