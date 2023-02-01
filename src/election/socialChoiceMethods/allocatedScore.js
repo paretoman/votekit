@@ -13,13 +13,13 @@ import { range } from '../../utilities/jsHelpers.js'
  * @param {Object} votes - The object for vote data.
  * @param {Object[]} votes.scoreVotes - A list of votes
  * @param {Number[]} votes.scoreVotes[] - A score for each candidate. From 0 to 1.
- * @param {Object} votes.votePop - The fraction of the population that voted that way.
+ * @param {Object} votes.voteFraction - The fraction of the population that voted that way.
  * @param {Object} socialChoiceOptions.seats - Number of candidates to elect.
  * @returns {{allocation:number[]}} - socialChoiceResults, with property allocation.
  * Allocation is an array of integers that say whether a candidate is elected (1) or not (0).
  */
 export default function allocatedScore({ votes, socialChoiceOptions }) {
-    const { scoreVotes, votePop } = votes
+    const { scoreVotes, voteFraction } = votes
 
     const { seats } = socialChoiceOptions
 
@@ -41,7 +41,7 @@ export default function allocatedScore({ votes, socialChoiceOptions }) {
         for (let k = 0; k < nk; k++) {
             if (allocation[k] === 1) continue // no clones
             for (let i = 0; i < nv; i++) {
-                tally[k] += weight[i] * votePop[i] * scoreVotes[i][k]
+                tally[k] += weight[i] * voteFraction[i] * scoreVotes[i][k]
             }
         }
 
@@ -66,7 +66,7 @@ export default function allocatedScore({ votes, socialChoiceOptions }) {
         for (let i = 0; i < nv; i++) {
             const index = iSortVoters[i]
             const score = scoreVotes[index][iWinner]
-            sumTop += score * weight[index] * votePop[i]
+            sumTop += score * weight[index] * voteFraction[i]
             weight[index] = 0 // remove vote
             if (sumTop >= quota) {
                 break

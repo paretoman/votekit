@@ -18,7 +18,7 @@ export default function vizMESChartsCalcBudget(electionResults) {
     const budgetsByGeom = []
     const colorRGBAByGeom = []
 
-    // We want to use the geometry rather than votePop because votePop normalizes to add to 1.
+    // We want to use the geometry rather than voteFraction because voteFraction normalizes to add to 1.
     for (let g = 0; g < nGeoms; g++) {
         const { voteIndex } = votesByGeom[g]
 

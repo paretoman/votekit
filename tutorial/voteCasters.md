@@ -22,7 +22,7 @@ VoteCasters: Votes are cast.
 Some of the following is output from a vote caster.
 
 * for socialChoiceMethods
-  * votePop - the fraction of the population that voted as listed.
+  * voteFraction - the fraction of the population that voted as listed.
   * List of votes:
     * scoreVotes - a list of votes. Each vote has a score for each candidate.
     * rankingVotes - a list of votes. Each vote has a rank for each candidate.

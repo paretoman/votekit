@@ -56,11 +56,11 @@ export default function castRanking(geometry, castOptions) {
             }
         }
     })
-    const votePop = countByVote.map((x) => x / totalCount)
+    const voteFraction = countByVote.map((x) => x / totalCount)
     const tallyFractions = firstPreferences.map((x) => x / totalCount)
 
     const votes = {
-        rankingVotes, cansByRank, votePop, tallyFractions, parties, votesByGeom,
+        rankingVotes, cansByRank, voteFraction, tallyFractions, parties, votesByGeom,
     }
     return votes
 }

@@ -41,9 +41,9 @@ export default function castScoreLong(geometry, castOptions) {
     // tally votes
     let scoreAverageByCan = (new Array(n)).fill(0)
     // flatten voteSets into scoreVotes
-    // votePop is number of voters with that vote as a fraction of total votes (usually 1 or lower)
+    // voteFraction is number of voters with that vote as a fraction of total votes (usually 1 or lower)
     const scoreVotes = []
-    const votePop = []
+    const voteFraction = []
     let k = 0
     for (let i = 0; i < voterGeoms.length; i++) {
         const {
@@ -58,13 +58,13 @@ export default function castScoreLong(geometry, castOptions) {
         for (let j = 0; j < voteSet.length; j++) {
             scoreVotes[k] = voteSet[j].tallyFractions
             voteIndex[j] = k
-            votePop[k] = grid.countByVote[j] * invTotalCount
+            voteFraction[k] = grid.countByVote[j] * invTotalCount
             k += 1
         }
         votesByGeom[i].voteIndex = voteIndex
 
         scoreAverageByCan = scoreAverageByCan.map((f, can) => f + scoreSumByCanForGeom[can] * invTotalCount)
     }
-    const votes = { tallyFractions: scoreAverageByCan, votesByGeom, scoreVotes, votePop, parties }
+    const votes = { tallyFractions: scoreAverageByCan, votesByGeom, scoreVotes, voteFraction, parties }
     return votes
 }

@@ -18,13 +18,13 @@ import { range } from '../../utilities/jsHelpers.js'
  * @param {Object} votes - The object for vote data.
  * @param {Object[]} votes.scoreVotes - A list of votes
  * @param {Number[]} votes.scoreVotes[] - A score for each candidate. From 0 to 1.
- * @param {Object} votes.votePop - The fraction of the population that voted that way.
+ * @param {Object} votes.voteFraction - The fraction of the population that voted that way.
  * @param {Object} socialChoiceOptions.seats - Number of candidates to elect.
  * @returns {{allocation:number[]}} - socialChoiceResults, with property allocation.
  * Allocation is an array of integers that say whether a candidate is elected (1) or not (0).
  */
 export default function methodOfEqualShares({ votes, socialChoiceOptions }) {
-    const { scoreVotes, votePop } = votes
+    const { scoreVotes, voteFraction } = votes
 
     const { seats } = socialChoiceOptions
 
@@ -84,7 +84,7 @@ export default function methodOfEqualShares({ votes, socialChoiceOptions }) {
         for (let k = 0; k < nk; k++) {
             if (allocation[k] === 1) continue // no clones
             for (let i = 0; i < nv; i++) {
-                tally[k] += votePop[i] * scoreVotes[i][k]
+                tally[k] += voteFraction[i] * scoreVotes[i][k]
             }
         }
 
@@ -146,7 +146,7 @@ export default function methodOfEqualShares({ votes, socialChoiceOptions }) {
                 const score = scoreVotes[i][can]
                 maxCostPerScore[i] = bud / score
                 if (score > 0) {
-                    totalBudget += bud * votePop[i]
+                    totalBudget += bud * voteFraction[i]
                     supporters[j] = i
                     j += 1
                 }
@@ -183,8 +183,8 @@ export default function methodOfEqualShares({ votes, socialChoiceOptions }) {
                     break
                 }
                 // remove voter
-                costLeft -= votePop[i] * budget[i]
-                scoreLeft -= votePop[i] * scoreVotes[i][can]
+                costLeft -= voteFraction[i] * budget[i]
+                scoreLeft -= voteFraction[i] * scoreVotes[i][can]
                 // if (scoreLeft < 0) {
                 //     console.log(Math.round(scoreLeft * 100))
                 // }
