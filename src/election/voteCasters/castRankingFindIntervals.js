@@ -75,7 +75,7 @@ export default function castRankingFindIntervals(canGeoms) {
     const intervalBorders = copyArrayShallow(midpoints)
     intervalBorders.unshift(-Infinity)
     intervalBorders.push(Infinity)
-    return { intervalBorders, ranking: rankings, cansRanked }
+    return { intervalBorders, rankings, cansRanked }
 }
 
 function findMidpoint(can1, can2) {

@@ -19,13 +19,13 @@ export default function VoronoiRanking1D(voterGroup, candidateList, screen) {
     self.update = function (votesForGeom) {
         // calculate colors
 
-        let { ranking } = votesForGeom
+        let { rankings } = votesForGeom
         let { intervalBorders } = votesForGeom
-        if (ranking === undefined || intervalBorders === undefined) {
+        if (rankings === undefined || intervalBorders === undefined) {
             canList = candidateList.getEntities()
             const canGeoms = canList.map((can) => can.shape1)
             const cd = castRankingFindIntervals(canGeoms)
-            ranking = cd.ranking
+            rankings = cd.rankings
             intervalBorders = cd.intervalBorders
         }
 
@@ -38,7 +38,7 @@ export default function VoronoiRanking1D(voterGroup, candidateList, screen) {
         colors = Array(ni)
         for (let i = 0; i < ni; i++) {
             intervals[i] = [intervalBorders[i], intervalBorders[i + 1]]
-            const bordaScores = ranking[i].map((r) => n - r)
+            const bordaScores = rankings[i].map((r) => n - r)
             colors[i] = rgbToString(colorBlender(bordaScores, colorList))
         }
     }

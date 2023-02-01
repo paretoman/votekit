@@ -25,7 +25,7 @@ Some of the following is output from a vote caster.
   * voteFractions - the fraction of the population with a preference.
   * List of votes:
     * scoreVotes - a list of votes. Each vote has a score for each candidate.
-    * rankingVotes - a list of votes. Each vote has a rank for each candidate.
+    * rankings - a list of votes. Each vote has a rank for each candidate.
     * cansByRank - a list of votes. Each vote is a list indexed by ranking. A list of candidates is at each ranking.
   * preComputedTallies:
     * tallyFractions - a number for each candidate.

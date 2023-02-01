@@ -28,7 +28,7 @@ export default function castRanking(geometry, castOptions) {
 
     // get fraction of votes for each candidate so we can summarize results
     let voteCounts = []
-    let rankingVotes = []
+    let rankings = []
     let cansByRank = []
     const firstPreferences = Array(n).fill(0)
     let totalCount = 0
@@ -38,12 +38,12 @@ export default function castRanking(geometry, castOptions) {
     voterGeoms.forEach((voterGeom, g) => {
         const votesForGeom = summer.sumArea(voterGeom)
         votesByGeom[g] = votesForGeom
-        const { rankings, cansRanked,
+        const { rankings: rankingsForGeom, cansRanked,
             voteCounts: voteCountsForGeom,
             totalCount: totalCountForGeom } = votesForGeom
 
         voteCounts = voteCounts.concat(voteCountsForGeom)
-        rankingVotes = rankingVotes.concat(rankings)
+        rankings = rankings.concat(rankingsForGeom)
         cansByRank = cansByRank.concat(cansRanked)
         totalCount += totalCountForGeom
 
@@ -60,7 +60,7 @@ export default function castRanking(geometry, castOptions) {
     const tallyFractions = firstPreferences.map((x) => x / totalCount)
 
     const votes = {
-        rankingVotes, cansByRank, voteFractions, tallyFractions, parties, votesByGeom,
+        rankings, cansByRank, voteFractions, tallyFractions, parties, votesByGeom,
     }
     return votes
 }
