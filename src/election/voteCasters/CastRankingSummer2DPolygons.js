@@ -19,23 +19,23 @@ export default function CastRankingSummer2DPolygons(canGeoms) {
         // find area of polygons
 
         const cn = cells.length
-        let area = Array(cn)
+        let areas = Array(cn)
         let totalArea = 0
         for (let i = 0; i < cn; i++) {
             // return area for each ranking
-            const theArea = -polygonArea(cells[i])
-            area[i] = theArea
-            totalArea += theArea
+            const area = -polygonArea(cells[i])
+            areas[i] = area
+            totalArea += area
         }
         // sometimes near-zero-area polygons are formed that need to be removed
         // because they also have rankings that don't make sense.
         const tol = 0.000001
-        ranking = ranking.filter((_, i) => Math.abs(area[i]) > tol)
-        cansRanked = cansRanked.filter((_, i) => Math.abs(area[i]) > tol)
-        cells = cells.filter((_, i) => Math.abs(area[i]) > tol)
-        area = area.filter((a) => Math.abs(a) > tol)
+        ranking = ranking.filter((_, i) => Math.abs(areas[i]) > tol)
+        cansRanked = cansRanked.filter((_, i) => Math.abs(areas[i]) > tol)
+        cells = cells.filter((_, i) => Math.abs(areas[i]) > tol)
+        areas = areas.filter((a) => Math.abs(a) > tol)
 
-        const [countByVote, totalCount] = [area, totalArea]
+        const [countByVote, totalCount] = [areas, totalArea]
         return {
             ranking, cansRanked, countByVote, totalCount, cells,
         }
