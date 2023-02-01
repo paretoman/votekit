@@ -5,9 +5,10 @@ export default function combineVotesByDistrict(votesByTract, canGeoms, voterDist
     const { nd } = voterDistricts
     const numCans = canGeoms.length
 
-    // loop through districts
-    // each district has a census with a list of tracts with weights
-    // tracts are listed by index
+    // Loop through districts.
+    // Each district has a census with a list of tracts with weights.
+    // The weights indicate what fraction of the tract is in the district.
+    // Tracts are listed by index.
     // This is the same index as the votes list uses.
     const votesByDistrict = range(nd).map((iDistrict) => {
         const cen = census[iDistrict]
