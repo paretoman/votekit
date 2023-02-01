@@ -39,20 +39,20 @@ export default function castRanking(geometry, castOptions) {
         const votesForGeom = summer.sumArea(voterGeom)
         votesByGeom[g] = votesForGeom
         const { rankings, cansRanked,
-            countByVote: countByVote4G,
-            totalCount: totalCount4G } = votesForGeom
+            countByVote: countByVoteForGeom,
+            totalCount: totalCountForGeom } = votesForGeom
 
-        countByVote = countByVote.concat(countByVote4G)
+        countByVote = countByVote.concat(countByVoteForGeom)
         rankingVotes = rankingVotes.concat(rankings)
         cansByRank = cansByRank.concat(cansRanked)
-        totalCount += totalCount4G
+        totalCount += totalCountForGeom
 
         // tally first preferences
         for (let i = 0; i < cansRanked.length; i++) {
             const cr0 = cansRanked[i][0]
             for (let k = 0; k < cr0.length; k++) {
                 const c0 = cr0[k]
-                firstPreferences[c0] += countByVote4G[i]
+                firstPreferences[c0] += countByVoteForGeom[i]
             }
         }
     })

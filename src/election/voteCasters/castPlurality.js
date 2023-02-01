@@ -35,7 +35,8 @@ export default function castPlurality(geometry, castOptions) {
 
         const votesForGeom = summer.sumArea(voterGeom)
         votesByGeom[i] = votesForGeom
-        const { countByCan: countByCanForGeom, totalCount: totalCountForGeom } = votesForGeom
+        const { countByCan: countByCanForGeom,
+            totalCount: totalCountForGeom } = votesForGeom
 
         for (let k = 0; k < n; k++) {
             countByCan[k] += countByCanForGeom[k]

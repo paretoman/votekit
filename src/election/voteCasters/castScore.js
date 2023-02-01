@@ -30,7 +30,8 @@ export default function castScore(geometry, castOptions) {
 
         const votesForGeom = summer.sumArea(voterGeom)
         votesByGeom[i] = votesForGeom
-        const { scoreSumByCanForGeom, totalCountForGeom } = votesForGeom
+        const { totalCount: totalCountForGeom,
+            scoreSumByCan: scoreSumByCanForGeom } = votesForGeom
 
         for (let k = 0; k < n; k++) {
             scoreSumByCan[k] += scoreSumByCanForGeom[k]

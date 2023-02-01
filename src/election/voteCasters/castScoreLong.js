@@ -32,7 +32,7 @@ export default function castScoreLong(geometry, castOptions) {
 
         const votesForGeom = summer.sumArea(voterGeom)
         votesByGeom[i] = votesForGeom
-        const { totalCountForGeom } = votesForGeom
+        const { totalCount: totalCountForGeom } = votesForGeom
 
         totalCount += totalCountForGeom
     }
@@ -47,7 +47,8 @@ export default function castScoreLong(geometry, castOptions) {
     let k = 0
     for (let i = 0; i < voterGeoms.length; i++) {
         const {
-            grid, voteSet, scoreSumByCanForGeom,
+            grid, voteSet,
+            scoreSumByCan: scoreSumByCanForGeom,
         } = votesByGeom[i]
 
         // use voteIndex to find flattened index

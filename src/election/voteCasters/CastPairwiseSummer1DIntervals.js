@@ -31,11 +31,11 @@ export default function CastPairwiseSummer1DIntervals(canGeoms) {
     self.sumArea = function sumArea(voterGeom) {
         // divide voterGeom
 
-        const totalCountForGeom = calcVoterTotalArea(voterGeom)
+        const totalCount = calcVoterTotalArea(voterGeom)
 
-        const winsPairwiseForGeom = Array(n).fill(0)
+        const winsPairwise = Array(n).fill(0)
         for (let i = 0; i < n; i++) {
-            winsPairwiseForGeom[i] = Array(n).fill(0)
+            winsPairwise[i] = Array(n).fill(0)
         }
 
         for (let i = 0; i < n - 1; i++) {
@@ -44,14 +44,14 @@ export default function CastPairwiseSummer1DIntervals(canGeoms) {
                 const lower = -Infinity
                 const upper = midpoints[i][k]
                 const lessWins = sumInterval(lower, upper, voterGeom)
-                const iWins = (iLess[i][k]) ? lessWins : totalCountForGeom - lessWins
-                const kWins = totalCountForGeom - iWins
+                const iWins = (iLess[i][k]) ? lessWins : totalCount - lessWins
+                const kWins = totalCount - iWins
 
-                winsPairwiseForGeom[i][k] = iWins
-                winsPairwiseForGeom[k][i] = kWins
+                winsPairwise[i][k] = iWins
+                winsPairwise[k][i] = kWins
             }
         }
-        return { winsPairwiseForGeom, totalCountForGeom }
+        return { winsPairwise, totalCount }
     }
 }
 
