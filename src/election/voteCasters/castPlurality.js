@@ -27,17 +27,22 @@ export default function castPlurality(geometry, castOptions) {
 
     // get fraction of votes for each candidate so we can summarize results
     const n = canGeoms.length
-    let tally = (new Array(n)).fill(0)
     const votesByGeom = []
-    voterGeoms.forEach((voterGeom, i) => {
+    const countByCan = (new Array(n)).fill(0)
+    let totalCount = 0
+    for (let i = 0; i < voterGeoms.length; i++) {
+        const voterGeom = voterGeoms[i]
+
         const votesForGeom = summer.sumArea(voterGeom)
         votesByGeom[i] = votesForGeom
-        const { area } = votesForGeom
+        const { countByCan: countByCanForGeom, totalCount: totalCountForGeom } = votesForGeom
 
-        tally = tally.map((value, index) => value + area[index])
-    })
-    const total = tally.reduce((p, c) => p + c)
-    const tallyFractions = tally.map((x) => x / total)
-    const votes = { tallyFractions, votesByGeom, parties }
+        for (let k = 0; k < n; k++) {
+            countByCan[k] += countByCanForGeom[k]
+        }
+        totalCount += totalCountForGeom
+    }
+    const voteFractionByCan = countByCan.map((x) => x / totalCount)
+    const votes = { tallyFractions: voteFractionByCan, votesByGeom, parties }
     return votes
 }

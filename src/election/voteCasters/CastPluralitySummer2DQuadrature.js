@@ -16,13 +16,16 @@ export default function AreaSummer(canGeoms) {
         // draw lines across shape of voterGeom
 
         const n = lines.length
-        const area = Array(n)
+        const countByCan = Array(n)
+        let totalCount = 0
         for (let i = 0; i < n; i++) {
             const lineSet = lines[i]
             // return area for each candidate
-            area[i] = sumCircle(voterGeom, lineSet)
+            const voteCount = sumCircle(voterGeom, lineSet)
+            countByCan[i] = voteCount
+            totalCount += voteCount
         }
-        return { area }
+        return { countByCan, totalCount }
     }
 }
 

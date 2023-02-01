@@ -3,7 +3,7 @@
 import { range, normCDF } from '../../utilities/jsHelpers.js'
 
 /**
- * Sum area of voter distributions to tally the votes.
+ * Sum area under voter distributions to tally the votes.
  * @param {Object[]} canGeoms - position of each candidate {x}
  * @constructor
  */
@@ -13,19 +13,18 @@ export default function LineSummer(canGeoms) {
     const intervals = findIntervals(canGeoms)
 
     self.sumArea = function sumArea(voterGeom) {
-        const n = canGeoms.length
-        const area = Array(n)
+        const sum = (voterGeom.densityProfile === 'gaussian') ? sumGaussian : sumBlock
+
         // return sum for each candidate
-        if (voterGeom.densityProfile === 'gaussian') {
-            for (let i = 0; i < n; i++) {
-                area[i] = sumGaussian(voterGeom, intervals[i])
-            }
-        } else {
-            for (let i = 0; i < n; i++) {
-                area[i] = sumBlock(voterGeom, intervals[i])
-            }
+        const n = canGeoms.length
+        const countByCan = Array(n)
+        let totalCount = 0
+        for (let i = 0; i < n; i++) {
+            const voteCount = sum(voterGeom, intervals[i])
+            countByCan[i] = voteCount
+            totalCount += voteCount
         }
-        return { area }
+        return { countByCan, totalCount }
     }
 }
 
