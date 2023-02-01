@@ -45,13 +45,13 @@ export default function CastRankingSummerGrid(canGeoms, castOptions, dimensions)
         }
 
         // bordaScore is nk-1 if a candidate receives all the votes for the voter geometry.
-        // bordaFractionSumByCan is the total number of votes if a candidate receives all the votes.
-        const bordaFractionSumByCan = bordaScoreSumByCan.map(
-            (bt) => (bt / (nk - 1)),
+        // bordaFractionAverageByCan is 1 if a candidate receives all the votes.
+        const bordaFractionAverageByCan = bordaScoreSumByCan.map(
+            (bt) => (bt / (nk - 1)) / totalCount,
         )
 
         return {
-            grid, voteSet, countByVote, totalCount, tallyFractions: bordaFractionSumByCan, ranking, cansRanked,
+            grid, voteSet, countByVote, totalCount, tallyFractions: bordaFractionAverageByCan, ranking, cansRanked,
         }
     }
 }

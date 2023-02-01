@@ -16,11 +16,13 @@ export default function castRankingTestVote({ canGeoms, voterGeom, dimensions })
     const indexInOrder = range(n).sort((a, b) => dist2[a] - dist2[b])
     // Note that ties are not handled.
 
-    const ranking = (new Array(n)).fill(0)
-    const bordaScores = (new Array(n)).fill(0)
+    const ranking = new Array(n)
+    const bordaScores = new Array(n)
+    const bordaFractions = new Array(n)
     for (let i = 0; i < n; i++) {
         ranking[indexInOrder[i]] = i + 1
         bordaScores[indexInOrder[i]] = n - i - 1
+        bordaFractions[indexInOrder[i]] = (n - i - 1) / (n - 1)
     }
     // Does i beat k? 1 if yes, -1 if opposite, 0 if tie
     const netWinsPairwise = new Array(n)
@@ -33,7 +35,7 @@ export default function castRankingTestVote({ canGeoms, voterGeom, dimensions })
     }
 
     return {
-        indexInOrder, ranking, netWinsPairwise, tallyFractions: bordaScores, bordaScores,
+        indexInOrder, ranking, netWinsPairwise, tallyFractions: bordaFractions, bordaScores,
     }
 }
 function df1(a, b) {

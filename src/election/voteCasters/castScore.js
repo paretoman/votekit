@@ -38,8 +38,9 @@ export default function castScore(geometry, castOptions) {
         }
         totalCount += totalCountForGeom
     }
-    const scoreAverageByCan = scoreSumByCan.map((x) => x / totalCount)
+    const maxScore = 1
+    const scoreFractionAverageByCan = scoreSumByCan.map((x) => x / (totalCount * maxScore))
 
-    const votes = { tallyFractions: scoreAverageByCan, parties, votesByGeom }
+    const votes = { tallyFractions: scoreFractionAverageByCan, parties, votesByGeom }
     return votes
 }
