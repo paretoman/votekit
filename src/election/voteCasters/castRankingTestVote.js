@@ -23,17 +23,17 @@ export default function castRankingTestVote({ canGeoms, voterGeom, dimensions })
         bordaScores[indexInOrder[i]] = n - i - 1
     }
     // Does i beat k? 1 if yes, -1 if opposite, 0 if tie
-    const pairwise = new Array(n)
+    const netWinsPairwise = new Array(n)
     for (let i = 0; i < n; i++) {
-        pairwise[i] = (new Array(n)).fill(0)
+        netWinsPairwise[i] = (new Array(n)).fill(0)
         for (let k = 0; k < n; k++) {
             if (ranking[i] === ranking[k]) continue
-            pairwise[i][k] = (ranking[i] < ranking[k]) ? 1 : -1
+            netWinsPairwise[i][k] = (ranking[i] < ranking[k]) ? 1 : -1
         }
     }
 
     return {
-        indexInOrder, ranking, bordaScores, pairwise, tallyFractions: bordaScores,
+        indexInOrder, ranking, netWinsPairwise, tallyFractions: bordaScores, bordaScores,
     }
 }
 function df1(a, b) {

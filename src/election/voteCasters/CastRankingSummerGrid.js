@@ -5,7 +5,7 @@ import makeGrid1D from './makeGrid1D.js'
 import makeGrid2D from './makeGrid2D.js'
 
 /**
- * Sum area of voter distributions to tally the votes.
+ * Tally votes.
  * @param {Object[]} canGeoms - position of each candidate {x}
  * @constructor
  */
@@ -18,7 +18,7 @@ export default function CastRankingSummerGrid(canGeoms, castOptions, dimensions)
         const grid = makeGrid(voterGeom, castOptions)
 
         const nk = canGeoms.length
-        const bordaTotals = Array(nk).fill(0)
+        const bordaScoreSumByCan = Array(nk).fill(0)
         const ranking = new Array(nk)
         const cansRanked = new Array(nk)
         let totalArea = 0
@@ -37,21 +37,20 @@ export default function CastRankingSummerGrid(canGeoms, castOptions, dimensions)
             cansRanked[i] = vote.indexInOrder.map((can) => [can])
             totalArea += countByVote
 
-            const { tallyFractions } = vote
+            const { bordaScores } = vote
             for (let k = 0; k < nk; k++) {
-                bordaTotals[k] += tallyFractions[k] * countByVote
+                bordaScoreSumByCan[k] += bordaScores[k] * countByVote
             }
         }
-        const area = grid.countByVote
 
         // bordaScore is nk-1 if a candidate receives all the votes for the voter geometry.
-        // tallyFractions is 1 if a candidate receives all the votes.
-        const tallyFractions = bordaTotals.map(
+        // bordaFractionSumByCan is the total number of votes if a candidate receives all the votes.
+        const bordaFractionSumByCan = bordaScoreSumByCan.map(
             (bt) => (bt / (nk - 1)),
         )
 
         return {
-            grid, voteSet, area, totalArea, tallyFractions, ranking, cansRanked,
+            grid, voteSet, area: grid.countByVote, totalArea, tallyFractions: bordaFractionSumByCan, ranking, cansRanked,
         }
     }
 }

@@ -22,7 +22,7 @@ export default function castScore(geometry, castOptions) {
 
     // get fraction of votes for each candidate so we can summarize results
     const n = canGeoms.length
-    let countByCan = (new Array(n)).fill(0)
+    let scoreSumByCan = (new Array(n)).fill(0)
     let totalCount = 0
     const votesByGeom = []
     for (let i = 0; i < voterGeoms.length; i++) {
@@ -30,15 +30,15 @@ export default function castScore(geometry, castOptions) {
 
         const votesForGeom = summer.sumArea(voterGeom)
         votesByGeom[i] = votesForGeom
-        const { countByCanForGeom, totalCountForGeom } = votesForGeom
+        const { scoreSumByCanForGeom, totalCountForGeom } = votesForGeom
 
-        countByCan = countByCan.map(
-            (count, k) => count + countByCanForGeom[k],
+        scoreSumByCan = scoreSumByCan.map(
+            (scoreSum, k) => scoreSum + scoreSumByCanForGeom[k],
         )
         totalCount += totalCountForGeom
     }
-    const tallyFractions = countByCan.map((x) => x / totalCount)
+    const scoreFractionByCan = scoreSumByCan.map((x) => x / totalCount)
 
-    const votes = { tallyFractions, parties, votesByGeom }
+    const votes = { tallyFractions: scoreFractionByCan, parties, votesByGeom }
     return votes
 }

@@ -6,7 +6,7 @@ import makeGrid1D from './makeGrid1D.js'
 import makeGrid2D from './makeGrid2D.js'
 
 /**
- * Sum area of voter distributions to tally the votes.
+ * Tally votes.
  * @param {Object[]} canGeoms - position of each candidate {x}
  * @constructor
  */
@@ -19,7 +19,7 @@ export default function CastPairwiseSummerGrid(canGeoms, castOptions, dimensions
         const grid = makeGrid(voterGeom, castOptions)
 
         const nk = canGeoms.length
-        const bordaTotals = Array(nk).fill(0)
+        const bordaScoreSumByCan = Array(nk).fill(0)
         const netWins = new Array(nk)
         range(nk).forEach((_, i) => { netWins[i] = Array(nk).fill(0) })
         let totalArea = 0
@@ -33,32 +33,33 @@ export default function CastPairwiseSummerGrid(canGeoms, castOptions, dimensions
             const vote = castRankingTestVote({ canGeoms, voterGeom: testVoter, dimensions })
             voteSet[i] = vote
 
-            const { pairwise } = vote
+            const { netWinsPairwise } = vote
             for (let m = 0; m < nk - 1; m++) {
                 for (let k = m + 1; k < nk; k++) {
-                    netWins[m][k] += pairwise[m][k] * countByVote
+                    netWins[m][k] += netWinsPairwise[m][k] * countByVote
                 }
             }
 
-            const { tallyFractions } = vote
+            const { bordaScores } = vote
             totalArea += countByVote
             for (let k = 0; k < nk; k++) {
-                bordaTotals[k] += tallyFractions[k] * countByVote
+                bordaScoreSumByCan[k] += bordaScores[k] * countByVote
             }
         }
 
-        // netWins is nk-1 if a candidate receives all the votes for the voter geometry.
-        // area is 1
-        const area = netWins.map((row) => row.map(
+        // netWins is (nk-1)*totalVotes if a candidate receives all the votes for the voter geometry.
+        // winFractionSumPairwise is the total number of votes
+        const winFractionSumPairwise = netWins.map((row) => row.map(
             (net) => ((net / (nk - 1)) + 1) * 0.5,
         ))
-        // tallyFractions is 1 if a candidate receives all the votes.
-        const tallyFractions = bordaTotals.map(
+        // bordaScore is nk-1 if a candidate receives all the votes for the voter geometry.
+        // bordaFractionSumByCan is the total number of votes if a candidate receives all the votes.
+        const bordaFractionSumByCan = bordaScoreSumByCan.map(
             (bt) => (bt / (nk - 1)),
         )
 
         return {
-            grid, voteSet, area, totalArea, tallyFractions,
+            grid, voteSet, area: winFractionSumPairwise, totalArea, tallyFractions: bordaFractionSumByCan,
         }
     }
 }

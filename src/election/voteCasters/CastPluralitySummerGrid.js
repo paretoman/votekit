@@ -5,7 +5,7 @@ import makeGrid1D from './makeGrid1D.js'
 import makeGrid2D from './makeGrid2D.js'
 
 /**
- * Sum area of voter distributions to tally the votes.
+ * Tally votes.
  * @param {Object[]} canGeoms - position of each candidate {x}
  * @constructor
  */
@@ -18,7 +18,7 @@ export default function CastPluralitySummerGrid(canGeoms, castOptions, dimension
         const grid = makeGrid(voterGeom, castOptions)
 
         const n = canGeoms.length
-        const area = Array(n).fill(0)
+        const tallySum = Array(n).fill(0)
         let totalArea = 0
 
         // find vote
@@ -29,14 +29,12 @@ export default function CastPluralitySummerGrid(canGeoms, castOptions, dimension
             const testVoter = grid.testVoter[i]
             const vote = castPluralityTestVote({ canGeoms, voterGeom: testVoter, dimensions })
             voteSet[i] = vote
-            const { tallyFractions } = vote
+            const { pluralityVote } = vote
             totalArea += countByVote
-            for (let k = 0; k < n; k++) {
-                area[k] += tallyFractions[k] * countByVote
-            }
+            tallySum[pluralityVote] += countByVote
         }
         return {
-            grid, voteSet, area, totalArea,
+            grid, voteSet, area: tallySum, totalArea,
         }
     }
 }
