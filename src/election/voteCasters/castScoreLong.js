@@ -34,9 +34,7 @@ export default function castScoreLong(geometry, castOptions) {
         votesByGeom[i] = votesForGeom
         const { totalCountForGeom } = votesForGeom
 
-        let { tractInDistrict } = voterGeom
-        if (tractInDistrict === undefined) tractInDistrict = 1
-        totalCount += totalCountForGeom * tractInDistrict
+        totalCount += totalCountForGeom
     }
     const invTotalCount = 1 / totalCount
 
@@ -48,7 +46,6 @@ export default function castScoreLong(geometry, castOptions) {
     const votePop = []
     let k = 0
     for (let i = 0; i < voterGeoms.length; i++) {
-        const voterGeom = voterGeoms[i]
         const {
             grid, voteSet, countByCanForGeom,
         } = votesByGeom[i]
@@ -65,9 +62,7 @@ export default function castScoreLong(geometry, castOptions) {
         }
         votesByGeom[i].voteIndex = voteIndex
 
-        let { tractInDistrict } = voterGeom
-        if (tractInDistrict === undefined) tractInDistrict = 1
-        tallyFractions = tallyFractions.map((f, index) => f + countByCanForGeom[index] * tractInDistrict * invTotalCount)
+        tallyFractions = tallyFractions.map((f, index) => f + countByCanForGeom[index] * invTotalCount)
     }
     const votes = { tallyFractions, votesByGeom, scoreVotes, votePop, parties }
     return votes

@@ -37,9 +37,7 @@ export default function castPairwise(geometry, castOptions) {
     }
     const votesByGeom = []
     voterGeoms.forEach((voterGeom, g) => {
-        const weight = ((voterGeom.weight === undefined) ? 1 : voterGeom.weight)
-
-        const votesForGeom = summer.sumArea(voterGeom, weight)
+        const votesForGeom = summer.sumArea(voterGeom, 1)
         votesByGeom[g] = votesForGeom
         const { area, totalArea } = votesForGeom
 

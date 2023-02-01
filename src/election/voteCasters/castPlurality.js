@@ -34,8 +34,7 @@ export default function castPlurality(geometry, castOptions) {
         votesByGeom[i] = votesForGeom
         const { area } = votesForGeom
 
-        const weight = ((voterGeom.weight === undefined) ? 1 : voterGeom.weight)
-        tally = tally.map((value, index) => value + area[index] * weight)
+        tally = tally.map((value, index) => value + area[index])
     })
     const total = tally.reduce((p, c) => p + c)
     const tallyFractions = tally.map((x) => x / total)

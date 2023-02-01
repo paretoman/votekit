@@ -32,10 +32,8 @@ export default function castScore(geometry, castOptions) {
         votesByGeom[i] = votesForGeom
         const { countByCanForGeom, totalCountForGeom } = votesForGeom
 
-        let { tractInDistrict } = voterGeom
-        if (tractInDistrict === undefined) tractInDistrict = 1
         countByCan = countByCan.map(
-            (count, k) => count + countByCanForGeom[k] * tractInDistrict,
+            (count, k) => count + countByCanForGeom[k],
         )
         totalCount += totalCountForGeom
     }
