@@ -16,13 +16,13 @@ export default function combineVotes(votesByTract, canGeoms) {
     if (votesByTract[0][0].cansByRank !== undefined) {
         // vrtf - votes ranked tally fractions
         const vrtf = statewideRankingTallyFractions(votesByTract)
-        votes.voteFraction = vrtf.voteFraction
+        votes.voteFractions = vrtf.voteFractions
         votes.cansByRank = vrtf.cansByRank
     }
     if (votesByTract[0][0].scoreVotes !== undefined) {
         // vstf - votes score tally fractions
         const vstf = statewideScoreTallyFractions(votesByTract)
-        votes.voteFraction = vstf.voteFraction
+        votes.voteFractions = vstf.voteFractions
         votes.scoreVotes = vstf.scoreVotes
     }
     votes.parties = votesByTract[0][0].parties
@@ -77,9 +77,9 @@ function statewideRankingTallyFractions(votesByTract) {
     votesByTract.forEach(
         (row) => row.forEach(
             (votes) => {
-                const { voteFraction, cansByRank } = votes
+                const { voteFractions, cansByRank } = votes
                 votePopAll = votePopAll
-                    .concat(voteFraction)
+                    .concat(voteFractions)
                 cansByRankAll = cansByRankAll.concat(cansByRank)
             },
         ),
@@ -89,7 +89,7 @@ function statewideRankingTallyFractions(votesByTract) {
     const rNorm = 1 / (numRows * numCols)
     votePopAll = votePopAll.map((t) => t * rNorm)
     return {
-        voteFraction: votePopAll,
+        voteFractions: votePopAll,
         cansByRank: cansByRankAll,
     }
 }
@@ -101,9 +101,9 @@ function statewideScoreTallyFractions(votesByTract) {
     votesByTract.forEach(
         (row) => row.forEach(
             (votes) => {
-                const { voteFraction, scoreVotes } = votes
+                const { voteFractions, scoreVotes } = votes
                 votePopAll = votePopAll
-                    .concat(voteFraction)
+                    .concat(voteFractions)
                 scoreVoteAll = scoreVoteAll.concat(scoreVotes)
             },
         ),
@@ -113,7 +113,7 @@ function statewideScoreTallyFractions(votesByTract) {
     const rNorm = 1 / (numRows * numCols)
     votePopAll = votePopAll.map((t) => t * rNorm)
     return {
-        voteFraction: votePopAll,
+        voteFractions: votePopAll,
         scoreVotes: scoreVoteAll,
     }
 }

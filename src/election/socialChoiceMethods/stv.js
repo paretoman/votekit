@@ -9,7 +9,7 @@ import {
  * @param {Object} votes
  * @param {Number[]} votes.tallyFractions - A list of fractions of voters
  * who ranked a candidate first, indexed by candidate.
- * @param {Number[]} votes.voteFraction - A list of fractions of voters
+ * @param {Number[]} votes.voteFractions - A list of fractions of voters
  * who share the same ranking.
  * @param {Number[][][]} votes.cansByRank - A list of lists of lists.
  * The first index is a group of voters who share the same ranking.
@@ -22,11 +22,11 @@ import {
  * Allocation is an array of integers that say whether a candidate is elected (1) or not (0).
  */
 export default function stv({ votes, socialChoiceOptions }) {
-    const { tallyFractions, voteFraction, cansByRank } = votes
+    const { tallyFractions, voteFractions, cansByRank } = votes
     const { seats } = socialChoiceOptions
 
     const nk = tallyFractions.length
-    const nr = voteFraction.length
+    const nr = voteFractions.length
 
     if (seats >= nk) {
         // more seats than candidates, so elect all candidates
@@ -67,7 +67,7 @@ export default function stv({ votes, socialChoiceOptions }) {
                 // candidates in the same rank each get full support
                 for (let k = 0; k < canArs.length; k++) {
                     const canAr = canArs[k]
-                    tally[canAr] += voteFraction[i] * weight[i]
+                    tally[canAr] += voteFractions[i] * weight[i]
                 }
             }
             tally = tally.filter((_, i) => stillIn[i])

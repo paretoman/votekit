@@ -43,7 +43,7 @@ export default function castPlurality(geometry, castOptions) {
         }
         totalCount += totalCountForGeom
     }
-    const voteFractionByCan = countByCan.map((x) => x / totalCount)
-    const votes = { tallyFractions: voteFractionByCan, votesByGeom, parties }
+    const voteFractionsByCan = countByCan.map((x) => x / totalCount)
+    const votes = { tallyFractions: voteFractionsByCan, votesByGeom, parties }
     return votes
 }
