@@ -28,7 +28,7 @@ export default function CastPairwiseSummerGrid(canGeoms, castOptions, dimensions
         const gridLength = grid.x.length
         const voteSet = Array(gridLength)
         for (let i = 0; i < gridLength; i++) {
-            const countByVote = grid.countByVote[i]
+            const voteCount = grid.countByVote[i]
             const testVoter = grid.testVoter[i]
             const vote = castRankingTestVote({ canGeoms, voterGeom: testVoter, dimensions })
             voteSet[i] = vote
@@ -36,14 +36,14 @@ export default function CastPairwiseSummerGrid(canGeoms, castOptions, dimensions
             const { netWinsPairwise } = vote
             for (let m = 0; m < nk - 1; m++) {
                 for (let k = m + 1; k < nk; k++) {
-                    netWins[m][k] += netWinsPairwise[m][k] * countByVote
+                    netWins[m][k] += netWinsPairwise[m][k] * voteCount
                 }
             }
 
             const { bordaScores } = vote
-            totalCount += countByVote
+            totalCount += voteCount
             for (let k = 0; k < nk; k++) {
-                bordaScoreSumByCan[k] += bordaScores[k] * countByVote
+                bordaScoreSumByCan[k] += bordaScores[k] * voteCount
             }
         }
 

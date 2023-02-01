@@ -25,14 +25,14 @@ export default function CastScoreSummerGrid(canGeoms, castOptions, dimensions) {
         const gridLength = grid.x.length
         const voteSet = Array(gridLength)
         for (let i = 0; i < gridLength; i++) {
-            const countByVote = grid.countByVote[i]
+            const voteCount = grid.countByVote[i]
             const testVoter = grid.testVoter[i]
             const vote = castScoreTestVote({ canGeoms, voterGeom: testVoter, dimensions })
             voteSet[i] = vote
             const { scoreVote } = vote
-            totalCountForGeom += countByVote
+            totalCountForGeom += voteCount
             for (let k = 0; k < n; k++) {
-                scoreSumByCanForGeom[k] += scoreVote[k] * countByVote
+                scoreSumByCanForGeom[k] += scoreVote[k] * voteCount
             }
         }
         const votesForGeom = { grid, voteSet, scoreSumByCanForGeom, totalCountForGeom, voterGeom }
