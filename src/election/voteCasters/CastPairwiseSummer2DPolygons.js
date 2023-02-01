@@ -12,7 +12,7 @@ export default function CastPairwiseSummer2DPolygons(canGeoms) {
     self.sumArea = function sumArea(voterGeom) {
         // draw lines across shape of voterGeom
 
-        const totalCount = calcVoterTotalArea(voterGeom)
+        const totalArea = calcVoterTotalArea(voterGeom)
 
         const n = canGeoms.length
 
@@ -30,14 +30,14 @@ export default function CastPairwiseSummer2DPolygons(canGeoms) {
                 const dist = calcDist(plane, voterGeom)
 
                 // find winsPairwise for i and k
-                const iWins = calcArea(dist, voterGeom, totalCount)
-                const kWins = totalCount - iWins
+                const iArea = calcArea(dist, voterGeom, totalArea)
+                const kArea = totalArea - iArea
 
-                winsPairwise[i][k] = iWins
-                winsPairwise[k][i] = kWins
+                winsPairwise[i][k] = iArea
+                winsPairwise[k][i] = kArea
             }
         }
-        return { winsPairwise, totalCount }
+        return { winsPairwise, totalCount: totalArea }
     }
 }
 function eqPlane(c1, c2) {

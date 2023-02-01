@@ -21,9 +21,9 @@ export default function AreaSummer(canGeoms) {
         for (let i = 0; i < n; i++) {
             const lineSet = lines[i]
             // return area for each candidate
-            const voteCount = sumCircle(voterGeom, lineSet)
-            countByCan[i] = voteCount
-            totalCount += voteCount
+            const area = sumCircle(voterGeom, lineSet)
+            countByCan[i] = area
+            totalCount += area
         }
         return { countByCan, totalCount }
     }

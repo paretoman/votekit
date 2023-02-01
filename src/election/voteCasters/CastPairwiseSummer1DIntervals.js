@@ -15,16 +15,16 @@ export default function CastPairwiseSummer1DIntervals(canGeoms) {
     const n = canGeoms.length
 
     const midpoints = Array(n - 1)
-    const iLess = Array(n - 1)
+    const iLower = Array(n - 1)
     for (let i = 0; i < n - 1; i++) {
         midpoints[i] = Array(n - i - 1)
-        iLess[i] = Array(n - i - 1)
+        iLower[i] = Array(n - i - 1)
         for (let k = i + 1; k < n; k++) {
             const ix = canGeoms[i].x
             const kx = canGeoms[k].x
             const midpoint = 0.5 * (ix + kx)
             midpoints[i][k] = midpoint
-            iLess[i][k] = (ix < kx)
+            iLower[i][k] = (ix < kx)
         }
     }
 
@@ -43,8 +43,8 @@ export default function CastPairwiseSummer1DIntervals(canGeoms) {
             // find split plane
                 const lower = -Infinity
                 const upper = midpoints[i][k]
-                const lessWins = sumInterval(lower, upper, voterGeom)
-                const iWins = (iLess[i][k]) ? lessWins : totalCount - lessWins
+                const lowerWins = sumInterval(lower, upper, voterGeom)
+                const iWins = (iLower[i][k]) ? lowerWins : totalCount - lowerWins
                 const kWins = totalCount - iWins
 
                 winsPairwise[i][k] = iWins
