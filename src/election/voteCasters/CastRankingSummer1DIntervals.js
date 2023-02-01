@@ -12,7 +12,7 @@ export default function CastRankingSummer1DIntervals(canGeoms) {
 
     const { intervalBorders, ranking, cansRanked } = castRankingFindIntervals(canGeoms)
 
-    self.sumArea = function sumArea(voterGeom, weight) {
+    self.sumArea = function sumArea(voterGeom) {
         // find area inside each interval
 
         const ni = intervalBorders.length - 1
@@ -22,7 +22,7 @@ export default function CastRankingSummer1DIntervals(canGeoms) {
             // return area for each ranking
             const lower = intervalBorders[i]
             const upper = intervalBorders[i + 1]
-            const theArea = sumInterval(lower, upper, voterGeom) * weight
+            const theArea = sumInterval(lower, upper, voterGeom)
             area[i] = theArea
             totalArea += theArea
         }

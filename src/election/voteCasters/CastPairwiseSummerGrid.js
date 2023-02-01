@@ -13,7 +13,7 @@ import makeGrid2D from './makeGrid2D.js'
 export default function CastPairwiseSummerGrid(canGeoms, castOptions, dimensions) {
     const self = this
 
-    self.sumArea = function sumArea(voterGeom, wt) {
+    self.sumArea = function sumArea(voterGeom) {
         // just find the vote at each grid point and weight according to type
         const makeGrid = (dimensions === 1) ? makeGrid1D : makeGrid2D
         const grid = makeGrid(voterGeom, castOptions)
@@ -46,16 +46,15 @@ export default function CastPairwiseSummerGrid(canGeoms, castOptions, dimensions
                 bordaTotals[k] += tallyFractions[k] * weight
             }
         }
-        totalArea *= wt
 
         // netWins is nk-1 if a candidate receives all the votes for the voter geometry.
-        // area is wt
+        // area is 1
         const area = netWins.map((row) => row.map(
-            (net) => wt * ((net / (nk - 1)) + 1) * 0.5,
+            (net) => ((net / (nk - 1)) + 1) * 0.5,
         ))
-        // tallyFractions is wt if a candidate receives all the votes.
+        // tallyFractions is 1 if a candidate receives all the votes.
         const tallyFractions = bordaTotals.map(
-            (bt) => wt * (bt / (nk - 1)),
+            (bt) => (bt / (nk - 1)),
         )
 
         return {

@@ -26,7 +26,6 @@ export default function CastScoreSummerGrid(canGeoms, castOptions, dimensions) {
         const voteSet = Array(gridLength)
         for (let i = 0; i < gridLength; i++) {
             const countByVote = grid.countByVote[i]
-            // if (weight === 0) continue
             const testVoter = grid.testVoter[i]
             const vote = castScoreTestVote({ canGeoms, voterGeom: testVoter, dimensions })
             voteSet[i] = vote

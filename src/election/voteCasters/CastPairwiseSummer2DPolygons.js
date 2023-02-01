@@ -9,10 +9,10 @@ import { equidistantLine } from './CastPluralitySummer2DQuadrature.js'
 export default function CastPairwiseSummer2DPolygons(canGeoms) {
     const self = this
 
-    self.sumArea = function sumArea(voterGeom, weight) {
+    self.sumArea = function sumArea(voterGeom) {
         // draw lines across shape of voterGeom
 
-        const totalArea = calcVoterTotalArea(voterGeom, weight)
+        const totalArea = calcVoterTotalArea(voterGeom)
 
         const n = canGeoms.length
 
@@ -30,7 +30,7 @@ export default function CastPairwiseSummer2DPolygons(canGeoms) {
                 const dist = calcDist(plane, voterGeom)
 
                 // find area for i and k
-                const iArea = calcArea(dist, voterGeom, weight, totalArea)
+                const iArea = calcArea(dist, voterGeom, totalArea)
                 const kArea = totalArea - iArea
 
                 area[i][k] = iArea
@@ -50,7 +50,7 @@ function calcDist(plane, voterGeom) {
     const denominator = Math.sqrt(plane[0] ** 2 + plane[1] ** 2)
     return numerator / denominator
 }
-function calcArea(dist, voterGeom, weight, totalArea) {
+function calcArea(dist, voterGeom, totalArea) {
     // find the area of the cap of circle,
     // where the area starts at a chord at a distance from the center.
 
@@ -65,10 +65,8 @@ function calcArea(dist, voterGeom, weight, totalArea) {
     // https://www.desmos.com/calculator
     // y=\arccos(d)-d\sqrt{1-d^{2}}
     const area = r ** 2 * normArea
-
-    const weightedArea = area * weight
-    return weightedArea
+    return area
 }
-function calcVoterTotalArea(voterGeom, weight) {
-    return weight * Math.PI * (voterGeom.w / 2) ** 2
+function calcVoterTotalArea(voterGeom) {
+    return Math.PI * (voterGeom.w / 2) ** 2
 }

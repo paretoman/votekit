@@ -28,10 +28,10 @@ export default function CastPairwiseSummer1DIntervals(canGeoms) {
         }
     }
 
-    self.sumArea = function sumArea(voterGeom, weight) {
+    self.sumArea = function sumArea(voterGeom) {
         // divide voterGeom
 
-        const totalArea = calcVoterTotalArea(voterGeom, weight)
+        const totalArea = calcVoterTotalArea(voterGeom)
 
         const area = Array(n).fill(0)
         for (let i = 0; i < n; i++) {
@@ -43,7 +43,7 @@ export default function CastPairwiseSummer1DIntervals(canGeoms) {
             // find split plane
                 const lower = -Infinity
                 const upper = midpoints[i][k]
-                const smallerArea = sumInterval(lower, upper, voterGeom) * weight
+                const smallerArea = sumInterval(lower, upper, voterGeom)
                 const iArea = (iSmaller[i][k]) ? smallerArea : totalArea - smallerArea
                 const kArea = totalArea - iArea
 
@@ -55,10 +55,10 @@ export default function CastPairwiseSummer1DIntervals(canGeoms) {
     }
 }
 
-function calcVoterTotalArea(voterGeom, weight) {
+function calcVoterTotalArea(voterGeom) {
     const lower = -Infinity
     const upper = Infinity
-    return sumInterval(lower, upper, voterGeom) * weight
+    return sumInterval(lower, upper, voterGeom)
 }
 
 function sumInterval(lower, upper, voterGeom) {

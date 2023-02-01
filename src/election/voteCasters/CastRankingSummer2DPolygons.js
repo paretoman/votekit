@@ -11,7 +11,7 @@ import castRankingFindPolygons from './castRankingFindPolygons.js'
 export default function CastRankingSummer2DPolygons(canGeoms) {
     const self = this
 
-    self.sumArea = function sumArea(voterGeom, weight) {
+    self.sumArea = function sumArea(voterGeom) {
         // draw lines across shape of voterGeom
 
         let { cells, ranking, cansRanked } = castRankingFindPolygons(voterGeom, canGeoms)
@@ -23,7 +23,7 @@ export default function CastRankingSummer2DPolygons(canGeoms) {
         let totalArea = 0
         for (let i = 0; i < cn; i++) {
             // return area for each ranking
-            const theArea = -polygonArea(cells[i]) * weight
+            const theArea = -polygonArea(cells[i])
             area[i] = theArea
             totalArea += theArea
         }

@@ -36,7 +36,7 @@ export default function castRanking(geometry, castOptions) {
 
     // should ideally make a set of polygons for each ranking so that we avoid repeating rankings.
     voterGeoms.forEach((voterGeom, g) => {
-        const votesForGeom = summer.sumArea(voterGeom, 1)
+        const votesForGeom = summer.sumArea(voterGeom)
         votesByGeom[g] = votesForGeom
         const { rankings, cansRanked, area, totalArea } = votesForGeom
 
