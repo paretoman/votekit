@@ -24,10 +24,10 @@ export default function CastRankingSummerGrid(canGeoms, castOptions, dimensions)
         let totalCount = 0
 
         // find vote
-        const { countByVote } = grid
-        const voteSet = Array(countByVote.length)
-        for (let i = 0; i < countByVote.length; i++) {
-            const voteCount = countByVote[i]
+        const { voteCounts } = grid
+        const voteSet = Array(voteCounts.length)
+        for (let i = 0; i < voteCounts.length; i++) {
+            const voteCount = voteCounts[i]
 
             const testVoter = grid.testVoter[i]
             const vote = castRankingTestVote({ canGeoms, voterGeom: testVoter, dimensions })
@@ -51,7 +51,7 @@ export default function CastRankingSummerGrid(canGeoms, castOptions, dimensions)
         )
 
         return {
-            grid, voteSet, countByVote, totalCount, tallyFractions: bordaFractionAverageByCan, ranking, cansRanked,
+            grid, voteSet, voteCounts, totalCount, tallyFractions: bordaFractionAverageByCan, ranking, cansRanked,
         }
     }
 }

@@ -58,7 +58,7 @@ export default function castScoreLong(geometry, castOptions) {
         for (let j = 0; j < voteSet.length; j++) {
             scoreVotes[index] = voteSet[j].tallyFractions
             voteIndex[j] = index
-            voteFraction[index] = grid.countByVote[j] * invTotalCount
+            voteFraction[index] = grid.voteCounts[j] * invTotalCount
             index += 1
         }
         votesByGeom[i].voteIndex = voteIndex

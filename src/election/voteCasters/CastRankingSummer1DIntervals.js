@@ -16,18 +16,18 @@ export default function CastRankingSummer1DIntervals(canGeoms) {
         // find count inside each interval
 
         const ni = intervalBorders.length - 1
-        const countByVote = Array(ni)
+        const voteCounts = Array(ni)
         let totalCount = 0
         for (let i = 0; i < ni; i++) {
             // return count for each ranking
             const lower = intervalBorders[i]
             const upper = intervalBorders[i + 1]
             const voteCount = sumInterval(lower, upper, voterGeom)
-            countByVote[i] = voteCount
+            voteCounts[i] = voteCount
             totalCount += voteCount
         }
         return {
-            ranking, cansRanked, countByVote, totalCount, intervalBorders,
+            ranking, cansRanked, voteCounts, totalCount, intervalBorders,
         }
     }
 }

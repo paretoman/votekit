@@ -28,7 +28,7 @@ export default function CastPairwiseSummerGrid(canGeoms, castOptions, dimensions
         const gridLength = grid.x.length
         const voteSet = Array(gridLength)
         for (let i = 0; i < gridLength; i++) {
-            const voteCount = grid.countByVote[i]
+            const voteCount = grid.voteCounts[i]
             const testVoter = grid.testVoter[i]
             const vote = castRankingTestVote({ canGeoms, voterGeom: testVoter, dimensions })
             voteSet[i] = vote
