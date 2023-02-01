@@ -2,7 +2,7 @@
 
 import DistrictNoise from './DistrictNoise.js'
 import DistrictMaker from './DistrictMaker.js'
-import { copyObjectShallow, range } from '../../utilities/jsHelpers.js'
+import { copyObjectShallow } from '../../utilities/jsHelpers.js'
 
 /**
  * @param {Screen} screen
@@ -53,54 +53,10 @@ export default function VoterDistricts(voterShapeList, changes, electionOptions)
         self.nd = electionOptions.numDistricts
         self.districtMaker.make(self.nx, self.ny, self.nd)
     }
-    self.updateVoters = () => {
-        self.updateFullSet()
-        self.updateVotersByDistrict()
-        self.updateVotersByTract()
-    }
 
     // We want to copy a set of voter basis objects for each census tract.
     // Then we add a little noise to represent differences due to geography.
-
-    self.updateFullSet = () => {
-        const { sn } = self.districtNoise
-        self.allVoterGroups = voterShapes.map(
-            (vb) => sn.map(
-                (rowNoise) => rowNoise.map(
-                    (cellNoise) => {
-                        const [xNoise, yNoise] = cellNoise
-                        const shape1 = copyObjectShallow(vb.shape1)
-                        const shape2 = copyObjectShallow(vb.shape2)
-                        shape1.x += xNoise
-                        shape2.x += xNoise
-                        shape2.y += yNoise
-                        return { shape2, shape1 }
-                    },
-                ).flat(),
-            ).flat(),
-        ).flat()
-    }
-
-    self.updateVotersByDistrict = () => {
-        const { census } = self.districtMaker
-        const { sn } = self.districtNoise
-        self.voterGroupsByDistrict = range(self.nd).map(
-            (iDistrict) => voterShapes.map(
-                (vb) => census[iDistrict].map((g) => {
-                    const [gx, gy, gf] = g
-                    const [xNoise, yNoise] = sn[gx][gy]
-                    const shape1 = copyObjectShallow(vb.shape1)
-                    const shape2 = copyObjectShallow(vb.shape2)
-                    shape1.x += xNoise
-                    shape2.x += xNoise
-                    shape2.y += yNoise
-                    return { shape2, shape1, weight: gf, tractInDistrict: gf }
-                }).flat(),
-            ).flat(),
-        )
-    }
-
-    self.updateVotersByTract = () => {
+    self.updateVoters = () => {
         const { sn } = self.districtNoise
         self.voterGroupsByTract = sn.map(
             (rowNoise) => rowNoise.map(
