@@ -13,7 +13,7 @@ export default function CastScoreSummerGrid(canGeoms, castOptions, dimensions) {
     const self = this
 
     self.sumArea = function sumArea(voterGeom) {
-        // just find the vote at each grid point and weight according to type
+        // just find the vote and count at each grid point
         const makeGrid = (dimensions === 1) ? makeGrid1D : makeGrid2D
         const grid = makeGrid(voterGeom, castOptions)
 

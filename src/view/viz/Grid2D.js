@@ -36,7 +36,7 @@ export default function Grid2D(candidateList, screenMain, screenMini) {
 
         function fillDataSeparate() {
             // make image data
-            const { nx, ny, weight } = grid
+            const { nx, ny, density } = grid
             canvases.splice(0)
             for (let i = 0; i < canList.length; i++) {
                 const canvas = document.createElement('canvas')
@@ -54,7 +54,7 @@ export default function Grid2D(candidateList, screenMain, screenMini) {
                 for (let yp = 0; yp < ny; yp++) {
                     for (let xp = 0; xp < nx; xp++) {
                         const support = voteSet[k].tallyFractions[i]
-                        const a = support * ((isGauss) ? weight[k] : 1) * 255
+                        const a = support * ((isGauss) ? density[k] : 1) * 255
 
                         data[(xp + yp * nx) * 4 + 0] = r
                         data[(xp + yp * nx) * 4 + 1] = g
@@ -70,7 +70,7 @@ export default function Grid2D(candidateList, screenMain, screenMini) {
 
         function fillDataBlend() {
         // make image data
-            const { nx, ny, weight } = grid
+            const { nx, ny, density } = grid
             const colorSet = canList.map((can) => can.colorRGBA)
 
             const canvas = document.createElement('canvas')
@@ -87,7 +87,7 @@ export default function Grid2D(candidateList, screenMain, screenMini) {
                     const { tallyFractions } = voteSet[k]
                     const [r, g, b] = colorBlender(tallyFractions, colorSet)
 
-                    const a = ((isGauss) ? weight[k] : 1) * 255
+                    const a = ((isGauss) ? density[k] : 1) * 255
 
                     data[(xp + yp * nx) * 4 + 0] = r
                     data[(xp + yp * nx) * 4 + 1] = g

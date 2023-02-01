@@ -13,7 +13,7 @@ export default function CastRankingSummerGrid(canGeoms, castOptions, dimensions)
     const self = this
 
     self.sumArea = function sumArea(voterGeom) {
-        // just find the vote at each grid point and weight according to type
+        // just find the vote and count at each grid point
         const makeGrid = (dimensions === 1) ? makeGrid1D : makeGrid2D
         const grid = makeGrid(voterGeom, castOptions)
 
@@ -27,7 +27,7 @@ export default function CastRankingSummerGrid(canGeoms, castOptions, dimensions)
         const gridLength = grid.x.length
         const voteSet = Array(gridLength)
         for (let i = 0; i < gridLength; i++) {
-            const weight = grid.weight[i]
+            const countByVote = grid.countByVote[i]
             const testVoter = grid.testVoter[i]
             const vote = castRankingTestVote({ canGeoms, voterGeom: testVoter, dimensions })
             voteSet[i] = vote
@@ -35,14 +35,14 @@ export default function CastRankingSummerGrid(canGeoms, castOptions, dimensions)
             // todo: possibly speed things up by combining votes with the same ranking.
             ranking[i] = vote.ranking
             cansRanked[i] = vote.indexInOrder.map((can) => [can])
-            totalArea += weight
+            totalArea += countByVote
 
             const { tallyFractions } = vote
             for (let k = 0; k < nk; k++) {
-                bordaTotals[k] += tallyFractions[k] * weight
+                bordaTotals[k] += tallyFractions[k] * countByVote
             }
         }
-        const area = grid.weight
+        const area = grid.countByVote
 
         // bordaScore is nk-1 if a candidate receives all the votes for the voter geometry.
         // tallyFractions is 1 if a candidate receives all the votes.

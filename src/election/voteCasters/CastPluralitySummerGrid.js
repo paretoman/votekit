@@ -13,7 +13,7 @@ export default function CastPluralitySummerGrid(canGeoms, castOptions, dimension
     const self = this
 
     self.sumArea = function sumArea(voterGeom) {
-        // just find the vote at each grid point and weight according to type
+        // just find the vote and count at each grid point
         const makeGrid = (dimensions === 1) ? makeGrid1D : makeGrid2D
         const grid = makeGrid(voterGeom, castOptions)
 
@@ -25,14 +25,14 @@ export default function CastPluralitySummerGrid(canGeoms, castOptions, dimension
         const gridLength = grid.x.length
         const voteSet = Array(gridLength)
         for (let i = 0; i < gridLength; i++) {
-            const weight = grid.weight[i]
+            const countByVote = grid.countByVote[i]
             const testVoter = grid.testVoter[i]
             const vote = castPluralityTestVote({ canGeoms, voterGeom: testVoter, dimensions })
             voteSet[i] = vote
             const { tallyFractions } = vote
-            totalArea += weight
+            totalArea += countByVote
             for (let k = 0; k < n; k++) {
-                area[k] += tallyFractions[k] * weight
+                area[k] += tallyFractions[k] * countByVote
             }
         }
         return {

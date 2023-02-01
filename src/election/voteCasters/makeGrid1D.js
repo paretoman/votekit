@@ -3,7 +3,7 @@ import { normPDF } from '../../utilities/jsHelpers.js'
 export default function makeGrid1D(voterGeom) {
     const { gridX, testVoter, gridPointLength } = findGridX(voterGeom)
     const { density, countByVote } = findDensity(voterGeom, gridX, gridPointLength)
-    const grid = { x: gridX, weight: density, testVoter, countByVote }
+    const grid = { x: gridX, density, testVoter, countByVote }
     return grid
 }
 

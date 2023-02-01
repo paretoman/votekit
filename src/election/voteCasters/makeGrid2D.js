@@ -39,7 +39,7 @@ export default function makeGrid2D(voterGeom, castOptions) {
     const { density, countByVote } = findDensity(voterGeom, gridX, gridY, gridPointArea)
 
     const grid = {
-        x: gridX, y: gridY, weight: density, nx, ny, width, testVoter, countByVote,
+        x: gridX, y: gridY, nx, ny, width, testVoter, density, countByVote,
     }
     return grid
 }
