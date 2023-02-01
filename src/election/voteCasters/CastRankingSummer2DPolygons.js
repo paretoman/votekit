@@ -14,7 +14,7 @@ export default function CastRankingSummer2DPolygons(canGeoms) {
     self.sumArea = function sumArea(voterGeom) {
         // draw lines across shape of voterGeom
 
-        let { cells, ranking, cansRanked } = castRankingFindPolygons(voterGeom, canGeoms)
+        let { cells, ranking, cansByRank } = castRankingFindPolygons(voterGeom, canGeoms)
 
         // find area of polygons
 
@@ -31,13 +31,13 @@ export default function CastRankingSummer2DPolygons(canGeoms) {
         // because they also have rankings that don't make sense.
         const tol = 0.000001
         ranking = ranking.filter((_, i) => Math.abs(areas[i]) > tol)
-        cansRanked = cansRanked.filter((_, i) => Math.abs(areas[i]) > tol)
+        cansByRank = cansByRank.filter((_, i) => Math.abs(areas[i]) > tol)
         cells = cells.filter((_, i) => Math.abs(areas[i]) > tol)
         areas = areas.filter((a) => Math.abs(a) > tol)
 
         const [voteCounts, totalCount] = [areas, totalArea]
         return {
-            ranking, cansRanked, voteCounts, totalCount, cells,
+            ranking, cansByRank, voteCounts, totalCount, cells,
         }
     }
 }

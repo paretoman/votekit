@@ -58,16 +58,16 @@ export default function castRankingFindIntervals(canGeoms) {
         rankings[i + 1] = copyArrayShallow(ranking)
     }
 
-    const cansRanked = Array(mn + 1)
+    const cansByRank = Array(mn + 1)
     for (let i = 0; i < mn + 1; i++) {
-        cansRanked[i] = Array(n)
+        cansByRank[i] = Array(n)
         for (let k = 0; k < n; k++) {
-            cansRanked[i][k] = []
+            cansByRank[i][k] = []
         }
         const ri = rankings[i]
         for (let k = 0; k < n; k++) {
             const rik = ri[k]
-            cansRanked[i][rik - 1].push(k)
+            cansByRank[i][rik - 1].push(k)
         }
     }
 
@@ -75,7 +75,7 @@ export default function castRankingFindIntervals(canGeoms) {
     const intervalBorders = copyArrayShallow(midpoints)
     intervalBorders.unshift(-Infinity)
     intervalBorders.push(Infinity)
-    return { intervalBorders, rankings, cansRanked }
+    return { intervalBorders, rankings, cansByRank }
 }
 
 function findMidpoint(can1, can2) {
