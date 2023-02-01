@@ -13,7 +13,7 @@ export default function CastRankingSummerGrid(canGeoms, castOptions, dimensions)
     const self = this
 
     self.sumArea = function sumArea(voterGeom) {
-        // just find the vote and count at each grid point
+        // just find the vote and voteCount at each grid point
         const makeGrid = (dimensions === 1) ? makeGrid1D : makeGrid2D
         const grid = makeGrid(voterGeom, castOptions)
 
@@ -21,13 +21,14 @@ export default function CastRankingSummerGrid(canGeoms, castOptions, dimensions)
         const bordaScoreSumByCan = Array(nk).fill(0)
         const ranking = new Array(nk)
         const cansRanked = new Array(nk)
-        let totalArea = 0
+        let totalCount = 0
 
         // find vote
-        const gridLength = grid.x.length
-        const voteSet = Array(gridLength)
-        for (let i = 0; i < gridLength; i++) {
-            const countByVote = grid.countByVote[i]
+        const { countByVote } = grid
+        const voteSet = Array(countByVote.length)
+        for (let i = 0; i < countByVote.length; i++) {
+            const voteCount = countByVote[i]
+
             const testVoter = grid.testVoter[i]
             const vote = castRankingTestVote({ canGeoms, voterGeom: testVoter, dimensions })
             voteSet[i] = vote
@@ -35,11 +36,11 @@ export default function CastRankingSummerGrid(canGeoms, castOptions, dimensions)
             // todo: possibly speed things up by combining votes with the same ranking.
             ranking[i] = vote.ranking
             cansRanked[i] = vote.indexInOrder.map((can) => [can])
-            totalArea += countByVote
+            totalCount += voteCount
 
             const { bordaScores } = vote
             for (let k = 0; k < nk; k++) {
-                bordaScoreSumByCan[k] += bordaScores[k] * countByVote
+                bordaScoreSumByCan[k] += bordaScores[k] * voteCount
             }
         }
 
@@ -50,7 +51,7 @@ export default function CastRankingSummerGrid(canGeoms, castOptions, dimensions)
         )
 
         return {
-            grid, voteSet, area: grid.countByVote, totalArea, tallyFractions: bordaFractionSumByCan, ranking, cansRanked,
+            grid, voteSet, countByVote, totalCount, tallyFractions: bordaFractionSumByCan, ranking, cansRanked,
         }
     }
 }

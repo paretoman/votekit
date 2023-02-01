@@ -13,21 +13,21 @@ export default function CastRankingSummer1DIntervals(canGeoms) {
     const { intervalBorders, ranking, cansRanked } = castRankingFindIntervals(canGeoms)
 
     self.sumArea = function sumArea(voterGeom) {
-        // find area inside each interval
+        // find count inside each interval
 
         const ni = intervalBorders.length - 1
-        const area = Array(ni)
-        let totalArea = 0
+        const countByVote = Array(ni)
+        let totalCount = 0
         for (let i = 0; i < ni; i++) {
-            // return area for each ranking
+            // return count for each ranking
             const lower = intervalBorders[i]
             const upper = intervalBorders[i + 1]
-            const theArea = sumInterval(lower, upper, voterGeom)
-            area[i] = theArea
-            totalArea += theArea
+            const voteCount = sumInterval(lower, upper, voterGeom)
+            countByVote[i] = voteCount
+            totalCount += voteCount
         }
         return {
-            ranking, cansRanked, area, totalArea, intervalBorders,
+            ranking, cansRanked, countByVote, totalCount, intervalBorders,
         }
     }
 }

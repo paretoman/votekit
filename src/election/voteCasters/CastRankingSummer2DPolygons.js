@@ -34,8 +34,10 @@ export default function CastRankingSummer2DPolygons(canGeoms) {
         cansRanked = cansRanked.filter((_, i) => Math.abs(area[i]) > tol)
         cells = cells.filter((_, i) => Math.abs(area[i]) > tol)
         area = area.filter((a) => Math.abs(a) > tol)
+
+        const [voteCount, totalCount] = [area, totalArea]
         return {
-            ranking, cansRanked, area, totalArea, cells,
+            ranking, cansRanked, voteCount, totalCount, cells,
         }
     }
 }
