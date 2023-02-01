@@ -41,7 +41,7 @@ export default function castScoreLong(geometry, castOptions) {
     // tally votes
     let scoreAverageByCan = (new Array(n)).fill(0)
     // flatten voteSets into scoreVotes
-    // votePop is number of voters with that vote (usually 1 or lower)
+    // votePop is number of voters with that vote as a fraction of total votes (usually 1 or lower)
     const scoreVotes = []
     const votePop = []
     let k = 0
