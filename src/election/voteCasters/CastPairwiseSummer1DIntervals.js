@@ -15,27 +15,27 @@ export default function CastPairwiseSummer1DIntervals(canGeoms) {
     const n = canGeoms.length
 
     const midpoints = Array(n - 1)
-    const iSmaller = Array(n - 1)
+    const iLess = Array(n - 1)
     for (let i = 0; i < n - 1; i++) {
         midpoints[i] = Array(n - i - 1)
-        iSmaller[i] = Array(n - i - 1)
+        iLess[i] = Array(n - i - 1)
         for (let k = i + 1; k < n; k++) {
             const ix = canGeoms[i].x
             const kx = canGeoms[k].x
             const midpoint = 0.5 * (ix + kx)
             midpoints[i][k] = midpoint
-            iSmaller[i][k] = (ix < kx)
+            iLess[i][k] = (ix < kx)
         }
     }
 
     self.sumArea = function sumArea(voterGeom) {
         // divide voterGeom
 
-        const totalArea = calcVoterTotalArea(voterGeom)
+        const totalCountForGeom = calcVoterTotalArea(voterGeom)
 
-        const area = Array(n).fill(0)
+        const winsPairwiseForGeom = Array(n).fill(0)
         for (let i = 0; i < n; i++) {
-            area[i] = Array(n).fill(0)
+            winsPairwiseForGeom[i] = Array(n).fill(0)
         }
 
         for (let i = 0; i < n - 1; i++) {
@@ -43,15 +43,15 @@ export default function CastPairwiseSummer1DIntervals(canGeoms) {
             // find split plane
                 const lower = -Infinity
                 const upper = midpoints[i][k]
-                const smallerArea = sumInterval(lower, upper, voterGeom)
-                const iArea = (iSmaller[i][k]) ? smallerArea : totalArea - smallerArea
-                const kArea = totalArea - iArea
+                const lessWins = sumInterval(lower, upper, voterGeom)
+                const iWins = (iLess[i][k]) ? lessWins : totalCountForGeom - lessWins
+                const kWins = totalCountForGeom - iWins
 
-                area[i][k] = iArea
-                area[k][i] = kArea
+                winsPairwiseForGeom[i][k] = iWins
+                winsPairwiseForGeom[k][i] = kWins
             }
         }
-        return { area, totalArea }
+        return { winsPairwiseForGeom, totalCountForGeom }
     }
 }
 

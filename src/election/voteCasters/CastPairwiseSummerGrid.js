@@ -22,7 +22,7 @@ export default function CastPairwiseSummerGrid(canGeoms, castOptions, dimensions
         const bordaScoreSumByCan = Array(nk).fill(0)
         const netWins = new Array(nk)
         range(nk).forEach((_, i) => { netWins[i] = Array(nk).fill(0) })
-        let totalArea = 0
+        let totalCount = 0
 
         // find vote
         const gridLength = grid.x.length
@@ -41,16 +41,16 @@ export default function CastPairwiseSummerGrid(canGeoms, castOptions, dimensions
             }
 
             const { bordaScores } = vote
-            totalArea += countByVote
+            totalCount += countByVote
             for (let k = 0; k < nk; k++) {
                 bordaScoreSumByCan[k] += bordaScores[k] * countByVote
             }
         }
 
-        // netWins is (nk-1)*totalVotes if a candidate receives all the votes for the voter geometry.
-        // winFractionSumPairwise is the total number of votes
-        const winFractionSumPairwise = netWins.map((row) => row.map(
-            (net) => ((net / (nk - 1)) + 1) * 0.5,
+        // netWins is totalVotes if a candidate receives all the votes for the voter geometry.
+        // winsPairwise is the total number of votes, too
+        const winsPairwise = netWins.map((row) => row.map(
+            (net) => (net + totalCount) * 0.5,
         ))
         // bordaScore is nk-1 if a candidate receives all the votes for the voter geometry.
         // bordaFractionSumByCan is the total number of votes if a candidate receives all the votes.
@@ -59,7 +59,7 @@ export default function CastPairwiseSummerGrid(canGeoms, castOptions, dimensions
         )
 
         return {
-            grid, voteSet, area: winFractionSumPairwise, totalArea, tallyFractions: bordaFractionSumByCan,
+            grid, voteSet, winsPairwise, totalCount, tallyFractions: bordaFractionSumByCan,
         }
     }
 }

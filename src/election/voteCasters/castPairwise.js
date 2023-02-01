@@ -26,45 +26,42 @@ export default function castPairwise(geometry, castOptions) {
     const summer = new Summer(canGeoms, castOptions, dimensions)
 
     // get fraction of votes for each candidate so we can summarize results
-    let totalAreaAll = 0
+    let totalCount = 0
 
     // should ideally make a set of polygons for each ranking so that we avoid repeating rankings.
 
     const n = canGeoms.length
-    const areaAll = Array(n).fill(0)
+    const winsPairwise = Array(n).fill(0)
     for (let i = 0; i < n; i++) {
-        areaAll[i] = Array(n).fill(0)
+        winsPairwise[i] = Array(n).fill(0)
     }
     const votesByGeom = []
     voterGeoms.forEach((voterGeom, g) => {
         const votesForGeom = summer.sumArea(voterGeom)
         votesByGeom[g] = votesForGeom
-        const { area, totalArea } = votesForGeom
+        const { winsPairwiseForGeom, totalCountForGeom } = votesForGeom
 
         for (let i = 0; i < n; i++) {
             for (let k = 0; k < n; k++) {
-                areaAll[i][k] += area[i][k]
+                winsPairwise[i][k] += winsPairwiseForGeom[i][k]
             }
         }
-        totalAreaAll += totalArea
+        totalCount += totalCountForGeom
     })
-    const pairwiseTallyFractions = areaAll.map((x) => x.map((a) => a / totalAreaAll))
+    const invTotalCount = 1 / totalCount
+    const winFractionPairwise = winsPairwise.map((x) => x.map((a) => a * invTotalCount))
 
-    // measure number of wins
-    const tallyWins = Array(n).fill(0)
-    for (let i = 0; i < n - 1; i++) {
-        for (let k = i + 1; k < n; k++) {
-            const ik = pairwiseTallyFractions[i][k]
-            const ki = pairwiseTallyFractions[k][i]
-            if (ik > ki) {
-                tallyWins[i] += 1
-            } else if (ik < ki) {
-                tallyWins[k] += 1
-            }
-            // nobody gets points for a tie
+    // borda scores
+    const bordaScoreSumByCan = Array(n).fill(0)
+    const bordaFractionAverageByCan = Array(n)
+    const invTotalCountTimesNMinus1 = invTotalCount / (n - 1)
+    for (let i = 0; i < n; i++) {
+        for (let k = 0; k < n; k++) {
+            bordaScoreSumByCan[i] += winsPairwise[i][k]
         }
+        bordaFractionAverageByCan[i] = bordaScoreSumByCan[i] * invTotalCountTimesNMinus1
     }
-    const tallyFractions = tallyWins.map((x) => x / (n - 1))
-    const votes = { pairwiseTallyFractions, tallyFractions, votesByGeom, parties }
+
+    const votes = { pairwiseTallyFractions: winFractionPairwise, tallyFractions: bordaFractionAverageByCan, votesByGeom, parties }
     return votes
 }
