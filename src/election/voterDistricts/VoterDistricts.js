@@ -70,7 +70,7 @@ export default function VoterDistricts(voterShapeList, changes, electionOptions)
                         shape2.y += yNoise
                         return { shape2, shape1 }
                     },
-                ).flat(),
+                ),
             ),
         )
     }

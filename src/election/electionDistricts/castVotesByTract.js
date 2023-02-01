@@ -1,21 +1,21 @@
 import voteCasters from '../voteCasters/voteCasters.js'
 import getGeoms from '../../sim/entities/getGeoms.js'
 
-export default function castVotesByTract(geometry, electionOptions) {
+export default function castVotesByTract(geometry0, electionOptions) {
     const { castOptions } = electionOptions
     const {
         canGeoms, parties, dimensions, voterDistricts,
-    } = geometry
+    } = geometry0
     const { voterGroupsByTract } = voterDistricts
 
     const votesByTract = voterGroupsByTract.map(
         (row) => row.map(
             (voterGroups) => {
                 const voterGeoms = getGeoms(voterGroups, dimensions)
-                const tractGeometry = {
-                    voterGeoms, canGeoms, parties, dimensions, voterDistricts,
+                const geometry = {
+                    voterGeoms, canGeoms, parties, dimensions,
                 }
-                return voteCasters[electionOptions.voteCasterName].cast(tractGeometry, castOptions)
+                return voteCasters[electionOptions.voteCasterName].cast(geometry, castOptions)
             },
         ),
     )
