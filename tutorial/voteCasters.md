@@ -33,7 +33,7 @@ Preferences are stored in the following ways:
 * Scores
   * scoreVote: a score for each candidate, any number, Number[].
     * Right now, we're just using scores between 0 to 1. In the future, scores above 1 might be used.
-  * scoreVotes: an list of scoreVote preferences, Number[][]. Each preference haas a score for each candidate.
+  * scoreVotes: an list of scoreVote preferences, Number[][]. Each preference has a score for each candidate.
 * Ranking
   * ranking: a rank for each candidate, Number[]. 0 is the best ranking, then 1, 2, etc.
   * rankings: a list of preferences. Each is a list with a rank for each candidate. Number[][]. 0 is the best ranking, then 1, 2, etc.
