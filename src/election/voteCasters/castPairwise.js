@@ -26,7 +26,7 @@ export default function castPairwise(geometry, castOptions) {
     const summer = new Summer(canGeoms, castOptions, dimensions)
 
     // get fraction of votes for each candidate so we can summarize results
-    let totalCount = 0
+    let totalVotes = 0
 
     // should ideally make a set of polygons for each ranking so that we avoid repeating rankings.
 
@@ -40,16 +40,16 @@ export default function castPairwise(geometry, castOptions) {
         const votesForGeom = summer.sumArea(voterGeom)
         votesByGeom[g] = votesForGeom
         const { winsPairwise: winsPairwiseForGeom,
-            totalCount: totalCountForGeom } = votesForGeom
+            totalVotes: totalVotesForGeom } = votesForGeom
 
         for (let i = 0; i < n; i++) {
             for (let k = 0; k < n; k++) {
                 winsPairwise[i][k] += winsPairwiseForGeom[i][k]
             }
         }
-        totalCount += totalCountForGeom
+        totalVotes += totalVotesForGeom
     })
-    const invTotalCount = 1 / totalCount
+    const invTotalCount = 1 / totalVotes
     const winFractionPairwise = winsPairwise.map((x) => x.map((a) => a * invTotalCount))
 
     // borda scores

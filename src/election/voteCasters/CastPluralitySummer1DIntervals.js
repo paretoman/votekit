@@ -18,13 +18,13 @@ export default function LineSummer(canGeoms) {
         // return sum for each candidate
         const n = canGeoms.length
         const countByCan = Array(n)
-        let totalCount = 0
+        let totalVotes = 0
         for (let i = 0; i < n; i++) {
             const voteCount = sum(voterGeom, intervals[i])
             countByCan[i] = voteCount
-            totalCount += voteCount
+            totalVotes += voteCount
         }
-        return { countByCan, totalCount }
+        return { countByCan, totalVotes }
     }
 }
 

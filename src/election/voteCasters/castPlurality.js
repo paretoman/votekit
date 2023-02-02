@@ -29,21 +29,21 @@ export default function castPlurality(geometry, castOptions) {
     const n = canGeoms.length
     const votesByGeom = []
     const countByCan = (new Array(n)).fill(0)
-    let totalCount = 0
+    let totalVotes = 0
     for (let i = 0; i < voterGeoms.length; i++) {
         const voterGeom = voterGeoms[i]
 
         const votesForGeom = summer.sumArea(voterGeom)
         votesByGeom[i] = votesForGeom
         const { countByCan: countByCanForGeom,
-            totalCount: totalCountForGeom } = votesForGeom
+            totalVotes: totalVotesForGeom } = votesForGeom
 
         for (let k = 0; k < n; k++) {
             countByCan[k] += countByCanForGeom[k]
         }
-        totalCount += totalCountForGeom
+        totalVotes += totalVotesForGeom
     }
-    const voteFractionsByCan = countByCan.map((x) => x / totalCount)
+    const voteFractionsByCan = countByCan.map((x) => x / totalVotes)
     const votes = { tallyFractions: voteFractionsByCan, votesByGeom, parties }
     return votes
 }

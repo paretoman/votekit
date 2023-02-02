@@ -47,7 +47,7 @@ Ways to say how many votes.
 * density: votes per pixel. From 0 to 1.
 * voteCount: a number of votes.
 * voteCounts: a list of numbers of votes for a list of preferences.
-* totalCount: total number of votes.
+* totalVotes: total number of votes.
 * voteFractions: a list of fractions for a list of preferences. voteCounts as a fraction of the total number of votes.  From 0 to 1.
 * All of these are positive real numbers.
 
@@ -73,7 +73,7 @@ Ways to combine votes. Each is a list indexed by candidate.
   * voteFractionByCan: The fraction of plurality votes for a candidate.
 * score
   * scoreSumByCan: number of votes times score, summed for each candidate.
-  * scoreAverageByCan: average score for each candidate. = scoreSumByCan / totalCount. number of votes times score divided by max score, summed for each candidate. (not used)
+  * scoreAverageByCan: average score for each candidate. = scoreSumByCan / totalVotes. number of votes times score divided by max score, summed for each candidate. (not used)
   * scoreFractionAverageByCan: average fractional score for each candidate.
 * ranking
   * bordaScores: The borda scores for each candidate for one vote.

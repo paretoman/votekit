@@ -21,7 +21,7 @@ export default function CastRankingSummerGrid(canGeoms, castOptions, dimensions)
         const bordaScoreSumByCan = Array(nk).fill(0)
         const ranking = new Array(nk)
         const cansByRankList = new Array(nk)
-        let totalCount = 0
+        let totalVotes = 0
 
         // find vote
         const { voteCounts } = grid
@@ -36,7 +36,7 @@ export default function CastRankingSummerGrid(canGeoms, castOptions, dimensions)
             // todo: possibly speed things up by combining votes with the same ranking.
             ranking[i] = vote.ranking
             cansByRankList[i] = vote.indexInOrder.map((can) => [can])
-            totalCount += voteCount
+            totalVotes += voteCount
 
             const { bordaScores } = vote
             for (let k = 0; k < nk; k++) {
@@ -47,11 +47,11 @@ export default function CastRankingSummerGrid(canGeoms, castOptions, dimensions)
         // bordaScore is nk-1 if a candidate receives all the votes for the voter geometry.
         // bordaFractionAverageByCan is 1 if a candidate receives all the votes.
         const bordaFractionAverageByCan = bordaScoreSumByCan.map(
-            (bt) => (bt / (nk - 1)) / totalCount,
+            (bt) => (bt / (nk - 1)) / totalVotes,
         )
 
         return {
-            grid, voteSet, voteCounts, totalCount, tallyFractions: bordaFractionAverageByCan, ranking, cansByRankList,
+            grid, voteSet, voteCounts, totalVotes, tallyFractions: bordaFractionAverageByCan, ranking, cansByRankList,
         }
     }
 }

@@ -19,7 +19,7 @@ export default function CastPluralitySummerGrid(canGeoms, castOptions, dimension
 
         const n = canGeoms.length
         const countByCan = Array(n).fill(0)
-        let totalCount = 0
+        let totalVotes = 0
 
         // find vote
         const gridLength = grid.x.length
@@ -31,10 +31,10 @@ export default function CastPluralitySummerGrid(canGeoms, castOptions, dimension
             voteSet[i] = vote
             const { pluralityVote } = vote
             countByCan[pluralityVote] += voteCounts
-            totalCount += voteCounts
+            totalVotes += voteCounts
         }
         return {
-            grid, voteSet, countByCan, totalCount,
+            grid, voteSet, countByCan, totalVotes,
         }
     }
 }

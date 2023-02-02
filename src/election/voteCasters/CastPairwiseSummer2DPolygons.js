@@ -37,7 +37,7 @@ export default function CastPairwiseSummer2DPolygons(canGeoms) {
                 winsPairwise[k][i] = kArea
             }
         }
-        return { winsPairwise, totalCount: totalArea }
+        return { winsPairwise, totalVotes: totalArea }
     }
 }
 function eqPlane(c1, c2) {

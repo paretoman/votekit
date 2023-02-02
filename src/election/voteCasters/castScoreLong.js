@@ -25,18 +25,18 @@ export default function castScoreLong(geometry, castOptions) {
 
     // find totalWeight of "voter area" over all the voterGeoms
     // then find normalization factor, which is just 1/totalWeight
-    let totalCount = 0
+    let totalVotes = 0
     const votesByGeom = []
     for (let i = 0; i < voterGeoms.length; i++) {
         const voterGeom = voterGeoms[i]
 
         const votesForGeom = summer.sumArea(voterGeom)
         votesByGeom[i] = votesForGeom
-        const { totalCount: totalCountForGeom } = votesForGeom
+        const { totalVotes: totalVotesForGeom } = votesForGeom
 
-        totalCount += totalCountForGeom
+        totalVotes += totalVotesForGeom
     }
-    const invTotalCount = 1 / totalCount
+    const invTotalCount = 1 / totalVotes
 
     // tally votes
     // flatten voteSets into scoreVotes
@@ -68,7 +68,7 @@ export default function castScoreLong(geometry, castOptions) {
         }
     }
     const maxScore = 1
-    const scoreFractionAverageByCan = scoreSumByCan.map((x) => x / (totalCount * maxScore))
+    const scoreFractionAverageByCan = scoreSumByCan.map((x) => x / (totalVotes * maxScore))
 
     const votes = { tallyFractions: scoreFractionAverageByCan, votesByGeom, scoreVotes, voteFractions, parties }
     return votes

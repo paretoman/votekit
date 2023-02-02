@@ -17,15 +17,15 @@ export default function AreaSummer(canGeoms) {
 
         const n = lines.length
         const countByCan = Array(n)
-        let totalCount = 0
+        let totalVotes = 0
         for (let i = 0; i < n; i++) {
             const lineSet = lines[i]
             // return area for each candidate
             const area = sumCircle(voterGeom, lineSet)
             countByCan[i] = area
-            totalCount += area
+            totalVotes += area
         }
-        return { countByCan, totalCount }
+        return { countByCan, totalVotes }
     }
 }
 

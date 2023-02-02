@@ -17,17 +17,17 @@ export default function CastRankingSummer1DIntervals(canGeoms) {
 
         const ni = intervalBorders.length - 1
         const voteCounts = Array(ni)
-        let totalCount = 0
+        let totalVotes = 0
         for (let i = 0; i < ni; i++) {
             // return count for each ranking
             const lower = intervalBorders[i]
             const upper = intervalBorders[i + 1]
             const voteCount = sumInterval(lower, upper, voterGeom)
             voteCounts[i] = voteCount
-            totalCount += voteCount
+            totalVotes += voteCount
         }
         return {
-            rankings, cansByRankList, voteCounts, totalCount, intervalBorders,
+            rankings, cansByRankList, voteCounts, totalVotes, intervalBorders,
         }
     }
 }

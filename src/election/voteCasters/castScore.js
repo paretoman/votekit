@@ -24,22 +24,22 @@ export default function castScore(geometry, castOptions) {
     const n = canGeoms.length
     const votesByGeom = []
     const scoreSumByCan = (new Array(n)).fill(0)
-    let totalCount = 0
+    let totalVotes = 0
     for (let i = 0; i < voterGeoms.length; i++) {
         const voterGeom = voterGeoms[i]
 
         const votesForGeom = summer.sumArea(voterGeom)
         votesByGeom[i] = votesForGeom
-        const { totalCount: totalCountForGeom,
+        const { totalVotes: totalVotesForGeom,
             scoreSumByCan: scoreSumByCanForGeom } = votesForGeom
 
         for (let k = 0; k < n; k++) {
             scoreSumByCan[k] += scoreSumByCanForGeom[k]
         }
-        totalCount += totalCountForGeom
+        totalVotes += totalVotesForGeom
     }
     const maxScore = 1
-    const scoreFractionAverageByCan = scoreSumByCan.map((x) => x / (totalCount * maxScore))
+    const scoreFractionAverageByCan = scoreSumByCan.map((x) => x / (totalVotes * maxScore))
 
     const votes = { tallyFractions: scoreFractionAverageByCan, parties, votesByGeom }
     return votes

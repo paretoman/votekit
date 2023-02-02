@@ -31,7 +31,7 @@ export default function castRanking(geometry, castOptions) {
     let rankings = []
     let cansByRankList = []
     const firstPreferences = Array(n).fill(0)
-    let totalCount = 0
+    let totalVotes = 0
     const votesByGeom = []
 
     // should ideally make a set of polygons for each ranking so that we avoid repeating rankings.
@@ -41,12 +41,12 @@ export default function castRanking(geometry, castOptions) {
         const { rankings: rankingsForGeom,
             cansByRankList: cansByRankListForGeom,
             voteCounts: voteCountsForGeom,
-            totalCount: totalCountForGeom } = votesForGeom
+            totalVotes: totalVotesForGeom } = votesForGeom
 
         voteCounts = voteCounts.concat(voteCountsForGeom)
         rankings = rankings.concat(rankingsForGeom)
         cansByRankList = cansByRankList.concat(cansByRankListForGeom)
-        totalCount += totalCountForGeom
+        totalVotes += totalVotesForGeom
 
         // tally first preferences
         for (let i = 0; i < cansByRankListForGeom.length; i++) {
@@ -57,8 +57,8 @@ export default function castRanking(geometry, castOptions) {
             }
         }
     })
-    const voteFractions = voteCounts.map((x) => x / totalCount)
-    const tallyFractions = firstPreferences.map((x) => x / totalCount)
+    const voteFractions = voteCounts.map((x) => x / totalVotes)
+    const tallyFractions = firstPreferences.map((x) => x / totalVotes)
 
     const votes = { rankings, cansByRankList, voteFractions, tallyFractions, parties, votesByGeom }
     return votes
