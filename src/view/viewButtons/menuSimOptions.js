@@ -9,10 +9,10 @@ export default function menuSimOptions(simOptions, menu) {
         explain: 'The simulation mode chooses the kind of analysis to do. '
         + 'Either do one election and see more detail or many and get summary stats.',
         options: [
-            { name: 'One Election',
+            { name: 'Election',
                 value: 'one',
                 explain: 'See the votes from one election.' },
-            { name: 'Sample Elections',
+            { name: 'Win Density',
                 value: 'sample',
                 explain: 'See the winning candidates as a density over many elections. '
                 + 'The prospective candidates come from a distribution.' },
