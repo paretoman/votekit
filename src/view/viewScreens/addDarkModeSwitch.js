@@ -3,7 +3,7 @@ import { buttonWidth } from '../menu/MenuItem.js'
 
 export default function addDarkModeSwitch(screenCommon, layout, viewMode) {
     const choose = new ButtonGroup({
-        label: 'Theme',
+        label: 'Theme:',
         width: buttonWidth(3),
         data: [
             { name: 'Light', value: false },
