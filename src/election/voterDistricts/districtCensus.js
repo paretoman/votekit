@@ -33,7 +33,8 @@ export default function districtCensus(districtMaker) {
                 // store data more sparsely because it is more efficient
                 // loop through all districts
                 if (overlap !== null) {
-                    census[iDistrict].push([gx, gy, polygonArea(overlap)])
+                    const gf = polygonArea(overlap)
+                    census[iDistrict].push([gx, gy, gf])
                 }
             })
         }
