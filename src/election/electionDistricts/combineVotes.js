@@ -13,11 +13,11 @@ export default function combineVotes(votesByTract, canGeoms) {
         const pwtf = statewidePairwiseTallyFractions(votesByTract, numCans)
         votes.pairwiseTallyFractions = pwtf
     }
-    if (votesByTract[0][0].cansByRank !== undefined) {
+    if (votesByTract[0][0].cansByRankList !== undefined) {
         // vrtf - votes ranked tally fractions
         const vrtf = statewideRankingTallyFractions(votesByTract)
         votes.voteFractions = vrtf.voteFractions
-        votes.cansByRank = vrtf.cansByRank
+        votes.cansByRankList = vrtf.cansByRankList
     }
     if (votesByTract[0][0].scoreVotes !== undefined) {
         // vstf - votes score tally fractions
@@ -71,16 +71,16 @@ function statewidePairwiseTallyFractions(votesByTract, numCans) {
 }
 
 function statewideRankingTallyFractions(votesByTract) {
-    // concatenate cansByRank
+    // concatenate cansByRankList
     let votePopAll = []
-    let cansByRankAll = []
+    let cansByRankListAll = []
     votesByTract.forEach(
         (row) => row.forEach(
             (votes) => {
-                const { voteFractions, cansByRank } = votes
+                const { voteFractions, cansByRankList } = votes
                 votePopAll = votePopAll
                     .concat(voteFractions)
-                cansByRankAll = cansByRankAll.concat(cansByRank)
+                cansByRankListAll = cansByRankListAll.concat(cansByRankList)
             },
         ),
     )
@@ -90,12 +90,12 @@ function statewideRankingTallyFractions(votesByTract) {
     votePopAll = votePopAll.map((t) => t * rNorm)
     return {
         voteFractions: votePopAll,
-        cansByRank: cansByRankAll,
+        cansByRankList: cansByRankListAll,
     }
 }
 
 function statewideScoreTallyFractions(votesByTract) {
-    // concatenate cansByRank
+    // concatenate cansByRankList
     let votePopAll = []
     let scoreVoteAll = []
     votesByTract.forEach(

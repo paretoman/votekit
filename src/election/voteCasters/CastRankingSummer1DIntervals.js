@@ -10,7 +10,7 @@ import castRankingFindIntervals from './castRankingFindIntervals.js'
 export default function CastRankingSummer1DIntervals(canGeoms) {
     const self = this
 
-    const { intervalBorders, rankings, cansByRank } = castRankingFindIntervals(canGeoms)
+    const { intervalBorders, rankings, cansByRankList } = castRankingFindIntervals(canGeoms)
 
     self.sumArea = function sumArea(voterGeom) {
         // find count inside each interval
@@ -27,7 +27,7 @@ export default function CastRankingSummer1DIntervals(canGeoms) {
             totalCount += voteCount
         }
         return {
-            rankings, cansByRank, voteCounts, totalCount, intervalBorders,
+            rankings, cansByRankList, voteCounts, totalCount, intervalBorders,
         }
     }
 }

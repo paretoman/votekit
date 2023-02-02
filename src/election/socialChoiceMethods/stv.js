@@ -11,7 +11,7 @@ import {
  * who ranked a candidate first, indexed by candidate.
  * @param {Number[]} votes.voteFractions - A list of fractions of voters
  * who share the same ranking.
- * @param {Number[][][]} votes.cansByRank - A list of lists of lists.
+ * @param {Number[][][]} votes.cansByRankList - A list of lists of lists.
  * The first index is a group of voters who share the same ranking.
  * The second index is the rank number.
  * The third index is for a list of candidates at that rank.
@@ -22,7 +22,7 @@ import {
  * Allocation is an array of integers that say whether a candidate is elected (1) or not (0).
  */
 export default function stv({ votes, socialChoiceOptions }) {
-    const { tallyFractions, voteFractions, cansByRank } = votes
+    const { tallyFractions, voteFractions, cansByRankList } = votes
     const { seats } = socialChoiceOptions
 
     const nk = tallyFractions.length
@@ -60,10 +60,10 @@ export default function stv({ votes, socialChoiceOptions }) {
         if (r !== 0) {
             // tally top preferences
             tally = Array(nk).fill(0)
-            for (let i = 0; i < cansByRank.length; i++) {
+            for (let i = 0; i < cansByRankList.length; i++) {
                 if (exhausted[i]) continue
                 const ar = activeRank[i]
-                const canArs = cansByRank[i][ar]
+                const canArs = cansByRankList[i][ar]
                 // candidates in the same rank each get full support
                 for (let k = 0; k < canArs.length; k++) {
                     const canAr = canArs[k]
@@ -100,10 +100,10 @@ export default function stv({ votes, socialChoiceOptions }) {
 
         // eliminate a candidate and reweight if needed
         stillIn[iEliminate] = false
-        for (let i = 0; i < cansByRank.length; i++) {
+        for (let i = 0; i < cansByRankList.length; i++) {
             if (exhausted[i]) continue
             const ar = activeRank[i]
-            const canArs = cansByRank[i][ar]
+            const canArs = cansByRankList[i][ar]
             if (canArs.includes(iEliminate)) {
                 if (reweight !== 1) {
                     weight[i] *= reweight // reweight if voter selected winner
@@ -122,7 +122,7 @@ export default function stv({ votes, socialChoiceOptions }) {
                         break
                     }
 
-                    const canArfs = cansByRank[i][arf]
+                    const canArfs = cansByRankList[i][arf]
 
                     // Only move forward if none of the candidates in this rank are still in.
                     for (let k = 0; k < canArfs.length; k++) {

@@ -26,11 +26,11 @@ export default function combineVotesByDistrict(votesByTract, canGeoms, voterDist
             const pwtf = districtPairwiseTallyFractions(votesByTract, cen, numCans)
             votes.pairwiseTallyFractions = pwtf
         }
-        if (votesByTract[0][0].cansByRank !== undefined) {
+        if (votesByTract[0][0].cansByRankList !== undefined) {
             // vrtf - votes ranked tally fractions
             const vrtf = districtRankingTallyFractions(votesByTract, cen)
             votes.voteFractions = vrtf.voteFractions
-            votes.cansByRank = vrtf.cansByRank
+            votes.cansByRankList = vrtf.cansByRankList
         }
         if (votesByTract[0][0].scoreVotes !== undefined) {
             // vstf - votes score tally fractions
@@ -80,9 +80,9 @@ function districtPairwiseTallyFractions(votesByTract, cen, numCans) {
 }
 
 function districtRankingTallyFractions(votesByTract, cen) {
-    // concatenate cansByRank
+    // concatenate cansByRankList
     let votePopAll = []
-    let cansByRankAll = []
+    let cansByRankListAll = []
 
     let gfSum = 0
     for (let j = 0; j < cen.length; j++) {
@@ -94,16 +94,16 @@ function districtRankingTallyFractions(votesByTract, cen) {
     for (let j = 0; j < cen.length; j++) {
         const [gx, gy, gf] = cen[j]
         gfSum += gf
-        const { voteFractions, cansByRank } = votesByTract[gx][gy]
+        const { voteFractions, cansByRankList } = votesByTract[gx][gy]
         const votePopNorm = voteFractions
             .map((x) => x * gf * gfNorm)
         votePopAll = votePopAll
             .concat(votePopNorm)
-        cansByRankAll = cansByRankAll.concat(cansByRank)
+        cansByRankListAll = cansByRankListAll.concat(cansByRankList)
     }
     return {
         voteFractions: votePopAll,
-        cansByRank: cansByRankAll,
+        cansByRankList: cansByRankListAll,
     }
 }
 

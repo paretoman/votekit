@@ -71,20 +71,20 @@ export default function castRankingFindPolygons(voterGeom, canGeoms) {
     }
     const cn = cells.length
     const ranking = Array(cn)
-    const cansByRank = Array(cn)
+    const cansByRankList = Array(cn)
     for (let i = 0; i < cn; i++) {
         ranking[i] = Array(n)
-        cansByRank[i] = Array(n)
+        cansByRankList[i] = Array(n)
         for (let k = 0; k < n; k++) {
-            cansByRank[i][k] = []
+            cansByRankList[i][k] = []
         }
         for (let k = 0; k < n; k++) {
             const rik = n - bordaScore[i][k]
             ranking[i][k] = rik
-            cansByRank[i][rik - 1].push(k)
+            cansByRankList[i][rik - 1].push(k)
         }
     }
-    return { cells, ranking, cansByRank }
+    return { cells, ranking, cansByRankList }
 }
 
 /**

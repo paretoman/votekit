@@ -37,7 +37,7 @@ Preferences are stored in the following ways:
 * Ranking
   * ranking: a rank for each candidate, Number[]. 0 is the best ranking, then 1, 2, etc.
   * rankings: a list of preferences. Each is a list with a rank for each candidate. Number[][]. 0 is the best ranking, then 1, 2, etc.
-  * cansByRank: a list of preferences. Each is a list indexed by rank. Each entry is a list of candidates at that ranking. Candidates are represented by index. Number[][][].
+  * cansByRankList: a list of preferences. Each is a list indexed by rank. Each entry is a list of candidates at that ranking. Candidates are represented by index. Number[][][].
 
 ## Votes
 
@@ -47,7 +47,7 @@ Some of the following is output from a vote caster as the "votes" data structure
   * Lists of preferences:
     * scoreVotes - Each preference has a score for each candidate.
     * rankings - Each preference has a rank for each candidate.
-    * cansByRank - Each preference is a list indexed by ranking. A list of candidates is at each ranking.
+    * cansByRankList - Each preference is a list indexed by ranking. A list of candidates is at each ranking.
     * Note that there is no "pluralityVotes" list of preferences because it isn't needed. It would be an identity matrix.
   * Counting preferences
     * voteFractions - the fraction of the population with a preference.
