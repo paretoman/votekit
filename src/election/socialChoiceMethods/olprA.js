@@ -54,7 +54,7 @@ export default function olprA({ votes, socialChoiceOptions }) {
         const socialChoiceOptions2 = { seats: partyAllocation[i] }
         const cansInParty = range(numCans).filter((k) => partiesByCan[k] === i)
         const tfWithinParty = cansInParty.map((k) => tallyFractions[k])
-        const totalTFInParty = tfWithinParty.reduce((p, c) => p + c)
+        const totalTFInParty = tfWithinParty.reduce((p, c) => p + c, 0)
         const fractionTfWithinParty = tfWithinParty.map((x) => x / totalTFInParty)
         // Run sntv.
         const socialChoiceInParty = sntv({
