@@ -69,7 +69,7 @@ export default function ViewEntitiesOne(entities, screen, menu, changes, simOpti
             addAllocation(electionResults)
             const { votes, socialChoiceResults } = electionResults
             candidateViewList.setCandidateWins(socialChoiceResults.allocation)
-            candidateViewList.setCandidateFractions(votes.tallyFractions)
+            candidateViewList.setCandidateFractions(votes.candidateTallies.tallyFractions)
         }
 
         self.testVoteView()

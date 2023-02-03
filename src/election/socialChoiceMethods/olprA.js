@@ -24,7 +24,8 @@ export default function olprA({ votes, socialChoiceOptions }) {
     // Make a tally for each party.
 
     // TODO: provide these variables in votes
-    const { tallyFractions, parties } = votes.candidateTallies
+    const { tallyFractions } = votes.candidateTallies
+    const { parties } = votes
     const { partiesByCan, numParties } = parties
     const numCans = tallyFractions.length
     const partyVotes = Array(numParties).fill(0)
@@ -40,7 +41,7 @@ export default function olprA({ votes, socialChoiceOptions }) {
     // Find out how many seats each party gets.
     // todo: change method
     const partyResults = sainteLague({
-        votes: { tallyFractions: partyVotes },
+        votes: { candidateTallies: { tallyFractions: partyVotes } },
         socialChoiceOptions,
         seatLimits,
     })
@@ -58,7 +59,7 @@ export default function olprA({ votes, socialChoiceOptions }) {
         const fractionTfWithinParty = tfWithinParty.map((x) => x / totalTFInParty)
         // Run sntv.
         const socialChoiceInParty = sntv({
-            votes: { tallyFractions: fractionTfWithinParty },
+            votes: { candidateTallies: { tallyFractions: fractionTfWithinParty } },
             socialChoiceOptions: socialChoiceOptions2,
         })
         const allocationInParty = socialChoiceInParty.allocation

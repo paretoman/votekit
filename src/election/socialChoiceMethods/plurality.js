@@ -11,7 +11,7 @@ import { maxIndex } from '../../utilities/jsHelpers.js'
  * @returns {Object} socialChoiceResults = {iWinner} Index of winner. Indexing according to votes[].
  */
 export default function plurality({ votes }) {
-    const iWinner = maxIndex(votes.tallyFractions)
+    const iWinner = maxIndex(votes.candidateTallies.tallyFractions)
 
     const socialChoiceResults = { iWinner }
     return socialChoiceResults

@@ -55,7 +55,7 @@ function districtTallyFractions(votesByTract, cen, numCans) {
     const totals = Array(numCans).fill(0)
     for (let j = 0; j < cen.length; j++) {
         const [gx, gy, gf] = cen[j]
-        const { tallyFractions } = votesByTract[gx][gy]
+        const { tallyFractions } = votesByTract[gx][gy].candidateTallies
         for (let k = 0; k < numCans; k++) {
             totals[k] += tallyFractions[k] * gf
         }
@@ -73,7 +73,7 @@ function districtPairwiseTallyFractions(votesByTract, cen, numCans) {
     }
     for (let j = 0; j < cen.length; j++) {
         const [gx, gy, gf] = cen[j]
-        const { pairwiseTallyFractions } = votesByTract[gx][gy]
+        const { pairwiseTallyFractions } = votesByTract[gx][gy].pairwiseTallies
         for (let i = 0; i < numCans; i++) {
             for (let k = 0; k < numCans; k++) {
                 pTotals[i][k] += pairwiseTallyFractions[i][k] * gf
@@ -100,7 +100,7 @@ function districtRankingTallyFractions(votesByTract, cen) {
     for (let j = 0; j < cen.length; j++) {
         const [gx, gy, gf] = cen[j]
         gfSum += gf
-        const { voteFractions, cansByRankList } = votesByTract[gx][gy]
+        const { voteFractions, cansByRankList } = votesByTract[gx][gy].preferenceTallies
         const votePopNorm = voteFractions
             .map((x) => x * gf * gfNorm)
         votePopAll = votePopAll
@@ -128,7 +128,7 @@ function districtScoreTallyFractions(votesByTract, cen) {
     for (let j = 0; j < cen.length; j++) {
         const [gx, gy, gf] = cen[j]
         gfSum += gf
-        const { voteFractions, scoreVotes } = votesByTract[gx][gy]
+        const { voteFractions, scoreVotes } = votesByTract[gx][gy].preferenceTallies
         const votePopNorm = voteFractions
             .map((x) => x * gf * gfNorm)
         votePopAll = votePopAll

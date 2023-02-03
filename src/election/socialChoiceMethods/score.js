@@ -8,7 +8,7 @@
  * @returns {Number} iWinner - Index of winner. Indexing according to votes[].
  */
 export default function score({ votes }) {
-    const max = Math.max(...votes.tallyFractions)
+    const max = Math.max(...votes.candidateTallies.tallyFractions)
     const iWinner = votes.candidateTallies.tallyFractions.indexOf(max)
 
     const results = { iWinner }

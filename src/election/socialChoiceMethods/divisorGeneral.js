@@ -48,7 +48,7 @@ export default function divisorGeneral({
     // Remove the threshold if there are no parties past the threshold.
     // Count the number of parties with positive populations.
     if (makeAdjustment) {
-        populations = copyArrayShallow(votes.tallyFractions)
+        populations = copyArrayShallow(votes.candidateTallies.tallyFractions)
         positivePopulations = populations.map(
             (p) => ((p === 0) ? 0 : 1),
         )

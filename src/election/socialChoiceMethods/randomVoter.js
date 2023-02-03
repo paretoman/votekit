@@ -10,7 +10,7 @@ import getCDF, { randomIndexFromCDF } from '../../utilities/mathUtilities.js'
  * @returns {Number} socialChoiceResults.iWinner - Index of winner. Indexing according to votes[].
  */
 export default function randomVoter({ votes }) {
-    const cdf = getCDF(votes.tallyFractions)
+    const cdf = getCDF(votes.candidateTallies.tallyFractions)
     const iWinner = randomIndexFromCDF(cdf)
     const socialChoiceResults = { iWinner }
     return socialChoiceResults
