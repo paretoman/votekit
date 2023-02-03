@@ -1,6 +1,6 @@
 /** @module */
 
-import { equidistantLine } from './CastPluralitySummer2DQuadrature.js'
+import { equidistantLine } from '../plurality/CastPluralitySummer2DQuadrature.js'
 /**
  * Sum area of voter distributions to tally the votes.
  * @param {Object[]} canGeoms

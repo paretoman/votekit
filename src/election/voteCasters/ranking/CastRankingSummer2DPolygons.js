@@ -1,6 +1,6 @@
 /** @module */
 
-import { polygonArea } from '../../lib/snowpack/build/snowpack/pkg/d3-polygon.js'
+import { polygonArea } from '../../../lib/snowpack/build/snowpack/pkg/d3-polygon.js'
 import castRankingFindPolygons from './castRankingFindPolygons.js'
 
 /**

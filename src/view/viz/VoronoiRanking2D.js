@@ -1,6 +1,6 @@
 /** @module */
 
-import castRankingFindPolygons from '../../election/voteCasters/castRankingFindPolygons.js'
+import castRankingFindPolygons from '../../election/voteCasters/ranking/castRankingFindPolygons.js'
 import colorBlender, { rgbToString } from './colorBlender.js'
 
 /**

@@ -1,9 +1,9 @@
 /** @module */
 
-import { range } from '../../utilities/jsHelpers.js'
-import castRankingTestVote from './castRankingTestVote.js'
-import makeGrid1D from './makeGrid1D.js'
-import makeGrid2D from './makeGrid2D.js'
+import { range } from '../../../utilities/jsHelpers.js'
+import castRankingTestVote from '../ranking/castRankingTestVote.js'
+import makeGrid1D from '../makeGrid1D.js'
+import makeGrid2D from '../makeGrid2D.js'
 
 /**
  * Tally votes.

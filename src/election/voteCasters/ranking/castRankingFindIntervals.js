@@ -1,6 +1,6 @@
 /** @module */
 
-import { copyArrayShallow, range } from '../../utilities/jsHelpers.js'
+import { copyArrayShallow, range } from '../../../utilities/jsHelpers.js'
 
 /**
  * Find the intervals over which voters share a ranking.

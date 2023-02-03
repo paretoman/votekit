@@ -1,6 +1,6 @@
 /** @module */
 
-import { minMax } from '../../utilities/jsHelpers.js'
+import { minMax } from '../../../utilities/jsHelpers.js'
 
 /**
  * Vote for the closest candidate.

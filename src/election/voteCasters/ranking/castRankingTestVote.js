@@ -1,5 +1,5 @@
 /** @module */
-import { range } from '../../utilities/jsHelpers.js'
+import { range } from '../../../utilities/jsHelpers.js'
 
 /**
  * Vote for the closest candidate.

@@ -1,8 +1,8 @@
 /** @module */
 
 import castScoreTestVote from './castScoreTestVote.js'
-import makeGrid1D from './makeGrid1D.js'
-import makeGrid2D from './makeGrid2D.js'
+import makeGrid1D from '../makeGrid1D.js'
+import makeGrid2D from '../makeGrid2D.js'
 
 /**
  * Tally votes.

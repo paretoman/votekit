@@ -1,7 +1,7 @@
 /** @module */
 
-import { copyArrayShallow } from '../../utilities/jsHelpers.js'
-import { equidistantLine } from './CastPluralitySummer2DQuadrature.js'
+import { copyArrayShallow } from '../../../utilities/jsHelpers.js'
+import { equidistantLine } from '../plurality/CastPluralitySummer2DQuadrature.js'
 import splitConvex from './splitConvex.js'
 
 /**

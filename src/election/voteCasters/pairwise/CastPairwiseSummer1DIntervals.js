@@ -1,6 +1,6 @@
 /** @module */
 
-import { sumBlock, sumGaussian } from './CastPluralitySummer1DIntervals.js'
+import { sumBlock, sumGaussian } from '../plurality/CastPluralitySummer1DIntervals.js'
 /**
  * Sum density of voter distributions along splits.
  * @param {Object[]} canGeoms

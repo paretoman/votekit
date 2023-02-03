@@ -1,6 +1,6 @@
 /** @module */
 
-import { sumBlock, sumGaussian } from './CastPluralitySummer1DIntervals.js'
+import { sumBlock, sumGaussian } from '../plurality/CastPluralitySummer1DIntervals.js'
 import castRankingFindIntervals from './castRankingFindIntervals.js'
 /**
  * Sum density of voter distributions within intervals to tally the votes.

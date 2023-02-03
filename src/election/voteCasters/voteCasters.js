@@ -1,13 +1,13 @@
 /** @module */
 
-import castPlurality from './castPlurality.js'
-import castScore from './castScore.js'
-import castScoreLong from './castScoreLong.js'
-import castRanking from './castRanking.js'
-import castPluralityTestVote from './castPluralityTestVote.js'
-import castScoreTestVote from './castScoreTestVote.js'
-import castRankingTestVote from './castRankingTestVote.js'
-import castPairwise from './castPairwise.js'
+import castPlurality from './plurality/castPlurality.js'
+import castScore from './score/castScore.js'
+import castScoreLong from './score/castScoreLong.js'
+import castRanking from './ranking/castRanking.js'
+import castPluralityTestVote from './plurality/castPluralityTestVote.js'
+import castScoreTestVote from './score/castScoreTestVote.js'
+import castRankingTestVote from './ranking/castRankingTestVote.js'
+import castPairwise from './pairwise/castPairwise.js'
 
 /**
  * a collection of ways to cast votes
