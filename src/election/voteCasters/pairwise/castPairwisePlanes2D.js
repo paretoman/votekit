@@ -3,42 +3,36 @@
 import { equidistantLine } from '../plurality/CastPluralitySummer2DQuadrature.js'
 /**
  * Sum area of voter distributions to tally the votes.
- * @param {Object[]} canGeoms
- * @constructor
  */
-export default function CastPairwiseSummer2DPolygons(canGeoms) {
-    const self = this
+export default function castPairwisePlanes2D({ voterGeom, canGeoms }) {
+    // draw lines across shape of voterGeom
 
-    self.sumArea = function sumArea(voterGeom) {
-        // draw lines across shape of voterGeom
+    const totalArea = calcVoterTotalArea(voterGeom)
 
-        const totalArea = calcVoterTotalArea(voterGeom)
+    const n = canGeoms.length
 
-        const n = canGeoms.length
+    const winsPairwise = Array(n).fill(0)
+    for (let i = 0; i < n; i++) {
+        winsPairwise[i] = Array(n).fill(0)
+    }
 
-        const winsPairwise = Array(n).fill(0)
-        for (let i = 0; i < n; i++) {
-            winsPairwise[i] = Array(n).fill(0)
-        }
-
-        for (let i = 0; i < n - 1; i++) {
-            for (let k = i + 1; k < n; k++) {
+    for (let i = 0; i < n - 1; i++) {
+        for (let k = i + 1; k < n; k++) {
             // find split plane
 
-                const plane = eqPlane(canGeoms[i], canGeoms[k])
+            const plane = eqPlane(canGeoms[i], canGeoms[k])
 
-                const dist = calcDist(plane, voterGeom)
+            const dist = calcDist(plane, voterGeom)
 
-                // find winsPairwise for i and k
-                const iArea = calcArea(dist, voterGeom, totalArea)
-                const kArea = totalArea - iArea
+            // find winsPairwise for i and k
+            const iArea = calcArea(dist, voterGeom, totalArea)
+            const kArea = totalArea - iArea
 
-                winsPairwise[i][k] = iArea
-                winsPairwise[k][i] = kArea
-            }
+            winsPairwise[i][k] = iArea
+            winsPairwise[k][i] = kArea
         }
-        return { winsPairwise, totalVotes: totalArea }
     }
+    return { winsPairwise, totalVotes: totalArea }
 }
 function eqPlane(c1, c2) {
     const { A, b } = equidistantLine(c1, c2)

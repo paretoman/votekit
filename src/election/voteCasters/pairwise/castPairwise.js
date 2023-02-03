@@ -1,8 +1,9 @@
 /** @module */
 
-import CastPairwiseSummer1DIntervals from './CastPairwiseSummer1DIntervals.js'
-import CastPairwiseSummer2DPolygons from './CastPairwiseSummer2DPolygons.js'
-import CastPairwiseSummerGrid from './CastPairwiseSummerGrid.js'
+import makeIntervals1D from './makeIntervals1D.js'
+import castPairwisePlanes2D from './castPairwisePlanes2D.js'
+import castPairwiseIntervals1D from './CastPairwiseIntervals1D.js'
+import castPairwiseGrid from './CastPairwiseGrid.js'
 
 /**
  * Vote for one.
@@ -17,13 +18,14 @@ import CastPairwiseSummerGrid from './CastPairwiseSummerGrid.js'
 export default function castPairwise(geometry, castOptions) {
     const { canGeoms, voterGeoms, dimensions, parties } = geometry
 
-    const SummerLines = (dimensions === 1)
-        ? CastPairwiseSummer1DIntervals
-        : CastPairwiseSummer2DPolygons
     const someGaussian2D = voterGeoms.some((v) => v.densityProfile === 'gaussian') && dimensions === 2
 
-    const Summer = (someGaussian2D) ? CastPairwiseSummerGrid : SummerLines
-    const summer = new Summer(canGeoms, castOptions, dimensions)
+    const precomputedCans = (dimensions === 2 || someGaussian2D) ? {} : makeIntervals1D(canGeoms)
+
+    const castRegions = (dimensions === 1)
+        ? castPairwiseIntervals1D
+        : castPairwisePlanes2D
+    const cast = (someGaussian2D) ? castPairwiseGrid : castRegions
 
     // get fraction of votes for each candidate so we can summarize results
     let totalVotes = 0
@@ -37,7 +39,7 @@ export default function castPairwise(geometry, castOptions) {
     }
     const votesByGeom = []
     voterGeoms.forEach((voterGeom, g) => {
-        const votesForGeom = summer.sumArea(voterGeom)
+        const votesForGeom = cast({ voterGeom, canGeoms, precomputedCans, castOptions, dimensions })
         votesByGeom[g] = votesForGeom
         const { winsPairwise: winsPairwiseForGeom,
             totalVotes: totalVotesForGeom } = votesForGeom
