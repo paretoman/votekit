@@ -98,22 +98,16 @@ Some of the following object is output from a vote caster as the "votes" data st
     * scoreVotes - Each preference has a score for each candidate.
     * rankings - Each preference has a rank for each candidate.
     * cansByRankList - Each preference is a list indexed by ranking. A list of candidates is at each ranking.
-    * There is no "pluralityVotes" list of preferences because it isn't needed. It would be an identity matrix.
-  
+    * There is no "pluralityVotes" list of preferences because it isn't needed. It would be an identity matrix.  
 * candidateTallies:
-  * tallyFractions - a fraction for each candidate.
-  
+  * tallyFractions - a fraction for each candidate.  
 * pairwiseTallies:
-
   * pairwiseTallyFractions - a fraction for each pair of candidates.
-
 * votesByGeom:
   * Vote data for each voter geometry. A list of votesForGeom. 
   * votesForGeom: Vote data for just one voter geometry. votesForGeom parts may include one of the following, depending on the vote caster:
     * { ranking, cells }
     * { ranking, intervalBorders }
-    * { grid, voteSet, voterGeom }
-  
+    * { grid, voteSet, voterGeom }  
 * parties: { partiesByCan, numParties }
-
   
