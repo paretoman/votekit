@@ -35,7 +35,7 @@ export default function ElectionSampler() {
         // add more points
 
         const {
-            voterGeoms, canGeoms, dimensions, voterDistricts,
+            voterGeoms, canGeoms, dimensions, districtGeometry,
         } = geometry
 
         if (voterGeoms.length === 0) return { pointsChanged: false }
@@ -73,7 +73,7 @@ export default function ElectionSampler() {
             }
 
             const sampleGeometry = {
-                voterGeoms, canGeoms: sCanGeoms, parties: { partiesByCan: sParties, numParties: 10 }, dimensions, voterDistricts,
+                voterGeoms, canGeoms: sCanGeoms, parties: { partiesByCan: sParties, numParties: 10 }, dimensions, districtGeometry,
             }
 
             const electionResults = election(sampleGeometry, electionOptions)

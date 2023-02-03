@@ -8,7 +8,7 @@ import { copyObjectShallow } from '../../utilities/jsHelpers.js'
  * @param {Screen} screen
  * @constructor
  */
-export default function VoterDistricts(voterShapeList, changes, electionOptions) {
+export default function DistrictGeometry(voterShapeList, changes, electionOptions) {
     const self = this
 
     /** Number of districts */

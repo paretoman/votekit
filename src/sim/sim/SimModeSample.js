@@ -12,10 +12,10 @@ import getGeometry from './getGeometry.js'
  * @param {Menu} menu
  * @param {ElectionSample} electionSample
  * @param {ElectionSampler} electionSampler
- * @param {VoterDistricts} voterDistricts
+ * @param {DistrictGeometry} districtGeometry
  * @constructor
  */
-export default function SimModeSample(pub, entities, changes, voterDistricts, simOptions, electionOptions) {
+export default function SimModeSample(pub, entities, changes, districtGeometry, simOptions, electionOptions) {
     const self = this
 
     const { candidateDnList, voterShapeList } = entities
@@ -30,10 +30,10 @@ export default function SimModeSample(pub, entities, changes, voterDistricts, si
 
         electionOptions.update()
 
-        if (electionOptions.useDistricts) voterDistricts.update()
+        if (electionOptions.useDistricts) districtGeometry.update()
         canDnSampler.update()
 
-        const geometry = getGeometry(voterShapeList, candidateDnList, simOptions, electionOptions, voterDistricts)
+        const geometry = getGeometry(voterShapeList, candidateDnList, simOptions, electionOptions, districtGeometry)
 
         const samplingResult = electionSampler.update(geometry, canDnSampler.sampler, changes, electionOptions)
         const simData = { samplingResult }

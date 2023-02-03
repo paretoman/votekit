@@ -2,7 +2,7 @@ import Changes from './Changes.js'
 import Commander from '../command/Commander.js'
 import SimOptions from './SimOptions.js'
 import ElectionOptions from '../../election/election/ElectionOptions.js'
-import VoterDistricts from '../../election/districtGeometry/districtGeometry.js'
+import DistrictGeometry from '../../election/districtGeometry/districtGeometry.js'
 import Entities from './Entities.js'
 import SimMode from './SimMode.js'
 import addDefaultEntities from './addDefaultEntities.js'
@@ -17,9 +17,9 @@ export default function Sim(comMessenger) {
     const electionOptions = new ElectionOptions(changes, simOptions, commander)
 
     const entities = new Entities(changes, commander)
-    const voterDistricts = new VoterDistricts(entities.voterShapeList, changes, electionOptions)
+    const districtGeometry = new DistrictGeometry(entities.voterShapeList, changes, electionOptions)
     const pub = new Publisher()
-    const simMode = new SimMode(pub, entities, voterDistricts, changes, simOptions, electionOptions)
+    const simMode = new SimMode(pub, entities, districtGeometry, changes, simOptions, electionOptions)
 
     function init(config) {
         addDefaultEntities(entities)
@@ -33,6 +33,6 @@ export default function Sim(comMessenger) {
     }
 
     return {
-        changes, commander, simOptions, electionOptions, entities, voterDistricts, simMode, pub, init, update,
+        changes, commander, simOptions, electionOptions, entities, districtGeometry, simMode, pub, init, update,
     }
 }

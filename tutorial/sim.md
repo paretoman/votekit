@@ -21,6 +21,6 @@ Sim is composed of components.
 - ElectionOptions are options inside the election and include: socialChoiceMethod, voteCasterName, number of districts and two sub categories:
   - CastOptions are options for the vote caster.
   - SocialChoiceOptions are options for the social choice function.
-- VoterDistricts creates geometries for voter districts. It does so by providing a modification of voter positions over a geographical space in tracts.
+- DistrictGeometry creates geometries for voter districts. It does so by providing a modification of voter positions over a geographical space in tracts.
 - [SimMode](simMode.md) is where the election happens and handles the processing of inputs geometries, options, and changes to output data structures.
 - Pub allows the ViewMode to attach to the SimMode. 
