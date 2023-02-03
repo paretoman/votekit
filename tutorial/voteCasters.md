@@ -10,7 +10,7 @@ VoteCasters: Votes are cast.
 ## VoteCasters
 
 * Voter geometries cast their votes. 
-* A density of a population of voters is summed. A 2D spatial model is used to make the decision of how to vote or who to vote for. 
+* A density of a population of voters is summed. A 1D or 2D spatial model is used to make the decision of how to vote or who to vote for. 
 * The vote is aggregated into a set that contains the information needed to elect, explain, and visualize.
 * There are two ways to cast.
   1. By points.
@@ -22,18 +22,26 @@ VoteCasters: Votes are cast.
 These are the three ways to state a preference.
 
 * Plurality: a choice of a candidate.
-* Scores: a score for each candidate.
-* Ranking: a rank for each candidate. No rankings are skipped, but skipping is allowed. Equal ranks allowed.
+* Scores: a score for each candidate. 
+* Ranking: a rank for each candidate.  
 
 A preference is stored as data in the following ways:
 
 * Plurality
-  * pluralityVote: a candidate, the index of the candidate.
+  * pluralityVote: the chosen candidate. 
+    * A candidate is represented as an integer from 0 to a max. The max is the number of candidates minus 1.
+    * type: Number
 * Scores
-  * scoreVote: a score for each candidate, any number, Number[].
-    * Right now, we're just using scores between 0 to 1. In the future, scores above 1 might be used.
+  * scoreVote: an array of scores, indexed by candidate. 
+    * A score is a number between 0 and 1. In the future, maybe integers between 0 and a maximum score.
+    * type: Number[], Number array
+    * length: number of candidates
 * Ranking
-  * ranking: a ranking for each candidate, Number[]. 0 is the best ranking, then 1, 2, etc.
+  * ranking: an array of ranks, indexed by candidate. 
+    * A rank of 0 is the best ranking, then 1, 2, and so on. No rankings are skipped, but skipping is allowed. Equal ranks are allowed.
+    * type: Number[], Number array
+    * length: number of candidates
+  * cansByRank: an array of candidates lists, indexed by rank. Candidates can share a rank. Number[][][].
 
 ## Counting
 
@@ -59,8 +67,8 @@ Preferences and how many votes share them.
   * Scores
     * scoreVotes: a list of scoreVote preferences, Number[][]. Each preference has a score for each candidate.
   * Ranking
-    * rankings: a list of preferences. Each is a list with a rank for each candidate. Number[][]. 0 is the best ranking, then 1, 2, etc.
-    * cansByRankList: a list of preferences. Each is a list indexed by rank. Each entry is a list of candidates at that ranking. Candidates are represented by index. Number[][][].
+    * rankings: a list of preferences. Each preference has a rank for each candidate. Number[][]. 0 is the best ranking, then 1, 2, etc.
+    * cansByRankList: a list of preferences. Each preference is a list indexed by rank. Each entry is a list of candidates at that ranking. Candidates are represented by index. Number[][][].
 
 ### Tallies by Candidate
 
