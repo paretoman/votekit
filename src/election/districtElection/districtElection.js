@@ -13,7 +13,7 @@ import sumAllocations from './sumAllocations.js'
  * The point is moved by simplex noise to create distinct districts.
  * All the voter groups share the same voter basis.
  */
-export default function electionDistrictsRun(geometry, electionOptions) {
+export default function districtElection(geometry, electionOptions) {
     const { canGeoms, voterDistricts } = geometry
 
     const votesByTract = castVotesByTract(geometry, electionOptions)

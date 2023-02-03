@@ -10,9 +10,9 @@ An election is run on the geometry to generate output data structures. It handle
 
 ## Election
 
-Election runs one of two election functions: electionRun or electionDistrictsRun.
+Election runs one of two election functions: electionRun or districtElection.
 
-The function electionDistrictsRun compiles district and statewide votes and results.
+The function districtElection compiles district and statewide votes and results.
 
 Election may be called by [ElectionSampler](electionSampler.md) to run multiple elections.
 

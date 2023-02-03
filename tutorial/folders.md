@@ -19,7 +19,7 @@ election
 
 - voteCasters
 - election
-- electionDistricts
+- districtElection
 - socialChoiceMethods
 
 sim

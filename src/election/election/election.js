@@ -1,6 +1,6 @@
 /** @module */
 
-import electionDistrictsRun from '../electionDistricts/electionDistrictsRun.js'
+import districtElection from '../districtElection/districtElection.js'
 import electionRun from './electionRun.js'
 
 /**
@@ -13,7 +13,7 @@ export default function election(geometry, electionOptions) {
 
     let electionResults
     if (electionOptions.useDistricts) {
-        electionResults = electionDistrictsRun(geometry, electionOptions)
+        electionResults = districtElection(geometry, electionOptions)
     } else {
         electionResults = electionRun(geometry, electionOptions)
     }
