@@ -24,7 +24,7 @@ export default function olprA({ votes, socialChoiceOptions }) {
     // Make a tally for each party.
 
     // TODO: provide these variables in votes
-    const { tallyFractions, parties } = votes
+    const { tallyFractions, parties } = votes.candidateTallies
     const { partiesByCan, numParties } = parties
     const numCans = tallyFractions.length
     const partyVotes = Array(numParties).fill(0)

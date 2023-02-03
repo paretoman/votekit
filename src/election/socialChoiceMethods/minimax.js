@@ -11,7 +11,7 @@ import { range } from '../../utilities/jsHelpers.js'
  * Indexing according to candidates in votes.tallyFractions.
  */
 export default function minimax({ votes }) {
-    const { pairwiseTallyFractions } = votes
+    const { pairwiseTallyFractions } = votes.pairwiseTallies
     const n = pairwiseTallyFractions.length
 
     // make a list of number of losses

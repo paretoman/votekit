@@ -22,7 +22,7 @@ import {
  * Allocation is an array of integers that say whether a candidate is elected (1) or not (0).
  */
 export default function stv({ votes, socialChoiceOptions }) {
-    const { tallyFractions, voteFractions, cansByRankList } = votes
+    const { tallyFractions, voteFractions, cansByRankList } = votes.preferenceTallies
     const { seats } = socialChoiceOptions
 
     const nk = tallyFractions.length

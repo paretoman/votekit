@@ -11,7 +11,7 @@ export default function addAllocation(electionResults) {
     const { socialChoiceResults, votes } = electionResults
     const { allocation } = socialChoiceResults
     if (allocation === undefined) {
-        const { tallyFractions } = votes
+        const { tallyFractions } = votes.candidateTallies
         const { iWinner } = socialChoiceResults
         const nk = tallyFractions.length
         const wins = Array(nk).fill(0)

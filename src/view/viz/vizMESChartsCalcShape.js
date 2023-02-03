@@ -27,9 +27,7 @@ export default function vizMESChartsCalcShape(electionResults, screen, budgetDat
     const budgetShapesbyGeom = []
 
     for (let g = 0; g < nGeoms; g++) {
-        const {
-            grid, voteIndex, voterGeom,
-        } = votesByGeom[g]
+        const { grid, voteIndex, voterGeom } = votesByGeom[g]
         const { w, densityProfile } = voterGeom
         const xCenter = voterGeom.x
 

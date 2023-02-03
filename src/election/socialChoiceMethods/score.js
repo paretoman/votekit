@@ -9,7 +9,7 @@
  */
 export default function score({ votes }) {
     const max = Math.max(...votes.tallyFractions)
-    const iWinner = votes.tallyFractions.indexOf(max)
+    const iWinner = votes.candidateTallies.tallyFractions.indexOf(max)
 
     const results = { iWinner }
     return results

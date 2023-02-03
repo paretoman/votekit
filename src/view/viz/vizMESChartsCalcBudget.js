@@ -9,7 +9,8 @@ export default function vizMESChartsCalcBudget(electionResults) {
     const { socialChoiceResults, votes, colorRGBAOfCandidates } = electionResults
     const { winnersByRound, winnerMaxCostPerScoreByRound } = socialChoiceResults.explanation
 
-    const { scoreVotes, votesByGeom } = votes
+    const { scoreVotes } = votes.preferenceTallies
+    const { votesByGeom } = votes
 
     const nRounds = winnersByRound.length
     const nGeoms = votesByGeom.length

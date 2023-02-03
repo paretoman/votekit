@@ -29,7 +29,7 @@ function colorTracts(votesByTract, canList) {
     const colorByTract = votesByTract.map(
         (row) => row.map(
             (votes) => {
-                const { tallyFractions } = votes
+                const { tallyFractions } = votes.candidateTallies
                 const color = colorBlender(tallyFractions, colorSet)
                 return color
             },
@@ -69,7 +69,7 @@ function colorDistrictWins(scResultsByDistrict, canList, electionOptions) {
  */
 function colorDistrictVote(votesByDistrict, canList) {
     const colorOfVoteByDistrict = votesByDistrict.map((votes) => {
-        const { tallyFractions } = votes
+        const { tallyFractions } = votes.candidateTallies
         const colorSet = canList.map((can) => can.colorRGBA)
         const color = rgbToString(colorBlender(tallyFractions, colorSet))
         return color

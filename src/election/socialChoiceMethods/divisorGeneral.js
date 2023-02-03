@@ -20,7 +20,7 @@ export default function divisorGeneral({
     const { seats, threshold } = socialChoiceOptions
 
     // find out how many parties pass the threshold
-    let populations = votes.tallyFractions.map(
+    let populations = votes.candidateTallies.tallyFractions.map(
         (p) => ((p < threshold) ? 0 : p),
     )
     let positivePopulations = populations.map(
@@ -71,7 +71,7 @@ export default function divisorGeneral({
             (a, b) => b - a,
         )
         const minPopulation = populationsSorted[seats - 1]
-        const pops2 = votes.tallyFractions
+        const pops2 = votes.candidateTallies.tallyFractions
 
         // todo: consider ties
         const allocation = pops2.map(

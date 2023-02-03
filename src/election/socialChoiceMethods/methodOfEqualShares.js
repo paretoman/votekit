@@ -24,7 +24,7 @@ import { range } from '../../utilities/jsHelpers.js'
  * Allocation is an array of integers that say whether a candidate is elected (1) or not (0).
  */
 export default function methodOfEqualShares({ votes, socialChoiceOptions }) {
-    const { scoreVotes, voteFractions } = votes
+    const { scoreVotes, voteFractions } = votes.preferenceTallies
 
     const { seats } = socialChoiceOptions
 

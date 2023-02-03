@@ -35,7 +35,7 @@ function statewideTallyFractions(votesByTract, numCans) {
     votesByTract.forEach(
         (row) => row.forEach(
             (votes) => {
-                const { tallyFractions } = votes
+                const { tallyFractions } = votes.candidateTallies
                 for (let k = 0; k < numCans; k++) {
                     totals[k] += tallyFractions[k]
                 }
@@ -56,7 +56,7 @@ function statewidePairwiseTallyFractions(votesByTract, numCans) {
     votesByTract.forEach(
         (row) => row.forEach(
             (votes) => {
-                const { pairwiseTallyFractions } = votes
+                const { pairwiseTallyFractions } = votes.pairwiseTallies
                 for (let i = 0; i < numCans; i++) {
                     for (let k = 0; k < numCans; k++) {
                         pTotals[i][k] += pairwiseTallyFractions[i][k]
@@ -77,7 +77,7 @@ function statewideRankingTallyFractions(votesByTract) {
     votesByTract.forEach(
         (row) => row.forEach(
             (votes) => {
-                const { voteFractions, cansByRankList } = votes
+                const { voteFractions, cansByRankList } = votes.preferenceTallies
                 votePopAll = votePopAll
                     .concat(voteFractions)
                 cansByRankListAll = cansByRankListAll.concat(cansByRankList)
@@ -101,7 +101,7 @@ function statewideScoreTallyFractions(votesByTract) {
     votesByTract.forEach(
         (row) => row.forEach(
             (votes) => {
-                const { voteFractions, scoreVotes } = votes
+                const { voteFractions, scoreVotes } = votes.preferenceTallies
                 votePopAll = votePopAll
                     .concat(voteFractions)
                 scoreVoteAll = scoreVoteAll.concat(scoreVotes)
