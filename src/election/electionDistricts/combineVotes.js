@@ -3,27 +3,33 @@ export default function combineVotes(votesByTract, canGeoms) {
 
     const votes = {}
 
-    if (votesByTract[0][0].tallyFractions !== undefined) {
+    if (votesByTract[0][0].candidateTallies !== undefined) {
         // tf - tally fractions
         const tf = statewideTallyFractions(votesByTract, numCans)
-        votes.tallyFractions = tf
+        votes.candidateTallies = { tallyFractions: tf }
     }
-    if (votesByTract[0][0].pairwiseTallyFractions !== undefined) {
+    if (votesByTract[0][0].pairwiseTallies !== undefined) {
         // pwtf - pairwise tally fractions
         const pwtf = statewidePairwiseTallyFractions(votesByTract, numCans)
-        votes.pairwiseTallyFractions = pwtf
+        votes.pairwiseTallies = { pairwiseTallyFractions: pwtf }
     }
-    if (votesByTract[0][0].cansByRankList !== undefined) {
+    if (votesByTract[0][0].preferenceTallies !== undefined
+        && votesByTract[0][0].preferenceTallies.cansByRankList !== undefined) {
         // vrtf - votes ranked tally fractions
         const vrtf = statewideRankingTallyFractions(votesByTract)
-        votes.voteFractions = vrtf.voteFractions
-        votes.cansByRankList = vrtf.cansByRankList
+        votes.preferenceTallies = {
+            voteFractions: vrtf.voteFractions,
+            cansByRankList: vrtf.cansByRankList,
+        }
     }
-    if (votesByTract[0][0].scoreVotes !== undefined) {
+    if (votesByTract[0][0].preferenceTallies !== undefined
+        && votesByTract[0][0].preferenceTallies.scoreVotes !== undefined) {
         // vstf - votes score tally fractions
         const vstf = statewideScoreTallyFractions(votesByTract)
-        votes.voteFractions = vstf.voteFractions
-        votes.scoreVotes = vstf.scoreVotes
+        votes.preferenceTallies = {
+            voteFractions: vstf.voteFractions,
+            scoreVotes: vstf.scoreVotes,
+        }
     }
     votes.parties = votesByTract[0][0].parties
     return votes

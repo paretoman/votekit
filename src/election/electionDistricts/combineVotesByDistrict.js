@@ -15,28 +15,34 @@ export default function combineVotesByDistrict(votesByTract, canGeoms, voterDist
 
         const votes = {}
 
-        if (votesByTract[0][0].tallyFractions !== undefined) {
+        if (votesByTract[0][0].candidateTallies !== undefined) {
             // tf - tally fractions
             const tf = districtTallyFractions(votesByTract, cen, numCans)
-            votes.tallyFractions = tf
+            votes.candidateTallies = { tallyFractions: tf }
         }
 
-        if (votesByTract[0][0].pairwiseTallyFractions !== undefined) {
+        if (votesByTract[0][0].pairwiseTallies !== undefined) {
             // pwtf - pairwise tally fractions
             const pwtf = districtPairwiseTallyFractions(votesByTract, cen, numCans)
-            votes.pairwiseTallyFractions = pwtf
+            votes.pairwiseTallies = { pairwiseTallyFractions: pwtf }
         }
-        if (votesByTract[0][0].cansByRankList !== undefined) {
+        if (votesByTract[0][0].preferenceTallies !== undefined
+            && votesByTract[0][0].preferenceTallies.cansByRankList !== undefined) {
             // vrtf - votes ranked tally fractions
             const vrtf = districtRankingTallyFractions(votesByTract, cen)
-            votes.voteFractions = vrtf.voteFractions
-            votes.cansByRankList = vrtf.cansByRankList
+            votes.preferenceTallies = {
+                voteFractions: vrtf.voteFractions,
+                cansByRankList: vrtf.cansByRankList,
+            }
         }
-        if (votesByTract[0][0].scoreVotes !== undefined) {
+        if (votesByTract[0][0].preferenceTallies !== undefined
+            && votesByTract[0][0].preferenceTallies.scoreVotes !== undefined) {
             // vstf - votes score tally fractions
             const vstf = districtScoreTallyFractions(votesByTract, cen)
-            votes.voteFractions = vstf.voteFractions
-            votes.scoreVotes = vstf.scoreVotes
+            votes.preferenceTallies = {
+                voteFractions: vstf.voteFractions,
+                scoreVotes: vstf.scoreVotes,
+            }
         }
         votes.parties = votesByTract[0][0].parties
         return votes
