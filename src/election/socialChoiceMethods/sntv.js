@@ -5,7 +5,8 @@ import { range } from '../../utilities/jsHelpers.js'
 /**
  * Single Transferable Vote
  * @param {Object} votes
- * @param {Number[]} votes.tallyFractions - A list of fractions of voters
+ * @param {Object} votes.candidateTallies - vote tallies indexed by candidate
+ * @param {Number[]} votes.candidateTallies.tallyFractions - A list of fractions of voters
  * who picked a candidate, indexed by candidate.
  * @param {Object} socialChoiceOptions
  * @param {number} socialChoiceOptions.seats - The number of seats to fill.

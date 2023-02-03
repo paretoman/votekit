@@ -5,10 +5,11 @@ import { range } from '../../utilities/jsHelpers.js'
 /**
  * Disregard the weakest pairwise defeat until one candidate is unbeaten.
  * @param {Object} votes
- * @param {Number[][]} votes.pairwiseTallyFractions - A list of fractions of voters
+ * @param {Object} votes.pairwiseTallies - pairwise tallies
+ * @param {Number[][]} votes.pairwiseTallies.pairwiseTallyFractions - A list of fractions of voters
  * who preferred candidate i over k, indexed by [i][k].
  * @returns {{iWinner:Number}} iWinner - Index of winner.
- * Indexing according to candidates in votes.tallyFractions.
+ * Indexing according to candidates in votes.candidateTallies.tallyFractions.
  */
 export default function minimax({ votes }) {
     const { pairwiseTallyFractions } = votes.pairwiseTallies

@@ -5,7 +5,8 @@ import { copyArrayShallow, range } from '../../utilities/jsHelpers.js'
 /**
  * Run the Huntington-Hill method of apportionment and return an allocation of seats.
  * @param {Object} votes
- * @param {number[]} votes.tallyFractions - tallies for each party as a fraction of 1.
+ * @param {Object} votes.candidateTallies - vote tallies indexed by candidate
+ * @param {number[]} votes.candidateTallies.tallyFractions - tallies for each party as a fraction of 1.
  * @param {Object} socialChoiceOptions
  * @param {number} socialChoiceOptions.seats - The number of seats to fill.
  * @param {number} socialChoiceOptions.threshold - The minimum fraction of voters

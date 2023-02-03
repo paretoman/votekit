@@ -5,7 +5,8 @@ import getCDF, { randomIndexFromCDF } from '../../utilities/mathUtilities.js'
 /**
  * pick a random voter to select the winner
  * @param {Object} votes
- * @param {Number} votes.tallyFractions.length - Number of candidates.
+ * @param {Object} votes.candidateTallies - vote tallies indexed by candidate
+ * @param {Number} votes.candidateTallies.tallyFractions.length - Number of candidates.
  * @returns {Object} socialChoiceResults
  * @returns {Number} socialChoiceResults.iWinner - Index of winner. Indexing according to votes[].
  */

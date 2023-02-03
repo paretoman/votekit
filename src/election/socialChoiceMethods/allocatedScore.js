@@ -11,9 +11,10 @@ import { range } from '../../utilities/jsHelpers.js'
  * The voters' weight is spent, starting from the top scores.
  * Weight is spent until the weight of voters included is equal to 1/seats, which is the quota.
  * @param {Object} votes - The object for vote data.
- * @param {Object[]} votes.scoreVotes - A list of votes
- * @param {Number[]} votes.scoreVotes[] - A score for each candidate. From 0 to 1.
- * @param {Object} votes.voteFractions - The fraction of the population that voted that way.
+ * @param {Object} votes.preferenceTallies - Preferences and how many votes share them.
+ * @param {Object[]} votes.preferenceTallies.scoreVotes - A list of votes
+ * @param {Number[]} votes.preferenceTallies.scoreVotes[] - A score for each candidate. From 0 to 1.
+ * @param {Object} votes.preferenceTallies.voteFractions - The fraction of the population that voted that way.
  * @param {Object} socialChoiceOptions.seats - Number of candidates to elect.
  * @returns {{allocation:number[]}} - socialChoiceResults, with property allocation.
  * Allocation is an array of integers that say whether a candidate is elected (1) or not (0).

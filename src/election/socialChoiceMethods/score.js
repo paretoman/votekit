@@ -3,7 +3,8 @@
 /**
  * the candidate with the highest tally wins
  * @param {Object} votes
- * @param {Number[]} votes.tallyFractions
+ * @param {Object} votes.candidateTallies - vote tallies indexed by candidate
+ * @param {Number[]} votes.candidateTallies.tallyFractions
  * @returns {Object} results
  * @returns {Number} iWinner - Index of winner. Indexing according to votes[].
  */

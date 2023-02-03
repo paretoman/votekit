@@ -6,7 +6,8 @@ import { maxIndex } from '../../utilities/jsHelpers.js'
  * the candidate with the highest tally wins
  * @param {Object} kwargs
  * @param {Object} kwargs.votes
- * @param {Number[]} kwargs.votes.tallyFractions - A list of fractions of voters
+ * @param {Object} kwargs.votes.candidateTallies - vote tallies indexed by candidate
+ * @param {Number[]} kwargs.votes.candidateTallies.tallyFractions - A list of fractions of voters
  * who chose a candidate, indexed by candidate.
  * @returns {Object} socialChoiceResults = {iWinner} Index of winner. Indexing according to votes[].
  */
