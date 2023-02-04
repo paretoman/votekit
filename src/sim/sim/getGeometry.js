@@ -1,3 +1,5 @@
+import getCanBorders from '../../election/voteCasters/getCanBorders.js'
+
 /**
  * Get geometry inputs to election. Both candidateList and candidateDnList work here, though we call both canGeoms.
  * @param {*} voterShapeList
@@ -15,6 +17,10 @@ export default function getGeometry(voterShapeList, candidateList, simOptions, e
     const geometry = {
         voterGeoms, canGeoms, parties, dimensions,
     }
-    if (useDistricts) geometry.districtGeometry = districtGeometry
+    if (useDistricts) {
+        geometry.districtGeometry = districtGeometry
+    }
+    geometry.canBorders = getCanBorders(geometry, electionOptions)
+
     return geometry
 }

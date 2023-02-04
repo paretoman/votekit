@@ -4,7 +4,9 @@ import { equidistantLine } from '../plurality/CastPluralitySummer2DQuadrature.js
 /**
  * Sum area of voter distributions to tally the votes.
  */
-export default function castPairwisePlanes2D({ voterGeom, canGeoms }) {
+export default function castPairwisePlanes2D(voterGeom, geometry) {
+    const { canGeoms } = geometry
+
     // draw lines across shape of voterGeom
 
     const totalArea = calcVoterTotalArea(voterGeom)

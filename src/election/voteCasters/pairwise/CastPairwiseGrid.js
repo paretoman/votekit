@@ -8,7 +8,9 @@ import makeGrid2D from '../makeGrid2D.js'
 /**
  * Tally votes.
  */
-export default function castPairwiseGrid({ voterGeom, canGeoms, castOptions, dimensions }) {
+export default function castPairwiseGrid(voterGeom, geometry, castOptions) {
+    const { canGeoms, dimensions } = geometry
+
     // just find the vote and count at each grid point
     const makeGrid = (dimensions === 1) ? makeGrid1D : makeGrid2D
     const grid = makeGrid(voterGeom, castOptions)

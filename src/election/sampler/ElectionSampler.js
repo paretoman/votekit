@@ -1,6 +1,7 @@
 /** @module */
 
 import election from '../election/election.js'
+import getCanBorders from '../voteCasters/getCanBorders.js'
 
 /**
  * Simulate winners from many sampled elections.
@@ -73,8 +74,13 @@ export default function ElectionSampler() {
             }
 
             const sampleGeometry = {
-                voterGeoms, canGeoms: sCanGeoms, parties: { partiesByCan: sParties, numParties: 10 }, dimensions, districtGeometry,
+                voterGeoms,
+                canGeoms: sCanGeoms,
+                parties: { partiesByCan: sParties, numParties: 10 },
+                dimensions,
+                districtGeometry,
             }
+            sampleGeometry.canBorders = getCanBorders(sampleGeometry, electionOptions)
 
             const electionResults = election(sampleGeometry, electionOptions)
             const scResultsByDistrict = (electionOptions.useDistricts)

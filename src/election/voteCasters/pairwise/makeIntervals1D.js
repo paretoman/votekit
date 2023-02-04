@@ -21,6 +21,6 @@ export default function makeIntervals1D(canGeoms) {
         }
     }
     const intervals1D = { midpoints, iLower }
-    const precomputedCans = { intervals1D }
-    return precomputedCans
+    const canBorders = { intervals1D }
+    return canBorders
 }

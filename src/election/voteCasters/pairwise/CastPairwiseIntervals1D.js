@@ -5,8 +5,9 @@ import { sumBlock, sumGaussian } from '../plurality/CastPluralitySummer1DInterva
 /**
  * Sum density of voter distributions along splits.
  */
-export default function castPairwiseIntervals1D({ voterGeom, canGeoms, precomputedCans }) {
-    const { midpoints, iLower } = precomputedCans.intervals1D
+export default function castPairwiseIntervals1D(voterGeom, geometry) {
+    const { canGeoms, canBorders } = geometry
+    const { midpoints, iLower } = canBorders.intervals1D
 
     const nCans = canGeoms.length
 

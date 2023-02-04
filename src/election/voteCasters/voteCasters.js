@@ -8,6 +8,7 @@ import castPluralityTestVote from './plurality/castPluralityTestVote.js'
 import castScoreTestVote from './score/castScoreTestVote.js'
 import castRankingTestVote from './ranking/castRankingTestVote.js'
 import castPairwise from './pairwise/castPairwise.js'
+import makeCanBordersPairwise from './pairwise/makeCanBordersPairwise.js'
 
 /**
  * a collection of ways to cast votes
@@ -18,7 +19,7 @@ const voteCasters = {
     score: { cast: castScore, castTestVote: castScoreTestVote },
     scoreLong: { cast: castScoreLong, castTestVote: castScoreTestVote },
     ranking: { cast: castRanking, castTestVote: castRankingTestVote },
-    pairwise: { cast: castPairwise, castTestVote: castRankingTestVote },
+    pairwise: { cast: castPairwise, castTestVote: castRankingTestVote, makeCanBorders: makeCanBordersPairwise },
 }
 
 export default voteCasters

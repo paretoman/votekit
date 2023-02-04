@@ -1,6 +1,5 @@
 /** @module */
 
-import makeIntervals1D from './makeIntervals1D.js'
 import castPairwisePlanes2D from './castPairwisePlanes2D.js'
 import castPairwiseIntervals1D from './CastPairwiseIntervals1D.js'
 import castPairwiseGrid from './CastPairwiseGrid.js'
@@ -20,8 +19,6 @@ export default function castPairwise(geometry, castOptions) {
 
     const someGaussian2D = voterGeoms.some((v) => v.densityProfile === 'gaussian') && dimensions === 2
 
-    const precomputedCans = (dimensions === 2 || someGaussian2D) ? {} : makeIntervals1D(canGeoms)
-
     const castRegions = (dimensions === 1)
         ? castPairwiseIntervals1D
         : castPairwisePlanes2D
@@ -39,7 +36,7 @@ export default function castPairwise(geometry, castOptions) {
     }
     const votesByGeom = []
     voterGeoms.forEach((voterGeom, g) => {
-        const votesForGeom = cast({ voterGeom, canGeoms, precomputedCans, castOptions, dimensions })
+        const votesForGeom = cast(voterGeom, geometry, castOptions)
         votesByGeom[g] = votesForGeom
         const { winsPairwise: winsPairwiseForGeom,
             totalVotes: totalVotesForGeom } = votesForGeom
