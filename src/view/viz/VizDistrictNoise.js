@@ -10,43 +10,60 @@ export default function VizDistrictNoise(screen) {
     }
 
     self.render = () => {
-        districtGeometry.voterGroupsByTract.forEach((row) => {
-            row.forEach((cell) => {
-                cell.forEach((voterGroup) => {
-                    if (dimensions === 1) {
-                        const { x } = voterGroup.shape1
-                        const { y } = voterGroup.shape2
-                        const ym = (y % 100) + 0 // TODO: better visual
-                        // const y = Math.random() * 100
-                        smallCircle(x, ym)
-                    } else {
-                        const { x, y } = voterGroup.shape2
-                        smallCircle(x, y)
-                        // TODO: use .x and .y instead of shape2
-                    }
+        const { ctx } = screen
+        const { svgMode } = screen.common
+        ctx.save()
+        if (dimensions === 1) {
+            ctx.globalAlpha = 0.3
+            districtGeometry.voterGeomsByTract1D.forEach((row) => {
+                row.forEach((cell) => {
+                    cell.forEach((voterGeom) => {
+                        const { x } = voterGeom
+                        faintLine(ctx, x)
+                    })
                 })
             })
-        })
+        } else {
+            districtGeometry.voterGeomsByTract2D.forEach((row) => {
+                row.forEach((cell) => {
+                    cell.forEach((voterGeom) => {
+                        const { x, y } = voterGeom
+                        smallCircle(ctx, svgMode, x, y)
+                    })
+                })
+            })
+        }
+        ctx.restore()
     }
 
     /** Draw a small dot */
 
     const canvas = document.createElement('canvas')
+    canvas.width = 10
+    canvas.height = 10
     const offCtx = canvas.getContext('2d')
-    preDrawCircle()
-    function preDrawCircle() {
-        canvas.width = 10
-        canvas.height = 10
-        offCtx.beginPath()
-        offCtx.fillStyle = '#555'
+    drawCircle(offCtx, 5, 5)
 
-        offCtx.arc(5, 5, 1, 0, 2 * Math.PI)
-        offCtx.fill()
+    function drawCircle(ctx, x, y) {
+        ctx.beginPath()
+        ctx.fillStyle = '#555'
+
+        ctx.arc(x, y, 1, 0, 2 * Math.PI)
+        ctx.fill()
     }
 
-    function smallCircle(x, y) {
-        const { ctx } = screen
-
+    function smallCircle(ctx, svgMode, x, y) {
+        if (svgMode) {
+            drawCircle(ctx, x, y)
+            return
+        }
         ctx.drawImage(canvas, x - 5, y - 5, 10, 10)
+    }
+
+    function faintLine(ctx, x) {
+        ctx.beginPath()
+        ctx.moveTo(x, 0)
+        ctx.lineTo(x, 100)
+        ctx.stroke()
     }
 }

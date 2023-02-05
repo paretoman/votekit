@@ -39,11 +39,12 @@ export default function DistrictGeometry(voterShapeList, changes, electionOption
         if (changes.checkNone()) return
 
         voterShapes = voterShapeList.getEntities()
-        if (changes.check(['numDistricts', 'mode', 'dimensions'])) {
+        if (changes.check(['numDistricts'])) {
             self.updateDistricts()
         }
-
-        self.updateVoters() // todo: maybe make this only trigger when voters change
+        if (changes.check(['draggables'])) {
+            self.updateVoters() // todo: maybe make this only trigger when voters change
+        }
     }
 
     // Update VoterGroup Sets //
@@ -58,17 +59,27 @@ export default function DistrictGeometry(voterShapeList, changes, electionOption
     // Then we add a little noise to represent differences due to geography.
     self.updateVoters = () => {
         const { sn } = self.districtNoise
-        self.voterGroupsByTract = sn.map(
+        self.voterGeomsByTract1D = sn.map(
+            (rowNoise) => rowNoise.map(
+                (cellNoise) => voterShapes.map(
+                    (vb) => {
+                        const [xNoise] = cellNoise
+                        const shape1 = copyObjectShallow(vb.shape1)
+                        shape1.x += xNoise
+                        return shape1
+                    },
+                ),
+            ),
+        )
+        self.voterGeomsByTract2D = sn.map(
             (rowNoise) => rowNoise.map(
                 (cellNoise) => voterShapes.map(
                     (vb) => {
                         const [xNoise, yNoise] = cellNoise
-                        const shape1 = copyObjectShallow(vb.shape1)
                         const shape2 = copyObjectShallow(vb.shape2)
-                        shape1.x += xNoise
                         shape2.x += xNoise
                         shape2.y += yNoise
-                        return { shape2, shape1 }
+                        return shape2
                     },
                 ),
             ),

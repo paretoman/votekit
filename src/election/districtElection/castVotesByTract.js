@@ -1,5 +1,4 @@
 import voteCasters from '../voteCasters/voteCasters.js'
-import getGeoms from '../../sim/entities/getGeoms.js'
 import getCanBorders from '../voteCasters/getCanBorders.js'
 
 export default function castVotesByTract(geometry0, electionOptions) {
@@ -7,12 +6,12 @@ export default function castVotesByTract(geometry0, electionOptions) {
     const {
         canGeoms, parties, dimensions, districtGeometry,
     } = geometry0
-    const { voterGroupsByTract } = districtGeometry
+    const { voterGeomsByTract1D, voterGeomsByTract2D } = districtGeometry
+    const voterGeomsByTract = (dimensions === 1) ? voterGeomsByTract1D : voterGeomsByTract2D
 
-    const votesByTract = voterGroupsByTract.map(
+    const votesByTract = voterGeomsByTract.map(
         (row) => row.map(
-            (voterGroups) => {
-                const voterGeoms = getGeoms(voterGroups, dimensions)
+            (voterGeoms) => {
                 const geometry = {
                     voterGeoms, canGeoms, parties, dimensions,
                 }
