@@ -55,8 +55,8 @@ export default function Grid1D(candidateList, screen) {
         ctx.restore()
     }
     function shapePath(ctx, iCan, drawOutline) {
-        const { grid, voteSet, voterGeom } = votesForGeom
-        const { x, w, densityProfile } = voterGeom
+        const { grid, voteSet } = votesForGeom
+        const { x, w, densityProfile } = grid.voterGeom
         const nCans = canList.length
 
         const isGauss = (densityProfile === 'gaussian')

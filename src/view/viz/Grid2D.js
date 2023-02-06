@@ -23,13 +23,14 @@ export default function Grid2D(candidateList, screenMain, screenMini) {
         votesForGeom = votesForGeom0
         canList = candidateList.getEntities()
 
-        const { grid, voteSet, voterGeom } = votesForGeom
+        const { grid, voteSet } = votesForGeom
+        const { densityProfile } = grid.voterGeom
 
         const nCans = canList.length
         const nHeight = Math.floor((nCans - 1) / 3) + 1
         screenMini.setHeight(nHeight * (1 / 3) * screenMini.common.height)
 
-        const isGauss = voterGeom.densityProfile === 'gaussian'
+        const isGauss = densityProfile === 'gaussian'
 
         fillDataSeparate()
         fillDataBlend()
@@ -102,8 +103,8 @@ export default function Grid2D(candidateList, screenMain, screenMini) {
     }
 
     self.render = function () {
-        const { x, y, w, densityProfile } = votesForGeom.voterGeom
-        const { width } = votesForGeom.grid
+        const { width, voterGeom } = votesForGeom.grid
+        const { x, y, w, densityProfile } = voterGeom
 
         drawBlend()
 
