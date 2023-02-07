@@ -6,26 +6,19 @@ import districtCensus from './districtCensus.js'
 /**
  * Makes and draws district boundaries.
  * Right now, just for a uniform square geography.
- * @param {Screen} screen
- * @constructor
- */
-export default function DistrictMaker() {
-    const self = this
-
-    /**
-     * Define district lines and count demographics.
+     * Define district lines and count voters.
      * @param {Number} nx - number of voter cells in x
      * @param {Number} ny - number of voter cells in y
      * @param {Number} nd - number of districts.
      */
-    self.make = (nx, ny, nd) => {
-        [self.centroids, self.voronoi, self.polygons] = lloydVoronoi(nx, ny, nd, 0.01)
-        self.nx = nx
-        self.ny = ny
-        self.nd = nd
-        self.polygonAreas = self.polygons.map(polygonArea).map((x) => -x)
-        self.totalArea = nx * ny
+export default function makeDistrictMap(nx, ny, nd) {
+    const [centroids, voronoi, polygons] = lloydVoronoi(nx, ny, nd, 0.01)
+    const polygonAreas = polygons.map(polygonArea).map((x) => -x)
+    const totalArea = nx * ny
 
-        self.census = districtCensus(self)
-    }
+    const districtMap = { nx, ny, nd, centroids, voronoi, polygons, polygonAreas, totalArea }
+
+    districtMap.census = districtCensus(districtMap)
+
+    return districtMap
 }

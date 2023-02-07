@@ -1,7 +1,7 @@
 import { range } from '../../utilities/jsHelpers.js'
 
 export default function combineVotesByDistrict(votesByTract, canGeoms, districtGeometry) {
-    const { census } = districtGeometry.districtMaker
+    const { census } = districtGeometry.districtMap
     const { nd } = districtGeometry
     const numCans = canGeoms.length
 

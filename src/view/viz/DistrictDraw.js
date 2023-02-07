@@ -7,7 +7,7 @@ import { drawStrokedColor } from '../../utilities/graphicsUtilities.js'
  * @param {Screen} screen
  * @constructor
  */
-export default function DistrictDraw(screen, districtMaker) {
+export default function DistrictDraw(screen, districtMap) {
     const self = this
 
     /**
@@ -42,7 +42,7 @@ export default function DistrictDraw(screen, districtMaker) {
         const { ctx } = screen
         const {
             voronoi, nx, ny, nd,
-        } = districtMaker
+        } = districtMap
         ctx.save()
         const scaleX = districtMapWidth / nx
         const scaleY = districtMapHeight / ny
@@ -65,10 +65,10 @@ export default function DistrictDraw(screen, districtMaker) {
 
     function renderAreaText(i) {
         const { ctx } = screen
-        const { centroids, polygonAreas } = districtMaker
+        const { centroids, polygonAreas } = districtMap
         const c = centroids[i]
         const textHeight = 1
-        // const area = textPercent(polygonAreas[i] / (districtMaker.nx * districtMaker.ny))
+        // const area = textPercent(polygonAreas[i] / (districtMap.nx * districtMap.ny))
         const area = polygonAreas[i].toFixed(0)
         drawStrokedColor(area, c[0], c[1] + textHeight * 0.5 - 0.2, textHeight, 0.2, '#222', 1, ctx)
     }

@@ -1,8 +1,8 @@
 /** @module */
 
 import DistrictNoise from './DistrictNoise.js'
-import DistrictMaker from './DistrictMaker.js'
 import { copyObjectShallow } from '../../utilities/jsHelpers.js'
+import makeDistrictMap from './DistrictMaker.js'
 
 /**
  * @param {Screen} screen
@@ -17,9 +17,6 @@ export default function DistrictGeometry() {
     /** Number of census tracts in x and y */
     self.nx = 20
     self.ny = 20
-
-    // Code that handles drawing districts of equal number of voters.
-    self.districtMaker = new DistrictMaker()
 
     // Code that handles making geographic district noise.
     self.districtNoise = new DistrictNoise(self.nx, self.ny)
@@ -36,7 +33,8 @@ export default function DistrictGeometry() {
     /** Make districts and update voter sets */
     self.updateDistricts = (numDistricts) => {
         self.nd = numDistricts
-        self.districtMaker.make(self.nx, self.ny, self.nd)
+        // Code that handles drawing districts of equal number of voters.
+        self.districtMap = makeDistrictMap(self.nx, self.ny, self.nd)
     }
 
     // We want to copy a set of voter basis objects for each census tract.

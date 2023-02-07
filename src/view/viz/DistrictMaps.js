@@ -19,8 +19,8 @@ export default function DistrictMaps(candidateList, screen, electionOptions) {
 
         // todo: make this only run when we have new districts
         if (self.districtDraw === undefined) {
-            const { districtMaker } = districtGeometry
-            self.districtDraw = new DistrictDraw(screen, districtMaker)
+            const { districtMap } = districtGeometry
+            self.districtDraw = new DistrictDraw(screen, districtMap)
             // Code that handles making images of geographic noise.
             self.noiseImage = new NoiseImage(districtGeometry.nx, districtGeometry.ny, screen)
         }

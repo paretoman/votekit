@@ -11,14 +11,14 @@ import { range, jcopy } from '../../utilities/jsHelpers.js'
  * Each element contains an array of pairs.
  * The first of the pair is a tract's pair of coordinates.
  * The second of the pair is the fraction of the tract within that district.
- * @param {DistrictMaker} districtMaker
+ * @param {DistrictMaker} districtMap
  * @returns {Number[][][]} - an array of districts,
  * each with a list of census tract properties [x,y,overlap]
  */
-export default function districtCensus(districtMaker) {
+export default function districtCensus(districtMap) {
     const {
         nd, nx, ny, polygons,
-    } = districtMaker
+    } = districtMap
 
     const census = Array(nd).fill().map(() => [])
 
