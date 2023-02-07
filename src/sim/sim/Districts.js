@@ -14,6 +14,7 @@ export default function Districts(voterShapeList, changes, electionOptions) {
 
     // Update call from sim //
     self.update = () => {
+        if (electionOptions.useDistricts === false) return
         if (changes.checkNone()) return
 
         if (changes.check(['numDistricts'])) {

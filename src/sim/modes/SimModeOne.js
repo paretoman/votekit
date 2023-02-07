@@ -24,8 +24,7 @@ export default function SimModeOne(pub, entities, changes, districts, simOptions
         if (changes.checkNone()) return
 
         electionOptions.update()
-
-        if (electionOptions.useDistricts) districts.update()
+        districts.update()
 
         const geometry = getGeometry(voterShapeList, candidateList, simOptions, electionOptions, districts)
 

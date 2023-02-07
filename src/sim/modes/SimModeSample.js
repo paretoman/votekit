@@ -29,8 +29,7 @@ export default function SimModeSample(pub, entities, changes, districts, simOpti
         // The electionResults communicates how to visualize the election.
 
         electionOptions.update()
-
-        if (electionOptions.useDistricts) districts.update()
+        districts.update()
         canDnSampler.update()
 
         const geometry = getGeometry(voterShapeList, candidateDnList, simOptions, electionOptions, districts)

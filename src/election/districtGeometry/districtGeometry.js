@@ -5,7 +5,6 @@ import makeDistrictMap from './makeDistrictMap.js'
 import makeTractNoise from './DistrictNoise.js'
 
 /**
- * @param {Screen} screen
  * @constructor
  */
 export default function DistrictGeometry() {
