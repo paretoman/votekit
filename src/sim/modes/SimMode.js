@@ -12,12 +12,12 @@ import SimModeOne from './SimModeOne.js'
  * @param {Changes} changes
  * @param {Commander} commander
  */
-export default function SimMode(pub, entities, districtGeometry, changes, simOptions, electionOptions) {
+export default function SimMode(pub, entities, districts, changes, simOptions, electionOptions) {
     const self = this
 
     self.modes = {
-        one: new SimModeOne(pub, entities, changes, districtGeometry, simOptions, electionOptions),
-        sample: new SimModeSample(pub, entities, changes, districtGeometry, simOptions, electionOptions),
+        one: new SimModeOne(pub, entities, changes, districts, simOptions, electionOptions),
+        sample: new SimModeSample(pub, entities, changes, districts, simOptions, electionOptions),
     }
 
     self.update = () => {

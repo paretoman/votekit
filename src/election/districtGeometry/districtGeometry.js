@@ -8,7 +8,7 @@ import { copyObjectShallow } from '../../utilities/jsHelpers.js'
  * @param {Screen} screen
  * @constructor
  */
-export default function DistrictGeometry(voterShapeList, changes, electionOptions) {
+export default function DistrictGeometry() {
     const self = this
 
     /** Number of districts */
@@ -31,33 +31,17 @@ export default function DistrictGeometry(voterShapeList, changes, electionOption
      *  It is altered by translating it in policy space.
      *  */
 
-    // Update call from sim //
-
-    let voterShapes = []
-
-    self.update = () => {
-        if (changes.checkNone()) return
-
-        voterShapes = voterShapeList.getEntities()
-        if (changes.check(['numDistricts'])) {
-            self.updateDistricts()
-        }
-        if (changes.check(['draggables'])) {
-            self.updateVoters() // todo: maybe make this only trigger when voters change
-        }
-    }
-
     // Update VoterGroup Sets //
 
     /** Make districts and update voter sets */
-    self.updateDistricts = () => {
-        self.nd = electionOptions.numDistricts
+    self.updateDistricts = (numDistricts) => {
+        self.nd = numDistricts
         self.districtMaker.make(self.nx, self.ny, self.nd)
     }
 
     // We want to copy a set of voter basis objects for each census tract.
     // Then we add a little noise to represent differences due to geography.
-    self.updateVoters = () => {
+    self.updateVoters = (voterShapes) => {
         const { sn } = self.districtNoise
         self.voterGeomsByTract1D = sn.map(
             (rowNoise) => rowNoise.map(

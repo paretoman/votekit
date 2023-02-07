@@ -5,7 +5,6 @@ import getGeoms from '../entities/getGeoms.js'
  * @param {*} voterShapeList
  * @param {*} candidateList
  * @param {*} simOptions
- * @param {*} districtGeometry
  * @returns
  */
 export default function getTestGeometry(testVoter, candidateList, simOptions) {

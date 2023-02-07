@@ -11,11 +11,11 @@ import election from '../../election/election/election.js'
  * @param {Screen} screen
  * @param {Menu} menu
  * @param {Changes} changes
- * @param {DistrictGeometry} districtGeometry
+ * @param {DistrictGeometry} districts
  * @constructor
  */
 // eslint-disable-next-line max-len
-export default function SimModeOne(pub, entities, changes, districtGeometry, simOptions, electionOptions) {
+export default function SimModeOne(pub, entities, changes, districts, simOptions, electionOptions) {
     const self = this
 
     const { voterShapeList, candidateList } = entities
@@ -25,9 +25,9 @@ export default function SimModeOne(pub, entities, changes, districtGeometry, sim
 
         electionOptions.update()
 
-        if (electionOptions.useDistricts) districtGeometry.update()
+        if (electionOptions.useDistricts) districts.update()
 
-        const geometry = getGeometry(voterShapeList, candidateList, simOptions, electionOptions, districtGeometry)
+        const geometry = getGeometry(voterShapeList, candidateList, simOptions, electionOptions, districts)
 
         const electionResults = election(geometry, electionOptions)
 
