@@ -20,14 +20,6 @@ export default function DistrictGeometry() {
     // Code that handles making geographic district noise.
     self.tractNoise = makeTractNoise(self.nx, self.ny)
 
-    // Manage VoterBasisSet //
-
-    /** This voter basis is repeated at every census tract on the district map.
-     *  It is altered by translating it in policy space.
-     *  */
-
-    // Update VoterGroup Sets //
-
     /** Make districts and update voter sets */
     self.updateDistricts = (numDistricts) => {
         self.nd = numDistricts
@@ -35,8 +27,12 @@ export default function DistrictGeometry() {
         self.districtMap = makeDistrictMap(self.nx, self.ny, self.nd)
     }
 
-    // We want to copy a set of voter basis objects for each census tract.
-    // Then we add a little noise to represent differences due to geography.
+    // Update VoterGroup Sets //
+
+    /** The set of voter basis geoms is repeated at every census tract on the district map,
+     *  but it is altered by translating it in policy space with a little noise
+     * to represent differences due to geomgraphy
+     *  */
     self.updateVoters = (voterShapes) => {
         self.voterGeomsByTract1D = self.tractNoise.map(
             (rowNoise) => rowNoise.map(
