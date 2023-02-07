@@ -1,6 +1,6 @@
 /** @module */
 
-import voteCasters from '../voteCasters/voteCasters.js'
+import voteCasters from '../voteCasters/voteCasters/voteCasters.js'
 import socialChoiceRun from './socialChoiceRun.js'
 
 /**

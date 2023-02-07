@@ -1,4 +1,4 @@
-import getCanBorders from '../../election/voteCasters/getCanBorders.js'
+import getCanBorders from '../../election/voteCasters/voteCasters/getCanBorders.js'
 
 /**
  * Get geometry inputs to election. Both candidateList and candidateDnList work here, though we call both canGeoms.

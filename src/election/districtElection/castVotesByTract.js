@@ -1,5 +1,5 @@
-import voteCasters from '../voteCasters/voteCasters.js'
-import getCanBorders from '../voteCasters/getCanBorders.js'
+import voteCasters from '../voteCasters/voteCasters/voteCasters.js'
+import getCanBorders from '../voteCasters/voteCasters/getCanBorders.js'
 
 export default function castVotesByTract(geometry0, electionOptions) {
     const { castOptions, voteCasterName } = electionOptions

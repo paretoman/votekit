@@ -1,7 +1,7 @@
 /** @module */
 
 import election from '../election/election.js'
-import getCanBorders from '../voteCasters/getCanBorders.js'
+import getCanBorders from '../voteCasters/voteCasters/getCanBorders.js'
 
 /**
  * Simulate winners from many sampled elections.
