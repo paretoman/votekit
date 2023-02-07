@@ -2,7 +2,7 @@
 
 import DistrictNoise from './DistrictNoise.js'
 import { copyObjectShallow } from '../../utilities/jsHelpers.js'
-import makeDistrictMap from './DistrictMaker.js'
+import makeDistrictMap from './makeDistrictMap.js'
 
 /**
  * @param {Screen} screen
