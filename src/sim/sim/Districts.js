@@ -10,6 +10,8 @@ export default function Districts(voterShapeList, changes, electionOptions, simO
 
     self.districtGeometry = new DistrictGeometry()
 
+    // We need to updateVoters the first time we change numDistricts to greater than 1,
+    // but not the next time.
     let firstRun = true
 
     // Update call from sim //
