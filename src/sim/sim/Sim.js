@@ -1,6 +1,6 @@
 import Changes from './Changes.js'
 import Commander from '../command/Commander.js'
-import SimOptions from './SimOptions.js'
+import SimOptions from '../options/SimOptions.js'
 import ElectionOptions from '../options/ElectionOptions.js'
 import DistrictGeometry from '../../election/districtGeometry/districtGeometry.js'
 import Entities from './Entities.js'
