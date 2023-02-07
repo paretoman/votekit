@@ -6,8 +6,7 @@ export default function castVotesByTract(geometry0, electionOptions) {
     const {
         canGeoms, parties, dimensions, districtGeometry,
     } = geometry0
-    const { voterGeomsByTract1D, voterGeomsByTract2D } = districtGeometry
-    const voterGeomsByTract = (dimensions === 1) ? voterGeomsByTract1D : voterGeomsByTract2D
+    const { voterGeomsByTract } = districtGeometry
 
     const votesByTract = voterGeomsByTract.map(
         (row) => row.map(

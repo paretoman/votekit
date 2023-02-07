@@ -5,7 +5,7 @@ import DistrictGeometry from '../../election/districtGeometry/districtGeometry.j
 /**
  * @constructor
  */
-export default function Districts(voterShapeList, changes, electionOptions) {
+export default function Districts(voterShapeList, changes, electionOptions, simOptions) {
     const self = this
 
     self.districtGeometry = new DistrictGeometry()
@@ -21,10 +21,11 @@ export default function Districts(voterShapeList, changes, electionOptions) {
             const { numDistricts } = electionOptions
             self.districtGeometry.updateDistricts(numDistricts)
         }
-        if (firstRun || changes.check(['draggables'])) {
+        if (firstRun || changes.check(['draggables', 'dimensions'])) {
             firstRun = false
             const voterShapes = voterShapeList.getEntities()
-            self.districtGeometry.updateVoters(voterShapes)
+            const { dimensions } = simOptions
+            self.districtGeometry.updateVoters(voterShapes, dimensions)
             // todo: maybe make this only trigger when voters change
         }
     }

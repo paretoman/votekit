@@ -17,7 +17,7 @@ export default function Sim(comMessenger) {
     const electionOptions = new ElectionOptions(changes, simOptions, commander)
 
     const entities = new Entities(changes, commander)
-    const districts = new Districts(entities.voterShapeList, changes, electionOptions)
+    const districts = new Districts(entities.voterShapeList, changes, electionOptions, simOptions)
     const pub = new Publisher()
     const simMode = new SimMode(pub, entities, districts, changes, simOptions, electionOptions)
 

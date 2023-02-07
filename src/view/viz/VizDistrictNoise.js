@@ -15,7 +15,7 @@ export default function VizDistrictNoise(screen) {
         ctx.save()
         if (dimensions === 1) {
             ctx.globalAlpha = 0.3
-            districtGeometry.voterGeomsByTract1D.forEach((row) => {
+            districtGeometry.voterGeomsByTract.forEach((row) => {
                 row.forEach((cell) => {
                     cell.forEach((voterGeom) => {
                         const { x } = voterGeom
@@ -24,7 +24,7 @@ export default function VizDistrictNoise(screen) {
                 })
             })
         } else {
-            districtGeometry.voterGeomsByTract2D.forEach((row) => {
+            districtGeometry.voterGeomsByTract.forEach((row) => {
                 row.forEach((cell) => {
                     cell.forEach((voterGeom) => {
                         const { x, y } = voterGeom

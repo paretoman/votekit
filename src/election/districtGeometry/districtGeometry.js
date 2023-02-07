@@ -33,31 +33,34 @@ export default function DistrictGeometry() {
      *  but it is altered by translating it in policy space with a little noise
      * to represent differences due to geomgraphy
      *  */
-    self.updateVoters = (voterShapes) => {
-        self.voterGeomsByTract1D = self.tractNoise.map(
-            (rowNoise) => rowNoise.map(
-                (cellNoise) => voterShapes.map(
-                    (vb) => {
-                        const [xNoise] = cellNoise
-                        const shape1 = copyObjectShallow(vb.shape1)
-                        shape1.x += xNoise
-                        return shape1
-                    },
+    self.updateVoters = (voterShapes, dimensions) => {
+        if (dimensions === 1) {
+            self.voterGeomsByTract = self.tractNoise.map(
+                (rowNoise) => rowNoise.map(
+                    (cellNoise) => voterShapes.map(
+                        (vb) => {
+                            const [xNoise] = cellNoise
+                            const shape1 = copyObjectShallow(vb.shape1)
+                            shape1.x += xNoise
+                            return shape1
+                        },
+                    ),
                 ),
-            ),
-        )
-        self.voterGeomsByTract2D = self.tractNoise.map(
-            (rowNoise) => rowNoise.map(
-                (cellNoise) => voterShapes.map(
-                    (vb) => {
-                        const [xNoise, yNoise] = cellNoise
-                        const shape2 = copyObjectShallow(vb.shape2)
-                        shape2.x += xNoise
-                        shape2.y += yNoise
-                        return shape2
-                    },
+            )
+        } else {
+            self.voterGeomsByTract = self.tractNoise.map(
+                (rowNoise) => rowNoise.map(
+                    (cellNoise) => voterShapes.map(
+                        (vb) => {
+                            const [xNoise, yNoise] = cellNoise
+                            const shape2 = copyObjectShallow(vb.shape2)
+                            shape2.x += xNoise
+                            shape2.y += yNoise
+                            return shape2
+                        },
+                    ),
                 ),
-            ),
-        )
+            )
+        }
     }
 }
