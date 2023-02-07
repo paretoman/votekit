@@ -4,7 +4,7 @@ import SimOptions from './SimOptions.js'
 import ElectionOptions from '../options/ElectionOptions.js'
 import DistrictGeometry from '../../election/districtGeometry/districtGeometry.js'
 import Entities from './Entities.js'
-import SimMode from './SimMode.js'
+import SimMode from '../modes/SimMode.js'
 import addDefaultEntities from './addDefaultEntities.js'
 import Publisher from './Publisher.js'
 
