@@ -1,8 +1,8 @@
 /** @module */
 
-import { copyObjectShallow } from '../../utilities/jsHelpers.js'
 import makeDistrictMap from './makeDistrictMap.js'
 import makeTractNoise from './DistrictNoise.js'
+import voterGeomsByTract2D, { voterGeomsByTract1D } from './voterGeomsByTract.js'
 
 /**
  * @constructor
@@ -24,40 +24,12 @@ export default function DistrictGeometry() {
         self.districtMap = makeDistrictMap(self.nx, self.ny, self.nd)
     }
 
-    /**
-     * Update VoterGroup Sets
-     * The set of voter basis geoms is repeated at every census tract on the district map,
-     * but it is altered by translating it in policy space with a little noise
-     * to represent differences due to geomgraphy
-     *  */
+    /** Update VoterGeoms for each Tract */
     self.updateVoters = (voterGeoms, dimensions) => {
         if (dimensions === 1) {
-            self.voterGeomsByTract = self.tractNoise.map(
-                (rowNoise) => rowNoise.map(
-                    (cellNoise) => voterGeoms.map(
-                        (vg) => {
-                            const [xNoise] = cellNoise
-                            const shape1 = copyObjectShallow(vg)
-                            shape1.x += xNoise
-                            return shape1
-                        },
-                    ),
-                ),
-            )
+            self.voterGeomsByTract = voterGeomsByTract1D(voterGeoms, self.tractNoise)
         } else {
-            self.voterGeomsByTract = self.tractNoise.map(
-                (rowNoise) => rowNoise.map(
-                    (cellNoise) => voterGeoms.map(
-                        (vg) => {
-                            const [xNoise, yNoise] = cellNoise
-                            const shape2 = copyObjectShallow(vg)
-                            shape2.x += xNoise
-                            shape2.y += yNoise
-                            return shape2
-                        },
-                    ),
-                ),
-            )
+            self.voterGeomsByTract = voterGeomsByTract2D(voterGeoms, self.tractNoise)
         }
     }
 }
