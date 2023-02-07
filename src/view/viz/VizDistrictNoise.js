@@ -1,11 +1,11 @@
 export default function VizDistrictNoise(screen) {
     const self = this
 
-    let districtGeometry
+    let voterGeomsByTract
     let dimensions
 
     self.update = (districtElectionResults) => {
-        districtGeometry = districtElectionResults.geometry.districtGeometry
+        voterGeomsByTract = districtElectionResults.geometry.districtGeometry.voterGeomsByTract
         dimensions = districtElectionResults.geometry.dimensions
     }
 
@@ -15,7 +15,7 @@ export default function VizDistrictNoise(screen) {
         ctx.save()
         if (dimensions === 1) {
             ctx.globalAlpha = 0.3
-            districtGeometry.voterGeomsByTract.forEach((row) => {
+            voterGeomsByTract.forEach((row) => {
                 row.forEach((cell) => {
                     cell.forEach((voterGeom) => {
                         const { x } = voterGeom
@@ -24,7 +24,7 @@ export default function VizDistrictNoise(screen) {
                 })
             })
         } else {
-            districtGeometry.voterGeomsByTract.forEach((row) => {
+            voterGeomsByTract.forEach((row) => {
                 row.forEach((cell) => {
                     cell.forEach((voterGeom) => {
                         const { x, y } = voterGeom
