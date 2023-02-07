@@ -1,8 +1,8 @@
 /** @module */
 
-import DistrictNoise from './DistrictNoise.js'
 import { copyObjectShallow } from '../../utilities/jsHelpers.js'
 import makeDistrictMap from './makeDistrictMap.js'
+import makeTractNoise from './DistrictNoise.js'
 
 /**
  * @param {Screen} screen
@@ -19,8 +19,7 @@ export default function DistrictGeometry() {
     self.ny = 20
 
     // Code that handles making geographic district noise.
-    self.districtNoise = new DistrictNoise(self.nx, self.ny)
-    self.districtNoise.genNoise()
+    self.tractNoise = makeTractNoise(self.nx, self.ny)
 
     // Manage VoterBasisSet //
 
@@ -40,8 +39,7 @@ export default function DistrictGeometry() {
     // We want to copy a set of voter basis objects for each census tract.
     // Then we add a little noise to represent differences due to geography.
     self.updateVoters = (voterShapes) => {
-        const { sn } = self.districtNoise
-        self.voterGeomsByTract1D = sn.map(
+        self.voterGeomsByTract1D = self.tractNoise.map(
             (rowNoise) => rowNoise.map(
                 (cellNoise) => voterShapes.map(
                     (vb) => {
@@ -53,7 +51,7 @@ export default function DistrictGeometry() {
                 ),
             ),
         )
-        self.voterGeomsByTract2D = sn.map(
+        self.voterGeomsByTract2D = self.tractNoise.map(
             (rowNoise) => rowNoise.map(
                 (cellNoise) => voterShapes.map(
                     (vb) => {

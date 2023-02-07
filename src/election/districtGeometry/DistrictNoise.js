@@ -10,12 +10,9 @@ import { SimplexNoise } from '../../lib/snowpack/build/snowpack/pkg/simplex-nois
  * Generate a noisy 2D map with two noise sources per pixel.
  * @param {Number} nx - Number of x pixels
  * @param {Number} ny - Number of y pixels
- * @constructor
  */
-export default function DistrictNoise(nx, ny) {
-    const self = this
+export default function makeTractNoise(nx, ny) {
     // Simplex Noise Parameters
-    self.sn = []
     const noiseWidth = 0.5
     const noiseHeight = 0.5
 
@@ -24,9 +21,8 @@ export default function DistrictNoise(nx, ny) {
     const yAmp = 100
 
     /** Generate simplex noise. */
-    self.genNoise = () => {
-        self.sn = makeDistrictNoise(nx, ny, noiseWidth, noiseHeight, xAmp, yAmp)
-    }
+    const sn = simplexNoise(nx, ny, noiseWidth, noiseHeight, xAmp, yAmp)
+    return sn
 }
 
 /**
@@ -37,7 +33,7 @@ export default function DistrictNoise(nx, ny) {
  * @param {Number} noiseHeight - A characteristic size of blobs, in pixels
  * @returns {Number[][][]} - Noise in pixel displacement, indexed by row, col, dimension
  */
-export function makeDistrictNoise(nx, ny, noiseWidth, noiseHeight, xAmp, yAmp) {
+export function simplexNoise(nx, ny, noiseWidth, noiseHeight, xAmp, yAmp) {
     const simplexX = new SimplexNoise('s')
     const simplexY = new SimplexNoise('seed')
     const map = zeros(nx, ny)
