@@ -1,6 +1,6 @@
 import Candidate from './Candidate.js'
 import { standardizeColor } from '../../utilities/jsHelpers.js'
-import Registrar from '../sim/Registrar.js'
+import Registrar from '../entities/Registrar.js'
 import EntityCommander from '../entities/EntityCommander.js'
 import EntityList from '../entities/EntityList.js'
 
