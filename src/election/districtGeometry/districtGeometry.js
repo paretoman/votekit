@@ -10,9 +10,6 @@ import makeTractNoise from './DistrictNoise.js'
 export default function DistrictGeometry() {
     const self = this
 
-    /** Number of districts */
-    self.nd = 20
-
     /** Number of census tracts in x and y */
     self.nx = 20
     self.ny = 20
