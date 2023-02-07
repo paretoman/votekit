@@ -27,20 +27,20 @@ export default function DistrictGeometry() {
         self.districtMap = makeDistrictMap(self.nx, self.ny, self.nd)
     }
 
-    // Update VoterGroup Sets //
-
-    /** The set of voter basis geoms is repeated at every census tract on the district map,
-     *  but it is altered by translating it in policy space with a little noise
+    /**
+     * Update VoterGroup Sets
+     * The set of voter basis geoms is repeated at every census tract on the district map,
+     * but it is altered by translating it in policy space with a little noise
      * to represent differences due to geomgraphy
      *  */
-    self.updateVoters = (voterShapes, dimensions) => {
+    self.updateVoters = (voterGeoms, dimensions) => {
         if (dimensions === 1) {
             self.voterGeomsByTract = self.tractNoise.map(
                 (rowNoise) => rowNoise.map(
-                    (cellNoise) => voterShapes.map(
-                        (vb) => {
+                    (cellNoise) => voterGeoms.map(
+                        (vg) => {
                             const [xNoise] = cellNoise
-                            const shape1 = copyObjectShallow(vb.shape1)
+                            const shape1 = copyObjectShallow(vg)
                             shape1.x += xNoise
                             return shape1
                         },
@@ -50,10 +50,10 @@ export default function DistrictGeometry() {
         } else {
             self.voterGeomsByTract = self.tractNoise.map(
                 (rowNoise) => rowNoise.map(
-                    (cellNoise) => voterShapes.map(
-                        (vb) => {
+                    (cellNoise) => voterGeoms.map(
+                        (vg) => {
                             const [xNoise, yNoise] = cellNoise
-                            const shape2 = copyObjectShallow(vb.shape2)
+                            const shape2 = copyObjectShallow(vg)
                             shape2.x += xNoise
                             shape2.y += yNoise
                             return shape2

@@ -25,9 +25,9 @@ export default function Districts(voterShapeList, changes, electionOptions, simO
         }
         if (firstRun || changes.check(['draggables', 'dimensions'])) {
             firstRun = false
-            const voterShapes = voterShapeList.getEntities()
             const { dimensions } = simOptions
-            self.districtGeometry.updateVoters(voterShapes, dimensions)
+            const voterGeoms = voterShapeList.getGeoms(dimensions)
+            self.districtGeometry.updateVoters(voterGeoms, dimensions)
             // todo: maybe make this only trigger when voters change
         }
     }
