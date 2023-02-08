@@ -1,10 +1,14 @@
-import makeIntervals1D from './makeIntervals1D.js'
+import makePairwiseIntervals1D from './makePairwiseIntervals1D.js'
 
 export default function makeCanBordersPairwise(geometry) {
     const { canGeoms, voterGeoms, dimensions } = geometry
 
     const someGaussian2D = voterGeoms.some((v) => v.densityProfile === 'gaussian') && dimensions === 2
 
-    const canBorders = (dimensions === 2 || someGaussian2D) ? {} : makeIntervals1D(canGeoms)
+    if (dimensions === 2 || someGaussian2D) {
+        const canBorders = {}
+        return canBorders
+    }
+    const canBorders = { pairwiseIntervals1D: makePairwiseIntervals1D(canGeoms) }
     return canBorders
 }

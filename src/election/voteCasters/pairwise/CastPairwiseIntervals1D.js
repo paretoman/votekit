@@ -1,13 +1,13 @@
 /** @module */
 
-import { sumBlock, sumGaussian } from '../plurality/CastPluralitySummer1DIntervals.js'
+import { sumBlock, sumGaussian } from '../plurality/castPluralityIntervals1D.js'
 
 /**
  * Sum density of voter distributions along splits.
  */
 export default function castPairwiseIntervals1D(voterGeom, geometry) {
     const { canGeoms, canBorders } = geometry
-    const { midpoints, iLower } = canBorders.intervals1D
+    const { midpoints, iLower } = canBorders.pairwiseIntervals1D
 
     const nCans = canGeoms.length
 

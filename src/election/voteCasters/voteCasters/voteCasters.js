@@ -9,13 +9,14 @@ import castScoreTestVote from '../score/castScoreTestVote.js'
 import castRankingTestVote from '../ranking/castRankingTestVote.js'
 import castPairwise from '../pairwise/castPairwise.js'
 import makeCanBordersPairwise from '../pairwise/makeCanBordersPairwise.js'
+import makeCanBordersPlurality from '../plurality/makeCanBordersPlurality.js'
 
 /**
  * a collection of ways to cast votes
  */
 
 const voteCasters = {
-    plurality: { cast: castPlurality, castTestVote: castPluralityTestVote },
+    plurality: { cast: castPlurality, castTestVote: castPluralityTestVote, makeCanBorders: makeCanBordersPlurality },
     score: { cast: castScore, castTestVote: castScoreTestVote },
     scoreLong: { cast: castScoreLong, castTestVote: castScoreTestVote },
     ranking: { cast: castRanking, castTestVote: castRankingTestVote },

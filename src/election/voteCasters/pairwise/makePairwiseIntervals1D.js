@@ -3,9 +3,9 @@
  * compute the midpoints
  * identify which candidate is smaller in x value
  * @param {Object[]} canGeoms
- * @returns {intervals1D}
+ * @returns {pairwiseIntervals1D}
  */
-export default function makeIntervals1D(canGeoms) {
+export default function makePairwiseIntervals1D(canGeoms) {
     const n = canGeoms.length
     const midpoints = Array(n - 1)
     const iLower = Array(n - 1)
@@ -20,7 +20,6 @@ export default function makeIntervals1D(canGeoms) {
             iLower[i][k] = (ix < kx)
         }
     }
-    const intervals1D = { midpoints, iLower }
-    const canBorders = { intervals1D }
-    return canBorders
+    const pairwiseIntervals1D = { midpoints, iLower }
+    return pairwiseIntervals1D
 }

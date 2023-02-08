@@ -1,8 +1,8 @@
 /** @module */
 
-import CastPluralitySummer2DQuadrature from './CastPluralitySummer2DQuadrature.js'
-import CastPluralitySummer1DIntervals from './CastPluralitySummer1DIntervals.js'
-import CastPluralitySummerGrid from './CastPluralitySummerGrid.js'
+import castPluralityIntervals1D from './castPluralityIntervals1D.js'
+import castPluralityQuadrature2D from './castPluralityQuadrature2D.js'
+import castPluralityGrid from './castPluralityGrid.js'
 
 /**
  * Vote for one.
@@ -17,13 +17,12 @@ import CastPluralitySummerGrid from './CastPluralitySummerGrid.js'
 export default function castPlurality(geometry, castOptions) {
     const { canGeoms, voterGeoms, dimensions, parties } = geometry
 
-    const SummerLines = (dimensions === 1)
-        ? CastPluralitySummer1DIntervals
-        : CastPluralitySummer2DQuadrature
     const someGaussian2D = voterGeoms.some((v) => v.densityProfile === 'gaussian') && dimensions === 2
 
-    const Summer = (someGaussian2D) ? CastPluralitySummerGrid : SummerLines
-    const summer = new Summer(canGeoms, castOptions, dimensions)
+    const castRegions = (dimensions === 1)
+        ? castPluralityIntervals1D
+        : castPluralityQuadrature2D
+    const cast = (someGaussian2D) ? castPluralityGrid : castRegions
 
     // get fraction of votes for each candidate so we can summarize results
     const n = canGeoms.length
@@ -33,7 +32,7 @@ export default function castPlurality(geometry, castOptions) {
     for (let i = 0; i < voterGeoms.length; i++) {
         const voterGeom = voterGeoms[i]
 
-        const votesForGeom = summer.sumArea(voterGeom)
+        const votesForGeom = cast(voterGeom, geometry, castOptions)
         votesByGeom[i] = votesForGeom
         const { countByCan: countByCanForGeom,
             totalVotes: totalVotesForGeom } = votesForGeom
