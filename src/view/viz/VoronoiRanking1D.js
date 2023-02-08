@@ -1,6 +1,6 @@
 /** @module */
 
-import castRankingFindIntervals from '../../election/voteCasters/ranking/castRankingFindIntervals.js'
+import makeRankingIntervals1D from '../../election/voteCasters/ranking/makeRankingIntervals1D.js'
 import colorBlender, { rgbToString } from './colorBlender.js'
 
 /**
@@ -24,7 +24,7 @@ export default function VoronoiRanking1D(voterGroup, candidateList, screen) {
         if (rankings === undefined || intervalBorders === undefined) {
             canList = candidateList.getEntities()
             const canGeoms = canList.map((can) => can.shape1)
-            const cd = castRankingFindIntervals(canGeoms)
+            const cd = makeRankingIntervals1D(canGeoms)
             rankings = cd.rankings
             intervalBorders = cd.intervalBorders
         }

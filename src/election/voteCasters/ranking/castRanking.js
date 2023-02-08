@@ -1,8 +1,8 @@
 /** @module */
 
-import CastRankingSummer2DPolygons from './CastRankingSummer2DPolygons.js'
-import CastRankingSummer1DIntervals from './CastRankingSummer1DIntervals.js'
-import CastRankingSummerGrid from './CastRankingSummerGrid.js'
+import castRankingGrid from './castRankingGrid.js'
+import castRankingIntervals1D from './castRankingIntervals1D.js'
+import castRankingPolygons2D from './castRankingPolygons2D.js'
 
 /**
  * Vote for one.
@@ -17,12 +17,12 @@ import CastRankingSummerGrid from './CastRankingSummerGrid.js'
 export default function castRanking(geometry, castOptions) {
     const { canGeoms, voterGeoms, dimensions, parties } = geometry
 
-    const SummerLines = (dimensions === 1)
-        ? CastRankingSummer1DIntervals
-        : CastRankingSummer2DPolygons
     const someGaussian2D = voterGeoms.some((v) => v.densityProfile === 'gaussian') && dimensions === 2
-    const Summer = (someGaussian2D) ? CastRankingSummerGrid : SummerLines
-    const summer = new Summer(canGeoms, castOptions, dimensions)
+
+    const castRegions = (dimensions === 1)
+        ? castRankingIntervals1D
+        : castRankingPolygons2D
+    const cast = (someGaussian2D) ? castRankingGrid : castRegions
 
     const n = canGeoms.length
 
@@ -36,7 +36,7 @@ export default function castRanking(geometry, castOptions) {
 
     // should ideally make a set of polygons for each ranking so that we avoid repeating rankings.
     voterGeoms.forEach((voterGeom, g) => {
-        const votesForGeom = summer.sumArea(voterGeom)
+        const votesForGeom = cast(voterGeom, geometry, castOptions)
         votesByGeom[g] = votesForGeom
         const { rankings: rankingsForGeom,
             cansByRankList: cansByRankListForGeom,

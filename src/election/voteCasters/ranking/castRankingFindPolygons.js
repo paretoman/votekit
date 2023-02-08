@@ -10,7 +10,6 @@ import splitConvex from './splitConvex.js'
  * Use a dividing line for each pair of candidates.
  * @param {Object} voterGeom
  * @param {Object[]} canGeoms
- * @constructor
  */
 export default function castRankingFindPolygons(voterGeom, canGeoms) {
     /* Start with polygons for each voterGeom
@@ -84,7 +83,8 @@ export default function castRankingFindPolygons(voterGeom, canGeoms) {
             cansByRankList[i][rik - 1].push(k)
         }
     }
-    return { cells, ranking, cansByRankList }
+    const rankingPolygons2D = { cells, ranking, cansByRankList }
+    return rankingPolygons2D
 }
 
 /**

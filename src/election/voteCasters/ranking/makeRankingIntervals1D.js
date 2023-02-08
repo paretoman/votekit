@@ -5,9 +5,8 @@ import { copyArrayShallow, range } from '../../../utilities/jsHelpers.js'
 /**
  * Find the intervals over which voters share a ranking.
  * @param {Object[]} canGeoms
- * @constructor
  */
-export default function castRankingFindIntervals(canGeoms) {
+export default function makeRankingIntervals1D(canGeoms) {
     /*
     * Find and sort midpoints for each pair of voters.
     * Find intervals in which voters have a ranking.
@@ -75,7 +74,8 @@ export default function castRankingFindIntervals(canGeoms) {
     const intervalBorders = copyArrayShallow(midpoints)
     intervalBorders.unshift(-Infinity)
     intervalBorders.push(Infinity)
-    return { intervalBorders, rankings, cansByRankList }
+    const rankingIntervals1D = { intervalBorders, rankings, cansByRankList }
+    return rankingIntervals1D
 }
 
 function findMidpoint(can1, can2) {
