@@ -1,6 +1,6 @@
 /** @module */
 
-import castScoreGrid from './castScoreGrid.js'
+import castScoreGrid from '../score/castScoreGrid.js'
 
 // The main difference between this and plurality is we need to return a grid from here.
 // We also will return a set of votes from that grid.
@@ -15,7 +15,7 @@ import castScoreGrid from './castScoreGrid.js'
  * For 1D, an array of objects: {x,w,densityProfile}.
  * @returns votes, an object
  */
-export default function castScoreLong(geometry, castOptions) {
+export default function castScoreFull(geometry, castOptions) {
     const { canGeoms, voterGeoms, parties } = geometry
 
     // get fraction of votes for each candidate so we can summarize results

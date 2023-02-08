@@ -262,7 +262,7 @@ export const methodOfEqualSharesMetadata = {
     name: 'Method of Equal Shares',
     shortName: 'MES',
     functionName: 'methodOfEqualShares',
-    voteCasterName: 'scoreLong', // for input
+    voteCasterName: 'scoreFull', // for input
     socialChoiceType: 'multiWinner',
     elect: methodOfEqualShares,
 }

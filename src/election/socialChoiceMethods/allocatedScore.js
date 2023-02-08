@@ -86,7 +86,7 @@ export const allocatedScoreMetadata = {
     name: 'Allocated Score',
     shortName: 'AllocScore',
     functionName: 'allocatedScore',
-    voteCasterName: 'scoreLong', // for input
+    voteCasterName: 'scoreFull', // for input
     socialChoiceType: 'multiWinner',
     elect: allocatedScore,
 }

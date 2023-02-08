@@ -2,7 +2,7 @@
 
 import castPlurality from '../plurality/castPlurality.js'
 import castScore from '../score/castScore.js'
-import castScoreLong from '../score/castScoreLong.js'
+import castScoreFull from '../scoreFull/castScoreFull.js'
 import castRanking from '../ranking/castRanking.js'
 import castPluralityTestVote from '../plurality/castPluralityTestVote.js'
 import castScoreTestVote from '../score/castScoreTestVote.js'
@@ -19,7 +19,7 @@ import makeCanBordersRanking from '../ranking/makeCanBordersRanking.js'
 const voteCasters = {
     plurality: { cast: castPlurality, castTestVote: castPluralityTestVote, makeCanBorders: makeCanBordersPlurality },
     score: { cast: castScore, castTestVote: castScoreTestVote },
-    scoreLong: { cast: castScoreLong, castTestVote: castScoreTestVote },
+    scoreFull: { cast: castScoreFull, castTestVote: castScoreTestVote },
     ranking: { cast: castRanking, castTestVote: castRankingTestVote, makeCanBorders: makeCanBordersRanking },
     pairwise: { cast: castPairwise, castTestVote: castRankingTestVote, makeCanBorders: makeCanBordersPairwise },
 }
