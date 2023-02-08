@@ -15,17 +15,8 @@ export default function ElectionSampler() {
 
     const maxPoints = 5000
 
-    let points = []
+    let points
     let partyWins
-
-    self.update = function (geometry, cDnSampler, changes, electionOptions) {
-        if (changes.checkAny()) {
-            self.startSim()
-        }
-
-        const samplingResult = self.addSim(geometry, cDnSampler, electionOptions)
-        return samplingResult
-    }
 
     self.startSim = function () {
         points = []

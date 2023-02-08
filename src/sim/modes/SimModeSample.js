@@ -1,18 +1,13 @@
 /** @module */
 
 import CandidateDistributionSampler from '../sampler/CandidateDistributionSampler.js'
-import ElectionSampler from '../../election/sampler/ElectionSampler.js'
 import getGeometry from '../sim/getGeometry.js'
+import Sampler from '../sampler/Sampler.js'
 
 /**
  * Simulate many sample elections with
  *   candidates in random positions within a distribution, and
  *   voters in a distribution that will be summed over.
- * @param {Screen} screen
- * @param {Menu} menu
- * @param {ElectionSample} electionSample
- * @param {ElectionSampler} electionSampler
- * @param {DistrictGeometry} districts
  * @constructor
  */
 export default function SimModeSample(pub, entities, changes, districts, simOptions, electionOptions) {
@@ -21,7 +16,7 @@ export default function SimModeSample(pub, entities, changes, districts, simOpti
     const { candidateDnList, voterShapeList } = entities
     const canDnSampler = new CandidateDistributionSampler(candidateDnList, changes, simOptions)
 
-    const electionSampler = new ElectionSampler()
+    const sampler = new Sampler()
 
     self.update = () => {
         // Update players. Run an election. Get result.
@@ -34,7 +29,7 @@ export default function SimModeSample(pub, entities, changes, districts, simOpti
 
         const geometry = getGeometry(voterShapeList, candidateDnList, simOptions, electionOptions, districts)
 
-        const samplingResult = electionSampler.update(geometry, canDnSampler.sampler, changes, electionOptions)
+        const samplingResult = sampler.update(geometry, canDnSampler.sampler, changes, electionOptions)
         const simData = { samplingResult }
 
         if (samplingResult.pointsChanged === true || changes.checkAny()) {
