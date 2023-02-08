@@ -1,7 +1,7 @@
 /** @module */
 
 import CandidateDistributionSampler from '../sampler/CandidateDistributionSampler.js'
-import getGeometry from '../sim/getGeometry.js'
+import getGeometry from '../geometry/getGeometry.js'
 import Sampler from '../sampler/Sampler.js'
 
 /**

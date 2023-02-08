@@ -5,7 +5,7 @@ import VoterViewList from '../vizVoters/VoterViewList.js'
 import ViewBase from './ViewBase.js'
 import addAllocation from '../viz/addAllocation.js'
 import TestVoterView from '../vizTestVoter/TestVoterView.js'
-import getTestGeometry from '../../sim/sim/getTestGeometry.js'
+import getTestGeometry from '../../sim/geometry/getTestGeometry.js'
 import voteCasters from '../../election/voteCasters/voteCasters/voteCasters.js'
 
 /**

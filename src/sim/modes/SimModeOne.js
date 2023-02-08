@@ -1,6 +1,6 @@
 /** @module */
 
-import getGeometry from '../sim/getGeometry.js'
+import getGeometry from '../geometry/getGeometry.js'
 import election from '../../election/election/election.js'
 
 /**

@@ -4,9 +4,9 @@ import SimOptions from '../options/SimOptions.js'
 import ElectionOptions from '../options/ElectionOptions.js'
 import Entities from '../entities/Entities.js'
 import SimMode from '../modes/SimMode.js'
-import addDefaultEntities from './addDefaultEntities.js'
+import addDefaultEntities from '../entities/addDefaultEntities.js'
 import Publisher from './Publisher.js'
-import Districts from './Districts.js'
+import Districts from '../geometry/Districts.js'
 
 export default function Sim(comMessenger) {
     const changes = new Changes()
