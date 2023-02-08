@@ -1,5 +1,5 @@
-import CandidateDistributionSampler1D from './CandidateDistributionSampler1D.js'
-import CandidateDistributionSampler2D from './CandidateDistributionSampler2D.js'
+import CandidateDistributionSampler1D from '../../election/sampler/CandidateDistributionSampler1D.js'
+import CandidateDistributionSampler2D from '../../election/sampler/CandidateDistributionSampler2D.js'
 
 export default function CandidateDistributionSampler(candidateDnList, changes, simOptions) {
     const self = this
@@ -12,11 +12,14 @@ export default function CandidateDistributionSampler(candidateDnList, changes, s
 
     self.startSampler = () => {
         const { dimensions } = simOptions
-        const canDnsList = candidateDnList.getEntities()
-        if (canDnsList.length === 0) return
+        const canDnsGeoms = candidateDnList.getGeoms()
+        const { partiesByCan } = candidateDnList.getParties()
+
+        if (canDnsGeoms.length === 0) return
+
         const CDnSampler = (dimensions === 1)
             ? CandidateDistributionSampler1D
             : CandidateDistributionSampler2D
-        self.sampler = new CDnSampler(canDnsList)
+        self.sampler = new CDnSampler(canDnsGeoms, partiesByCan)
     }
 }

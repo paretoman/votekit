@@ -5,31 +5,32 @@ import getCDF, { randomIndexFromCDF } from '../../utilities/mathUtilities.js'
 /**
  * Use this to sample a random candidate from a collection of distributions of candidates.
  * Sample a point multiple times after the constructor call.
- * @param {CandidateDn[]} candidateDistributions
+ * @param {CandidateDn[]} canDnGeoms
  * @constructor
  */
-export default function CandidateDistributionSampler1D(candidateDistributions) {
+export default function CandidateDistributionSampler1D(canDnGeoms, partiesByCan) {
     const self = this
 
     // cumulative distribution function
     // find the size of the voter distributions
-    const proportion = candidateDistributions.map((cd) => cd.shape1.w)
+    const proportion = canDnGeoms.map((cd) => cd.w)
     const cdf = getCDF(proportion)
 
     self.samplePoint = function () {
-        return samplePoint1(candidateDistributions, cdf)
+        return samplePoint1(canDnGeoms, partiesByCan, cdf)
     }
 }
 
-function samplePoint1(candidateDistributions, cdf) {
+function samplePoint1(canDnGeoms, partiesByCan, cdf) {
     // pick a voter distribution
     const iDist = randomIndexFromCDF(cdf)
-    const cd = candidateDistributions[iDist]
+    const cd = canDnGeoms[iDist]
+    const party = partiesByCan[iDist]
+    const { x, w, densityProfile } = cd
     // sample circle
-    const isGaussian = cd.shape1.densityProfile === 'gaussian'
+    const isGaussian = densityProfile === 'gaussian'
     const sample = (isGaussian) ? sampleGaussian : randomInsideInterval
-    const canGeom = sample(cd.shape1.x, cd.shape1.w * 0.5)
-    const { party } = cd
+    const canGeom = sample(x, w * 0.5)
     const point = { canGeom, party }
     return point
 }

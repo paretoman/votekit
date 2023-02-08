@@ -3,28 +3,28 @@
 /**
  * Use this to sample a random candidate from a collection of distributions of candidates.
  * Sample a point multiple times after the constructor call.
- * @param {CandidateDn[]} candidateDistributions
+ * @param {Object[]} canDnGeoms
  * @constructor
  */
-export default function CandidateDistributionSampler2D(candidateDistributions) {
+export default function CandidateDistributionSampler2D(canDnGeoms, partiesByCan) {
     const self = this
     // cumulative distribution function
-    const cdf = getCDF(candidateDistributions)
+    const cdf = getCDF(canDnGeoms)
     self.samplePoint = function () {
-        return samplePoint1(candidateDistributions, cdf)
+        return samplePoint1(canDnGeoms, partiesByCan, cdf)
     }
 }
 
-function samplePoint1(candidateDistributions, cdf) {
+function samplePoint1(canDnGeoms, partiesByCan, cdf) {
     // pick a voter distribution
     const iDist = randomDistribution(cdf)
-    const cd = candidateDistributions[iDist]
-    const { x, y, w, densityProfile } = cd.shape2
+    const cd = canDnGeoms[iDist]
+    const party = partiesByCan[iDist]
+    const { x, y, w, densityProfile } = cd
     // sample circle
     const randomSample = (densityProfile === 'gaussian') ? randomInsideGaussian : randomInsideCircle
     const canGeom = randomSample(x, y, w * 0.5)
 
-    const { party } = cd
     const point = { canGeom, party }
     return point
 }
@@ -37,9 +37,9 @@ function randomDistribution(cdf) {
     return selectDistribution
 }
 
-function getCDF(candidateDistributions) {
+function getCDF(canDnGeoms) {
     // find the size of the voter distributions
-    const areasProportion = candidateDistributions.map((cd) => cd.shape2.w ** 2)
+    const areasProportion = canDnGeoms.map((cd) => cd.w ** 2)
 
     const sumAreasProportion = areasProportion.reduce((p, c) => p + c)
 

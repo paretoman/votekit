@@ -1,6 +1,6 @@
 /** @module */
 
-import CandidateDistributionSampler from '../../election/sampler/CandidateDistributionSampler.js'
+import CandidateDistributionSampler from '../sampler/CandidateDistributionSampler.js'
 import ElectionSampler from '../../election/sampler/ElectionSampler.js'
 import getGeometry from '../sim/getGeometry.js'
 
