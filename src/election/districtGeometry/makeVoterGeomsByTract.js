@@ -6,7 +6,14 @@ import { copyObjectShallow } from '../../utilities/jsHelpers.js'
  * but it is altered by translating it in policy space with a little noise
  * to represent differences due to geography
  *  */
-export function voterGeomsByTract1D(voterGeoms, tractNoise) {
+export default function makeVoterGeomsByTract(voterGeoms, tractNoise, dimensions) {
+    if (dimensions === 1) {
+        return voterGeomsByTract1D(voterGeoms, tractNoise)
+    }
+    return voterGeomsByTract2D(voterGeoms, tractNoise)
+}
+
+function voterGeomsByTract1D(voterGeoms, tractNoise) {
     return tractNoise.map(
         (rowNoise) => rowNoise.map(
             (cellNoise) => voterGeoms.map(
@@ -20,7 +27,8 @@ export function voterGeomsByTract1D(voterGeoms, tractNoise) {
         ),
     )
 }
-export default function voterGeomsByTract2D(voterGeoms, tractNoise) {
+
+function voterGeomsByTract2D(voterGeoms, tractNoise) {
     return tractNoise.map(
         (rowNoise) => rowNoise.map(
             (cellNoise) => voterGeoms.map(

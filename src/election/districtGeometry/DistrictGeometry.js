@@ -1,8 +1,8 @@
 /** @module */
 
 import makeDistrictMap from './makeDistrictMap.js'
-import makeTractNoise from './DistrictNoise.js'
-import voterGeomsByTract2D, { voterGeomsByTract1D } from './voterGeomsByTract.js'
+import makeTractNoise from './makeTractNoise.js'
+import makeVoterGeomsByTract from './makeVoterGeomsByTract.js'
 
 /**
  * @constructor
@@ -26,10 +26,6 @@ export default function DistrictGeometry() {
 
     /** Update VoterGeoms for each Tract */
     self.updateVoters = (voterGeoms, dimensions) => {
-        if (dimensions === 1) {
-            self.voterGeomsByTract = voterGeomsByTract1D(voterGeoms, self.tractNoise)
-        } else {
-            self.voterGeomsByTract = voterGeomsByTract2D(voterGeoms, self.tractNoise)
-        }
+        self.voterGeomsByTract = makeVoterGeomsByTract(voterGeoms, self.tractNoise, dimensions)
     }
 }
