@@ -11,15 +11,17 @@ export default function CandidateDistributionSampler(candidateDnList, changes, s
     }
 
     self.startSampler = () => {
-        const { dimensions } = simOptions
         const canDnsGeoms = candidateDnList.getGeoms()
-        const { partiesByCan } = candidateDnList.getParties()
 
         if (canDnsGeoms.length === 0) return
 
-        const CDnSampler = (dimensions === 1)
-            ? CandidateDistributionSampler1D
-            : CandidateDistributionSampler2D
-        self.sampler = new CDnSampler(canDnsGeoms, partiesByCan)
+        const { dimensions } = simOptions
+        const { partiesByCan } = candidateDnList.getParties()
+
+        if (dimensions === 1) {
+            self.sampler = new CandidateDistributionSampler1D(canDnsGeoms, partiesByCan)
+        } else {
+            self.sampler = new CandidateDistributionSampler2D(canDnsGeoms, partiesByCan)
+        }
     }
 }
