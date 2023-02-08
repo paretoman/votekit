@@ -1,10 +1,10 @@
 /** @module */
 
-import combineVotes from './combineVotes.js'
+import combineVotesStatewide from './combineVotesStatewide.js'
 import combineVotesByDistrict from './combineVotesByDistrict.js'
 import socialChoiceRun from '../election/socialChoiceRun.js'
 import castVotesByTract from './castVotesByTract.js'
-import sumAllocations from './sumAllocations.js'
+import sumAllocationsStatewide from './combineAllocationsStatewide.js'
 
 /**
  * An election with many districts.
@@ -17,11 +17,11 @@ export default function districtElection(geometry, electionOptions) {
     const { canGeoms, districtGeometry } = geometry
 
     const votesByTract = castVotesByTract(geometry, electionOptions)
-    const allVotes = combineVotes(votesByTract, canGeoms)
+    const allVotes = combineVotesStatewide(votesByTract, canGeoms)
     const votesByDistrict = combineVotesByDistrict(votesByTract, canGeoms, districtGeometry)
 
     const scResultsByDistrict = countDistrictElections(votesByDistrict, electionOptions)
-    const allocation = sumAllocations(scResultsByDistrict, canGeoms, electionOptions)
+    const allocation = sumAllocationsStatewide(scResultsByDistrict, canGeoms, electionOptions)
     const socialChoiceResults = { allocation }
 
     const electionResults = {

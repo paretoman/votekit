@@ -3,7 +3,7 @@ import statewideRankingTallyFractions from './statewideRankingTallyFractions.js'
 import statewideScoreTallyFractions from './statewideScoreTallyFractions.js'
 import statewideTallyFractions from './statewideTallyFractions.js'
 
-export default function combineVotes(votesByTract, canGeoms) {
+export default function combineVotesStatewide(votesByTract, canGeoms) {
     const numCans = canGeoms.length
 
     const votes = {}

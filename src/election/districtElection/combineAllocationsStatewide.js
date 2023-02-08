@@ -1,5 +1,5 @@
 // Show wins across all districts for each candidate
-export default function sumAllocations(scResultsByDistrict, canGeoms, electionOptions) {
+export default function sumAllocationsStatewide(scResultsByDistrict, canGeoms, electionOptions) {
     // make a histogram of allocation
     const numCandidates = canGeoms.length
     const allocationsSum = Array(numCandidates).fill(0)
