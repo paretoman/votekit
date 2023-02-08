@@ -1,6 +1,6 @@
 /** @module */
 
-import CastScoreSummerGrid from './CastScoreSummerGrid.js'
+import castScoreGrid from './castScoreGrid.js'
 
 // The main difference between this and plurality is we need to return a grid from here.
 // We also will return a set of votes from that grid.
@@ -16,9 +16,7 @@ import CastScoreSummerGrid from './CastScoreSummerGrid.js'
  * @returns votes, an object
  */
 export default function castScore(geometry, castOptions) {
-    const { canGeoms, voterGeoms, dimensions, parties } = geometry
-
-    const summer = new CastScoreSummerGrid(canGeoms, castOptions, dimensions)
+    const { canGeoms, voterGeoms, parties } = geometry
 
     // get fraction of votes for each candidate so we can summarize results
     const n = canGeoms.length
@@ -28,7 +26,7 @@ export default function castScore(geometry, castOptions) {
     for (let i = 0; i < voterGeoms.length; i++) {
         const voterGeom = voterGeoms[i]
 
-        const votesForGeom = summer.sumArea(voterGeom)
+        const votesForGeom = castScoreGrid(voterGeom, geometry, castOptions)
         votesByGeom[i] = votesForGeom
         const { totalVotes: totalVotesForGeom,
             scoreSumByCan: scoreSumByCanForGeom } = votesForGeom
