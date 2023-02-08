@@ -46,8 +46,8 @@ function districtTallyFractions(votesByTract, cen, numCans) {
             totals[k] += tallyFractions[k] * gf
         }
     }
-    const norm = 1 / totals.reduce((p, c) => p + c)
-    const tallyFractions = totals.map((t) => t * norm)
+    const gfNorm = getNormDistrict(cen)
+    const tallyFractions = totals.map((t) => t * gfNorm)
     return { tallyFractions }
 }
 
@@ -66,8 +66,9 @@ function districtPairwiseTallyFractions(votesByTract, cen, numCans) {
             }
         }
     }
-    const pNorm = 1 / (pTotals[0][1] + pTotals[1][0]) // sum wins and losses
-    const pairwiseTallyFractions = pTotals.map((row) => row.map((t) => t * pNorm))
+
+    const gfNorm = getNormDistrict(cen)
+    const pairwiseTallyFractions = pTotals.map((row) => row.map((t) => t * gfNorm))
     return { pairwiseTallyFractions }
 }
 
@@ -76,16 +77,10 @@ function districtRankingTallyFractions(votesByTract, cen) {
     let votePopAll = []
     let cansByRankListAll = []
 
-    let gfSum = 0
-    for (let j = 0; j < cen.length; j++) {
-        const [, , gf] = cen[j]
-        gfSum += gf
-    }
-    const gfNorm = 1 / gfSum
+    const gfNorm = getNormDistrict(cen)
 
     for (let j = 0; j < cen.length; j++) {
         const [gx, gy, gf] = cen[j]
-        gfSum += gf
         const { voteFractions, cansByRankList } = votesByTract[gx][gy].preferenceTallies
         const votePopNorm = voteFractions
             .map((x) => x * gf * gfNorm)
@@ -104,16 +99,10 @@ function districtScoreTallyFractions(votesByTract, cen) {
     let votePopAll = []
     let scoreVotesAll = []
 
-    let gfSum = 0
-    for (let j = 0; j < cen.length; j++) {
-        const [, , gf] = cen[j]
-        gfSum += gf
-    }
-    const gfNorm = 1 / gfSum
+    const gfNorm = getNormDistrict(cen)
 
     for (let j = 0; j < cen.length; j++) {
         const [gx, gy, gf] = cen[j]
-        gfSum += gf
         const { voteFractions, scoreVotes } = votesByTract[gx][gy].preferenceTallies
         const votePopNorm = voteFractions
             .map((x) => x * gf * gfNorm)
@@ -125,4 +114,20 @@ function districtScoreTallyFractions(votesByTract, cen) {
         voteFractions: votePopAll,
         scoreVotes: scoreVotesAll,
     }
+}
+
+/**
+ * Normalize the sum of the stats for a district.
+ * @param {Number[][]} cen - An entry in the census for a district,
+ * containing the fraction of a tract in a district
+ * @returns {Number} normalizing parameter to multiply stat sum by.
+ */
+function getNormDistrict(cen) {
+    let gfSum = 0
+    for (let j = 0; j < cen.length; j++) {
+        const [, , gf] = cen[j]
+        gfSum += gf
+    }
+    const gfNorm = 1 / gfSum
+    return gfNorm
 }

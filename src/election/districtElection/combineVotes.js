@@ -34,8 +34,8 @@ function statewideTallyFractions(votesByTract, numCans) {
             },
         ),
     )
-    const norm = 1 / totals.reduce((p, c) => p + c)
-    const tallyFractions = totals.map((t) => t * norm)
+    const dNorm = getNormStatewide(votesByTract)
+    const tallyFractions = totals.map((t) => t * dNorm)
     return { tallyFractions }
 }
 
@@ -57,8 +57,8 @@ function statewidePairwiseTallyFractions(votesByTract, numCans) {
             },
         ),
     )
-    const pNorm = 1 / (pTotals[0][1] + pTotals[1][0]) // sum wins and losses
-    const pairwiseTallyFractions = pTotals.map((row) => row.map((t) => t * pNorm))
+    const dNorm = getNormStatewide(votesByTract)
+    const pairwiseTallyFractions = pTotals.map((row) => row.map((t) => t * dNorm))
     return { pairwiseTallyFractions }
 }
 
@@ -76,10 +76,8 @@ function statewideRankingTallyFractions(votesByTract) {
             },
         ),
     )
-    const numRows = votesByTract.length
-    const numCols = votesByTract[0].length
-    const rNorm = 1 / (numRows * numCols)
-    votePopAll = votePopAll.map((t) => t * rNorm)
+    const dNorm = getNormStatewide(votesByTract)
+    votePopAll = votePopAll.map((t) => t * dNorm)
     return {
         voteFractions: votePopAll,
         cansByRankList: cansByRankListAll,
@@ -100,12 +98,16 @@ function statewideScoreTallyFractions(votesByTract) {
             },
         ),
     )
-    const numRows = votesByTract.length
-    const numCols = votesByTract[0].length
-    const rNorm = 1 / (numRows * numCols)
-    votePopAll = votePopAll.map((t) => t * rNorm)
+    const dNorm = getNormStatewide(votesByTract)
+    votePopAll = votePopAll.map((t) => t * dNorm)
     return {
         voteFractions: votePopAll,
         scoreVotes: scoreVoteAll,
     }
+}
+function getNormStatewide(votesByTract) {
+    const numRows = votesByTract.length
+    const numCols = votesByTract[0].length
+    const dNorm = 1 / (numRows * numCols)
+    return dNorm
 }
