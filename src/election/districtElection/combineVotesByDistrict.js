@@ -16,33 +16,19 @@ export default function combineVotesByDistrict(votesByTract, canGeoms, districtG
         const votes = {}
 
         if (votesByTract[0][0].candidateTallies !== undefined) {
-            // tf - tally fractions
-            const tf = districtTallyFractions(votesByTract, cen, numCans)
-            votes.candidateTallies = { tallyFractions: tf }
+            votes.candidateTallies = districtTallyFractions(votesByTract, cen, numCans)
         }
 
         if (votesByTract[0][0].pairwiseTallies !== undefined) {
-            // pwtf - pairwise tally fractions
-            const pwtf = districtPairwiseTallyFractions(votesByTract, cen, numCans)
-            votes.pairwiseTallies = { pairwiseTallyFractions: pwtf }
+            votes.pairwiseTallies = districtPairwiseTallyFractions(votesByTract, cen, numCans)
         }
         if (votesByTract[0][0].preferenceTallies !== undefined
             && votesByTract[0][0].preferenceTallies.cansByRankList !== undefined) {
-            // vrtf - votes ranked tally fractions
-            const vrtf = districtRankingTallyFractions(votesByTract, cen)
-            votes.preferenceTallies = {
-                voteFractions: vrtf.voteFractions,
-                cansByRankList: vrtf.cansByRankList,
-            }
+            votes.preferenceTallies = districtRankingTallyFractions(votesByTract, cen)
         }
         if (votesByTract[0][0].preferenceTallies !== undefined
             && votesByTract[0][0].preferenceTallies.scoreVotes !== undefined) {
-            // vstf - votes score tally fractions
-            const vstf = districtScoreTallyFractions(votesByTract, cen)
-            votes.preferenceTallies = {
-                voteFractions: vstf.voteFractions,
-                scoreVotes: vstf.scoreVotes,
-            }
+            votes.preferenceTallies = districtScoreTallyFractions(votesByTract, cen)
         }
         votes.parties = votesByTract[0][0].parties
         return votes
@@ -62,7 +48,7 @@ function districtTallyFractions(votesByTract, cen, numCans) {
     }
     const norm = 1 / totals.reduce((p, c) => p + c)
     const tallyFractions = totals.map((t) => t * norm)
-    return tallyFractions
+    return { tallyFractions }
 }
 
 function districtPairwiseTallyFractions(votesByTract, cen, numCans) {
@@ -82,7 +68,7 @@ function districtPairwiseTallyFractions(votesByTract, cen, numCans) {
     }
     const pNorm = 1 / (pTotals[0][1] + pTotals[1][0]) // sum wins and losses
     const pairwiseTallyFractions = pTotals.map((row) => row.map((t) => t * pNorm))
-    return pairwiseTallyFractions
+    return { pairwiseTallyFractions }
 }
 
 function districtRankingTallyFractions(votesByTract, cen) {

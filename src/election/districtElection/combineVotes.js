@@ -4,32 +4,18 @@ export default function combineVotes(votesByTract, canGeoms) {
     const votes = {}
 
     if (votesByTract[0][0].candidateTallies !== undefined) {
-        // tf - tally fractions
-        const tf = statewideTallyFractions(votesByTract, numCans)
-        votes.candidateTallies = { tallyFractions: tf }
+        votes.candidateTallies = statewideTallyFractions(votesByTract, numCans)
     }
     if (votesByTract[0][0].pairwiseTallies !== undefined) {
-        // pwtf - pairwise tally fractions
-        const pwtf = statewidePairwiseTallyFractions(votesByTract, numCans)
-        votes.pairwiseTallies = { pairwiseTallyFractions: pwtf }
+        votes.pairwiseTallies = statewidePairwiseTallyFractions(votesByTract, numCans)
     }
     if (votesByTract[0][0].preferenceTallies !== undefined
         && votesByTract[0][0].preferenceTallies.cansByRankList !== undefined) {
-        // vrtf - votes ranked tally fractions
-        const vrtf = statewideRankingTallyFractions(votesByTract)
-        votes.preferenceTallies = {
-            voteFractions: vrtf.voteFractions,
-            cansByRankList: vrtf.cansByRankList,
-        }
+        votes.preferenceTallies = statewideRankingTallyFractions(votesByTract)
     }
     if (votesByTract[0][0].preferenceTallies !== undefined
         && votesByTract[0][0].preferenceTallies.scoreVotes !== undefined) {
-        // vstf - votes score tally fractions
-        const vstf = statewideScoreTallyFractions(votesByTract)
-        votes.preferenceTallies = {
-            voteFractions: vstf.voteFractions,
-            scoreVotes: vstf.scoreVotes,
-        }
+        votes.preferenceTallies = statewideScoreTallyFractions(votesByTract)
     }
     votes.parties = votesByTract[0][0].parties
     return votes
@@ -50,7 +36,7 @@ function statewideTallyFractions(votesByTract, numCans) {
     )
     const norm = 1 / totals.reduce((p, c) => p + c)
     const tallyFractions = totals.map((t) => t * norm)
-    return tallyFractions
+    return { tallyFractions }
 }
 
 function statewidePairwiseTallyFractions(votesByTract, numCans) {
@@ -73,7 +59,7 @@ function statewidePairwiseTallyFractions(votesByTract, numCans) {
     )
     const pNorm = 1 / (pTotals[0][1] + pTotals[1][0]) // sum wins and losses
     const pairwiseTallyFractions = pTotals.map((row) => row.map((t) => t * pNorm))
-    return pairwiseTallyFractions
+    return { pairwiseTallyFractions }
 }
 
 function statewideRankingTallyFractions(votesByTract) {
