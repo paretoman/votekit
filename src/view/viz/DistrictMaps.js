@@ -12,15 +12,16 @@ import NoiseImage from './NoiseImage.js'
 export default function DistrictMaps(candidateList, screen, electionOptions) {
     const self = this
 
+    let districtMap
     // Update //
 
     self.update = (districtElectionResults) => {
         const { districtGeometry } = districtElectionResults.geometry
+        districtMap = districtGeometry.districtMap
 
         // todo: make this only run when we have new districts
         if (self.districtDraw === undefined) {
-            const { districtMap } = districtGeometry
-            self.districtDraw = new DistrictDraw(screen, districtMap)
+            self.districtDraw = new DistrictDraw(screen)
             // Code that handles making images of geographic noise.
             self.noiseImage = new NoiseImage(districtGeometry.nx, districtGeometry.ny, screen)
         }
@@ -47,16 +48,16 @@ export default function DistrictMaps(candidateList, screen, electionOptions) {
     // Render census tract votes.
     self.renderTractVotes = () => {
         self.noiseImage.render(districtMapWidth, districtMapHeight)
-        self.districtDraw.renderVoronoi(districtMapWidth, districtMapHeight)
+        self.districtDraw.renderVoronoi(districtMap, districtMapWidth, districtMapHeight)
     }
     // Render district wins.
     self.renderDistrictWins = () => {
         const { renderVoronoiColors } = self.districtDraw
-        renderVoronoiColors(200, 0, districtMapWidth, districtMapHeight, self.winnerColors)
+        renderVoronoiColors(districtMap, 200, 0, districtMapWidth, districtMapHeight, self.winnerColors)
     }
     // render district votes.
     self.renderDistrictVotes = () => {
         const { renderVoronoiColors } = self.districtDraw
-        renderVoronoiColors(100, 0, districtMapWidth, districtMapHeight, self.colorOfVoteByDistrict)
+        renderVoronoiColors(districtMap, 100, 0, districtMapWidth, districtMapHeight, self.colorOfVoteByDistrict)
     }
 }

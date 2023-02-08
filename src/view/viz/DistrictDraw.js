@@ -7,7 +7,7 @@ import { drawStrokedColor } from '../../utilities/graphicsUtilities.js'
  * @param {Screen} screen
  * @constructor
  */
-export default function DistrictDraw(screen, districtMap) {
+export default function DistrictDraw(screen) {
     const self = this
 
     /**
@@ -22,12 +22,12 @@ export default function DistrictDraw(screen, districtMap) {
      * @param {Number} districtMapWidth - width of image
      * @param {Number} districtMapHeight - height of image
      */
-    self.renderVoronoi = (districtMapWidth, districtMapHeight) => {
-        self.renderVoronoiGeneral(0, 0, districtMapWidth, districtMapHeight, null, renderAreaText)
+    self.renderVoronoi = (districtMap, districtMapWidth, districtMapHeight) => {
+        self.renderVoronoiGeneral(districtMap, 0, 0, districtMapWidth, districtMapHeight, null, renderAreaText)
     }
 
-    self.renderVoronoiColors = (x, y, districtMapWidth, districtMapHeight, colors) => {
-        self.renderVoronoiGeneral(x, y, districtMapWidth, districtMapHeight, colors, undefined)
+    self.renderVoronoiColors = (districtMap, x, y, districtMapWidth, districtMapHeight, colors) => {
+        self.renderVoronoiGeneral(districtMap, x, y, districtMapWidth, districtMapHeight, colors, undefined)
     }
     /**
      * Draw a Voronoi Diagram
@@ -38,7 +38,7 @@ export default function DistrictDraw(screen, districtMap) {
      * @param {string[]} colors - an option, say "null" if do not want colors
      * @param {Function} textFunction - an option, defaults to undefined
      */
-    self.renderVoronoiGeneral = (x, y, districtMapWidth, districtMapHeight, colors, textFunction) => {
+    self.renderVoronoiGeneral = (districtMap, x, y, districtMapWidth, districtMapHeight, colors, textFunction) => {
         const { ctx } = screen
         const {
             voronoi, nx, ny, nd,
@@ -58,12 +58,12 @@ export default function DistrictDraw(screen, districtMap) {
                 ctx.fill()
             }
             ctx.stroke()
-            if (textFunction !== undefined) textFunction(i) // option
+            if (textFunction !== undefined) textFunction(districtMap, i) // option
         }
         ctx.restore()
     }
 
-    function renderAreaText(i) {
+    function renderAreaText(districtMap, i) {
         const { ctx } = screen
         const { centroids, polygonAreas } = districtMap
         const c = centroids[i]
