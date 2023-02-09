@@ -21,7 +21,8 @@ import { range } from '../../utilities/jsHelpers.js'
  * Allocation is an array of integers that say whether a candidate is elected (1) or not (0).
  */
 export default function allocatedScore({ votes, socialChoiceOptions }) {
-    const { scoreVotes, voteFractions } = votes.preferenceTallies
+    const { voteFractions } = votes.preferenceTallies
+    const { scoreVotes } = votes.preferenceLists
 
     const { seats } = socialChoiceOptions
 
