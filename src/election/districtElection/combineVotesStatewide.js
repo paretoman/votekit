@@ -14,13 +14,17 @@ export default function combineVotesStatewide(votesByTract, canGeoms) {
     if (votesByTract[0][0].pairwiseTallies !== undefined) {
         votes.pairwiseTallies = statewidePairwiseTallyFractions(votesByTract, numCans)
     }
-    if (votesByTract[0][0].preferenceTallies !== undefined
-        && votesByTract[0][0].preferenceTallies.cansByRankList !== undefined) {
-        votes.preferenceTallies = statewideRankingTallyFractions(votesByTract)
+    if (votesByTract[0][0].preferenceLists !== undefined
+        && votesByTract[0][0].preferenceLists.cansByRankList !== undefined) {
+        const prefs = statewideRankingTallyFractions(votesByTract)
+        votes.preferenceTallies = prefs.preferenceTallies
+        votes.preferenceLists = prefs.preferenceLists
     }
     if (votesByTract[0][0].preferenceTallies !== undefined
         && votesByTract[0][0].preferenceTallies.scoreVotes !== undefined) {
-        votes.preferenceTallies = statewideScoreTallyFractions(votesByTract)
+        const prefs = statewideScoreTallyFractions(votesByTract)
+        votes.preferenceTallies = prefs.preferenceTallies
+        votes.preferenceLists = prefs.preferenceLists
     }
     votes.parties = votesByTract[0][0].parties
     return votes

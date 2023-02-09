@@ -26,13 +26,17 @@ export default function combineVotesByDistrict(votesByTract, canGeoms, districtG
         if (votesByTract[0][0].pairwiseTallies !== undefined) {
             votes.pairwiseTallies = districtPairwiseTallyFractions(votesByTract, cen, numCans)
         }
-        if (votesByTract[0][0].preferenceTallies !== undefined
-            && votesByTract[0][0].preferenceTallies.cansByRankList !== undefined) {
-            votes.preferenceTallies = districtRankingTallyFractions(votesByTract, cen)
+        if (votesByTract[0][0].preferenceLists !== undefined
+            && votesByTract[0][0].preferenceLists.cansByRankList !== undefined) {
+            const prefs = districtRankingTallyFractions(votesByTract, cen)
+            votes.preferenceTallies = prefs.preferenceTallies
+            votes.preferenceLists = prefs.preferenceLists
         }
         if (votesByTract[0][0].preferenceTallies !== undefined
             && votesByTract[0][0].preferenceTallies.scoreVotes !== undefined) {
-            votes.preferenceTallies = districtScoreTallyFractions(votesByTract, cen)
+            const prefs = districtScoreTallyFractions(votesByTract, cen)
+            votes.preferenceTallies = prefs.preferenceTallies
+            votes.preferenceLists = prefs.preferenceLists
         }
         votes.parties = votesByTract[0][0].parties
         return votes

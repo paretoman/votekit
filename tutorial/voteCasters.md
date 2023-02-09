@@ -57,7 +57,7 @@ Ways to say how many votes.
 
 Preferences and how many votes share them.
 
-* Tallying
+* Preference Tallies
   * voteCounts: a list of numbers of votes for a list of preferences.
     * Also used for "grid" of votes.
   * voteFractions: a list of fractions for a list of preferences. voteCounts as a fraction of the total number of votes.  From 0 to 1.
@@ -113,11 +113,11 @@ Some of the following object is output from a vote caster as the "votes" data st
 
 * preferenceTallies:
   * voteFractions - the fraction of the population with a preference.
-  * Preference Lists
-    * scoreVotes - Each preference has a score for each candidate.
-    * rankings - Each preference has a rank for each candidate.
-    * cansByRankList - Each preference is a list indexed by ranking. A list of candidates is at each ranking.
-    * There is no "pluralityVotes" list of preferences because it isn't needed. It would be an identity matrix.  
+* preferencesLists:
+  * scoreVotes - Each preference has a score for each candidate.
+  * rankings - Each preference has a rank for each candidate.
+  * cansByRankList - Each preference is a list indexed by ranking. A list of candidates is at each ranking.
+  * There is no "pluralityVotes" list of preferences because it isn't needed. It would be an identity matrix.  
 * candidateTallies:
   * tallyFractions - a fraction for each candidate.  
 * pairwiseTallies:

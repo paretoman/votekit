@@ -10,10 +10,11 @@ import {
  * @param {Object} votes.candidateTallies - vote tallies indexed by candidate
  * @param {Number[]} votes.candidateTallies.tallyFractions - A list of fractions of voters
  * who ranked a candidate first, indexed by candidate.
- * @param {Object} votes.preferenceTallies - Preferences and how many votes share them.
+ * @param {Object} votes.preferenceLists - Lists of preferences.
+ * @param {Object} votes.preferenceTallies - How many votes have a listed preference.
  * @param {Number[]} votes.preferenceTallies.voteFractions - A list of fractions of voters
  * who share the same ranking.
- * @param {Number[][][]} votes.preferenceTallies.cansByRankList - A list of lists of lists.
+ * @param {Number[][][]} votes.preferenceLists.cansByRankList - A list of lists of lists.
  * The first index is a group of voters who share the same ranking.
  * The second index is the rank number.
  * The third index is for a list of candidates at that rank.
@@ -25,7 +26,8 @@ import {
  */
 export default function stv({ votes, socialChoiceOptions }) {
     const { tallyFractions } = votes.candidateTallies
-    const { voteFractions, cansByRankList } = votes.preferenceTallies
+    const { voteFractions } = votes.preferenceTallies
+    const { cansByRankList } = votes.preferenceLists
     const { seats } = socialChoiceOptions
 
     const nk = tallyFractions.length

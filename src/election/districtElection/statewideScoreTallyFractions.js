@@ -7,7 +7,8 @@ export default function statewideScoreTallyFractions(votesByTract) {
     votesByTract.forEach(
         (row) => row.forEach(
             (votes) => {
-                const { voteFractions, scoreVotes } = votes.preferenceTallies
+                const { voteFractions } = votes.preferenceTallies
+                const { scoreVotes } = votes.preferenceLists
                 votePopAll = votePopAll
                     .concat(voteFractions)
                 scoreVoteAll = scoreVoteAll.concat(scoreVotes)
@@ -17,7 +18,7 @@ export default function statewideScoreTallyFractions(votesByTract) {
     const dNorm = getNormStatewide(votesByTract)
     votePopAll = votePopAll.map((t) => t * dNorm)
     return {
-        voteFractions: votePopAll,
-        scoreVotes: scoreVoteAll,
+        preferenceTallies: { voteFractions: votePopAll },
+        preferenceLists: { scoreVotes: scoreVoteAll },
     }
 }

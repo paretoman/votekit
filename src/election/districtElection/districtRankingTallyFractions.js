@@ -9,7 +9,9 @@ export default function districtRankingTallyFractions(votesByTract, cen) {
 
     for (let j = 0; j < cen.length; j++) {
         const [gx, gy, gf] = cen[j]
-        const { voteFractions, cansByRankList } = votesByTract[gx][gy].preferenceTallies
+        const votesInTract = votesByTract[gx][gy]
+        const { voteFractions } = votesInTract.preferenceTallies
+        const { cansByRankList } = votesInTract.preferenceLists
         const votePopNorm = voteFractions
             .map((x) => x * gf * gfNorm)
         votePopAll = votePopAll
@@ -17,7 +19,7 @@ export default function districtRankingTallyFractions(votesByTract, cen) {
         cansByRankListAll = cansByRankListAll.concat(cansByRankList)
     }
     return {
-        voteFractions: votePopAll,
-        cansByRankList: cansByRankListAll,
+        preferenceTallies: { voteFractions: votePopAll },
+        preferenceLists: { cansByRankList: cansByRankListAll },
     }
 }
