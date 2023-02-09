@@ -1,8 +1,8 @@
 import { range } from '../../utilities/jsHelpers.js'
 import districtPairwiseTallyFractions from './districtPairwiseTallyFractions.js'
-import districtRankingTallyFractions from './districtRankingTallyFractions.js'
-import districtScoreTallyFractions from './districtScoreTallyFractions.js'
 import districtTallyFractions from './districtTallyFractions.js'
+import districtPreferenceLists from './districtPreferenceLists.js'
+import districtPreferenceTallies from './districtPreferenceTallies.js'
 
 export default function combineVotesByDistrict(votesByTract, canGeoms, districtGeometry) {
     const { census } = districtGeometry.districtMap
@@ -26,17 +26,9 @@ export default function combineVotesByDistrict(votesByTract, canGeoms, districtG
         if (votesByTract[0][0].pairwiseTallies !== undefined) {
             votes.pairwiseTallies = districtPairwiseTallyFractions(votesByTract, cen, numCans)
         }
-        if (votesByTract[0][0].preferenceLists !== undefined
-            && votesByTract[0][0].preferenceLists.cansByRankList !== undefined) {
-            const prefs = districtRankingTallyFractions(votesByTract, cen)
-            votes.preferenceTallies = prefs.preferenceTallies
-            votes.preferenceLists = prefs.preferenceLists
-        }
-        if (votesByTract[0][0].preferenceTallies !== undefined
-            && votesByTract[0][0].preferenceTallies.scoreVotes !== undefined) {
-            const prefs = districtScoreTallyFractions(votesByTract, cen)
-            votes.preferenceTallies = prefs.preferenceTallies
-            votes.preferenceLists = prefs.preferenceLists
+        if (votesByTract[0][0].preferenceLists !== undefined) {
+            votes.preferenceLists = districtPreferenceLists(votesByTract, cen)
+            votes.preferenceTallies = districtPreferenceTallies(votesByTract, cen)
         }
         votes.parties = votesByTract[0][0].parties
         return votes
