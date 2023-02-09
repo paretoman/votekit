@@ -1,6 +1,20 @@
 import getNormStatewide from './getNormStatewide.js'
 
 export default function statewidePairwiseTallyFractions(votesByTract, numCans) {
+    const tallyNames = Object.keys(votesByTract[0][0].pairwiseTallies)
+
+    const pairwiseTallies = {}
+    for (let i = 0; i < tallyNames.length; i++) {
+        const tallyName = tallyNames[i]
+
+        const tallyAverage = getPairwiseTallyAverageStatewide(tallyName, votesByTract, numCans)
+        pairwiseTallies[tallyName] = tallyAverage
+    }
+
+    return pairwiseTallies
+}
+
+function getPairwiseTallyAverageStatewide(tallyName, votesByTract, numCans) {
     // sum pairwiseTallyFractions
     const pTotals = Array(numCans)
     for (let k = 0; k < numCans; k++) {
@@ -9,16 +23,16 @@ export default function statewidePairwiseTallyFractions(votesByTract, numCans) {
     votesByTract.forEach(
         (row) => row.forEach(
             (votes) => {
-                const { pairwiseTallyFractions } = votes.pairwiseTallies
+                const pairwiseTally = votes.pairwiseTallies[tallyName]
                 for (let i = 0; i < numCans; i++) {
                     for (let k = 0; k < numCans; k++) {
-                        pTotals[i][k] += pairwiseTallyFractions[i][k]
+                        pTotals[i][k] += pairwiseTally[i][k]
                     }
                 }
             },
         ),
     )
     const dNorm = getNormStatewide(votesByTract)
-    const pairwiseTallyFractions = pTotals.map((row) => row.map((t) => t * dNorm))
-    return { pairwiseTallyFractions }
+    const pairwiseTallyAverage = pTotals.map((row) => row.map((t) => t * dNorm))
+    return pairwiseTallyAverage
 }
