@@ -1,6 +1,6 @@
 import getNormDistrict from './getNormDistrict.js'
 
-export default function districtTallyFractions(votesByTract, cen, numCans) {
+export default function districtCandidateTallies(votesByTract, cen, numCans) {
     // sum tallyFractions
 
     const tallyNames = Object.keys(votesByTract[0][0].candidateTallies)

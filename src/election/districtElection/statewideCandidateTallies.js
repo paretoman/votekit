@@ -1,6 +1,6 @@
 import getNormStatewide from './getNormStatewide.js'
 
-export default function statewideTallyFractions(votesByTract, numCans) {
+export default function statewideCandidateTallies(votesByTract, numCans) {
     const tallyNames = Object.keys(votesByTract[0][0].candidateTallies)
 
     const candidateTallies = {}

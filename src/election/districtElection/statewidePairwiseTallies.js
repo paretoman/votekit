@@ -1,6 +1,6 @@
 import getNormStatewide from './getNormStatewide.js'
 
-export default function statewidePairwiseTallyFractions(votesByTract, numCans) {
+export default function statewidePairwiseTallies(votesByTract, numCans) {
     const tallyNames = Object.keys(votesByTract[0][0].pairwiseTallies)
 
     const pairwiseTallies = {}

@@ -1,7 +1,7 @@
-import statewidePairwiseTallyFractions from './statewidePairwiseTallyFractions.js'
+import statewidePairwiseTallies from './statewidePairwiseTallies.js'
 import statewidePreferenceLists from './statewidePreferenceLists.js'
 import statewidePreferenceTallies from './statewidePreferenceTallies.js'
-import statewideTallyFractions from './statewideTallyFractions.js'
+import statewideCandidateTallies from './statewideCandidateTallies.js'
 
 export default function combineVotesStatewide(votesByTract, canGeoms) {
     const numCans = canGeoms.length
@@ -9,10 +9,10 @@ export default function combineVotesStatewide(votesByTract, canGeoms) {
     const votes = {}
 
     if (votesByTract[0][0].candidateTallies !== undefined) {
-        votes.candidateTallies = statewideTallyFractions(votesByTract, numCans)
+        votes.candidateTallies = statewideCandidateTallies(votesByTract, numCans)
     }
     if (votesByTract[0][0].pairwiseTallies !== undefined) {
-        votes.pairwiseTallies = statewidePairwiseTallyFractions(votesByTract, numCans)
+        votes.pairwiseTallies = statewidePairwiseTallies(votesByTract, numCans)
     }
     if (votesByTract[0][0].preferenceLists !== undefined) {
         votes.preferenceLists = statewidePreferenceLists(votesByTract)

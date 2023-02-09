@@ -1,6 +1,6 @@
 import { range } from '../../utilities/jsHelpers.js'
-import districtPairwiseTallyFractions from './districtPairwiseTallyFractions.js'
-import districtTallyFractions from './districtTallyFractions.js'
+import districtPairwiseTallies from './districtPairwiseTallies.js'
+import districtCandidateTallies from './districtCandidateTallies.js'
 import districtPreferenceLists from './districtPreferenceLists.js'
 import districtPreferenceTallies from './districtPreferenceTallies.js'
 
@@ -20,11 +20,11 @@ export default function combineVotesByDistrict(votesByTract, canGeoms, districtG
         const votes = {}
 
         if (votesByTract[0][0].candidateTallies !== undefined) {
-            votes.candidateTallies = districtTallyFractions(votesByTract, cen, numCans)
+            votes.candidateTallies = districtCandidateTallies(votesByTract, cen, numCans)
         }
 
         if (votesByTract[0][0].pairwiseTallies !== undefined) {
-            votes.pairwiseTallies = districtPairwiseTallyFractions(votesByTract, cen, numCans)
+            votes.pairwiseTallies = districtPairwiseTallies(votesByTract, cen, numCans)
         }
         if (votesByTract[0][0].preferenceLists !== undefined) {
             votes.preferenceLists = districtPreferenceLists(votesByTract, cen)

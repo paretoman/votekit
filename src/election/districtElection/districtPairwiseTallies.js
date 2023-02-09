@@ -1,6 +1,6 @@
 import getNormDistrict from './getNormDistrict.js'
 
-export default function districtPairwiseTallyFractions(votesByTract, cen, numCans) {
+export default function districtPairwiseTallies(votesByTract, cen, numCans) {
     const tallyNames = Object.keys(votesByTract[0][0].pairwiseTallies)
 
     const pairwiseTallies = {}
