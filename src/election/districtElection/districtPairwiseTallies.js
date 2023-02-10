@@ -1,6 +1,7 @@
 import getNormDistrict from './getNormDistrict.js'
 
 export default function districtPairwiseTallies(votesByTract, cen, numCans) {
+    // average pairwiseTallies
     const tallyNames = Object.keys(votesByTract[0][0].pairwiseTallies)
 
     const pairwiseTallies = {}
@@ -15,7 +16,6 @@ export default function districtPairwiseTallies(votesByTract, cen, numCans) {
 }
 
 function getPairwiseTallyAverageForDistrict(tallyName, votesByTract, cen, numCans) {
-    // sum pairwiseTallyFractions
     const pTotals = Array(numCans)
     for (let k = 0; k < numCans; k++) {
         pTotals[k] = Array(numCans).fill(0)

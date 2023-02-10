@@ -1,6 +1,7 @@
 import getNormStatewide from './getNormStatewide.js'
 
 export default function statewidePairwiseTallies(votesByTract, numCans) {
+    // average pairwiseTallies
     const tallyNames = Object.keys(votesByTract[0][0].pairwiseTallies)
 
     const pairwiseTallies = {}
@@ -15,7 +16,6 @@ export default function statewidePairwiseTallies(votesByTract, numCans) {
 }
 
 function getPairwiseTallyAverageStatewide(tallyName, votesByTract, numCans) {
-    // sum pairwiseTallyFractions
     const pTotals = Array(numCans)
     for (let k = 0; k < numCans; k++) {
         pTotals[k] = Array(numCans).fill(0)
