@@ -19,6 +19,8 @@ VoteCasters: Votes are cast.
 
 ## Preferences
 
+### A single Preference
+
 These are the three ways to state a preference.
 
 * Plurality: a choice of a candidate.
@@ -43,6 +45,17 @@ A preference is stored as data in the following ways:
     * length: number of candidates
   * cansByRank: an array of candidates lists, indexed by rank. Candidates can share a rank. Number[][][].
 
+### Preference Lists
+
+* Plurality
+  * There is no "pluralityVotes" list of preferences because it isn't needed.
+* Scores
+  * scoreVotes: a list of scoreVote preferences, Number[][]. Each preference has a score for each candidate.
+* Ranking
+  * rankings: a list of preferences. Each preference has a rank for each candidate. Number[][]. 0 is the best ranking, then 1, 2, etc.
+  * cansByRankList: a list of preferences. Each preference is a list indexed by rank. Each entry is a list of candidates at that ranking. Candidates are represented by index. Number[][][].
+
+
 ## Counting
 
 Ways to say how many votes.
@@ -53,26 +66,17 @@ Ways to say how many votes.
 * totalVotes: total number of votes.
 * All of these are non-negative real numbers.
 
-### Tallies by Preference
+### Preference Tallies
 
-Preferences and how many votes share them.
+Preference tallies tell how many votes have a listed preference.
 
-* Preference Tallies
-  * voteCounts: a list of numbers of votes for a list of preferences.
-    * Also used for "grid" of votes.
-  * voteFractions: a list of fractions for a list of preferences. voteCounts as a fraction of the total number of votes.  From 0 to 1.
-* Preference Lists
-  * Plurality
-    * There is no "pluralityVotes" list of preferences because it isn't needed.
-  * Scores
-    * scoreVotes: a list of scoreVote preferences, Number[][]. Each preference has a score for each candidate.
-  * Ranking
-    * rankings: a list of preferences. Each preference has a rank for each candidate. Number[][]. 0 is the best ranking, then 1, 2, etc.
-    * cansByRankList: a list of preferences. Each preference is a list indexed by rank. Each entry is a list of candidates at that ranking. Candidates are represented by index. Number[][][].
+* voteCounts: a list of numbers of votes for a list of preferences.
+  * Also used for "grid" of votes.
+* voteFractions: a list of fractions for a list of preferences. voteCounts as a fraction of the total number of votes.  From 0 to 1.
 
-### Tallies by Candidate
+### Candidate Tallies
 
-Ways to combine votes. Each is a list indexed by candidate.
+Candidate tallies are just tallies indexed by candidate. This is a way to combine preferences.
 
 First, we have a loosely defined tally:
 
@@ -82,7 +86,7 @@ First, we have a loosely defined tally:
   * TestVoterGraphic uses tallyFractions
   * A general representation of a vote as a vector.
 
-Next, we have defined tallies:
+Next, we have defined tallies for each type of preference:
 
 * plurality
   * countByCan: The number of plurality votes for a candidate.
@@ -101,9 +105,10 @@ Next, we have defined tallies:
 
 ### Pairwise Tallies
 
-Pairwise tallies are indexed by a pair of candidates. The winning candidate is first and the losing candidate is second.
-* pairwiseTallyFractions have the same lack of context as tallyFractions. Just a number from 0 to 1, indexed by a pair of candidates.
+Pairwise tallies are indexed by a pair of candidates. The winning candidate is first and the losing candidate is second. This is another way to combine preferences.
+
 * ranking
+  * pairwiseTallyFractions: This has the same lack of context as tallyFractions. Just a number from 0 to 1, indexed by a pair of candidates.
   * winsPairwise: The number of wins for the first of a pair of candidates.
   * winFractionPairwise: The fraction of wins for the first of a pair of candidates.
 
@@ -111,17 +116,21 @@ Pairwise tallies are indexed by a pair of candidates. The winning candidate is f
 
 Some of the following object is output from a vote caster as the "votes" data structure.
 
-* preferenceTallies:
-  * voteFractions - the fraction of the population with a preference.
 * preferencesLists:
   * scoreVotes - Each preference has a score for each candidate.
   * rankings - Each preference has a rank for each candidate.
   * cansByRankList - Each preference is a list indexed by ranking. A list of candidates is at each ranking.
   * There is no "pluralityVotes" list of preferences because it isn't needed. It would be an identity matrix.  
+* preferenceTallies:
+  * voteFractions - the fraction of the population with a preference.
 * candidateTallies:
-  * tallyFractions - a fraction for each candidate.  
+  * tallyFractions - a fraction for each candidate.
+  * voteFractionsByCan - the fraction of plurality votes for each candidate.
+  * scoreFractionAverageByCan - the average fractional score for each candidate.
+  * firstPreferenceFractions - a list of fractions of voters who ranked a candidate first, indexed by candidate.
 * pairwiseTallies:
   * pairwiseTallyFractions - a fraction for each pair of candidates.
+  * winFractionPairwise - the fraction of wins for the first of a pair of candidates.
 * votesByGeom:
   * Vote data for each voter geometry. A list of votesForGeom. 
   * votesForGeom: Vote data for just one voter geometry. votesForGeom parts may include one of the following, depending on the vote caster:

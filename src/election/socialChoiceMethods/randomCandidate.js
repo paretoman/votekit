@@ -4,12 +4,13 @@
  * pick a random candidate as the winner
  * @param {Object} votes
  * @param {Object} votes.candidateTallies - vote tallies indexed by candidate
- * @param {Number} votes.candidateTallies.tallyFractions.length - Number of candidates.
+ * @param {Number[]} votes.candidateTallies.voteFractionsByCan - The fraction of plurality votes for each candidate.
  * @returns {Object} socialChoiceResults
  * @returns {Number} socialChoiceResults.iWinner - Index of winner. Indexing according to votes[].
  */
 export default function randomCandidate({ votes }) {
-    const nk = votes.candidateTallies.tallyFractions.length
+    const { voteFractionsByCan } = votes.candidateTallies
+    const nk = voteFractionsByCan.length
     const iWinner = Math.floor(Math.random() * nk)
     const socialChoiceResults = { iWinner }
     return socialChoiceResults

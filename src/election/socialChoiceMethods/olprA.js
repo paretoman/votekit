@@ -11,7 +11,7 @@ import sntv from './sntv.js'
  * Party lists are allocated seats. The most popular candidates in a party are elected.
  * @param {Object} votes
  * @param {Object} votes.candidateTallies - vote tallies indexed by candidate
- * @param {number[]} votes.candidateTallies.tallyFractions - tallies for each candidate as a fraction of 1.
+ * @param {Number[]} votes.candidateTallies.voteFractionsByCan - The fraction of plurality votes for each candidate.
  * @param {Object} socialChoiceOptions
  * @param {number} socialChoiceOptions.seats - The number of seats to fill.
  * @param {number} socialChoiceOptions.threshold - The minimum fraction of voters
@@ -25,24 +25,24 @@ export default function olprA({ votes, socialChoiceOptions }) {
     // Make a tally for each party.
 
     // TODO: provide these variables in votes
-    const { tallyFractions } = votes.candidateTallies
+    const { voteFractionsByCan } = votes.candidateTallies
     const { parties } = votes
     const { partiesByCan, numParties } = parties
-    const numCans = tallyFractions.length
+    const numCans = voteFractionsByCan.length
     const partyVotes = Array(numParties).fill(0)
     const seatLimits = Array(numParties).fill(0)
     for (let i = 0; i < numCans; i++) {
         // Find which party the candidate belongs to - index of party.
         const iParty = partiesByCan[i]
         // Add tally to party.
-        partyVotes[iParty] += tallyFractions[i]
+        partyVotes[iParty] += voteFractionsByCan[i]
         seatLimits[iParty] += 1
     }
 
     // Find out how many seats each party gets.
     // todo: change method
     const partyResults = sainteLague({
-        votes: { candidateTallies: { tallyFractions: partyVotes } },
+        votes: { candidateTallies: { voteFractionsByCan: partyVotes } },
         socialChoiceOptions,
         seatLimits,
     })
@@ -55,12 +55,12 @@ export default function olprA({ votes, socialChoiceOptions }) {
         // Set inputs for SNTV.
         const socialChoiceOptions2 = { seats: partyAllocation[i] }
         const cansInParty = range(numCans).filter((k) => partiesByCan[k] === i)
-        const tfWithinParty = cansInParty.map((k) => tallyFractions[k])
+        const tfWithinParty = cansInParty.map((k) => voteFractionsByCan[k])
         const totalTFInParty = tfWithinParty.reduce((p, c) => p + c, 0)
         const fractionTfWithinParty = tfWithinParty.map((x) => x / totalTFInParty)
         // Run sntv.
         const socialChoiceInParty = sntv({
-            votes: { candidateTallies: { tallyFractions: fractionTfWithinParty } },
+            votes: { candidateTallies: { voteFractionsByCan: fractionTfWithinParty } },
             socialChoiceOptions: socialChoiceOptions2,
         })
         const allocationInParty = socialChoiceInParty.allocation

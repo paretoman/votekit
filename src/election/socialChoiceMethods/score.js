@@ -4,13 +4,14 @@
  * the candidate with the highest tally wins
  * @param {Object} votes
  * @param {Object} votes.candidateTallies - vote tallies indexed by candidate
- * @param {Number[]} votes.candidateTallies.tallyFractions
+ * @param {Number[]} votes.candidateTallies.scoreFractionAverageByCan - average fractional score for each candidate.
  * @returns {Object} results
  * @returns {Number} iWinner - Index of winner. Indexing according to votes[].
  */
 export default function score({ votes }) {
-    const max = Math.max(...votes.candidateTallies.tallyFractions)
-    const iWinner = votes.candidateTallies.tallyFractions.indexOf(max)
+    const { scoreFractionAverageByCan } = votes.candidateTallies
+    const max = Math.max(...scoreFractionAverageByCan)
+    const iWinner = scoreFractionAverageByCan.indexOf(max)
 
     const results = { iWinner }
     return results

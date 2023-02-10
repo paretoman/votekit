@@ -1,6 +1,7 @@
 import getNormStatewide from './getNormStatewide.js'
 
 export default function statewideCandidateTallies(votesByTract, numCans) {
+    // average tallies
     const tallyNames = Object.keys(votesByTract[0][0].candidateTallies)
 
     const candidateTallies = {}
@@ -15,7 +16,7 @@ export default function statewideCandidateTallies(votesByTract, numCans) {
 }
 
 function getCandidateTallyAverageStatewide(tallyName, votesByTract, numCans) {
-    // sum tallyFractions
+    // average the tally
     const totals = Array(numCans).fill(0)
     votesByTract.forEach(
         (row) => row.forEach(

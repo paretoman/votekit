@@ -6,7 +6,7 @@ import { range } from '../../utilities/jsHelpers.js'
  * Single Transferable Vote
  * @param {Object} votes
  * @param {Object} votes.candidateTallies - vote tallies indexed by candidate
- * @param {Number[]} votes.candidateTallies.tallyFractions - A list of fractions of voters
+ * @param {Number[]} votes.candidateTallies.voteFractionsByCan - The fraction of plurality votes for each candidate.
  * who picked a candidate, indexed by candidate.
  * @param {Object} socialChoiceOptions
  * @param {number} socialChoiceOptions.seats - The number of seats to fill.
@@ -15,10 +15,10 @@ import { range } from '../../utilities/jsHelpers.js'
  * Allocation is an array of integers that say whether a candidate is elected (1) or not (0).
  */
 export default function sntv({ votes, socialChoiceOptions }) {
-    const { tallyFractions } = votes.candidateTallies
+    const { voteFractionsByCan } = votes.candidateTallies
     const { seats } = socialChoiceOptions
 
-    const nk = tallyFractions.length
+    const nk = voteFractionsByCan.length
 
     if (seats >= nk) {
         // more seats than candidates, so elect all candidates
@@ -28,7 +28,7 @@ export default function sntv({ votes, socialChoiceOptions }) {
     }
 
     // sort descending
-    const cansSorted = range(nk).sort((a, b) => tallyFractions[b] - tallyFractions[a])
+    const cansSorted = range(nk).sort((a, b) => voteFractionsByCan[b] - voteFractionsByCan[a])
 
     const allocation = Array(nk).fill(0)
     for (let r = 0; r < seats; r++) { // TODO: handle edge cases, like ties or zeros

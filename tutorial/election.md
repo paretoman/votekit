@@ -31,8 +31,13 @@ The election results are all the data you need for making explanations. They are
 
 * electionOptions
 * geometry
-* votes
-  * tallyFractions
+* votes - see [VoteCasters](voteCasters.md) for more explanation.
+  * preferencesLists
+  * preferenceTallies
+  * candidateTallies
+  * pairwiseTallies
+  * votesByGeom
+  * parties
 * socialChoiceResults
   * iWinner or allocation
 * colorRGBAofCandidates

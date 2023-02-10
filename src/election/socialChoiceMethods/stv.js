@@ -8,7 +8,7 @@ import {
  * Single Transferable Vote
  * @param {Object} votes
  * @param {Object} votes.candidateTallies - vote tallies indexed by candidate
- * @param {Number[]} votes.candidateTallies.tallyFractions - A list of fractions of voters
+ * @param {Number[]} votes.candidateTallies.firstPreferenceFractions - A list of fractions of voters
  * who ranked a candidate first, indexed by candidate.
  * @param {Object} votes.preferenceLists - Lists of preferences.
  * @param {Object} votes.preferenceTallies - How many votes have a listed preference.
@@ -25,12 +25,12 @@ import {
  * Allocation is an array of integers that say whether a candidate is elected (1) or not (0).
  */
 export default function stv({ votes, socialChoiceOptions }) {
-    const { tallyFractions } = votes.candidateTallies
+    const { firstPreferenceFractions } = votes.candidateTallies
     const { voteFractions } = votes.preferenceTallies
     const { cansByRankList } = votes.preferenceLists
     const { seats } = socialChoiceOptions
 
-    const nk = tallyFractions.length
+    const nk = firstPreferenceFractions.length
     const nr = voteFractions.length
 
     if (seats >= nk) {
@@ -50,7 +50,7 @@ export default function stv({ votes, socialChoiceOptions }) {
     // Count the number of candidates elected
     const elected = []
     // the current tally of first preferences among candidates still remaining
-    let tally = copyArrayShallow(tallyFractions)
+    let tally = copyArrayShallow(firstPreferenceFractions)
     // is the candidate still in the running? Alternatively, they have been eliminated.
     const stillIn = Array(nk).fill(true)
     let canInTally = range(nk)

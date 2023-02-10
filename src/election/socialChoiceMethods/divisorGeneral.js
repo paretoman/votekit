@@ -6,7 +6,7 @@ import { copyArrayShallow, range } from '../../utilities/jsHelpers.js'
  * Run the Huntington-Hill method of apportionment and return an allocation of seats.
  * @param {Object} votes
  * @param {Object} votes.candidateTallies - vote tallies indexed by candidate
- * @param {number[]} votes.candidateTallies.tallyFractions - tallies for each party as a fraction of 1.
+ * @param {Number[]} votes.candidateTallies.voteFractionsByCan - The fraction of plurality votes for each candidate.
  * @param {Object} socialChoiceOptions
  * @param {number} socialChoiceOptions.seats - The number of seats to fill.
  * @param {number} socialChoiceOptions.threshold - The minimum fraction of voters
@@ -19,9 +19,10 @@ export default function divisorGeneral({
     votes, socialChoiceOptions, typeOfDivisor, seatLimits,
 }) {
     const { seats, threshold } = socialChoiceOptions
+    const { voteFractionsByCan } = votes.candidateTallies
 
     // find out how many parties pass the threshold
-    let populations = votes.candidateTallies.tallyFractions.map(
+    let populations = voteFractionsByCan.map(
         (p) => ((p < threshold) ? 0 : p),
     )
     let positivePopulations = populations.map(
@@ -49,7 +50,7 @@ export default function divisorGeneral({
     // Remove the threshold if there are no parties past the threshold.
     // Count the number of parties with positive populations.
     if (makeAdjustment) {
-        populations = copyArrayShallow(votes.candidateTallies.tallyFractions)
+        populations = copyArrayShallow(voteFractionsByCan)
         positivePopulations = populations.map(
             (p) => ((p === 0) ? 0 : 1),
         )
@@ -72,7 +73,7 @@ export default function divisorGeneral({
             (a, b) => b - a,
         )
         const minPopulation = populationsSorted[seats - 1]
-        const pops2 = votes.candidateTallies.tallyFractions
+        const pops2 = voteFractionsByCan
 
         // todo: consider ties
         const allocation = pops2.map(

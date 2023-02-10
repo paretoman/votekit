@@ -1,7 +1,7 @@
 import getNormDistrict from './getNormDistrict.js'
 
 export default function districtCandidateTallies(votesByTract, cen, numCans) {
-    // sum tallyFractions
+    // average tallies
 
     const tallyNames = Object.keys(votesByTract[0][0].candidateTallies)
 
@@ -17,6 +17,7 @@ export default function districtCandidateTallies(votesByTract, cen, numCans) {
 }
 
 function getCandidateTallyAverage(tallyName, votesByTract, cen, numCans) {
+    // average the tally
     const totals = Array(numCans).fill(0)
     for (let j = 0; j < cen.length; j++) {
         const [gx, gy, gf] = cen[j]

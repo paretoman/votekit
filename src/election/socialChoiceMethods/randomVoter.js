@@ -6,12 +6,13 @@ import getCDF, { randomIndexFromCDF } from '../../utilities/mathUtilities.js'
  * pick a random voter to select the winner
  * @param {Object} votes
  * @param {Object} votes.candidateTallies - vote tallies indexed by candidate
- * @param {Number} votes.candidateTallies.tallyFractions.length - Number of candidates.
+ * @param {Number[]} votes.candidateTallies.voteFractionsByCan - The fraction of plurality votes for each candidate.
  * @returns {Object} socialChoiceResults
  * @returns {Number} socialChoiceResults.iWinner - Index of winner. Indexing according to votes[].
  */
 export default function randomVoter({ votes }) {
-    const cdf = getCDF(votes.candidateTallies.tallyFractions)
+    const { voteFractionsByCan } = votes.candidateTallies
+    const cdf = getCDF(voteFractionsByCan)
     const iWinner = randomIndexFromCDF(cdf)
     const socialChoiceResults = { iWinner }
     return socialChoiceResults

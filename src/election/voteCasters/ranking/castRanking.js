@@ -58,11 +58,11 @@ export default function castRanking(geometry, castOptions) {
         }
     })
     const voteFractions = voteCounts.map((x) => x / totalVotes)
-    const tallyFractions = firstPreferences.map((x) => x / totalVotes)
+    const firstPreferenceFractions = firstPreferences.map((x) => x / totalVotes)
 
     const preferenceLists = { rankings, cansByRankList }
     const preferenceTallies = { voteFractions }
-    const candidateTallies = { tallyFractions }
+    const candidateTallies = { firstPreferenceFractions, tallyFractions: firstPreferenceFractions }
     const votes = { preferenceLists, preferenceTallies, candidateTallies, votesByGeom, parties }
     return votes
 }

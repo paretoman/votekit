@@ -6,14 +6,13 @@ import { range } from '../../utilities/jsHelpers.js'
  * Disregard the weakest pairwise defeat until one candidate is unbeaten.
  * @param {Object} votes
  * @param {Object} votes.pairwiseTallies - pairwise tallies
- * @param {Number[][]} votes.pairwiseTallies.pairwiseTallyFractions - A list of fractions of voters
+ * @param {Number[][]} votes.pairwiseTallies.winFractionPairwise - The fraction of wins for the first of a pair of candidates.
  * who preferred candidate i over k, indexed by [i][k].
  * @returns {{iWinner:Number}} iWinner - Index of winner.
- * Indexing according to candidates in votes.candidateTallies.tallyFractions.
  */
 export default function minimax({ votes }) {
-    const { pairwiseTallyFractions } = votes.pairwiseTallies
-    const n = pairwiseTallyFractions.length
+    const { winFractionPairwise } = votes.pairwiseTallies
+    const n = winFractionPairwise.length
 
     // make a list of number of losses
     const losses = Array(n).fill(0)
@@ -23,7 +22,7 @@ export default function minimax({ votes }) {
     let o = 0
     for (let i = 0; i < n - 1; i++) {
         for (let k = i + 1; k < n; k++) {
-            const iOverK = pairwiseTallyFractions[i][k] - pairwiseTallyFractions[k][i]
+            const iOverK = winFractionPairwise[i][k] - winFractionPairwise[k][i]
             lossDegree[o] = Math.abs(iOverK)
             // add a loss for each member of the pair
             // ties go to i
