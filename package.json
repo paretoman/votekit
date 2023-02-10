@@ -29,5 +29,6 @@
     "build-n-doc": "npm run build && npm run doc",
     "publish-docs": "cd docs && git add . && git commit && git push -u",
     "snowpack": "snowpack build"
-  }
+  },
+  "type": "module"
 }
