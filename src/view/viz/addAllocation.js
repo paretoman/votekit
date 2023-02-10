@@ -1,5 +1,7 @@
 /** @module */
 
+import getTallyFractions from './getTallyFractions.js'
+
 /**
  * When there is just one winner,
  * sometimes the allocation isn't included in the election results.
@@ -11,7 +13,7 @@ export default function addAllocation(electionResults) {
     const { socialChoiceResults, votes } = electionResults
     const { allocation } = socialChoiceResults
     if (allocation === undefined) {
-        const { tallyFractions } = votes.candidateTallies
+        const tallyFractions = getTallyFractions(votes)
         const { iWinner } = socialChoiceResults
         const nk = tallyFractions.length
         const wins = Array(nk).fill(0)

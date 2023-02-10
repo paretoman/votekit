@@ -1,4 +1,5 @@
 import { textPercent } from '../../utilities/graphicsUtilities.js'
+import getTallyFractionsNameForVote from '../viz/getTallyFractionsNameForVote.js'
 
 export default function TooltipVoteText(box) {
     const self = this
@@ -13,8 +14,10 @@ export default function TooltipVoteText(box) {
 
         if (vote.ranking) {
             voteText.innerHTML = vote.ranking.map((c, i) => makeSpan(colorSet[i]) + c).join('<br />')
-        } else if (vote.tallyFractions) {
-            voteText.innerHTML = vote.tallyFractions.map(textPercent).map((c, i) => makeSpan(colorSet[i]) + c).join('<br />')
+        } else {
+            const tallyName = getTallyFractionsNameForVote(vote)
+            const tallyFractions = vote[tallyName]
+            voteText.innerHTML = tallyFractions.map(textPercent).map((c, i) => makeSpan(colorSet[i]) + c).join('<br />')
         }
     }
 }

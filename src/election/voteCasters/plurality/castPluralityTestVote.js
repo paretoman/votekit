@@ -13,9 +13,9 @@ export default function castPluralityTestVote({ canGeoms, voterGeom, dimensions 
     const dist2 = canGeoms.map((c) => df(c, voterGeom))
     const i = minIndex(dist2)
     const n = canGeoms.length
-    const tally = (new Array(n)).fill(0)
-    tally[i] = 1
-    const vote = { tallyFractions: tally, pluralityVote: i }
+    const pluralityAllocation = (new Array(n)).fill(0)
+    pluralityAllocation[i] = 1
+    const vote = { pluralityAllocation, tallyFractions: pluralityAllocation, pluralityVote: i }
     return vote
 }
 function df1(a, b) {

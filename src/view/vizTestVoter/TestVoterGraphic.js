@@ -3,6 +3,7 @@ import hideOnClickOutside from '../tooltips/hideOnClickOutside.js'
 import tooltipForTestVoter from '../tooltips/tooltipForTestVoter.js'
 import colorBlender, { rgbToString } from '../viz/colorBlender.js'
 import EntityGraphic from '../vizEntities/EntityGraphic.js'
+import getTallyFractionsNameForVote from '../viz/getTallyFractionsNameForVote.js'
 
 export default function TestVoterGraphic(testVoter, screen, simOptions, viewEntitiesOne, viewSettings) {
     const self = this
@@ -37,7 +38,8 @@ export default function TestVoterGraphic(testVoter, screen, simOptions, viewEnti
         const colorSetRGBA = canList.map((can) => can.colorRGBA)
         self.colorSet = colorSet
 
-        const { tallyFractions } = vote
+        const tallyName = getTallyFractionsNameForVote(vote)
+        const tallyFractions = vote[tallyName]
         const color = rgbToString(colorBlender(tallyFractions, colorSetRGBA))
         testVoter.doSetCommand.color(color)
 

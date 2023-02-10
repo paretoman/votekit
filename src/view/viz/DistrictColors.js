@@ -1,6 +1,7 @@
 /** @module */
 
 import colorBlender, { rgbToString } from './colorBlender.js'
+import getTallyFractions from './getTallyFractions.js'
 
 export default function districtColors(districtElectionResults, candidateList, electionOptions) {
     const {
@@ -29,7 +30,7 @@ function colorTracts(votesByTract, canList) {
     const colorByTract = votesByTract.map(
         (row) => row.map(
             (votes) => {
-                const { tallyFractions } = votes.candidateTallies
+                const tallyFractions = getTallyFractions(votes)
                 const color = colorBlender(tallyFractions, colorSet)
                 return color
             },
@@ -69,7 +70,7 @@ function colorDistrictWins(scResultsByDistrict, canList, electionOptions) {
  */
 function colorDistrictVote(votesByDistrict, canList) {
     const colorOfVoteByDistrict = votesByDistrict.map((votes) => {
-        const { tallyFractions } = votes.candidateTallies
+        const tallyFractions = getTallyFractions(votes)
         const colorSet = canList.map((can) => can.colorRGBA)
         const color = rgbToString(colorBlender(tallyFractions, colorSet))
         return color

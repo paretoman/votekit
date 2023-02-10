@@ -7,6 +7,7 @@ import addAllocation from '../viz/addAllocation.js'
 import TestVoterView from '../vizTestVoter/TestVoterView.js'
 import getTestGeometry from '../../sim/geometry/getTestGeometry.js'
 import voteCasters from '../../election/voteCasters/voteCasters/voteCasters.js'
+import getTallyFractions from '../viz/getTallyFractions.js'
 
 /**
  * Draw entities: voters, candidates, test voters.
@@ -69,7 +70,8 @@ export default function ViewEntitiesOne(entities, screen, menu, changes, simOpti
             addAllocation(electionResults)
             const { votes, socialChoiceResults } = electionResults
             candidateViewList.setCandidateWins(socialChoiceResults.allocation)
-            candidateViewList.setCandidateFractions(votes.candidateTallies.tallyFractions)
+            const tallyFractions = getTallyFractions(votes)
+            candidateViewList.setCandidateFractions(tallyFractions)
         }
 
         self.testVoteView()

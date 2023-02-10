@@ -1,6 +1,7 @@
 /** @module */
 
 import colorBlender, { rgbToString } from './colorBlender.js'
+import getTallyFractionsNameForVote from './getTallyFractionsNameForVote.js'
 
 /**
  * Draw grid cells to show votes.
@@ -69,11 +70,12 @@ export default function Grid1D(candidateList, screen) {
         const left = Math.max(-1, gridX[0])
         ctx.moveTo(left, bottom)
         const gl = gridX.length
+        const tallyName = getTallyFractionsNameForVote(voteSet[0])
         for (let i = 0; i < gl; i += 1) {
             const xg = gridX[i]
             if (xg < -1) continue
             if (xg > screen.width) continue
-            const voteMult = (drawOutline) ? 1 : voteSet[i].tallyFractions[iCan]
+            const voteMult = (drawOutline) ? 1 : voteSet[i][tallyName][iCan]
             const shapeMult = (isGauss) ? Math.exp(-0.5 * ((xg - x) / sigma) ** 2) : 1
             const y = bottom - amp * shapeMult * voteMult
             ctx.lineTo(xg, y)

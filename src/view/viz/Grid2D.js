@@ -1,5 +1,6 @@
 /** @module */
 import colorBlender from './colorBlender.js'
+import getTallyFractionsNameForVote from './getTallyFractionsNameForVote.js'
 
 /**
  * Draw grid cells to show votes.
@@ -39,6 +40,7 @@ export default function Grid2D(candidateList, screenMain, screenMini) {
             // make image data
             const { nx, ny, density } = grid
             canvases.splice(0)
+            const tallyName = getTallyFractionsNameForVote(voteSet[0])
             for (let i = 0; i < canList.length; i++) {
                 const canvas = document.createElement('canvas')
                 canvas.width = nx
@@ -54,7 +56,7 @@ export default function Grid2D(candidateList, screenMain, screenMini) {
                 let k = 0
                 for (let yp = 0; yp < ny; yp++) {
                     for (let xp = 0; xp < nx; xp++) {
-                        const support = voteSet[k].tallyFractions[i]
+                        const support = voteSet[k][tallyName][i]
                         const a = support * ((isGauss) ? density[k] : 1) * 255
 
                         data[(xp + yp * nx) * 4 + 0] = r
@@ -82,10 +84,12 @@ export default function Grid2D(candidateList, screenMain, screenMini) {
 
             const { data } = imageData
 
+            const tallyName = getTallyFractionsNameForVote(voteSet[0])
+
             let k = 0
             for (let yp = 0; yp < ny; yp++) {
                 for (let xp = 0; xp < nx; xp++) {
-                    const { tallyFractions } = voteSet[k]
+                    const tallyFractions = voteSet[k][tallyName]
                     const [r, g, b] = colorBlender(tallyFractions, colorSet)
 
                     const a = ((isGauss) ? density[k] : 1) * 255
