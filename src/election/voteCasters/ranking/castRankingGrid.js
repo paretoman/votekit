@@ -49,6 +49,6 @@ export default function castRankingGrid(voterGeom, geometry, castOptions) {
     )
 
     return {
-        grid, voteSet, voteCounts, totalVotes, tallyFractions: bordaFractionAverageByCan, ranking, cansByRankList,
+        grid, voteSet, voteCounts, totalVotes, bordaFractionAverageByCan, ranking, cansByRankList,
     }
 }

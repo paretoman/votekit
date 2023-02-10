@@ -11,7 +11,7 @@ import { minMax } from '../../../utilities/jsHelpers.js'
  */
 export default function castScoreTestVote({ canGeoms, voterGeom, dimensions }) {
     const lc = canGeoms.length
-    const tally = (new Array(lc)).fill(0)
+    const scoreVote = (new Array(lc)).fill(0)
     const df = (dimensions === 1) ? df1 : df2
 
     // in the current implementation, all candidates are frontrunners
@@ -22,18 +22,18 @@ export default function castScoreTestVote({ canGeoms, voterGeom, dimensions }) {
     for (let i = 0; i < lc; i++) {
         const d = dist[i]
         if (d <= min) {
-            tally[i] = maxscore
+            scoreVote[i] = maxscore
         } else if (d >= max) {
             // in the case that the voter likes the frontrunner candidates equally,
             // he just votes for everyone better
-            tally[i] = minscore
+            scoreVote[i] = minscore
         } else { // putting this last avoids max==min giving division by 0
             const frac = (d - min) / (max - min)
-            // tally[i] = Math.floor(0.5 + minscore + (maxscore - minscore) * (1 - frac))
-            tally[i] = minscore + (maxscore - minscore) * (1 - frac)
+            // scoreVote[i] = Math.floor(0.5 + minscore + (maxscore - minscore) * (1 - frac))
+            scoreVote[i] = minscore + (maxscore - minscore) * (1 - frac)
         }
     }
-    const vote = { tallyFractions: tally, scoreVote: tally }
+    const vote = { scoreVote }
     return vote
 }
 function df1(a, b) {

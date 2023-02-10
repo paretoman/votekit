@@ -15,7 +15,7 @@ export default function castPluralityTestVote({ canGeoms, voterGeom, dimensions 
     const n = canGeoms.length
     const pluralityAllocation = (new Array(n)).fill(0)
     pluralityAllocation[i] = 1
-    const vote = { pluralityAllocation, tallyFractions: pluralityAllocation, pluralityVote: i }
+    const vote = { pluralityAllocation, pluralityVote: i }
     return vote
 }
 function df1(a, b) {

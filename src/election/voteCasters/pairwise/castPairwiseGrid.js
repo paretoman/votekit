@@ -56,6 +56,6 @@ export default function castPairwiseGrid(voterGeom, geometry, castOptions) {
     )
 
     return {
-        grid, voteSet, winsPairwise, totalVotes, tallyFractions: bordaFractionAverageByCan,
+        grid, voteSet, winsPairwise, totalVotes, bordaFractionAverageByCan,
     }
 }

@@ -62,7 +62,7 @@ export default function castPairwise(geometry, castOptions) {
         bordaFractionAverageByCan[i] = bordaScoreSumByCan[i] * invTotalCountTimesNMinus1
     }
 
-    const candidateTallies = { bordaFractionAverageByCan, tallyFractions: bordaFractionAverageByCan }
+    const candidateTallies = { bordaFractionAverageByCan }
     const pairwiseTallies = { winFractionPairwise, pairwiseTallyFractions: winFractionPairwise }
     const votes = { candidateTallies, pairwiseTallies, votesByGeom, parties }
     return votes
