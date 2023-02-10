@@ -54,7 +54,7 @@ export default function castScoreFull(geometry, castOptions) {
         const voteIndex = []
 
         for (let j = 0; j < voteSet.length; j++) {
-            scoreVotes[index] = voteSet[j].tallyFractions
+            scoreVotes[index] = voteSet[j].scoreVote
             voteIndex[j] = index
             voteFractions[index] = grid.voteCounts[j] * invTotalCount
             index += 1

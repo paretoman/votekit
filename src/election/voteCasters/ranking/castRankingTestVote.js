@@ -35,7 +35,7 @@ export default function castRankingTestVote({ canGeoms, voterGeom, dimensions })
     }
 
     return {
-        indexInOrder, ranking, netWinsPairwise, tallyFractions: bordaFractions, bordaScores,
+        indexInOrder, ranking, netWinsPairwise, bordaFractions, tallyFractions: bordaFractions, bordaScores,
     }
 }
 function df1(a, b) {
