@@ -76,25 +76,17 @@ Preference tallies tell how many votes have a listed preference.
 
 ### Candidate Tallies
 
-Candidate tallies are just tallies indexed by candidate. This is a way to combine preferences.
-
-First, we have a loosely defined tally:
-
-* tallyFractions: A general term that should only be used when we don't need to know what type of vote was being used but instead just want to give each candidate a number between 0 and 1.
-* Uses of tallyFractions
-  * tooltip uses tallyFractions and ranking
-  * TestVoterGraphic uses tallyFractions
-  * A general representation of a vote as a vector.
-
-Next, we have defined tallies for each type of preference:
+Candidate tallies are just tallies indexed by candidate. This is a way to combine preferences. We have defined tallies for each type of preference:
 
 * plurality
   * countByCan: The number of plurality votes for a candidate.
   * voteFractionByCan: The fraction of plurality votes for a candidate.
+  
 * score
   * scoreSumByCan: number of votes times score, summed for each candidate.
   * scoreAverageByCan: average score for each candidate. = scoreSumByCan / totalVotes. number of votes times score divided by max score, summed for each candidate. (not used)
   * scoreFractionAverageByCan: average fractional score for each candidate.
+  
 * ranking
   * bordaScores: The borda scores for each candidate for one vote.
   * bordaFractions: Fractional borda scores, between 0 and 1.
@@ -102,13 +94,22 @@ Next, we have defined tallies for each type of preference:
   * bordaFractionSumByCan: The sum of fractional borda scores for a candidate. (not used)
   * bordaFractionAverageByCan: The average fractional borda score for a candidate.
   * firstPreferences: a sum of ranking votes for each candidate, counting the vote only by the first preference.
+  
+
+Outside of voteCasters, we sometimes use a loosely defined tally. It changes its definition depending on the type of vote.
+
+* tallyFractions: A general term that should only be used when we don't need to know what type of vote was being used but instead just want to give each candidate a number between 0 and 1.
+
+* Uses of tallyFractions
+  * tooltip uses tallyFractions and ranking
+  * TestVoterGraphic uses tallyFractions
+  * A general representation of a vote as a vector.
 
 ### Pairwise Tallies
 
 Pairwise tallies are indexed by a pair of candidates. The winning candidate is first and the losing candidate is second. This is another way to combine preferences.
 
 * ranking
-  * pairwiseTallyFractions: This has the same lack of context as tallyFractions. Just a number from 0 to 1, indexed by a pair of candidates.
   * winsPairwise: The number of wins for the first of a pair of candidates.
   * winFractionPairwise: The fraction of wins for the first of a pair of candidates.
 
@@ -124,12 +125,10 @@ Some of the following object is output from a vote caster as the "votes" data st
 * preferenceTallies:
   * voteFractions - the fraction of the population with a preference.
 * candidateTallies:
-  * tallyFractions - a fraction for each candidate.
   * voteFractionsByCan - the fraction of plurality votes for each candidate.
   * scoreFractionAverageByCan - the average fractional score for each candidate.
   * firstPreferenceFractions - a list of fractions of voters who ranked a candidate first, indexed by candidate.
 * pairwiseTallies:
-  * pairwiseTallyFractions - a fraction for each pair of candidates.
   * winFractionPairwise - the fraction of wins for the first of a pair of candidates.
 * votesByGeom:
   * Vote data for each voter geometry. A list of votesForGeom. 
