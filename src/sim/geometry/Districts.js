@@ -1,6 +1,6 @@
 /** @module */
 
-import DistrictGeometry from '../../election/districtGeometry/districtGeometry.js'
+import createDistrictGeometry, { updateDistricts, updateVoters } from '../../election/districtGeometry/createDistrictGeometry.js'
 
 /**
  * @constructor
@@ -8,7 +8,7 @@ import DistrictGeometry from '../../election/districtGeometry/districtGeometry.j
 export default function Districts(voterShapeList, changes, electionOptions, simOptions) {
     const self = this
 
-    self.districtGeometry = new DistrictGeometry()
+    self.districtGeometry = createDistrictGeometry()
 
     // We need to updateVoters the first time we change numDistricts to greater than 1,
     // but not the next time.
@@ -21,13 +21,13 @@ export default function Districts(voterShapeList, changes, electionOptions, simO
 
         if (changes.check(['numDistricts'])) {
             const { numDistricts } = electionOptions
-            self.districtGeometry.updateDistricts(numDistricts)
+            self.districtGeometry = updateDistricts(self.districtGeometry, numDistricts)
         }
         if (firstRun || changes.check(['draggables', 'dimensions'])) {
             firstRun = false
             const { dimensions } = simOptions
             const voterGeoms = voterShapeList.getGeoms(dimensions)
-            self.districtGeometry.updateVoters(voterGeoms, dimensions)
+            self.districtGeometry = updateVoters(self.districtGeometry, voterGeoms, dimensions)
             // todo: maybe make this only trigger when voters change
         }
     }
