@@ -19,7 +19,7 @@ function samplePoint1(canDnGeoms, partiesByCan, cdf) {
     // pick a voter distribution
     const iDist = randomDistribution(cdf)
     const cd = canDnGeoms[iDist]
-    const party = partiesByCan[iDist]
+    const party = [partiesByCan[iDist]]
     const { x, y, w, densityProfile } = cd
     // sample circle
     const randomSample = (densityProfile === 'gaussian') ? randomInsideGaussian : randomInsideCircle
