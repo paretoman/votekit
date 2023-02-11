@@ -15,7 +15,13 @@ export default function tooltipBox(graphic, screen) {
             box.style.left = `${x}px`
             box.style.right = 'unset'
         }
-        box.style.top = `${y}px`
+        if (y > screen.height * 0.5) {
+            box.style.bottom = `${screen.height - y}px`
+            box.style.top = 'unset'
+        } else {
+            box.style.top = `${y}px`
+            box.style.bottom = 'unset'
+        }
     }
     update()
     // box.style.width = '10px'
