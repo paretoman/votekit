@@ -5,6 +5,7 @@
     "eslint.validate": [
       "javascript"
     ],
+    "javascript.preferences.importModuleSpecifierEnding": "js",
     "cSpell.words": [
       "borda",
       "Buschmann",
