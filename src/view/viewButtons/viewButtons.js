@@ -12,12 +12,12 @@ import Menu from '../menu/Menu.js'
  */
 export default function viewButtons(sim, layout, viewMode) {
     const {
-        commander, simOptions, electionOptions, entities, changes, pub,
+        commander, simOptions, electionOptionsMan, entities, changes, pub,
     } = sim
 
     const menu = new Menu(pub, changes, layout)
     menuSimOptions(simOptions, menu)
-    menuElectionOptions(electionOptions, menu)
+    menuElectionOptions(electionOptionsMan, menu)
 
     addUndo(layout, commander)
     addSimControlsLabel(layout)

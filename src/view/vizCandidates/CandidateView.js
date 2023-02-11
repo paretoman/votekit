@@ -10,9 +10,9 @@ import CandidateGraphic from './CandidateGraphic.js'
  * @param {Candidate} candidate - a candidate component that CandidateView builds upon.
  * @constructor
  */
-export default function CandidateView(candidate, screen, wHandle, hHandle, viewSettings, simOptions, electionOptions) {
+export default function CandidateView(candidate, screen, wHandle, hHandle, viewSettings, simOptions, electionOptionsMan) {
     const self = this
     self.candidate = candidate
 
-    self.graphic = new CandidateGraphic(candidate, screen, wHandle, hHandle, viewSettings, simOptions, electionOptions)
+    self.graphic = new CandidateGraphic(candidate, screen, wHandle, hHandle, viewSettings, simOptions, electionOptionsMan)
 }

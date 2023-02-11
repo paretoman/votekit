@@ -17,7 +17,7 @@ import getTallyFractions from '../viz/getTallyFractions.js'
  * @param {ViewSettings} viewSettings
  * @constructor
  */
-export default function ViewEntitiesOne(entities, screen, menu, changes, simOptions, electionOptions, viewMode, viewSettings, viewChanges) {
+export default function ViewEntitiesOne(entities, screen, menu, changes, simOptions, electionOptionsMan, viewMode, viewSettings, viewChanges) {
     const self = this
 
     viewMode.viewModes.one.attach(self)
@@ -27,7 +27,7 @@ export default function ViewEntitiesOne(entities, screen, menu, changes, simOpti
     const { candidateList, voterShapeList } = entities
 
     // Entities //
-    const candidateViewList = new CandidateViewList(viewSettings, candidateList, screen, simOptions, electionOptions)
+    const candidateViewList = new CandidateViewList(viewSettings, candidateList, screen, simOptions, electionOptionsMan)
     const voterViewList = new VoterViewList(viewSettings, voterShapeList, screen, simOptions)
     candidateViewList.attachNewG(self.dragm)
     voterViewList.attachNewG(self.dragm)
@@ -85,6 +85,7 @@ export default function ViewEntitiesOne(entities, screen, menu, changes, simOpti
         self.testVoterView.graphic.start(p)
     }
     self.testVoteView = () => {
+        const electionOptions = electionOptionsMan.getOptions()
         const geometry = getTestGeometry(self.testVoterView.testVoter, candidateList, simOptions)
         const vote = voteCasters[electionOptions.voteCasterName].castTestVote(geometry)
         self.testVoterView.graphic.update(vote, candidateList)

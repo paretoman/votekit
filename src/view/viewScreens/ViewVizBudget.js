@@ -2,7 +2,7 @@ import Screen from '../screen/Screen.js'
 import BaseExplanation from '../viz/BaseExplanation.js'
 import VizExplanationBudgetMES from '../viz/VizExplanationBudgetMES.js'
 
-export default function ViewVizBudget(screenCommon, layout, menu, changes, simOptions, electionOptions, viewMode) {
+export default function ViewVizBudget(screenCommon, layout, menu, changes, simOptions, electionOptionsMan, viewMode) {
     const self = this
 
     viewMode.viewModes.one.attach(self)
@@ -15,6 +15,7 @@ export default function ViewVizBudget(screenCommon, layout, menu, changes, simOp
     let vizExplanation
 
     function enterStrategy() {
+        const electionOptions = electionOptionsMan.getOptions()
         const { socialChoiceMethod, useGeography } = electionOptions
         const { dimensions } = simOptions
         const VizExplanation = (socialChoiceMethod === 'methodOfEqualShares' && !useGeography && dimensions === 1)

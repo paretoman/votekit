@@ -22,7 +22,7 @@ import addDownloadScreen from './addDownloadScreen.js'
  */
 export default function viewScreens(sim, viewMode, layout, viewChanges, menu) {
     const {
-        entities, simOptions, electionOptions, changes,
+        entities, simOptions, electionOptionsMan, changes,
     } = sim
 
     const screenCommon = new ScreenCommon(300, 300)
@@ -36,12 +36,12 @@ export default function viewScreens(sim, viewMode, layout, viewChanges, menu) {
     addDarkModeSwitch(screenCommon, layout, viewMode)
 
     const viewSettings = new ViewSettings(changes)
-    new ViewEntitiesOne(entities, screenMain, menu, changes, simOptions, electionOptions, viewMode, viewSettings, viewChanges)
-    new ViewEntitiesSample(entities, screenMain, menu, changes, simOptions, electionOptions, viewMode, viewSettings)
-    new ViewVizOne(entities, screenMain, screenMini, menu, changes, simOptions, electionOptions, viewMode, viewSettings)
+    new ViewEntitiesOne(entities, screenMain, menu, changes, simOptions, electionOptionsMan, viewMode, viewSettings, viewChanges)
+    new ViewEntitiesSample(entities, screenMain, menu, changes, simOptions, electionOptionsMan, viewMode, viewSettings)
+    new ViewVizOne(entities, screenMain, screenMini, menu, changes, simOptions, electionOptionsMan, viewMode, viewSettings)
     new ViewVizSample(entities, screenMain, menu, changes, simOptions, viewMode, viewSettings)
-    new ViewVizBudget(screenCommon, layout, menu, changes, simOptions, electionOptions, viewMode)
-    new ViewDistrictMaps(entities, screenCommon, layout, changes, simOptions, electionOptions, viewMode)
+    new ViewVizBudget(screenCommon, layout, menu, changes, simOptions, electionOptionsMan, viewMode)
+    new ViewDistrictMaps(entities, screenCommon, layout, changes, simOptions, electionOptionsMan, viewMode)
 
     return { screenMain }
 }

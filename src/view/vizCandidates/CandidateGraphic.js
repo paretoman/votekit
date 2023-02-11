@@ -4,7 +4,7 @@ import EntityGraphic from '../vizEntities/EntityGraphic.js'
 import SquareGraphic from '../vizEntities/SquareGraphic.js'
 
 // eslint-disable-next-line max-len
-export default function CandidateGraphic(candidate, screen, wHandle, hHandle, viewSettings, simOptions, electionOptions) {
+export default function CandidateGraphic(candidate, screen, wHandle, hHandle, viewSettings, simOptions, electionOptionsMan) {
     const self = this
 
     const square = new SquareGraphic(self, candidate, wHandle, hHandle, screen)
@@ -50,6 +50,7 @@ export default function CandidateGraphic(candidate, screen, wHandle, hHandle, vi
             const y2 = y + square.h * 0.5 + 20 + 2
             drawStrokedColor(self.wins, x, y2, 20, 2, color, 1, fctx)
         }
+        const electionOptions = electionOptionsMan.getOptions()
         if (electionOptions.socialChoiceMethod === 'olprA') {
             const x3 = x + square.w * 0.1
             const y3 = y + 8

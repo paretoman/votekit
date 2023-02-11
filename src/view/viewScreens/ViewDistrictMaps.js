@@ -7,7 +7,7 @@ import DistrictMapViz from '../viz/DistrictMapViz.js'
  * Show votes
  * @constructor
  */
-export default function ViewDistrictMaps(entities, screenCommon, layout, changes, simOptions, electionOptions, viewMode) {
+export default function ViewDistrictMaps(entities, screenCommon, layout, changes, simOptions, electionOptionsMan, viewMode) {
     const self = this
 
     viewMode.viewModes.one.attach(self)
@@ -17,10 +17,11 @@ export default function ViewDistrictMaps(entities, screenCommon, layout, changes
     screen.setHeight(height / 3)
     screen.hide()
 
-    const districtMapViz = new DistrictMapViz(entities.candidateList, screen, electionOptions, changes)
+    const districtMapViz = new DistrictMapViz(entities.candidateList, screen, electionOptionsMan, changes)
     let flagNoRender = false
 
     self.enter = () => {
+        const electionOptions = electionOptionsMan.getOptions()
         if (electionOptions.useGeography) {
             screen.show()
         }
@@ -30,6 +31,7 @@ export default function ViewDistrictMaps(entities, screenCommon, layout, changes
     }
 
     self.update = function (simData) {
+        const electionOptions = electionOptionsMan.getOptions()
         if (changes.check(['numDistricts', 'numTracts'])) {
             if (electionOptions.useGeography) {
                 screen.show()
@@ -55,6 +57,7 @@ export default function ViewDistrictMaps(entities, screenCommon, layout, changes
     self.render = function () {
         if (flagNoRender) return
 
+        const electionOptions = electionOptionsMan.getOptions()
         if (electionOptions.useGeography) districtMapViz.render()
     }
     self.clear = () => {

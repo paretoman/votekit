@@ -8,7 +8,7 @@ import CandidateDnView from './CandidateDnView.js'
  * It also checks if that member exists. Alternatively, it was deleted.
  * @constructor
  */
-export default function CandidateDnViewList(viewSettings, candidateDnList, screen, simOptions, electionOptions) {
+export default function CandidateDnViewList(viewSettings, candidateDnList, screen, simOptions, electionOptionsMan) {
     const self = this
 
     const canDnViews = []
@@ -28,7 +28,7 @@ export default function CandidateDnViewList(viewSettings, candidateDnList, scree
     // Data Setters and Getters //
 
     self.newCandidateDn = function (candidateDn) {
-        const canDnView = new CandidateDnView(candidateDn, screen, 21, 21, viewSettings, simOptions, electionOptions)
+        const canDnView = new CandidateDnView(candidateDn, screen, 21, 21, viewSettings, simOptions, electionOptionsMan)
         canDnViews.push(canDnView)
         canDnView.graphic.setRenderer(self.rendererMaker)
         updateObservers(canDnView)

@@ -9,7 +9,7 @@ import NoiseImage from './NoiseImage.js'
  * @param {Screen} screen
  * @constructor
  */
-export default function DistrictMapViz(candidateList, screen, electionOptions, changes) {
+export default function DistrictMapViz(candidateList, screen, electionOptionsMan, changes) {
     const self = this
 
     let districtMap
@@ -26,6 +26,7 @@ export default function DistrictMapViz(candidateList, screen, electionOptions, c
             self.noiseImage = new NoiseImage(districtGeometry.nx, districtGeometry.ny, screen)
         }
 
+        const electionOptions = electionOptionsMan.getOptions()
         const gc = districtColors(districtElectionResults, candidateList, electionOptions)
         const { colorByTract, colorOfVoteByDistrict, colorOfWinsByDistrict } = gc
         self.colorOfVoteByDistrict = colorOfVoteByDistrict

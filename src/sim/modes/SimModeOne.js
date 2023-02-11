@@ -15,7 +15,7 @@ import election from '../../election/election/election.js'
  * @constructor
  */
 // eslint-disable-next-line max-len
-export default function SimModeOne(pub, entities, changes, districts, simOptions, electionOptions) {
+export default function SimModeOne(pub, entities, changes, districts, simOptions, electionOptionsMan) {
     const self = this
 
     const { voterShapeList, candidateList } = entities
@@ -23,7 +23,9 @@ export default function SimModeOne(pub, entities, changes, districts, simOptions
     self.update = () => {
         if (changes.checkNone()) return
 
-        electionOptions.update()
+        electionOptionsMan.update()
+        const electionOptions = electionOptionsMan.getOptions()
+
         districts.update()
 
         const geometry = getGeometry(voterShapeList, candidateList, simOptions, electionOptions, districts)

@@ -18,9 +18,9 @@ Sim is composed of components.
 - [Commander](commands.md) keeps track of commands sent to the Sim and stores them as a configuration. Undo and redo use these commands. Commander is like a middleman.
 - [Entities](entities.md) are geometric objects representing voters and candidates.
 - SimOptions are outside of the election and include: mode and dimension.
-- ElectionOptions are options inside the election and include: socialChoiceMethod, voteCasterName, number of districts and two sub categories:
-  - CastOptions are options for the vote caster.
-  - SocialChoiceOptions are options for the social choice function.
+- ElectionOptionsMan manages [electionOptions](electionOptions.md), which are options inside the election and include: socialChoiceMethod, voteCasterName, number of districts and two sub categories:
+  - castOptions are options for the vote caster.
+  - socialChoiceOptions are options for the social choice function.
 - DistrictGeometry creates geometries for voter districts. It does so by providing a modification of voter positions over a geographical space in tracts.
 - [SimMode](simMode.md) is where the election happens and handles the processing of inputs geometries, options, and changes to output data structures.
 - Pub allows the ViewMode to attach to the SimMode. 

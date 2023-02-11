@@ -10,7 +10,7 @@ import Sampler from '../sampler/Sampler.js'
  *   voters in a distribution that will be summed over.
  * @constructor
  */
-export default function SimModeSample(pub, entities, changes, districts, simOptions, electionOptions) {
+export default function SimModeSample(pub, entities, changes, districts, simOptions, electionOptionsMan) {
     const self = this
 
     const { candidateDnList, voterShapeList } = entities
@@ -23,7 +23,9 @@ export default function SimModeSample(pub, entities, changes, districts, simOpti
         // The election handles any changes.
         // The electionResults communicates how to visualize the election.
 
-        electionOptions.update()
+        electionOptionsMan.update()
+        const electionOptions = electionOptionsMan.getOptions()
+
         districts.update()
         canDnSampler.update()
 

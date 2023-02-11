@@ -10,9 +10,9 @@ import CandidateDnGraphic from './CandidateDnGraphic.js'
  * @param {CandidateDn} canDn - a canDn component that CandidateView builds upon.
  * @constructor
  */
-export default function CandidateDnView(canDn, screen, wHandle, hHandle, viewSettings, simOptions, electionOptions) {
+export default function CandidateDnView(canDn, screen, wHandle, hHandle, viewSettings, simOptions, electionOptionsMan) {
     const self = this
     self.canDn = canDn
 
-    self.graphic = new CandidateDnGraphic(canDn, screen, wHandle, hHandle, viewSettings, simOptions, electionOptions)
+    self.graphic = new CandidateDnGraphic(canDn, screen, wHandle, hHandle, viewSettings, simOptions, electionOptionsMan)
 }

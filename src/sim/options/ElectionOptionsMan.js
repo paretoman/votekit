@@ -8,7 +8,7 @@ import SocialChoiceOptions from './SocialChoiceOptions.js'
  * Here we are in the context of a single election.
  * @constructor
  */
-export default function ElectionOptions(changes, simOptions, commander) {
+export default function ElectionOptionsMan(changes, simOptions, commander) {
     const self = this
 
     self.castOptions = new CastOptions(changes, simOptions, self)
@@ -59,6 +59,8 @@ export default function ElectionOptions(changes, simOptions, commander) {
         self.castOptions.update()
         self.socialChoiceOptions.update()
     }
+
+    self.getOptions = () => ({ ...self })
 
     self.init()
 }

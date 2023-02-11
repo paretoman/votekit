@@ -14,7 +14,7 @@ import ViewBase from './ViewBase.js'
  * @param {ViewSettings} viewSettings
  * @constructor
  */
-export default function ViewEntitiesSample(entities, screen, menu, changes, simOptions, electionOptions, viewMode, viewSettings) {
+export default function ViewEntitiesSample(entities, screen, menu, changes, simOptions, electionOptionsMan, viewMode, viewSettings) {
     const self = this
 
     viewMode.viewModes.sample.attach(self)
@@ -25,7 +25,7 @@ export default function ViewEntitiesSample(entities, screen, menu, changes, simO
     const { candidateDnList, voterShapeList } = entities
 
     // eslint-disable-next-line max-len
-    const candidateDnViewList = new CandidateDnViewList(viewSettings, candidateDnList, screen, simOptions, electionOptions)
+    const candidateDnViewList = new CandidateDnViewList(viewSettings, candidateDnList, screen, simOptions, electionOptionsMan)
     const voterViewList = new VoterViewList(viewSettings, voterShapeList, screen, simOptions)
 
     candidateDnViewList.attachNewG(self.dragm)

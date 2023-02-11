@@ -1,6 +1,6 @@
 import { socialChoiceMethodMetadata } from '../../election/socialChoiceMethods/socialChoiceMethods.js'
 
-export default function menuElectionOptions(electionOptions, menu) {
+export default function menuElectionOptions(electionOptionsMan, menu) {
     menu.addMenuItem({
         label: 'Number of Census Tracts:',
         explain: 'Tracts add some geography into the election. '
@@ -14,9 +14,9 @@ export default function menuElectionOptions(electionOptions, menu) {
             { name: '20', value: 20 },
         ],
         changeList: ['numTracts'],
-        getValue: () => electionOptions.numTracts,
+        getValue: () => electionOptionsMan.numTracts,
         onChoose: (o) => {
-            electionOptions.setNumTracts(o.value)
+            electionOptionsMan.setNumTracts(o.value)
         },
     })
 
@@ -32,9 +32,9 @@ export default function menuElectionOptions(electionOptions, menu) {
             { name: '20', value: 20 },
         ],
         changeList: ['numDistricts'],
-        getValue: () => electionOptions.numDistricts,
+        getValue: () => electionOptionsMan.numDistricts,
         onChoose: (o) => {
-            electionOptions.setNumDistricts(o.value)
+            electionOptionsMan.setNumDistricts(o.value)
         },
     })
 
@@ -47,9 +47,9 @@ export default function menuElectionOptions(electionOptions, menu) {
             ),
         ),
         changeList: ['socialChoiceMethod'],
-        getValue: () => electionOptions.socialChoiceMethod,
+        getValue: () => electionOptionsMan.socialChoiceMethod,
         onChoose: (o) => {
-            electionOptions.setSocialChoiceMethod(o.value)
+            electionOptionsMan.setSocialChoiceMethod(o.value)
         },
     })
 }

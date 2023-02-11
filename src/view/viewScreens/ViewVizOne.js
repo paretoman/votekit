@@ -21,7 +21,7 @@ import VoterRendererList from '../vizVoters/VoterRendererList.js'
  * @constructor
  */
 // eslint-disable-next-line max-len
-export default function ViewVizOne(entities, screenMain, screenMini, menu, changes, simOptions, electionOptions, viewMode, viewSettings) {
+export default function ViewVizOne(entities, screenMain, screenMini, menu, changes, simOptions, electionOptionsMan, viewMode, viewSettings) {
     const self = this
 
     viewMode.viewModes.one.attach(self)
@@ -36,6 +36,7 @@ export default function ViewVizOne(entities, screenMain, screenMini, menu, chang
     // Strategies //
     let vizOne
     function enterStrategy() {
+        const electionOptions = electionOptionsMan.getOptions()
         const { voteCasterName } = electionOptions
         const { dimensions } = simOptions
 
