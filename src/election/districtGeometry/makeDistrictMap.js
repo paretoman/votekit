@@ -5,18 +5,16 @@ import lloydVoronoi from './lloydVoronoi.js'
 /**
  * Makes and draws district boundaries for districts of equal number of voters.
  * Right now, just for a uniform square geography.
+ * Each axis is from 0 to 1.
+ * The total area is 1.
  * Define district lines and count voters.
- * @param {Number} nx - number of voter cells in x
- * @param {Number} ny - number of voter cells in y
  * @param {Number} nd - number of districts.
  */
 export default function makeDistrictMap(nd) {
-    const lloydPoints = 100
-    const totalArea = lloydPoints * lloydPoints
-    const [centroids, voronoi, polygons] = lloydVoronoi(lloydPoints, lloydPoints, nd, 0.01)
+    const [centroids, voronoi, polygons] = lloydVoronoi(1, 1, nd, 0.01)
     const polygonAreas = polygons.map(polygonArea).map((x) => -x)
 
-    const districtMap = { lloydPoints, totalArea, nd, centroids, voronoi, polygons, polygonAreas }
+    const districtMap = { nd, centroids, voronoi, polygons, polygonAreas }
 
     return districtMap
 }

@@ -16,12 +16,12 @@ import { range, jcopy } from '../../utilities/jsHelpers.js'
  * each with a list of census tract properties [x,y,overlap]
  */
 export default function districtCensus(districtMap, nx, ny) {
-    const { nd, polygons, lloydPoints } = districtMap
+    const { nd, polygons } = districtMap
 
     const census = Array(nd).fill().map(() => [])
 
-    const xScale = lloydPoints / nx
-    const yScale = lloydPoints / ny
+    const xScale = 1 / nx
+    const yScale = 1 / ny
     for (let gx = 0; gx < nx; gx++) { // x-coordinate of tract
         for (let gy = 0; gy < ny; gy++) { // y-coordinate of tract
             const subject = makeSquare(gx * xScale, gy * yScale, xScale, yScale)

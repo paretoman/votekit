@@ -40,10 +40,10 @@ export default function DistrictDraw(screen) {
      */
     self.renderVoronoiGeneral = (districtMap, x, y, districtMapWidth, districtMapHeight, colors, textFunction) => {
         const { ctx } = screen
-        const { voronoi, lloydPoints, nd } = districtMap
+        const { voronoi, nd } = districtMap
         ctx.save()
-        const scaleX = districtMapWidth / lloydPoints
-        const scaleY = districtMapHeight / lloydPoints
+        const scaleX = districtMapWidth
+        const scaleY = districtMapHeight
         ctx.translate(x, y)
         ctx.scale(scaleX, scaleY)
         for (let i = 0; i < nd; i++) {
@@ -63,11 +63,11 @@ export default function DistrictDraw(screen) {
 
     function renderAreaText(districtMap, i) {
         const { ctx } = screen
-        const { centroids, polygonAreas, lloydPoints, totalArea } = districtMap
+        const { centroids, polygonAreas } = districtMap
         const c = centroids[i]
-        const textHeight = lloydPoints * 0.1
+        const textHeight = 0.1
         // const areaText = textPercent(polygonAreas[i] / (districtMap.totalArea))
-        const area = polygonAreas[i] / totalArea
+        const area = polygonAreas[i]
         const area1000 = area * 1000
         const areaText = area1000.toFixed(0)
         drawStrokedColor(areaText, c[0], c[1] + textHeight * 0.5, textHeight, 0.2, '#222', 1, ctx)
