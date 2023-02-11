@@ -11,8 +11,9 @@ import SocialChoiceOptions from './SocialChoiceOptions.js'
 export default function ElectionOptionsMan(changes, simOptions, commander) {
     const self = this
 
-    self.castOptions = new CastOptions(changes, simOptions, self)
-    self.socialChoiceOptions = new SocialChoiceOptions(changes, self)
+    const electionOptions = {}
+    electionOptions.castOptions = new CastOptions(changes, simOptions, electionOptions)
+    electionOptions.socialChoiceOptions = new SocialChoiceOptions(changes, electionOptions)
 
     self.init = () => {
         // Defaults
@@ -23,44 +24,44 @@ export default function ElectionOptionsMan(changes, simOptions, commander) {
 
     self.setSocialChoiceMethod = commander.addSender({
         name: 'socialChoiceMethod',
-        currentValue: self.socialChoiceMethod,
+        currentValue: electionOptions.socialChoiceMethod,
         action(functionName) {
-            self.socialChoiceMethod = functionName
+            electionOptions.socialChoiceMethod = functionName
             const metadata = socialChoiceMethodMetadataByFunctionName[functionName]
-            self.voteCasterName = metadata.voteCasterName
-            self.socialChoiceType = metadata.socialChoiceType
+            electionOptions.voteCasterName = metadata.voteCasterName
+            electionOptions.socialChoiceType = metadata.socialChoiceType
             changes.add(['socialChoiceMethod'])
         },
     }).go
 
     self.setNumDistricts = commander.addSender({
         name: 'numDistricts',
-        currentValue: self.numDistricts,
+        currentValue: electionOptions.numDistricts,
         action(n) {
-            self.numDistricts = n
-            self.useDistricts = n > 1
-            self.useGeography = self.useTracts || self.useDistricts
+            electionOptions.numDistricts = n
+            electionOptions.useDistricts = n > 1
+            electionOptions.useGeography = electionOptions.useTracts || electionOptions.useDistricts
             changes.add(['numDistricts'])
         },
     }).go
 
     self.setNumTracts = commander.addSender({
         name: 'numTracts',
-        currentValue: self.numTracts,
+        currentValue: electionOptions.numTracts,
         action(n) {
-            self.numTracts = n
-            self.useTracts = n > 1
-            self.useGeography = self.useTracts || self.useDistricts
+            electionOptions.numTracts = n
+            electionOptions.useTracts = n > 1
+            electionOptions.useGeography = electionOptions.useTracts || electionOptions.useDistricts
             changes.add(['numTracts'])
         },
     }).go
 
     self.update = () => {
-        self.castOptions.update()
-        self.socialChoiceOptions.update()
+        electionOptions.castOptions.update()
+        electionOptions.socialChoiceOptions.update()
     }
 
-    self.getOptions = () => ({ ...self })
+    self.getOptions = () => ({ ...electionOptions })
 
     self.init()
 }

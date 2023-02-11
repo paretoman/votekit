@@ -14,7 +14,7 @@ export default function menuElectionOptions(electionOptionsMan, menu) {
             { name: '20', value: 20 },
         ],
         changeList: ['numTracts'],
-        getValue: () => electionOptionsMan.numTracts,
+        getValue: () => electionOptionsMan.getOptions().numTracts,
         onChoose: (o) => {
             electionOptionsMan.setNumTracts(o.value)
         },
@@ -32,7 +32,7 @@ export default function menuElectionOptions(electionOptionsMan, menu) {
             { name: '20', value: 20 },
         ],
         changeList: ['numDistricts'],
-        getValue: () => electionOptionsMan.numDistricts,
+        getValue: () => electionOptionsMan.getOptions().numDistricts,
         onChoose: (o) => {
             electionOptionsMan.setNumDistricts(o.value)
         },
@@ -47,7 +47,7 @@ export default function menuElectionOptions(electionOptionsMan, menu) {
             ),
         ),
         changeList: ['socialChoiceMethod'],
-        getValue: () => electionOptionsMan.socialChoiceMethod,
+        getValue: () => electionOptionsMan.getOptions().socialChoiceMethod,
         onChoose: (o) => {
             electionOptionsMan.setSocialChoiceMethod(o.value)
         },
