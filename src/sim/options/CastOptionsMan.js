@@ -16,7 +16,7 @@ export default function CastOptionsMan(changes, simOptions, electionOptions) {
             } else if (electionOptions.numTracts === 1) {
                 castOptions.usr = 16
             } else {
-                castOptions.usr = 16
+                castOptions.usr = 32
             }
         }
     }
