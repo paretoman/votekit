@@ -10,15 +10,11 @@ export default function Districts(voterShapeList, changes, electionOptionsMan, s
 
     self.districtGeometry = createDistrictGeometry()
 
-    // We need to updateVoters the first time we change numDistricts to greater than 1,
-    // but not the next time.
-    let firstRun = true
-
     // Update call from sim //
     self.update = () => {
-        const electionOptions = electionOptionsMan.getOptions()
-        if (electionOptions.useGeography === false) return
         if (changes.checkNone()) return
+
+        const electionOptions = electionOptionsMan.getOptions()
 
         if (changes.check(['numTracts'])) {
             const { numTracts } = electionOptions
@@ -34,8 +30,7 @@ export default function Districts(voterShapeList, changes, electionOptionsMan, s
             self.districtGeometry = updateCensus(self.districtGeometry)
         }
 
-        if (firstRun || changes.check(['draggables', 'dimensions', 'numTracts'])) {
-            firstRun = false
+        if (changes.check(['draggables', 'dimensions', 'numTracts'])) {
             const { dimensions } = simOptions
             const voterGeoms = voterShapeList.getGeoms(dimensions)
             self.districtGeometry = updateVoters(self.districtGeometry, voterGeoms, dimensions)
