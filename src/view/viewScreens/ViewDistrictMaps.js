@@ -1,7 +1,7 @@
 /** @module */
 
 import Screen from '../screen/Screen.js'
-import DistrictMaps from '../viz/DistrictMaps.js'
+import DistrictMapViz from '../viz/DistrictMapViz.js'
 
 /**
  * Show votes
@@ -17,7 +17,7 @@ export default function ViewDistrictMaps(entities, screenCommon, layout, changes
     screen.setHeight(height / 3)
     screen.hide()
 
-    const districtMaps = new DistrictMaps(entities.candidateList, screen, electionOptions, changes)
+    const districtMapViz = new DistrictMapViz(entities.candidateList, screen, electionOptions, changes)
     let flagNoRender = false
 
     self.enter = () => {
@@ -46,7 +46,7 @@ export default function ViewDistrictMaps(entities, screenCommon, layout, changes
         flagNoRender = false
 
         if (electionOptions.useGeography) {
-            districtMaps.update(electionResults)
+            districtMapViz.update(electionResults)
             self.clear()
             self.render()
         }
@@ -55,7 +55,7 @@ export default function ViewDistrictMaps(entities, screenCommon, layout, changes
     self.render = function () {
         if (flagNoRender) return
 
-        if (electionOptions.useGeography) districtMaps.render()
+        if (electionOptions.useGeography) districtMapViz.render()
     }
     self.clear = () => {
         screen.clear()

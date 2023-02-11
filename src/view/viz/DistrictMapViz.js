@@ -9,7 +9,7 @@ import NoiseImage from './NoiseImage.js'
  * @param {Screen} screen
  * @constructor
  */
-export default function DistrictMaps(candidateList, screen, electionOptions, changes) {
+export default function DistrictMapViz(candidateList, screen, electionOptions, changes) {
     const self = this
 
     let districtMap

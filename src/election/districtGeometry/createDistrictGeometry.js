@@ -1,5 +1,6 @@
 /** @module */
 
+import districtCensus from './districtCensus.js'
 import makeDistrictMap from './makeDistrictMap.js'
 import makeTractNoise from './makeTractNoise.js'
 import makeVoterGeomsByTract from './makeVoterGeomsByTract.js'
@@ -26,12 +27,17 @@ export function makeTracts(districtGeometry0, numTracts) {
 
 /** Make districts */
 export function updateDistricts(districtGeometry0, numDistricts) {
-    const { nx, ny } = districtGeometry0
-    const nd = numDistricts
+    const districtGeometry = { ...districtGeometry0 }
+    districtGeometry.districtMap = makeDistrictMap(numDistricts)
+    return districtGeometry
+}
+
+/** update census */
+export function updateCensus(districtGeometry0) {
+    const { districtMap, nx, ny } = districtGeometry0
 
     const districtGeometry = { ...districtGeometry0 }
-    districtGeometry.nd = nd
-    districtGeometry.districtMap = makeDistrictMap(nx, ny, nd)
+    districtGeometry.census = districtCensus(districtMap, nx, ny)
     return districtGeometry
 }
 

@@ -1,6 +1,6 @@
 /** @module */
 
-import createDistrictGeometry, { makeTracts, updateDistricts, updateVoters } from '../../election/districtGeometry/createDistrictGeometry.js'
+import createDistrictGeometry, { makeTracts, updateCensus, updateDistricts, updateVoters } from '../../election/districtGeometry/createDistrictGeometry.js'
 
 /**
  * @constructor
@@ -24,10 +24,15 @@ export default function Districts(voterShapeList, changes, electionOptions, simO
             self.districtGeometry = makeTracts(self.districtGeometry, numTracts)
         }
 
-        if (changes.check(['numDistricts', 'numTracts'])) {
+        if (changes.check(['numDistricts'])) {
             const { numDistricts } = electionOptions
             self.districtGeometry = updateDistricts(self.districtGeometry, numDistricts)
         }
+
+        if (changes.check(['numDistricts', 'numTracts'])) {
+            self.districtGeometry = updateCensus(self.districtGeometry)
+        }
+
         if (firstRun || changes.check(['draggables', 'dimensions', 'numTracts'])) {
             firstRun = false
             const { dimensions } = simOptions

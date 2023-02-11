@@ -15,16 +15,16 @@ import { range, jcopy } from '../../utilities/jsHelpers.js'
  * @returns {Number[][][]} - an array of districts,
  * each with a list of census tract properties [x,y,overlap]
  */
-export default function districtCensus(districtMap) {
-    const {
-        nd, nx, ny, polygons,
-    } = districtMap
+export default function districtCensus(districtMap, nx, ny) {
+    const { nd, polygons, lloydPoints } = districtMap
 
     const census = Array(nd).fill().map(() => [])
 
+    const xScale = lloydPoints / nx
+    const yScale = lloydPoints / ny
     for (let gx = 0; gx < nx; gx++) { // x-coordinate of tract
         for (let gy = 0; gy < ny; gy++) { // y-coordinate of tract
-            const subject = makeSquare(gx, gy)
+            const subject = makeSquare(gx * xScale, gy * yScale, xScale, yScale)
             range(nd).forEach((iDistrict) => {
                 const poly = polygons[iDistrict]
                 const clip = jcopy(poly).reverse()
@@ -43,7 +43,7 @@ export default function districtCensus(districtMap) {
     return census
 }
 
-function makeSquare(x, y) {
+function makeSquare(x, y, w, h) {
     // the points are in counterclockwise order
     // assuming a coordinate system where y points down and x points right.
     // top left
@@ -52,9 +52,9 @@ function makeSquare(x, y) {
     // top right
     const subject = [
         [x, y],
-        [x, y + 1],
-        [x + 1, y + 1],
-        [x + 1, y],
+        [x, y + h],
+        [x + w, y + h],
+        [x + w, y],
     ]
     return subject
 }

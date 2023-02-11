@@ -31,7 +31,7 @@ The viz's for ViewMode state "sample" are:
 
 Viz\* calls specialized drawing functions for each viz type:
 
-* DistrictMaps draws the voters in tracts and districts.
+* DistrictMapViz draws the voters in tracts and districts.
 * Voronoi1D/2D draws voronoi diagrams.
 * Grid1D/2D draws grids of votes.
 * VoterRender1D/2D has methods to draw voter shapes outside of any other context.

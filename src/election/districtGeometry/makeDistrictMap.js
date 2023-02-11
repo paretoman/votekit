@@ -2,7 +2,6 @@
 
 import { polygonArea } from '../../lib/snowpack/build/snowpack/pkg/d3-polygon.js'
 import lloydVoronoi from './lloydVoronoi.js'
-import districtCensus from './districtCensus.js'
 /**
  * Makes and draws district boundaries for districts of equal number of voters.
  * Right now, just for a uniform square geography.
@@ -11,14 +10,13 @@ import districtCensus from './districtCensus.js'
  * @param {Number} ny - number of voter cells in y
  * @param {Number} nd - number of districts.
  */
-export default function makeDistrictMap(nx, ny, nd) {
-    const [centroids, voronoi, polygons] = lloydVoronoi(nx, ny, nd, 0.01)
+export default function makeDistrictMap(nd) {
+    const lloydPoints = 100
+    const totalArea = lloydPoints * lloydPoints
+    const [centroids, voronoi, polygons] = lloydVoronoi(lloydPoints, lloydPoints, nd, 0.01)
     const polygonAreas = polygons.map(polygonArea).map((x) => -x)
-    const totalArea = nx * ny
 
-    const districtMap = { nx, ny, nd, centroids, voronoi, polygons, polygonAreas, totalArea }
-
-    districtMap.census = districtCensus(districtMap)
+    const districtMap = { lloydPoints, totalArea, nd, centroids, voronoi, polygons, polygonAreas }
 
     return districtMap
 }

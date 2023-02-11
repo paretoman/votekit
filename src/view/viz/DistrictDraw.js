@@ -40,12 +40,10 @@ export default function DistrictDraw(screen) {
      */
     self.renderVoronoiGeneral = (districtMap, x, y, districtMapWidth, districtMapHeight, colors, textFunction) => {
         const { ctx } = screen
-        const {
-            voronoi, nx, ny, nd,
-        } = districtMap
+        const { voronoi, lloydPoints, nd } = districtMap
         ctx.save()
-        const scaleX = districtMapWidth / nx
-        const scaleY = districtMapHeight / ny
+        const scaleX = districtMapWidth / lloydPoints
+        const scaleY = districtMapHeight / lloydPoints
         ctx.translate(x, y)
         ctx.scale(scaleX, scaleY)
         for (let i = 0; i < nd; i++) {
@@ -65,10 +63,10 @@ export default function DistrictDraw(screen) {
 
     function renderAreaText(districtMap, i) {
         const { ctx } = screen
-        const { centroids, polygonAreas, ny, totalArea } = districtMap
+        const { centroids, polygonAreas, lloydPoints, totalArea } = districtMap
         const c = centroids[i]
-        const textHeight = ny * 0.1
-        // const area = textPercent(polygonAreas[i] / (districtMap.nx * districtMap.ny))
+        const textHeight = lloydPoints * 0.1
+        // const areaText = textPercent(polygonAreas[i] / (districtMap.totalArea))
         const area = polygonAreas[i] / totalArea
         const area1000 = area * 1000
         const areaText = area1000.toFixed(0)
