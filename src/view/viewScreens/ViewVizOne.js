@@ -47,7 +47,7 @@ export default function ViewVizOne(entities, screenMain, screenMini, menu, chang
 
         const VizOneVoronoiGeneral = (doRanking) ? VizOneVoronoiRanking : VizOneVoronoi
         const VizNoDistricts = (doGrid) ? VizOneGrid : VizOneVoronoiGeneral
-        const VizOne = (electionOptions.useDistricts === true) ? VizDistricts : VizNoDistricts
+        const VizOne = (electionOptions.useGeography === true) ? VizDistricts : VizNoDistricts
         vizOne = new VizOne(voterRendererList, candidateList, screenMain, screenMini, simOptions)
     }
     enterStrategy()
@@ -64,7 +64,7 @@ export default function ViewVizOne(entities, screenMain, screenMini, menu, chang
 
     self.update = (simData) => {
         if (changes.checkNone()) return
-        if (changes.check(['numDistricts', 'dimensions', 'socialChoiceMethod', 'densityProfile'])) {
+        if (changes.check(['numDistricts', 'numTracts', 'dimensions', 'socialChoiceMethod', 'densityProfile'])) {
             self.exit()
             self.enter()
         }

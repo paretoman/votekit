@@ -17,19 +17,21 @@ export default function ViewDistrictMaps(entities, screenCommon, layout, changes
     screen.setHeight(height / 3)
     screen.hide()
 
-    const districtMaps = new DistrictMaps(entities.candidateList, screen, electionOptions)
+    const districtMaps = new DistrictMaps(entities.candidateList, screen, electionOptions, changes)
     let flagNoRender = false
 
     self.enter = () => {
-        if (electionOptions.useDistricts) screen.show()
+        if (electionOptions.useGeography) {
+            screen.show()
+        }
     }
     self.exit = () => {
         screen.hide()
     }
 
     self.update = function (simData) {
-        if (changes.check(['numDistricts'])) {
-            if (electionOptions.useDistricts) {
+        if (changes.check(['numDistricts', 'numTracts'])) {
+            if (electionOptions.useGeography) {
                 screen.show()
             } else {
                 screen.hide()
@@ -43,7 +45,7 @@ export default function ViewDistrictMaps(entities, screenCommon, layout, changes
         }
         flagNoRender = false
 
-        if (electionOptions.useDistricts) {
+        if (electionOptions.useGeography) {
             districtMaps.update(electionResults)
             self.clear()
             self.render()
@@ -53,7 +55,7 @@ export default function ViewDistrictMaps(entities, screenCommon, layout, changes
     self.render = function () {
         if (flagNoRender) return
 
-        if (electionOptions.useDistricts) districtMaps.render()
+        if (electionOptions.useGeography) districtMaps.render()
     }
     self.clear = () => {
         screen.clear()

@@ -12,7 +12,7 @@ export default function election(geometry, electionOptions) {
     if (canGeoms.length === 0) return { error: 'No Candidates' }
 
     let electionResults
-    if (electionOptions.useDistricts) {
+    if (electionOptions.useGeography) {
         electionResults = districtElection(geometry, electionOptions)
     } else {
         electionResults = electionRun(geometry, electionOptions)

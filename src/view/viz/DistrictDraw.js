@@ -65,11 +65,13 @@ export default function DistrictDraw(screen) {
 
     function renderAreaText(districtMap, i) {
         const { ctx } = screen
-        const { centroids, polygonAreas } = districtMap
+        const { centroids, polygonAreas, ny, totalArea } = districtMap
         const c = centroids[i]
-        const textHeight = 1
+        const textHeight = ny * 0.1
         // const area = textPercent(polygonAreas[i] / (districtMap.nx * districtMap.ny))
-        const area = polygonAreas[i].toFixed(0)
-        drawStrokedColor(area, c[0], c[1] + textHeight * 0.5 - 0.2, textHeight, 0.2, '#222', 1, ctx)
+        const area = polygonAreas[i] / totalArea
+        const area1000 = area * 1000
+        const areaText = area1000.toFixed(0)
+        drawStrokedColor(areaText, c[0], c[1] + textHeight * 0.5, textHeight, 0.2, '#222', 1, ctx)
     }
 }

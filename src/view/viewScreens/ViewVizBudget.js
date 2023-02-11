@@ -33,7 +33,7 @@ export default function ViewVizBudget(screenCommon, layout, menu, changes, simOp
     }
     self.update = (simData) => {
         if (changes.checkNone()) return
-        if (changes.check(['numDistricts', 'dimensions', 'socialChoiceMethod'])) {
+        if (changes.check(['numDistricts', 'numTracts', 'dimensions', 'socialChoiceMethod'])) {
             self.exit()
             self.enter()
         }

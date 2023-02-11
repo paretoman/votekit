@@ -74,7 +74,7 @@ export default function ElectionSampler() {
             sampleGeometry.canBorders = getCanBorders(sampleGeometry, electionOptions)
 
             const electionResults = election(sampleGeometry, electionOptions)
-            const scResultsByDistrict = (electionOptions.useDistricts)
+            const scResultsByDistrict = (electionOptions.useGeography)
                 ? electionResults.scResultsByDistrict
                 : [electionResults.socialChoiceResults]
             const nDistricts = scResultsByDistrict.length

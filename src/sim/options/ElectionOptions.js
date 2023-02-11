@@ -17,6 +17,7 @@ export default function ElectionOptions(changes, simOptions, commander) {
     self.init = () => {
         // Defaults
         self.setSocialChoiceMethod('plurality')
+        self.setNumTracts(1)
         self.setNumDistricts(1)
     }
 
@@ -38,7 +39,19 @@ export default function ElectionOptions(changes, simOptions, commander) {
         action(n) {
             self.numDistricts = n
             self.useDistricts = n > 1
+            self.useGeography = self.useTracts || self.useDistricts
             changes.add(['numDistricts'])
+        },
+    }).go
+
+    self.setNumTracts = commander.addSender({
+        name: 'numTracts',
+        currentValue: self.numTracts,
+        action(n) {
+            self.numTracts = n
+            self.useTracts = n > 1
+            self.useGeography = self.useTracts || self.useDistricts
+            changes.add(['numTracts'])
         },
     }).go
 
