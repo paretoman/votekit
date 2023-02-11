@@ -1,7 +1,7 @@
 /** @module */
 
 import { socialChoiceMethodMetadataByFunctionName } from '../../election/socialChoiceMethods/socialChoiceMethods.js'
-import CastOptions from './CastOptions.js'
+import CastOptionsMan from './CastOptionsMan.js'
 import SocialChoiceOptions from './SocialChoiceOptions.js'
 
 /**
@@ -12,7 +12,7 @@ export default function ElectionOptionsMan(changes, simOptions, commander) {
     const self = this
 
     const electionOptions = {}
-    electionOptions.castOptions = new CastOptions(changes, simOptions, electionOptions)
+    self.castOptionsMan = new CastOptionsMan(changes, simOptions, electionOptions)
     electionOptions.socialChoiceOptions = new SocialChoiceOptions(changes, electionOptions)
 
     self.init = () => {
@@ -57,11 +57,15 @@ export default function ElectionOptionsMan(changes, simOptions, commander) {
     }).go
 
     self.update = () => {
-        electionOptions.castOptions.update()
+        self.castOptionsMan.update()
         electionOptions.socialChoiceOptions.update()
     }
 
-    self.getOptions = () => ({ ...electionOptions })
+    self.getOptions = () => {
+        const eo = { ...electionOptions }
+        eo.castOptions = self.castOptionsMan.getOptions()
+        return eo
+    }
 
     self.init()
 }
