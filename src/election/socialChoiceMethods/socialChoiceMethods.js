@@ -30,7 +30,7 @@ export const socialChoiceMethodMetadata = [
     randomVoterMetadata,
 ]
 
-export const socialChoiceMethods = {}
+const socialChoiceMethods = {}
 export const socialChoiceMethodMetadataByFunctionName = {}
 
 socialChoiceMethodMetadata.forEach((x) => {
