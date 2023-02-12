@@ -35,7 +35,7 @@ The same pattern applies to CastOptionsMan and SocialChoiceOptionsMan.
 
 The parts of ElectionOptionsMan are:
 
-* init: initializaiton
+* init: initialization
 * setters
   * setSocialChoiceMethod
   * setNumDistricts
