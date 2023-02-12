@@ -1,6 +1,7 @@
 import makeGeography from '../src/geography/makeGeography.js'
 import election from '../src/election/election.js'
 import getCanBorders from '../src/voteCasters/voteCasters/getCanBorders.js'
+import electionOptions1 from './electionOptions1.js'
 
 export default function testElection() {
     const dimensions = 2
@@ -16,32 +17,11 @@ export default function testElection() {
 
     const parties = [[0], [1]]
 
-    const electionOptions = {
-        numTracts: 2,
-        numDistricts: 3,
-        socialChoiceMethod: 'plurality',
-        voteCasterName: 'plurality',
-        socialChoiceType: 'singleWinner',
-        castOptions: { usr: 4 },
-        SocialChoiceOptions: {
-            seats: 1,
-            threshold: 0.1,
-            numSampleCandidates: 10,
-        },
-    }
+    const electionOptions = electionOptions1
 
     const canBorders = getCanBorders(canGeoms, voterGeoms, dimensions, electionOptions)
-
     const geography = makeGeography(electionOptions, voterGeoms, dimensions)
-
-    const geometry = {
-        voterGeoms,
-        canGeoms,
-        parties,
-        dimensions,
-        canBorders,
-        geography,
-    }
+    const geometry = { voterGeoms, canGeoms, parties, dimensions, canBorders, geography }
 
     const electionResults = election(geometry, electionOptions)
 

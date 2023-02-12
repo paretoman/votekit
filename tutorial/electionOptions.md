@@ -20,7 +20,7 @@ electionOptions structure
 * socialChoiceType
 * castOptions
   * usr
-* SocialChoiceOptions
+* socialChoiceOptions
   * seats
   * threshold
   * numSampleCandidates
