@@ -39,7 +39,7 @@ export default function testElection() {
         dimensions,
         districtGeometry,
     }
-    geometry.canBorders = getCanBorders(geometry, electionOptions)
+    geometry.canBorders = getCanBorders(canGeoms, voterGeoms, dimensions, electionOptions)
 
     const electionResults = election(geometry, electionOptions)
 

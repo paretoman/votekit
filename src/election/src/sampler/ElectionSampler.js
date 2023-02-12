@@ -63,6 +63,7 @@ export default function ElectionSampler() {
                 sCanGeoms.push(canGeom)
                 sParties.push(party[0])
             }
+            const canBorders = getCanBorders(sCanGeoms, voterGeoms, dimensions, electionOptions)
 
             const sampleGeometry = {
                 voterGeoms,
@@ -70,8 +71,8 @@ export default function ElectionSampler() {
                 parties: { partiesByCan: sParties, numParties: 10 },
                 dimensions,
                 districtGeometry,
+                canBorders,
             }
-            sampleGeometry.canBorders = getCanBorders(sampleGeometry, electionOptions)
 
             const electionResults = election(sampleGeometry, electionOptions)
             const scResultsByDistrict = (electionOptions.useGeography)
