@@ -1,13 +1,13 @@
 {
   "name": "@paretoman/votekit",
-  "description": "An explorable sandbox that shows how different voting methods work using a spatial opinion model.",
   "version": "1.0.0",
+  "description": "An explorable sandbox that shows how different voting methods work using a spatial opinion model.",
   "browser": "src\\sandbox\\addSandboxes.js",
+  "type": "module",
   "directories": {
     "doc": "docs",
     "test": "test"
   },
-  "type": "module",
   "scripts": {
     "doc": "jsdoc -c jsdoc.json",
     "build": "npm run parcel-build && npm run copy1 && npm run copy2 && npm run copy3",
