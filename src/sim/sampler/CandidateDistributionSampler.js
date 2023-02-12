@@ -1,5 +1,5 @@
-import CandidateDistributionSampler1D from '../../election/src/sampler/CandidateDistributionSampler1D.js'
-import CandidateDistributionSampler2D from '../../election/src/sampler/CandidateDistributionSampler2D.js'
+import CandidateDistributionSampler1D from '../../election/src/sampler/sampleCanDnGeom1D.js'
+import CandidateDistributionSampler2D from '../../election/src/sampler/sampleCanDnGeom2D.js'
 
 export default function CandidateDistributionSampler(candidateDnList, changes, simOptions) {
     const self = this

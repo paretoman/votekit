@@ -1,5 +1,5 @@
-import { sampleCanDnGeom1D } from './CandidateDistributionSampler1D.js'
-import { sampleCanDnGeom2D } from './CandidateDistributionSampler2D.js'
+import sampleCanDnGeom1D from './sampleCanDnGeom1D.js'
+import sampleCanDnGeom2D from './sampleCanDnGeom2D.js'
 
 /**
  * Pick a point in the candidate distribution geometry.
