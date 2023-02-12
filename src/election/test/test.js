@@ -9,7 +9,7 @@ describe('The election', () => {
         assert.equal(1, iWinner)
     })
 })
-describe('The sampler', () => {
+describe('Sampling an election', () => {
     it('should sample a winner', () => {
         const point0 = testElectionSample()
         const expectedPoint0 = [1, 2]

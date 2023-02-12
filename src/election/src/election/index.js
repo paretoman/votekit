@@ -1,6 +1,6 @@
 import makeGeography, { makeTracts, updateCensus, updateDistricts, updateVoters } from '../geography/makeGeography.js'
-import makeCandidateDistributionCDF from '../sampler/makeCandidateDistributionCDF.js'
-import sampleElection from '../sampler/sampleElection.js'
+import makeCandidateDistributionCDF from '../sampleElection/makeCandidateDistributionCDF.js'
+import sampleElection from '../sampleElection/sampleElection.js'
 import socialChoiceMethods, { socialChoiceMethodMetadataByFunctionName } from '../socialChoiceMethods/socialChoiceMethods.js'
 import getCanBorders from '../voteCasters/voteCasters/getCanBorders.js'
 import voteCasters from '../voteCasters/voteCasters/voteCasters.js'

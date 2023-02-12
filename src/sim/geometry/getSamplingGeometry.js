@@ -1,4 +1,4 @@
-import makeCandidateDistributionCDF from '../../election/src/sampler/makeCandidateDistributionCDF.js'
+import makeCandidateDistributionCDF from '../../election/src/sampleElection/makeCandidateDistributionCDF.js'
 
 /**
  * Get samplingGeometry inputs to sampleElection.

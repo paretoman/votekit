@@ -1,7 +1,7 @@
 import makeGeography from '../src/geography/makeGeography.js'
 import electionOptions1 from './electionOptions1.js'
-import makeCandidateDistributionCDF from '../src/sampler/makeCandidateDistributionCDF.js'
-import sampleElection from '../src/sampler/sampleElection.js'
+import makeCandidateDistributionCDF from '../src/sampleElection/makeCandidateDistributionCDF.js'
+import sampleElection from '../src/sampleElection/sampleElection.js'
 
 export default function testElectionSample() {
     const dimensions = 2

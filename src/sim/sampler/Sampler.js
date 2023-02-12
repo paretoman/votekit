@@ -1,4 +1,4 @@
-import ElectionSampler from '../../election/src/sampler/ElectionSampler.js'
+import ElectionSampler from './ElectionSampler.js'
 
 export default function Sampler() {
     const self = this
