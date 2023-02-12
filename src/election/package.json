@@ -1,0 +1,57 @@
+{
+  "name": "@paretoman/votekit-election",
+  "version": "1.0.0",
+  "description": "Run a spatial election model. Input geometry. Cast votes. Use a social choice function. Collect results.",
+  "main": "election/index.js",
+  "scripts": {
+    "test": "mocha --reporter list"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/paretoman/votekit-election.git"
+  },
+  "author": {
+    "name": "paretoman",
+    "url": "https://paretoman.github.io"
+  },
+  "license": "MIT-0",
+  "bugs": {
+    "url": "https://github.com/paretoman/votekit-election/issues"
+  },
+  "homepage": "https://github.com/paretoman/votekit-election#readme",
+  "keywords": [
+    "voting",
+    "voting-methods",
+    "social-choice",
+    "computational-social-choice",
+    "elections",
+    "strategy",
+    "electoral-methods",
+    "plurality",
+    "approval",
+    "condorcet",
+    "instant-runoff",
+    "score",
+    "star",
+    "proportional",
+    "proportional-representation",
+    "districts",
+    "redistricting",
+    "single-transferable-vote",
+    "monroe",
+    "thiele",
+    "proportional-approval-voting",
+    "phragmen",
+    "party-list",
+    "party-list-proportional",
+    "dHondt",
+    "Huntington-Hill",
+    "Webster",
+    "Sainte-Lague",
+    "MMP",
+    "OLPR"
+  ],
+  "devDependencies": {
+    "mocha": "^10.2.0"
+  }
+}
