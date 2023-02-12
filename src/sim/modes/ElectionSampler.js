@@ -12,6 +12,15 @@ import sampleElection from '../../election/src/sampleElection/sampleElection.js'
 export default function ElectionSampler() {
     const self = this
 
+    self.update = function (geometry, changes, electionOptions) {
+        if (changes.checkAny()) {
+            self.startSim()
+        }
+
+        const samplingResult = self.addSim(geometry, electionOptions)
+        return samplingResult
+    }
+
     const maxPoints = 5000
 
     let points

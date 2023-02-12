@@ -1,7 +1,7 @@
 /** @module */
 
 import getSamplingGeometry from '../geometry/getSamplingGeometry.js'
-import Sampler from '../sampler/Sampler.js'
+import ElectionSampler from './ElectionSampler.js'
 
 /**
  * Simulate many sample elections with
@@ -14,7 +14,7 @@ export default function SimModeSample(pub, entities, changes, districts, simOpti
 
     const { candidateDnList, voterShapeList } = entities
 
-    const sampler = new Sampler()
+    const electionSampler = new ElectionSampler()
 
     self.update = () => {
         // Update players. Run an election. Get result.
@@ -28,7 +28,7 @@ export default function SimModeSample(pub, entities, changes, districts, simOpti
 
         const samplingGeometry = getSamplingGeometry(voterShapeList, candidateDnList, simOptions, electionOptions, districts)
 
-        const samplingResult = sampler.update(samplingGeometry, changes, electionOptions)
+        const samplingResult = electionSampler.update(samplingGeometry, changes, electionOptions)
         const simData = { samplingResult }
 
         if (samplingResult.pointsChanged === true || changes.checkAny()) {
