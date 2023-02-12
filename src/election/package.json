@@ -18,10 +18,7 @@
     "type": "git",
     "url": "git+https://github.com/paretoman/votekit.git"
   },
-  "author": {
-    "name": "paretoman",
-    "url": "https://paretoman.github.io"
-  },
+  "author": "paretoman (https://paretoman.github.io)",
   "license": "MIT-0",
   "bugs": {
     "url": "https://github.com/paretoman/votekit/issues"
