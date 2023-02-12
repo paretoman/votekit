@@ -10,7 +10,7 @@
       "ecmaVersion": "latest",
       "sourceType": "module"
     },
-    "ignorePatterns": [ "dev", "lib", "dist", "snowpack"    ],
+    "ignorePatterns": [ "lib", "dist" ],
     "rules": {
       "semi": [ "error", "never" ],
       "indent": [ "error", 4 ],
@@ -23,7 +23,6 @@
       "import/no-unresolved": "off",
       "no-bitwise": "off",
       "max-len": "off",
-      "object-curly-newline": [ "error", { "ObjectPattern": { "consistent": true } } ],
-      "import/no-relative-packages": "off"
+      "object-curly-newline": [ "error", { "ObjectPattern": { "consistent": true } } ]
     }
   }
