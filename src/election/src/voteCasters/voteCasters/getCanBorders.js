@@ -4,8 +4,7 @@ export default function getCanBorders(canGeoms, voterGeoms, dimensions, election
     const { voteCasterName } = electionOptions
     const { makeCanBorders } = voteCasters[voteCasterName]
     if (makeCanBorders !== undefined) {
-        const partialGeometry = { canGeoms, voterGeoms, dimensions }
-        const canBorders = makeCanBorders(partialGeometry)
+        const canBorders = makeCanBorders(canGeoms, voterGeoms, dimensions)
         return canBorders
     }
     return {}

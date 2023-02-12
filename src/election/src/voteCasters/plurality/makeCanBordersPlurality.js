@@ -1,9 +1,7 @@
 import makeVoronoiIntervals1D from './makeVoronoiIntervals1D.js'
 import makeVoronoiLines2D from './makeVoronoiLines2D.js'
 
-export default function makeCanBordersPlurality(geometry) {
-    const { canGeoms, voterGeoms, dimensions } = geometry
-
+export default function makeCanBordersPlurality(canGeoms, voterGeoms, dimensions) {
     const someGaussian2D = voterGeoms.some((v) => v.densityProfile === 'gaussian') && dimensions === 2
 
     if (someGaussian2D) {
