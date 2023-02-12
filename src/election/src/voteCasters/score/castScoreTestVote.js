@@ -1,6 +1,6 @@
 /** @module */
 
-import { minMax } from '../../../utilities/jsHelpers.js'
+import { minMax } from '../../election/mathHelpers.js'
 
 /**
  * Vote for the closest candidate.

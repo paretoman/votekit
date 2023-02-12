@@ -1,4 +1,4 @@
-import { normPDF } from '../../../utilities/jsHelpers.js'
+import { normPDF } from '../../election/mathHelpers.js'
 
 export default function makeGrid1D(voterGeom) {
     const { gridX, testVoter, gridPointLength } = findGridX(voterGeom)

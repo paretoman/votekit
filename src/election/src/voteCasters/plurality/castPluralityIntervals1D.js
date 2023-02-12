@@ -1,6 +1,6 @@
 /** @module */
 
-import { normCDF } from '../../../utilities/jsHelpers.js'
+import { normCDF } from '../../election/mathHelpers.js'
 
 /**
  * Sum area under voter distributions to tally the votes.

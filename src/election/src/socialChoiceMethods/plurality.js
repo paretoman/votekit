@@ -1,6 +1,6 @@
 /** @module */
 
-import { maxIndex } from '../../utilities/jsHelpers.js'
+import { maxIndex } from '../election/mathHelpers.js'
 
 /**
  * the candidate with the highest tally wins

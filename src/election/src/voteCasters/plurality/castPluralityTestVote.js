@@ -1,5 +1,6 @@
 /** @module */
-import { minIndex } from '../../../utilities/jsHelpers.js'
+
+import { minIndex } from '../../election/mathHelpers.js'
 
 /**
  * Vote for the closest candidate.

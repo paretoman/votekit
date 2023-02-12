@@ -1,7 +1,7 @@
 /* eslint-disable max-len */
 /** @module */
 
-import { range } from '../../utilities/jsHelpers.js'
+import { range } from '../election/mathHelpers.js'
 
 /**
  * This method has rounds.

@@ -1,9 +1,10 @@
 /** @module */
 
 // import _ from 'https://cdn.skypack.dev/lodash@4.17.21'
-import { polygonArea } from '../../lib/snowpack/build/snowpack/pkg/d3-polygon.js'
-import polygonClip from '../../lib/polygonClip.js'
-import { range, jcopy } from '../../utilities/jsHelpers.js'
+import { polygonArea } from '../../../lib/snowpack/build/snowpack/pkg/d3-polygon.js'
+import polygonClip from '../../../lib/polygonClip.js'
+import { range } from '../election/mathHelpers.js'
+import { jcopy } from '../election/jsHelpers.js'
 
 /**
  * What fraction of each tract lives in each district?

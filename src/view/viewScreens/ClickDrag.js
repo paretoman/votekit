@@ -1,6 +1,6 @@
 /** @module */
 
-import { clamp, copyObjectShallow, minIndex } from '../../utilities/jsHelpers.js'
+import { clamp, minIndex } from '../../utilities/jsHelpers.js'
 
 /**
  * ClickDrag gives draggable behavior to objects on a canvas.
@@ -177,7 +177,7 @@ export default function ClickDrag(dragm, viewEntities, screen, changes, viewSett
     let startPos
     function startClickDetect(mouse) {
         couldBeClick = true
-        startPos = copyObjectShallow(mouse)
+        startPos = { ...mouse }
     }
     function moveClickDetect(mouse) {
         if (couldBeClick) {

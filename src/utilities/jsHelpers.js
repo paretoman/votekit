@@ -41,38 +41,6 @@ export function orderedJsonStringify(obj) {
     return JSON.stringify(sortObjByKey(obj), null, '\t')
 }
 
-const coefInvSqrt2Pi = 1 / (Math.sqrt(2 * Math.PI))
-
-export function normPDF(x, mean, sd) {
-    const coef = coefInvSqrt2Pi / sd
-    return coef * Math.exp(-0.5 * ((x - mean) / sd) ** 2)
-}
-
-export function standardNormPDF(x) {
-    return coefInvSqrt2Pi * Math.exp(-0.5 * x ** 2)
-}
-
-export function normCDF(x, mean, sd) {
-    if (x === Infinity) {
-        return 1
-    } if (x === -Infinity) {
-        return 0
-    }
-    return 0.5 * erf((x - mean) / (sd * Math.sqrt(2))) + 0.5
-}
-
-function erf(x) {
-    const ERF_A = 0.147
-    const x2 = x ** 2
-    const down = 1 + ERF_A * x2
-    const up = 4 / Math.PI + ERF_A * x2
-    const ratio = -(up / down) * x2
-    const expofun = Math.exp(ratio)
-    const radical = Math.sqrt(1 - expofun)
-    const z = radical * Math.sign(x)
-    return z
-}
-
 /** https://stackoverflow.com/a/47355187 */
 export function standardizeColor(str) {
     const canvas = document.createElement('canvas')
@@ -95,70 +63,12 @@ export function minIndex(a) {
     }
     return iClosest
 }
-export function maxIndex(a) {
-    let max = -Infinity
-    let iMax = null
-    for (let i = 0; i < a.length; i++) {
-        const d = a[i]
-        if (d > max) {
-            max = d
-            iMax = i
-        }
-    }
-    return iMax
-}
-
-export function minMax(a) {
-    let min = a[0]
-    let max = a[0]
-    for (let i = 0; i < a.length; i++) {
-        const d = a[i]
-        if (d < min) {
-            min = d
-        }
-        if (d > max) {
-            max = d
-        }
-    }
-    return [min, max]
-}
 
 /** https://stackoverflow.com/a/24719569 */
 export function clamp(value, min, max) {
     if (value < min) return min
     if (value > max) return max
     return value
-}
-
-export function copyArrayShallow(a) {
-    const n = a.length
-    const b = Array(n)
-    for (let i = 0; i < n; i++) {
-        b[i] = a[i]
-    }
-    return b
-}
-
-export function copyArrayShallow2(a) {
-    const n = a.length
-    const b = Array(n)
-    for (let i = 0; i < n; i++) {
-        const m = a[i].length
-        b[i] = Array(m)
-        for (let k = 0; k < m; k++) {
-            b[i][k] = a[i][k]
-        }
-    }
-    return b
-}
-
-export function copyObjectShallow(a) {
-    const b = { ...a }
-    return b
-}
-
-export function countUnique(iterable) {
-    return new Set(iterable).size
 }
 
 export function hashCode(s) { // https://stackoverflow.com/a/7616484

@@ -1,0 +1,105 @@
+/**
+ * List the indices of an array of length n.
+ * @param {Number} n - length of array
+ * @returns {Number[]} - A number array from 0 to n-1.
+ */
+export function range(n) {
+    return [...Array(n).keys()]
+}
+
+const coefInvSqrt2Pi = 1 / (Math.sqrt(2 * Math.PI))
+
+export function normPDF(x, mean, sd) {
+    const coef = coefInvSqrt2Pi / sd
+    return coef * Math.exp(-0.5 * ((x - mean) / sd) ** 2)
+}
+
+export function normCDF(x, mean, sd) {
+    if (x === Infinity) {
+        return 1
+    } if (x === -Infinity) {
+        return 0
+    }
+    return 0.5 * erf((x - mean) / (sd * Math.sqrt(2))) + 0.5
+}
+
+function erf(x) {
+    const ERF_A = 0.147
+    const x2 = x ** 2
+    const down = 1 + ERF_A * x2
+    const up = 4 / Math.PI + ERF_A * x2
+    const ratio = -(up / down) * x2
+    const expofun = Math.exp(ratio)
+    const radical = Math.sqrt(1 - expofun)
+    const z = radical * Math.sign(x)
+    return z
+}
+
+export function getCDF(proportion) {
+    const sumProportion = proportion.reduce((p, c) => p + c)
+
+    // probability mass function
+    const pmf = proportion.map((p) => p / sumProportion)
+
+    // https://stackoverflow.com/a/20477613
+    // [5, 10, 3, 2];
+    // [5, 15, 18, 20]
+    // cumulative distribution function
+    const cdf = []
+    pmf.reduce((p, c, i) => {
+        const a = p + c
+        cdf[i] = a
+        return a
+    }, 0)
+
+    return cdf
+}
+
+export function randomIndexFromCDF(cdf) {
+    // sample from distribution
+    // pick a random number from 0 to 1
+    const random1 = Math.random()
+    const index = cdf.findIndex((x) => x >= random1)
+    return index
+}
+
+export function minIndex(a) {
+    let min = Infinity
+    let iClosest = null
+    for (let i = 0; i < a.length; i++) {
+        const d = a[i]
+        if (d < min) {
+            min = d
+            iClosest = i
+        }
+    }
+    return iClosest
+}
+
+export function maxIndex(a) {
+    let max = -Infinity
+    let iMax = null
+    for (let i = 0; i < a.length; i++) {
+        const d = a[i]
+        if (d > max) {
+            max = d
+            iMax = i
+        }
+    }
+    return iMax
+}
+
+export function minMax(a) {
+    let min = a[0]
+    let max = a[0]
+    for (let i = 0; i < a.length; i++) {
+        const d = a[i]
+        if (d < min) {
+            min = d
+        }
+        if (d > max) {
+            max = d
+        }
+    }
+    return [min, max]
+}

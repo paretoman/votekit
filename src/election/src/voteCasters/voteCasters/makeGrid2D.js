@@ -1,4 +1,4 @@
-import { normPDF, range } from '../../../utilities/jsHelpers.js'
+import { normPDF, range } from '../../election/mathHelpers.js'
 
 export default function makeGrid2D(voterGeom, castOptions) {
     const { x, y, w, densityProfile } = voterGeom

@@ -1,6 +1,7 @@
 /** @module */
 
-import { copyArrayShallow, range } from '../../utilities/jsHelpers.js'
+import { copyArrayShallow } from '../election/jsHelpers.js'
+import { range } from '../election/mathHelpers.js'
 
 /**
  * Run the Huntington-Hill method of apportionment and return an allocation of seats.

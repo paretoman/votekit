@@ -1,5 +1,3 @@
-import { copyObjectShallow } from '../../utilities/jsHelpers.js'
-
 /**
  * Update VoterGeoms for each Tract
  * The set of voter basis geoms is repeated at every census tract on the district map,
@@ -19,7 +17,7 @@ function voterGeomsByTract1D(voterGeoms, tractNoise) {
             (cellNoise) => voterGeoms.map(
                 (vg) => {
                     const [xNoise] = cellNoise
-                    const shape1 = copyObjectShallow(vg)
+                    const shape1 = { ...vg }
                     shape1.x += xNoise
                     return shape1
                 },
@@ -34,7 +32,7 @@ function voterGeomsByTract2D(voterGeoms, tractNoise) {
             (cellNoise) => voterGeoms.map(
                 (vg) => {
                     const [xNoise, yNoise] = cellNoise
-                    const shape2 = copyObjectShallow(vg)
+                    const shape2 = { ...vg }
                     shape2.x += xNoise
                     shape2.y += yNoise
                     return shape2

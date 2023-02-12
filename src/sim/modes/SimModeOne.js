@@ -1,7 +1,7 @@
 /** @module */
 
 import getGeometry from '../geometry/getGeometry.js'
-import election from '../../election/election/election.js'
+import election from '../../election/src/election/election.js'
 
 /**
  * Simulate one election with

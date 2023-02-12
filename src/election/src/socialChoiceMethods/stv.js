@@ -1,8 +1,7 @@
 /** @module */
 
-import {
-    copyArrayShallow, maxIndex, minIndex, range,
-} from '../../utilities/jsHelpers.js'
+import { copyArrayShallow } from '../election/jsHelpers.js'
+import { maxIndex, minIndex, range } from '../election/mathHelpers.js'
 
 /**
  * Single Transferable Vote

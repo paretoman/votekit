@@ -1,6 +1,6 @@
 /** @module */
 
-import getCDF, { randomIndexFromCDF } from '../../utilities/mathUtilities.js'
+import { getCDF, randomIndexFromCDF } from '../election/mathHelpers.js'
 
 /**
  * pick a random voter to select the winner

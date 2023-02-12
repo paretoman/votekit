@@ -1,6 +1,6 @@
 /** @module */
 
-import getCDF, { randomIndexFromCDF } from '../../utilities/mathUtilities.js'
+import { getCDF, randomIndexFromCDF } from '../election/mathHelpers.js'
 
 /**
  * Use this to sample a random candidate from a collection of distributions of candidates.

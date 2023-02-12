@@ -1,6 +1,6 @@
 /** @module */
 
-import { range } from '../../utilities/jsHelpers.js'
+import { range } from '../election/mathHelpers.js'
 
 /**
  * Single Transferable Vote

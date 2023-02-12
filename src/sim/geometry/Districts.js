@@ -1,6 +1,6 @@
 /** @module */
 
-import createDistrictGeometry, { makeTracts, updateCensus, updateDistricts, updateVoters } from '../../election/districtGeometry/createDistrictGeometry.js'
+import createDistrictGeometry, { makeTracts, updateCensus, updateDistricts, updateVoters } from '../../election/src/districtGeometry/createDistrictGeometry.js'
 
 /**
  * @constructor

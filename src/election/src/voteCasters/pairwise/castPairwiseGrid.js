@@ -1,6 +1,6 @@
 /** @module */
 
-import { range } from '../../../utilities/jsHelpers.js'
+import { range } from '../../election/mathHelpers.js'
 import castRankingTestVote from '../ranking/castRankingTestVote.js'
 import makeGrid1D from '../voteCasters/makeGrid1D.js'
 import makeGrid2D from '../voteCasters/makeGrid2D.js'
