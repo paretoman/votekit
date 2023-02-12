@@ -1,9 +1,9 @@
 /** @module */
 
 // import { polygonCentroid } from 'https://cdn.skypack.dev/d3-polygon@3'
-import { polygonCentroid } from '../../../lib/snowpack/build/snowpack/pkg/d3-polygon.js'
+import { polygonCentroid } from '../lib/snowpack/build/snowpack/pkg/d3-polygon.js'
 // import * as d3 from 'https://cdn.skypack.dev/d3@7'
-import { Delaunay } from '../../../lib/snowpack/build/snowpack/pkg/d3-delaunay.js'
+import { Delaunay } from '../lib/snowpack/build/snowpack/pkg/d3-delaunay.js'
 /**
  * Calculate a voronoi diagram with some degree of equal capacity between voronoi cells.
  * Uses Lloyd's method.
