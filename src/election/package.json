@@ -10,6 +10,10 @@
     "lint": "eslint .",
     "doc": "jsdoc -c jsdoc.json"
   },
+  "directories": {
+    "doc": "docs",
+    "test": "test"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/paretoman/votekit.git"
