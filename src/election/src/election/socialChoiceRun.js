@@ -1,6 +1,7 @@
 /** @module */
 
 import socialChoiceMethods from '../socialChoiceMethods/socialChoiceMethods.js'
+import makeAllocation from './makeAllocation.js'
 
 export default function socialChoiceRun(votes, electionOptions) {
     // why have two different kinds of results?
@@ -13,5 +14,8 @@ export default function socialChoiceRun(votes, electionOptions) {
     const { socialChoiceOptions } = electionOptions
     const socialChoiceMethod = socialChoiceMethods[electionOptions.socialChoiceMethod]
     const socialChoiceResults = socialChoiceMethod({ votes, socialChoiceOptions })
+    if (socialChoiceResults.allocation === undefined) {
+        socialChoiceResults.allocation = makeAllocation(votes, socialChoiceResults)
+    }
     return socialChoiceResults
 }

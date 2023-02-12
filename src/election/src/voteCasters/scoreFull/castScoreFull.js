@@ -71,6 +71,7 @@ export default function castScoreFull(geometry, castOptions) {
     const preferenceLists = { scoreVotes }
     const preferenceTallies = { voteFractions }
     const candidateTallies = { scoreFractionAverageByCan }
-    const votes = { preferenceLists, preferenceTallies, candidateTallies, votesByGeom, parties }
+    const numCans = canGeoms.length
+    const votes = { preferenceLists, preferenceTallies, candidateTallies, votesByGeom, parties, numCans }
     return votes
 }

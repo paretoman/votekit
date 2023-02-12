@@ -40,6 +40,7 @@ export default function castScore(geometry, castOptions) {
     const scoreFractionAverageByCan = scoreSumByCan.map((x) => x / (totalVotes * maxScore))
 
     const candidateTallies = { scoreFractionAverageByCan }
-    const votes = { candidateTallies, votesByGeom, parties }
+    const numCans = canGeoms.length
+    const votes = { candidateTallies, votesByGeom, parties, numCans }
     return votes
 }

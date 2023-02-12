@@ -63,6 +63,7 @@ export default function castRanking(geometry, castOptions) {
     const preferenceLists = { rankings, cansByRankList }
     const preferenceTallies = { voteFractions }
     const candidateTallies = { firstPreferenceFractions }
-    const votes = { preferenceLists, preferenceTallies, candidateTallies, votesByGeom, parties }
+    const numCans = canGeoms.length
+    const votes = { preferenceLists, preferenceTallies, candidateTallies, votesByGeom, parties, numCans }
     return votes
 }
