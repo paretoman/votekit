@@ -35,6 +35,11 @@ function erf(x) {
     return z
 }
 
+/**
+ * Make a cumulative distribution function CDF for a set of proportions.
+ * @param {Number[]} proportion - Doesn't have to add to 1. Will normalize.
+ * @returns {Number[]} cdf - Use with randomIndexFromCDF
+ */
 export function getCDF(proportion) {
     const sumProportion = proportion.reduce((p, c) => p + c)
 

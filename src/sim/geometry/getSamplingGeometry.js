@@ -1,4 +1,4 @@
-import getCanBorders from '../../election/src/voteCasters/voteCasters/getCanBorders.js'
+import makeCandidateDistributionCDF from '../../election/src/sampler/makeCandidateDistributionCDF.js'
 
 /**
  * Get samplingGeometry inputs to sampleElection.
@@ -15,8 +15,9 @@ export default function getSamplingGeometry(voterShapeList, candidateDnList, sim
     const voterGeoms = voterShapeList.getGeoms(dimensions)
     const canDnGeoms = candidateDnList.getGeoms(dimensions)
     const parties = candidateDnList.getParties()
-    const canBorders = getCanBorders(canDnGeoms, voterGeoms, dimensions, electionOptions)
 
-    const samplingGeometry = { voterGeoms, canDnGeoms, parties, dimensions, canBorders, geography }
+    const canDnCDF = makeCandidateDistributionCDF(canDnGeoms, dimensions)
+
+    const samplingGeometry = { voterGeoms, canDnGeoms, parties, dimensions, geography, canDnCDF }
     return samplingGeometry
 }
