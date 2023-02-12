@@ -8,6 +8,7 @@ import { getCDF, randomIndexFromCDF } from '../election/mathHelpers.js'
  * @param {CandidateDn[]} canDnGeoms
  * @constructor
  */
+
 export default function CandidateDistributionSampler1D(canDnGeoms, partiesByCan) {
     const self = this
 
@@ -19,6 +20,15 @@ export default function CandidateDistributionSampler1D(canDnGeoms, partiesByCan)
     self.samplePoint = function () {
         return samplePoint1(canDnGeoms, partiesByCan, cdf)
     }
+}
+
+export function sampleCanDnGeom1D(canDnGeom) {
+    const { x, w, densityProfile } = canDnGeom
+    // sample circle
+    const isGaussian = densityProfile === 'gaussian'
+    const sample = (isGaussian) ? sampleGaussian : randomInsideInterval
+    const canGeom = sample(x, w * 0.5)
+    return canGeom
 }
 
 function samplePoint1(canDnGeoms, partiesByCan, cdf) {

@@ -1,7 +1,9 @@
 /** @module */
 
 import election from '../election/election.js'
+import { randomIndexFromCDF } from '../election/mathHelpers.js'
 import getCanBorders from '../voteCasters/voteCasters/getCanBorders.js'
+import sampleCanDnGeom from './sampleCanDnGeom.js'
 
 /**
  * Simulate winners from many sampled elections.
@@ -23,12 +25,11 @@ export default function ElectionSampler() {
         partyWins = Array(10).fill(0) // TODO: Use number of parties
     }
 
-    self.addSim = function (samplingGeometry, cDnSampler, electionOptions) {
+    self.addSim = function (samplingGeometry, electionOptions) {
         // add more points
 
-        const {
-            voterGeoms, canDnGeoms, dimensions, geography,
-        } = samplingGeometry
+        const { voterGeoms, canDnGeoms, dimensions, geography, canDnCDF } = samplingGeometry
+        const { partiesByCan } = samplingGeometry.parties
 
         if (voterGeoms.length === 0) return { pointsChanged: false }
         if (canDnGeoms.length === 0) {
@@ -56,10 +57,12 @@ export default function ElectionSampler() {
             const sParties = []
             for (let k = 0; k < nk; k++) {
                 // sample a point from the distribution of candidates
-                const point = cDnSampler.samplePoint()
+                const iDist = randomIndexFromCDF(canDnCDF)
+                const party = [partiesByCan[iDist]]
+                const canDnGeom = canDnGeoms[iDist]
+                const canGeom = sampleCanDnGeom(canDnGeom, dimensions)
 
                 // make a candidate
-                const { canGeom, party } = point
                 sCanGeoms.push(canGeom)
                 sParties.push(party[0])
             }

@@ -1,6 +1,5 @@
 import makeGeography from '../src/geography/makeGeography.js'
 import electionOptions1 from './electionOptions1.js'
-import CandidateDistributionSampler2D from '../src/sampler/CandidateDistributionSampler2D.js'
 import ElectionSampler from '../src/sampler/ElectionSampler.js'
 import makeCandidateDistributionCDF from '../src/sampler/makeCandidateDistributionCDF.js'
 
@@ -28,11 +27,9 @@ export default function testElectionSample() {
 
     const samplingGeometry = { voterGeoms, canDnGeoms, parties, dimensions, geography, canDnCDF }
 
-    const cDnSampler = new CandidateDistributionSampler2D(canDnGeoms, parties.partiesByCan)
-
     const sampler = new ElectionSampler()
     sampler.startSim()
-    const samplingResult = sampler.addSim(samplingGeometry, cDnSampler, electionOptions)
+    const samplingResult = sampler.addSim(samplingGeometry, electionOptions)
 
     return samplingResult.points[0]
 }

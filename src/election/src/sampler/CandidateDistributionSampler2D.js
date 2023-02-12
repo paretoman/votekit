@@ -15,6 +15,14 @@ export default function CandidateDistributionSampler2D(canDnGeoms, partiesByCan)
     }
 }
 
+export function sampleCanDnGeom2D(canDnGeom) {
+    const { x, y, w, densityProfile } = canDnGeom
+
+    const randomSample = (densityProfile === 'gaussian') ? randomInsideGaussian : randomInsideCircle
+    const canGeom = randomSample(x, y, w * 0.5)
+    return canGeom
+}
+
 function samplePoint1(canDnGeoms, partiesByCan, cdf) {
     // pick a voter distribution
     const iDist = randomDistribution(cdf)
