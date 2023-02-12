@@ -8,7 +8,9 @@ describe('The election', () => {
         const iWinner = testElection()
         assert.equal(1, iWinner)
     })
-    it('should sample elections', () => {
+})
+describe('The sampler', () => {
+    it('should sample a winner', () => {
         const point0 = testElectionSample()
         const expectedPoint0 = [1, 2]
         assert.equal(expectedPoint0.length, point0.length)
