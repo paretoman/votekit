@@ -1,4 +1,4 @@
-import createGeography from '../src/geography/createGeography.js'
+import makeGeography from '../src/geography/makeGeography.js'
 import election from '../src/election/election.js'
 import getCanBorders from '../src/voteCasters/voteCasters/getCanBorders.js'
 
@@ -30,7 +30,7 @@ export default function testElection() {
         },
     }
 
-    const geography = createGeography(electionOptions, voterGeoms, dimensions)
+    const geography = makeGeography(electionOptions, voterGeoms, dimensions)
 
     const geometry = {
         voterGeoms,

@@ -1,4 +1,4 @@
-import createGeography, { makeTracts, updateCensus, updateDistricts, updateVoters } from '../geography/createGeography.js'
+import makeGeography, { makeTracts, updateCensus, updateDistricts, updateVoters } from '../geography/makeGeography.js'
 import CandidateDistributionSampler1D from '../sampler/CandidateDistributionSampler1D.js'
 import CandidateDistributionSampler2D from '../sampler/CandidateDistributionSampler2D.js'
 import ElectionSampler from '../sampler/ElectionSampler.js'
@@ -8,7 +8,7 @@ import voteCasters from '../voteCasters/voteCasters/voteCasters.js'
 import election from './election.js'
 
 const geography = {
-    createGeography,
+    makeGeography,
     makeTracts,
     updateCensus,
     updateDistricts,

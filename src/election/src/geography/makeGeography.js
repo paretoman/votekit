@@ -6,7 +6,7 @@ import makeTractNoise from './makeTractNoise.js'
 import makeVoterGeomsByTract from './makeVoterGeomsByTract.js'
 
 /** Make tracts */
-export default function createGeography(electionOptions, voterGeoms, dimensions) {
+export default function makeGeography(electionOptions, voterGeoms, dimensions) {
     const { numTracts, numDistricts } = electionOptions
     const nx = numTracts
     const ny = numTracts

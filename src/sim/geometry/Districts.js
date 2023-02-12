@@ -1,6 +1,6 @@
 /** @module */
 
-import createGeography, { makeTracts, updateCensus, updateDistricts, updateVoters } from '../../election/src/geography/createGeography.js'
+import makeGeography, { makeTracts, updateCensus, updateDistricts, updateVoters } from '../../election/src/geography/makeGeography.js'
 
 /**
  * @constructor
@@ -12,7 +12,7 @@ export default function Districts(voterShapeList, changes, electionOptionsMan, s
         const electionOptions = electionOptionsMan.getOptions()
         const { dimensions } = simOptions
         const voterGeoms = voterShapeList.getGeoms(dimensions)
-        self.geography = createGeography(electionOptions, voterGeoms, dimensions)
+        self.geography = makeGeography(electionOptions, voterGeoms, dimensions)
     }
 
     let firstRun = true
