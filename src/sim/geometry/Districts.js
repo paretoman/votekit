@@ -8,11 +8,24 @@ import createDistrictGeometry, { makeTracts, updateCensus, updateDistricts, upda
 export default function Districts(voterShapeList, changes, electionOptionsMan, simOptions) {
     const self = this
 
-    self.districtGeometry = createDistrictGeometry()
+    self.init = () => {
+        const electionOptions = electionOptionsMan.getOptions()
+        const { dimensions } = simOptions
+        const voterGeoms = voterShapeList.getGeoms(dimensions)
+        self.districtGeometry = createDistrictGeometry(electionOptions, voterGeoms, dimensions)
+    }
+
+    let firstRun = true
 
     // Update call from sim //
     self.update = () => {
         if (changes.checkNone()) return
+
+        if (firstRun) {
+            firstRun = false
+            self.init()
+            return
+        }
 
         const electionOptions = electionOptionsMan.getOptions()
 
