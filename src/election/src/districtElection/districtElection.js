@@ -14,11 +14,11 @@ import sumAllocationsStatewide from './combineAllocationsStatewide.js'
  * All the voter groups share the same voter basis.
  */
 export default function districtElection(geometry, electionOptions) {
-    const { canGeoms, districtGeometry } = geometry
+    const { canGeoms, geography } = geometry
 
     const votesByTract = castVotesByTract(geometry, electionOptions)
     const allVotes = combineVotesStatewide(votesByTract, canGeoms)
-    const votesByDistrict = combineVotesByDistrict(votesByTract, canGeoms, districtGeometry)
+    const votesByDistrict = combineVotesByDistrict(votesByTract, canGeoms, geography)
 
     const scResultsByDistrict = countDistrictElections(votesByDistrict, electionOptions)
     const allocation = sumAllocationsStatewide(scResultsByDistrict, canGeoms, electionOptions)

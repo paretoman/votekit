@@ -5,7 +5,7 @@ export default function VizDistrictNoise(screen) {
     let dimensions
 
     self.update = (districtElectionResults) => {
-        voterGeomsByTract = districtElectionResults.geometry.districtGeometry.voterGeomsByTract
+        voterGeomsByTract = districtElectionResults.geometry.geography.voterGeomsByTract
         dimensions = districtElectionResults.geometry.dimensions
     }
 

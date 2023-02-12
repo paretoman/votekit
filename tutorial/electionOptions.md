@@ -3,7 +3,7 @@ title: ElectionOptions
 layout: default
 ---
 
-The electionOptions are options inside the election and include: socialChoiceMethod, voteCasterName, number of districts and two sub categories:
+The electionOptions are options inside the election such as socialChoiceMethod. There are two sub categories:
   - The castOptions are options for the vote caster.
   - The socialChoiceOptions are options for the social choice function.
 

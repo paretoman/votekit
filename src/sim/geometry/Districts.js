@@ -1,6 +1,6 @@
 /** @module */
 
-import createDistrictGeometry, { makeTracts, updateCensus, updateDistricts, updateVoters } from '../../election/src/districtGeometry/createDistrictGeometry.js'
+import createGeography, { makeTracts, updateCensus, updateDistricts, updateVoters } from '../../election/src/geography/createGeography.js'
 
 /**
  * @constructor
@@ -12,7 +12,7 @@ export default function Districts(voterShapeList, changes, electionOptionsMan, s
         const electionOptions = electionOptionsMan.getOptions()
         const { dimensions } = simOptions
         const voterGeoms = voterShapeList.getGeoms(dimensions)
-        self.districtGeometry = createDistrictGeometry(electionOptions, voterGeoms, dimensions)
+        self.geography = createGeography(electionOptions, voterGeoms, dimensions)
     }
 
     let firstRun = true
@@ -31,22 +31,22 @@ export default function Districts(voterShapeList, changes, electionOptionsMan, s
 
         if (changes.check(['numTracts'])) {
             const { numTracts } = electionOptions
-            self.districtGeometry = makeTracts(self.districtGeometry, numTracts)
+            self.geography = makeTracts(self.geography, numTracts)
         }
 
         if (changes.check(['numDistricts'])) {
             const { numDistricts } = electionOptions
-            self.districtGeometry = updateDistricts(self.districtGeometry, numDistricts)
+            self.geography = updateDistricts(self.geography, numDistricts)
         }
 
         if (changes.check(['numDistricts', 'numTracts'])) {
-            self.districtGeometry = updateCensus(self.districtGeometry)
+            self.geography = updateCensus(self.geography)
         }
 
         if (changes.check(['draggables', 'dimensions', 'numTracts'])) {
             const { dimensions } = simOptions
             const voterGeoms = voterShapeList.getGeoms(dimensions)
-            self.districtGeometry = updateVoters(self.districtGeometry, voterGeoms, dimensions)
+            self.geography = updateVoters(self.geography, voterGeoms, dimensions)
             // todo: maybe make this only trigger when voters change
         }
     }

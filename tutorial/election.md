@@ -18,9 +18,9 @@ Election may be called by [ElectionSampler](electionSampler.md) to run multiple 
 
 **Steps**:
 
-- If there are districts, then the geometry is run in several tracts, each with slight variations in geometry.
+- If there is a geography, then the geometry is run in several tracts, each with slight variations in political geometry.
 - [VoteCasters](voteCasters.md): Votes are cast.
-- If there are districts, then votes from tracts are combined into districts.
+- If there is a geography, then votes from tracts are combined into districts.
 - A [social choice](socialChoice.md) function runs on the votes to determine winners.
 - Election results are assembled.
 - All the options, geometry, votes, and social choice outputs are combined into an electionResults data structure.

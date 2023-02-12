@@ -4,9 +4,9 @@ import districtCandidateTallies from './districtCandidateTallies.js'
 import districtPreferenceLists from './districtPreferenceLists.js'
 import districtPreferenceTallies from './districtPreferenceTallies.js'
 
-export default function combineVotesByDistrict(votesByTract, canGeoms, districtGeometry) {
-    const { census } = districtGeometry
-    const { nd } = districtGeometry.districtMap
+export default function combineVotesByDistrict(votesByTract, canGeoms, geography) {
+    const { census } = geography
+    const { nd } = geography.districtMap
     const numCans = canGeoms.length
 
     // Loop through districts.

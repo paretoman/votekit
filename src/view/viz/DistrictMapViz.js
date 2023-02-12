@@ -16,14 +16,14 @@ export default function DistrictMapViz(candidateList, screen, electionOptionsMan
     // Update //
 
     self.update = (districtElectionResults) => {
-        const { districtGeometry } = districtElectionResults.geometry
-        districtMap = districtGeometry.districtMap
+        const { geography } = districtElectionResults.geometry
+        districtMap = geography.districtMap
 
         // todo: make this only run when we have new districts
         if (self.districtDraw === undefined || changes.check(['numTracts'])) {
             self.districtDraw = new DistrictDraw(screen)
             // Code that handles making images of geographic noise.
-            self.noiseImage = new NoiseImage(districtGeometry.nx, districtGeometry.ny, screen)
+            self.noiseImage = new NoiseImage(geography.nx, geography.ny, screen)
         }
 
         const electionOptions = electionOptionsMan.getOptions()
