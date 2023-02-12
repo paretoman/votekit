@@ -16,7 +16,7 @@ import { jcopy } from '../election/jsHelpers.js'
  * @returns {Number[][][]} - an array of districts,
  * each with a list of census tract properties [x,y,overlap]
  */
-export default function districtCensus(districtMap, nx, ny) {
+export default function makeCensus(districtMap, nx, ny) {
     const { nd, polygons } = districtMap
 
     const census = Array(nd).fill().map(() => [])
