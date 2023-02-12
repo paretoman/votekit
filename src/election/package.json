@@ -60,7 +60,10 @@
     "d3-delaunay": "^6.0.2",
     "d3-polygon": "^3.0.1",
     "simplex-noise": "^3.0.1",
-    "snowpack": "^3.8.8"
+    "snowpack": "^3.8.8",
+    "eslint": "^8.7.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.25.4"
   },
   "dependencies": {
     "mocha": "^10.2.0"
