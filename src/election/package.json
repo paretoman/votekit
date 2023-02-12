@@ -6,7 +6,8 @@
   "type": "module",
   "scripts": {
     "test": "mocha --reporter list",
-    "snowpack": "snowpack build"
+    "snowpack": "snowpack build",
+    "lint": "eslint ."
   },
   "repository": {
     "type": "git",

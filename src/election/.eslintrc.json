@@ -10,7 +10,7 @@
       "ecmaVersion": "latest",
       "sourceType": "module"
     },
-    "ignorePatterns": [ "lib", "dist" ],
+    "ignorePatterns": [ "lib", "dist", "docs" ],
     "rules": {
       "semi": [ "error", "never" ],
       "indent": [ "error", 4 ],
