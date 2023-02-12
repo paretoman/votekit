@@ -15,7 +15,10 @@ export default function testElection() {
         { x: 50, y: 0 },
     ]
 
-    const parties = [[0], [1]]
+    const parties = {
+        partiesByCan: [[0], [1]],
+        numParties: 2,
+    }
 
     const electionOptions = electionOptions1
 
