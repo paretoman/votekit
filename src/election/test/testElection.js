@@ -30,6 +30,8 @@ export default function testElection() {
         },
     }
 
+    const canBorders = getCanBorders(canGeoms, voterGeoms, dimensions, electionOptions)
+
     const geography = makeGeography(electionOptions, voterGeoms, dimensions)
 
     const geometry = {
@@ -37,9 +39,9 @@ export default function testElection() {
         canGeoms,
         parties,
         dimensions,
+        canBorders,
         geography,
     }
-    geometry.canBorders = getCanBorders(canGeoms, voterGeoms, dimensions, electionOptions)
 
     const electionResults = election(geometry, electionOptions)
 
