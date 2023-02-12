@@ -1,7 +1,7 @@
 import makeGeography from '../src/geography/makeGeography.js'
 import electionOptions1 from './electionOptions1.js'
-import ElectionSampler from '../src/sampler/ElectionSampler.js'
 import makeCandidateDistributionCDF from '../src/sampler/makeCandidateDistributionCDF.js'
+import sampleElection from '../src/sampler/sampleElection.js'
 
 export default function testElectionSample() {
     const dimensions = 2
@@ -27,9 +27,8 @@ export default function testElectionSample() {
 
     const samplingGeometry = { voterGeoms, canDnGeoms, parties, dimensions, geography, canDnCDF }
 
-    const sampler = new ElectionSampler()
-    sampler.startSim()
-    const samplingResult = sampler.addSim(samplingGeometry, electionOptions)
+    const numSamples = 2
+    const { pointList } = sampleElection(samplingGeometry, electionOptions, numSamples)
 
-    return samplingResult.points[0]
+    return pointList[0]
 }
