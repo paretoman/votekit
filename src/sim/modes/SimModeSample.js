@@ -1,7 +1,7 @@
 /** @module */
 
 import CandidateDistributionSampler from '../sampler/CandidateDistributionSampler.js'
-import getGeometry from '../geometry/getGeometry.js'
+import getSamplingGeometry from '../geometry/getSamplingGeometry.js'
 import Sampler from '../sampler/Sampler.js'
 
 /**
@@ -29,9 +29,9 @@ export default function SimModeSample(pub, entities, changes, districts, simOpti
         districts.update()
         canDnSampler.update()
 
-        const geometry = getGeometry(voterShapeList, candidateDnList, simOptions, electionOptions, districts)
+        const samplingGeometry = getSamplingGeometry(voterShapeList, candidateDnList, simOptions, electionOptions, districts)
 
-        const samplingResult = sampler.update(geometry, canDnSampler.sampler, changes, electionOptions)
+        const samplingResult = sampler.update(samplingGeometry, canDnSampler.sampler, changes, electionOptions)
         const simData = { samplingResult }
 
         if (samplingResult.pointsChanged === true || changes.checkAny()) {

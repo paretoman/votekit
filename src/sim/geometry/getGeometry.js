@@ -1,7 +1,7 @@
 import getCanBorders from '../../election/src/voteCasters/voteCasters/getCanBorders.js'
 
 /**
- * Get geometry inputs to election. Both candidateList and candidateDnList work here, though we call both canGeoms.
+ * Get geometry inputs to election.
  * @param {*} voterShapeList
  * @param {*} candidateList
  * @param {*} simOptions

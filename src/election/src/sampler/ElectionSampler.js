@@ -23,15 +23,15 @@ export default function ElectionSampler() {
         partyWins = Array(10).fill(0) // TODO: Use number of parties
     }
 
-    self.addSim = function (geometry, cDnSampler, electionOptions) {
+    self.addSim = function (samplingGeometry, cDnSampler, electionOptions) {
         // add more points
 
         const {
-            voterGeoms, canGeoms, dimensions, geography,
-        } = geometry
+            voterGeoms, canDnGeoms, dimensions, geography,
+        } = samplingGeometry
 
         if (voterGeoms.length === 0) return { pointsChanged: false }
-        if (canGeoms.length === 0) {
+        if (canDnGeoms.length === 0) {
             return { pointsChanged: false }
         }
 
@@ -65,7 +65,7 @@ export default function ElectionSampler() {
             }
             const canBorders = getCanBorders(sCanGeoms, voterGeoms, dimensions, electionOptions)
 
-            const sampleGeometry = {
+            const samplingGeometry = {
                 voterGeoms,
                 canGeoms: sCanGeoms,
                 parties: { partiesByCan: sParties, numParties: 10 },
@@ -74,7 +74,7 @@ export default function ElectionSampler() {
                 canBorders,
             }
 
-            const electionResults = election(sampleGeometry, electionOptions)
+            const electionResults = election(samplingGeometry, electionOptions)
             const scResultsByDistrict = (electionOptions.useGeography)
                 ? electionResults.scResultsByDistrict
                 : [electionResults.socialChoiceResults]

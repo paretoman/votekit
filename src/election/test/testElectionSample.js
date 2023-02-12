@@ -10,7 +10,7 @@ export default function testElectionSample() {
         { x: 0, y: 0, w: 200, densityProfile: 'step' },
     ]
 
-    const canDnsGeoms = [
+    const canDnGeoms = [
         { x: 0, y: 0, w: 200, densityProfile: 'step' },
     ]
 
@@ -22,13 +22,13 @@ export default function testElectionSample() {
     const electionOptions = electionOptions1
 
     const geography = makeGeography(electionOptions, voterGeoms, dimensions)
-    const geometry = { voterGeoms, canGeoms: canDnsGeoms, parties, dimensions, geography }
+    const samplingGeometry = { voterGeoms, canDnGeoms, parties, dimensions, geography }
 
-    const cDnSampler = new CandidateDistributionSampler2D(canDnsGeoms, parties.partiesByCan)
+    const cDnSampler = new CandidateDistributionSampler2D(canDnGeoms, parties.partiesByCan)
 
     const sampler = new ElectionSampler()
     sampler.startSim()
-    const samplingResult = sampler.addSim(geometry, cDnSampler, electionOptions)
+    const samplingResult = sampler.addSim(samplingGeometry, cDnSampler, electionOptions)
 
     return samplingResult.points[0]
 }
