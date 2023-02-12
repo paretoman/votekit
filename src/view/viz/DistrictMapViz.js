@@ -2,7 +2,7 @@
 
 import DistrictDraw from './DistrictDraw.js'
 import districtColors from './DistrictColors.js'
-import NoiseImage from './NoiseImage.js'
+import MapOfTracts from './MapOfTracts.js'
 
 /**
  * Show votes
@@ -23,7 +23,7 @@ export default function DistrictMapViz(candidateList, screen, electionOptionsMan
         if (self.districtDraw === undefined || changes.check(['numTracts'])) {
             self.districtDraw = new DistrictDraw(screen)
             // Code that handles making images of geographic noise.
-            self.noiseImage = new NoiseImage(geography.nx, geography.ny, screen)
+            self.mapOfTracts = new MapOfTracts(geography.nx, geography.ny, screen)
         }
 
         const electionOptions = electionOptionsMan.getOptions()
@@ -31,7 +31,7 @@ export default function DistrictMapViz(candidateList, screen, electionOptionsMan
         const { colorByTract, colorOfVoteByDistrict, colorOfWinsByDistrict } = gc
         self.colorOfVoteByDistrict = colorOfVoteByDistrict
         self.winnerColors = colorOfWinsByDistrict
-        self.noiseImage.loadColors(colorByTract)
+        self.mapOfTracts.loadColors(colorByTract)
     }
 
     // Display //
@@ -48,7 +48,7 @@ export default function DistrictMapViz(candidateList, screen, electionOptionsMan
     }
     // Render census tract votes.
     self.renderTractVotes = () => {
-        self.noiseImage.render(districtMapWidth, districtMapHeight)
+        self.mapOfTracts.render(districtMapWidth, districtMapHeight)
         self.districtDraw.renderVoronoi(districtMap, districtMapWidth, districtMapHeight)
     }
     // Render district wins.

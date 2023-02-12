@@ -1,13 +1,13 @@
 /** @module */
 
 /**
- * Draws an image of noise, or anything really.
+ * Draws a map of the geographical tracts, or anything really.
  * @param {Number} nx - Width in pixels
  * @param {Number} ny - Height in pixels
  * @param {Screen} screen - Draw here.
  * @constructor
  */
-export default function NoiseImage(nx, ny, screen) {
+export default function MapOfTracts(nx, ny, screen) {
     const self = this
 
     /*
