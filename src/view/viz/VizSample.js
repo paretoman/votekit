@@ -16,8 +16,8 @@ export default function VizSample(voterRendererList, canDnRendererList, screen, 
 
     // buffer canvas
     const canvas2 = document.createElement('canvas')
-    canvas2.width = screen.canvas.width
-    canvas2.height = screen.canvas.height
+    canvas2.width = screen.width
+    canvas2.height = screen.height
     const context2 = canvas2.getContext('2d')
 
     const { dimensions } = simOptions
@@ -78,13 +78,13 @@ export default function VizSample(voterRendererList, canDnRendererList, screen, 
         ctx.fillStyle = 'grey'
         const n = newPoints.length
         for (let i = 0; i < n; i++) {
-            const p = newPoints[i]
+            const [x, y0] = newPoints[i]
             // dot
             ctx.beginPath()
             const y = (dimensions === 1)
                 ? Math.random() * 100 + 0
-                : p.y
-            ctx.arc(p.x, y, 2, 0, 2 * Math.PI)
+                : y0
+            ctx.arc(x, y, 2, 0, 2 * Math.PI)
             ctx.fill()
         }
     }
