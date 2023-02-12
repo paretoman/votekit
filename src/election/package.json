@@ -12,7 +12,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/paretoman/votekit-election.git"
+    "url": "git+https://github.com/paretoman/votekit.git"
   },
   "author": {
     "name": "paretoman",
@@ -20,9 +20,9 @@
   },
   "license": "MIT-0",
   "bugs": {
-    "url": "https://github.com/paretoman/votekit-election/issues"
+    "url": "https://github.com/paretoman/votekit/issues"
   },
-  "homepage": "https://github.com/paretoman/votekit-election#readme",
+  "homepage": "https://paretoman.github.io/votekit",
   "keywords": [
     "voting",
     "voting-methods",
