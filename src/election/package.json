@@ -7,7 +7,8 @@
   "scripts": {
     "test": "mocha --reporter list",
     "snowpack": "snowpack build",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "doc": "jsdoc -c jsdoc.json"
   },
   "repository": {
     "type": "git",

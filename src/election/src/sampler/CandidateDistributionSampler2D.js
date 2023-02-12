@@ -84,7 +84,7 @@ const invSqrt2 = 1 / Math.sqrt(2)
  * @param {Number} X center.x
  * @param {Number} Y center.y
  * @param {Number} R radius = stdev * sqrt(2)
- * @returns
+ * @returns {Object} point
  */
 function randomInsideGaussian(X, Y, R) {
     const [a, b] = randomStandardNormal()
