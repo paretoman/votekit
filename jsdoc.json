@@ -2,7 +2,7 @@
     "source": {
         "include": ["src"],
         "includePattern": ".js$",
-        "excludePattern": "lib"
+        "excludePattern": "(lib|node_modules|docs|.cjs$)"
     },
     "opts": {
         "recurse":true,
