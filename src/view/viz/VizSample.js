@@ -33,12 +33,12 @@ export default function VizSample(voterRendererList, canDnRendererList, screen, 
         }
 
         const {
-            pointsChanged, newPointsList, newPointsCount,
+            pointsChanged, samplingPointsList, samplingPointsCount,
         } = samplingResult
 
         if (pointsChanged) {
             // newPoints are jittered
-            const newPoints = addNewPoints(newPointsList, newPointsCount)
+            const newPoints = addNewPoints(samplingPointsList, samplingPointsCount)
             renderToBuffer(newPoints)
         }
     }
@@ -48,13 +48,13 @@ export default function VizSample(voterRendererList, canDnRendererList, screen, 
     }
 
     /** Add points with jitter */
-    function addNewPoints(newPointsList, newPointsCount) {
+    function addNewPoints(samplingPointsList, samplingPointsCount) {
         const jitterSize = 10
 
         const newPoints = []
-        for (let i = 0; i < newPointsList.length; i++) {
-            const point = newPointsList[i]
-            const count = newPointsCount[i]
+        for (let i = 0; i < samplingPointsList.length; i++) {
+            const point = samplingPointsList[i]
+            const count = samplingPointsCount[i]
 
             const [x, y] = point
             for (let m = 0; m < count; m++) {

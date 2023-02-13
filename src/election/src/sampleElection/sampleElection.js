@@ -13,8 +13,8 @@ export default function sampleElection(samplingGeometry, electionOptions, numSam
     // number of new points
     const { socialChoiceOptions } = electionOptions
 
-    const pointList = []
-    const pointCount = []
+    const samplingPointsList = []
+    const samplingPointsCount = []
     const partyWins = Array(10).fill(0) // TODO: Use number of parties
 
     for (let i = 0; i < numSamples; i++) {
@@ -49,10 +49,10 @@ export default function sampleElection(samplingGeometry, electionOptions, numSam
             const winPoint = (dimensions === 1) ? [x] : [x, y]
             const winParty = sParties[k]
 
-            pointList.push(winPoint)
-            pointCount.push(winCount)
+            samplingPointsList.push(winPoint)
+            samplingPointsCount.push(winCount)
             partyWins[winParty] += winCount
         }
     }
-    return { pointList, pointCount, partyWins }
+    return { samplingPointsList, samplingPointsCount, partyWins }
 }

@@ -35,11 +35,11 @@ export default function ElectionSampler() {
         if (totalPoints > maxPoints) return { pointsChanged: false }
 
         const numSamples = 1
-        const { pointList, pointCount, partyWins, error } = sampleElection(samplingGeometry, electionOptions, numSamples)
+        const { samplingPointsList, samplingPointsCount, partyWins, error } = sampleElection(samplingGeometry, electionOptions, numSamples)
 
         if (error !== undefined) return { pointsChanged: false }
 
-        const numNewPoints = pointCount.reduce((p, c) => p + c)
+        const numNewPoints = samplingPointsCount.reduce((p, c) => p + c)
         totalPoints += numNewPoints
 
         for (let i = 0; i < partyWins.length; i++) {
@@ -48,12 +48,8 @@ export default function ElectionSampler() {
 
         const partyWinFraction = totalPartyWins.map((x) => x / totalPoints)
 
-        const samplingResult = {
-            pointsChanged: true,
-            newPointsList: pointList,
-            newPointsCount: pointCount,
-            partyWinFraction,
-        }
+        const pointsChanged = true
+        const samplingResult = { pointsChanged, samplingPointsList, samplingPointsCount, partyWinFraction }
         return samplingResult
     }
 }

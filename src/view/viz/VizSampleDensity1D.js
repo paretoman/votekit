@@ -34,10 +34,10 @@ export default function VizSampleDensity1D(voterRendererList, canDnRendererList,
             start()
         }
 
-        const { pointsChanged, newPointsList, newPointsCount } = samplingResult
+        const { pointsChanged, samplingPointsList, samplingPointsCount } = samplingResult
 
         if (pointsChanged) {
-            updatePoints(newPointsList, newPointsCount)
+            updatePoints(samplingPointsList, samplingPointsCount)
         }
     }
 
@@ -47,12 +47,12 @@ export default function VizSampleDensity1D(voterRendererList, canDnRendererList,
     }
 
     const kernelsize = 4 / 3
-    function updatePoints(newPointsList, newPointsCount) {
+    function updatePoints(samplingPointsList, samplingPointsCount) {
         // add to sum for each point
-        const nk = newPointsList.length
+        const nk = samplingPointsList.length
         for (let k = 0; k < nk; k++) {
-            const x = newPointsList[k][0]
-            const count = newPointsCount[k]
+            const x = samplingPointsList[k][0]
+            const count = samplingPointsCount[k]
             for (let i = 0; i < width; i++) {
                 sum[i] += kernel(i - x) * count
             }

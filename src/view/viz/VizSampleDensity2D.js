@@ -32,10 +32,10 @@ export default function VizSampleDensity2D(voterRendererList, canDnRendererList,
         if (changes.checkAny()) {
             start()
         }
-        const { pointsChanged, newPointsList, newPointsCount } = samplingResult
+        const { pointsChanged, samplingPointsList, samplingPointsCount } = samplingResult
 
         if (pointsChanged) {
-            self.updatePoints(newPointsList, newPointsCount)
+            self.updatePoints(samplingPointsList, samplingPointsCount)
             self.updateDensity()
         }
     }
@@ -51,10 +51,10 @@ export default function VizSampleDensity2D(voterRendererList, canDnRendererList,
         canDnRendererList.render()
     }
 
-    self.updatePoints = function (newPointsList, newPointsCount) {
-        for (let i = 0; i < newPointsList.length; i++) {
-            const point = newPointsList[i]
-            const count = newPointsCount[i]
+    self.updatePoints = function (samplingPointsList, samplingPointsCount) {
+        for (let i = 0; i < samplingPointsList.length; i++) {
+            const point = samplingPointsList[i]
+            const count = samplingPointsCount[i]
 
             for (let m = 0; m < count; m++) {
                 points.push(point)

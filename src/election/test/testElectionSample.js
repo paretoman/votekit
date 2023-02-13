@@ -28,7 +28,7 @@ export default function testElectionSample() {
     const samplingGeometry = { voterGeoms, canDnGeoms, parties, dimensions, geography, canDnCDF }
 
     const numSamples = 2
-    const { pointList } = sampleElection(samplingGeometry, electionOptions, numSamples)
+    const { samplingPointsList } = sampleElection(samplingGeometry, electionOptions, numSamples)
 
-    return pointList[0]
+    return samplingPointsList[0]
 }
