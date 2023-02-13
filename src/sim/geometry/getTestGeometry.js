@@ -5,7 +5,7 @@ import getGeoms from '../entities/getGeoms.js'
  * @param {*} voterShapeList
  * @param {*} candidateList
  * @param {*} simOptions
- * @returns
+ * @returns {Object} geometry is input for castTestVote
  */
 export default function getTestGeometry(testVoter, candidateList, simOptions) {
     const { dimensions } = simOptions

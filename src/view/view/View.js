@@ -14,7 +14,7 @@ import save from '../save/save.js'
  * The view loops as fast as the browser can refresh.
  * @param {*} sim
  * @param {String} sandboxPath
- * @returns
+ * @returns {Object} - { div, load } - div contains everything, load figures out what configuration to load
  */
 export default function View(sim, sandboxPath) {
     const {

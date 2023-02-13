@@ -6,7 +6,7 @@ import getCanBorders from '../../election/src/voteCasters/voteCasters/getCanBord
  * @param {*} candidateList
  * @param {*} simOptions
  * @param {*} districts
- * @returns
+ * @returns {Object} geometry is input for an election
  */
 export default function getGeometry(voterShapeList, candidateList, simOptions, electionOptions, districts) {
     const { dimensions } = simOptions
