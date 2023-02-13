@@ -58,7 +58,7 @@ export default function ViewEntitiesOne(entities, screen, menu, changes, simOpti
             self.enter()
         }
 
-        if (changes.check(['draggables'])) {
+        if (changes.check(['draggables', 'dimensions'])) {
             // this will trigger when undo moves entities
             voterViewList.updateViewXY()
             candidateViewList.updateViewXY()

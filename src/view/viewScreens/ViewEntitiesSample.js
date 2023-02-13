@@ -48,7 +48,7 @@ export default function ViewEntitiesSample(entities, screen, menu, changes, simO
         // The election handles any changes.
         // The electionResults communicates how to visualize the election.
 
-        if (changes.check(['draggables'])) {
+        if (changes.check(['draggables', 'dimensions'])) {
             // this will trigger when undo moves entities
             voterViewList.updateViewXY()
             candidateDnViewList.updateViewXY()
