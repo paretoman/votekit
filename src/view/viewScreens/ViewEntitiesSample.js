@@ -33,13 +33,6 @@ export default function ViewEntitiesSample(entities, screen, menu, changes, simO
 
     // Main State Machine Functions //
 
-    const superEnter = self.enter
-    self.enter = () => {
-        superEnter()
-    }
-
-    self.exit = () => { }
-
     self.update = (simData) => {
         const { samplingResult } = simData
         // Update players. Run an election. Get result. Visualize result.

@@ -12,7 +12,7 @@ export default function EntityGraphic(entity, simOptions) {
         self.updateViewXY()
     }
 
-    /** Model sets view position when entering a view state */
+    /** Model sets view position when entering a view mode */
     self.updateViewXY = () => {
         const { dimensions } = simOptions
         if (dimensions === 1) {

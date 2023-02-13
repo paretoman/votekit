@@ -36,13 +36,6 @@ export default function ViewEntitiesOne(entities, screen, menu, changes, simOpti
 
     // Main State Machine Functions //
 
-    const superEnter = self.enter
-    self.enter = () => {
-        superEnter()
-
-        self.testVoterView.graphic.updateViewXY()
-    }
-
     self.exit = () => {
         candidateViewList.unsetCandidateWins()
         self.testVoterView.testVoter.doSetCommand.exists(0)
@@ -59,6 +52,7 @@ export default function ViewEntitiesOne(entities, screen, menu, changes, simOpti
         if (changes.check(['draggables', 'dimensions', 'mode'])) {
             voterViewList.updateViewXY()
             candidateViewList.updateViewXY()
+            self.testVoterView.graphic.updateViewXY()
         }
 
         const { electionResults } = simData
