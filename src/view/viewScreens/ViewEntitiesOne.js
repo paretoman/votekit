@@ -40,8 +40,6 @@ export default function ViewEntitiesOne(entities, screen, menu, changes, simOpti
     self.enter = () => {
         superEnter()
 
-        voterViewList.updateViewXY()
-        candidateViewList.updateViewXY()
         self.testVoterView.graphic.updateViewXY()
     }
 
@@ -58,8 +56,7 @@ export default function ViewEntitiesOne(entities, screen, menu, changes, simOpti
             self.enter()
         }
 
-        if (changes.check(['draggables', 'dimensions'])) {
-            // this will trigger when undo moves entities
+        if (changes.check(['draggables', 'dimensions', 'mode'])) {
             voterViewList.updateViewXY()
             candidateViewList.updateViewXY()
         }

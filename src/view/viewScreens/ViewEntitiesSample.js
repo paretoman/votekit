@@ -36,8 +36,6 @@ export default function ViewEntitiesSample(entities, screen, menu, changes, simO
     const superEnter = self.enter
     self.enter = () => {
         superEnter()
-        voterViewList.updateViewXY()
-        candidateDnViewList.updateViewXY()
     }
 
     self.exit = () => { }
@@ -48,8 +46,7 @@ export default function ViewEntitiesSample(entities, screen, menu, changes, simO
         // The election handles any changes.
         // The electionResults communicates how to visualize the election.
 
-        if (changes.check(['draggables', 'dimensions'])) {
-            // this will trigger when undo moves entities
+        if (changes.check(['draggables', 'dimensions', 'mode'])) {
             voterViewList.updateViewXY()
             candidateDnViewList.updateViewXY()
         }
