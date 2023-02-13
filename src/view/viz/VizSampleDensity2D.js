@@ -26,12 +26,22 @@ export default function VizSampleDensity2D(voterRendererList, canDnRendererList,
     voterRendererList.setRenderer((voterShape) => new VoterRenderer(voterShape, screen))
     canDnRendererList.setRenderer((voterShape) => new VoterRenderer(voterShape, screen))
 
+    const points = []
+
     self.update = function (samplingResult) {
-        const { pointsChanged, points } = samplingResult
+        if (changes.checkAny()) {
+            start()
+        }
+        const { pointsChanged, newPointsList, newPointsCount } = samplingResult
 
         if (pointsChanged) {
-            self.updatePoints(points)
+            self.updatePoints(newPointsList, newPointsCount)
+            self.updateDensity()
         }
+    }
+
+    function start() {
+        points.splice(0, points.length)
     }
 
     self.render = () => {
@@ -41,9 +51,20 @@ export default function VizSampleDensity2D(voterRendererList, canDnRendererList,
         canDnRendererList.render()
     }
 
+    self.updatePoints = function (newPointsList, newPointsCount) {
+        for (let i = 0; i < newPointsList.length; i++) {
+            const point = newPointsList[i]
+            const count = newPointsCount[i]
+
+            for (let m = 0; m < count; m++) {
+                points.push(point)
+            }
+        }
+    }
+
     const nThresholds = 20
     let densityData
-    self.updatePoints = function (points) {
+    self.updateDensity = () => {
         const btw = points.length / 10000
         const thresholds = range(nThresholds).map((x) => x * btw)
         const cd = contourDensity()

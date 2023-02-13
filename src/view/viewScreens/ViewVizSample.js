@@ -34,7 +34,7 @@ export default function ViewVizSample(entities, screen, menu, changes, simOption
 
     let vizSample
     function enterStrategy() {
-        const doDensity = false // TODO : make into an option, perhaps
+        const doDensity = true // TODO : make into an option, perhaps
         const { dimensions } = simOptions
         const VizSampleDensity = (dimensions === 1)
             ? VizSampleDensity1D
