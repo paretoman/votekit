@@ -3,9 +3,10 @@ import { randomIndexFromCDF } from '../election/mathHelpers.js'
 import getCanBorders from '../voteCasters/voteCasters/getCanBorders.js'
 import sampleCanDnGeom from './sampleCanDnGeom.js'
 
-export default function sampleElection(samplingGeometry, electionOptions, numSamples) {
+export default function sampleElection(samplingGeometry, electionOptions, numSamples, rng0) {
     const { voterGeoms, canDnGeoms, dimensions, geography, canDnCDF } = samplingGeometry
     const { partiesByCan } = samplingGeometry.parties
+    const rng = rng0 || Math.random
 
     if (voterGeoms.length === 0) return { pointsChanged: false }
     if (canDnGeoms.length === 0) return { pointsChanged: false }
@@ -24,10 +25,10 @@ export default function sampleElection(samplingGeometry, electionOptions, numSam
         const sParties = []
         for (let k = 0; k < numSampleCandidates; k++) {
             // sample a point from the distribution of candidates
-            const iDist = randomIndexFromCDF(canDnCDF)
+            const iDist = randomIndexFromCDF(canDnCDF, rng)
             const party = [partiesByCan[iDist]]
             const canDnGeom = canDnGeoms[iDist]
-            const canGeom = sampleCanDnGeom(canDnGeom, dimensions)
+            const canGeom = sampleCanDnGeom(canDnGeom, dimensions, rng)
 
             // make a candidate
             canGeoms.push(canGeom)

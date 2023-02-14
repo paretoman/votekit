@@ -2,6 +2,7 @@
   "imports": {
     "d3-delaunay": "./d3-delaunay.js",
     "d3-polygon": "./d3-polygon.js",
+    "seedrandom": "./seedrandom.js",
     "simplex-noise": "./simplex-noise.js"
   }
 }

@@ -2,6 +2,7 @@ import makeGeography from '../src/geography/makeGeography.js'
 import electionOptions1 from './electionOptions1.js'
 import makeCandidateDistributionCDF from '../src/sampleElection/makeCandidateDistributionCDF.js'
 import sampleElection from '../src/sampleElection/sampleElection.js'
+import seedrandom from '../src/lib/snowpack/build/snowpack/pkg/seedrandom.js'
 
 export default function testElectionSample() {
     const dimensions = 2
@@ -28,7 +29,9 @@ export default function testElectionSample() {
     const samplingGeometry = { voterGeoms, canDnGeoms, parties, dimensions, geography, canDnCDF }
 
     const numSamples = 2
-    const { samplingPointsList } = sampleElection(samplingGeometry, electionOptions, numSamples)
+    const seed = '670171517'
+    const rng = seedrandom(seed)
+    const { samplingPointsList } = sampleElection(samplingGeometry, electionOptions, numSamples, rng)
 
     return samplingPointsList[0]
 }

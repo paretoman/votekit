@@ -60,10 +60,10 @@ export function getCDF(proportion) {
     return cdf
 }
 
-export function randomIndexFromCDF(cdf) {
+export function randomIndexFromCDF(cdf, rng) {
     // sample from distribution
     // pick a random number from 0 to 1
-    const random1 = Math.random()
+    const random1 = rng()
     const index = cdf.findIndex((x) => x >= random1)
     return index
 }

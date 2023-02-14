@@ -7,9 +7,9 @@ import sampleCanDnGeom2D from './sampleCanDnGeom2D.js'
  * @param {Number} dimensions
  * @returns {Object} canGeom
  */
-export default function sampleCanDnGeom(canDnGeom, dimensions) {
+export default function sampleCanDnGeom(canDnGeom, dimensions, rng) {
     if (dimensions === 1) {
-        return sampleCanDnGeom1D(canDnGeom)
+        return sampleCanDnGeom1D(canDnGeom, rng)
     }
-    return sampleCanDnGeom2D(canDnGeom)
+    return sampleCanDnGeom2D(canDnGeom, rng)
 }
