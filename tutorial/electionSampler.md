@@ -20,3 +20,5 @@ Visualization functions receive the new batches of points and store them for dis
 * VizSample
 * VizSampleDensity1D
 * VizSampleDensity2D
+
+A seed is used to sample the same candidates each time, no matter if the other settings change. The only way things would be different is if the size of the candidate distributions change or if the number of candidate distributions change. Even if the size of the candidate distributions change, the same candidates will be sampled relative to the center. If the number of candidate distributions change, then there will be correlations, though complex.

@@ -1,5 +1,6 @@
 /** @module */
 
+import seedrandom from '../../election/src/lib/snowpack/build/snowpack/pkg/seedrandom.js'
 import sampleElection from '../../election/src/sampleElection/sampleElection.js'
 
 /**
@@ -25,17 +26,21 @@ export default function ElectionSampler() {
 
     let totalPartyWins
     let totalPoints
+    let rng
 
     self.startSim = function () {
         totalPoints = 0
         totalPartyWins = Array(10).fill(0) // TODO: Use number of parties
+        const seed = '145275920'
+        rng = seedrandom(seed)
     }
 
     self.addSim = function (samplingGeometry, electionOptions) {
         if (totalPoints > maxPoints) return { pointsChanged: false }
 
         const numSamples = 1
-        const { samplingPointsList, samplingPointsCount, partyWins, error } = sampleElection(samplingGeometry, electionOptions, numSamples)
+        const sampleResult = sampleElection(samplingGeometry, electionOptions, numSamples, rng)
+        const { samplingPointsList, samplingPointsCount, partyWins, error } = sampleResult
 
         if (error !== undefined) return { pointsChanged: false }
 
