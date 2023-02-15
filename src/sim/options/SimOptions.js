@@ -29,5 +29,7 @@ export default function SimOptions(changes, commander) {
         },
     }).go
 
+    self.seeds = [0]
+
     self.init()
 }

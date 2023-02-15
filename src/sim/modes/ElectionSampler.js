@@ -15,7 +15,7 @@ export default function ElectionSampler() {
 
     self.update = function (geometry, changes, electionOptions) {
         if (changes.checkAny()) {
-            self.startSim()
+            self.startSim(geometry)
         }
 
         const samplingResult = self.addSim(geometry, electionOptions)
@@ -28,10 +28,11 @@ export default function ElectionSampler() {
     let totalPoints
     let rng
 
-    self.startSim = function () {
+    self.startSim = function (geometry) {
         totalPoints = 0
         totalPartyWins = Array(10).fill(0) // TODO: Use number of parties
-        const seed = '145275920'
+
+        const seed = `watermelon${geometry.samplingSeed}`
         rng = seedrandom(seed)
     }
 

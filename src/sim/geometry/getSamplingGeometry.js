@@ -9,7 +9,7 @@ import makeCandidateDistributionCDF from '../../election/src/sampleElection/make
  * @returns {Object} samplingGeometry is input for sampleElection
  */
 export default function getSamplingGeometry(voterShapeList, candidateDnList, simOptions, electionOptions, districts) {
-    const { dimensions } = simOptions
+    const { dimensions, seeds } = simOptions
     const { geography } = districts
 
     const voterGeoms = voterShapeList.getGeoms(dimensions)
@@ -18,6 +18,8 @@ export default function getSamplingGeometry(voterShapeList, candidateDnList, sim
 
     const canDnCDF = makeCandidateDistributionCDF(canDnGeoms, dimensions)
 
-    const samplingGeometry = { voterGeoms, canDnGeoms, parties, dimensions, geography, canDnCDF }
+    const samplingSeed = `apple${seeds[0]}`
+
+    const samplingGeometry = { voterGeoms, canDnGeoms, parties, dimensions, geography, canDnCDF, samplingSeed }
     return samplingGeometry
 }
