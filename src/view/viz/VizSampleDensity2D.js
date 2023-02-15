@@ -26,7 +26,9 @@ export default function VizSampleDensity2D(voterRendererList, canDnRendererList,
     voterRendererList.setRenderer((voterShape) => new VoterRenderer(voterShape, screen))
     canDnRendererList.setRenderer((voterShape) => new VoterRenderer(voterShape, screen))
 
-    const points = []
+    const pointsList = []
+    const pointCounts = []
+    let totalCount
 
     self.update = function (samplingResult) {
         if (changes.checkAny()) {
@@ -41,7 +43,9 @@ export default function VizSampleDensity2D(voterRendererList, canDnRendererList,
     }
 
     function start() {
-        points.splice(0, points.length)
+        pointsList.splice(0, pointsList.length)
+        pointCounts.splice(0, pointCounts.length)
+        totalCount = 0
     }
 
     self.render = () => {
@@ -55,24 +59,24 @@ export default function VizSampleDensity2D(voterRendererList, canDnRendererList,
         for (let i = 0; i < samplingPointsList.length; i++) {
             const point = samplingPointsList[i]
             const count = samplingPointsCount[i]
-
-            for (let m = 0; m < count; m++) {
-                points.push(point)
-            }
+            pointsList.push(point)
+            pointCounts.push(count)
+            totalCount += count
         }
     }
 
     const nThresholds = 20
     let densityData
     self.updateDensity = () => {
-        const btw = points.length / 10000
+        const btw = totalCount / 10000
         const thresholds = range(nThresholds).map((x) => x * btw)
         const cd = contourDensity()
             .x((d) => d[0])
             .y((d) => d[1])
+            .weight((d, i) => pointCounts[i])
             .bandwidth(10)
             .thresholds(thresholds)
-        densityData = cd(points)
+        densityData = cd(pointsList)
     }
 
     self.renderCans = () => {
