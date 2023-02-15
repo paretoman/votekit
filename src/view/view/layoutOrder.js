@@ -3,6 +3,7 @@ const layoutOrder = [
     'darkModeSwitch',
     'simControlsLabel',
     'addEntities',
+    'seeds',
     'undo',
     'redo',
     'viz',
