@@ -11,6 +11,7 @@ export default function SimOptions(changes, commander) {
         self.setDimensions(2)
         self.seeds = []
         self.setSeeds(0, 0)
+        self.setSeedRandom(true)
     }
 
     self.setMode = commander.addSender({
@@ -36,6 +37,15 @@ export default function SimOptions(changes, commander) {
         action(i, seed) {
             self.seeds[i] = seed
             changes.add(['seeds'])
+        },
+    }).go
+
+    self.setSeedRandom = commander.addSender({
+        name: 'seedRandom',
+        currentValue: self.seedRandom,
+        action(seedRandom) {
+            self.seedRandom = seedRandom
+            changes.add(['seedRandom'])
         },
     }).go
 

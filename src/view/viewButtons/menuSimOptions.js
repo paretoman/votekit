@@ -1,3 +1,5 @@
+import menuSeedRandom from './menuSeedRandom.js'
+
 /**
  * Add simOptions to Menu.
  * @param {*} simOptions
@@ -41,4 +43,6 @@ export default function menuSimOptions(simOptions, menu) {
             simOptions.setDimensions(o.value)
         },
     })
+
+    menuSeedRandom(menu, simOptions)
 }

@@ -2,6 +2,7 @@
 
 import getSamplingGeometry from '../geometry/getSamplingGeometry.js'
 import ElectionSampler from './ElectionSampler.js'
+import updateSeeds from './updateSeeds.js'
 
 /**
  * Simulate many sample elections with
@@ -25,6 +26,7 @@ export default function SimModeSample(pub, entities, changes, districts, simOpti
         const electionOptions = electionOptionsMan.getOptions()
 
         districts.update()
+        updateSeeds(simOptions, changes)
 
         const samplingGeometry = getSamplingGeometry(voterShapeList, candidateDnList, simOptions, electionOptions, districts)
 
