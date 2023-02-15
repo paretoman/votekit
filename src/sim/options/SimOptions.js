@@ -9,6 +9,8 @@ export default function SimOptions(changes, commander) {
         // Defaults
         self.setMode('one')
         self.setDimensions(2)
+        self.seeds = []
+        self.setSeeds(0, 0)
     }
 
     self.setMode = commander.addSender({
@@ -29,7 +31,13 @@ export default function SimOptions(changes, commander) {
         },
     }).go
 
-    self.seeds = [0]
+    self.setSeeds = commander.addSenderForList({
+        name: 'seeds',
+        action(i, seed) {
+            self.seeds[i] = seed
+            changes.add(['seeds'])
+        },
+    }).go
 
     self.init()
 }
