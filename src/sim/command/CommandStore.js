@@ -49,7 +49,8 @@ export default function CommandStore(commander) {
             name, id, value, props, currentValue,
         })
         const go = (id, value, currentValue) => commander.do(command(id, value, currentValue))
-        const sender = { command, go }
+        const load = (id, value, currentValue) => commander.loadCommands([command(id, value, currentValue)])
+        const sender = { command, go, load }
         return sender
     }
 

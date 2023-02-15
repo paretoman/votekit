@@ -38,7 +38,7 @@ export default function SimOptions(changes, commander) {
             self.seeds[i] = seed
             changes.add(['seeds'])
         },
-    }).go
+    }).load
 
     self.setSeedRandom = commander.addSender({
         name: 'seedRandom',
