@@ -6,14 +6,15 @@ import castScoreGrid from './castScoreGrid.js'
 // We also will return a set of votes from that grid.
 
 /**
- * Vote for one.
  * Voters cast votes for candidates.
- * There is also a separate graphical representation in VoronoiGroup.js.
- * @param {Object[]} canGeoms - For 2D, an array of objects: {x,y}.
+ * @param {Object} geometry - geometry for casting votes
+ * @param {Object[]} geometry.canGeoms - For 2D, an array of objects: {x,y}.
  * For 1D, an array of objects: {x}.
- * @param {Object[]} voterGeoms - For 2D, an array of objects: {x,y,w}.
+ * @param {Object[]} geometry.voterGeoms - For 2D, an array of objects: {x,y,w}.
  * For 1D, an array of objects: {x,w,densityProfile}.
- * @returns votes, an object
+ * @param {Object} geometry.parties
+ * @param {Object} castOptions - options for how to cast votes.
+ * @returns {Object} votes
  */
 export default function castScore(geometry, castOptions) {
     const { canGeoms, voterGeoms, parties } = geometry

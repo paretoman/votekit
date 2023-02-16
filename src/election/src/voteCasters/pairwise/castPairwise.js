@@ -5,14 +5,16 @@ import castPairwiseIntervals1D from './CastPairwiseIntervals1D.js'
 import castPairwiseGrid from './CastPairwiseGrid.js'
 
 /**
- * Vote for one.
  * Voters cast votes for candidates.
- * There is also a separate graphical representation in VoronoiRanking2D.js.
- * @param {Object[]} canGeoms - For 2D, an array of objects: {x,y}.
+ * @param {Object} geometry - geometry for casting votes
+ * @param {Object[]} geometry.canGeoms - For 2D, an array of objects: {x,y}.
  * For 1D, an array of objects: {x}.
- * @param {Object[]} voterGeoms - For 2D, an array of objects: {x,y,w}.
+ * @param {Object[]} geometry.voterGeoms - For 2D, an array of objects: {x,y,w}.
  * For 1D, an array of objects: {x,w,densityProfile}.
- * @returns votes, an object
+ * @param {Number} geometry.dimensions
+ * @param {Object} geometry.parties
+ * @param {Object} castOptions - options for how to cast votes.
+ * @returns {Object} votes
  */
 export default function castPairwise(geometry, castOptions) {
     const { canGeoms, voterGeoms, dimensions, parties } = geometry
