@@ -1,0 +1,24 @@
+{
+    "editor.codeActionsOnSave": {
+      "source.fixAll.eslint": true
+    },
+    "eslint.validate": [
+      "javascript"
+    ],
+    "javascript.preferences.importModuleSpecifierEnding": "js",
+    "cSpell.words": [
+      "borda",
+      "Buschmann",
+      "drawio",
+      "Hondt",
+      "Lague",
+      "linebreak",
+      "olpr",
+      "phragmen",
+      "plusplus",
+      "Sainte",
+      "Subpage",
+      "Subpages",
+      "thiele"
+    ]
+}
