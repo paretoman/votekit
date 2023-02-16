@@ -30,7 +30,9 @@ function findDensity(voterGeom, gridX, gridPointLength) {
     const voteCounts = Array(gridX.length)
 
     if (!isGauss) {
-        return density.fill(1)
+        density.fill(1)
+        voteCounts.fill(1)
+        return { density, voteCounts }
     }
 
     const sigma = w / Math.sqrt(2 * Math.PI) // w = sigma * sqrt(2*pi)
