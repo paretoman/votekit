@@ -25,5 +25,6 @@
       "max-len": "off",
       "object-curly-newline": [ "error", { "ObjectPattern": { "consistent": true } } ],
       "import/no-extraneous-dependencies": ["error", {"devDependencies": ["**/test.js"]}]
-    }
+    },
+    "root":true
   }
