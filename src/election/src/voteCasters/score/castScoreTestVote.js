@@ -4,7 +4,7 @@ import { minMax } from '../../election/mathHelpers.js'
 
 /**
  * Vote for the closest candidate.
- * @param {Objects[]} canGeoms - For 2D, an array of objects: {x,y}.
+ * @param {Object[]} canGeoms - For 2D, an array of objects: {x,y}.
  * For 1D, an array of objects: {x}.
  * @param {*} voter
  * @param {*} dimensions
