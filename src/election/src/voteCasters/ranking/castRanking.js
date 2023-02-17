@@ -3,16 +3,10 @@
 import castRankingGrid from './castRankingGrid.js'
 import castRankingIntervals1D from './castRankingIntervals1D.js'
 import castRankingPolygons2D from './castRankingPolygons2D.js'
-
+import * as typesVC from '../voteCasters/typesVC.js'
 /**
  * Voters cast votes for candidates.
- * @param {Object} geometry - geometry for casting votes
- * @param {Object[]} geometry.canGeoms - For 2D, an array of objects: {x,y}.
- * For 1D, an array of objects: {x}.
- * @param {Object[]} geometry.voterGeoms - For 2D, an array of objects: {x,y,w}.
- * For 1D, an array of objects: {x,w,densityProfile}.
- * @param {Number} geometry.dimensions
- * @param {Object} geometry.parties
+ * @param {typesVC.Geometry} geometry - geometry for casting votes
  * @param {Object} castOptions - options for how to cast votes.
  * @returns {Object} votes
  */
