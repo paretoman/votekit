@@ -4,10 +4,12 @@ import { minMax } from '../../election/mathHelpers.js'
 
 /**
  * Vote for the closest candidate.
- * @param {Object[]} canGeoms - For 2D, an array of objects: {x,y}.
+ * @param {Object} testGeometry - the election geometry for the case of a single voter.
+ * @param {Object[]} testGeometry.canGeoms - For 2D, an array of objects: {x,y}.
  * For 1D, an array of objects: {x}.
- * @param {*} voter
- * @param {*} dimensions
+ * @param {Object[]} testGeometry.voterGeom - For 2D, an object: {x,y,w}.
+ * For 1D, an object: {x,w,densityProfile}.
+ * @param {Number} testGeometry.dimensions
  */
 export default function castScoreTestVote({ canGeoms, voterGeom, dimensions }) {
     const lc = canGeoms.length
