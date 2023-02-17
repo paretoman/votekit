@@ -28,8 +28,13 @@ export default function History(commander) {
         commander.execute(command)
 
         // Add command to history
-        history.push([{ command, undoCommand }])
-        head += 1
+        if (command.props && command.props.combineWithCurrentCommand && head > -1) {
+            // combine with current command.
+            history[head].push({ command, undoCommand })
+        } else {
+            history.push([{ command, undoCommand }])
+            head += 1
+        }
     }
 
     /**

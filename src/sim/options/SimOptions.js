@@ -9,8 +9,7 @@ export default function SimOptions(changes, commander) {
         // Defaults
         self.setMode('one')
         self.setDimensions(2)
-        self.seeds = []
-        self.setSeeds(0, 0)
+        self.seeds = [0]
         self.setSeedRandom(true)
     }
 
@@ -38,7 +37,8 @@ export default function SimOptions(changes, commander) {
             self.seeds[i] = seed
             changes.add(['seeds'])
         },
-    }).load
+        props: { combineWithCurrentCommand: true },
+    }).go
 
     self.setSeedRandom = commander.addSender({
         name: 'seedRandom',
