@@ -6,7 +6,7 @@ import castRankingPolygons2D from './castRankingPolygons2D.js'
 import * as typesVC from '../voteCasters/typesVC.js'
 /**
  * Voters cast votes for candidates.
- * @param {typesVC.Geometry} geometry - geometry for casting votes
+ * @param {typesVC.geometry} geometry - geometry for casting votes
  * @param {Object} castOptions - options for how to cast votes.
  * @returns {Object} votes
  */
