@@ -3,9 +3,9 @@ import * as typesGeoms from '../types/typesGeoms.js'
 import * as typesGrid from '../types/typesGrid.js'
 
 export default function makeGrid1D(voterGeom) {
-    const { gridX, testVoters, gridPointLength } = findGridX(voterGeom)
+    const { gridX, voterPoints, gridPointLength } = findGridX(voterGeom)
     const { density, voteCounts } = findDensity(voterGeom, gridX, gridPointLength)
-    const grid = { x: gridX, density, testVoters, voteCounts, voterGeom }
+    const grid = { x: gridX, density, voterPoints, voteCounts, voterGeom }
     return grid
 }
 
@@ -19,15 +19,15 @@ function findGridX(voterGeom) {
     const spread = (isGauss) ? 3 : 1
     const iWidth = Math.round(voterGeom.w * spread)
     const gridX = Array(iWidth)
-    const testVoters = Array(iWidth)
+    const voterPoints = Array(iWidth)
     const gridPointLength = 1
 
     for (let i = 0; i < iWidth; i++) {
         const x = i + 0.5 - iWidth * 0.5 + voterGeom.x
         gridX[i] = x
-        testVoters[i] = { x }
+        voterPoints[i] = { x }
     }
-    return { gridX, testVoters, gridPointLength }
+    return { gridX, voterPoints, gridPointLength }
 }
 
 function findDensity(voterGeom, gridX, gridPointLength) {

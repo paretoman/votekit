@@ -9,9 +9,9 @@ import { range } from '../../election/mathHelpers.js'
  * @param {Number} dimensions
  * @returns {rankingVote}
  */
-export default function castRankingTestVote({ canGeoms, testVoter, dimensions }) {
+export default function castRankingTestVote({ canGeoms, voterPoint, dimensions }) {
     const df = (dimensions === 1) ? df1 : df2
-    const dist2 = canGeoms.map((c) => df(c, testVoter))
+    const dist2 = canGeoms.map((c) => df(c, voterPoint))
     const n = canGeoms.length
     const indexInOrder = range(n).sort((a, b) => dist2[a] - dist2[b])
     // Note that ties are not handled.

@@ -23,8 +23,8 @@ export default function castScoreGrid(voterGeom, geometry, castOptions) {
     const voteSet = Array(gridLength)
     for (let i = 0; i < gridLength; i++) {
         const voteCount = grid.voteCounts[i]
-        const testVoter = grid.testVoters[i]
-        const vote = castScoreTestVote({ canGeoms, testVoter, dimensions })
+        const voterPoint = grid.voterPoints[i]
+        const vote = castScoreTestVote({ canGeoms, voterPoint, dimensions })
         voteSet[i] = vote
         const { scoreVote } = vote
         totalVotes += voteCount

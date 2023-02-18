@@ -1,5 +1,5 @@
 import * as typesGeoms from './typesGeoms.js'
-import * as typesTestVoter from './typesTestVoter.js'
+import * as typesVoterPoint from './typesVoterPoint.js'
 
 /**
  * @namespace typesGrid
@@ -10,14 +10,14 @@ import * as typesTestVoter from './typesTestVoter.js'
 /**
  * @typedef {Object} grid1D - data for points on a 1D grid
  * @property {Number[]} x - x coordinates for grid points
- * @property {typesTestVoter.testVoter1D[]} testVoters - pass this to the testVote function.
+ * @property {typesVoterPoint.voterPoint1D[]} voterPoints - pass this to the testVote function.
  * @property {Number} gridPointLength - size of grid point's region in policy space. density * length = count.
  * @memberof typesGrid
  */
 /**
 * @typedef {Object} gridX
 * @property {Number[]} gridX - x coordinates for grid points
-* @property {typesTestVoter.testVoter1D[]} testVoters - pass this to the testVote function.
+* @property {typesVoterPoint.voterPoint1D[]} voterPoints - pass this to the testVote function.
 * @property {Number} gridPointLength - size of grid point's region in policy space. density * length = count.
  * @memberof typesGrid
  */
@@ -31,7 +31,7 @@ import * as typesTestVoter from './typesTestVoter.js'
  * @property {Number} nx - number of x coordinates
  * @property {Number} ny - number of y coordinates
  * @property {Number} width - width and height of grid in pixels. grid is square.
- * @property {typesTestVoter.testVoter2D[]} testVoters - pass this to the testVote function.
+ * @property {typesVoterPoint.voterPoint2D[]} voterPoints - pass this to the testVote function.
  * @property {typesGeoms.voterGeom2D} voterGeom - the geometry of a voter distribution in 2D
  * @memberof typesGrid
  */

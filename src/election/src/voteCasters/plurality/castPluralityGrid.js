@@ -24,8 +24,8 @@ export default function castPluralityGrid(voterGeom, geometry, castOptions) {
     const voteSet = Array(gridLength)
     for (let i = 0; i < gridLength; i++) {
         const voteCounts = grid.voteCounts[i]
-        const testVoter = grid.testVoters[i]
-        const vote = castPluralityTestVote({ canGeoms, testVoter, dimensions })
+        const voterPoint = grid.voterPoints[i]
+        const vote = castPluralityTestVote({ canGeoms, voterPoint, dimensions })
         voteSet[i] = vote
         const { pluralityVote } = vote
         countByCan[pluralityVote] += voteCounts

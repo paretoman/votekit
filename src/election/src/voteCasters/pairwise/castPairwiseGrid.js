@@ -26,8 +26,8 @@ export default function castPairwiseGrid(voterGeom, geometry, castOptions) {
     const voteSet = Array(gridLength)
     for (let i = 0; i < gridLength; i++) {
         const voteCount = grid.voteCounts[i]
-        const testVoter = grid.testVoters[i]
-        const vote = castRankingTestVote({ canGeoms, testVoter, dimensions })
+        const voterPoint = grid.voterPoints[i]
+        const vote = castRankingTestVote({ canGeoms, voterPoint, dimensions })
         voteSet[i] = vote
 
         const { netWinsPairwise } = vote

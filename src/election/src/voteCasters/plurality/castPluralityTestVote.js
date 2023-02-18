@@ -9,9 +9,9 @@ import { minIndex } from '../../election/mathHelpers.js'
  * @param {*} voterGeom
  * @param {*} dimensions
  */
-export default function castPluralityTestVote({ canGeoms, testVoter, dimensions }) {
+export default function castPluralityTestVote({ canGeoms, voterPoint, dimensions }) {
     const df = (dimensions === 1) ? df1 : df2
-    const dist2 = canGeoms.map((c) => df(c, testVoter))
+    const dist2 = canGeoms.map((c) => df(c, voterPoint))
     const i = minIndex(dist2)
     const n = canGeoms.length
     const pluralityAllocation = (new Array(n)).fill(0)
