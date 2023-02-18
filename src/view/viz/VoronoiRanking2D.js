@@ -19,14 +19,14 @@ export default function VoronoiRanking2D(voterGroup, candidateList, screen) {
     self.update = function (votesForGeom) {
         // calculate colors
 
-        let { ranking } = votesForGeom
+        let { rankings } = votesForGeom
         cells = votesForGeom.cells
-        if (ranking === undefined || cells === undefined) {
+        if (rankings === undefined || cells === undefined) {
             canList = candidateList.getEntities()
             const canGeoms = canList.map((can) => can.shape2)
             const voterGeom = voterGroup.shape2
             const cd = castRankingFindPolygons(voterGeom, canGeoms)
-            ranking = cd.ranking
+            rankings = cd.rankings
             cells = cd.cells
         }
 
@@ -37,7 +37,7 @@ export default function VoronoiRanking2D(voterGroup, candidateList, screen) {
         colors = Array(cn)
         const colorList = canList.map((can) => can.colorRGBA)
         for (let i = 0; i < cn; i++) {
-            const bordaScores = ranking[i].map((r) => n - r)
+            const bordaScores = rankings[i].map((r) => n - r)
             colors[i] = rgbToString(colorBlender(bordaScores, colorList))
         }
     }
