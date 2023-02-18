@@ -8,3 +8,5 @@ test/jupyter/.ipynb_checkpoints
 _site
 .jekyll-cache
 src/election/node_modules
+src/election/docs
+src/election/dist
