@@ -21,7 +21,7 @@ export default function makeGrid2D(voterGeom, castOptions) {
     const gridLength = nx * ny
     const gridX = Array(gridLength)
     const gridY = Array(gridLength)
-    const testVoter = Array(gridLength)
+    const testVoters = Array(gridLength)
     let i = 0
 
     for (let iy = 0; iy < iyGrid.length; iy++) {
@@ -30,7 +30,7 @@ export default function makeGrid2D(voterGeom, castOptions) {
             const gy = gridYMargin[iy]
             gridX[i] = gx
             gridY[i] = gy
-            testVoter[i] = { x: gx, y: gy }
+            testVoters[i] = { x: gx, y: gy }
             i += 1
         }
     }
@@ -39,7 +39,7 @@ export default function makeGrid2D(voterGeom, castOptions) {
     const { density, voteCounts } = findDensity(voterGeom, gridX, gridY, gridPointArea)
 
     const grid = {
-        x: gridX, y: gridY, nx, ny, width, testVoter, density, voteCounts, voterGeom,
+        x: gridX, y: gridY, nx, ny, width, testVoters, density, voteCounts, voterGeom,
     }
     return grid
 }

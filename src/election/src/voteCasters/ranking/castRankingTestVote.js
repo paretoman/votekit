@@ -4,15 +4,14 @@ import { range } from '../../election/mathHelpers.js'
 
 /**
  * Vote for the closest candidate.
- * @param {Object[]} canGeoms - For 2D, an array of objects: {x,y}.
- * For 1D, an array of objects: {x}.
- * @param {Object} voterGeom - has properties x and y or just x.
+ * @param {canGeoms} canGeoms - geometries for candidates
+ * @param {voterPoint} voterPoint - geometry for single voter
  * @param {Number} dimensions
- * @returns {Number[]} Rank of each candidate
+ * @returns {rankingVote}
  */
-export default function castRankingTestVote({ canGeoms, voterGeom, dimensions }) {
+export default function castRankingTestVote({ canGeoms, testVoter, dimensions }) {
     const df = (dimensions === 1) ? df1 : df2
-    const dist2 = canGeoms.map((c) => df(c, voterGeom))
+    const dist2 = canGeoms.map((c) => df(c, testVoter))
     const n = canGeoms.length
     const indexInOrder = range(n).sort((a, b) => dist2[a] - dist2[b])
     // Note that ties are not handled.

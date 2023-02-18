@@ -11,7 +11,7 @@ export default function castRankingPolygons2D(voterGeom, geometry) {
     const { canGeoms } = geometry
 
     // draw lines across shape of voterGeom
-    let { cells, ranking, cansByRankList } = castRankingFindPolygons(voterGeom, canGeoms)
+    let { cells, rankings, cansByRankList } = castRankingFindPolygons(voterGeom, canGeoms)
 
     // find area of polygons
     const cn = cells.length
@@ -27,13 +27,13 @@ export default function castRankingPolygons2D(voterGeom, geometry) {
     // sometimes near-zero-area polygons are formed that need to be removed
     // because they also have rankings that don't make sense.
     const tol = 0.000001
-    ranking = ranking.filter((_, i) => Math.abs(areas[i]) > tol)
+    rankings = rankings.filter((_, i) => Math.abs(areas[i]) > tol)
     cansByRankList = cansByRankList.filter((_, i) => Math.abs(areas[i]) > tol)
     cells = cells.filter((_, i) => Math.abs(areas[i]) > tol)
     areas = areas.filter((a) => Math.abs(a) > tol)
 
     const [voteCounts, totalVotes] = [areas, totalArea]
     return {
-        ranking, cansByRankList, voteCounts, totalVotes, cells,
+        rankings, cansByRankList, voteCounts, totalVotes, cells,
     }
 }

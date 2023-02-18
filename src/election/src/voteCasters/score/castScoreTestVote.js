@@ -7,17 +7,17 @@ import { minMax } from '../../election/mathHelpers.js'
  * @param {Object} testGeometry - the election geometry for the case of a single voter.
  * @param {Object[]} testGeometry.canGeoms - For 2D, an array of objects: {x,y}.
  * For 1D, an array of objects: {x}.
- * @param {Object[]} testGeometry.voterGeom - For 2D, an object: {x,y,w}.
+ * @param {Object[]} testGeometry.testVoter - For 2D, an object: {x,y,w}.
  * For 1D, an object: {x,w,densityProfile}.
  * @param {Number} testGeometry.dimensions
  */
-export default function castScoreTestVote({ canGeoms, voterGeom, dimensions }) {
+export default function castScoreTestVote({ canGeoms, testVoter, dimensions }) {
     const lc = canGeoms.length
     const scoreVote = (new Array(lc)).fill(0)
     const df = (dimensions === 1) ? df1 : df2
 
     // in the current implementation, all candidates are frontrunners
-    const dist = canGeoms.map((c) => df(c, voterGeom))
+    const dist = canGeoms.map((c) => df(c, testVoter))
     const [min, max] = minMax(dist)
     const maxscore = 1
     const minscore = 0

@@ -4,9 +4,17 @@ import castRankingTestVote from './castRankingTestVote.js'
 import makeGrid1D from '../voteCasters/makeGrid1D.js'
 import makeGrid2D from '../voteCasters/makeGrid2D.js'
 
+import * as typesGeoms from '../types/typesGeoms.js'
+import * as typesGeometry from '../types/typesGeometry.js'
+import * as typesCast from '../types/typesCast.js'
+import * as typesVotesForGeomGrid from '../types/typesVotesForGeomGrid.js'
+
 /**
- * Tally votes.
- * @param {Object[]} canGeoms - position of each candidate {x}
+ * Cast and tally votes on a grid of points.
+ * @param {typesGeoms.voterGeom} voterGeom
+ * @param {typesGeometry.geometry} geometry
+ * @param {typesCast.castOptions} castOptions
+ * @returns {typesVotesForGeomGrid.votesForGeomGridRanking} votesForGeom
  */
 export default function castRankingGrid(voterGeom, geometry, castOptions) {
     const { canGeoms, dimensions } = geometry
@@ -17,7 +25,7 @@ export default function castRankingGrid(voterGeom, geometry, castOptions) {
 
     const nk = canGeoms.length
     const bordaScoreSumByCan = Array(nk).fill(0)
-    const ranking = new Array(nk)
+    const rankings = new Array(nk)
     const cansByRankList = new Array(nk)
     let totalVotes = 0
 
@@ -27,12 +35,12 @@ export default function castRankingGrid(voterGeom, geometry, castOptions) {
     for (let i = 0; i < voteCounts.length; i++) {
         const voteCount = voteCounts[i]
 
-        const testVoter = grid.testVoter[i]
-        const vote = castRankingTestVote({ canGeoms, voterGeom: testVoter, dimensions })
+        const testVoter = grid.testVoters[i]
+        const vote = castRankingTestVote({ canGeoms, testVoter, dimensions })
         voteSet[i] = vote
 
         // todo: possibly speed things up by combining votes with the same ranking.
-        ranking[i] = vote.ranking
+        rankings[i] = vote.ranking
         cansByRankList[i] = vote.indexInOrder.map((can) => [can])
         totalVotes += voteCount
 
@@ -49,6 +57,6 @@ export default function castRankingGrid(voterGeom, geometry, castOptions) {
     )
 
     return {
-        grid, voteSet, voteCounts, totalVotes, bordaFractionAverageByCan, ranking, cansByRankList,
+        grid, voteSet, voteCounts, totalVotes, bordaFractionAverageByCan, rankings, cansByRankList,
     }
 }

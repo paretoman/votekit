@@ -21,6 +21,8 @@ VoteCasters: Votes are cast.
 
 ### A single Preference
 
+: also called a single vote.
+
 These are the three ways to state a preference.
 
 * Plurality: a choice of a candidate.
@@ -43,7 +45,11 @@ A preference is stored as data in the following ways:
     * A rank of 0 is the best ranking, then 1, 2, and so on. No rankings are skipped, but skipping is allowed. Equal ranks are allowed.
     * type: Number[], Number array
     * length: number of candidates
-  * cansByRank: an array of candidates lists, indexed by rank. Candidates can share a rank. Number[][][].
+  * cansByRank: an array of candidates lists, indexed by rank. Candidates can share a rank. Number[][]..
+  * indexInOrder: an array of candidates in order of rank. Only one candidate is listed per rank. Number[].
+  * netWinsPairwise: The number of wins minus number of losses for the first of a pair of candidates. Number[][]
+  * bordaScores: The borda scores for each candidate for one vote. Number[]
+  * bordaFractions: Fractional borda scores, between 0 and 1. Number[]
 
 ### Preference Lists
 
@@ -88,8 +94,6 @@ Candidate tallies are just tallies indexed by candidate. This is a way to combin
   * scoreFractionAverageByCan: average fractional score for each candidate.
   
 * ranking
-  * bordaScores: The borda scores for each candidate for one vote.
-  * bordaFractions: Fractional borda scores, between 0 and 1.
   * bordaScoreSumByCan: sum of borda scores for a candidate.
   * bordaFractionSumByCan: The sum of fractional borda scores for a candidate. (not used)
   * bordaFractionAverageByCan: The average fractional borda score for a candidate.
@@ -123,7 +127,7 @@ Some of the following object is output from a vote caster as the "votes" data st
   * cansByRankList - Each preference is a list indexed by ranking. A list of candidates is at each ranking.
   * There is no "pluralityVotes" list of preferences because it isn't needed. It would be an identity matrix.  
 * preferenceTallies:
-  * voteFractions - the fraction of the population with a preference.
+  * voteFractions - the fraction of the voters who share the same preference.
 * candidateTallies:
   * voteFractionsByCan - the fraction of plurality votes for each candidate.
   * scoreFractionAverageByCan - the average fractional score for each candidate.
@@ -133,8 +137,9 @@ Some of the following object is output from a vote caster as the "votes" data st
 * votesByGeom:
   * Vote data for each voter geometry. A list of votesForGeom. 
   * votesForGeom: Vote data for just one voter geometry. votesForGeom parts may include one of the following, depending on the vote caster:
-    * { ranking, cells }
-    * { ranking, intervalBorders }
-    * { grid, voteSet, voterGeom }  
+    * votesForGeomCells: { ranking, cells }
+    * votesForGeomIntervals: { ranking, intervalBorders }
+    * votesForGeomGrid: { grid, voteSet, voterGeom }
+      * This varies as well, depending on voteCaster. 
 * parties: { partiesByCan, numParties }
-  
+* numCans: the number of candidates

@@ -1,26 +1,33 @@
 import { normPDF } from '../../election/mathHelpers.js'
+import * as typesGeoms from '../types/typesGeoms.js'
+import * as typesGrid from '../types/typesGrid.js'
 
 export default function makeGrid1D(voterGeom) {
-    const { gridX, testVoter, gridPointLength } = findGridX(voterGeom)
+    const { gridX, testVoters, gridPointLength } = findGridX(voterGeom)
     const { density, voteCounts } = findDensity(voterGeom, gridX, gridPointLength)
-    const grid = { x: gridX, density, testVoter, voteCounts, voterGeom }
+    const grid = { x: gridX, density, testVoters, voteCounts, voterGeom }
     return grid
 }
 
+/**
+ * get x coordinates for grid
+ * @param {typesGeoms.voterGeom1D} voterGeom
+ * @returns {typesGrid.gridX}
+ */
 function findGridX(voterGeom) {
     const isGauss = voterGeom.densityProfile === 'gaussian'
     const spread = (isGauss) ? 3 : 1
     const iWidth = Math.round(voterGeom.w * spread)
     const gridX = Array(iWidth)
-    const testVoter = Array(iWidth)
+    const testVoters = Array(iWidth)
     const gridPointLength = 1
 
     for (let i = 0; i < iWidth; i++) {
         const x = i + 0.5 - iWidth * 0.5 + voterGeom.x
         gridX[i] = x
-        testVoter[i] = { x }
+        testVoters[i] = { x }
     }
-    return { gridX, testVoter, gridPointLength }
+    return { gridX, testVoters, gridPointLength }
 }
 
 function findDensity(voterGeom, gridX, gridPointLength) {
