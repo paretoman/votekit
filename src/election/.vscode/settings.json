@@ -20,5 +20,13 @@
       "Subpage",
       "Subpages",
       "thiele"
-    ]
+    ],
+    "emeraldwalk.runonsave": {
+      "commands": [
+          {
+              "match": "\\.js$",
+              "cmd": "npm run doc"
+          }
+      ]
+  }
 }
