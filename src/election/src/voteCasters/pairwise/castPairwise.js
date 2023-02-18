@@ -3,18 +3,14 @@
 import castPairwisePlanes2D from './castPairwisePlanes2D.js'
 import castPairwiseIntervals1D from './CastPairwiseIntervals1D.js'
 import castPairwiseGrid from './CastPairwiseGrid.js'
-
+import * as typesGeometry from '../types/typesGeometry.js'
+import * as typesCast from '../types/typesCast.js'
+import * as typesVotes from '../types/typesVotes.js'
 /**
  * Voters cast votes for candidates.
- * @param {Object} geometry - geometry for casting votes
- * @param {Object[]} geometry.canGeoms - For 2D, an array of objects: {x,y}.
- * For 1D, an array of objects: {x}.
- * @param {Object[]} geometry.voterGeoms - For 2D, an array of objects: {x,y,w}.
- * For 1D, an array of objects: {x,w,densityProfile}.
- * @param {Number} geometry.dimensions
- * @param {Object} geometry.parties
- * @param {Object} castOptions - options for how to cast votes.
- * @returns {Object} votes
+ * @param {typesGeometry.geometry} geometry - geometry for casting votes
+ * @param {typesCast.castOptions} castOptions - options for how to cast votes.
+ * @returns {typesVotes.votes} votes
  */
 export default function castPairwise(geometry, castOptions) {
     const { canGeoms, voterGeoms, dimensions, parties } = geometry

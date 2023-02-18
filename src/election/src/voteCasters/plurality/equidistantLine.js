@@ -1,3 +1,12 @@
+import * as typesMath from '../types/typesMath.js'
+/**
+ * Make line equidistant from two points.
+ * The line can be used to determine if a new point c is closer to c1 or c2.
+ * For the line {A,b}, Ac < b means the point c is close to c1.
+ * @param {typesMath.vector2D} c1
+ * @param {typesMath.vector2D} c2
+ * @returns {typesMath.lineHomogeneous}
+ */
 export default function equidistantLine(c1, c2) {
     // Ac < b
     // this is the condition that x counts for a candidate.

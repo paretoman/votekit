@@ -1,9 +1,11 @@
+import * as typesGeoms from '../types/typesGeoms.js'
+import * as typesCanBorders from '../types/typesCanBorders.js'
 /**
  * divide voterGeom
  * compute the midpoints
  * identify which candidate is smaller in x value
- * @param {Object[]} canGeoms
- * @returns {pairwiseIntervals1D}
+ * @param {typesGeoms.canGeom2D[]} canGeoms
+ * @returns {typesCanBorders.pairwiseIntervals1D}
  */
 export default function makePairwiseIntervals1D(canGeoms) {
     const n = canGeoms.length

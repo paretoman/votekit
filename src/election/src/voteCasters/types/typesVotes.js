@@ -34,6 +34,7 @@ import * as typesVoteArrays from './typesVoteArrays.js'
  * @property {Number[]} [scoreFractionAverageByCan] - the average fractional score for each candidate.
  * @property {Number[]} [firstPreferenceFractions] - A list of fractions of voters
  * who ranked a candidate first, indexed by candidate.
+ * @property {Number[]} [bordaFractionAverageByCan] - The average fractional borda score for a candidate.
  * @memberof typesVotes
  */
 /**
