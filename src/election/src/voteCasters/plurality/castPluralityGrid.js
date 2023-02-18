@@ -3,10 +3,11 @@
 import castPluralityTestVote from './castPluralityTestVote.js'
 import makeGrid1D from '../voteCasters/makeGrid1D.js'
 import makeGrid2D from '../voteCasters/makeGrid2D.js'
+import * as typesVotesForGeomGrid from '../types/typesVotesForGeomGrid.js'
 
 /**
  * Tally votes.
- * @param {Object[]} canGeoms - position of each candidate {x}
+ * @returns {typesVotesForGeomGrid.votesForGeomGridPlurality}
  */
 export default function castPluralityGrid(voterGeom, geometry, castOptions) {
     const { canGeoms, dimensions } = geometry

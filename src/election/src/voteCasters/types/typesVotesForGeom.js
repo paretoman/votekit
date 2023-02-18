@@ -5,7 +5,7 @@ import * as typesVotesForGeomGrid from './typesVotesForGeomGrid.js'
  * @namespace typesVotesForGeom
  */
 /**
- * @typedef {typesVotesForGeomGrid.votesForGeomGrid | votesForGeomCells | votesForGeomIntervals} votesForGeom
+ * @typedef {typesVotesForGeomGrid.votesForGeomGrid | votesForGeomCells | votesForGeomIntervals | votesForGeomPlurality} votesForGeom
  */
 
 /**
@@ -39,6 +39,13 @@ import * as typesVotesForGeomGrid from './typesVotesForGeomGrid.js'
  * @property {typesVoteArrays.rankings} rankings - rankings for each interval
  * @property {typesVoteArrays.cansByRankList} cansByRankList - cansByRank for each interval
  * @property {Number[]} intervalBorders - midpoints and two infinity points
+ * @memberof typesVotesForGeom
+ */
+
+/**
+ * @typedef {Object} votesForGeomPlurality - Vote data for just one voter geometry in the form of 1D intervals.
+ * @property {Number[]} countByCan - The number of plurality votes for a candidate.
+ * @property {Number} totalVotes - total number of votes
  * @memberof typesVotesForGeom
  */
 

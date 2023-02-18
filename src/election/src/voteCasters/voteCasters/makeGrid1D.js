@@ -2,6 +2,11 @@ import { normPDF } from '../../election/mathHelpers.js'
 import * as typesGeoms from '../types/typesGeoms.js'
 import * as typesGrid from '../types/typesGrid.js'
 
+/**
+ * makes 1D grid data structure
+ * @param {typesGeoms.voterGeom2D} voterGeom
+ * @returns {typesGrid.grid1D}
+ */
 export default function makeGrid1D(voterGeom) {
     const { gridX, voterPoints, gridPointLength } = findGridX(voterGeom)
     const { density, voteCounts } = findDensity(voterGeom, gridX, gridPointLength)

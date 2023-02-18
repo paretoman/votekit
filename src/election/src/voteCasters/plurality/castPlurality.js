@@ -3,19 +3,16 @@
 import castPluralityIntervals1D from './castPluralityIntervals1D.js'
 import castPluralityQuadrature2D from './castPluralityQuadrature2D.js'
 import castPluralityGrid from './castPluralityGrid.js'
+import * as typesGeometry from '../types/typesGeometry.js'
+import * as typesCast from '../types/typesCast.js'
+import * as typesVotes from '../types/typesVotes.js'
 
 /**
  * Vote for one.
  * Voters cast votes for candidates.
- * @param {Object} geometry - geometry for casting votes
- * @param {Object[]} geometry.canGeoms - For 2D, an array of objects: {x,y}.
- * For 1D, an array of objects: {x}.
- * @param {Object[]} geometry.voterGeoms - For 2D, an array of objects: {x,y,w}.
- * For 1D, an array of objects: {x,w,densityProfile}.
- * @param {Number} geometry.dimensions
- * @param {Object} geometry.parties
- * @param {Object} castOptions - options for how to cast votes.
- * @returns {Object} votes
+ * @param {typesGeometry.geometry} geometry - geometry for casting votes
+ * @param {typesCast.castOptions} castOptions - options for how to cast votes.
+ * @returns {typesVotes.votes} votes
  */
 export default function castPlurality(geometry, castOptions) {
     const { canGeoms, voterGeoms, dimensions, parties } = geometry

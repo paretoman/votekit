@@ -1,5 +1,13 @@
 import { normPDF, range } from '../../election/mathHelpers.js'
-
+import * as typesGeoms from '../types/typesGeoms.js'
+import * as typesGrid from '../types/typesGrid.js'
+import * as typesCast from '../types/typesCast.js'
+/**
+ * makes 2D grid data structure
+ * @param {typesGeoms.voterGeom2D} voterGeom
+ * @param {typesCast.castOptions} castOptions
+ * @returns {typesGrid.grid2D}
+ */
 export default function makeGrid2D(voterGeom, castOptions) {
     const { x, y, w, densityProfile } = voterGeom
     const isGauss = densityProfile === 'gaussian'

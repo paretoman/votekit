@@ -1,9 +1,10 @@
 /** @module */
 
 import { normCDF } from '../../election/mathHelpers.js'
-
+import * as typesVotesForGeom from '../types/typesVotesForGeom.js'
 /**
  * Sum area under voter distributions to tally the votes.
+ * @returns {typesVotesForGeom.votesForGeomPlurality}
  */
 export default function castPluralityIntervals1D(voterGeom, geometry) {
     const { canGeoms, canBorders } = geometry

@@ -1,13 +1,10 @@
 /** @module */
 
 import { minIndex } from '../../election/mathHelpers.js'
-
+import * as typesVote from '../types/typesVote.js'
 /**
  * Vote for the closest candidate.
- * @param {Object[]} canGeoms - For 2D, an array of objects: {x,y}.
- * For 1D, an array of objects: {x}.
- * @param {*} voterGeom
- * @param {*} dimensions
+ * @returns {typesVote.pluralityVote}
  */
 export default function castPluralityTestVote({ canGeoms, voterPoint, dimensions }) {
     const df = (dimensions === 1) ? df1 : df2

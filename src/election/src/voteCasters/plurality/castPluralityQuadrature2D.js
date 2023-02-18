@@ -1,10 +1,11 @@
 /** @module */
 
 import sumCircle from './sumCircle.js'
+import * as typesVotesForGeom from '../types/typesVotesForGeom.js'
 
 /**
  * Sum area of voter distributions to tally the votes.
- * @param {Object[]} canGeoms
+ * @returns {typesVotesForGeom.votesForGeomPlurality}
  */
 export default function castPluralityQuadrature2D(voterGeom, geometry) {
     const lines = geometry.canBorders.voronoiLines2D
