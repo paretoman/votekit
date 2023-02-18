@@ -2,7 +2,8 @@
  * @namespace typesGeoms
  */
 /**
- * @typedef {canGeom1D[] | canGeom2D[]} canGeoms - geometries for a number of candidates
+ * @typedef {canGeom1D[] | canGeom2D[]} canGeoms - geometries for a number of candidates.
+ * For 2D, an array of objects: {x,y}. For 1D, an array of objects: {x}.
  * @memberof typesGeoms
  */
 /**

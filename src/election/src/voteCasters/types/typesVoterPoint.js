@@ -3,6 +3,9 @@
  */
 
 /**
+ * @typedef {voterPoint[]} voterPoints - For 2D, an array of objects: {x,y,w}. For 1D, an array of objects: {x,w,densityProfile}.
+ */
+/**
  * @typedef {voterPoint1D | voterPoint2D} voterPoint
  */
 /**

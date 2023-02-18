@@ -8,8 +8,8 @@ import * as typesVoterPoint from './typesVoterPoint.js'
  */
 /**
  * @typedef {Object} geometry - geometry for casting votes
- * @property {geoms.canGeom1D[] | geoms.canGeom2D[]} canGeoms - For 2D, an array of objects: {x,y}. For 1D, an array of objects: {x}.
- * @property {geoms.voterGeom1D[] | geoms.voterGeom2D[]} voterGeoms - For 2D, an array of objects: {x,y,w}. For 1D, an array of objects: {x,w,densityProfile}.
+ * @property {geoms.canGeoms} canGeoms
+ * @property {geoms.voterGeoms} voterGeoms
  * @property {Number} dimensions
  * @property {parties} parties
  * @memberof typesGeometry
@@ -24,8 +24,8 @@ import * as typesVoterPoint from './typesVoterPoint.js'
 
 /**
  * @typedef {Object} testGeometry -geometry for casting one vote
- * @property {geoms.canGeom1D[] | geoms.canGeom2D[]} canGeoms - For 2D, an array of objects: {x,y}. For 1D, an array of objects: {x}.
- * @property {typesVoterPoint.voterPoint[]} voterPoints - For 2D, an array of objects: {x,y,w}. For 1D, an array of objects: {x,w,densityProfile}.
+ * @property {geoms.canGeoms} canGeoms
+ * @property {typesVoterPoint.voterPoints} voterPoints
  * @property {Number} dimensions
  * @property {parties} parties
  * @memberof typesGeometry
