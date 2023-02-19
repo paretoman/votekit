@@ -20,12 +20,15 @@ export default function divisorGeneral(votes, socialChoiceOptions, typeOfDivisor
     let populations = voteFractionsByCan.map(
         (p) => ((p < threshold) ? 0 : p),
     )
-    let positivePopulations = populations.map(
-        (p) => ((p === 0) ? 0 : 1),
-    )
+    let positivePopulations = Array(populations.length)
+    for (let i = 0; i < populations.length; i++) {
+        positivePopulations[i] = ((populations[i] === 0) ? 0 : 1)
+    }
+
     let nPositiveParties = positivePopulations.reduce(
         (p, c) => p + c,
     )
+
     let makeAdjustment = nPositiveParties === 0
 
     // Do we have limits to how many candidates are available in a party?
