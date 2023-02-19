@@ -1,5 +1,5 @@
 import * as geoms from './typesGeoms.js'
-import * as typesVoterPoint from './typesVoterPoint.js'
+import * as typesPoints from './typesPoints.js'
 
 // How exporting types works:
 // https://stackoverflow.com/a/73232942
@@ -25,7 +25,7 @@ import * as typesVoterPoint from './typesVoterPoint.js'
 /**
  * @typedef {object} testGeometry -geometry for casting one vote
  * @property {geoms.canGeoms} canGeoms
- * @property {typesVoterPoint.voterPoints} voterPoints
+ * @property {typesPoints.points} voterPoints
  * @property {number} dimensions
  * @property {parties} parties
  * @memberof typesGeometry
