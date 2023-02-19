@@ -12,7 +12,7 @@ import * as typesSocialChoice from './typesSocialChoice.js'
 export default function randomVoter(votes) {
     const { voteFractionsByCan } = votes.candidateTallies
     const cdf = getCDF(voteFractionsByCan)
-    const iWinner = randomIndexFromCDF(cdf)
+    const iWinner = randomIndexFromCDF(cdf, Math.random)
     const socialChoiceResults = { iWinner }
     return socialChoiceResults
 }
