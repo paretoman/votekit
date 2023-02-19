@@ -34,7 +34,9 @@ export default function makeTractNoise(nx, ny) {
  * @returns {number[][][]} - Noise in pixel displacement, indexed by row, col, dimension
  */
 export function simplexNoise(nx, ny, noiseWidth, noiseHeight, xAmp, yAmp) {
+    // @ts-ignore
     const simplexX = new SimplexNoise('s')
+    // @ts-ignore
     const simplexY = new SimplexNoise('seed')
     const map = zeros(nx, ny)
     let sumX = 0

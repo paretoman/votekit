@@ -12,7 +12,6 @@ import { jcopy } from '../election/jsHelpers.js'
  * Each element contains an array of pairs.
  * The first of the pair is a tract's pair of coordinates.
  * The second of the pair is the fraction of the tract within that district.
- * @param {DistrictMaker} districtMap
  * @returns {number[][][]} - an array of districts,
  * each with a list of census tract properties [x,y,overlap]
  */
