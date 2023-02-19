@@ -13,7 +13,7 @@ export default function socialChoiceRun(votes, electionOptions) {
 
     const { socialChoiceOptions } = electionOptions
     const socialChoiceMethod = socialChoiceMethods[electionOptions.socialChoiceMethod]
-    const socialChoiceResults = socialChoiceMethod({ votes, socialChoiceOptions })
+    const socialChoiceResults = socialChoiceMethod(votes, socialChoiceOptions)
     if (socialChoiceResults.allocation === undefined) {
         socialChoiceResults.allocation = makeAllocation(votes, socialChoiceResults)
     }

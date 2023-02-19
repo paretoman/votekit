@@ -10,7 +10,7 @@ import { getCDF, randomIndexFromCDF } from '../election/mathHelpers.js'
  * @returns {Object} socialChoiceResults
  * @returns {Number} socialChoiceResults.iWinner - Index of winner. Indexing according to votes[].
  */
-export default function randomVoter({ votes }) {
+export default function randomVoter(votes) {
     const { voteFractionsByCan } = votes.candidateTallies
     const cdf = getCDF(voteFractionsByCan)
     const iWinner = randomIndexFromCDF(cdf)

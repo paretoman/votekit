@@ -23,7 +23,7 @@ import { maxIndex, minIndex, range } from '../election/mathHelpers.js'
  * with the property "allocation".
  * Allocation is an array of integers that say whether a candidate is elected (1) or not (0).
  */
-export default function stv({ votes, socialChoiceOptions }) {
+export default function stv(votes, socialChoiceOptions) {
     const { firstPreferenceFractions } = votes.candidateTallies
     const { voteFractions } = votes.preferenceTallies
     const { cansByRankList } = votes.preferenceLists

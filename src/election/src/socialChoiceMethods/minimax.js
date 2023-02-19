@@ -10,7 +10,7 @@ import { range } from '../election/mathHelpers.js'
  * who preferred candidate i over k, indexed by [i][k].
  * @returns {{iWinner:Number}} iWinner - Index of winner.
  */
-export default function minimax({ votes }) {
+export default function minimax(votes) {
     const { winFractionPairwise } = votes.pairwiseTallies
     const n = winFractionPairwise.length
 

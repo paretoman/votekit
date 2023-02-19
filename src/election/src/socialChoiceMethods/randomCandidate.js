@@ -8,7 +8,7 @@
  * @returns {Object} socialChoiceResults
  * @returns {Number} socialChoiceResults.iWinner - Index of winner. Indexing according to votes[].
  */
-export default function randomCandidate({ votes }) {
+export default function randomCandidate(votes) {
     const { voteFractionsByCan } = votes.candidateTallies
     const nk = voteFractionsByCan.length
     const iWinner = Math.floor(Math.random() * nk)

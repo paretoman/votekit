@@ -8,7 +8,7 @@
  * @returns {Object} results
  * @returns {Number} iWinner - Index of winner. Indexing according to votes[].
  */
-export default function score({ votes }) {
+export default function score(votes) {
     const { scoreFractionAverageByCan } = votes.candidateTallies
     const max = Math.max(...scoreFractionAverageByCan)
     const iWinner = scoreFractionAverageByCan.indexOf(max)

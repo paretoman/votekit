@@ -17,7 +17,7 @@ import * as typesSocialChoice from './typesSocialChoice.js'
  * @param {typesSocialChoice.socialChoiceOptions} args.socialChoiceOptions - options to specify a social choice function.
  * @returns {typesSocialChoice.socialChoiceResults} - the results returned from a social choice function.
  */
-export default function allocatedScore({ votes, socialChoiceOptions }) {
+export default function allocatedScore(votes, socialChoiceOptions) {
     const { voteFractions } = votes.preferenceTallies
     const { scoreVotes } = votes.preferenceLists
 

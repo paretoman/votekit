@@ -15,10 +15,9 @@ import divisorGeneral from './divisorGeneral.js'
  * Allocation is an array of integers that say how many representatives each party gets.
  */
 
-export default function sainteLague({ votes, socialChoiceOptions }) {
-    const socialChoiceResults = divisorGeneral({
-        votes, socialChoiceOptions, typeOfDivisor: 'sainteLague',
-    })
+export default function sainteLague(votes, socialChoiceOptions) {
+    const typeOfDivisor = 'sainteLague'
+    const socialChoiceResults = divisorGeneral(votes, socialChoiceOptions, typeOfDivisor)
     return socialChoiceResults
 }
 

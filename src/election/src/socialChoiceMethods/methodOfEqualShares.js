@@ -25,7 +25,7 @@ import { range } from '../election/mathHelpers.js'
  * @returns {{allocation:number[]}} - socialChoiceResults, with property allocation.
  * Allocation is an array of integers that say whether a candidate is elected (1) or not (0).
  */
-export default function methodOfEqualShares({ votes, socialChoiceOptions }) {
+export default function methodOfEqualShares(votes, socialChoiceOptions) {
     const { voteFractions } = votes.preferenceTallies
     const { scoreVotes } = votes.preferenceLists
 

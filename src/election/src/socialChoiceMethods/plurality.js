@@ -11,7 +11,7 @@ import { maxIndex } from '../election/mathHelpers.js'
  * who chose a candidate, indexed by candidate.
  * @returns {Object} socialChoiceResults = {iWinner} Index of winner. Indexing according to votes[].
  */
-export default function plurality({ votes }) {
+export default function plurality(votes) {
     const { voteFractionsByCan } = votes.candidateTallies
     const iWinner = maxIndex(voteFractionsByCan)
 
