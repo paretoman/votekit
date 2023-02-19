@@ -6,7 +6,7 @@ import divisorGeneral from './divisorGeneral.js'
  * Run the Sainte-Lague / Webster method of apportionment and return an allocation of seats.
  * @param {Object} votes
  * @param {Object} votes.candidateTallies - vote tallies indexed by candidate
- * @param {Number[]} votes.candidateTallies.voteFractionsByCan - The fraction of plurality votes for each candidate.
+ * @param {number[]} votes.candidateTallies.voteFractionsByCan - The fraction of plurality votes for each candidate.
  * @param {Object} socialChoiceOptions
  * @param {number} socialChoiceOptions.seats - The number of seats to fill.
  * @param {number} socialChoiceOptions.threshold - The minimum fraction of voters

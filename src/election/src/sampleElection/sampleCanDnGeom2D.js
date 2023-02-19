@@ -34,9 +34,9 @@ const invSqrt2 = 1 / Math.sqrt(2)
 
 /**
  * Two samples from gaussian around center with stdev scaled to R.
- * @param {Number} X center.x
- * @param {Number} Y center.y
- * @param {Number} R radius = stdev * sqrt(2)
+ * @param {number} X center.x
+ * @param {number} Y center.y
+ * @param {number} R radius = stdev * sqrt(2)
  * @returns {Object} point
  */
 function randomInsideGaussian(X, Y, R, rng) {
@@ -54,7 +54,7 @@ function randomInsideGaussian(X, Y, R, rng) {
 /**
  * Marsaglia Method
  * https://www.alanzucconi.com/2015/09/16/how-to-sample-from-a-gaussian-distribution/
- * @returns {Number[]} Two samples from Random standard normal with mean 0 and stdev 1.
+ * @returns {number[]} Two samples from Random standard normal with mean 0 and stdev 1.
  */
 function randomStandardNormal(rng) {
     let a; let b; let c

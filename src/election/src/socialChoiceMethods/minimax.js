@@ -6,7 +6,7 @@ import { range } from '../election/mathHelpers.js'
  * Disregard the weakest pairwise defeat until one candidate is unbeaten.
  * @param {Object} votes
  * @param {Object} votes.pairwiseTallies - pairwise tallies
- * @param {Number[][]} votes.pairwiseTallies.winFractionPairwise - The fraction of wins for the first of a pair of candidates.
+ * @param {number[][]} votes.pairwiseTallies.winFractionPairwise - The fraction of wins for the first of a pair of candidates.
  * who preferred candidate i over k, indexed by [i][k].
  * @returns {{iWinner:Number}} iWinner - Index of winner.
  */

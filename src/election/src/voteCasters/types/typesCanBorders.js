@@ -15,8 +15,8 @@ import * as typesMath from './typesMath.js'
 
 /**
  * @typedef {Object} pairwiseIntervals1D
- * @property {Number[][]} midpoints - midpoint for every pair of candidates
- * @property {Number[][]} iLower - true if first candidate of pair is lower in x coordinate than second.
+ * @property {number[][]} midpoints - midpoint for every pair of candidates
+ * @property {number[][]} iLower - true if first candidate of pair is lower in x coordinate than second.
  * @memberof typesCanBorders
  */
 /**

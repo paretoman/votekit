@@ -11,7 +11,7 @@ import sntv from './sntv.js'
  * Party lists are allocated seats. The most popular candidates in a party are elected.
  * @param {Object} votes
  * @param {Object} votes.candidateTallies - vote tallies indexed by candidate
- * @param {Number[]} votes.candidateTallies.voteFractionsByCan - The fraction of plurality votes for each candidate.
+ * @param {number[]} votes.candidateTallies.voteFractionsByCan - The fraction of plurality votes for each candidate.
  * @param {Object} socialChoiceOptions
  * @param {number} socialChoiceOptions.seats - The number of seats to fill.
  * @param {number} socialChoiceOptions.threshold - The minimum fraction of voters

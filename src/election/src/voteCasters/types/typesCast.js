@@ -6,7 +6,7 @@
 
 /**
  * @typedef {Object} castOptions - options for how to cast votes.
- * @property {Number} usr - undersampling ratio. Sample grid points faster by reducing resolution in each dimension by this factor.
+ * @property {number} usr - undersampling ratio. Sample grid points faster by reducing resolution in each dimension by this factor.
  * @memberof typesCast
  */
 

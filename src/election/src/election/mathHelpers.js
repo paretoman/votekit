@@ -1,7 +1,7 @@
 /**
  * List the indices of an array of length n.
- * @param {Number} n - length of array
- * @returns {Number[]} - A number array from 0 to n-1.
+ * @param {number} n - length of array
+ * @returns {number[]} - A number array from 0 to n-1.
  */
 export function range(n) {
     return [...Array(n).keys()]
@@ -37,8 +37,8 @@ function erf(x) {
 
 /**
  * Make a cumulative distribution function CDF for a set of proportions.
- * @param {Number[]} proportion - Doesn't have to add to 1. Will normalize.
- * @returns {Number[]} cdf - Use with randomIndexFromCDF
+ * @param {number[]} proportion - Doesn't have to add to 1. Will normalize.
+ * @returns {number[]} cdf - Use with randomIndexFromCDF
  */
 export function getCDF(proportion) {
     const sumProportion = proportion.reduce((p, c) => p + c)

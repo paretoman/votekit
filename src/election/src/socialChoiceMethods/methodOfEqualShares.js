@@ -19,7 +19,7 @@ import { range } from '../election/mathHelpers.js'
  * @param {Object} votes.preferenceLists - Lists of preferences.
  * @param {Object} votes.preferenceTallies - How many votes have a listed preference.
  * @param {Object[]} votes.preferenceLists.scoreVotes - A list of votes
- * @param {Number[]} votes.preferenceLists.scoreVotes[] - A score for each candidate. From 0 to 1.
+ * @param {number[]} votes.preferenceLists.scoreVotes[] - A score for each candidate. From 0 to 1.
  * @param {Object} votes.preferenceTallies.voteFractions - The fraction of the population that voted that way.
  * @param {Object} socialChoiceOptions.seats - Number of candidates to elect.
  * @returns {{allocation:number[]}} - socialChoiceResults, with property allocation.

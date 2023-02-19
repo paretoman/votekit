@@ -8,8 +8,8 @@ import { SimplexNoise } from '../lib/snowpack/build/snowpack/pkg/simplex-noise.j
 
 /**
  * Generate a noisy 2D map with two noise sources per pixel.
- * @param {Number} nx - Number of x pixels
- * @param {Number} ny - Number of y pixels
+ * @param {number} nx - Number of x pixels
+ * @param {number} ny - Number of y pixels
  */
 export default function makeTractNoise(nx, ny) {
     // Simplex Noise Parameters
@@ -27,11 +27,11 @@ export default function makeTractNoise(nx, ny) {
 
 /**
  * Generate a noisy 2D map with two noise sources per pixel.
- * @param {Number} nx - Number of x pixels
- * @param {Number} ny - Number of y pixels
- * @param {Number} noiseWidth -  A characteristic size of blobs, in pixels
- * @param {Number} noiseHeight - A characteristic size of blobs, in pixels
- * @returns {Number[][][]} - Noise in pixel displacement, indexed by row, col, dimension
+ * @param {number} nx - Number of x pixels
+ * @param {number} ny - Number of y pixels
+ * @param {number} noiseWidth -  A characteristic size of blobs, in pixels
+ * @param {number} noiseHeight - A characteristic size of blobs, in pixels
+ * @returns {number[][][]} - Noise in pixel displacement, indexed by row, col, dimension
  */
 export function simplexNoise(nx, ny, noiseWidth, noiseHeight, xAmp, yAmp) {
     const simplexX = new SimplexNoise('s')

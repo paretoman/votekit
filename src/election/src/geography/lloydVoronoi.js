@@ -7,10 +7,10 @@ import { Delaunay } from '../lib/snowpack/build/snowpack/pkg/d3-delaunay.js'
 /**
  * Calculate a voronoi diagram with some degree of equal capacity between voronoi cells.
  * Uses Lloyd's method.
- * @param {Number} w - number of discrete points wide of space to divide
- * @param {Number} h - number of points high
- * @param {Number} n - number of voronoi cells
- * @param {Number} tolFraction - fractional tolerance for relaxation. Maybe .01 is good.
+ * @param {number} w - number of discrete points wide of space to divide
+ * @param {number} h - number of points high
+ * @param {number} n - number of voronoi cells
+ * @param {number} tolFraction - fractional tolerance for relaxation. Maybe .01 is good.
  * @returns Centroids (list of points) and voronoi d3 object
  */
 export default function lloydVoronoi(w, h, n, tolFraction) {

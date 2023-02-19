@@ -1,8 +1,8 @@
 /** @module */
 /**
  * Beware, points are references to old points, so make sure to make a copy afterward.
- * @param {Number[][]} points
- * @param {Number[]} plane
+ * @param {number[][]} points
+ * @param {number[]} plane
  * @returns {{positive:Number[][], negative:Number[][]}} - Object containing properties
  * positive and negative, each being a set of points
  */

@@ -14,9 +14,9 @@ import * as typesGeoms from './typesGeoms.js'
  * @typedef {Object} votesForGeomGridRanking
  * @property {typesGrid.grid} grid - data for points on a grid
  * @property {typesVote.rankingVote[]} voteSet - a vote for each grid point
- * @property {Number[]} voteCounts
- * @property {Number} totalVotes
- * @property {Number[]} bordaFractionAverageByCan
+ * @property {number[]} voteCounts
+ * @property {number} totalVotes
+ * @property {number[]} bordaFractionAverageByCan
  * @property {typesVoteArrays.rankings} rankings
  * @property {typesVoteArrays.cansByRankList} cansByRankList - cansByRank for each grid point
  * @memberof typesVotesForGeomGrid
@@ -25,25 +25,25 @@ import * as typesGeoms from './typesGeoms.js'
  * @typedef {Object} votesForGeomGridPairwise
  * @property {typesGrid.grid} grid - data for points on a grid
  * @property {typesVote.rankingVote[]} voteSet - a vote for each grid point
- * @property {Number} totalVotes
- * @property {Number[]} bordaFractionAverageByCan
- * @property {Number[][]} winsPairwise -  The number of wins for the first of a pair of candidates.
+ * @property {number} totalVotes
+ * @property {number[]} bordaFractionAverageByCan
+ * @property {number[][]} winsPairwise -  The number of wins for the first of a pair of candidates.
  * @memberof typesVotesForGeomGrid
  */
 /**
  * @typedef {Object} votesForGeomGridPlurality
  * @property {typesGrid.grid} grid - data for points on a grid
  * @property {typesVote.pluralityVote[]} voteSet - a vote for each grid point
- * @property {Number[]} countByCan
- * @property {Number} totalVotes
+ * @property {number[]} countByCan
+ * @property {number} totalVotes
  * @memberof typesVotesForGeomGrid
  */
 /**
  * @typedef {Object} votesForGeomGridScore
  * @property {typesGrid.grid} grid - data for points on a grid
  * @property {typesVote.scoreVote[]} voteSet - a vote for each grid point
- * @property {Number[]} scoreSumByCan
- * @property {Number} totalVotes
+ * @property {number[]} scoreSumByCan
+ * @property {number} totalVotes
  * @property {typesGeoms.voterGeom} voterGeom
  * @memberof typesVotesForGeomGrid
  */

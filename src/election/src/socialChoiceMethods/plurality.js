@@ -7,7 +7,7 @@ import { maxIndex } from '../election/mathHelpers.js'
  * @param {Object} kwargs
  * @param {Object} kwargs.votes
  * @param {Object} kwargs.votes.candidateTallies - vote tallies indexed by candidate
- * @param {Number[]} votes.candidateTallies.voteFractionsByCan - The fraction of plurality votes for each candidate.
+ * @param {number[]} votes.candidateTallies.voteFractionsByCan - The fraction of plurality votes for each candidate.
  * who chose a candidate, indexed by candidate.
  * @returns {Object} socialChoiceResults = {iWinner} Index of winner. Indexing according to votes[].
  */

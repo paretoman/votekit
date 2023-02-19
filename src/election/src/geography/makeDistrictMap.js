@@ -8,7 +8,7 @@ import lloydVoronoi from './lloydVoronoi.js'
  * Each axis is from 0 to 1.
  * The total area is 1.
  * Define district lines and count voters.
- * @param {Number} nd - number of districts.
+ * @param {number} nd - number of districts.
  */
 export default function makeDistrictMap(nd) {
     const [centroids, voronoi, polygons] = lloydVoronoi(1, 1, nd, 0.01)

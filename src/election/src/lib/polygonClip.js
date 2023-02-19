@@ -2,9 +2,9 @@
  * Clips a polygon with another polygon to return a polygon.
  * Polygons must be counter-clockwise.
  * https://observablehq.com/@d3/polygonclip@1237
- * @param {Number[][]} clip - polygon
- * @param {Number[][]} subject - polygon, gets mutated
- * @returns {Number[][]} - polygon
+ * @param {number[][]} clip - polygon
+ * @param {number[][]} subject - polygon, gets mutated
+ * @returns {number[][]} - polygon
  */
 export default function polygonClip(clip, subject0) {
     const closed = polygonClosed(subject0)
