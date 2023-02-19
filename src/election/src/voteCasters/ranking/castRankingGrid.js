@@ -25,6 +25,9 @@ export default function castRankingGrid(voterGeom, geometry, castOptions) {
     const grid = makeGrid(voterGeom, castOptions)
 
     const nk = canGeoms.length
+    const canPoints = (dimensions === 1)
+        ? canGeoms.map((c) => c.x)
+        : canGeoms.map((c) => [c.x, c.y])
     const bordaScoreSumByCan = Array(nk).fill(0)
     const rankings = new Array(nk)
     const cansByRankList = new Array(nk)
@@ -37,7 +40,7 @@ export default function castRankingGrid(voterGeom, geometry, castOptions) {
         const voteCount = voteCounts[i]
 
         const voterPoint = grid.voterPoints[i]
-        const vote = castRankingTestVote({ canGeoms, voterPoint, dimensions })
+        const vote = castRankingTestVote({ canPoints, voterPoint, dimensions })
         voteSet[i] = vote
 
         // todo: possibly speed things up by combining votes with the same ranking.

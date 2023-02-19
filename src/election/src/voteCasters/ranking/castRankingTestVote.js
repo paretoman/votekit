@@ -6,10 +6,10 @@ import * as typesVote from '../types/typesVote.js'
  * Vote for the closest candidate.
  * @returns {typesVote.rankingVote}
  */
-export default function castRankingTestVote({ canGeoms, voterPoint, dimensions }) {
+export default function castRankingTestVote({ canPoints, voterPoint, dimensions }) {
     const df = (dimensions === 1) ? df1 : df2
-    const dist2 = canGeoms.map((c) => df(c, voterPoint))
-    const n = canGeoms.length
+    const dist2 = canPoints.map((c) => df(c, voterPoint))
+    const n = canPoints.length
     const indexInOrder = range(n).sort((a, b) => dist2[a] - dist2[b])
     // Note that ties are not handled.
 
@@ -36,8 +36,8 @@ export default function castRankingTestVote({ canGeoms, voterPoint, dimensions }
     }
 }
 function df1(a, b) {
-    return (a.x - b.x) ** 2
+    return (a - b) ** 2
 }
 function df2(a, b) {
-    return (a.x - b.x) ** 2 + (a.y - b.y) ** 2
+    return (a[0] - b[0]) ** 2 + (a[1] - b[1]) ** 2
 }

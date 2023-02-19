@@ -30,7 +30,7 @@ function findGridX(voterGeom) {
     for (let i = 0; i < iWidth; i++) {
         const x = i + 0.5 - iWidth * 0.5 + voterGeom.x
         gridX[i] = x
-        voterPoints[i] = { x }
+        voterPoints[i] = x
     }
     return { gridX, voterPoints, gridPointLength }
 }

@@ -16,6 +16,9 @@ export default function castPairwiseGrid(voterGeom, geometry, castOptions) {
     const grid = makeGrid(voterGeom, castOptions)
 
     const nk = canGeoms.length
+    const canPoints = (dimensions === 1)
+        ? canGeoms.map((c) => c.x)
+        : canGeoms.map((c) => [c.x, c.y])
     const bordaScoreSumByCan = Array(nk).fill(0)
     const netWins = new Array(nk)
     range(nk).forEach((_, i) => { netWins[i] = Array(nk).fill(0) })
@@ -27,7 +30,7 @@ export default function castPairwiseGrid(voterGeom, geometry, castOptions) {
     for (let i = 0; i < gridLength; i++) {
         const voteCount = grid.voteCounts[i]
         const voterPoint = grid.voterPoints[i]
-        const vote = castRankingTestVote({ canGeoms, voterPoint, dimensions })
+        const vote = castRankingTestVote({ canPoints, voterPoint, dimensions })
         voteSet[i] = vote
 
         const { netWinsPairwise } = vote

@@ -38,7 +38,7 @@ export default function makeGrid2D(voterGeom, castOptions) {
             const gy = gridYMargin[iy]
             gridX[i] = gx
             gridY[i] = gy
-            voterPoints[i] = { x: gx, y: gy }
+            voterPoints[i] = [gx, gy]
             i += 1
         }
     }

@@ -14,6 +14,9 @@ export default function castScoreGrid(voterGeom, geometry, castOptions) {
     const grid = makeGrid(voterGeom, castOptions)
 
     const n = canGeoms.length
+    const canPoints = (dimensions === 1)
+        ? canGeoms.map((c) => c.x)
+        : canGeoms.map((c) => [c.x, c.y])
     const scoreSumByCan = Array(n).fill(0)
     let totalVotes = 0
 
@@ -23,7 +26,7 @@ export default function castScoreGrid(voterGeom, geometry, castOptions) {
     for (let i = 0; i < gridLength; i++) {
         const voteCount = grid.voteCounts[i]
         const voterPoint = grid.voterPoints[i]
-        const vote = castScoreTestVote({ canGeoms, voterPoint, dimensions })
+        const vote = castScoreTestVote({ canPoints, voterPoint, dimensions })
         voteSet[i] = vote
         const { scoreVote } = vote
         totalVotes += voteCount

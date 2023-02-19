@@ -5,13 +5,13 @@ import { minMax } from '../../election/mathHelpers.js'
 /**
  * Vote for the closest candidate.
  */
-export default function castScoreTestVote({ canGeoms, voterPoint, dimensions }) {
-    const lc = canGeoms.length
+export default function castScoreTestVote({ canPoints, voterPoint, dimensions }) {
+    const lc = canPoints.length
     const scoreVote = (new Array(lc)).fill(0)
     const df = (dimensions === 1) ? df1 : df2
 
     // in the current implementation, all candidates are frontrunners
-    const dist = canGeoms.map((c) => df(c, voterPoint))
+    const dist = canPoints.map((c) => df(c, voterPoint))
     const [min, max] = minMax(dist)
     const maxscore = 1
     const minscore = 0
@@ -33,8 +33,8 @@ export default function castScoreTestVote({ canGeoms, voterPoint, dimensions }) 
     return vote
 }
 function df1(a, b) {
-    return Math.abs(a.x - b.x)
+    return (a - b) ** 2
 }
 function df2(a, b) {
-    return Math.sqrt((a.x - b.x) ** 2 + (a.y - b.y) ** 2)
+    return (a[0] - b[0]) ** 2 + (a[1] - b[1]) ** 2
 }

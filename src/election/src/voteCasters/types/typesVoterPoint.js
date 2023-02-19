@@ -9,14 +9,11 @@
  * @typedef {voterPoint1D | voterPoint2D} voterPoint
  */
 /**
- * @typedef {object} voterPoint1D - the point where a single voter sits in 1D
- * @property {number} x - x coordinate in policy space
+ * @typedef {number} voterPoint1D - the point where a single voter sits in 1D, x coordinate in policy space.
  * @memberof typesVoterPoint
  */
 /**
- * @typedef {object} voterPoint2D - the point where a single voter sits in 2D
- * @property {number} x - x coordinate in policy space
- * @property {number} y - y coordinate in policy space
+ * @typedef {number[]} voterPoint2D - the point where a single voter sits in 2D, [x,y] coordinates in policy space.
  * @memberof typesVoterPoint
  */
 
