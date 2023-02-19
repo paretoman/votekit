@@ -2,26 +2,14 @@
 
 import { copyArrayShallow } from '../election/jsHelpers.js'
 import { maxIndex, minIndex, range } from '../election/mathHelpers.js'
+import * as typesVotes from '../voteCasters/types/typesVotes.js'
+import * as typesSocialChoice from './typesSocialChoice.js'
 
 /**
  * Single Transferable Vote
- * @param {object} votes
- * @param {object} votes.candidateTallies - vote tallies indexed by candidate
- * @param {number[]} votes.candidateTallies.firstPreferenceFractions - A list of fractions of voters
- * who ranked a candidate first, indexed by candidate.
- * @param {object} votes.preferenceLists - Lists of preferences.
- * @param {object} votes.preferenceTallies - How many votes have a listed preference.
- * @param {number[]} votes.preferenceTallies.voteFractions - A list of fractions of voters
- * who share the same ranking.
- * @param {number[][][]} votes.preferenceLists.cansByRankList - A list of lists of lists.
- * The first index is a group of voters who share the same ranking.
- * The second index is the rank number.
- * The third index is for a list of candidates at that rank.
- * @param {object} socialChoiceOptions
- * @param {number} socialChoiceOptions.seats - The number of seats to fill.
- * @returns {{allocation:number[]}} - A variable "socialChoiceResults",
- * with the property "allocation".
- * Allocation is an array of integers that say whether a candidate is elected (1) or not (0).
+ * @param {typesVotes.votes} votes - The object for vote data.
+ * @param {typesSocialChoice.socialChoiceOptions} socialChoiceOptions - options to specify a social choice function.
+ * @returns {typesSocialChoice.socialChoiceResults} - the results returned from a social choice function.
  */
 export default function stv(votes, socialChoiceOptions) {
     const { firstPreferenceFractions } = votes.candidateTallies

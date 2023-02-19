@@ -1,7 +1,8 @@
-/* eslint-disable max-len */
 /** @module */
 
 import { range } from '../election/mathHelpers.js'
+import * as typesVotes from '../voteCasters/types/typesVotes.js'
+import * as typesSocialChoice from './typesSocialChoice.js'
 
 /**
  * This method has rounds.
@@ -15,15 +16,9 @@ import { range } from '../election/mathHelpers.js'
  * Use this new groupCost like the old groupCost and do the steps above.
  * Do this 10 times. That should be enough, maybe.
  * If there is any deficit remaining, then subtract it from everybody.
- * @param {object} votes - The object for vote data.
- * @param {object} votes.preferenceLists - Lists of preferences.
- * @param {object} votes.preferenceTallies - How many votes have a listed preference.
- * @param {object[]} votes.preferenceLists.scoreVotes - A list of votes
- * @param {number[]} votes.preferenceLists.scoreVotes[] - A score for each candidate. From 0 to 1.
- * @param {object} votes.preferenceTallies.voteFractions - The fraction of the population that voted that way.
- * @param {object} socialChoiceOptions.seats - Number of candidates to elect.
- * @returns {{allocation:number[]}} - socialChoiceResults, with property allocation.
- * Allocation is an array of integers that say whether a candidate is elected (1) or not (0).
+ * @param {typesVotes.votes} votes - The object for vote data.
+ * @param {typesSocialChoice.socialChoiceOptions} socialChoiceOptions - options to specify a social choice function.
+ * @returns {typesSocialChoice.socialChoiceResults} - the results returned from a social choice function.
  */
 export default function methodOfEqualShares(votes, socialChoiceOptions) {
     const { voteFractions } = votes.preferenceTallies

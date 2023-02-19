@@ -1,15 +1,13 @@
 /** @module */
 
 import { maxIndex } from '../election/mathHelpers.js'
+import * as typesVotes from '../voteCasters/types/typesVotes.js'
+import * as typesSocialChoice from './typesSocialChoice.js'
 
 /**
  * the candidate with the highest tally wins
- * @param {object} kwargs
- * @param {object} kwargs.votes
- * @param {object} kwargs.votes.candidateTallies - vote tallies indexed by candidate
- * @param {number[]} votes.candidateTallies.voteFractionsByCan - The fraction of plurality votes for each candidate.
- * who chose a candidate, indexed by candidate.
- * @returns {object} socialChoiceResults = {iWinner} Index of winner. Indexing according to votes[].
+ * @param {typesVotes.votes} votes - The object for vote data.
+ * @returns {typesSocialChoice.socialChoiceResults} - the results returned from a social choice function.
  */
 export default function plurality(votes) {
     const { voteFractionsByCan } = votes.candidateTallies

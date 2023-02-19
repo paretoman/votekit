@@ -1,18 +1,14 @@
 /** @module */
 
 import divisorGeneral from './divisorGeneral.js'
+import * as typesVotes from '../voteCasters/types/typesVotes.js'
+import * as typesSocialChoice from './typesSocialChoice.js'
 
 /**
  * Run the Sainte-Lague / Webster method of apportionment and return an allocation of seats.
- * @param {object} votes
- * @param {object} votes.candidateTallies - vote tallies indexed by candidate
- * @param {number[]} votes.candidateTallies.voteFractionsByCan - The fraction of plurality votes for each candidate.
- * @param {object} socialChoiceOptions
- * @param {number} socialChoiceOptions.seats - The number of seats to fill.
- * @param {number} socialChoiceOptions.threshold - The minimum fraction of voters
- * that a party needs to be eligible for a seat.
- * @returns {{allocation:number[]}} - socialChoiceResults, with property allocation.
- * Allocation is an array of integers that say how many representatives each party gets.
+ * @param {typesVotes.votes} votes - The object for vote data.
+ * @param {typesSocialChoice.socialChoiceOptions} socialChoiceOptions - options to specify a social choice function.
+ * @returns {typesSocialChoice.socialChoiceResults} - the results returned from a social choice function.
  */
 
 export default function sainteLague(votes, socialChoiceOptions) {

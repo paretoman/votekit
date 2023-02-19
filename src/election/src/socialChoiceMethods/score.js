@@ -1,12 +1,11 @@
 /** @module */
+import * as typesVotes from '../voteCasters/types/typesVotes.js'
+import * as typesSocialChoice from './typesSocialChoice.js'
 
 /**
  * the candidate with the highest tally wins
- * @param {object} votes
- * @param {object} votes.candidateTallies - vote tallies indexed by candidate
- * @param {number[]} votes.candidateTallies.scoreFractionAverageByCan - average fractional score for each candidate.
- * @returns {object} results
- * @returns {number} iWinner - Index of winner. Indexing according to votes[].
+ * @param {typesVotes.votes} votes - The object for vote data.
+ * @returns {typesSocialChoice.socialChoiceResults} - the results returned from a social choice function.
  */
 export default function score(votes) {
     const { scoreFractionAverageByCan } = votes.candidateTallies

@@ -1,14 +1,13 @@
 /** @module */
 
 import { range } from '../election/mathHelpers.js'
+import * as typesVotes from '../voteCasters/types/typesVotes.js'
+import * as typesSocialChoice from './typesSocialChoice.js'
 
 /**
  * Disregard the weakest pairwise defeat until one candidate is unbeaten.
- * @param {object} votes
- * @param {object} votes.pairwiseTallies - pairwise tallies
- * @param {number[][]} votes.pairwiseTallies.winFractionPairwise - The fraction of wins for the first of a pair of candidates.
- * who preferred candidate i over k, indexed by [i][k].
- * @returns {{iWinner:Number}} iWinner - Index of winner.
+ * @param {typesVotes.votes} votes - The object for vote data.
+ * @returns {typesSocialChoice.socialChoiceResults} - the results returned from a social choice function.
  */
 export default function minimax(votes) {
     const { winFractionPairwise } = votes.pairwiseTallies

@@ -1,18 +1,14 @@
 /** @module */
 
 import { range } from '../election/mathHelpers.js'
+import * as typesVotes from '../voteCasters/types/typesVotes.js'
+import * as typesSocialChoice from './typesSocialChoice.js'
 
 /**
  * Single Transferable Vote
- * @param {object} votes
- * @param {object} votes.candidateTallies - vote tallies indexed by candidate
- * @param {number[]} votes.candidateTallies.voteFractionsByCan - The fraction of plurality votes for each candidate.
- * who picked a candidate, indexed by candidate.
- * @param {object} socialChoiceOptions
- * @param {number} socialChoiceOptions.seats - The number of seats to fill.
- * @returns {{allocation:number[]}} - A variable "socialChoiceResults",
- * with the property "allocation".
- * Allocation is an array of integers that say whether a candidate is elected (1) or not (0).
+ * @param {typesVotes.votes} votes - The object for vote data.
+ * @param {typesSocialChoice.socialChoiceOptions} socialChoiceOptions - options to specify a social choice function.
+ * @returns {typesSocialChoice.socialChoiceResults} - the results returned from a social choice function.
  */
 export default function sntv(votes, socialChoiceOptions) {
     const { voteFractionsByCan } = votes.candidateTallies

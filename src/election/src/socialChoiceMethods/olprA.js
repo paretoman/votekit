@@ -3,22 +3,17 @@
 import { range } from '../election/mathHelpers.js'
 import sainteLague from './sainteLague.js'
 import sntv from './sntv.js'
+import * as typesVotes from '../voteCasters/types/typesVotes.js'
+import * as typesSocialChoice from './typesSocialChoice.js'
 
 /**
  * Run an Open List Proportional Representation method. Call this variant by the name "A".
  * Return a list of winning candidates and a list of allocated seats to parties.
  * A voter votes for a candidate. Party lists help candidates pool their votes.
  * Party lists are allocated seats. The most popular candidates in a party are elected.
- * @param {object} votes
- * @param {object} votes.candidateTallies - vote tallies indexed by candidate
- * @param {number[]} votes.candidateTallies.voteFractionsByCan - The fraction of plurality votes for each candidate.
- * @param {object} socialChoiceOptions
- * @param {number} socialChoiceOptions.seats - The number of seats to fill.
- * @param {number} socialChoiceOptions.threshold - The minimum fraction of voters
- * that a party needs to be eligible for a seat.
- * @returns {{allocation:number[]}} - A variable "socialChoiceResults",
- * with the property "allocation".
- * Allocation is an array of integers that say whether a candidate is elected (1) or not (0).
+ * @param {typesVotes.votes} votes - The object for vote data.
+ * @param {typesSocialChoice.socialChoiceOptions} socialChoiceOptions - options to specify a social choice function.
+ * @returns {typesSocialChoice.socialChoiceResults} - the results returned from a social choice function.
  */
 
 export default function olprA(votes, socialChoiceOptions) {

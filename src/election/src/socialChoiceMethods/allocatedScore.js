@@ -12,9 +12,8 @@ import * as typesSocialChoice from './typesSocialChoice.js'
  * Then the scores for the candidate are sorted.
  * The voters' weight is spent, starting from the top scores.
  * Weight is spent until the weight of voters included is equal to 1/seats, which is the quota.
- * @param {object} args
- * @param {typesVotes.votes} args.votes - The object for vote data.
- * @param {typesSocialChoice.socialChoiceOptions} args.socialChoiceOptions - options to specify a social choice function.
+ * @param {typesVotes.votes} votes - The object for vote data.
+ * @param {typesSocialChoice.socialChoiceOptions} socialChoiceOptions - options to specify a social choice function.
  * @returns {typesSocialChoice.socialChoiceResults} - the results returned from a social choice function.
  */
 export default function allocatedScore(votes, socialChoiceOptions) {
