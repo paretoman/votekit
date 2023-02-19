@@ -5,7 +5,7 @@ import * as typesMath from './typesMath.js'
  */
 
 /**
- * @typedef {Object} canBorders
+ * @typedef {object} canBorders
  * @property {pairwiseIntervals1D} [pairwiseIntervals1D]
  * @property {voronoiIntervals1D} [voronoiIntervals1D]
  * @property {voronoiLines2D} [voronoiLines2D]
@@ -14,13 +14,13 @@ import * as typesMath from './typesMath.js'
  */
 
 /**
- * @typedef {Object} pairwiseIntervals1D
+ * @typedef {object} pairwiseIntervals1D
  * @property {number[][]} midpoints - midpoint for every pair of candidates
  * @property {number[][]} iLower - true if first candidate of pair is lower in x coordinate than second.
  * @memberof typesCanBorders
  */
 /**
- * @typedef {Object} voronoiIntervals1D
+ * @typedef {object} voronoiIntervals1D
  * @memberof typesCanBorders
  */
 /**
@@ -28,7 +28,7 @@ import * as typesMath from './typesMath.js'
  * @memberof typesCanBorders
  */
 /**
- * @typedef {Object} rankingIntervals1D
+ * @typedef {object} rankingIntervals1D
  * @memberof typesCanBorders
  */
 

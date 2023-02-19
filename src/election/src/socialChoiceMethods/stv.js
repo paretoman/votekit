@@ -5,19 +5,19 @@ import { maxIndex, minIndex, range } from '../election/mathHelpers.js'
 
 /**
  * Single Transferable Vote
- * @param {Object} votes
- * @param {Object} votes.candidateTallies - vote tallies indexed by candidate
+ * @param {object} votes
+ * @param {object} votes.candidateTallies - vote tallies indexed by candidate
  * @param {number[]} votes.candidateTallies.firstPreferenceFractions - A list of fractions of voters
  * who ranked a candidate first, indexed by candidate.
- * @param {Object} votes.preferenceLists - Lists of preferences.
- * @param {Object} votes.preferenceTallies - How many votes have a listed preference.
+ * @param {object} votes.preferenceLists - Lists of preferences.
+ * @param {object} votes.preferenceTallies - How many votes have a listed preference.
  * @param {number[]} votes.preferenceTallies.voteFractions - A list of fractions of voters
  * who share the same ranking.
  * @param {number[][][]} votes.preferenceLists.cansByRankList - A list of lists of lists.
  * The first index is a group of voters who share the same ranking.
  * The second index is the rank number.
  * The third index is for a list of candidates at that rank.
- * @param {Object} socialChoiceOptions
+ * @param {object} socialChoiceOptions
  * @param {number} socialChoiceOptions.seats - The number of seats to fill.
  * @returns {{allocation:number[]}} - A variable "socialChoiceResults",
  * with the property "allocation".
@@ -157,7 +157,7 @@ export default function stv(votes, socialChoiceOptions) {
     return socialChoiceResults
 }
 
-/** @constant {Object} - an object: this function and descriptions of its name, input, and output */
+/** @constant {object} - an object: this function and descriptions of its name, input, and output */
 export const stvMetadata = {
     name: 'Single Transferable Vote',
     shortName: 'STV',

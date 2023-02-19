@@ -2,8 +2,8 @@
 
 /**
  * Use this to sample a random candidate from a distribution.
- * @param {Object} canDnGeom
- * @returns {Object} x coordinate
+ * @param {object} canDnGeom
+ * @returns {object} x coordinate
  */
 export default function sampleCanDnGeom1D(canDnGeom, rng) {
     const { x, w, densityProfile } = canDnGeom

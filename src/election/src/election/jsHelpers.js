@@ -5,8 +5,8 @@
 
 /**
  * Try to deepcopy an object.
- * @param {Object} a - an object to copy.
- * @returns {Object} A copy of a.
+ * @param {object} a - an object to copy.
+ * @returns {object} A copy of a.
  */
 export function jcopy(a) {
     return JSON.parse(JSON.stringify(a))

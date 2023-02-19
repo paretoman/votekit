@@ -11,7 +11,7 @@ import * as typesGeoms from './typesGeoms.js'
  * @memberof typesVotesForGeomGrid
  */
 /**
- * @typedef {Object} votesForGeomGridRanking
+ * @typedef {object} votesForGeomGridRanking
  * @property {typesGrid.grid} grid - data for points on a grid
  * @property {typesVote.rankingVote[]} voteSet - a vote for each grid point
  * @property {number[]} voteCounts
@@ -22,7 +22,7 @@ import * as typesGeoms from './typesGeoms.js'
  * @memberof typesVotesForGeomGrid
  */
 /**
- * @typedef {Object} votesForGeomGridPairwise
+ * @typedef {object} votesForGeomGridPairwise
  * @property {typesGrid.grid} grid - data for points on a grid
  * @property {typesVote.rankingVote[]} voteSet - a vote for each grid point
  * @property {number} totalVotes
@@ -31,7 +31,7 @@ import * as typesGeoms from './typesGeoms.js'
  * @memberof typesVotesForGeomGrid
  */
 /**
- * @typedef {Object} votesForGeomGridPlurality
+ * @typedef {object} votesForGeomGridPlurality
  * @property {typesGrid.grid} grid - data for points on a grid
  * @property {typesVote.pluralityVote[]} voteSet - a vote for each grid point
  * @property {number[]} countByCan
@@ -39,7 +39,7 @@ import * as typesGeoms from './typesGeoms.js'
  * @memberof typesVotesForGeomGrid
  */
 /**
- * @typedef {Object} votesForGeomGridScore
+ * @typedef {object} votesForGeomGridScore
  * @property {typesGrid.grid} grid - data for points on a grid
  * @property {typesVote.scoreVote[]} voteSet - a vote for each grid point
  * @property {number[]} scoreSumByCan

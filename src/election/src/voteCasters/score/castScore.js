@@ -7,14 +7,14 @@ import castScoreGrid from './castScoreGrid.js'
 
 /**
  * Voters cast votes for candidates.
- * @param {Object} geometry - geometry for casting votes
- * @param {Object[]} geometry.canGeoms - For 2D, an array of objects: {x,y}.
+ * @param {object} geometry - geometry for casting votes
+ * @param {object[]} geometry.canGeoms - For 2D, an array of objects: {x,y}.
  * For 1D, an array of objects: {x}.
- * @param {Object[]} geometry.voterGeoms - For 2D, an array of objects: {x,y,w}.
+ * @param {object[]} geometry.voterGeoms - For 2D, an array of objects: {x,y,w}.
  * For 1D, an array of objects: {x,w,densityProfile}.
- * @param {Object} geometry.parties
- * @param {Object} castOptions - options for how to cast votes.
- * @returns {Object} votes
+ * @param {object} geometry.parties
+ * @param {object} castOptions - options for how to cast votes.
+ * @returns {object} votes
  */
 export default function castScore(geometry, castOptions) {
     const { canGeoms, voterGeoms, parties } = geometry

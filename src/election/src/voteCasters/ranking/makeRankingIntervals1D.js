@@ -5,7 +5,7 @@ import { range } from '../../election/mathHelpers.js'
 
 /**
  * Find the intervals over which voters share a ranking.
- * @param {Object[]} canGeoms
+ * @param {object[]} canGeoms
  */
 export default function makeRankingIntervals1D(canGeoms) {
     /*

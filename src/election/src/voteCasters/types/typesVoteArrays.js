@@ -2,11 +2,11 @@
  * @namespace typesVoteArrays
  */
 /**
- * @typedef {Object[][]} scoreVotes - Each preference has a score for each candidate.
+ * @typedef {object[][]} scoreVotes - Each preference has a score for each candidate.
  * @memberof typesVoteArrays
  */
 /**
- * @typedef {Object[][]} rankings - Each preference has a rank for each candidate.
+ * @typedef {object[][]} rankings - Each preference has a rank for each candidate.
  * @memberof typesVoteArrays
  */
 /**

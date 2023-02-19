@@ -8,7 +8,7 @@ import * as typesVoterPoint from './typesVoterPoint.js'
  * @typedef {grid1D | grid2D} grid - data for points on a grid
  */
 /**
- * @typedef {Object} grid1D - data for points on a 1D grid
+ * @typedef {object} grid1D - data for points on a 1D grid
  * @property {number[]} x - x coordinates for grid points
  * @property {number[]} density - density for grid points
  * @property {typesVoterPoint.voterPoint1D[]} voterPoints - grid points in voterPoint format
@@ -17,7 +17,7 @@ import * as typesVoterPoint from './typesVoterPoint.js'
  * @memberof typesGrid
  */
 /**
-* @typedef {Object} gridX
+* @typedef {object} gridX
 * @property {number[]} gridX - x coordinates for grid points
 * @property {typesVoterPoint.voterPoint1D[]} voterPoints - grid points in voterPoint format
 * @property {number} gridPointLength - size of grid point's region in policy space. density * length = count.
@@ -25,7 +25,7 @@ import * as typesVoterPoint from './typesVoterPoint.js'
  */
 
 /**
- * @typedef {Object} grid2D - data for points on a 2D grid
+ * @typedef {object} grid2D - data for points on a 2D grid
  * @property {number[]} x - x coordinates for grid points
  * @property {number[]} y - y coordinates for grid points
  * @property {number[]} density - density for grid points

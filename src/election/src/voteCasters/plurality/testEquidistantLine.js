@@ -4,7 +4,7 @@ import equidistantLine from './equidistantLine.js'
  * Test for the function equidistantLine, which finds a line equidistant from two points.
  * @param {Function} eq - assertion function for equality
  * @param {Function} assert - assertion function for true
- * @returns {Object[]} an array of test objects, each with a label and a test function.
+ * @returns {object[]} an array of test objects, each with a label and a test function.
  */
 export default function testEquidistantLine(eq, assert) {
     // Takes an assertion function.

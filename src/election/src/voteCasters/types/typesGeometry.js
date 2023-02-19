@@ -7,7 +7,7 @@ import * as typesVoterPoint from './typesVoterPoint.js'
  * @namespace typesGeometry
  */
 /**
- * @typedef {Object} geometry - geometry for casting votes
+ * @typedef {object} geometry - geometry for casting votes
  * @property {geoms.canGeoms} canGeoms
  * @property {geoms.voterGeoms} voterGeoms
  * @property {number} dimensions
@@ -16,14 +16,14 @@ import * as typesVoterPoint from './typesVoterPoint.js'
  */
 
 /**
- * @typedef {Object} parties - describes parties each candidate belongs to.
+ * @typedef {object} parties - describes parties each candidate belongs to.
  * @property {number[][]} partiesByCan - each candidate has a list of parties.
  * @property {number} numParties - total number of parties.
  * @memberof typesGeometry
  */
 
 /**
- * @typedef {Object} testGeometry -geometry for casting one vote
+ * @typedef {object} testGeometry -geometry for casting one vote
  * @property {geoms.canGeoms} canGeoms
  * @property {typesVoterPoint.voterPoints} voterPoints
  * @property {number} dimensions

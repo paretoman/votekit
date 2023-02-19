@@ -2,8 +2,8 @@
 
 /**
  * Use this to sample a random candidate from a distribution.
- * @param {Object} canDnGeom
- * @returns {Object} x,y coordinates
+ * @param {object} canDnGeom
+ * @returns {object} x,y coordinates
  */
 export default function sampleCanDnGeom2D(canDnGeom, rng) {
     const { x, y, w, densityProfile } = canDnGeom
@@ -37,7 +37,7 @@ const invSqrt2 = 1 / Math.sqrt(2)
  * @param {number} X center.x
  * @param {number} Y center.y
  * @param {number} R radius = stdev * sqrt(2)
- * @returns {Object} point
+ * @returns {object} point
  */
 function randomInsideGaussian(X, Y, R, rng) {
     const [a, b] = randomStandardNormal(rng)

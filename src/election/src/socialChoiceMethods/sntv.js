@@ -4,11 +4,11 @@ import { range } from '../election/mathHelpers.js'
 
 /**
  * Single Transferable Vote
- * @param {Object} votes
- * @param {Object} votes.candidateTallies - vote tallies indexed by candidate
+ * @param {object} votes
+ * @param {object} votes.candidateTallies - vote tallies indexed by candidate
  * @param {number[]} votes.candidateTallies.voteFractionsByCan - The fraction of plurality votes for each candidate.
  * who picked a candidate, indexed by candidate.
- * @param {Object} socialChoiceOptions
+ * @param {object} socialChoiceOptions
  * @param {number} socialChoiceOptions.seats - The number of seats to fill.
  * @returns {{allocation:number[]}} - A variable "socialChoiceResults",
  * with the property "allocation".

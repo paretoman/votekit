@@ -4,8 +4,8 @@ import { range } from '../election/mathHelpers.js'
 
 /**
  * Disregard the weakest pairwise defeat until one candidate is unbeaten.
- * @param {Object} votes
- * @param {Object} votes.pairwiseTallies - pairwise tallies
+ * @param {object} votes
+ * @param {object} votes.pairwiseTallies - pairwise tallies
  * @param {number[][]} votes.pairwiseTallies.winFractionPairwise - The fraction of wins for the first of a pair of candidates.
  * who preferred candidate i over k, indexed by [i][k].
  * @returns {{iWinner:Number}} iWinner - Index of winner.
@@ -56,7 +56,7 @@ export default function minimax(votes) {
     return socialChoiceResults
 }
 
-/** @constant {Object} - an object: this function and descriptions of its name, input, and output */
+/** @constant {object} - an object: this function and descriptions of its name, input, and output */
 export const minimaxMetadata = {
     name: 'Minimax',
     shortName: 'Minimax',

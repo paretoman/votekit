@@ -9,10 +9,10 @@ import sntv from './sntv.js'
  * Return a list of winning candidates and a list of allocated seats to parties.
  * A voter votes for a candidate. Party lists help candidates pool their votes.
  * Party lists are allocated seats. The most popular candidates in a party are elected.
- * @param {Object} votes
- * @param {Object} votes.candidateTallies - vote tallies indexed by candidate
+ * @param {object} votes
+ * @param {object} votes.candidateTallies - vote tallies indexed by candidate
  * @param {number[]} votes.candidateTallies.voteFractionsByCan - The fraction of plurality votes for each candidate.
- * @param {Object} socialChoiceOptions
+ * @param {object} socialChoiceOptions
  * @param {number} socialChoiceOptions.seats - The number of seats to fill.
  * @param {number} socialChoiceOptions.threshold - The minimum fraction of voters
  * that a party needs to be eligible for a seat.
@@ -73,7 +73,7 @@ export default function olprA(votes, socialChoiceOptions) {
     return socialChoiceResults
 }
 
-/** @constant {Object} - an object: this function and descriptions of its name, input, and output */
+/** @constant {object} - an object: this function and descriptions of its name, input, and output */
 export const olprAMetadata = {
     name: 'Open List Proportional Representation',
     shortName: 'OLPR A',

@@ -9,7 +9,7 @@ import * as typesVotesForGeomGrid from './typesVotesForGeomGrid.js'
  */
 
 /**
- * @typedef {Object} votesForGeomCells - Vote data for just one voter geometry in the form of 2D cells.
+ * @typedef {object} votesForGeomCells - Vote data for just one voter geometry in the form of 2D cells.
  * @property {number[][][]} cells - each cell is a list of points.
  * @property {typesVoteArrays.rankings} rankings - rankings for each cell
  * @property {typesVoteArrays.cansByRankList} cansByRankList - cansByRank for each cell
@@ -18,7 +18,7 @@ import * as typesVotesForGeomGrid from './typesVotesForGeomGrid.js'
  * @memberof typesVotesForGeom
  */
 /**
- * @typedef {Object} rankingPolygons2D - calculated cells of 2D policy space where voters share the same ranking.
+ * @typedef {object} rankingPolygons2D - calculated cells of 2D policy space where voters share the same ranking.
  * @property {number[][][]} cells - each cell is a list of points.
  * @property {typesVoteArrays.rankings} rankings - rankings for each cell
  * @property {typesVoteArrays.cansByRankList} cansByRankList - cansByRank for each cell
@@ -26,7 +26,7 @@ import * as typesVotesForGeomGrid from './typesVotesForGeomGrid.js'
  */
 
 /**
- * @typedef {Object} votesForGeomIntervals - Vote data for just one voter geometry in the form of 1D intervals.
+ * @typedef {object} votesForGeomIntervals - Vote data for just one voter geometry in the form of 1D intervals.
  * @property {typesVoteArrays.rankings} rankings - rankings for each interval
  * @property {typesVoteArrays.cansByRankList} cansByRankList - cansByRank for each interval
  * @property {number[]} voteCounts - number of votes for each interval
@@ -35,7 +35,7 @@ import * as typesVotesForGeomGrid from './typesVotesForGeomGrid.js'
  * @memberof typesVotesForGeom
  */
 /**
- * @typedef {Object} rankingIntervals1D - calculated intervals of 1D policy space where voters share the same ranking.
+ * @typedef {object} rankingIntervals1D - calculated intervals of 1D policy space where voters share the same ranking.
  * @property {typesVoteArrays.rankings} rankings - rankings for each interval
  * @property {typesVoteArrays.cansByRankList} cansByRankList - cansByRank for each interval
  * @property {number[]} intervalBorders - midpoints and two infinity points
@@ -43,7 +43,7 @@ import * as typesVotesForGeomGrid from './typesVotesForGeomGrid.js'
  */
 
 /**
- * @typedef {Object} votesForGeomPlurality - Vote data for just one voter geometry in the form of 1D intervals.
+ * @typedef {object} votesForGeomPlurality - Vote data for just one voter geometry in the form of 1D intervals.
  * @property {number[]} countByCan - The number of plurality votes for a candidate.
  * @property {number} totalVotes - total number of votes
  * @memberof typesVotesForGeom
