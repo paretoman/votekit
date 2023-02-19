@@ -7,8 +7,8 @@ import * as typesVote from '../types/typesVote.js'
  * @returns {typesVote.rankingVote}
  */
 export default function castRankingTestVote({ canPoints, voterPoint, dimensions }) {
-    const df = (dimensions === 1) ? df1 : df2
-    const dist2 = canPoints.map((c) => df(c, voterPoint))
+    const d2f = (dimensions === 1) ? d2f1 : d2f2
+    const dist2 = canPoints.map((c) => d2f(c, voterPoint))
     const n = canPoints.length
     const indexInOrder = range(n).sort((a, b) => dist2[a] - dist2[b])
     // Note that ties are not handled.
@@ -35,9 +35,9 @@ export default function castRankingTestVote({ canPoints, voterPoint, dimensions 
         indexInOrder, ranking, netWinsPairwise, bordaFractions, bordaScores,
     }
 }
-function df1(a, b) {
+function d2f1(a, b) {
     return (a - b) ** 2
 }
-function df2(a, b) {
+function d2f2(a, b) {
     return (a[0] - b[0]) ** 2 + (a[1] - b[1]) ** 2
 }
