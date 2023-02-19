@@ -25,13 +25,13 @@ export default function sampleElection(samplingGeometry, electionOptions, numSam
         for (let k = 0; k < numSampleCandidates; k++) {
             // sample a point from the distribution of candidates
             const iDist = randomIndexFromCDF(canDnCDF, rng)
-            const party = [partiesByCan[iDist]]
+            const party0 = partiesByCan[iDist]
             const canDnGeom = canDnGeoms[iDist]
             const canGeom = sampleCanDnGeom(canDnGeom, dimensions, rng)
 
             // make a candidate
             canGeoms.push(canGeom)
-            sParties.push(party[0])
+            sParties.push(party0)
         }
 
         const canBorders = getCanBorders(canGeoms, voterGeoms, dimensions, electionOptions)

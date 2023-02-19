@@ -17,7 +17,7 @@ import * as typesVoterPoint from './typesVoterPoint.js'
 
 /**
  * @typedef {object} parties - describes parties each candidate belongs to.
- * @property {number[][]} partiesByCan - each candidate has a list of parties.
+ * @property {number[]} partiesByCan - each candidate has party.
  * @property {number} numParties - total number of parties.
  * @memberof typesGeometry
  */
