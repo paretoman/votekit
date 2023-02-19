@@ -15,9 +15,9 @@ import divisorGeneral from './divisorGeneral.js'
  * Allocation is an array of integers that say how many representatives each party gets.
  */
 
-export default function dHondt({ votes, socialChoiceOptions, seatLimits }) {
+export default function dHondt({ votes, socialChoiceOptions }) {
     const socialChoiceResults = divisorGeneral({
-        votes, socialChoiceOptions, seatLimits, typeOfDivisor: 'dHondt',
+        votes, socialChoiceOptions, typeOfDivisor: 'dHondt',
     })
     return socialChoiceResults
 }

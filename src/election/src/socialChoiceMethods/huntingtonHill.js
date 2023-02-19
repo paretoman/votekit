@@ -15,9 +15,9 @@ import divisorGeneral from './divisorGeneral.js'
  * Allocation is an array of integers that say how many representatives each party gets.
  */
 
-export default function huntingtonHill({ votes, socialChoiceOptions, seatLimits }) {
+export default function huntingtonHill({ votes, socialChoiceOptions }) {
     const socialChoiceResults = divisorGeneral({
-        votes, socialChoiceOptions, seatLimits, typeOfDivisor: 'huntingtonHill',
+        votes, socialChoiceOptions, typeOfDivisor: 'huntingtonHill',
     })
     return socialChoiceResults
 }

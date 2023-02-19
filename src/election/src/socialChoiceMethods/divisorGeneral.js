@@ -16,10 +16,8 @@ import { range } from '../election/mathHelpers.js'
  * Allocation is an array of integers that say how many representatives each party gets.
  */
 
-export default function divisorGeneral({
-    votes, socialChoiceOptions, typeOfDivisor, seatLimits,
-}) {
-    const { seats, threshold } = socialChoiceOptions
+export default function divisorGeneral({ votes, socialChoiceOptions, typeOfDivisor }) {
+    const { seats, threshold, seatLimits } = socialChoiceOptions
     const { voteFractionsByCan } = votes.candidateTallies
 
     // find out how many parties pass the threshold

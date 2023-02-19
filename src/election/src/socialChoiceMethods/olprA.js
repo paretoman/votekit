@@ -41,10 +41,11 @@ export default function olprA({ votes, socialChoiceOptions }) {
 
     // Find out how many seats each party gets.
     // todo: change method
+    const socialChoiceOptions3 = { ...socialChoiceOptions }
+    socialChoiceOptions3.seatLimits = seatLimits
     const partyResults = sainteLague({
         votes: { candidateTallies: { voteFractionsByCan: partyVotes } },
-        socialChoiceOptions,
-        seatLimits,
+        socialChoiceOptions: socialChoiceOptions3,
     })
     const partyAllocation = partyResults.allocation
 

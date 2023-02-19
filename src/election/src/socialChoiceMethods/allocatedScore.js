@@ -1,6 +1,8 @@
 /** @module */
 
 import { range } from '../election/mathHelpers.js'
+import * as typesVotes from '../voteCasters/types/typesVotes.js'
+import * as typesSocialChoice from './typesSocialChoice.js'
 
 /**
  * This method has rounds.
@@ -10,15 +12,10 @@ import { range } from '../election/mathHelpers.js'
  * Then the scores for the candidate are sorted.
  * The voters' weight is spent, starting from the top scores.
  * Weight is spent until the weight of voters included is equal to 1/seats, which is the quota.
- * @param {Object} votes - The object for vote data.
- * @param {Object} votes.preferenceLists - Lists of preferences.
- * @param {Object} votes.preferenceTallies - How many votes have a listed preference.
- * @param {Object[]} votes.preferenceLists.scoreVotes - A list of votes
- * @param {Number[]} votes.preferenceLists.scoreVotes[] - A score for each candidate. From 0 to 1.
- * @param {Object} votes.preferenceTallies.voteFractions - The fraction of the population that voted that way.
- * @param {Object} socialChoiceOptions.seats - Number of candidates to elect.
- * @returns {{allocation:number[]}} - socialChoiceResults, with property allocation.
- * Allocation is an array of integers that say whether a candidate is elected (1) or not (0).
+ * @param {Object} args
+ * @param {typesVotes.votes} args.votes - The object for vote data.
+ * @param {typesSocialChoice.socialChoiceOptions} args.socialChoiceOptions - options to specify a social choice function.
+ * @returns {typesSocialChoice.socialChoiceResults} - the results returned from a social choice function.
  */
 export default function allocatedScore({ votes, socialChoiceOptions }) {
     const { voteFractions } = votes.preferenceTallies
