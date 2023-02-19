@@ -5,7 +5,6 @@ import castRankingFindPolygons from './castRankingFindPolygons.js'
 
 /**
  * Sum area of voter distributions to tally the votes.
- * @param {Object[]} canGeoms
  */
 export default function castRankingPolygons2D(voterGeom, geometry) {
     const { canGeoms } = geometry

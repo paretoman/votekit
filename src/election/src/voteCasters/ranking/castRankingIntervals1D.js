@@ -3,7 +3,6 @@
 import { sumBlock, sumGaussian } from '../plurality/castPluralityIntervals1D.js'
 /**
  * Sum density of voter distributions within intervals to tally the votes.
- * @param {Object[]} canGeoms
  */
 export default function castRankingIntervals1D(voterGeom, geometry) {
     const { intervalBorders, rankings, cansByRankList } = geometry.canBorders.rankingIntervals1D

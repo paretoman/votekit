@@ -4,7 +4,7 @@ import * as typesGrid from '../types/typesGrid.js'
 
 /**
  * makes 1D grid data structure
- * @param {typesGeoms.voterGeom2D} voterGeom
+ * @param {typesGeoms.voterGeom1D} voterGeom
  * @returns {typesGrid.grid1D}
  */
 export default function makeGrid1D(voterGeom) {

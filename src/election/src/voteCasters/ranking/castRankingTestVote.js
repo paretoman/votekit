@@ -1,13 +1,10 @@
 /** @module */
 
 import { range } from '../../election/mathHelpers.js'
-
+import * as typesVote from '../types/typesVote.js'
 /**
  * Vote for the closest candidate.
- * @param {canGeoms} canGeoms - geometries for candidates
- * @param {voterPoint} voterPoint - geometry for single voter
- * @param {Number} dimensions
- * @returns {rankingVote}
+ * @returns {typesVote.rankingVote}
  */
 export default function castRankingTestVote({ canGeoms, voterPoint, dimensions }) {
     const df = (dimensions === 1) ? df1 : df2
