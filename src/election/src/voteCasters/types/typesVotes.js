@@ -11,9 +11,9 @@ import * as typesVoteArrays from './typesVoteArrays.js'
  * @property {preferenceTallies} [preferenceTallies] - How many votes have a listed preference.
  * @property {candidateTallies} [candidateTallies] - vote tallies indexed by candidate
  * @property {pairwiseTallies} [pairwiseTallies] - pairwise tallies
- * @property {typesVotesForGeom.votesForGeom[]} votesByGeom - Vote data for each voter geometry. A list of votesForGeom.
- * @property {typesGeometry.parties} parties - describes parties each candidate belongs to.
- * @property {number} numCans - the number of candidates, comes in handy.
+ * @property {typesVotesForGeom.votesForGeom[]} [votesByGeom] - Vote data for each voter geometry. A list of votesForGeom.
+ * @property {typesGeometry.parties} [parties] - describes parties each candidate belongs to.
+ * @property {number} [numCans] - the number of candidates, comes in handy.
  * @memberof typesVotes
  */
 /**
