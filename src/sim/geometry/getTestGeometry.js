@@ -18,8 +18,8 @@ export default function getTestGeometry(testVoter, candidateList, simOptions) {
         ? canGeoms.map((c) => c.x)
         : canGeoms.map((c) => [c.x, c.y])
     const parties = candidateList.getParties()
-    const geometry = {
+    const testGeometry = {
         voterPoint, canPoints, parties, dimensions,
     }
-    return geometry
+    return testGeometry
 }

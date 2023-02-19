@@ -5,7 +5,7 @@ import { minMax } from '../../election/mathHelpers.js'
 /**
  * Vote for the closest candidate.
  */
-export default function castScoreTestVote({ canPoints, voterPoint, dimensions }) {
+export default function castScoreTestVote(canPoints, voterPoint, dimensions) {
     const lc = canPoints.length
     const scoreVote = (new Array(lc)).fill(0)
     const df = (dimensions === 1) ? df1 : df2

@@ -77,8 +77,9 @@ export default function ViewEntitiesOne(entities, screen, menu, changes, simOpti
     }
     self.testVoteView = () => {
         const electionOptions = electionOptionsMan.getOptions()
-        const geometry = getTestGeometry(self.testVoterView.testVoter, candidateList, simOptions)
-        const vote = voteCasters[electionOptions.voteCasterName].castTestVote(geometry)
+        const testGeometry = getTestGeometry(self.testVoterView.testVoter, candidateList, simOptions)
+        const { canPoints, voterPoint, dimensions } = testGeometry
+        const vote = voteCasters[electionOptions.voteCasterName].castTestVote(canPoints, voterPoint, dimensions)
         self.testVoterView.graphic.update(vote, candidateList)
         viewChanges.add(['testVote'])
         return vote

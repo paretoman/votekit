@@ -40,7 +40,7 @@ export default function castRankingGrid(voterGeom, geometry, castOptions) {
         const voteCount = voteCounts[i]
 
         const voterPoint = grid.voterPoints[i]
-        const vote = castRankingTestVote({ canPoints, voterPoint, dimensions })
+        const vote = castRankingTestVote(canPoints, voterPoint, dimensions)
         voteSet[i] = vote
 
         // todo: possibly speed things up by combining votes with the same ranking.
