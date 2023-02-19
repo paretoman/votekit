@@ -6,7 +6,6 @@ import makeGrid2D from '../voteCasters/makeGrid2D.js'
 
 /**
  * Tally votes.
- * @param {Object[]} canGeoms
  */
 export default function castScoreGrid(voterGeom, geometry, castOptions) {
     const { canGeoms, dimensions } = geometry

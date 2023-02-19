@@ -21,6 +21,7 @@ export default function castRankingGrid(voterGeom, geometry, castOptions) {
 
     // just find the vote and voteCount at each grid point
     const makeGrid = (dimensions === 1) ? makeGrid1D : makeGrid2D
+    // @ts-ignore
     const grid = makeGrid(voterGeom, castOptions)
 
     const nk = canGeoms.length
