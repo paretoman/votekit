@@ -4,7 +4,11 @@
  * @returns {number[]} - A number array from 0 to n-1.
  */
 export function range(n) {
-    return [...Array(n).keys()]
+    const a = Array(n)
+    for (let i = 0; i < n; i++) {
+        a[i] = i
+    }
+    return a
 }
 
 const coefInvSqrt2Pi = 1 / (Math.sqrt(2 * Math.PI))
