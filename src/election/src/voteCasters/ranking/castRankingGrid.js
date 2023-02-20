@@ -66,7 +66,7 @@ export default function castRankingGrid(voterGeom, geometry, castOptions) {
         }
     }
     if (verbosity < 2) {
-        return { grid, voteSet, voteCounts, totalVotes, cansByRankList }
+        return { voteCounts, totalVotes, cansByRankList }
     }
 
     // bordaScore is nk-1 if a candidate receives all the votes for the voter geometry.

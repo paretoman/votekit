@@ -12,8 +12,8 @@ import * as typesGeoms from './typesGeoms.js'
  */
 /**
  * @typedef {object} votesForGeomGridRanking
- * @property {typesGrid.grid} grid - data for points on a grid
- * @property {typesVote.rankingVote[]} voteSet - a vote for each grid point
+ * @property {typesGrid.grid} [grid] - data for points on a grid
+ * @property {typesVote.rankingVote[]} [voteSet] - a vote for each grid point
  * @property {number[]} voteCounts
  * @property {number} totalVotes
  * @property {number[]} [bordaFractionAverageByCan]
