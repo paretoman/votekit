@@ -43,10 +43,11 @@ export default function castRankingGrid(voterGeom, geometry, castOptions) {
         // todo: possibly speed things up by combining votes with the same ranking.
         rankings[i] = vote.ranking
 
-        const cansByRank = Array(nk)
-        for (let k = 0; k < nk; k++) {
-            const can = vote.indexInOrder[k]
-            cansByRank[k] = [can]
+        const len = vote.indexInOrder.length
+        const cansByRank = Array(len)
+        for (let m = 0; m < len; m++) {
+            const can = vote.indexInOrder[m]
+            cansByRank[m] = [can]
         }
         cansByRankList[i] = cansByRank
 
