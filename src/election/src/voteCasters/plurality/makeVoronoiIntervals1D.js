@@ -1,12 +1,12 @@
 import { range } from '../../election/mathHelpers.js'
 
 /** Find boundary between candidates */
-export default function makeVoronoiIntervals1D(canGeoms) {
-    const n = canGeoms.length
-    const iSorted = range(n).sort((a, b) => canGeoms[a].x - canGeoms[b].x)
+export default function makeVoronoiIntervals1D(canPoints) {
+    const n = canPoints.length
+    const iSorted = range(n).sort((a, b) => canPoints[a] - canPoints[b])
     const midpoints = new Array(n - 1)
     for (let i = 0; i < n - 1; i++) {
-        midpoints[i] = (canGeoms[iSorted[i]].x + canGeoms[iSorted[i + 1]].x) * 0.5
+        midpoints[i] = (canPoints[iSorted[i]] + canPoints[iSorted[i + 1]]) * 0.5
     }
     const intervals = new Array(n)
     for (let i = 0; i < n; i++) {

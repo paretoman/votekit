@@ -1,15 +1,13 @@
 import equidistantLine from './equidistantLine.js'
-import * as typesGeoms from '../types/typesGeoms.js'
 import * as typesCanBorders from '../types/typesCanBorders.js'
 /**
  * Each pair of candidates defines a potential line for the voronoi diagram.
- * @param {typesGeoms.canGeom2D[]} canGeoms
+ * @param {number[][]} canPoints
  * @returns {typesCanBorders.voronoiLines2D}
  */
-export default function makeVoronoiLines2D(canGeoms) {
+export default function makeVoronoiLines2D(canPoints) {
     // find all lines
-    const n = canGeoms.length
-    const canPoints = canGeoms.map((c) => [c.x, c.y])
+    const n = canPoints.length
     const lines = new Array(n) // each candidate has a set of lines for themselves
     for (let i = 0; i < n; i++) {
         lines[i] = []

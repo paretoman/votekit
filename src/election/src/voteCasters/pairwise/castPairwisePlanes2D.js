@@ -6,14 +6,13 @@ import equidistantLine from '../plurality/equidistantLine.js'
  * Sum area of voter distributions to tally the votes.
  */
 export default function castPairwisePlanes2D(voterGeom, geometry) {
-    const { canGeoms } = geometry
+    const { canPoints } = geometry
 
     // draw lines across shape of voterGeom
 
     const totalArea = calcVoterTotalArea(voterGeom)
 
-    const n = canGeoms.length
-    const canPoints = canGeoms.map((c) => [c.x, c.y])
+    const n = canPoints.length
 
     const winsPairwise = Array(n).fill(0)
     for (let i = 0; i < n; i++) {

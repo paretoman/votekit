@@ -23,8 +23,8 @@ export default function VoronoiRanking1D(voterGroup, candidateList, screen) {
         let { intervalBorders } = votesForGeom
         if (rankings === undefined || intervalBorders === undefined) {
             canList = candidateList.getEntities()
-            const canGeoms = canList.map((can) => can.shape1)
-            const cd = makeRankingIntervals1D(canGeoms)
+            const canPoints = canList.map((can) => can.shape1.x)
+            const cd = makeRankingIntervals1D(canPoints)
             rankings = cd.rankings
             intervalBorders = cd.intervalBorders
         }

@@ -13,7 +13,7 @@ import * as typesVotes from '../types/typesVotes.js'
  * @returns {typesVotes.votes} votes
  */
 export default function castPairwise(geometry, castOptions) {
-    const { canGeoms, voterGeoms, dimensions, parties } = geometry
+    const { canPoints, voterGeoms, dimensions, parties } = geometry
 
     const someGaussian2D = voterGeoms.some((v) => v.densityProfile === 'gaussian') && dimensions === 2
 
@@ -27,7 +27,7 @@ export default function castPairwise(geometry, castOptions) {
 
     // should ideally make a set of polygons for each ranking so that we avoid repeating rankings.
 
-    const n = canGeoms.length
+    const n = canPoints.length
     const winsPairwise = Array(n).fill(0)
     for (let i = 0; i < n; i++) {
         winsPairwise[i] = Array(n).fill(0)
@@ -62,7 +62,7 @@ export default function castPairwise(geometry, castOptions) {
 
     const candidateTallies = { bordaFractionAverageByCan }
     const pairwiseTallies = { winFractionPairwise }
-    const numCans = canGeoms.length
+    const numCans = canPoints.length
     const votes = { candidateTallies, pairwiseTallies, votesByGeom, parties, numCans }
     return votes
 }

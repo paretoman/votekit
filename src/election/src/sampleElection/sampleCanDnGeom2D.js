@@ -9,15 +9,15 @@ export default function sampleCanDnGeom2D(canDnGeom, rng) {
     const { x, y, w, densityProfile } = canDnGeom
 
     const randomSample = (densityProfile === 'gaussian') ? randomInsideGaussian : randomInsideCircle
-    const canGeom = randomSample(x, y, w * 0.5, rng)
-    return canGeom
+    const canPoint = randomSample(x, y, w * 0.5, rng)
+    return canPoint
 }
 
 function randomInsideCircle(X, Y, R, rng) {
     const [a, b] = randomUnitCircle(rng)
     const x = X + R * a
     const y = Y + R * b
-    return { x, y }
+    return [x, y]
 }
 
 function randomUnitCircle(rng) {
@@ -48,7 +48,7 @@ function randomInsideGaussian(X, Y, R, rng) {
     const scale = R * invSqrt2
     const x = X + scale * a
     const y = Y + scale * b
-    return { x, y }
+    return [x, y]
 }
 
 /**

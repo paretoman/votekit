@@ -15,7 +15,7 @@ import * as typesVotes from '../types/typesVotes.js'
  * @returns {typesVotes.votes} votes
  */
 export default function castPlurality(geometry, castOptions) {
-    const { canGeoms, voterGeoms, dimensions, parties } = geometry
+    const { canPoints, voterGeoms, dimensions, parties } = geometry
 
     const someGaussian2D = voterGeoms.some((v) => v.densityProfile === 'gaussian') && dimensions === 2
 
@@ -25,7 +25,7 @@ export default function castPlurality(geometry, castOptions) {
     const cast = (someGaussian2D) ? castPluralityGrid : castRegions
 
     // get fraction of votes for each candidate so we can summarize results
-    const n = canGeoms.length
+    const n = canPoints.length
     const votesByGeom = []
     const countByCan = (new Array(n)).fill(0)
     let totalVotes = 0
@@ -45,7 +45,7 @@ export default function castPlurality(geometry, castOptions) {
     const voteFractionsByCan = countByCan.map((x) => x / totalVotes)
 
     const candidateTallies = { voteFractionsByCan }
-    const numCans = canGeoms.length
+    const numCans = canPoints.length
     const votes = { candidateTallies, votesByGeom, parties, numCans }
     return votes
 }

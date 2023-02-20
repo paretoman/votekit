@@ -8,7 +8,7 @@ import * as typesPoints from './typesPoints.js'
  */
 /**
  * @typedef {object} geometry - geometry for casting votes
- * @property {geoms.canGeoms} canGeoms
+ * @property {geoms.canPoints} canPoints
  * @property {geoms.voterGeoms} voterGeoms
  * @property {number} dimensions
  * @property {parties} parties

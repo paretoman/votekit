@@ -13,10 +13,10 @@ export default function getGeometry(voterShapeList, candidateList, simOptions, e
     const { geography } = districts
 
     const voterGeoms = voterShapeList.getGeoms(dimensions)
-    const canGeoms = candidateList.getGeoms(dimensions)
+    const canPoints = candidateList.getPoints(dimensions)
     const parties = candidateList.getParties()
-    const canBorders = getCanBorders(canGeoms, voterGeoms, dimensions, electionOptions)
+    const canBorders = getCanBorders(canPoints, voterGeoms, dimensions, electionOptions)
 
-    const geometry = { voterGeoms, canGeoms, parties, dimensions, canBorders, geography }
+    const geometry = { voterGeoms, canPoints, parties, dimensions, canBorders, geography }
     return geometry
 }

@@ -4,10 +4,10 @@ import districtCandidateTallies from './districtCandidateTallies.js'
 import districtPreferenceLists from './districtPreferenceLists.js'
 import districtPreferenceTallies from './districtPreferenceTallies.js'
 
-export default function combineVotesByDistrict(votesByTract, canGeoms, geography) {
+export default function combineVotesByDistrict(votesByTract, canPoints, geography) {
     const { census } = geography
     const { nd } = geography.districtMap
-    const numCans = canGeoms.length
+    const numCans = canPoints.length
 
     // Loop through districts.
     // Each district has a census with a list of tracts with weights.

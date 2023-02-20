@@ -3,8 +3,8 @@ import statewidePreferenceLists from './statewidePreferenceLists.js'
 import statewidePreferenceTallies from './statewidePreferenceTallies.js'
 import statewideCandidateTallies from './statewideCandidateTallies.js'
 
-export default function combineVotesStatewide(votesByTract, canGeoms) {
-    const numCans = canGeoms.length
+export default function combineVotesStatewide(votesByTract, canPoints) {
+    const numCans = canPoints.length
 
     const votes = {}
 

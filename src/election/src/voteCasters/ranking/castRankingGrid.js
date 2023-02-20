@@ -17,17 +17,14 @@ import * as typesVotesForGeomGrid from '../types/typesVotesForGeomGrid.js'
  * @returns {typesVotesForGeomGrid.votesForGeomGridRanking} votesForGeom
  */
 export default function castRankingGrid(voterGeom, geometry, castOptions) {
-    const { canGeoms, dimensions } = geometry
+    const { canPoints, dimensions } = geometry
 
     // just find the vote and voteCount at each grid point
     const makeGrid = (dimensions === 1) ? makeGrid1D : makeGrid2D
     // @ts-ignore
     const grid = makeGrid(voterGeom, castOptions)
 
-    const nk = canGeoms.length
-    const canPoints = (dimensions === 1)
-        ? canGeoms.map((c) => c.x)
-        : canGeoms.map((c) => [c.x, c.y])
+    const nk = canPoints.length
     const bordaScoreSumByCan = Array(nk).fill(0)
     const rankings = new Array(nk)
     const cansByRankList = new Array(nk)

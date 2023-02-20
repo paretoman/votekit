@@ -3,20 +3,20 @@
 /**
  * Use this to sample a random candidate from a distribution.
  * @param {object} canDnGeom
- * @returns {object} x coordinate
+ * @returns {number} x coordinate
  */
 export default function sampleCanDnGeom1D(canDnGeom, rng) {
     const { x, w, densityProfile } = canDnGeom
     // sample circle
     const isGaussian = densityProfile === 'gaussian'
     const sample = (isGaussian) ? sampleGaussian : randomInsideInterval
-    const canGeom = sample(x, w * 0.5, rng)
-    return canGeom
+    const canPoint = sample(x, w * 0.5, rng)
+    return canPoint
 }
 
 function randomInsideInterval(X, R, rng) {
     const x = (rng() * 2 - 1) * R + X
-    return { x }
+    return x
 }
 
 const invSqrtHalfPi = 1 / Math.sqrt(Math.PI / 2)
@@ -32,7 +32,7 @@ function sampleGaussian(X, R, rng) {
     const sigma = R * invSqrtHalfPi
     const x = a * sigma + X
     // const x2 = mag * Math.sin(2 * Math.PI * u2) + X
-    return { x }
+    return x
 }
 
 function sampleStandardNormal(rng) {

@@ -5,9 +5,9 @@ import { range } from '../../election/mathHelpers.js'
 
 /**
  * Find the intervals over which voters share a ranking.
- * @param {object[]} canGeoms
+ * @param {number[]} canPoints
  */
-export default function makeRankingIntervals1D(canGeoms) {
+export default function makeRankingIntervals1D(canPoints) {
     /*
     * Find and sort midpoints for each pair of voters.
     * Find intervals in which voters have a ranking.
@@ -18,8 +18,8 @@ export default function makeRankingIntervals1D(canGeoms) {
 
     // compute the midpoints
 
-    const n = canGeoms.length
-    const iSorted = range(n).sort((a, b) => canGeoms[a].x - canGeoms[b].x)
+    const n = canPoints.length
+    const iSorted = range(n).sort((a, b) => canPoints[a] - canPoints[b])
 
     const mn = 0.5 * n * (n - 1)
     const uMidpoints = Array(mn)
@@ -29,7 +29,7 @@ export default function makeRankingIntervals1D(canGeoms) {
         for (let k = i + 1; k < n; k++) {
             const ci = iSorted[i]
             const ck = iSorted[k]
-            const midpoint = findMidpoint(canGeoms[ci], canGeoms[ck])
+            const midpoint = findMidpoint(canPoints[ci], canPoints[ck])
             uMidpoints[o] = midpoint
             uMidpointPair[o] = [ci, ck]
             o += 1
@@ -80,5 +80,5 @@ export default function makeRankingIntervals1D(canGeoms) {
 }
 
 function findMidpoint(can1, can2) {
-    return (can1.x + can2.x) * 0.5
+    return (can1 + can2) * 0.5
 }

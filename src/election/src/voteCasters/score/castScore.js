@@ -8,8 +8,8 @@ import castScoreGrid from './castScoreGrid.js'
 /**
  * Voters cast votes for candidates.
  * @param {object} geometry - geometry for casting votes
- * @param {object[]} geometry.canGeoms - For 2D, an array of objects: {x,y}.
- * For 1D, an array of objects: {x}.
+ * @param {object[]} geometry.canPoints - For 2D, an array of arrays: [x,y].
+ * For 1D, an array of numbers: x.
  * @param {object[]} geometry.voterGeoms - For 2D, an array of objects: {x,y,w}.
  * For 1D, an array of objects: {x,w,densityProfile}.
  * @param {object} geometry.parties
@@ -17,10 +17,10 @@ import castScoreGrid from './castScoreGrid.js'
  * @returns {object} votes
  */
 export default function castScore(geometry, castOptions) {
-    const { canGeoms, voterGeoms, parties } = geometry
+    const { canPoints, voterGeoms, parties } = geometry
 
     // get fraction of votes for each candidate so we can summarize results
-    const n = canGeoms.length
+    const n = canPoints.length
     const votesByGeom = []
     const scoreSumByCan = (new Array(n)).fill(0)
     let totalVotes = 0
@@ -41,7 +41,7 @@ export default function castScore(geometry, castOptions) {
     const scoreFractionAverageByCan = scoreSumByCan.map((x) => x / (totalVotes * maxScore))
 
     const candidateTallies = { scoreFractionAverageByCan }
-    const numCans = canGeoms.length
+    const numCans = canPoints.length
     const votes = { candidateTallies, votesByGeom, parties, numCans }
     return votes
 }

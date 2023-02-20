@@ -15,7 +15,7 @@ import * as typesVotes from '../types/typesVotes.js'
  */
 
 export default function castRanking(geometry, castOptions) {
-    const { canGeoms, voterGeoms, dimensions, parties } = geometry
+    const { canPoints, voterGeoms, dimensions, parties } = geometry
 
     const someGaussian2D = voterGeoms.some((v) => v.densityProfile === 'gaussian') && dimensions === 2
 
@@ -24,7 +24,7 @@ export default function castRanking(geometry, castOptions) {
         : castRankingPolygons2D
     const cast = (someGaussian2D) ? castRankingGrid : castRegions
 
-    const n = canGeoms.length
+    const n = canPoints.length
 
     // get fraction of votes for each candidate so we can summarize results
     const voteCounts = []
@@ -69,7 +69,7 @@ export default function castRanking(geometry, castOptions) {
     const preferenceLists = { rankings, cansByRankList }
     const preferenceTallies = { voteFractions }
     const candidateTallies = { firstPreferenceFractions }
-    const numCans = canGeoms.length
+    const numCans = canPoints.length
     const votes = { preferenceLists, preferenceTallies, candidateTallies, votesByGeom, parties, numCans }
     return votes
 }

@@ -7,13 +7,13 @@ import * as typesVotesForGeom from '../types/typesVotesForGeom.js'
  * @returns {typesVotesForGeom.votesForGeomPlurality}
  */
 export default function castPluralityIntervals1D(voterGeom, geometry) {
-    const { canGeoms, canBorders } = geometry
+    const { canPoints, canBorders } = geometry
     const intervals = canBorders.voronoiIntervals1D
 
     const sum = (voterGeom.densityProfile === 'gaussian') ? sumGaussian : sumBlock
 
     // return sum for each candidate
-    const n = canGeoms.length
+    const n = canPoints.length
     const countByCan = Array(n)
     let totalVotes = 0
     for (let i = 0; i < n; i++) {

@@ -9,9 +9,9 @@ import splitConvex from './splitConvex.js'
  * Divide a starting polygon into smaller polygons.
  * Use a dividing line for each pair of candidates.
  * @param {object} voterGeom
- * @param {object[]} canGeoms
+ * @param {number[][]} canPoints
  */
-export default function castRankingFindPolygons(voterGeom, canGeoms) {
+export default function castRankingFindPolygons(voterGeom, canPoints) {
     /* Start with polygons for each voterGeom
     * At each division, increment the borda score for the closer candidate.
     * The resulting borda score is nearly the opposite of the ranking. n-i-1.
@@ -23,8 +23,7 @@ export default function castRankingFindPolygons(voterGeom, canGeoms) {
     const voterPoly = makeCircle(voterGeom)
     let cells = [voterPoly]
 
-    const n = canGeoms.length
-    const canPoints = canGeoms.map((c) => [c.x, c.y])
+    const n = canPoints.length
     let bordaScore = [Array(n).fill(0)]
 
     for (let i = 0; i < n - 1; i++) {

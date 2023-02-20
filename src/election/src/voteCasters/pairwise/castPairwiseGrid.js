@@ -9,16 +9,13 @@ import makeGrid2D from '../voteCasters/makeGrid2D.js'
  * Tally votes.
  */
 export default function castPairwiseGrid(voterGeom, geometry, castOptions) {
-    const { canGeoms, dimensions } = geometry
+    const { canPoints, dimensions } = geometry
 
     // just find the vote and count at each grid point
     const makeGrid = (dimensions === 1) ? makeGrid1D : makeGrid2D
     const grid = makeGrid(voterGeom, castOptions)
 
-    const nk = canGeoms.length
-    const canPoints = (dimensions === 1)
-        ? canGeoms.map((c) => c.x)
-        : canGeoms.map((c) => [c.x, c.y])
+    const nk = canPoints.length
     const bordaScoreSumByCan = Array(nk).fill(0)
     const netWins = new Array(nk)
     range(nk).forEach((_, i) => { netWins[i] = Array(nk).fill(0) })

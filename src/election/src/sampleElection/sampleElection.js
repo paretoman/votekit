@@ -20,23 +20,23 @@ export default function sampleElection(samplingGeometry, electionOptions, numSam
     for (let i = 0; i < numSamples; i++) {
         // choose a number of candidates
         const { numSampleCandidates } = socialChoiceOptions
-        const canGeoms = []
+        const canPoints = []
         const sParties = []
         for (let k = 0; k < numSampleCandidates; k++) {
             // sample a point from the distribution of candidates
             const iDist = randomIndexFromCDF(canDnCDF, rng)
             const party0 = partiesByCan[iDist]
             const canDnGeom = canDnGeoms[iDist]
-            const canGeom = sampleCanDnGeom(canDnGeom, dimensions, rng)
+            const canPoint = sampleCanDnGeom(canDnGeom, dimensions, rng)
 
             // make a candidate
-            canGeoms.push(canGeom)
+            canPoints.push(canPoint)
             sParties.push(party0)
         }
 
-        const canBorders = getCanBorders(canGeoms, voterGeoms, dimensions, electionOptions)
+        const canBorders = getCanBorders(canPoints, voterGeoms, dimensions, electionOptions)
         const parties = { partiesByCan: sParties, numParties: 10 }
-        const geometry = { voterGeoms, canGeoms, parties, dimensions, geography, canBorders }
+        const geometry = { voterGeoms, canPoints, parties, dimensions, geography, canBorders }
 
         const electionResults = election(geometry, electionOptions)
         const { allocation } = electionResults.socialChoiceResults
@@ -45,8 +45,8 @@ export default function sampleElection(samplingGeometry, electionOptions, numSam
             const winCount = allocation[k]
             if (winCount === 0) continue
 
-            const { x, y } = canGeoms[k]
-            const winPoint = (dimensions === 1) ? [x] : [x, y]
+            const canPoint = canPoints[k]
+            const winPoint = (dimensions === 1) ? [canPoint] : canPoint
             const winParty = sParties[k]
 
             samplingPointsList.push(winPoint)

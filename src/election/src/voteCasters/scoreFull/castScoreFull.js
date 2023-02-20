@@ -8,8 +8,7 @@ import castScoreGrid from '../score/castScoreGrid.js'
 /**
  * Voters cast votes for candidates.
  * @param {object} geometry - geometry for casting votes
- * @param {object[]} geometry.canGeoms - For 2D, an array of objects: {x,y}.
- * For 1D, an array of objects: {x}.
+ * @param {object[]} geometry.canPoints - For 2D, an array of arrays: [x,y]. For 1D, an array of numbers: x.
  * @param {object[]} geometry.voterGeoms - For 2D, an array of objects: {x,y,w}.
  * For 1D, an array of objects: {x,w,densityProfile}.
  * @param {object} geometry.parties
@@ -17,10 +16,10 @@ import castScoreGrid from '../score/castScoreGrid.js'
  * @returns {object} votes
  */
 export default function castScoreFull(geometry, castOptions) {
-    const { canGeoms, voterGeoms, parties } = geometry
+    const { canPoints, voterGeoms, parties } = geometry
 
     // get fraction of votes for each candidate so we can summarize results
-    const n = canGeoms.length
+    const n = canPoints.length
 
     // find totalWeight of "voter area" over all the voterGeoms
     // then find normalization factor, which is just 1/totalWeight
@@ -72,7 +71,7 @@ export default function castScoreFull(geometry, castOptions) {
     const preferenceLists = { scoreVotes }
     const preferenceTallies = { voteFractions }
     const candidateTallies = { scoreFractionAverageByCan }
-    const numCans = canGeoms.length
+    const numCans = canPoints.length
     const votes = { preferenceLists, preferenceTallies, candidateTallies, votesByGeom, parties, numCans }
     return votes
 }

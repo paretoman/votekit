@@ -2,7 +2,7 @@
  * @namespace typesGeoms
  */
 /**
- * @typedef {canGeom1D[] | canGeom2D[]} canGeoms - geometries for a number of candidates.
+ * @typedef {canPoint1D[] | canPoint2D[]} canPoints - geometries for a number of candidates.
  * For 2D, an array of objects: {x,y}. For 1D, an array of objects: {x}.
  * @memberof typesGeoms
  */
@@ -15,14 +15,11 @@
  * @memberof typesGeoms
  */
 /**
- * @typedef {object} canGeom1D - the point where a candidate sits in 1D
- * @property {number} x - x position
+ * @typedef {number} canPoint1D - the point where a candidate sits in 1D - x position
  * @memberof typesGeoms
  */
 /**
- * @typedef {object} canGeom2D - the point where a candidate sits in 2D
- * @property {number} x - x position
- * @property {number} y - y position
+ * @typedef {number[]} canPoint2D - the point where a candidate sits in 2D- [x,y] position
  * @memberof typesGeoms
  */
 /**

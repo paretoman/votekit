@@ -1,4 +1,5 @@
 import getGeoms from './getGeoms.js'
+import getPoints from './getPoints.js'
 
 /** A component of sim.js that deals with adding candidates. */
 export default function EntityList(commander, prefix, registrar) {
@@ -40,4 +41,5 @@ export default function EntityList(commander, prefix, registrar) {
 
     self.getEntities = () => registrar.getList().filter((c) => c.exists)
     self.getGeoms = (dimensions) => getGeoms(self.getEntities(), dimensions)
+    self.getPoints = (dimensions) => getPoints(self.getEntities(), dimensions)
 }

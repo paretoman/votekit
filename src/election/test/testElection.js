@@ -10,9 +10,9 @@ export default function testElection() {
         { x: 0, y: 0, w: 200, densityProfile: 'step' },
     ]
 
-    const canGeoms = [
-        { x: -50, y: 0 },
-        { x: 50, y: 0 },
+    const canPoints = [
+        [-50, 0],
+        [50, 0],
     ]
 
     const parties = {
@@ -22,9 +22,9 @@ export default function testElection() {
 
     const electionOptions = electionOptions1
 
-    const canBorders = getCanBorders(canGeoms, voterGeoms, dimensions, electionOptions)
+    const canBorders = getCanBorders(canPoints, voterGeoms, dimensions, electionOptions)
     const geography = makeGeography(electionOptions, voterGeoms, dimensions)
-    const geometry = { voterGeoms, canGeoms, parties, dimensions, canBorders, geography }
+    const geometry = { voterGeoms, canPoints, parties, dimensions, canBorders, geography }
 
     const electionResults = election(geometry, electionOptions)
 

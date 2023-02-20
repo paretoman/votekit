@@ -34,9 +34,9 @@ Entities are shared between states. Lists of entities manage the creation of ent
   * CandidateCommander is the component that handles commands for each Candidate.
 * Data types:
   * These are the standard data structures for candidates.
-  * canGeoms:
-    * For 2D, an array of objects: {x,y}.
-    * For 1D, an array of objects: {x}.
+  * canPoints:
+    * For 2D, an array of arrays: [x,y].
+    * For 1D, an array of numbers: x.
   * canList: An array of Candidate objects.
 
 ### CandidateDns (Distributions)

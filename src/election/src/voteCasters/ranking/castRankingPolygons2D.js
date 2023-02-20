@@ -7,10 +7,10 @@ import castRankingFindPolygons from './castRankingFindPolygons.js'
  * Sum area of voter distributions to tally the votes.
  */
 export default function castRankingPolygons2D(voterGeom, geometry) {
-    const { canGeoms } = geometry
+    const { canPoints } = geometry
 
     // draw lines across shape of voterGeom
-    let { cells, rankings, cansByRankList } = castRankingFindPolygons(voterGeom, canGeoms)
+    let { cells, rankings, cansByRankList } = castRankingFindPolygons(voterGeom, canPoints)
 
     // find area of polygons
     const cn = cells.length

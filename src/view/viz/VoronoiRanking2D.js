@@ -23,9 +23,9 @@ export default function VoronoiRanking2D(voterGroup, candidateList, screen) {
         cells = votesForGeom.cells
         if (rankings === undefined || cells === undefined) {
             canList = candidateList.getEntities()
-            const canGeoms = canList.map((can) => can.shape2)
+            const canPoints = canList.map((can) => [can.shape2.x, can.shape2.y])
             const voterGeom = voterGroup.shape2
-            const cd = castRankingFindPolygons(voterGeom, canGeoms)
+            const cd = castRankingFindPolygons(voterGeom, canPoints)
             rankings = cd.rankings
             cells = cd.cells
         }
