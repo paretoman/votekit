@@ -16,7 +16,7 @@ export default function districtPreferenceTallies(votesByTract, cen) {
 
 function concatPreferenceTalliesDistrict(tallyName, votesByTract, cen) {
     // concatenate tallies and normalize
-    let tallyAll = []
+    const tallyAll = []
     const gfNorm = getNormDistrict(cen)
 
     for (let j = 0; j < cen.length; j++) {
@@ -24,7 +24,15 @@ function concatPreferenceTalliesDistrict(tallyName, votesByTract, cen) {
         const votesInTract = votesByTract[gx][gy]
         const tally = votesInTract.preferenceTallies[tallyName]
         const tallyNorm = tally.map((x) => x * gf * gfNorm)
-        tallyAll = tallyAll.concat(tallyNorm)
+
+        // concat
+        // tallyAll.push(...tally)
+        const n1 = tallyAll.length
+        const n2 = tallyNorm.length
+        tallyAll.length += tallyNorm.length
+        for (let i = 0; i < n2; i++) {
+            tallyAll[n1 + i] = tallyNorm[i]
+        }
     }
     return tallyAll
 }

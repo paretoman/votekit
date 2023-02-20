@@ -13,12 +13,20 @@ export default function statewidePreferenceLists(votesByTract) {
 }
 function concatPreferenceListsStatewide(tallyName, votesByTract) {
     // concatenate preferences
-    let preferencesAll = []
+    const preferencesAll = []
     votesByTract.forEach(
         (row) => row.forEach(
             (votes) => {
                 const preferences = votes.preferenceLists[tallyName]
-                preferencesAll = preferencesAll.concat(preferences)
+
+                // concat
+                // preferencesAll.push(...preferences)
+                const n1 = preferencesAll.length
+                const n2 = preferences.length
+                preferencesAll.length += preferences.length
+                for (let i = 0; i < n2; i++) {
+                    preferencesAll[n1 + i] = preferences[i]
+                }
             },
         ),
     )

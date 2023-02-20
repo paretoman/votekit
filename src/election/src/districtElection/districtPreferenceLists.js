@@ -13,12 +13,20 @@ export default function districtPreferenceLists(votesByTract, cen) {
 }
 function concatPreferenceListsDistrict(tallyName, votesByTract, cen) {
     // concatenate preferences
-    let preferencesAll = []
+    const preferencesAll = []
     for (let j = 0; j < cen.length; j++) {
         const [gx, gy] = cen[j]
         const votesInTract = votesByTract[gx][gy]
         const preferences = votesInTract.preferenceLists[tallyName]
-        preferencesAll = preferencesAll.concat(preferences)
+
+        // concat
+        // preferencesAll.push(...preferences)
+        const n1 = preferencesAll.length
+        const n2 = preferences.length
+        preferencesAll.length += preferences.length
+        for (let i = 0; i < n2; i++) {
+            preferencesAll[n1 + i] = preferences[i]
+        }
     }
     return preferencesAll
 }

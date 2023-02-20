@@ -21,7 +21,15 @@ function concatPreferenceTalliesStatewide(tallyName, votesByTract) {
         (row) => row.forEach(
             (votes) => {
                 const tally = votes.preferenceTallies[tallyName]
-                tallyAll = tallyAll.concat(tally)
+
+                // concat
+                // tallyAll.push(...tally)
+                const n1 = tallyAll.length
+                const n2 = tally.length
+                tallyAll.length += tally.length
+                for (let i = 0; i < n2; i++) {
+                    tallyAll[n1 + i] = tally[i]
+                }
             },
         ),
     )
