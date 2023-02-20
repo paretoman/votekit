@@ -13,6 +13,7 @@ import * as typesPoints from './typesPoints.js'
  * @property {number[]} density - density for grid points
  * @property {typesPoints.point1D[]} voterPoints - grid points in point1D format
  * @property {number[]} voteCounts - voteCount for each grid point
+ * @property {number} totalVotes - total number of votes
  * @property {typesGeoms.voterGeom1D} voterGeom - the geometry of a voter distribution in 1D
  * @memberof typesGrid
  */
@@ -30,6 +31,7 @@ import * as typesPoints from './typesPoints.js'
  * @property {number[]} y - y coordinates for grid points
  * @property {number[]} density - density for grid points
  * @property {number[]} voteCounts - voteCount for each grid point
+ * @property {number} totalVotes - total number of votes
  * @property {number} nx - number of x coordinates
  * @property {number} ny - number of y coordinates
  * @property {number} width - width and height of grid in pixels. grid is square.

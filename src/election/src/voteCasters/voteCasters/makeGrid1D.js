@@ -9,8 +9,8 @@ import * as typesGrid from '../types/typesGrid.js'
  */
 export default function makeGrid1D(voterGeom) {
     const { gridX, voterPoints, gridPointLength } = findGridX(voterGeom)
-    const { density, voteCounts } = findDensity(voterGeom, gridX, gridPointLength)
-    const grid = { x: gridX, density, voterPoints, voteCounts, voterGeom }
+    const { density, voteCounts, totalVotes } = findDensity(voterGeom, gridX, gridPointLength)
+    const grid = { x: gridX, density, voterPoints, voteCounts, totalVotes, voterGeom }
     return grid
 }
 
@@ -44,17 +44,21 @@ function findDensity(voterGeom, gridX, gridPointLength) {
     if (!isGauss) {
         density.fill(1)
         voteCounts.fill(1)
-        return { density, voteCounts }
+        const totalVotes = voteCounts.length
+        return { density, voteCounts, totalVotes }
     }
 
     const sigma = w / Math.sqrt(2 * Math.PI) // w = sigma * sqrt(2*pi)
     const invNorm = 1 / normPDF(0, 0, sigma)
+    let totalVotes = 0
     for (let i = 0; i < gridX.length; i++) {
         const xi = gridX[i]
         const d = normPDF(xi, x, sigma) * invNorm
         density[i] = d
-        voteCounts[i] = d * gridPointLength
+        const voteCount = d * gridPointLength
+        voteCounts[i] = voteCount
+        totalVotes += voteCount
     }
 
-    return { density, voteCounts }
+    return { density, voteCounts, totalVotes }
 }
