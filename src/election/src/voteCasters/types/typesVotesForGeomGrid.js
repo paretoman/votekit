@@ -16,8 +16,8 @@ import * as typesGeoms from './typesGeoms.js'
  * @property {typesVote.rankingVote[]} voteSet - a vote for each grid point
  * @property {number[]} voteCounts
  * @property {number} totalVotes
- * @property {number[]} bordaFractionAverageByCan
- * @property {typesVoteArrays.rankings} rankings
+ * @property {number[]} [bordaFractionAverageByCan]
+ * @property {typesVoteArrays.rankings} [rankings]
  * @property {typesVoteArrays.cansByRankList} cansByRankList - cansByRank for each grid point
  * @memberof typesVotesForGeomGrid
  */

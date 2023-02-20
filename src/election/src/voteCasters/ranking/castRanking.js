@@ -16,6 +16,7 @@ import * as typesVotes from '../types/typesVotes.js'
 
 export default function castRanking(geometry, castOptions) {
     const { canPoints, voterGeoms, dimensions, parties } = geometry
+    const { verbosity } = castOptions
 
     const someGaussian2D = voterGeoms.some((v) => v.densityProfile === 'gaussian') && dimensions === 2
 
@@ -37,7 +38,11 @@ export default function castRanking(geometry, castOptions) {
     // should ideally make a set of polygons for each ranking so that we avoid repeating rankings.
     voterGeoms.forEach((voterGeom, g) => {
         const votesForGeom = cast(voterGeom, geometry, castOptions)
-        votesByGeom[g] = votesForGeom
+
+        if (verbosity === 2) {
+            votesByGeom[g] = votesForGeom
+        }
+
         const { rankings: rankingsForGeom,
             cansByRankList: cansByRankListForGeom,
             voteCounts: voteCountsForGeom,
@@ -49,7 +54,9 @@ export default function castRanking(geometry, castOptions) {
         voteCounts.length += n2
         for (let i = 0; i < n2; i++) {
             voteCounts[n1 + i] = voteCountsForGeom[i]
-            rankings[n1 + i] = rankingsForGeom[i]
+            if (verbosity === 2) {
+                rankings[n1 + i] = rankingsForGeom[i]
+            }
             cansByRankList[n1 + i] = cansByRankListForGeom[i]
         }
         totalVotes += totalVotesForGeom

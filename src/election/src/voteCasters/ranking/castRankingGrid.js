@@ -18,6 +18,7 @@ import * as typesVotesForGeomGrid from '../types/typesVotesForGeomGrid.js'
  */
 export default function castRankingGrid(voterGeom, geometry, castOptions) {
     const { canPoints, dimensions } = geometry
+    const { verbosity } = castOptions
 
     // just find the vote and voteCount at each grid point
     const makeGrid = (dimensions === 1) ? makeGrid1D : makeGrid2D
@@ -40,9 +41,6 @@ export default function castRankingGrid(voterGeom, geometry, castOptions) {
         const vote = castRankingTestVote(canPoints, voterPoint, dimensions)
         voteSet[i] = vote
 
-        // todo: possibly speed things up by combining votes with the same ranking.
-        rankings[i] = vote.ranking
-
         const len = vote.indexInOrder.length
         const cansByRank = Array(len)
         for (let m = 0; m < len; m++) {
@@ -53,19 +51,23 @@ export default function castRankingGrid(voterGeom, geometry, castOptions) {
 
         totalVotes += voteCount
 
-        const { bordaScores } = vote
-        for (let k = 0; k < nk; k++) {
-            bordaScoreSumByCan[k] += bordaScores[k] * voteCount
+        if (verbosity === 2) {
+            rankings[i] = vote.ranking
+            const { bordaScores } = vote
+            for (let k = 0; k < nk; k++) {
+                bordaScoreSumByCan[k] += bordaScores[k] * voteCount
+            }
         }
     }
 
-    // bordaScore is nk-1 if a candidate receives all the votes for the voter geometry.
-    // bordaFractionAverageByCan is 1 if a candidate receives all the votes.
-    const bordaFractionAverageByCan = bordaScoreSumByCan.map(
-        (bt) => (bt / (nk - 1)) / totalVotes,
-    )
-
-    return {
-        grid, voteSet, voteCounts, totalVotes, bordaFractionAverageByCan, rankings, cansByRankList,
+    if (verbosity === 2) {
+        // bordaScore is nk-1 if a candidate receives all the votes for the voter geometry.
+        // bordaFractionAverageByCan is 1 if a candidate receives all the votes.
+        const bordaFractionAverageByCan = bordaScoreSumByCan.map(
+            (bt) => (bt / (nk - 1)) / totalVotes,
+        )
+        return { grid, voteSet, voteCounts, totalVotes, bordaFractionAverageByCan, rankings, cansByRankList }
     }
+
+    return { grid, voteSet, voteCounts, totalVotes, cansByRankList }
 }
