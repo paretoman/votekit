@@ -33,32 +33,32 @@ export default function VoterShape(
     self.setAction = {
         exists(e) {
             self.exists = e
-            changes.add(['draggables'])
+            changes.add(['voters', 'draggables'])
         },
         shape2p(p) {
             self.shape2.x = p.x
             self.shape2.y = p.y
-            changes.add(['draggables'])
+            changes.add(['voters', 'draggables'])
         },
         shape1x(x) {
             self.shape1.x = x
-            changes.add(['draggables'])
+            changes.add(['voters', 'draggables'])
         },
         shape2w(w) {
             self.shape2.w = w
-            changes.add(['width'])
+            changes.add(['voters', 'width'])
         },
         shape1w(w) {
             self.shape1.w = w
-            changes.add(['width'])
+            changes.add(['voters', 'width'])
         },
         shape1densityProfile(d) {
             self.shape1.densityProfile = d
-            changes.add(['densityProfile'])
+            changes.add(['voters', 'densityProfile'])
         },
         shape2densityProfile(d) {
             self.shape2.densityProfile = d
-            changes.add(['densityProfile'])
+            changes.add(['voters', 'densityProfile'])
         },
     }
 

@@ -43,7 +43,7 @@ export default function Districts(voterShapeList, changes, electionOptionsMan, s
             self.geography = updateCensus(self.geography)
         }
 
-        if (changes.check(['draggables', 'dimensions', 'numTracts'])) {
+        if (changes.check(['voters', 'dimensions', 'numTracts'])) {
             const { dimensions } = simOptions
             const voterGeoms = voterShapeList.getGeoms(dimensions)
             self.geography = updateVoters(self.geography, voterGeoms, dimensions)
