@@ -11,9 +11,18 @@
 		{
 			"type": "npm",
 			"script": "check-types",
-			"problemMatcher": ["$tsc"],
+			"problemMatcher": [
+				"$tsc"
+			],
 			"label": "npm: check-types",
-			"detail": "tsc --noEmit",
+			"detail": "tsc --noEmit -p ./jsconfig.json"
+		},
+		{
+			"type": "npm",
+			"script": "check-types-silent",
+			"problemMatcher": [],
+			"label": "npm: check-types-silent",
+			"detail": "tsc-silent -p ./jsconfig.json --suppress @/src/lib @/snowpack.config.cjs @/test/test.js",
 			"group": {
 				"kind": "build",
 				"isDefault": true
