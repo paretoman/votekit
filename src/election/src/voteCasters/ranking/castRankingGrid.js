@@ -42,7 +42,14 @@ export default function castRankingGrid(voterGeom, geometry, castOptions) {
 
         // todo: possibly speed things up by combining votes with the same ranking.
         rankings[i] = vote.ranking
-        cansByRankList[i] = vote.indexInOrder.map((can) => [can])
+
+        const cansByRank = Array(nk)
+        for (let k = 0; k < nk; k++) {
+            const can = vote.indexInOrder[k]
+            cansByRank[k] = [can]
+        }
+        cansByRankList[i] = cansByRank
+
         totalVotes += voteCount
 
         const { bordaScores } = vote
