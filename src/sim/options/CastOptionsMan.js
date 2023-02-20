@@ -3,20 +3,26 @@ export default function CastOptionsMan(changes, simOptions, electionOptions) {
 
     const castOptions = {
         usr: 4,
+        verbosity: 2,
     }
 
     self.update = () => {
         if (changes.check(['mode']) || changes.check(['numTracts'])) {
             if (simOptions.mode === 'one') {
                 if (electionOptions.numTracts === 1) {
+                    castOptions.verbosity = 2
                     castOptions.usr = 4
+                } else {
+                    castOptions.verbosity = 1
+                    castOptions.usr = 32
+                }
+            } else { // mode = "sample"
+                castOptions.verbosity = 0
+                if (electionOptions.numTracts === 1) {
+                    castOptions.usr = 16
                 } else {
                     castOptions.usr = 32
                 }
-            } else if (electionOptions.numTracts === 1) {
-                castOptions.usr = 16
-            } else {
-                castOptions.usr = 32
             }
         }
     }
