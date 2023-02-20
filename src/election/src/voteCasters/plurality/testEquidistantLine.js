@@ -13,16 +13,19 @@ export default function testEquidistantLine(eq, assert) {
     return [{
         label: 'Finds line equation equidistant from two points.',
         test: () => {
-            const m = equidistantLine({ x: 0, y: 0 }, { x: 1, y: 1 })
-            const e = { A: { x: 1, y: 1 }, b: 1 }
-            eq(e.A.x / e.b, m.A.x / m.b)
-            eq(e.A.y / e.b, m.A.y / m.b)
+            const m = equidistantLine([0, 0], [1, 1])
+            const e = [1, 1, 1]
+            const [max, may, mb] = m
+            const [eax, eay, eb] = e
+            eq(eax / eb, max / mb)
+            eq(eay / eb, may / mb)
         },
     }, {
         label: 'The first point satisfies Ac < b. A[0,0] < b. ',
         test: () => {
-            const m = equidistantLine({ x: 0, y: 0 }, { x: 1, y: 1 })
-            assert(m.b > 0)
+            const m = equidistantLine([0, 0], [1, 1])
+            const [, , mb] = m
+            assert(mb > 0)
         },
     },
     ]

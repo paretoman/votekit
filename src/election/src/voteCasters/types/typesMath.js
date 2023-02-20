@@ -2,9 +2,8 @@
  * @namespace typesMath
  */
 /**
- * @typedef {object} lineHomogeneous
- * @property {vector2D} A - vector indicating x and y coefficients in homogeneous coordinates
- * @property {number} b - constant in homogeneouse coordinates
+ * @typedef {number[]} lineHomogeneous - line in homogeneous coordinates, [ax, ay, b],
+ * ax * x + ay * y = b
  * @memberof typesMath
  */
 /**

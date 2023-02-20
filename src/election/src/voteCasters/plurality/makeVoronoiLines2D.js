@@ -9,6 +9,7 @@ import * as typesCanBorders from '../types/typesCanBorders.js'
 export default function makeVoronoiLines2D(canGeoms) {
     // find all lines
     const n = canGeoms.length
+    const canPoints = canGeoms.map((c) => [c.x, c.y])
     const lines = new Array(n) // each candidate has a set of lines for themselves
     for (let i = 0; i < n; i++) {
         lines[i] = []
@@ -16,8 +17,8 @@ export default function makeVoronoiLines2D(canGeoms) {
             // skip sames
             if (i === k) continue
             // find equation for a line
-            const c1 = canGeoms[i]
-            const c2 = canGeoms[k]
+            const c1 = canPoints[i]
+            const c2 = canPoints[k]
             // lines[i][k] = equidistantLine(c1,c2) // problem when i === k
             lines[i].push(equidistantLine(c1, c2))
         }

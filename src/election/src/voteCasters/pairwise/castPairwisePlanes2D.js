@@ -13,6 +13,7 @@ export default function castPairwisePlanes2D(voterGeom, geometry) {
     const totalArea = calcVoterTotalArea(voterGeom)
 
     const n = canGeoms.length
+    const canPoints = canGeoms.map((c) => [c.x, c.y])
 
     const winsPairwise = Array(n).fill(0)
     for (let i = 0; i < n; i++) {
@@ -23,7 +24,7 @@ export default function castPairwisePlanes2D(voterGeom, geometry) {
         for (let k = i + 1; k < n; k++) {
             // find split plane
 
-            const plane = eqPlane(canGeoms[i], canGeoms[k])
+            const plane = eqPlane(canPoints[i], canPoints[k])
 
             const dist = calcDist(plane, voterGeom)
 
@@ -38,8 +39,8 @@ export default function castPairwisePlanes2D(voterGeom, geometry) {
     return { winsPairwise, totalVotes: totalArea }
 }
 function eqPlane(c1, c2) {
-    const { A, b } = equidistantLine(c1, c2)
-    return [A.x, A.y, -b]
+    const [ax, ay, b] = equidistantLine(c1, c2)
+    return [ax, ay, -b]
 }
 function calcDist(plane, voterGeom) {
     // https://en.wikipedia.org/wiki/Distance_from_a_point_to_a_line

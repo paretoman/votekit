@@ -24,6 +24,7 @@ export default function castRankingFindPolygons(voterGeom, canGeoms) {
     let cells = [voterPoly]
 
     const n = canGeoms.length
+    const canPoints = canGeoms.map((c) => [c.x, c.y])
     let bordaScore = [Array(n).fill(0)]
 
     for (let i = 0; i < n - 1; i++) {
@@ -37,7 +38,7 @@ export default function castRankingFindPolygons(voterGeom, canGeoms) {
             for (let m = 0; m < cn; m++) {
                 const subject = cells[m]
 
-                const plane = eqPlane(canGeoms[i], canGeoms[k])
+                const plane = eqPlane(canPoints[i], canPoints[k])
 
                 const newC = splitConvex(subject, plane)
 
@@ -107,6 +108,6 @@ function makeCircle(voterGeom) {
 }
 
 function eqPlane(c1, c2) {
-    const { A, b } = equidistantLine(c1, c2)
-    return [A.x, A.y, -b]
+    const [ax, ay, b] = equidistantLine(c1, c2)
+    return [ax, ay, -b]
 }

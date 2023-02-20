@@ -35,10 +35,7 @@ export default function sumCircle(circle, lineSet) {
         // A.x * x + A.y * y = b
         // y = (b - A.x * x) / A.y
         for (let i = 0; i < lineSet.length; i++) {
-            const line = lineSet[i]
-            const ay = line.A.y
-            const ax = line.A.x
-            const { b } = line
+            const [ax, ay, b] = lineSet[i]
             if (ay === 0) {
                 if (ax * x < b) {
                     // no bounds

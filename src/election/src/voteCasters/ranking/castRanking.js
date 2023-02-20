@@ -44,9 +44,14 @@ export default function castRanking(geometry, castOptions) {
             totalVotes: totalVotesForGeom } = votesForGeom
 
         // concat
-        voteCounts.push(...voteCountsForGeom)
-        rankings.push(...rankingsForGeom)
-        cansByRankList.push(...cansByRankListForGeom)
+        const n1 = voteCounts.length
+        const n2 = voteCountsForGeom.length
+        voteCounts.length += n2
+        for (let i = 0; i < n2; i++) {
+            voteCounts[n1 + i] = voteCountsForGeom[i]
+            rankings[n1 + i] = rankingsForGeom[i]
+            cansByRankList[n1 + i] = cansByRankListForGeom[i]
+        }
         totalVotes += totalVotesForGeom
 
         // tally first preferences

@@ -2,12 +2,15 @@ import * as typesMath from '../types/typesMath.js'
 /**
  * Make line equidistant from two points.
  * The line can be used to determine if a new point c is closer to c1 or c2.
- * For the line {A,b}, Ac < b means the point c is close to c1.
- * @param {typesMath.vector2D} c1
- * @param {typesMath.vector2D} c2
+ * For the line [ax, ay, b] and point c = [x,y], ax * x + ay * y < b means the point c is closer to c1.
+ * @param {number[]} c1
+ * @param {number[]} c2
  * @returns {typesMath.lineHomogeneous}
  */
 export default function equidistantLine(c1, c2) {
+    const [c1x, c1y] = c1
+    const [c2x, c2y] = c2
+
     // Ac < b
     // this is the condition that x counts for a candidate.
 
@@ -15,12 +18,12 @@ export default function equidistantLine(c1, c2) {
     // https://math.stackexchange.com/a/771773
 
     // difference between points
-    const dx = c2.x - c1.x
-    const dy = c2.y - c1.y
+    const dx = c2x - c1x
+    const dy = c2y - c1y
 
     // midpoint between points
-    const mx = (c1.x + c2.x) * 0.5
-    const my = (c1.y + c2.y) * 0.5
+    const mx = (c1x + c2x) * 0.5
+    const my = (c1y + c2y) * 0.5
 
     // equation for line
     // (y-my) / (x-mx) = - dx / dy
@@ -28,11 +31,12 @@ export default function equidistantLine(c1, c2) {
     // implies dx * x + dy * y = mx * dx + my * dy
     // rename to A = [dx;dy]
     //           b = mx * dx + my * dy
-    const A = { x: dx, y: dy }
+    const ax = dx
+    const ay = dy
     const b = mx * dx + my * dy
 
     // is c1 or c2 closer?
     // c1 is closer is equivalent to Ac < b
 
-    return { A, b }
+    return [ax, ay, b]
 }
