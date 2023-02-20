@@ -19,7 +19,8 @@ electionOptions structure
 * voteCasterName
 * socialChoiceType
 * castOptions
-  * usr
+  * usr: under-sampling ratio - how many pixels in length between sampling points
+  * verbosity: how much data to store in votes data structure.
 * socialChoiceOptions
   * seats
   * threshold

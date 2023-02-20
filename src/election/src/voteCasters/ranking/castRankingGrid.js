@@ -26,10 +26,15 @@ export default function castRankingGrid(voterGeom, geometry, castOptions) {
     const grid = makeGrid(voterGeom, castOptions)
 
     const nk = canPoints.length
-    const bordaScoreSumByCan = Array(nk).fill(0)
-    const rankings = new Array(nk)
     const cansByRankList = new Array(nk)
     let totalVotes = 0
+
+    let bordaScoreSumByCan
+    let rankings
+    if (verbosity >= 2) {
+        bordaScoreSumByCan = Array(nk).fill(0)
+        rankings = new Array(nk)
+    }
 
     // find vote
     const { voteCounts } = grid
@@ -38,8 +43,7 @@ export default function castRankingGrid(voterGeom, geometry, castOptions) {
         const voteCount = voteCounts[i]
 
         const voterPoint = grid.voterPoints[i]
-        const vote = castRankingTestVote(canPoints, voterPoint, dimensions)
-        voteSet[i] = vote
+        const vote = castRankingTestVote(canPoints, voterPoint, dimensions, verbosity)
 
         const len = vote.indexInOrder.length
         const cansByRank = Array(len)
@@ -51,23 +55,24 @@ export default function castRankingGrid(voterGeom, geometry, castOptions) {
 
         totalVotes += voteCount
 
-        if (verbosity === 2) {
-            rankings[i] = vote.ranking
-            const { bordaScores } = vote
-            for (let k = 0; k < nk; k++) {
-                bordaScoreSumByCan[k] += bordaScores[k] * voteCount
-            }
+        if (verbosity < 2) continue
+
+        voteSet[i] = vote
+
+        rankings[i] = vote.ranking
+        const { bordaScores } = vote
+        for (let k = 0; k < nk; k++) {
+            bordaScoreSumByCan[k] += bordaScores[k] * voteCount
         }
     }
-
-    if (verbosity === 2) {
-        // bordaScore is nk-1 if a candidate receives all the votes for the voter geometry.
-        // bordaFractionAverageByCan is 1 if a candidate receives all the votes.
-        const bordaFractionAverageByCan = bordaScoreSumByCan.map(
-            (bt) => (bt / (nk - 1)) / totalVotes,
-        )
-        return { grid, voteSet, voteCounts, totalVotes, bordaFractionAverageByCan, rankings, cansByRankList }
+    if (verbosity < 2) {
+        return { grid, voteSet, voteCounts, totalVotes, cansByRankList }
     }
 
-    return { grid, voteSet, voteCounts, totalVotes, cansByRankList }
+    // bordaScore is nk-1 if a candidate receives all the votes for the voter geometry.
+    // bordaFractionAverageByCan is 1 if a candidate receives all the votes.
+    const bordaFractionAverageByCan = bordaScoreSumByCan.map(
+        (bt) => (bt / (nk - 1)) / totalVotes,
+    )
+    return { grid, voteSet, voteCounts, totalVotes, bordaFractionAverageByCan, rankings, cansByRankList }
 }

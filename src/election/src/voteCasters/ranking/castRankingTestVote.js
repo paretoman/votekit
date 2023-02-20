@@ -6,7 +6,7 @@ import * as typesVote from '../types/typesVote.js'
  * Vote for the closest candidate.
  * @returns {typesVote.rankingVote}
  */
-export default function castRankingTestVote(canPoints, voterPoint, dimensions) {
+export default function castRankingTestVote(canPoints, voterPoint, dimensions, verbosity) {
     const d2f = (dimensions === 1) ? d2f1 : d2f2
 
     const dist2 = Array(canPoints.length)
@@ -16,6 +16,8 @@ export default function castRankingTestVote(canPoints, voterPoint, dimensions) {
     const n = canPoints.length
     const indexInOrder = range(n).sort((a, b) => dist2[a] - dist2[b])
     // Note that ties are not handled.
+
+    if (verbosity === 0) return { indexInOrder }
 
     const ranking = Array(n)
     const bordaScores = Array(n)

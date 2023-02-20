@@ -5,10 +5,10 @@
 /**
  * @typedef rankingVote - a rank for each candidate.
  * @property {number[]} indexInOrder - an array of candidates in order of rank. Only one candidate is listed per rank.
- * @property {number[]} ranking - an array of ranks, indexed by candidate.
- * @property {number[][]} netWinsPairwise - The number of wins minus the number of losses for the first of a pair of candidates.
- * @property {number[]} bordaScores - The borda scores for each candidate for one vote.
- * @property {number[]} bordaFractions - Fractional borda scores, between 0 and 1.
+ * @property {number[]} [ranking] - an array of ranks, indexed by candidate.
+ * @property {number[][]} [netWinsPairwise] - The number of wins minus the number of losses for the first of a pair of candidates.
+ * @property {number[]} [bordaScores] - The borda scores for each candidate for one vote.
+ * @property {number[]} [bordaFractions] - Fractional borda scores, between 0 and 1.
  * @memberof typesVote
  */
 
