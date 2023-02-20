@@ -8,23 +8,27 @@ import * as typesVote from '../types/typesVote.js'
  */
 export default function castRankingTestVote(canPoints, voterPoint, dimensions) {
     const d2f = (dimensions === 1) ? d2f1 : d2f2
-    const dist2 = canPoints.map((c) => d2f(c, voterPoint))
+
+    const dist2 = Array(canPoints.length)
+    for (let i = 0; i < canPoints.length; i++) {
+        dist2[i] = d2f(canPoints[i], voterPoint)
+    }
     const n = canPoints.length
     const indexInOrder = range(n).sort((a, b) => dist2[a] - dist2[b])
     // Note that ties are not handled.
 
-    const ranking = new Array(n)
-    const bordaScores = new Array(n)
-    const bordaFractions = new Array(n)
+    const ranking = Array(n)
+    const bordaScores = Array(n)
+    const bordaFractions = Array(n)
     for (let i = 0; i < n; i++) {
         ranking[indexInOrder[i]] = i + 1
         bordaScores[indexInOrder[i]] = n - i - 1
         bordaFractions[indexInOrder[i]] = (n - i - 1) / (n - 1)
     }
     // Does i beat k? 1 if yes, -1 if opposite, 0 if tie
-    const netWinsPairwise = new Array(n)
+    const netWinsPairwise = Array(n)
     for (let i = 0; i < n; i++) {
-        netWinsPairwise[i] = (new Array(n)).fill(0)
+        netWinsPairwise[i] = Array(n).fill(0)
         for (let k = 0; k < n; k++) {
             if (ranking[i] === ranking[k]) continue
             netWinsPairwise[i][k] = (ranking[i] < ranking[k]) ? 1 : -1
