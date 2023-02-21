@@ -1,6 +1,6 @@
 /** @module */
 
-import castScoreGrid from '../score/castScoreGrid.js'
+import castScoreFullGrid from './castScoreFullGrid.js'
 
 // The main difference between this and plurality is we need to return a grid from here.
 // We also will return a set of votes from that grid.
@@ -17,6 +17,7 @@ import castScoreGrid from '../score/castScoreGrid.js'
  */
 export default function castScoreFull(geometry, castOptions) {
     const { canPoints, voterGeoms, parties } = geometry
+    const { verbosity } = castOptions
 
     // get fraction of votes for each candidate so we can summarize results
     const n = canPoints.length
@@ -28,7 +29,7 @@ export default function castScoreFull(geometry, castOptions) {
     for (let i = 0; i < voterGeoms.length; i++) {
         const voterGeom = voterGeoms[i]
 
-        const votesForGeom = castScoreGrid(voterGeom, geometry, castOptions)
+        const votesForGeom = castScoreFullGrid(voterGeom, geometry, castOptions)
         votesByGeom[i] = votesForGeom
         const { totalVotes: totalVotesForGeom } = votesForGeom
 
@@ -72,6 +73,10 @@ export default function castScoreFull(geometry, castOptions) {
     const preferenceTallies = { voteFractions }
     const candidateTallies = { scoreFractionAverageByCan }
     const numCans = canPoints.length
-    const votes = { preferenceLists, preferenceTallies, candidateTallies, votesByGeom, parties, numCans }
+
+    const votes = { preferenceLists, preferenceTallies, candidateTallies, parties, numCans }
+    if (verbosity < 2) return votes
+
+    votes.votesByGeom = votesByGeom
     return votes
 }

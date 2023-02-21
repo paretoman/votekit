@@ -6,16 +6,21 @@ import { minMax } from '../../election/mathHelpers.js'
  * Vote for the closest candidate.
  */
 export default function castScorePoint(canPoints, voterPoint, dimensions) {
-    const lc = canPoints.length
-    const scoreVote = (new Array(lc)).fill(0)
     const df = (dimensions === 1) ? df1 : df2
 
+    const n = canPoints.length
+    const dist = Array(n)
+    for (let i = 0; i < n; i++) {
+        dist[i] = df(canPoints[i], voterPoint)
+    }
+
     // in the current implementation, all candidates are frontrunners
-    const dist = canPoints.map((c) => df(c, voterPoint))
+
     const [min, max] = minMax(dist)
     const maxscore = 1
     const minscore = 0
-    for (let i = 0; i < lc; i++) {
+    const scoreVote = (new Array(n)).fill(0)
+    for (let i = 0; i < n; i++) {
         const d = dist[i]
         if (d <= min) {
             scoreVote[i] = maxscore

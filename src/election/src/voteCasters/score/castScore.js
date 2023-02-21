@@ -18,6 +18,7 @@ import castScoreGrid from './castScoreGrid.js'
  */
 export default function castScore(geometry, castOptions) {
     const { canPoints, voterGeoms, parties } = geometry
+    const { verbosity } = castOptions
 
     // get fraction of votes for each candidate so we can summarize results
     const n = canPoints.length
@@ -42,6 +43,9 @@ export default function castScore(geometry, castOptions) {
 
     const candidateTallies = { scoreFractionAverageByCan }
     const numCans = canPoints.length
-    const votes = { candidateTallies, votesByGeom, parties, numCans }
+    const votes = { candidateTallies, parties, numCans }
+    if (verbosity < 2) return votes
+
+    votes.votesByGeom = votesByGeom
     return votes
 }

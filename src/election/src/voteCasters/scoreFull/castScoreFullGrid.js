@@ -1,13 +1,13 @@
 /** @module */
 
-import castScorePoint from './castScorePoint.js'
+import castScorePoint from '../score/castScorePoint.js'
 import makeGrid1D from '../voteCasters/makeGrid1D.js'
 import makeGrid2D from '../voteCasters/makeGrid2D.js'
 
 /**
  * Tally votes.
  */
-export default function castScoreGrid(voterGeom, geometry, castOptions) {
+export default function castScoreFullGrid(voterGeom, geometry, castOptions) {
     const { canPoints, dimensions } = geometry
     const { verbosity } = castOptions
 
@@ -33,7 +33,7 @@ export default function castScoreGrid(voterGeom, geometry, castOptions) {
         }
     }
     if (verbosity < 2) {
-        return { scoreSumByCan, totalVotes }
+        return { grid, voteSet, scoreSumByCan, totalVotes }
     }
     const votesForGeom = { grid, voteSet, scoreSumByCan, totalVotes, voterGeom }
     return votesForGeom
