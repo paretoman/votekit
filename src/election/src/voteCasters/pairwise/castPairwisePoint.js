@@ -9,11 +9,11 @@ import * as typesVote from '../types/typesVote.js'
 export default function castPairwisePoint(canPoints, voterPoint, dimensions, verbosity) {
     const d2f = (dimensions === 1) ? d2f1 : d2f2
 
-    const dist2 = Array(canPoints.length)
-    for (let i = 0; i < canPoints.length; i++) {
+    const n = canPoints.length
+    const dist2 = Array(n)
+    for (let i = 0; i < n; i++) {
         dist2[i] = d2f(canPoints[i], voterPoint)
     }
-    const n = canPoints.length
 
     // Does i beat k? 1 if yes, -1 if opposite, 0 if tie
     const netWinsPairwise = Array(n)

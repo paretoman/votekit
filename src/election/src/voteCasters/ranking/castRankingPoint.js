@@ -9,11 +9,11 @@ import * as typesVote from '../types/typesVote.js'
 export default function castRankingPoint(canPoints, voterPoint, dimensions, verbosity) {
     const d2f = (dimensions === 1) ? d2f1 : d2f2
 
-    const dist2 = Array(canPoints.length)
-    for (let i = 0; i < canPoints.length; i++) {
+    const n = canPoints.length
+    const dist2 = Array(n)
+    for (let i = 0; i < n; i++) {
         dist2[i] = d2f(canPoints[i], voterPoint)
     }
-    const n = canPoints.length
     const indexInOrder = range(n).sort((a, b) => dist2[a] - dist2[b])
     // Note that ties are not handled.
 
