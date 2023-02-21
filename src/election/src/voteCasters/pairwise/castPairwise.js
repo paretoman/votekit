@@ -14,6 +14,7 @@ import * as typesVotes from '../types/typesVotes.js'
  */
 export default function castPairwise(geometry, castOptions) {
     const { canPoints, voterGeoms, dimensions, parties } = geometry
+    const { verbosity } = castOptions
 
     const someGaussian2D = voterGeoms.some((v) => v.densityProfile === 'gaussian') && dimensions === 2
 
@@ -35,7 +36,6 @@ export default function castPairwise(geometry, castOptions) {
     const votesByGeom = []
     voterGeoms.forEach((voterGeom, g) => {
         const votesForGeom = cast(voterGeom, geometry, castOptions)
-        votesByGeom[g] = votesForGeom
         const { winsPairwise: winsPairwiseForGeom,
             totalVotes: totalVotesForGeom } = votesForGeom
 
@@ -45,9 +45,21 @@ export default function castPairwise(geometry, castOptions) {
             }
         }
         totalVotes += totalVotesForGeom
+
+        if (verbosity < 2) return
+
+        votesByGeom[g] = votesForGeom
     })
     const invTotalCount = 1 / totalVotes
     const winFractionPairwise = winsPairwise.map((x) => x.map((a) => a * invTotalCount))
+
+    const pairwiseTallies = { winFractionPairwise }
+    const numCans = canPoints.length
+
+    if (verbosity >= 2) {
+        const votes = { pairwiseTallies, parties, numCans }
+        return votes
+    }
 
     // borda scores
     const bordaScoreSumByCan = Array(n).fill(0)
@@ -61,8 +73,6 @@ export default function castPairwise(geometry, castOptions) {
     }
 
     const candidateTallies = { bordaFractionAverageByCan }
-    const pairwiseTallies = { winFractionPairwise }
-    const numCans = canPoints.length
     const votes = { candidateTallies, pairwiseTallies, votesByGeom, parties, numCans }
     return votes
 }

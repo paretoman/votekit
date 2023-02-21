@@ -17,28 +17,35 @@ export default function castRankingPoint(canPoints, voterPoint, dimensions, verb
     const indexInOrder = range(n).sort((a, b) => dist2[a] - dist2[b])
     // Note that ties are not handled.
 
-    if (verbosity === 0) return { indexInOrder }
+    const cansByRank = Array(n)
+    for (let i = 0; i < n; i++) {
+        const can = indexInOrder[i]
+        cansByRank[i] = [can]
+    }
+
+    if (verbosity === 0) return { cansByRank }
 
     const ranking = Array(n)
     const bordaScores = Array(n)
     const bordaFractions = Array(n)
     for (let i = 0; i < n; i++) {
-        ranking[indexInOrder[i]] = i + 1
-        bordaScores[indexInOrder[i]] = n - i - 1
-        bordaFractions[indexInOrder[i]] = (n - i - 1) / (n - 1)
+        const can = indexInOrder[i]
+        ranking[can] = i + 1
+        bordaScores[can] = n - i - 1
+        bordaFractions[can] = (n - i - 1) / (n - 1)
     }
     // Does i beat k? 1 if yes, -1 if opposite, 0 if tie
     const netWinsPairwise = Array(n)
     for (let i = 0; i < n; i++) {
         netWinsPairwise[i] = Array(n).fill(0)
         for (let k = 0; k < n; k++) {
-            if (ranking[i] === ranking[k]) continue
-            netWinsPairwise[i][k] = (ranking[i] < ranking[k]) ? 1 : -1
+            if (dist2[i] === dist2[k]) continue
+            netWinsPairwise[i][k] = (dist2[i] < dist2[k]) ? 1 : -1
         }
     }
 
     return {
-        indexInOrder, ranking, netWinsPairwise, bordaFractions, bordaScores,
+        cansByRank, ranking, netWinsPairwise, bordaFractions, bordaScores,
     }
 }
 function d2f1(a, b) {

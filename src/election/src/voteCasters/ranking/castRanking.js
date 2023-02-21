@@ -39,10 +39,6 @@ export default function castRanking(geometry, castOptions) {
     voterGeoms.forEach((voterGeom, g) => {
         const votesForGeom = cast(voterGeom, geometry, castOptions)
 
-        if (verbosity === 2) {
-            votesByGeom[g] = votesForGeom
-        }
-
         const { rankings: rankingsForGeom,
             cansByRankList: cansByRankListForGeom,
             voteCounts: voteCountsForGeom,
@@ -69,6 +65,10 @@ export default function castRanking(geometry, castOptions) {
                 firstPreferences[c0] += voteCountsForGeom[i]
             }
         }
+
+        if (verbosity < 2) return
+
+        votesByGeom[g] = votesForGeom
     })
     const voteFractions = voteCounts.map((x) => x / totalVotes)
     const firstPreferenceFractions = firstPreferences.map((x) => x / totalVotes)

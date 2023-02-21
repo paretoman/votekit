@@ -24,33 +24,28 @@ export default function castRankingGrid(voterGeom, geometry, castOptions) {
     const makeGrid = (dimensions === 1) ? makeGrid1D : makeGrid2D
     // @ts-ignore
     const grid = makeGrid(voterGeom, castOptions)
+    const { voteCounts, totalVotes, voterPoints } = grid
 
     const nk = canPoints.length
     const cansByRankList = new Array(nk)
 
     let bordaScoreSumByCan
     let rankings
+    let voteSet
     if (verbosity >= 2) {
         bordaScoreSumByCan = Array(nk).fill(0)
         rankings = new Array(nk)
+        voteSet = Array(voteCounts.length)
     }
 
     // find vote
-    const { voteCounts, totalVotes } = grid
-    const voteSet = Array(voteCounts.length)
     for (let i = 0; i < voteCounts.length; i++) {
         const voteCount = voteCounts[i]
+        const voterPoint = voterPoints[i]
 
-        const voterPoint = grid.voterPoints[i]
         const vote = castRankingPoint(canPoints, voterPoint, dimensions, verbosity)
 
-        const len = vote.indexInOrder.length
-        const cansByRank = Array(len)
-        for (let m = 0; m < len; m++) {
-            const can = vote.indexInOrder[m]
-            cansByRank[m] = [can]
-        }
-        cansByRankList[i] = cansByRank
+        cansByRankList[i] = vote.cansByRank
 
         if (verbosity < 2) continue
 
