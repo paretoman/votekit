@@ -5,7 +5,7 @@ import getPoints from '../entities/getPoints.js'
  * @param {*} voterShapeList
  * @param {*} candidateList
  * @param {*} simOptions
- * @returns {Object} geometry is input for castTestVote
+ * @returns {Object} geometry is input for castPoint
  */
 export default function getTestGeometry(testVoter, candidateList, simOptions) {
     const { dimensions } = simOptions

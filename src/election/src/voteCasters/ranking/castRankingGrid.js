@@ -1,6 +1,6 @@
 /** @module */
 
-import castRankingTestVote from './castRankingTestVote.js'
+import castRankingPoint from './castRankingPoint.js'
 import makeGrid1D from '../voteCasters/makeGrid1D.js'
 import makeGrid2D from '../voteCasters/makeGrid2D.js'
 
@@ -42,7 +42,7 @@ export default function castRankingGrid(voterGeom, geometry, castOptions) {
         const voteCount = voteCounts[i]
 
         const voterPoint = grid.voterPoints[i]
-        const vote = castRankingTestVote(canPoints, voterPoint, dimensions, verbosity)
+        const vote = castRankingPoint(canPoints, voterPoint, dimensions, verbosity)
 
         const len = vote.indexInOrder.length
         const cansByRank = Array(len)

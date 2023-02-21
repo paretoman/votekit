@@ -6,7 +6,7 @@ import * as typesVote from '../types/typesVote.js'
  * Vote for the closest candidate.
  * @returns {typesVote.rankingVote}
  */
-export default function castRankingTestVote(canPoints, voterPoint, dimensions, verbosity) {
+export default function castRankingPoint(canPoints, voterPoint, dimensions, verbosity) {
     const d2f = (dimensions === 1) ? d2f1 : d2f2
 
     const dist2 = Array(canPoints.length)
