@@ -1,9 +1,9 @@
 /** @module */
 
 import { range } from '../../election/mathHelpers.js'
-import castRankingPoint from '../ranking/castRankingPoint.js'
 import makeGrid1D from '../voteCasters/makeGrid1D.js'
 import makeGrid2D from '../voteCasters/makeGrid2D.js'
+import castPairwisePoint from './castPairwisePoint.js'
 
 /**
  * Tally votes.
@@ -27,7 +27,7 @@ export default function castPairwiseGrid(voterGeom, geometry, castOptions) {
     for (let i = 0; i < gridLength; i++) {
         const voteCount = grid.voteCounts[i]
         const voterPoint = grid.voterPoints[i]
-        const vote = castRankingPoint(canPoints, voterPoint, dimensions)
+        const vote = castPairwisePoint(canPoints, voterPoint, dimensions)
         voteSet[i] = vote
 
         const { netWinsPairwise } = vote

@@ -8,6 +8,7 @@ import castPluralityPoint from '../plurality/castPluralityPoint.js'
 import castScorePoint from '../score/castScorePoint.js'
 import castRankingPoint from '../ranking/castRankingPoint.js'
 import castPairwise from '../pairwise/castPairwise.js'
+import castPairwisePoint from '../pairwise/castPairwisePoint.js'
 import makeCanBordersPairwise from '../pairwise/makeCanBordersPairwise.js'
 import makeCanBordersPlurality from '../plurality/makeCanBordersPlurality.js'
 import makeCanBordersRanking from '../ranking/makeCanBordersRanking.js'
@@ -21,7 +22,7 @@ const voteCasters = {
     score: { cast: castScore, castPoint: castScorePoint },
     scoreFull: { cast: castScoreFull, castPoint: castScorePoint },
     ranking: { cast: castRanking, castPoint: castRankingPoint, makeCanBorders: makeCanBordersRanking },
-    pairwise: { cast: castPairwise, castPoint: castRankingPoint, makeCanBorders: makeCanBordersPairwise },
+    pairwise: { cast: castPairwise, castPoint: castPairwisePoint, makeCanBorders: makeCanBordersPairwise },
 }
 
 export default voteCasters
