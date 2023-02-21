@@ -55,11 +55,8 @@ export default function castPairwise(geometry, castOptions) {
 
     const pairwiseTallies = { winFractionPairwise }
     const numCans = canPoints.length
-
-    if (verbosity >= 2) {
-        const votes = { pairwiseTallies, parties, numCans }
-        return votes
-    }
+    const votes = { pairwiseTallies, parties, numCans }
+    if (verbosity < 1) return votes
 
     // borda scores
     const bordaScoreSumByCan = Array(n).fill(0)
@@ -71,8 +68,10 @@ export default function castPairwise(geometry, castOptions) {
         }
         bordaFractionAverageByCan[i] = bordaScoreSumByCan[i] * invTotalCountTimesNMinus1
     }
-
     const candidateTallies = { bordaFractionAverageByCan }
-    const votes = { candidateTallies, pairwiseTallies, votesByGeom, parties, numCans }
+    votes.candidateTallies = candidateTallies
+    if (verbosity < 2) return votes
+
+    votes.votesByGeom = votesByGeom
     return votes
 }

@@ -24,9 +24,11 @@ export default function castPairwiseGrid(voterGeom, geometry, castOptions) {
     }
 
     let bordaScoreSumByCan
+    if (verbosity >= 1) {
+        bordaScoreSumByCan = Array(nk).fill(0)
+    }
     let voteSet
     if (verbosity >= 2) {
-        bordaScoreSumByCan = Array(nk).fill(0)
         voteSet = Array(gridLength)
     }
 
@@ -43,14 +45,16 @@ export default function castPairwiseGrid(voterGeom, geometry, castOptions) {
             }
         }
 
-        if (verbosity < 2) continue
-
-        voteSet[i] = vote
+        if (verbosity < 1) continue
 
         const { bordaScores } = vote
         for (let k = 0; k < nk; k++) {
             bordaScoreSumByCan[k] += bordaScores[k] * voteCount
         }
+
+        if (verbosity < 2) continue
+
+        voteSet[i] = vote
     }
 
     // netWins is totalVotes if a candidate receives all the votes for the voter geometry.
@@ -59,7 +63,7 @@ export default function castPairwiseGrid(voterGeom, geometry, castOptions) {
         (net) => (net + totalVotes) * 0.5,
     ))
 
-    if (verbosity < 2) {
+    if (verbosity < 1) {
         return { voteCounts, totalVotes, winsPairwise }
     }
 

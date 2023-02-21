@@ -50,9 +50,6 @@ export default function castRanking(geometry, castOptions) {
         voteCounts.length += n2
         for (let i = 0; i < n2; i++) {
             voteCounts[n1 + i] = voteCountsForGeom[i]
-            if (verbosity === 2) {
-                rankings[n1 + i] = rankingsForGeom[i]
-            }
             cansByRankList[n1 + i] = cansByRankListForGeom[i]
         }
         totalVotes += totalVotesForGeom
@@ -68,15 +65,23 @@ export default function castRanking(geometry, castOptions) {
 
         if (verbosity < 2) return
 
+        for (let i = 0; i < n2; i++) {
+            rankings[n1 + i] = rankingsForGeom[i]
+        }
+
         votesByGeom[g] = votesForGeom
     })
     const voteFractions = voteCounts.map((x) => x / totalVotes)
     const firstPreferenceFractions = firstPreferences.map((x) => x / totalVotes)
 
-    const preferenceLists = { rankings, cansByRankList }
+    const preferenceLists = { cansByRankList }
     const preferenceTallies = { voteFractions }
     const candidateTallies = { firstPreferenceFractions }
     const numCans = canPoints.length
-    const votes = { preferenceLists, preferenceTallies, candidateTallies, votesByGeom, parties, numCans }
+    const votes = { preferenceLists, preferenceTallies, candidateTallies, parties, numCans }
+    if (verbosity < 2) return votes
+
+    preferenceLists.rankings = rankings
+    votes.votesByGeom = votesByGeom
     return votes
 }
