@@ -33,8 +33,8 @@ export default function castScoreFullGrid(voterGeom, geometry, castOptions) {
         }
     }
     if (verbosity < 2) {
-        return { grid, voteSet, scoreSumByCan, totalVotes }
+        return { voteCounts, voteSet, scoreSumByCan, totalVotes }
     }
-    const votesForGeom = { grid, voteSet, scoreSumByCan, totalVotes, voterGeom }
+    const votesForGeom = { grid, voteCounts, voteSet, scoreSumByCan, totalVotes, voterGeom }
     return votesForGeom
 }

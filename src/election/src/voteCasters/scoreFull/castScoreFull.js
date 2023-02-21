@@ -2,8 +2,7 @@
 
 import castScoreFullGrid from './castScoreFullGrid.js'
 
-// The main difference between this and plurality is we need to return a grid from here.
-// We also will return a set of votes from that grid.
+// The main difference between this and score is we need to return a set of votes from here.
 
 /**
  * Voters cast votes for candidates.
@@ -46,18 +45,18 @@ export default function castScoreFull(geometry, castOptions) {
     let index = 0
     for (let i = 0; i < voterGeoms.length; i++) {
         const {
-            grid, voteSet,
+            voteCounts, voteSet,
             scoreSumByCan: scoreSumByCanForGeom,
         } = votesByGeom[i]
 
         // use voteIndex to find flattened index
-        // voteIndex = Number[] with first index as geometry and second index as grid index
+        // voteIndex = Number[] with first index as geometry and second index as voteSet index
         const voteIndex = []
 
         for (let j = 0; j < voteSet.length; j++) {
             scoreVotes[index] = voteSet[j].scoreVote
             voteIndex[j] = index
-            voteFractions[index] = grid.voteCounts[j] * invTotalCount
+            voteFractions[index] = voteCounts[j] * invTotalCount
             index += 1
         }
         votesByGeom[i].voteIndex = voteIndex

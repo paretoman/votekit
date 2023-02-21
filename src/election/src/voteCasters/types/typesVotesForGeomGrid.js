@@ -40,11 +40,21 @@ import * as typesGeoms from './typesGeoms.js'
  */
 /**
  * @typedef {object} votesForGeomGridScore
- * @property {typesGrid.grid} grid - data for points on a grid
- * @property {typesVote.scoreVote[]} voteSet - a vote for each grid point
  * @property {number[]} scoreSumByCan
  * @property {number} totalVotes
- * @property {typesGeoms.voterGeom} voterGeom
+ * @property {typesGrid.grid} [grid] - data for points on a grid
+ * @property {typesVote.scoreVote[]} [voteSet] - a vote for each grid point
+ * @property {typesGeoms.voterGeom} [voterGeom]
+ * @memberof typesVotesForGeomGrid
+ */
+/**
+ * @typedef {object} votesForGeomGridScoreFull
+ * @property {number[]} scoreSumByCan
+ * @property {number} totalVotes
+ * @property {number[]} voteCounts
+ * @property {typesVote.scoreVote[]} voteSet - a vote for each grid point
+ * @property {typesGrid.grid} [grid] - data for points on a grid
+ * @property {typesGeoms.voterGeom} [voterGeom]
  * @memberof typesVotesForGeomGrid
  */
 
