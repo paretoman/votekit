@@ -6,11 +6,19 @@ import * as typesVote from '../types/typesVote.js'
  * Vote for the closest candidate.
  * @returns {typesVote.pluralityVote}
  */
-export default function castPluralityPoint(canPoints, voterPoint, dimensions) {
+export default function castPluralityPoint(canPoints, voterPoint, dimensions, verbosity) {
     const d2f = (dimensions === 1) ? d2f1 : d2f2
-    const dist2 = canPoints.map((c) => d2f(c, voterPoint))
-    const i = minIndex(dist2)
     const n = canPoints.length
+    const dist2 = Array(n)
+    for (let i = 0; i < n; i++) {
+        dist2[i] = d2f(canPoints[i], voterPoint)
+    }
+    const i = minIndex(dist2)
+
+    if (verbosity < 2) {
+        return { pluralityVote: i }
+    }
+
     const pluralityAllocation = (new Array(n)).fill(0)
     pluralityAllocation[i] = 1
     const vote = { pluralityAllocation, pluralityVote: i }

@@ -11,6 +11,7 @@ import * as typesVotesForGeomGrid from '../types/typesVotesForGeomGrid.js'
  */
 export default function castPluralityGrid(voterGeom, geometry, castOptions) {
     const { canPoints, dimensions } = geometry
+    const { verbosity } = castOptions
 
     // just find the vote and count at each grid point
     const makeGrid = (dimensions === 1) ? makeGrid1D : makeGrid2D
@@ -26,11 +27,17 @@ export default function castPluralityGrid(voterGeom, geometry, castOptions) {
     for (let i = 0; i < gridLength; i++) {
         const voteCounts = grid.voteCounts[i]
         const voterPoint = grid.voterPoints[i]
-        const vote = castPluralityPoint(canPoints, voterPoint, dimensions)
-        voteSet[i] = vote
+        const vote = castPluralityPoint(canPoints, voterPoint, dimensions, verbosity)
         const { pluralityVote } = vote
         countByCan[pluralityVote] += voteCounts
         totalVotes += voteCounts
+
+        if (verbosity < 2) continue
+
+        voteSet[i] = vote
+    }
+    if (verbosity < 2) {
+        return { countByCan, totalVotes }
     }
     return {
         grid, voteSet, countByCan, totalVotes,

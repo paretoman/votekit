@@ -24,10 +24,10 @@
 
 /**
  * @typedef pluralityVote - a choice of a candidate.
- * @property {number[]} pluralityAllocation - an array of 0's except for a 1 for the chosen candidate.
  * @property {number} pluralityVote - the chosen candidate.
  * A candidate is represented as an integer from 0 to a max.
  * The max is the number of candidates minus 1.
+ * @property {number[]} [pluralityAllocation] - an array of 0's except for a 1 for the chosen candidate.
  * @memberof typesVote
  */
 

@@ -32,10 +32,10 @@ import * as typesGeoms from './typesGeoms.js'
  */
 /**
  * @typedef {object} votesForGeomGridPlurality
- * @property {typesGrid.grid} grid - data for points on a grid
- * @property {typesVote.pluralityVote[]} voteSet - a vote for each grid point
  * @property {number[]} countByCan
  * @property {number} totalVotes
+ * @property {typesGrid.grid} [grid] - data for points on a grid
+ * @property {typesVote.pluralityVote[]} [voteSet] - a vote for each grid point
  * @memberof typesVotesForGeomGrid
  */
 /**

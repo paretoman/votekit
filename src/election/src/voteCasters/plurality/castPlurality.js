@@ -16,6 +16,7 @@ import * as typesVotes from '../types/typesVotes.js'
  */
 export default function castPlurality(geometry, castOptions) {
     const { canPoints, voterGeoms, dimensions, parties } = geometry
+    const { verbosity } = castOptions
 
     const someGaussian2D = voterGeoms.some((v) => v.densityProfile === 'gaussian') && dimensions === 2
 
@@ -33,7 +34,6 @@ export default function castPlurality(geometry, castOptions) {
         const voterGeom = voterGeoms[i]
 
         const votesForGeom = cast(voterGeom, geometry, castOptions)
-        votesByGeom[i] = votesForGeom
         const { countByCan: countByCanForGeom,
             totalVotes: totalVotesForGeom } = votesForGeom
 
@@ -41,11 +41,18 @@ export default function castPlurality(geometry, castOptions) {
             countByCan[k] += countByCanForGeom[k]
         }
         totalVotes += totalVotesForGeom
+
+        if (verbosity < 2) continue
+
+        votesByGeom[i] = votesForGeom
     }
     const voteFractionsByCan = countByCan.map((x) => x / totalVotes)
 
     const candidateTallies = { voteFractionsByCan }
     const numCans = canPoints.length
-    const votes = { candidateTallies, votesByGeom, parties, numCans }
+    const votes = { candidateTallies, parties, numCans }
+    if (verbosity < 2) return votes
+
+    votes.votesByGeom = votesByGeom
     return votes
 }
