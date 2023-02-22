@@ -21,7 +21,7 @@ export default function makeGrid1D(voterGeom) {
  */
 function findGridX(voterGeom) {
     const isGauss = voterGeom.densityProfile === 'gaussian'
-    const spread = (isGauss) ? 3 : 1
+    const spread = (isGauss) ? 2 : 1
     const iWidth = Math.round(voterGeom.w * spread)
     const gridX = Array(iWidth)
     const voterPoints = Array(iWidth)

@@ -11,7 +11,7 @@ import * as typesCast from '../types/typesCast.js'
 export default function makeGrid2D(voterGeom, castOptions) {
     const { x, y, w, densityProfile } = voterGeom
     const isGauss = densityProfile === 'gaussian'
-    const spread = (isGauss) ? 3 : 1
+    const spread = (isGauss) ? 2 : 1
 
     const width = w * spread
     const { usr } = castOptions // undersampling ratio
