@@ -11,7 +11,7 @@ export default function castRankingPolygons2D(voterGeom, geometry, castOptions) 
     const { verbosity } = castOptions
 
     // draw lines across shape of voterGeom
-    let { cells, rankings, cansByRankList } = castRankingFindPolygons(voterGeom, canPoints)
+    let { cells, rankings, cansByRankList } = castRankingFindPolygons(voterGeom, canPoints, verbosity)
 
     // find area of polygons
     const cn = cells.length

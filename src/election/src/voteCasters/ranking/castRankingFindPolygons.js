@@ -11,7 +11,7 @@ import splitConvex from './splitConvex.js'
  * @param {object} voterGeom
  * @param {number[][]} canPoints
  */
-export default function castRankingFindPolygons(voterGeom, canPoints) {
+export default function castRankingFindPolygons(voterGeom, canPoints, verbosity) {
     /* Start with polygons for each voterGeom
     * At each division, increment the borda score for the closer candidate.
     * The resulting borda score is nearly the opposite of the ranking. n-i-1.
@@ -68,20 +68,28 @@ export default function castRankingFindPolygons(voterGeom, canPoints) {
         }
     }
     const cn = cells.length
-    const rankings = Array(cn)
     const cansByRankList = Array(cn)
+    let rankings
+    if (verbosity >= 2) {
+        rankings = Array(cn)
+        for (let i = 0; i < cn; i++) {
+            rankings[i] = Array(n)
+        }
+    }
     for (let i = 0; i < cn; i++) {
-        rankings[i] = Array(n)
         cansByRankList[i] = Array(n)
         for (let k = 0; k < n; k++) {
             cansByRankList[i][k] = []
         }
         for (let k = 0; k < n; k++) {
             const rik = n - bordaScore[i][k]
-            rankings[i][k] = rik
             cansByRankList[i][rik - 1].push(k)
+            if (verbosity < 2) continue
+            rankings[i][k] = rik
         }
     }
+    if (verbosity < 2) return { cells, cansByRankList }
+
     const rankingPolygons2D = { cells, rankings, cansByRankList }
     return rankingPolygons2D
 }
