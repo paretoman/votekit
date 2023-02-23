@@ -30,8 +30,9 @@ export default function castRankingFindPolygons(voterGeom, canPoints) {
         for (let k = i + 1; k < n; k++) {
             const cn = cells.length
             // split cells with voronoi, guess how many cells
-            const newCells = Array(cn * 2)
-            const newBordaScore = Array(cn * 2)
+            // the number of cells will only increase, so start with cn and add more if needed
+            const newCells = Array(cn)
+            const newBordaScore = Array(cn)
 
             let o = 0
             for (let m = 0; m < cn; m++) {
@@ -62,8 +63,6 @@ export default function castRankingFindPolygons(voterGeom, canPoints) {
                     o += 1
                 }
             }
-            newCells.splice(o)
-            newBordaScore.splice(o)
             cells = newCells
             bordaScore = newBordaScore
         }
