@@ -31,20 +31,20 @@ export default function sumCircle(circle, lineSet) {
         // then adjust the bound.
         // The y coefficient tells us whether this is an upper or lower bound.
         // Imagine infinite +y.
-        // If the y coefficient is negative, then Ac < b, and Ac = b is a lower bound.
-        // A.x * x + A.y * y = b
-        // y = (b - A.x * x) / A.y
+        // If the y coefficient is negative, then ax * x + ay * y + b < 0, and ax * x + ay * y + b = 0 is a lower bound.
+        // ax * x + ay * y + b = 0
+        // y = -(b + ax * x) / ay
         for (let i = 0; i < lineSet.length; i++) {
             const [ax, ay, b] = lineSet[i]
             if (ay === 0) {
-                if (ax * x < b) {
+                if (ax * x < -b) {
                     // no bounds
                 } else {
                     low = Infinity // bounded by x
                 }
                 // not handling 0,0 case
             } else {
-                const y2 = (b - ax * x) / ay
+                const y2 = -(b + ax * x) / ay
                 if (ay < 0) {
                     low = Math.max(low, y2)
                 } else {

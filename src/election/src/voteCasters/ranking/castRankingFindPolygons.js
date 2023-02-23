@@ -37,7 +37,7 @@ export default function castRankingFindPolygons(voterGeom, canPoints) {
             for (let m = 0; m < cn; m++) {
                 const subject = cells[m]
 
-                const plane = eqPlane(canPoints[i], canPoints[k])
+                const plane = equidistantLine(canPoints[i], canPoints[k])
 
                 const newC = splitConvex(subject, plane)
 
@@ -104,9 +104,4 @@ function makeCircle(voterGeom) {
         circle[i] = [px, py]
     }
     return circle
-}
-
-function eqPlane(c1, c2) {
-    const [ax, ay, b] = equidistantLine(c1, c2)
-    return [ax, ay, -b]
 }
