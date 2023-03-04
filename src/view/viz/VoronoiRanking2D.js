@@ -25,7 +25,8 @@ export default function VoronoiRanking2D(voterGroup, candidateList, screen) {
             canList = candidateList.getEntities()
             const canPoints = canList.map((can) => [can.shape2.x, can.shape2.y])
             const voterGeom = voterGroup.shape2
-            const cd = castRankingFindPolygons(voterGeom, canPoints)
+            const verbosity = 3
+            const cd = castRankingFindPolygons(voterGeom, canPoints, verbosity)
             rankings = cd.rankings
             cells = cd.cells
         }
