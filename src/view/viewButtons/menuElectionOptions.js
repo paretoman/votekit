@@ -11,7 +11,6 @@ export default function menuElectionOptions(electionOptionsMan, menu) {
         options: [
             { name: '1', value: 1 },
             { name: '9', value: 9 },
-            { name: '20', value: 20 },
         ],
         changeList: ['numTracts'],
         getValue: () => electionOptionsMan.getOptions().numTracts,
@@ -29,7 +28,6 @@ export default function menuElectionOptions(electionOptionsMan, menu) {
         options: [
             { name: '1', value: 1 },
             { name: '9', value: 9 },
-            { name: '20', value: 20 },
         ],
         changeList: ['numDistricts'],
         getValue: () => electionOptionsMan.getOptions().numDistricts,
