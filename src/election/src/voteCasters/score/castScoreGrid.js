@@ -3,7 +3,6 @@
 import castScorePoint from './castScorePoint.js'
 import makeGrid1D from '../voteCasters/makeGrid1D.js'
 import makeGrid2D from '../voteCasters/makeGrid2D.js'
-import { randomIndexFromCDF } from '../../election/mathHelpers.js'
 
 /**
  * Tally votes.
@@ -11,7 +10,6 @@ import { randomIndexFromCDF } from '../../election/mathHelpers.js'
 export default function castScoreGrid(voterGeom, geometry, castOptions, strategyRng, voterGroupBehavior) {
     const { canPoints, dimensions, information } = geometry
     const { verbosity } = castOptions
-    const { strategyCDF, strategyList } = voterGroupBehavior
 
     // just find the vote and count at each grid point
     const makeGrid = (dimensions === 1) ? makeGrid1D : makeGrid2D
@@ -28,10 +26,7 @@ export default function castScoreGrid(voterGeom, geometry, castOptions, strategy
         const voteCount = voteCounts[i]
         const voterPoint = voterPoints[i]
 
-        const idx = randomIndexFromCDF(strategyCDF, strategyRng)
-        const { strategyName, strategyOptions } = strategyList[idx]
-
-        const vote = castScorePoint(canPoints, voterPoint, dimensions, information, strategyName, strategyOptions)
+        const vote = castScorePoint(canPoints, voterPoint, dimensions, information, voterGroupBehavior, strategyRng)
         voteSet[i] = vote
         const { scoreVote } = vote
         for (let k = 0; k < n; k++) {

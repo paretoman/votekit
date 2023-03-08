@@ -13,4 +13,6 @@ export default {
         threshold: 0.1,
         numSampleCandidates: 10,
     },
+    usePolls: true,
+    pollCount: 5,
 }

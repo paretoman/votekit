@@ -1,11 +1,11 @@
 /** @module */
 
-import { minMax } from '../../election/mathHelpers.js'
+import { minMax, randomIndexFromCDF } from '../../election/mathHelpers.js'
 
 /**
  * Vote for the closest candidate.
  */
-export default function castScorePoint(canPoints, voterPoint, dimensions, information, strategyName, strategyOptions) {
+export default function castScorePoint(canPoints, voterPoint, dimensions, information, voterGroupBehavior, strategyRng) {
     const df = (dimensions === 1) ? df1 : df2
 
     const n = canPoints.length
@@ -13,6 +13,10 @@ export default function castScorePoint(canPoints, voterPoint, dimensions, inform
     for (let i = 0; i < n; i++) {
         dist[i] = df(canPoints[i], voterPoint)
     }
+
+    const { strategyCDF, strategyList } = voterGroupBehavior
+    const idx = randomIndexFromCDF(strategyCDF, strategyRng)
+    const { strategyName, strategyOptions } = strategyList[idx]
 
     // in the current implementation, all candidates are frontrunners
 

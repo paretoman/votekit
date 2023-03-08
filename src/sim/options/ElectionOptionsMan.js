@@ -11,7 +11,10 @@ import SocialChoiceOptionsMan from './SocialChoiceOptionsMan.js'
 export default function ElectionOptionsMan(changes, simOptions, commander) {
     const self = this
 
-    const electionOptions = {}
+    const electionOptions = {
+        usePolls: true,
+        pollCount: 5,
+    }
     self.castOptionsMan = new CastOptionsMan(changes, simOptions, electionOptions)
     self.socialChoiceOptionsMan = new SocialChoiceOptionsMan(changes, electionOptions)
 
