@@ -30,6 +30,21 @@ export default function VoterShape(
 
     self.color = '#88888888'
 
+    self.behavior = {
+        strategyCDF: [1],
+        strategyList: [
+            { strategyName: 'normalize',
+                strategyOptions: {
+                    threshold: {
+                        type: 'normal',
+                        mean: 0.5,
+                        stdDev: 0.1,
+                    },
+                    utility: { type: 'linear' },
+                } },
+        ],
+    }
+
     self.setAction = {
         exists(e) {
             self.exists = e

@@ -1,5 +1,6 @@
 /** @module */
 
+import seedrandom from '../../lib/snowpack/build/snowpack/pkg/seedrandom.js'
 import castScoreGrid from './castScoreGrid.js'
 
 // The main difference between this and plurality is we need to return a grid from here.
@@ -13,11 +14,13 @@ import castScoreGrid from './castScoreGrid.js'
  * @param {object[]} geometry.voterGeoms - For 2D, an array of objects: {x,y,w}.
  * For 1D, an array of objects: {x,w,densityProfile}.
  * @param {object} geometry.parties
+ * @param {object} geometry.strategySeed
+ * @param {object} geometry.voterGroupBehaviorList
  * @param {object} castOptions - options for how to cast votes.
  * @returns {object} votes
  */
 export default function castScore(geometry, castOptions) {
-    const { canPoints, voterGeoms, parties } = geometry
+    const { canPoints, voterGeoms, parties, strategySeed, voterGroupBehaviorList } = geometry
     const { verbosity } = castOptions
 
     // get fraction of votes for each candidate so we can summarize results
@@ -25,10 +28,12 @@ export default function castScore(geometry, castOptions) {
     const votesByGeom = []
     const scoreSumByCan = (new Array(n)).fill(0)
     let totalVotes = 0
+    const strategyRng = seedrandom(strategySeed)
     for (let i = 0; i < voterGeoms.length; i++) {
         const voterGeom = voterGeoms[i]
+        const voterGroupBehavior = voterGroupBehaviorList[i]
 
-        const votesForGeom = castScoreGrid(voterGeom, geometry, castOptions)
+        const votesForGeom = castScoreGrid(voterGeom, geometry, castOptions, strategyRng, voterGroupBehavior)
         votesByGeom[i] = votesForGeom
         const { totalVotes: totalVotesForGeom,
             scoreSumByCan: scoreSumByCanForGeom } = votesForGeom

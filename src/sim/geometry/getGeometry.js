@@ -9,14 +9,18 @@ import getCanBorders from '../../election/src/voteCasters/voteCasters/getCanBord
  * @returns {Object} geometry is input for an election
  */
 export default function getGeometry(voterShapeList, candidateList, simOptions, electionOptions, districts) {
-    const { dimensions } = simOptions
+    const { dimensions, seeds } = simOptions
     const { geography } = districts
 
     const voterGeoms = voterShapeList.getGeoms(dimensions)
+    const voterGroupBehaviorList = voterShapeList.getVoterGroupBehaviorList()
+    const information = null
+
     const canPoints = candidateList.getPoints(dimensions)
     const parties = candidateList.getParties()
     const canBorders = getCanBorders(canPoints, voterGeoms, dimensions, electionOptions)
 
-    const geometry = { voterGeoms, canPoints, parties, dimensions, canBorders, geography }
+    const strategySeed = `pumpkin${seeds[0]}` // todo: use seeds[1] for strategySeed
+    const geometry = { voterGeoms, canPoints, parties, dimensions, canBorders, geography, strategySeed, voterGroupBehaviorList, information }
     return geometry
 }

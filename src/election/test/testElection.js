@@ -10,6 +10,27 @@ export default function testElection() {
         { x: 0, y: 0, w: 200, densityProfile: 'step' },
     ]
 
+    const voterGroupBehaviorList = [
+        {
+            strategyCDF: [1],
+            strategyList: [
+                {
+                    strategyName: 'normalize',
+                    strategyOptions: {
+                        threshold: {
+                            type: 'normal',
+                            mean: 0.5,
+                            stdDev: 0.1,
+                        },
+                        utility: { type: 'linear' },
+                    },
+                },
+            ],
+        },
+    ]
+
+    const information = null
+
     const canPoints = [
         [-50, 0],
         [50, 0],
@@ -24,7 +45,8 @@ export default function testElection() {
 
     const canBorders = getCanBorders(canPoints, voterGeoms, dimensions, electionOptions)
     const geography = makeGeography(electionOptions, voterGeoms, dimensions)
-    const geometry = { voterGeoms, canPoints, parties, dimensions, canBorders, geography }
+    const strategySeed = 'pumpkin82000'
+    const geometry = { voterGeoms, canPoints, parties, dimensions, canBorders, geography, strategySeed, voterGroupBehaviorList, information }
 
     const electionResults = election(geometry, electionOptions)
 

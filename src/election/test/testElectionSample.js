@@ -26,7 +26,9 @@ export default function testElectionSample() {
 
     const canDnCDF = makeCandidateDistributionCDF(canDnGeoms, dimensions)
 
-    const samplingGeometry = { voterGeoms, canDnGeoms, parties, dimensions, geography, canDnCDF }
+    const strategySeed = 'pumpkin1114'
+
+    const samplingGeometry = { voterGeoms, canDnGeoms, parties, dimensions, geography, canDnCDF, strategySeed }
 
     const numSamples = 2
     const seed = '670171517'
