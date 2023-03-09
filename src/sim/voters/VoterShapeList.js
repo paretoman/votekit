@@ -37,8 +37,8 @@ export default function VoterShapeList(changes, commander) {
         })
     }
 
-    self.getVoterGroupStrategyList = () => {
-        const voterGroupStrategyList = self.getEntities().map((v) => v.groupStrategy)
-        return voterGroupStrategyList
+    self.getVoterStrategyList = () => {
+        const voterStrategyList = self.getEntities().map((v) => v.strategy)
+        return voterStrategyList
     }
 }
