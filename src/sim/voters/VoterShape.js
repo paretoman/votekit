@@ -31,7 +31,7 @@ export default function VoterShape(
     self.color = '#88888888'
 
     self.strategy = {
-        actionCDF: [1],
+        actionCDF: [0.5, 1],
         actionList: [
             { actionName: 'normalizeOverFrontrunners',
                 actionOptions: {
@@ -41,6 +41,8 @@ export default function VoterShape(
                         stdDev: 0.1,
                     },
                 } },
+            { actionName: 'normalize',
+                actionOptions: {} },
         ],
     }
 
