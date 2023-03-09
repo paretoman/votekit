@@ -40,7 +40,6 @@ export default function VoterShape(
                         mean: 0.5,
                         stdDev: 0.1,
                     },
-                    utility: { type: 'linear' },
                 } },
         ],
     }
