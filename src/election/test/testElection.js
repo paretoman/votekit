@@ -12,11 +12,11 @@ export default function testElection() {
 
     const voterGroupStrategyList = [
         {
-            strategyCDF: [1],
-            strategyList: [
+            actionCDF: [1],
+            actionList: [
                 {
-                    strategyName: 'normalize',
-                    strategyOptions: {
+                    actionName: 'normalize',
+                    actionOptions: {
                         threshold: {
                             type: 'normal',
                             mean: 0.5,

@@ -31,10 +31,10 @@ export default function VoterShape(
     self.color = '#88888888'
 
     self.groupStrategy = {
-        strategyCDF: [1],
-        strategyList: [
-            { strategyName: 'normalize',
-                strategyOptions: {
+        actionCDF: [1],
+        actionList: [
+            { actionName: 'normalize',
+                actionOptions: {
                     threshold: {
                         type: 'normal',
                         mean: 0.5,

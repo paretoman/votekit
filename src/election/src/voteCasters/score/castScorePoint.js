@@ -15,9 +15,9 @@ export default function castScorePoint(canPoints, voterPoint, dimensions, verbos
     }
 
     if (voterGroupStrategy !== undefined) {
-        const { strategyCDF, strategyList } = voterGroupStrategy
-        const idx = randomIndexFromCDF(strategyCDF, strategyRng)
-        const { strategyName, strategyOptions } = strategyList[idx]
+        const { actionCDF, actionList } = voterGroupStrategy
+        const idx = randomIndexFromCDF(actionCDF, strategyRng)
+        const { actionName, actionOptions } = actionList[idx]
     }
 
     // in the current implementation, all candidates are frontrunners
