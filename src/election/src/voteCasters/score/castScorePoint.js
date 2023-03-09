@@ -1,6 +1,6 @@
 /** @module */
 
-import { minMax, randomIndexFromCDF } from '../../election/mathHelpers.js'
+import strategicMinMax from './strategicMinMax.js'
 
 /**
  * Vote for the closest candidate.
@@ -14,15 +14,10 @@ export default function castScorePoint(canPoints, voterPoint, dimensions, verbos
         dist[i] = df(canPoints[i], voterPoint)
     }
 
-    if (voterStrategy !== undefined) {
-        const { actionCDF, actionList } = voterStrategy
-        const idx = randomIndexFromCDF(actionCDF, strategyRng)
-        const { actionName, actionOptions } = actionList[idx]
-    }
+    const [min, max] = strategicMinMax(dist, information, voterStrategy, strategyRng)
 
     // in the current implementation, all candidates are frontrunners
 
-    const [min, max] = minMax(dist)
     const maxscore = 1
     const minscore = 0
     const scoreVote = (new Array(n)).fill(0)

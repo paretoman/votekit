@@ -33,7 +33,7 @@ export default function VoterShape(
     self.strategy = {
         actionCDF: [1],
         actionList: [
-            { actionName: 'normalize',
+            { actionName: 'normalizeOverFrontrunners',
                 actionOptions: {
                     threshold: {
                         type: 'normal',
