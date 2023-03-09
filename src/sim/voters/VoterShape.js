@@ -30,7 +30,7 @@ export default function VoterShape(
 
     self.color = '#88888888'
 
-    self.behavior = {
+    self.groupStrategy = {
         strategyCDF: [1],
         strategyList: [
             { strategyName: 'normalize',

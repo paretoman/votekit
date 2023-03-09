@@ -13,7 +13,7 @@ export default function getSamplingGeometry(voterShapeList, candidateDnList, sim
     const { geography } = districts
 
     const voterGeoms = voterShapeList.getGeoms(dimensions)
-    const voterGroupBehaviorList = voterShapeList.getVoterGroupBehaviorList()
+    const voterGroupStrategyList = voterShapeList.getVoterGroupStrategyList()
     const canDnGeoms = candidateDnList.getGeoms(dimensions)
     const parties = candidateDnList.getParties()
 
@@ -21,6 +21,6 @@ export default function getSamplingGeometry(voterShapeList, candidateDnList, sim
 
     const strategySeed = `pumpkin${seeds[0]}` // todo: use seeds[1] for strategySeed
 
-    const samplingGeometry = { voterGeoms, canDnGeoms, parties, dimensions, geography, canDnCDF, strategySeed, voterGroupBehaviorList }
+    const samplingGeometry = { voterGeoms, canDnGeoms, parties, dimensions, geography, canDnCDF, strategySeed, voterGroupStrategyList }
     return samplingGeometry
 }

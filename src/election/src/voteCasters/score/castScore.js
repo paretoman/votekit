@@ -15,12 +15,12 @@ import castScoreGrid from './castScoreGrid.js'
  * For 1D, an array of objects: {x,w,densityProfile}.
  * @param {object} geometry.parties
  * @param {object} geometry.strategySeed
- * @param {object} geometry.voterGroupBehaviorList
+ * @param {object} geometry.voterGroupStrategyList
  * @param {object} castOptions - options for how to cast votes.
  * @returns {object} votes
  */
 export default function castScore(geometry, castOptions) {
-    const { canPoints, voterGeoms, parties, strategySeed, voterGroupBehaviorList } = geometry
+    const { canPoints, voterGeoms, parties, strategySeed, voterGroupStrategyList } = geometry
     const { verbosity } = castOptions
 
     // get fraction of votes for each candidate so we can summarize results
@@ -31,9 +31,9 @@ export default function castScore(geometry, castOptions) {
     const strategyRng = seedrandom(strategySeed)
     for (let i = 0; i < voterGeoms.length; i++) {
         const voterGeom = voterGeoms[i]
-        const voterGroupBehavior = voterGroupBehaviorList[i]
+        const voterGroupStrategy = voterGroupStrategyList[i]
 
-        const votesForGeom = castScoreGrid(voterGeom, geometry, castOptions, strategyRng, voterGroupBehavior)
+        const votesForGeom = castScoreGrid(voterGeom, geometry, castOptions, strategyRng, voterGroupStrategy)
         votesByGeom[i] = votesForGeom
         const { totalVotes: totalVotesForGeom,
             scoreSumByCan: scoreSumByCanForGeom } = votesForGeom

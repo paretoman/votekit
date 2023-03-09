@@ -7,7 +7,7 @@ import makeGrid2D from '../voteCasters/makeGrid2D.js'
 /**
  * Tally votes.
  */
-export default function castScoreGrid(voterGeom, geometry, castOptions, strategyRng, voterGroupBehavior) {
+export default function castScoreGrid(voterGeom, geometry, castOptions, strategyRng, voterGroupStrategy) {
     const { canPoints, dimensions, information } = geometry
     const { verbosity } = castOptions
 
@@ -26,7 +26,7 @@ export default function castScoreGrid(voterGeom, geometry, castOptions, strategy
         const voteCount = voteCounts[i]
         const voterPoint = voterPoints[i]
 
-        const vote = castScorePoint(canPoints, voterPoint, dimensions, information, voterGroupBehavior, strategyRng)
+        const vote = castScorePoint(canPoints, voterPoint, dimensions, verbosity, information, voterGroupStrategy, strategyRng)
         voteSet[i] = vote
         const { scoreVote } = vote
         for (let k = 0; k < n; k++) {
