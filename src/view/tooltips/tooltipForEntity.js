@@ -1,3 +1,4 @@
+import { getCDF, sumArray } from '../../election/src/election/mathHelpers.js'
 import tooltipBox from './tooltipBox.js'
 
 export default function tooltipForEntity(graphic, entity, screen, viewSettings, simOptions) {
@@ -39,7 +40,7 @@ export default function tooltipForEntity(graphic, entity, screen, viewSettings, 
                 'Density Profile: ',
                 (val) => entity.doSetCommand.shape1densityProfile(val),
                 entity.shape1.densityProfile,
-                ['step', 'gaussian'],
+                { choices: ['step', 'gaussian'] },
             )
             box.appendChild(items.densityProfile1.div)
         }
@@ -61,7 +62,7 @@ export default function tooltipForEntity(graphic, entity, screen, viewSettings, 
                 'Density Profile: ',
                 (val) => entity.doSetCommand.shape2densityProfile(val),
                 entity.shape2.densityProfile,
-                ['step', 'gaussian'],
+                { choices: ['step', 'gaussian'] },
             )
             box.appendChild(items.densityProfile2.div)
         }
@@ -83,10 +84,47 @@ export default function tooltipForEntity(graphic, entity, screen, viewSettings, 
             'Party: ',
             (val) => entity.doSetCommand.party([Number(val)]),
             entity.party,
-            [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
+            { choices: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9] },
         )
         box.appendChild(items.party.div)
     }
+    if (entity.doSetCommand.actionCDF !== undefined) {
+        items.actionCDF1 = new Item(
+            'range',
+            'Action PDF 1',
+            'Action PDF 1: ',
+            (val) => {
+                const { actionPDF } = entity.strategy
+                actionPDF[0] = Number(val)
+                if (sumArray(actionPDF) === 0) {
+                    actionPDF[0] = 1
+                }
+                const actionCDF = getCDF(actionPDF)
+                entity.doSetCommand.actionCDF(actionCDF)
+            },
+            entity.strategy.actionPDF[0],
+            { min: 0, max: 1, step: 0.01 },
+        )
+        box.appendChild(items.actionCDF1.div)
+        items.actionCDF2 = new Item(
+            'range',
+            'Action PDF 2',
+            'Action PDF 2: ',
+            (val) => {
+                const { actionPDF } = entity.strategy
+                actionPDF[1] = Number(val)
+                if (sumArray(actionPDF) === 0) {
+                    actionPDF[1] = 1
+                }
+                const actionCDF = getCDF(actionPDF)
+                entity.doSetCommand.actionCDF(actionCDF)
+            },
+            entity.strategy.actionPDF[1],
+            { min: 0, max: 1, step: 0.01 },
+        )
+        box.appendChild(items.actionCDF2.div)
+    }
+
     items.showGhosts = new Item(
         'checkbox',
         'Show Ghosts',
@@ -101,13 +139,14 @@ export default function tooltipForEntity(graphic, entity, screen, viewSettings, 
     screen.tooltips.appendChild(box)
 }
 
-function Item(type, name, text, onChange, defaultValue, choices) {
+function Item(type, name, text, onChange, defaultValue, options) {
     const self = this
 
     self.div = document.createElement('div')
 
     if (type === 'select') {
         self.input = document.createElement('select')
+        const { choices } = options
         for (let i = 0; i < choices.length; i++) {
             const option = document.createElement('option')
             option.value = choices[i]
@@ -129,8 +168,19 @@ function Item(type, name, text, onChange, defaultValue, choices) {
         } else if (type === 'range') {
             self.input.min = 1
             self.input.max = 300
-            self.input.value = defaultValue
             self.input.step = 1
+            if (options !== undefined) {
+                if (options.min !== undefined) {
+                    self.input.min = options.min
+                }
+                if (options.max !== undefined) {
+                    self.input.max = options.max
+                }
+                if (options.step !== undefined) {
+                    self.input.step = options.step
+                }
+            }
+            self.input.value = defaultValue
             self.input.addEventListener('input', () => onChange(self.input.value))
         } else if (type === 'color') {
             self.input.value = defaultValue

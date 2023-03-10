@@ -124,3 +124,7 @@ export function minMax(a) {
     }
     return [min, max]
 }
+
+export function sumArray(a) {
+    return a.reduce((p, c) => p + c)
+}
