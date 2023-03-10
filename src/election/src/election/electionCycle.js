@@ -1,6 +1,7 @@
 /** @module */
 
 import districtElection from '../districtElection/districtElection.js'
+import calculatePolling from './calculatePolling.js'
 import electionRun from './electionRun.js'
 
 /**
@@ -16,7 +17,8 @@ export default function electionCycle(geometry, electionOptions) {
     const electionResultsList = []
     for (let i = 0; i < pollCount + 1; i++) {
         const geometry1 = { ...geometry }
-        geometry1.information = { electionResultsList }
+        const polling = calculatePolling(electionResultsList)
+        geometry1.information = { electionResultsList, polling }
         if (useGeography) {
             electionResults = districtElection(geometry1, electionOptions)
         } else {

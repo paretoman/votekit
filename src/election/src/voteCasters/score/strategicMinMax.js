@@ -31,7 +31,8 @@ export default function strategicMinMax(dist, information, voterStrategy, strate
         return minMax(dist)
     }
     const { scoreFractionAverageByCan } = electionResultsList[electionResultsList.length - 1].votes.candidateTallies
-    const highestScore = Math.max(...scoreFractionAverageByCan)
+    const { highestScore } = information.polling
+
     const scoreThreshold = threshold * highestScore
     const distViable = dist.filter((d, i) => scoreFractionAverageByCan[i] >= scoreThreshold)
 
