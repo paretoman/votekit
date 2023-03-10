@@ -89,7 +89,7 @@ export default function tooltipForEntity(graphic, entity, screen, viewSettings, 
         box.appendChild(items.party.div)
     }
     if (entity.doSetCommand.actionCDF !== undefined) {
-        items.actionCDF1 = new Item(
+        items.actionPDF1 = new Item(
             'range',
             'Action PDF 1',
             `Action PDF 1: ${entity.strategy.actionList[0].actionName}: `,
@@ -99,16 +99,17 @@ export default function tooltipForEntity(graphic, entity, screen, viewSettings, 
                 if (sumArray(actionPDF) === 0) {
                     actionPDF[0] = 1
                 }
-                items.actionCDF1.input.value = actionPDF[0]
-                items.actionCDF2.input.value = actionPDF[1]
+                const [a0, a1] = actionPDF
+                items.actionPDF1.input.value = a0
+                items.actionPDF2.input.value = a1
                 const actionCDF = getCDF(actionPDF)
                 entity.doSetCommand.actionCDF(actionCDF)
             },
             entity.strategy.actionPDF[0],
             { min: 0, max: 1, step: 0.01 },
         )
-        box.appendChild(items.actionCDF1.div)
-        items.actionCDF2 = new Item(
+        box.appendChild(items.actionPDF1.div)
+        items.actionPDF2 = new Item(
             'range',
             'Action PDF 2',
             `Action PDF 2: ${entity.strategy.actionList[1].actionName}: `,
@@ -118,15 +119,16 @@ export default function tooltipForEntity(graphic, entity, screen, viewSettings, 
                 if (sumArray(actionPDF) === 0) {
                     actionPDF[1] = 1
                 }
-                items.actionCDF1.input.value = actionPDF[0]
-                items.actionCDF2.input.value = actionPDF[1]
+                const [a0, a1] = actionPDF
+                items.actionPDF1.input.value = a0
+                items.actionPDF2.input.value = a1
                 const actionCDF = getCDF(actionPDF)
                 entity.doSetCommand.actionCDF(actionCDF)
             },
             entity.strategy.actionPDF[1],
             { min: 0, max: 1, step: 0.01 },
         )
-        box.appendChild(items.actionCDF2.div)
+        box.appendChild(items.actionPDF2.div)
     }
     if (entity.doSetCommand.actionList !== undefined) {
         items.actionName1 = new Item(
@@ -136,7 +138,7 @@ export default function tooltipForEntity(graphic, entity, screen, viewSettings, 
             (val) => {
                 const { actionList } = entity.strategy
                 actionList[0].actionName = val
-                items.actionCDF2.label.innerText = `PDF 1: ${val}: `
+                items.actionPDF2.label.innerText = `PDF 1: ${val}: `
                 entity.doSetCommand.actionList(actionList)
             },
             entity.strategy.actionList[0].actionName,
@@ -150,7 +152,7 @@ export default function tooltipForEntity(graphic, entity, screen, viewSettings, 
             (val) => {
                 const { actionList } = entity.strategy
                 actionList[1].actionName = val
-                items.actionCDF2.label.innerText = `PDF 2: ${val}: `
+                items.actionPDF2.label.innerText = `PDF 2: ${val}: `
                 entity.doSetCommand.actionList(actionList)
             },
             entity.strategy.actionList[1].actionName,
