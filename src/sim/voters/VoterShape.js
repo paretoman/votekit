@@ -1,5 +1,7 @@
 /** @module */
 
+import { pdfFromCdf } from '../../election/src/election/mathHelpers.js'
+
 /**
  * VoterShape class with Handle component to take care of dragging.
  * Voronoi2D component takes care of drawing votes.
@@ -45,6 +47,7 @@ export default function VoterShape(
                 actionOptions: {} },
         ],
     }
+    self.strategy.actionPDF = pdfFromCdf(self.strategy.actionCDF)
 
     self.setAction = {
         exists(e) {
@@ -76,6 +79,16 @@ export default function VoterShape(
             self.shape2.densityProfile = d
             changes.add(['voters', 'densityProfile'])
         },
+        actionList(a) {
+            self.strategy.actionList = a
+            changes.add(['voters', 'strategy'])
+        },
+        actionCDF(a) {
+            self.strategy.actionCDF = a
+            self.strategy.actionPDF = pdfFromCdf(a)
+            changes.add(['voters', 'strategy'])
+        },
+
     }
 
     // Make Commands //
@@ -104,6 +117,8 @@ export default function VoterShape(
         voterCommander.shape1w.command(id, shape1.w, shape1.w),
         voterCommander.shape1densityProfile.command(id, shape1.densityProfile, shape1.densityProfile),
         voterCommander.shape2densityProfile.command(id, shape2.densityProfile, shape2.densityProfile),
+        voterCommander.actionList.command(id, self.strategy.actionList, self.strategy.actionList),
+        voterCommander.actionCDF.command(id, self.strategy.actionCDF, self.strategy.actionCDF),
     ]
     // Either load the commands because we don't want to create an item of history
     // Or do the commands because want to store an item in history, so that we can undo.

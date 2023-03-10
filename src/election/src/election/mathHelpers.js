@@ -45,10 +45,8 @@ function erf(x) {
  * @returns {number[]} cdf - Use with randomIndexFromCDF
  */
 export function getCDF(proportion) {
-    const sumProportion = proportion.reduce((p, c) => p + c)
-
     // probability mass function
-    const pmf = proportion.map((p) => p / sumProportion)
+    const pmf = normalizePDF(proportion)
 
     // https://stackoverflow.com/a/20477613
     // [5, 10, 3, 2];
@@ -62,6 +60,20 @@ export function getCDF(proportion) {
     }, 0)
 
     return cdf
+}
+
+export function normalizePDF(pdf) {
+    const sum = pdf.reduce((p, c) => p + c)
+    return pdf.map((p) => p / sum)
+}
+
+export function pdfFromCdf(a) {
+    return a.map((x, i) => {
+        if (i === 0) {
+            return x
+        }
+        return x - a[i - 1]
+    })
 }
 
 export function randomIndexFromCDF(cdf, rng) {
