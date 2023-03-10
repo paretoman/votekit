@@ -82,12 +82,13 @@ export default function History(commander) {
         if (undoCommand.props.isChain !== true) return
         if (head === -1) return
         const penUltimate = history[head][0]
-        if (penUltimate.undoCommand.name === undoCommand.name) {
-            // todo: make this only work for repeated setXY commands
-            // set timer and callback
-            clearTimeout(chainTimer)
-            chainTimer = setTimeout(self.undo, chainDuration)
-        }
+        if (penUltimate.undoCommand.name !== undoCommand.name) return
+        if (undoCommand.id !== undefined && penUltimate.undoCommand.id !== undoCommand.id) return
+
+        // todo: make this only work for repeated setXY commands
+        // set timer and callback
+        clearTimeout(chainTimer)
+        chainTimer = setTimeout(self.undo, chainDuration)
     }
 
     self.redo = () => {
@@ -104,11 +105,12 @@ export default function History(commander) {
         if (command.props.isChain !== true) return
         if (head === history.length - 1) return
         const nextnext = history[head + 1][0]
-        if (nextnext.command.name === command.name) {
-            // todo: make this only work for repeated setXY commands
-            // set timer and callback
-            clearTimeout(chainTimer)
-            chainTimer = setTimeout(self.redo, chainDuration)
-        }
+        if (nextnext.command.name !== command.name) return
+        if (command.id !== undefined && nextnext.command.id !== command.id) return
+
+        // todo: make this only work for repeated setXY commands
+        // set timer and callback
+        clearTimeout(chainTimer)
+        chainTimer = setTimeout(self.redo, chainDuration)
     }
 }
