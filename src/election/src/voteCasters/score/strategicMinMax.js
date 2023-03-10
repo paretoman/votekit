@@ -5,16 +5,16 @@ import { minMax, randomIndexFromCDF } from '../../election/mathHelpers.js'
  * @param {number[]} dist
  * @param {object} information
  * @param {object} voterStrategy
- * @param {function} strategyRng
+ * @param {function} strategyRngs
  * @returns {number[]} [min, max]
  */
-export default function strategicMinMax(dist, information, voterStrategy, strategyRng) {
+export default function strategicMinMax(dist, information, voterStrategy, strategyRngs) {
     if (voterStrategy === undefined) {
         return minMax(dist)
     }
 
     const { actionCDF, actionList } = voterStrategy
-    const idx = randomIndexFromCDF(actionCDF, strategyRng)
+    const idx = randomIndexFromCDF(actionCDF, strategyRngs[0])
     const { actionName, actionOptions } = actionList[idx]
 
     if (actionName !== 'normalizeOverFrontrunners') {
@@ -22,7 +22,7 @@ export default function strategicMinMax(dist, information, voterStrategy, strate
     }
 
     const { mean, stdDev } = actionOptions.threshold
-    const rnd = strategyRng()
+    const rnd = strategyRngs[1]()
     const threshold = mean + stdDev * (rnd * 2 - 1)
 
     // determine closest and furthest of the viable candidates

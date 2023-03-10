@@ -5,7 +5,7 @@ import strategicMinMax from './strategicMinMax.js'
 /**
  * Vote for the closest candidate.
  */
-export default function castScorePoint(canPoints, voterPoint, dimensions, verbosity, information, voterStrategy, strategyRng) {
+export default function castScorePoint(canPoints, voterPoint, dimensions, verbosity, information, voterStrategy, strategyRngs) {
     const df = (dimensions === 1) ? df1 : df2
 
     const n = canPoints.length
@@ -14,7 +14,7 @@ export default function castScorePoint(canPoints, voterPoint, dimensions, verbos
         dist[i] = df(canPoints[i], voterPoint)
     }
 
-    const [min, max] = strategicMinMax(dist, information, voterStrategy, strategyRng)
+    const [min, max] = strategicMinMax(dist, information, voterStrategy, strategyRngs)
 
     // in the current implementation, all candidates are frontrunners
 

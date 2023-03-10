@@ -28,12 +28,12 @@ export default function castScore(geometry, castOptions) {
     const votesByGeom = []
     const scoreSumByCan = (new Array(n)).fill(0)
     let totalVotes = 0
-    const strategyRng = seedrandom(strategySeed)
+    const strategyRngs = [seedrandom(`green${strategySeed}`), seedrandom(`orange${strategySeed}`)]
     for (let i = 0; i < voterGeoms.length; i++) {
         const voterGeom = voterGeoms[i]
         const voterStrategy = voterStrategyList[i]
 
-        const votesForGeom = castScoreGrid(voterGeom, geometry, castOptions, strategyRng, voterStrategy)
+        const votesForGeom = castScoreGrid(voterGeom, geometry, castOptions, strategyRngs, voterStrategy)
         votesByGeom[i] = votesForGeom
         const { totalVotes: totalVotesForGeom,
             scoreSumByCan: scoreSumByCanForGeom } = votesForGeom
