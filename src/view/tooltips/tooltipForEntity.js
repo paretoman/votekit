@@ -1,4 +1,5 @@
 import { getCDF, sumArray } from '../../election/src/election/mathHelpers.js'
+import { jcopy } from '../../utilities/jsHelpers.js'
 import tooltipBox from './tooltipBox.js'
 
 export default function tooltipForEntity(graphic, entity, screen, viewSettings, simOptions) {
@@ -136,7 +137,7 @@ export default function tooltipForEntity(graphic, entity, screen, viewSettings, 
             'Action 1',
             'Action 1: ',
             (val) => {
-                const { actionList } = entity.strategy
+                const actionList = jcopy(entity.strategy.actionList)
                 actionList[0].actionName = val
                 items.actionPDF2.label.innerText = `PDF 1: ${val}: `
                 entity.doSetCommand.actionList(actionList)
@@ -150,7 +151,7 @@ export default function tooltipForEntity(graphic, entity, screen, viewSettings, 
             'Action 2',
             'Action 2: ',
             (val) => {
-                const { actionList } = entity.strategy
+                const actionList = jcopy(entity.strategy.actionList)
                 actionList[1].actionName = val
                 items.actionPDF2.label.innerText = `PDF 2: ${val}: `
                 entity.doSetCommand.actionList(actionList)
@@ -164,7 +165,7 @@ export default function tooltipForEntity(graphic, entity, screen, viewSettings, 
             'Threshold',
             'Threshold: ',
             (val) => {
-                const { actionList } = entity.strategy
+                const actionList = jcopy(entity.strategy.actionList)
                 actionList[0].actionOptions.threshold.mean = Number(val)
                 actionList[1].actionOptions.threshold.mean = Number(val)
                 entity.doSetCommand.actionList(actionList)
