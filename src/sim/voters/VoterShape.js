@@ -89,6 +89,10 @@ export default function VoterShape(
             self.strategy.actionList = a
             changes.add(['voters', 'strategy'])
         },
+        actionOptionThreshold(a) {
+            self.strategy.actionList = a
+            changes.add(['voters', 'strategy'])
+        },
         actionCDF(a) {
             self.strategy.actionCDF = a
             self.strategy.actionPDF = pdfFromCdf(a)

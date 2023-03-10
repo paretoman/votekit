@@ -20,7 +20,8 @@ export default function VoterShapeList(changes, commander) {
         ['shape1densityProfile', 'shape1D-densityProfile', false],
         ['shape2densityProfile', 'shape2D-densityProfile', false],
         ['actionCDF', 'actionCDF', true],
-        ['actionList', 'actionList', true],
+        ['actionList', 'actionList', false],
+        ['actionOptionThreshold', 'actionList', true],
     ]
     const registrar = new Registrar()
     EntityList.call(self, commander, prefix, registrar)

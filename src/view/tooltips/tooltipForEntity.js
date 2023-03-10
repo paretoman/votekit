@@ -168,7 +168,7 @@ export default function tooltipForEntity(graphic, entity, screen, viewSettings, 
                 const actionList = jcopy(entity.strategy.actionList)
                 actionList[0].actionOptions.threshold.mean = Number(val)
                 actionList[1].actionOptions.threshold.mean = Number(val)
-                entity.doSetCommand.actionList(actionList)
+                entity.doSetCommand.actionOptionThreshold(actionList)
             },
             entity.strategy.actionList[0].actionOptions.threshold.mean,
             { min: 0, max: 1, step: 0.01 },
