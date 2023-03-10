@@ -44,7 +44,13 @@ export default function VoterShape(
                     },
                 } },
             { actionName: 'normalize',
-                actionOptions: {} },
+                actionOptions: {
+                    threshold: {
+                        type: 'normal',
+                        mean: 0.5,
+                        stdDev: 0.1,
+                    },
+                } },
         ],
     }
     self.strategy.actionPDF = pdfFromCdf(self.strategy.actionCDF)

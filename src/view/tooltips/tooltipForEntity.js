@@ -92,13 +92,15 @@ export default function tooltipForEntity(graphic, entity, screen, viewSettings, 
         items.actionCDF1 = new Item(
             'range',
             'Action PDF 1',
-            'Action PDF 1: ',
+            `Action PDF 1: ${entity.strategy.actionList[0].actionName}: `,
             (val) => {
                 const { actionPDF } = entity.strategy
                 actionPDF[0] = Number(val)
                 if (sumArray(actionPDF) === 0) {
                     actionPDF[0] = 1
                 }
+                items.actionCDF1.input.value = actionPDF[0]
+                items.actionCDF2.input.value = actionPDF[1]
                 const actionCDF = getCDF(actionPDF)
                 entity.doSetCommand.actionCDF(actionCDF)
             },
@@ -109,13 +111,15 @@ export default function tooltipForEntity(graphic, entity, screen, viewSettings, 
         items.actionCDF2 = new Item(
             'range',
             'Action PDF 2',
-            'Action PDF 2: ',
+            `Action PDF 2: ${entity.strategy.actionList[1].actionName}: `,
             (val) => {
                 const { actionPDF } = entity.strategy
                 actionPDF[1] = Number(val)
                 if (sumArray(actionPDF) === 0) {
                     actionPDF[1] = 1
                 }
+                items.actionCDF1.input.value = actionPDF[0]
+                items.actionCDF2.input.value = actionPDF[1]
                 const actionCDF = getCDF(actionPDF)
                 entity.doSetCommand.actionCDF(actionCDF)
             },
@@ -123,6 +127,50 @@ export default function tooltipForEntity(graphic, entity, screen, viewSettings, 
             { min: 0, max: 1, step: 0.01 },
         )
         box.appendChild(items.actionCDF2.div)
+    }
+    if (entity.doSetCommand.actionList !== undefined) {
+        items.actionName1 = new Item(
+            'select',
+            'Action 1',
+            'Action 1: ',
+            (val) => {
+                const { actionList } = entity.strategy
+                actionList[0].actionName = val
+                items.actionCDF2.label.innerText = `PDF 1: ${val}: `
+                entity.doSetCommand.actionList(actionList)
+            },
+            entity.strategy.actionList[0].actionName,
+            { choices: ['normalize', 'normalizeOverFrontrunners'] },
+        )
+        box.appendChild(items.actionName1.div)
+        items.actionName2 = new Item(
+            'select',
+            'Action 2',
+            'Action 2: ',
+            (val) => {
+                const { actionList } = entity.strategy
+                actionList[1].actionName = val
+                items.actionCDF2.label.innerText = `PDF 2: ${val}: `
+                entity.doSetCommand.actionList(actionList)
+            },
+            entity.strategy.actionList[1].actionName,
+            { choices: ['normalize', 'normalizeOverFrontrunners'] },
+        )
+        box.appendChild(items.actionName2.div)
+        items.actionOptionThreshold = new Item(
+            'range',
+            'Threshold',
+            'Threshold: ',
+            (val) => {
+                const { actionList } = entity.strategy
+                actionList[0].actionOptions.threshold.mean = Number(val)
+                actionList[1].actionOptions.threshold.mean = Number(val)
+                entity.doSetCommand.actionList(actionList)
+            },
+            entity.strategy.actionList[0].actionOptions.threshold.mean,
+            { min: 0, max: 1, step: 0.01 },
+        )
+        box.appendChild(items.actionOptionThreshold.div)
     }
 
     items.showGhosts = new Item(
