@@ -3,6 +3,7 @@ import VoterShape from './VoterShape.js'
 import EntityCommander from '../entities/EntityCommander.js'
 import EntityList from '../entities/EntityList.js'
 import { getCDF, normalizePDF } from '../../election/src/election/mathHelpers.js'
+import defaultStrategy from '../entities/defaultStrategy.js'
 
 /** A component of sim.js that deals with adding voters. */
 export default function VoterShapeList(changes, commander) {
@@ -28,15 +29,16 @@ export default function VoterShapeList(changes, commander) {
     EntityList.call(self, commander, prefix, registrar)
 
     const voterCommander = new EntityCommander(registrar, commander, self, prefix, voterSenderList)
-    self.addVoterCircle = ({ shape2, shape1, doLoad }) => {
+    self.addVoterCircle = ({ shape2, shape1, strategy, doLoad }) => {
         // eslint-disable-next-line max-len
-        const voterShape = new VoterShape(shape2, shape1, registrar, commander, changes, doLoad, voterCommander)
+        const voterShape = new VoterShape(shape2, shape1, strategy, registrar, commander, changes, doLoad, voterCommander)
         self.addEntity(voterShape)
     }
     self.addDefaultEntity = () => {
         self.addVoterCircle({
             shape2: { x: 50, y: 50, w: 200, densityProfile: 'step' },
             shape1: { x: 50, w: 200, densityProfile: 'gaussian' },
+            strategy: defaultStrategy,
             doLoad: false,
         })
     }

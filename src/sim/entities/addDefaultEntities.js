@@ -1,3 +1,5 @@
+import defaultStrategy from './defaultStrategy.js'
+
 /**
  * Add entities for a default configuration.
  * @param {Entities} entities
@@ -30,6 +32,7 @@ export default function addDefaultEntities(entities) {
     entities.voterShapeList.addVoterCircle({
         shape2: { x: 150, y: 150, w: 200, densityProfile: 'step' },
         shape1: { x: 150, w: 200, densityProfile: 'gaussian' },
+        strategy: defaultStrategy,
         doLoad,
     })
 }
