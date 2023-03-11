@@ -46,7 +46,7 @@ export default function ViewVizOne(entities, screenMain, screenMini, menu, chang
         const voterStrategyList = voterShapeList.getVoterStrategyList(voteCasterName)
         const someStrategy = voterStrategyList.some(
             (v) => v.actionList.some(
-                (a) => (a.actionName !== 'closest' && a.weight !== 0),
+                (a) => (a.actionName !== 'closest' && a.actionWeight !== 0),
             ),
         )
         const doGrid = someGaussian2D || someStrategy || voteCasterName === 'score' || voteCasterName === 'scoreFull'

@@ -23,7 +23,7 @@ export default function castPlurality(geometry, castOptions) {
 
     const someStrategy = voterStrategyList.some(
         (v) => v.actionList.some(
-            (a) => (a.actionName !== 'closest' && a.weight !== 0),
+            (a) => (a.actionName !== 'closest' && a.actionWeight !== 0),
         ),
     )
 
