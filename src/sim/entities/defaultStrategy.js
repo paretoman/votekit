@@ -52,6 +52,33 @@ const defaultStrategy = {
         ],
 
     },
+    ranking: {
+        actionList: [
+            {
+                actionName: 'closest',
+                actionWeight: 1,
+                actionOptions: {},
+            },
+        ],
+    },
+    pairwise: {
+        actionList: [
+            {
+                actionName: 'closest',
+                actionWeight: 1,
+                actionOptions: {},
+            },
+        ],
+    },
+    scoreFull: {
+        actionList: [
+            {
+                actionName: 'normalize',
+                actionWeight: 1,
+                actionOptions: {},
+            },
+        ],
+    },
 }
 
 export default defaultStrategy
