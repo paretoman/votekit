@@ -19,7 +19,7 @@ export default function VoterShapeList(changes, commander) {
         ['shape1w', 'shape1D-width', true],
         ['shape1densityProfile', 'shape1D-densityProfile', false],
         ['shape2densityProfile', 'shape2D-densityProfile', false],
-        ['actionCDF', 'actionCDF', true],
+        ['actionWeight', 'actionList', true],
         ['actionList', 'actionList', false],
         ['actionOptionThreshold', 'actionList', true],
     ]

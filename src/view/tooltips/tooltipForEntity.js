@@ -1,4 +1,4 @@
-import { getCDF, sumArray } from '../../election/src/election/mathHelpers.js'
+import { sumArray } from '../../election/src/election/mathHelpers.js'
 import { jcopy } from '../../utilities/jsHelpers.js'
 import tooltipBox from './tooltipBox.js'
 
@@ -89,7 +89,7 @@ export default function tooltipForEntity(graphic, entity, screen, viewSettings, 
         )
         box.appendChild(items.party.div)
     }
-    if (entity.doSetCommand.actionCDF !== undefined) {
+    if (entity.doSetCommand.actionWeight !== undefined) {
         items.actionPDF1 = new Item(
             'range',
             'Action PDF 1',
@@ -103,8 +103,12 @@ export default function tooltipForEntity(graphic, entity, screen, viewSettings, 
                 const [a0, a1] = actionPDF
                 items.actionPDF1.input.value = a0
                 items.actionPDF2.input.value = a1
-                const actionCDF = getCDF(actionPDF)
-                entity.doSetCommand.actionCDF(actionCDF)
+
+                const actionList = jcopy(entity.strategy.actionList)
+                for (let i = 0; i < actionList.length; i += 1) {
+                    actionList[i].actionWeight = actionPDF[i]
+                }
+                entity.doSetCommand.actionWeight(actionList)
             },
             entity.strategy.actionPDF[0],
             { min: 0, max: 1, step: 0.01 },
@@ -123,8 +127,12 @@ export default function tooltipForEntity(graphic, entity, screen, viewSettings, 
                 const [a0, a1] = actionPDF
                 items.actionPDF1.input.value = a0
                 items.actionPDF2.input.value = a1
-                const actionCDF = getCDF(actionPDF)
-                entity.doSetCommand.actionCDF(actionCDF)
+
+                const actionList = jcopy(entity.strategy.actionList)
+                for (let i = 0; i < actionList.length; i += 1) {
+                    actionList[i].actionWeight = actionPDF[i]
+                }
+                entity.doSetCommand.actionWeight(actionList)
             },
             entity.strategy.actionPDF[1],
             { min: 0, max: 1, step: 0.01 },

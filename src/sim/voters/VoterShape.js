@@ -1,6 +1,6 @@
 /** @module */
 
-import { pdfFromCdf } from '../../election/src/election/mathHelpers.js'
+import { getCDF, normalizePDF } from '../../election/src/election/mathHelpers.js'
 
 /**
  * VoterShape class with Handle component to take care of dragging.
@@ -33,27 +33,33 @@ export default function VoterShape(
     self.color = '#88888888'
 
     self.strategy = {
-        actionCDF: [0.5, 1],
         actionList: [
-            { actionName: 'normalizeOverFrontrunners',
+            {
+                actionName: 'normalizeOverFrontrunners',
+                actionWeight: 0.5,
                 actionOptions: {
                     threshold: {
                         type: 'normal',
                         mean: 0.5,
                         stdDev: 0.1,
                     },
-                } },
-            { actionName: 'normalize',
+                },
+            },
+            {
+                actionName: 'normalize',
+                actionWeight: 0.5,
                 actionOptions: {
                     threshold: {
                         type: 'normal',
                         mean: 0.5,
                         stdDev: 0.1,
                     },
-                } },
+                },
+            },
         ],
     }
-    self.strategy.actionPDF = pdfFromCdf(self.strategy.actionCDF)
+    self.strategy.actionPDF = normalizePDF(self.strategy.actionList.map((a) => a.actionWeight))
+    self.strategy.actionCDF = getCDF(self.strategy.actionPDF)
 
     self.setAction = {
         exists(e) {
@@ -86,19 +92,21 @@ export default function VoterShape(
             changes.add(['voters', 'densityProfile'])
         },
         actionList(a) {
-            self.strategy.actionList = a
-            changes.add(['voters', 'strategy'])
+            actionListMain(a)
         },
         actionOptionThreshold(a) {
-            self.strategy.actionList = a
-            changes.add(['voters', 'strategy'])
+            actionListMain(a)
         },
-        actionCDF(a) {
-            self.strategy.actionCDF = a
-            self.strategy.actionPDF = pdfFromCdf(a)
-            changes.add(['voters', 'strategy'])
+        actionWeight(a) {
+            actionListMain(a)
         },
 
+    }
+    function actionListMain(a) {
+        self.strategy.actionList = a
+        self.strategy.actionPDF = normalizePDF(self.strategy.actionList.map((b) => b.actionWeight))
+        self.strategy.actionCDF = getCDF(self.strategy.actionPDF)
+        changes.add(['voters', 'strategy'])
     }
 
     // Make Commands //
@@ -128,7 +136,6 @@ export default function VoterShape(
         voterCommander.shape1densityProfile.command(id, shape1.densityProfile, shape1.densityProfile),
         voterCommander.shape2densityProfile.command(id, shape2.densityProfile, shape2.densityProfile),
         voterCommander.actionList.command(id, self.strategy.actionList, self.strategy.actionList),
-        voterCommander.actionCDF.command(id, self.strategy.actionCDF, self.strategy.actionCDF),
     ]
     // Either load the commands because we don't want to create an item of history
     // Or do the commands because want to store an item in history, so that we can undo.
