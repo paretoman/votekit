@@ -26,7 +26,7 @@ export default function ViewEntitiesSample(entities, screen, menu, changes, simO
 
     // eslint-disable-next-line max-len
     const candidateDnViewList = new CandidateDnViewList(viewSettings, candidateDnList, screen, simOptions, electionOptionsMan)
-    const voterViewList = new VoterViewList(viewSettings, voterShapeList, screen, simOptions)
+    const voterViewList = new VoterViewList(viewSettings, voterShapeList, screen, simOptions, electionOptionsMan)
 
     candidateDnViewList.attachNewG(self.dragm)
     voterViewList.attachNewG(self.dragm)

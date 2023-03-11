@@ -22,7 +22,7 @@ export default function castPlurality(geometry, castOptions) {
     const someGaussian2D = voterGeoms.some((v) => v.densityProfile === 'gaussian') && dimensions === 2
 
     const someStrategy = voterStrategyList.some(
-        (v) => v.strategy.plurality.actionList.some(
+        (v) => v.actionList.some(
             (a) => (a.actionName !== 'closest' && a.weight !== 0),
         ),
     )
@@ -40,6 +40,7 @@ export default function castPlurality(geometry, castOptions) {
     const strategyRngs = [seedrandom(`green${strategySeed}`), seedrandom(`orange${strategySeed}`)]
     for (let i = 0; i < voterGeoms.length; i++) {
         const voterGeom = voterGeoms[i]
+        const voterStrategy = voterStrategyList[i]
 
         const votesForGeom = cast(voterGeom, geometry, castOptions, strategyRngs, voterStrategy)
         const { countByCan: countByCanForGeom,

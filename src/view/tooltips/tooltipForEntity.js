@@ -1,8 +1,7 @@
-import { normalizePDF, sumArray } from '../../election/src/election/mathHelpers.js'
 import { jcopy } from '../../utilities/jsHelpers.js'
 import tooltipBox from './tooltipBox.js'
 
-export default function tooltipForEntity(graphic, entity, screen, viewSettings, simOptions) {
+export default function tooltipForEntity(graphic, entity, screen, viewSettings, simOptions, electionOptionsMan) {
     // make a html box appear
 
     const tbox = tooltipBox(graphic, screen)
@@ -90,27 +89,25 @@ export default function tooltipForEntity(graphic, entity, screen, viewSettings, 
         box.appendChild(items.party.div)
     }
     if (entity.doSetCommand.actionList !== undefined) {
+        const { voteCasterName } = electionOptionsMan.getOptions()
         items.actionPDF1 = new Item(
             'range',
             'Action PDF 1',
             '',
             (val) => {
-                const { actionPDF } = entity.strategy
-                actionPDF[0] = Number(val)
-                if (sumArray(actionPDF) === 0) {
-                    actionPDF[0] = 1
-                }
-                const [a0, a1] = normalizePDF(actionPDF)
+                const a0 = Number(val)
+                const a1 = 1 - a0
                 items.actionPDF1.input.value = a0
                 items.actionPDF2.input.value = a1
+                const actionPDF = [a0, a1]
 
-                const actionList = jcopy(entity.strategy.actionList)
-                for (let i = 0; i < actionList.length; i += 1) {
-                    actionList[i].actionWeight = actionPDF[i]
+                const strategy = jcopy(entity.strategy)
+                for (let i = 0; i < actionPDF.length; i += 1) {
+                    strategy[voteCasterName].actionList[i].actionWeight = actionPDF[i]
                 }
-                entity.doSetCommand.actionWeight(actionList)
+                entity.doSetCommand.actionWeight(strategy)
             },
-            entity.strategy.actionPDF[0],
+            entity.strategy[voteCasterName].actionList[0].actionWeight,
             { min: 0, max: 1, step: 0.01 },
         )
         items.actionPDF2 = new Item(
@@ -118,47 +115,44 @@ export default function tooltipForEntity(graphic, entity, screen, viewSettings, 
             'Action PDF 2',
             '',
             (val) => {
-                const { actionPDF } = entity.strategy
-                actionPDF[1] = Number(val)
-                if (sumArray(actionPDF) === 0) {
-                    actionPDF[1] = 1
-                }
-                const [a0, a1] = normalizePDF(actionPDF)
+                const a1 = Number(val)
+                const a0 = 1 - a1
                 items.actionPDF1.input.value = a0
                 items.actionPDF2.input.value = a1
+                const actionPDF = [a0, a1]
 
-                const actionList = jcopy(entity.strategy.actionList)
-                for (let i = 0; i < actionList.length; i += 1) {
-                    actionList[i].actionWeight = actionPDF[i]
+                const strategy = jcopy(entity.strategy)
+                for (let i = 0; i < actionPDF.length; i += 1) {
+                    strategy[voteCasterName].actionList[i].actionWeight = actionPDF[i]
                 }
-                entity.doSetCommand.actionWeight(actionList)
+                entity.doSetCommand.actionWeight(strategy)
             },
-            entity.strategy.actionPDF[1],
+            entity.strategy[voteCasterName].actionList[1].actionWeight,
             { min: 0, max: 1, step: 0.01 },
         )
 
         items.actionName1 = new Item(
             'select',
             'Action 1',
-            'Action 1: ',
+            'Strategy 1: ',
             (val) => {
-                const actionList = jcopy(entity.strategy.actionList)
-                actionList[0].actionName = val
-                entity.doSetCommand.actionList(actionList)
+                const strategy = jcopy(entity.strategy)
+                strategy[voteCasterName].actionList[0].actionName = val
+                entity.doSetCommand.actionList(strategy)
             },
-            entity.strategy.actionList[0].actionName,
+            entity.strategy[voteCasterName].actionList[0].actionName,
             { choices: ['normalize', 'normalizeOverFrontrunners'] },
         )
         items.actionName2 = new Item(
             'select',
             'Action 2',
-            'Action 2: ',
+            'Strategy 2: ',
             (val) => {
-                const actionList = jcopy(entity.strategy.actionList)
-                actionList[1].actionName = val
-                entity.doSetCommand.actionList(actionList)
+                const strategy = jcopy(entity.strategy)
+                strategy[voteCasterName].actionList[1].actionName = val
+                entity.doSetCommand.actionList(strategy)
             },
-            entity.strategy.actionList[1].actionName,
+            entity.strategy[voteCasterName].actionList[1].actionName,
             { choices: ['normalize', 'normalizeOverFrontrunners'] },
         )
         items.actionOptionThreshold = new Item(
@@ -166,12 +160,12 @@ export default function tooltipForEntity(graphic, entity, screen, viewSettings, 
             'Threshold',
             'Threshold: ',
             (val) => {
-                const actionList = jcopy(entity.strategy.actionList)
-                actionList[0].actionOptions.threshold.mean = Number(val)
-                actionList[1].actionOptions.threshold.mean = Number(val)
-                entity.doSetCommand.actionOptionThreshold(actionList)
+                const strategy = jcopy(entity.strategy)
+                strategy[voteCasterName].actionList[0].actionOptions.threshold.mean = Number(val)
+                strategy[voteCasterName].actionList[1].actionOptions.threshold.mean = Number(val)
+                entity.doSetCommand.actionOptionThreshold(strategy)
             },
-            entity.strategy.actionList[0].actionOptions.threshold.mean,
+            entity.strategy[voteCasterName].actionList[0].actionOptions.threshold.mean,
             { min: 0, max: 1, step: 0.01 },
         )
         box.appendChild(items.actionName1.div)

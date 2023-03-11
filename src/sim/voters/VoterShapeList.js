@@ -2,6 +2,7 @@ import Registrar from '../entities/Registrar.js'
 import VoterShape from './VoterShape.js'
 import EntityCommander from '../entities/EntityCommander.js'
 import EntityList from '../entities/EntityList.js'
+import { getCDF, normalizePDF } from '../../election/src/election/mathHelpers.js'
 
 /** A component of sim.js that deals with adding voters. */
 export default function VoterShapeList(changes, commander) {
@@ -40,8 +41,16 @@ export default function VoterShapeList(changes, commander) {
         })
     }
 
-    self.getVoterStrategyList = () => {
-        const voterStrategyList = self.getEntities().map((v) => v.strategy)
+    self.getVoterStrategyList = (voteCasterName) => {
+        const voterStrategyList = []
+        const entities = self.getEntities()
+        for (let i = 0; i < entities.length; i += 1) {
+            const entity = entities[i]
+            const { actionList } = entity.strategy[voteCasterName]
+            const actionPDF = normalizePDF(actionList.map((a) => a.actionWeight))
+            const actionCDF = getCDF(actionPDF)
+            voterStrategyList.push({ actionList, actionCDF })
+        }
         return voterStrategyList
     }
 }

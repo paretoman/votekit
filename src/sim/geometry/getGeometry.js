@@ -11,9 +11,10 @@ import getCanBorders from '../../election/src/voteCasters/voteCasters/getCanBord
 export default function getGeometry(voterShapeList, candidateList, simOptions, electionOptions, districts) {
     const { dimensions, seeds } = simOptions
     const { geography } = districts
+    const { voteCasterName } = electionOptions
 
     const voterGeoms = voterShapeList.getGeoms(dimensions)
-    const voterStrategyList = voterShapeList.getVoterStrategyList()
+    const voterStrategyList = voterShapeList.getVoterStrategyList(voteCasterName)
     const information = null
 
     const canPoints = candidateList.getPoints(dimensions)

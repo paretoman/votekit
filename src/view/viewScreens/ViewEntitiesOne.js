@@ -28,7 +28,7 @@ export default function ViewEntitiesOne(entities, screen, menu, changes, simOpti
 
     // Entities //
     const candidateViewList = new CandidateViewList(viewSettings, candidateList, screen, simOptions, electionOptionsMan)
-    const voterViewList = new VoterViewList(viewSettings, voterShapeList, screen, simOptions)
+    const voterViewList = new VoterViewList(viewSettings, voterShapeList, screen, simOptions, electionOptionsMan)
     candidateViewList.attachNewG(self.dragm)
     voterViewList.attachNewG(self.dragm)
 

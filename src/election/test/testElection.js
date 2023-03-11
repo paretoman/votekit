@@ -16,6 +16,7 @@ export default function testElection() {
             actionList: [
                 {
                     actionName: 'normalizeOverFrontrunners',
+                    actionWeight: 1,
                     actionOptions: {
                         threshold: {
                             type: 'normal',

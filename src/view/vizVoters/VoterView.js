@@ -11,9 +11,9 @@ import VoterGraphic from './VoterGraphic.js'
  * @param {VoterShape} voterShape - a voter component that VoterView builds upon.
  * @constructor
  */
-export default function VoterView(voterShape, screen, viewSettings, simOptions) {
+export default function VoterView(voterShape, screen, viewSettings, simOptions, electionOptionsMan) {
     const self = this
     self.voterShape = voterShape
 
-    self.graphic = new VoterGraphic(voterShape, screen, viewSettings, simOptions)
+    self.graphic = new VoterGraphic(voterShape, screen, viewSettings, simOptions, electionOptionsMan)
 }

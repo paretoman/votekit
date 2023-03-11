@@ -1,7 +1,5 @@
 /** @module */
 
-import { getCDF, normalizePDF } from '../../election/src/election/mathHelpers.js'
-
 /**
  * VoterShape class with Handle component to take care of dragging.
  * Voronoi2D component takes care of drawing votes.
@@ -87,14 +85,6 @@ export default function VoterShape(
 
         },
     }
-    calcActionCDF()
-
-    function calcActionCDF() {
-        self.strategy.score.actionPDF = normalizePDF(self.strategy.actionList.map((a) => a.actionWeight))
-        self.strategy.score.actionCDF = getCDF(self.strategy.actionPDF)
-        self.strategy.plurality.actionPDF = normalizePDF(self.strategy.actionList.map((a) => a.actionWeight))
-        self.strategy.plurality.actionCDF = getCDF(self.strategy.actionPDF)
-    }
 
     self.setAction = {
         exists(e) {
@@ -138,8 +128,7 @@ export default function VoterShape(
 
     }
     function actionListMain(a) {
-        self.strategy.actionList = a
-        calcActionCDF()
+        self.strategy = a
         changes.add(['voters', 'strategy'])
     }
 
@@ -169,7 +158,7 @@ export default function VoterShape(
         voterCommander.shape1w.command(id, shape1.w, shape1.w),
         voterCommander.shape1densityProfile.command(id, shape1.densityProfile, shape1.densityProfile),
         voterCommander.shape2densityProfile.command(id, shape2.densityProfile, shape2.densityProfile),
-        voterCommander.actionList.command(id, self.strategy.actionList, self.strategy.actionList),
+        voterCommander.actionList.command(id, self.strategy, self.strategy),
     ]
     // Either load the commands because we don't want to create an item of history
     // Or do the commands because want to store an item in history, so that we can undo.

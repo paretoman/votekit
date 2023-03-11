@@ -11,9 +11,10 @@ import makeCandidateDistributionCDF from '../../election/src/sampleElection/make
 export default function getSamplingGeometry(voterShapeList, candidateDnList, simOptions, electionOptions, districts) {
     const { dimensions, seeds } = simOptions
     const { geography } = districts
+    const { voteCasterName } = electionOptions
 
     const voterGeoms = voterShapeList.getGeoms(dimensions)
-    const voterStrategyList = voterShapeList.getVoterStrategyList()
+    const voterStrategyList = voterShapeList.getVoterStrategyList(voteCasterName)
     const canDnGeoms = candidateDnList.getGeoms(dimensions)
     const parties = candidateDnList.getParties()
 
