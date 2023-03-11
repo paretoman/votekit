@@ -89,7 +89,7 @@ export default function tooltipForEntity(graphic, entity, screen, viewSettings, 
         )
         box.appendChild(items.party.div)
     }
-    if (entity.doSetCommand.actionWeight !== undefined) {
+    if (entity.doSetCommand.actionList !== undefined) {
         items.actionPDF1 = new Item(
             'range',
             'Action PDF 1',
@@ -113,7 +113,6 @@ export default function tooltipForEntity(graphic, entity, screen, viewSettings, 
             entity.strategy.actionPDF[0],
             { min: 0, max: 1, step: 0.01 },
         )
-        box.appendChild(items.actionPDF1.div)
         items.actionPDF2 = new Item(
             'range',
             'Action PDF 2',
@@ -137,9 +136,7 @@ export default function tooltipForEntity(graphic, entity, screen, viewSettings, 
             entity.strategy.actionPDF[1],
             { min: 0, max: 1, step: 0.01 },
         )
-        box.appendChild(items.actionPDF2.div)
-    }
-    if (entity.doSetCommand.actionList !== undefined) {
+
         items.actionName1 = new Item(
             'select',
             'Action 1',
@@ -153,7 +150,6 @@ export default function tooltipForEntity(graphic, entity, screen, viewSettings, 
             entity.strategy.actionList[0].actionName,
             { choices: ['normalize', 'normalizeOverFrontrunners'] },
         )
-        box.appendChild(items.actionName1.div)
         items.actionName2 = new Item(
             'select',
             'Action 2',
@@ -167,7 +163,6 @@ export default function tooltipForEntity(graphic, entity, screen, viewSettings, 
             entity.strategy.actionList[1].actionName,
             { choices: ['normalize', 'normalizeOverFrontrunners'] },
         )
-        box.appendChild(items.actionName2.div)
         items.actionOptionThreshold = new Item(
             'range',
             'Threshold',
@@ -181,6 +176,10 @@ export default function tooltipForEntity(graphic, entity, screen, viewSettings, 
             entity.strategy.actionList[0].actionOptions.threshold.mean,
             { min: 0, max: 1, step: 0.01 },
         )
+        box.appendChild(items.actionName1.div)
+        box.appendChild(items.actionPDF1.div)
+        box.appendChild(items.actionName2.div)
+        box.appendChild(items.actionPDF2.div)
         box.appendChild(items.actionOptionThreshold.div)
     }
 
