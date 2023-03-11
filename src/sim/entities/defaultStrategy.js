@@ -2,8 +2,8 @@ const defaultStrategy = {
     score: {
         actionList: [
             {
-                actionName: 'normalizeOverFrontrunners',
-                actionWeight: 0.5,
+                actionName: 'normalize',
+                actionWeight: 1,
                 actionOptions: {
                     threshold: {
                         type: 'step',
@@ -13,8 +13,8 @@ const defaultStrategy = {
                 },
             },
             {
-                actionName: 'normalize',
-                actionWeight: 0.5,
+                actionName: 'normalizeOverFrontrunners',
+                actionWeight: 0,
                 actionOptions: {
                     threshold: {
                         type: 'step',
@@ -29,7 +29,7 @@ const defaultStrategy = {
         actionList: [
             {
                 actionName: 'closest',
-                actionWeight: 0.5,
+                actionWeight: 1,
                 actionOptions: {
                     threshold: {
                         type: 'step',
@@ -40,7 +40,7 @@ const defaultStrategy = {
             },
             {
                 actionName: 'lesserEvil',
-                actionWeight: 0.5,
+                actionWeight: 0,
                 actionOptions: {
                     threshold: {
                         type: 'step',
