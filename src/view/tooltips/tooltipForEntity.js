@@ -1,4 +1,4 @@
-import { sumArray } from '../../election/src/election/mathHelpers.js'
+import { normalizePDF, sumArray } from '../../election/src/election/mathHelpers.js'
 import { jcopy } from '../../utilities/jsHelpers.js'
 import tooltipBox from './tooltipBox.js'
 
@@ -100,7 +100,7 @@ export default function tooltipForEntity(graphic, entity, screen, viewSettings, 
                 if (sumArray(actionPDF) === 0) {
                     actionPDF[0] = 1
                 }
-                const [a0, a1] = actionPDF
+                const [a0, a1] = normalizePDF(actionPDF)
                 items.actionPDF1.input.value = a0
                 items.actionPDF2.input.value = a1
 
@@ -123,7 +123,7 @@ export default function tooltipForEntity(graphic, entity, screen, viewSettings, 
                 if (sumArray(actionPDF) === 0) {
                     actionPDF[1] = 1
                 }
-                const [a0, a1] = actionPDF
+                const [a0, a1] = normalizePDF(actionPDF)
                 items.actionPDF1.input.value = a0
                 items.actionPDF2.input.value = a1
 
