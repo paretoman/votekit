@@ -21,9 +21,9 @@ export default function strategicMinMax(dist, information, voterStrategy, strate
         return minMax(dist)
     }
 
-    const { mean, stdDev } = actionOptions.threshold
+    const { mean, radius } = actionOptions.threshold
     const rnd = strategyRngs[1]()
-    const threshold = mean + stdDev * (rnd * 2 - 1)
+    const threshold = mean + radius * (rnd * 2 - 1)
 
     // determine closest and furthest of the viable candidates
     const { electionResultsList } = information

@@ -19,9 +19,9 @@ export default function testElection() {
                     actionWeight: 1,
                     actionOptions: {
                         threshold: {
-                            type: 'normal',
+                            type: 'step',
                             mean: 0.5,
-                            stdDev: 0.1,
+                            radius: 0.1,
                         },
                     },
                 },

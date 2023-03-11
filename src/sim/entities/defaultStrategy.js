@@ -6,9 +6,9 @@ const defaultStrategy = {
                 actionWeight: 0.5,
                 actionOptions: {
                     threshold: {
-                        type: 'normal',
+                        type: 'step',
                         mean: 0.5,
-                        stdDev: 0.1,
+                        radius: 0.1,
                     },
                 },
             },
@@ -17,9 +17,9 @@ const defaultStrategy = {
                 actionWeight: 0.5,
                 actionOptions: {
                     threshold: {
-                        type: 'normal',
+                        type: 'step',
                         mean: 0.5,
-                        stdDev: 0.1,
+                        radius: 0.1,
                     },
                 },
             },
@@ -32,9 +32,9 @@ const defaultStrategy = {
                 actionWeight: 0.5,
                 actionOptions: {
                     threshold: {
-                        type: 'normal',
+                        type: 'step',
                         mean: 0.5,
-                        stdDev: 0.1,
+                        radius: 0.1,
                     },
                 },
             },
@@ -43,9 +43,9 @@ const defaultStrategy = {
                 actionWeight: 0.5,
                 actionOptions: {
                     threshold: {
-                        type: 'normal',
+                        type: 'step',
                         mean: 0.5,
-                        stdDev: 0.1,
+                        radius: 0.1,
                     },
                 },
             },
