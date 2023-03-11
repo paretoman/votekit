@@ -20,8 +20,9 @@ export default function getSamplingGeometry(voterShapeList, candidateDnList, sim
 
     const canDnCDF = makeCandidateDistributionCDF(canDnGeoms, dimensions)
 
+    const samplingSeed = `apple${seeds[0]}`
     const strategySeed = `pumpkin${seeds[0]}` // todo: use seeds[1] for strategySeed
 
-    const samplingGeometry = { voterGeoms, canDnGeoms, parties, dimensions, geography, canDnCDF, strategySeed, voterStrategyList }
+    const samplingGeometry = { voterGeoms, canDnGeoms, parties, dimensions, geography, canDnCDF, samplingSeed, strategySeed, voterStrategyList }
     return samplingGeometry
 }
