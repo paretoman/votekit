@@ -93,7 +93,7 @@ export default function tooltipForEntity(graphic, entity, screen, viewSettings, 
         items.actionPDF1 = new Item(
             'range',
             'Action PDF 1',
-            `Action PDF 1: ${entity.strategy.actionList[0].actionName}: `,
+            '',
             (val) => {
                 const { actionPDF } = entity.strategy
                 actionPDF[0] = Number(val)
@@ -116,7 +116,7 @@ export default function tooltipForEntity(graphic, entity, screen, viewSettings, 
         items.actionPDF2 = new Item(
             'range',
             'Action PDF 2',
-            `Action PDF 2: ${entity.strategy.actionList[1].actionName}: `,
+            '',
             (val) => {
                 const { actionPDF } = entity.strategy
                 actionPDF[1] = Number(val)
@@ -144,7 +144,6 @@ export default function tooltipForEntity(graphic, entity, screen, viewSettings, 
             (val) => {
                 const actionList = jcopy(entity.strategy.actionList)
                 actionList[0].actionName = val
-                items.actionPDF2.label.innerText = `PDF 1: ${val}: `
                 entity.doSetCommand.actionList(actionList)
             },
             entity.strategy.actionList[0].actionName,
@@ -157,7 +156,6 @@ export default function tooltipForEntity(graphic, entity, screen, viewSettings, 
             (val) => {
                 const actionList = jcopy(entity.strategy.actionList)
                 actionList[1].actionName = val
-                items.actionPDF2.label.innerText = `PDF 2: ${val}: `
                 entity.doSetCommand.actionList(actionList)
             },
             entity.strategy.actionList[1].actionName,
