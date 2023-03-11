@@ -33,33 +33,68 @@ export default function VoterShape(
     self.color = '#88888888'
 
     self.strategy = {
-        actionList: [
-            {
-                actionName: 'normalizeOverFrontrunners',
-                actionWeight: 0.5,
-                actionOptions: {
-                    threshold: {
-                        type: 'normal',
-                        mean: 0.5,
-                        stdDev: 0.1,
+        score: {
+            actionList: [
+                {
+                    actionName: 'normalizeOverFrontrunners',
+                    actionWeight: 0.5,
+                    actionOptions: {
+                        threshold: {
+                            type: 'normal',
+                            mean: 0.5,
+                            stdDev: 0.1,
+                        },
                     },
                 },
-            },
-            {
-                actionName: 'normalize',
-                actionWeight: 0.5,
-                actionOptions: {
-                    threshold: {
-                        type: 'normal',
-                        mean: 0.5,
-                        stdDev: 0.1,
+                {
+                    actionName: 'normalize',
+                    actionWeight: 0.5,
+                    actionOptions: {
+                        threshold: {
+                            type: 'normal',
+                            mean: 0.5,
+                            stdDev: 0.1,
+                        },
                     },
                 },
-            },
-        ],
+            ],
+        },
+        plurality: {
+            actionList: [
+                {
+                    actionName: 'closest',
+                    actionWeight: 0.5,
+                    actionOptions: {
+                        threshold: {
+                            type: 'normal',
+                            mean: 0.5,
+                            stdDev: 0.1,
+                        },
+                    },
+                },
+                {
+                    actionName: 'lesserEvil',
+                    actionWeight: 0.5,
+                    actionOptions: {
+                        threshold: {
+                            type: 'normal',
+                            mean: 0.5,
+                            stdDev: 0.1,
+                        },
+                    },
+                },
+            ],
+
+        },
     }
-    self.strategy.actionPDF = normalizePDF(self.strategy.actionList.map((a) => a.actionWeight))
-    self.strategy.actionCDF = getCDF(self.strategy.actionPDF)
+    calcActionCDF()
+
+    function calcActionCDF() {
+        self.strategy.score.actionPDF = normalizePDF(self.strategy.actionList.map((a) => a.actionWeight))
+        self.strategy.score.actionCDF = getCDF(self.strategy.actionPDF)
+        self.strategy.plurality.actionPDF = normalizePDF(self.strategy.actionList.map((a) => a.actionWeight))
+        self.strategy.plurality.actionCDF = getCDF(self.strategy.actionPDF)
+    }
 
     self.setAction = {
         exists(e) {
@@ -104,8 +139,7 @@ export default function VoterShape(
     }
     function actionListMain(a) {
         self.strategy.actionList = a
-        self.strategy.actionPDF = normalizePDF(self.strategy.actionList.map((b) => b.actionWeight))
-        self.strategy.actionCDF = getCDF(self.strategy.actionPDF)
+        calcActionCDF()
         changes.add(['voters', 'strategy'])
     }
 

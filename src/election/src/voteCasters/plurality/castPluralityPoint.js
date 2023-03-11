@@ -1,19 +1,20 @@
 /** @module */
 
-import { minIndex } from '../../election/mathHelpers.js'
 import * as typesVote from '../types/typesVote.js'
+import strategicPlurality from './strategicPlurality.js'
 /**
  * Vote for the closest candidate.
  * @returns {typesVote.pluralityVote}
  */
-export default function castPluralityPoint(canPoints, voterPoint, dimensions, verbosity) {
+export default function castPluralityPoint(canPoints, voterPoint, dimensions, verbosity, information, voterStrategy, strategyRngs) {
     const d2f = (dimensions === 1) ? d2f1 : d2f2
     const n = canPoints.length
     const dist2 = Array(n)
     for (let i = 0; i < n; i++) {
         dist2[i] = d2f(canPoints[i], voterPoint)
     }
-    const i = minIndex(dist2)
+
+    const i = strategicPlurality(dist2, information, voterStrategy, strategyRngs)
 
     if (verbosity < 2) {
         return { pluralityVote: i }
