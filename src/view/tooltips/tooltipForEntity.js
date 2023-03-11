@@ -131,6 +131,8 @@ export default function tooltipForEntity(graphic, entity, screen, viewSettings, 
             { min: 0, max: 1, step: 0.01 },
         )
 
+        const choices = (voteCasterName === 'score') ? ['normalize', 'normalizeOverFrontrunners'] : ['closest', 'lesserEvil']
+
         items.actionName1 = new Item(
             'select',
             'Action 1',
@@ -141,7 +143,7 @@ export default function tooltipForEntity(graphic, entity, screen, viewSettings, 
                 entity.doSetCommand.actionList(strategy)
             },
             entity.strategy[voteCasterName].actionList[0].actionName,
-            { choices: ['normalize', 'normalizeOverFrontrunners'] },
+            { choices },
         )
         items.actionName2 = new Item(
             'select',
@@ -153,7 +155,7 @@ export default function tooltipForEntity(graphic, entity, screen, viewSettings, 
                 entity.doSetCommand.actionList(strategy)
             },
             entity.strategy[voteCasterName].actionList[1].actionName,
-            { choices: ['normalize', 'normalizeOverFrontrunners'] },
+            { choices },
         )
         items.actionOptionThreshold = new Item(
             'range',

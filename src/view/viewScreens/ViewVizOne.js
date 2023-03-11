@@ -42,7 +42,14 @@ export default function ViewVizOne(entities, screenMain, screenMini, menu, chang
 
         const voterGeoms = voterShapeList.getGeoms(dimensions)
         const someGaussian2D = voterGeoms.some((v) => v.densityProfile === 'gaussian') && dimensions === 2
-        const doGrid = someGaussian2D || voteCasterName === 'score' || voteCasterName === 'scoreFull'
+
+        const voterStrategyList = voterShapeList.getVoterStrategyList(voteCasterName)
+        const someStrategy = voterStrategyList.some(
+            (v) => v.actionList.some(
+                (a) => (a.actionName !== 'closest' && a.weight !== 0),
+            ),
+        )
+        const doGrid = someGaussian2D || someStrategy || voteCasterName === 'score' || voteCasterName === 'scoreFull'
 
         const doRanking = voteCasterName === 'ranking' || voteCasterName === 'pairwise'
 

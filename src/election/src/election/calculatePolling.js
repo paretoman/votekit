@@ -8,12 +8,15 @@ export default function calculatePolling(electionResultsList) {
         return polling
     }
     const { scoreFractionAverageByCan } = lastElectionResults.votes.candidateTallies
-    if (scoreFractionAverageByCan === undefined) {
-        return polling
-    }
+    const { voteFractionsByCan } = lastElectionResults.votes.candidateTallies
 
-    const highestScore = Math.max(...scoreFractionAverageByCan)
-    polling.highestScore = highestScore
+    if (scoreFractionAverageByCan !== undefined) {
+        const highestScore = Math.max(...scoreFractionAverageByCan)
+        polling.highestScore = highestScore
+    } else if (voteFractionsByCan !== undefined) {
+        const highestScore = Math.max(...voteFractionsByCan)
+        polling.highestScore = highestScore
+    }
 
     return polling
 }
