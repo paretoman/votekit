@@ -11,6 +11,19 @@ export default function testElectionSample() {
         { x: 0, y: 0, w: 200, densityProfile: 'step' },
     ]
 
+    const voterStrategyList = [
+        {
+            actionCDF: [1],
+            actionList: [
+                {
+                    actionName: 'normalize',
+                    actionWeight: 1,
+                    actionOptions: { },
+                },
+            ],
+        },
+    ]
+
     const canDnGeoms = [
         { x: 0, y: 0, w: 200, densityProfile: 'step' },
     ]
@@ -26,13 +39,13 @@ export default function testElectionSample() {
 
     const canDnCDF = makeCandidateDistributionCDF(canDnGeoms, dimensions)
 
+    const samplingSeed = '670171517'
     const strategySeed = 'pumpkin1114'
 
-    const samplingGeometry = { voterGeoms, canDnGeoms, parties, dimensions, geography, canDnCDF, strategySeed }
+    const samplingGeometry = { voterGeoms, canDnGeoms, parties, dimensions, geography, canDnCDF, samplingSeed, strategySeed, voterStrategyList }
 
     const numSamples = 2
-    const seed = '670171517'
-    const rng = seedrandom(seed)
+    const rng = seedrandom(samplingSeed)
     const { samplingPointsList } = sampleElection(samplingGeometry, electionOptions, numSamples, rng)
 
     return samplingPointsList[0]

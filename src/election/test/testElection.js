@@ -15,15 +15,9 @@ export default function testElection() {
             actionCDF: [1],
             actionList: [
                 {
-                    actionName: 'normalizeOverFrontrunners',
+                    actionName: 'closest',
                     actionWeight: 1,
-                    actionOptions: {
-                        threshold: {
-                            type: 'step',
-                            mean: 0.5,
-                            radius: 0.1,
-                        },
-                    },
+                    actionOptions: { },
                 },
             ],
         },
