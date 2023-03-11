@@ -12,6 +12,8 @@ import * as typesPoints from './typesPoints.js'
  * @property {geoms.voterGeoms} voterGeoms
  * @property {number} dimensions
  * @property {parties} parties
+ * @property {string} [strategySeed]
+ * @property {object} [voterStrategyList]
  * @memberof typesGeometry
  */
 
