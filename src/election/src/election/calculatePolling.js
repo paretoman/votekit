@@ -1,9 +1,8 @@
-export default function calculatePolling(electionResultsList) {
-    if (electionResultsList.length === 0) {
+export default function calculatePolling(lastElectionResults) {
+    if (lastElectionResults === null) {
         return {}
     }
 
-    const lastElectionResults = electionResultsList[electionResultsList.length - 1]
     if (lastElectionResults.votes.candidateTallies === undefined) {
         return {}
     }

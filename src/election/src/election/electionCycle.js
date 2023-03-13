@@ -13,18 +13,16 @@ export default function electionCycle(geometry, electionOptions) {
     // run several elections and store the results in electionResultsList
     // return the last one
 
-    let electionResults
-    const electionResultsList = []
+    let electionResults = null
     for (let i = 0; i < pollCount + 1; i++) {
         const geometry1 = { ...geometry }
-        const polling = calculatePolling(electionResultsList)
+        const polling = calculatePolling(electionResults)
         geometry1.information = { polling }
         if (useGeography) {
             electionResults = districtElection(geometry1, electionOptions)
         } else {
             electionResults = electionRun(geometry1, electionOptions)
         }
-        electionResultsList.push(electionResults)
     }
     return electionResults
 }
