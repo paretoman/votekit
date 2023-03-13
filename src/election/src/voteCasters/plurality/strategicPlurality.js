@@ -18,12 +18,10 @@ export default function strategicPlurality(dist2, information, voterStrategy, st
     const threshold = mean + radius * (rnd * 2 - 1)
 
     // determine closest of the viable candidates
-    const { electionResultsList } = information
-    if (electionResultsList.length === 0) {
+    const { voteFractionsByCan, highestScore } = information.polling
+    if (highestScore === undefined) {
         return minIndex(dist2)
     }
-    const { voteFractionsByCan } = electionResultsList[electionResultsList.length - 1].votes.candidateTallies
-    const { highestScore } = information.polling
 
     const scoreThreshold = threshold * highestScore
     const indexViable = range(dist2.length).filter((i) => voteFractionsByCan[i] >= scoreThreshold)

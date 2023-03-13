@@ -26,12 +26,10 @@ export default function strategicMinMax(dist, information, voterStrategy, strate
     const threshold = mean + radius * (rnd * 2 - 1)
 
     // determine closest and furthest of the viable candidates
-    const { electionResultsList } = information
-    if (electionResultsList.length === 0) {
+    const { scoreFractionAverageByCan, highestScore } = information.polling
+    if (highestScore === undefined) {
         return minMax(dist)
     }
-    const { scoreFractionAverageByCan } = electionResultsList[electionResultsList.length - 1].votes.candidateTallies
-    const { highestScore } = information.polling
 
     const scoreThreshold = threshold * highestScore
     const distViable = dist.filter((d, i) => scoreFractionAverageByCan[i] >= scoreThreshold)

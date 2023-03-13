@@ -18,7 +18,7 @@ export default function electionCycle(geometry, electionOptions) {
     for (let i = 0; i < pollCount + 1; i++) {
         const geometry1 = { ...geometry }
         const polling = calculatePolling(electionResultsList)
-        geometry1.information = { electionResultsList, polling }
+        geometry1.information = { polling }
         if (useGeography) {
             electionResults = districtElection(geometry1, electionOptions)
         } else {
