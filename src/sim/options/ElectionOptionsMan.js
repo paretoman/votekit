@@ -12,7 +12,6 @@ export default function ElectionOptionsMan(changes, simOptions, commander) {
     const self = this
 
     const electionOptions = {
-        usePolls: true,
         pollCount: 5,
     }
     self.castOptionsMan = new CastOptionsMan(changes, simOptions, electionOptions)

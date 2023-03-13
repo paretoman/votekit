@@ -23,6 +23,8 @@ export default function testElection() {
         },
     ]
 
+    const usePolls = false
+
     const information = null
 
     const canPoints = [
@@ -40,7 +42,7 @@ export default function testElection() {
     const canBorders = getCanBorders(canPoints, voterGeoms, dimensions, electionOptions)
     const geography = makeGeography(electionOptions, voterGeoms, dimensions)
     const strategySeed = 'pumpkin82000'
-    const geometry = { voterGeoms, canPoints, parties, dimensions, canBorders, geography, strategySeed, voterStrategyList, information }
+    const geometry = { voterGeoms, canPoints, parties, dimensions, canBorders, geography, strategySeed, voterStrategyList, information, usePolls }
 
     const electionResults = election(geometry, electionOptions)
 

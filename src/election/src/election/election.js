@@ -12,18 +12,15 @@ export default function election(geometry, electionOptions) {
     if (voterGeoms.length === 0) return { error: 'No Voters' }
     if (canPoints.length === 0) return { error: 'No Candidates' }
 
-    const { useGeography, usePolls } = electionOptions
+    const { useGeography } = electionOptions
+    const { usePolls } = geometry
 
-    let electionResults
     if (usePolls) {
-        electionResults = electionCycle(geometry, electionOptions)
-        return electionResults
+        return electionCycle(geometry, electionOptions)
     }
     if (useGeography) {
-        electionResults = districtElection(geometry, electionOptions)
-        return electionResults
+        return districtElection(geometry, electionOptions)
     }
 
-    electionResults = electionRun(geometry, electionOptions)
-    return electionResults
+    return electionRun(geometry, electionOptions)
 }

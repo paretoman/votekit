@@ -4,7 +4,7 @@ import getCanBorders from '../voteCasters/voteCasters/getCanBorders.js'
 import sampleCanDnGeom from './sampleCanDnGeom.js'
 
 export default function sampleElection(samplingGeometry, electionOptions, numSamples, rng) {
-    const { voterGeoms, canDnGeoms, dimensions, geography, canDnCDF, strategySeed, voterStrategyList, information } = samplingGeometry
+    const { voterGeoms, canDnGeoms, dimensions, geography, canDnCDF, strategySeed, voterStrategyList, information, usePolls } = samplingGeometry
     const { partiesByCan } = samplingGeometry.parties
 
     if (voterGeoms.length === 0) return { pointsChanged: false }
@@ -36,7 +36,7 @@ export default function sampleElection(samplingGeometry, electionOptions, numSam
 
         const canBorders = getCanBorders(canPoints, voterGeoms, dimensions, electionOptions)
         const parties = { partiesByCan: sParties, numParties: 10 }
-        const geometry = { voterGeoms, canPoints, parties, dimensions, geography, canBorders, strategySeed, voterStrategyList, information }
+        const geometry = { voterGeoms, canPoints, parties, dimensions, geography, canBorders, strategySeed, voterStrategyList, information, usePolls }
 
         const electionResults = election(geometry, electionOptions)
         const { allocation } = electionResults.socialChoiceResults

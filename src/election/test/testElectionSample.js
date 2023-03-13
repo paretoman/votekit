@@ -24,6 +24,8 @@ export default function testElectionSample() {
         },
     ]
 
+    const usePolls = false
+
     const canDnGeoms = [
         { x: 0, y: 0, w: 200, densityProfile: 'step' },
     ]
@@ -42,7 +44,7 @@ export default function testElectionSample() {
     const samplingSeed = '670171517'
     const strategySeed = 'pumpkin1114'
 
-    const samplingGeometry = { voterGeoms, canDnGeoms, parties, dimensions, geography, canDnCDF, samplingSeed, strategySeed, voterStrategyList }
+    const samplingGeometry = { voterGeoms, canDnGeoms, parties, dimensions, geography, canDnCDF, samplingSeed, strategySeed, voterStrategyList, usePolls }
 
     const numSamples = 2
     const rng = seedrandom(samplingSeed)
