@@ -25,6 +25,11 @@ Entities are shared between states. Lists of entities manage the creation of ent
   * voterGeom: 
     * For 2D, an array of objects: {x,y,w}.
     * For 1D, an array of objects: {x,w,densityProfile}.
+  * voterStrategyList: voterStrategy[]
+  * voterStrategy:
+    * {actionList, actionCDF}
+  * voterShape.strategy
+    * A list of actionLists, indexed by voteCasterName to decide applicability.
 
 ### Candidates
 
