@@ -1,58 +1,70 @@
-const defaultStrategy = {
-    score: {
-        actionList: [
-            {
-                actionName: 'normalize',
-                actionWeight: 1,
-                actionOptions: {
-                    threshold: {
-                        type: 'step',
-                        mean: 0.5,
-                        radius: 0.1,
+const defaultStrategy = [
+    {
+        condition: {
+            voteCasterName: 'score',
+        },
+        actionList:
+            [
+                {
+                    actionName: 'normalize',
+                    actionWeight: 1,
+                    actionOptions: {
+                        threshold: {
+                            type: 'step',
+                            mean: 0.5,
+                            radius: 0.1,
+                        },
                     },
                 },
-            },
-            {
-                actionName: 'normalizeOverFrontrunners',
-                actionWeight: 0,
-                actionOptions: {
-                    threshold: {
-                        type: 'step',
-                        mean: 0.5,
-                        radius: 0.1,
+                {
+                    actionName: 'normalizeOverFrontrunners',
+                    actionWeight: 0,
+                    actionOptions: {
+                        threshold: {
+                            type: 'step',
+                            mean: 0.5,
+                            radius: 0.1,
+                        },
                     },
                 },
-            },
-        ],
-    },
-    plurality: {
-        actionList: [
-            {
-                actionName: 'closest',
-                actionWeight: 1,
-                actionOptions: {
-                    threshold: {
-                        type: 'step',
-                        mean: 0.5,
-                        radius: 0.1,
-                    },
-                },
-            },
-            {
-                actionName: 'lesserEvil',
-                actionWeight: 0,
-                actionOptions: {
-                    threshold: {
-                        type: 'step',
-                        mean: 0.5,
-                        radius: 0.1,
-                    },
-                },
-            },
-        ],
+            ],
 
     },
-    ranking: {
+    {
+        condition: {
+            voteCasterName: 'plurality',
+        },
+        actionList:
+            [
+                {
+                    actionName: 'closest',
+                    actionWeight: 1,
+                    actionOptions: {
+                        threshold: {
+                            type: 'step',
+                            mean: 0.5,
+                            radius: 0.1,
+                        },
+                    },
+                },
+                {
+                    actionName: 'lesserEvil',
+                    actionWeight: 0,
+                    actionOptions: {
+                        threshold: {
+                            type: 'step',
+                            mean: 0.5,
+                            radius: 0.1,
+                        },
+                    },
+                },
+            ],
+
+    },
+    {
+        condition: {
+            voteCasterName: 'ranking',
+        },
         actionList: [
             {
                 actionName: 'closest',
@@ -61,7 +73,10 @@ const defaultStrategy = {
             },
         ],
     },
-    pairwise: {
+    {
+        condition: {
+            voteCasterName: 'pairwise',
+        },
         actionList: [
             {
                 actionName: 'closest',
@@ -70,7 +85,10 @@ const defaultStrategy = {
             },
         ],
     },
-    scoreFull: {
+    {
+        condition: {
+            voteCasterName: 'scoreFull',
+        },
         actionList: [
             {
                 actionName: 'normalize',
@@ -79,6 +97,6 @@ const defaultStrategy = {
             },
         ],
     },
-}
+]
 
 export default defaultStrategy

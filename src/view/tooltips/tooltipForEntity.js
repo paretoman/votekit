@@ -102,12 +102,13 @@ export default function tooltipForEntity(graphic, entity, screen, viewSettings, 
                 const actionPDF = [a0, a1]
 
                 const strategy = jcopy(entity.strategy)
+                const actionList = getActionList(strategy, voteCasterName)
                 for (let i = 0; i < actionPDF.length; i += 1) {
-                    strategy[voteCasterName].actionList[i].actionWeight = actionPDF[i]
+                    actionList[i].actionWeight = actionPDF[i]
                 }
                 entity.doSetCommand.actionWeight(strategy)
             },
-            entity.strategy[voteCasterName].actionList[0].actionWeight,
+            getActionList(entity.strategy, voteCasterName)[0].actionWeight,
             { min: 0, max: 1, step: 0.01 },
         )
         items.actionPDF2 = new Item(
@@ -122,12 +123,13 @@ export default function tooltipForEntity(graphic, entity, screen, viewSettings, 
                 const actionPDF = [a0, a1]
 
                 const strategy = jcopy(entity.strategy)
+                const actionList = getActionList(strategy, voteCasterName)
                 for (let i = 0; i < actionPDF.length; i += 1) {
-                    strategy[voteCasterName].actionList[i].actionWeight = actionPDF[i]
+                    actionList[i].actionWeight = actionPDF[i]
                 }
                 entity.doSetCommand.actionWeight(strategy)
             },
-            entity.strategy[voteCasterName].actionList[1].actionWeight,
+            getActionList(entity.strategy, voteCasterName)[1].actionWeight,
             { min: 0, max: 1, step: 0.01 },
         )
 
@@ -139,10 +141,11 @@ export default function tooltipForEntity(graphic, entity, screen, viewSettings, 
             'Strategy 1: ',
             (val) => {
                 const strategy = jcopy(entity.strategy)
-                strategy[voteCasterName].actionList[0].actionName = val
+                const actionList = getActionList(strategy, voteCasterName)
+                actionList[0].actionName = val
                 entity.doSetCommand.actionList(strategy)
             },
-            entity.strategy[voteCasterName].actionList[0].actionName,
+            getActionList(entity.strategy, voteCasterName)[0].actionName,
             { choices },
         )
         items.actionName2 = new Item(
@@ -154,7 +157,7 @@ export default function tooltipForEntity(graphic, entity, screen, viewSettings, 
                 strategy[voteCasterName].actionList[1].actionName = val
                 entity.doSetCommand.actionList(strategy)
             },
-            entity.strategy[voteCasterName].actionList[1].actionName,
+            getActionList(entity.strategy, voteCasterName)[1].actionName,
             { choices },
         )
         items.actionOptionThreshold = new Item(
@@ -163,11 +166,12 @@ export default function tooltipForEntity(graphic, entity, screen, viewSettings, 
             'Threshold: ',
             (val) => {
                 const strategy = jcopy(entity.strategy)
-                strategy[voteCasterName].actionList[0].actionOptions.threshold.mean = Number(val)
-                strategy[voteCasterName].actionList[1].actionOptions.threshold.mean = Number(val)
+                const actionList = getActionList(strategy, voteCasterName)
+                actionList[0].actionOptions.threshold.mean = Number(val)
+                actionList[1].actionOptions.threshold.mean = Number(val)
                 entity.doSetCommand.actionOptionThreshold(strategy)
             },
-            entity.strategy[voteCasterName].actionList[0].actionOptions.threshold.mean,
+            getActionList(entity.strategy, voteCasterName)[0].actionOptions.threshold.mean,
             { min: 0, max: 1, step: 0.01 },
         )
         box.appendChild(items.actionName1.div)
@@ -189,6 +193,16 @@ export default function tooltipForEntity(graphic, entity, screen, viewSettings, 
     // Append //
 
     screen.tooltips.appendChild(box)
+}
+
+function getActionList(strategy, voteCasterName) {
+    for (let i = 0; i < strategy.length; i += 1) {
+        const s = strategy[i]
+        if (s.condition.voteCasterName === voteCasterName) {
+            return s.actionList
+        }
+    }
+    return undefined
 }
 
 function Item(type, name, text, onChange, defaultValue, options) {
