@@ -50,8 +50,8 @@ export default function VoterShapeList(changes, commander) {
             const entity = entities[i]
             const strategy = getStrategy(entity.strategyRules, voteCasterName)
             const actionPDF = normalizePDF(strategy.map((a) => a.actionWeight))
-            const actionCDF = getCDF(actionPDF)
-            voterStrategyList.push({ strategy, actionCDF })
+            const strategyCDF = getCDF(actionPDF)
+            voterStrategyList.push({ strategy, strategyCDF })
         }
         return voterStrategyList
     }

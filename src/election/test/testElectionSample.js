@@ -13,7 +13,7 @@ export default function testElectionSample() {
 
     const voterStrategyList = [
         {
-            actionCDF: [1],
+            strategyCDF: [1],
             strategy: [
                 {
                     actionName: 'normalize',

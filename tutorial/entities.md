@@ -27,7 +27,7 @@ Entities are shared between states. Lists of entities manage the creation of ent
     * For 1D, an array of objects: {x,w,densityProfile}.
   * voterStrategyList: voterStrategy[]
   * voterStrategy:
-    * {strategy, actionCDF}
+    * {strategy, strategyCDF}
   * voterShape.strategyRules
     * A list of actionLists, indexed by voteCasterName to decide applicability.
 

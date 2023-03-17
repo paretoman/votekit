@@ -13,8 +13,8 @@ export default function strategicMinMax(dist, information, voterStrategy, strate
         return minMax(dist)
     }
 
-    const { actionCDF, strategy } = voterStrategy
-    const idx = randomIndexFromCDF(actionCDF, strategyRngs[0])
+    const { strategyCDF, strategy } = voterStrategy
+    const idx = randomIndexFromCDF(strategyCDF, strategyRngs[0])
     const { actionName, actionOptions } = strategy[idx]
 
     if (actionName !== 'normalizeOverFrontrunners') {

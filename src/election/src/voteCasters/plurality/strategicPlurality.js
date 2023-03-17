@@ -5,8 +5,8 @@ export default function strategicPlurality(dist2, information, voterStrategy, st
         return minIndex(dist2)
     }
 
-    const { actionCDF, strategy } = voterStrategy
-    const idx = randomIndexFromCDF(actionCDF, strategyRngs[0])
+    const { strategyCDF, strategy } = voterStrategy
+    const idx = randomIndexFromCDF(strategyCDF, strategyRngs[0])
     const { actionName, actionOptions } = strategy[idx]
 
     if (actionName !== 'lesserEvil') {
