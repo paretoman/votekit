@@ -15,7 +15,7 @@
 export default function VoterShape(
     shape2,
     shape1,
-    strategy,
+    strategyRules,
     voterRegistrar,
     commander,
     changes,
@@ -30,7 +30,7 @@ export default function VoterShape(
     self.shape2 = {}
 
     self.color = '#88888888'
-    self.strategy = strategy
+    self.strategyRules = strategyRules
 
     self.setAction = {
         exists(e) {
@@ -74,8 +74,8 @@ export default function VoterShape(
 
     }
     function actionListMain(a) {
-        self.strategy = a
-        changes.add(['voters', 'strategy'])
+        self.strategyRules = a
+        changes.add(['voters', 'strategyRules'])
     }
 
     // Make Commands //
@@ -104,7 +104,7 @@ export default function VoterShape(
         voterCommander.shape1w.command(id, shape1.w, shape1.w),
         voterCommander.shape1densityProfile.command(id, shape1.densityProfile, shape1.densityProfile),
         voterCommander.shape2densityProfile.command(id, shape2.densityProfile, shape2.densityProfile),
-        voterCommander.actionList.command(id, self.strategy, self.strategy),
+        voterCommander.actionList.command(id, self.strategyRules, self.strategyRules),
     ]
     // Either load the commands because we don't want to create an item of history
     // Or do the commands because want to store an item in history, so that we can undo.

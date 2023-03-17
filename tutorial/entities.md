@@ -28,7 +28,7 @@ Entities are shared between states. Lists of entities manage the creation of ent
   * voterStrategyList: voterStrategy[]
   * voterStrategy:
     * {actionList, actionCDF}
-  * voterShape.strategy
+  * voterShape.strategyRules
     * A list of actionLists, indexed by voteCasterName to decide applicability.
 
 ### Candidates

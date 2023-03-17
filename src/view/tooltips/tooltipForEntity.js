@@ -101,14 +101,14 @@ export default function tooltipForEntity(graphic, entity, screen, viewSettings, 
                 items.actionPDF2.input.value = a1
                 const actionPDF = [a0, a1]
 
-                const strategy = jcopy(entity.strategy)
-                const actionList = getActionList(strategy, voteCasterName)
+                const strategyRules = jcopy(entity.strategyRules)
+                const actionList = getActionList(strategyRules, voteCasterName)
                 for (let i = 0; i < actionPDF.length; i += 1) {
                     actionList[i].actionWeight = actionPDF[i]
                 }
-                entity.doSetCommand.actionWeight(strategy)
+                entity.doSetCommand.actionWeight(strategyRules)
             },
-            getActionList(entity.strategy, voteCasterName)[0].actionWeight,
+            getActionList(entity.strategyRules, voteCasterName)[0].actionWeight,
             { min: 0, max: 1, step: 0.01 },
         )
         items.actionPDF2 = new Item(
@@ -122,14 +122,14 @@ export default function tooltipForEntity(graphic, entity, screen, viewSettings, 
                 items.actionPDF2.input.value = a1
                 const actionPDF = [a0, a1]
 
-                const strategy = jcopy(entity.strategy)
-                const actionList = getActionList(strategy, voteCasterName)
+                const strategyRules = jcopy(entity.strategyRules)
+                const actionList = getActionList(strategyRules, voteCasterName)
                 for (let i = 0; i < actionPDF.length; i += 1) {
                     actionList[i].actionWeight = actionPDF[i]
                 }
-                entity.doSetCommand.actionWeight(strategy)
+                entity.doSetCommand.actionWeight(strategyRules)
             },
-            getActionList(entity.strategy, voteCasterName)[1].actionWeight,
+            getActionList(entity.strategyRules, voteCasterName)[1].actionWeight,
             { min: 0, max: 1, step: 0.01 },
         )
 
@@ -140,12 +140,12 @@ export default function tooltipForEntity(graphic, entity, screen, viewSettings, 
             'Action 1',
             'Strategy 1: ',
             (val) => {
-                const strategy = jcopy(entity.strategy)
-                const actionList = getActionList(strategy, voteCasterName)
+                const strategyRules = jcopy(entity.strategyRules)
+                const actionList = getActionList(strategyRules, voteCasterName)
                 actionList[0].actionName = val
-                entity.doSetCommand.actionList(strategy)
+                entity.doSetCommand.actionList(strategyRules)
             },
-            getActionList(entity.strategy, voteCasterName)[0].actionName,
+            getActionList(entity.strategyRules, voteCasterName)[0].actionName,
             { choices },
         )
         items.actionName2 = new Item(
@@ -153,11 +153,11 @@ export default function tooltipForEntity(graphic, entity, screen, viewSettings, 
             'Action 2',
             'Strategy 2: ',
             (val) => {
-                const strategy = jcopy(entity.strategy)
-                strategy[voteCasterName].actionList[1].actionName = val
-                entity.doSetCommand.actionList(strategy)
+                const strategyRules = jcopy(entity.strategyRules)
+                strategyRules[voteCasterName].actionList[1].actionName = val
+                entity.doSetCommand.actionList(strategyRules)
             },
-            getActionList(entity.strategy, voteCasterName)[1].actionName,
+            getActionList(entity.strategyRules, voteCasterName)[1].actionName,
             { choices },
         )
         items.actionOptionThreshold = new Item(
@@ -165,13 +165,13 @@ export default function tooltipForEntity(graphic, entity, screen, viewSettings, 
             'Threshold',
             'Threshold: ',
             (val) => {
-                const strategy = jcopy(entity.strategy)
-                const actionList = getActionList(strategy, voteCasterName)
+                const strategyRules = jcopy(entity.strategyRules)
+                const actionList = getActionList(strategyRules, voteCasterName)
                 actionList[0].actionOptions.threshold.mean = Number(val)
                 actionList[1].actionOptions.threshold.mean = Number(val)
-                entity.doSetCommand.actionOptionThreshold(strategy)
+                entity.doSetCommand.actionOptionThreshold(strategyRules)
             },
-            getActionList(entity.strategy, voteCasterName)[0].actionOptions.threshold.mean,
+            getActionList(entity.strategyRules, voteCasterName)[0].actionOptions.threshold.mean,
             { min: 0, max: 1, step: 0.01 },
         )
         box.appendChild(items.actionName1.div)
@@ -195,9 +195,9 @@ export default function tooltipForEntity(graphic, entity, screen, viewSettings, 
     screen.tooltips.appendChild(box)
 }
 
-function getActionList(strategy, voteCasterName) {
-    for (let i = 0; i < strategy.length; i += 1) {
-        const s = strategy[i]
+function getActionList(strategyRules, voteCasterName) {
+    for (let i = 0; i < strategyRules.length; i += 1) {
+        const s = strategyRules[i]
         if (s.condition.voteCasterName === voteCasterName) {
             return s.actionList
         }

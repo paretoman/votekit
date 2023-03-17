@@ -72,7 +72,7 @@ export default function ViewVizOne(entities, screenMain, screenMini, menu, chang
 
     self.update = (simData) => {
         if (changes.checkNone()) return
-        if (changes.check(['numDistricts', 'numTracts', 'dimensions', 'socialChoiceMethod', 'densityProfile', 'strategy'])) {
+        if (changes.check(['numDistricts', 'numTracts', 'dimensions', 'socialChoiceMethod', 'densityProfile', 'strategyRules'])) {
             self.exit()
             self.enter()
         }

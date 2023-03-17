@@ -29,16 +29,16 @@ export default function VoterShapeList(changes, commander) {
     EntityList.call(self, commander, prefix, registrar)
 
     const voterCommander = new EntityCommander(registrar, commander, self, prefix, voterSenderList)
-    self.addVoterCircle = ({ shape2, shape1, strategy, doLoad }) => {
+    self.addVoterCircle = ({ shape2, shape1, strategyRules, doLoad }) => {
         // eslint-disable-next-line max-len
-        const voterShape = new VoterShape(shape2, shape1, strategy, registrar, commander, changes, doLoad, voterCommander)
+        const voterShape = new VoterShape(shape2, shape1, strategyRules, registrar, commander, changes, doLoad, voterCommander)
         self.addEntity(voterShape)
     }
     self.addDefaultEntity = () => {
         self.addVoterCircle({
             shape2: { x: 50, y: 50, w: 200, densityProfile: 'step' },
             shape1: { x: 50, w: 200, densityProfile: 'gaussian' },
-            strategy: defaultStrategy,
+            strategyRules: defaultStrategy,
             doLoad: false,
         })
     }
@@ -48,16 +48,16 @@ export default function VoterShapeList(changes, commander) {
         const entities = self.getEntities()
         for (let i = 0; i < entities.length; i += 1) {
             const entity = entities[i]
-            const actionList = getActionList(entity.strategy, voteCasterName)
+            const actionList = getActionList(entity.strategyRules, voteCasterName)
             const actionPDF = normalizePDF(actionList.map((a) => a.actionWeight))
             const actionCDF = getCDF(actionPDF)
             voterStrategyList.push({ actionList, actionCDF })
         }
         return voterStrategyList
     }
-    function getActionList(strategy, voteCasterName) {
-        for (let i = 0; i < strategy.length; i += 1) {
-            const s = strategy[i]
+    function getActionList(strategyRules, voteCasterName) {
+        for (let i = 0; i < strategyRules.length; i += 1) {
+            const s = strategyRules[i]
             if (s.condition.voteCasterName === voteCasterName) {
                 return s.actionList
             }
