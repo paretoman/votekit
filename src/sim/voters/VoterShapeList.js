@@ -21,9 +21,9 @@ export default function VoterShapeList(changes, commander) {
         ['shape1w', 'shape1D-width', true],
         ['shape1densityProfile', 'shape1D-densityProfile', false],
         ['shape2densityProfile', 'shape2D-densityProfile', false],
-        ['actionWeight', 'strategy', true],
-        ['strategy', 'strategy', false],
-        ['actionOptionThreshold', 'strategy', true],
+        ['actionWeight', 'strategyRules', true],
+        ['strategy', 'strategyRules', false],
+        ['actionOptionThreshold', 'strategyRules', true],
     ]
     const registrar = new Registrar()
     EntityList.call(self, commander, prefix, registrar)
