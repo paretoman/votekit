@@ -1,4 +1,4 @@
-const defaultStrategy = [
+const defaultStrategyRules = [
     {
         condition: {
             voteCasterName: 'score',
@@ -99,4 +99,4 @@ const defaultStrategy = [
     },
 ]
 
-export default defaultStrategy
+export default defaultStrategyRules
