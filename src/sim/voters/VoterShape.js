@@ -63,17 +63,17 @@ export default function VoterShape(
             changes.add(['voters', 'densityProfile'])
         },
         strategy(a) {
-            strategyMain(a)
+            setStrategyRules(a)
         },
         actionOptionThreshold(a) {
-            strategyMain(a)
+            setStrategyRules(a)
         },
         actionWeight(a) {
-            strategyMain(a)
+            setStrategyRules(a)
         },
 
     }
-    function strategyMain(a) {
+    function setStrategyRules(a) {
         self.strategyRules = a
         changes.add(['voters', 'strategyRules'])
     }
