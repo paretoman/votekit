@@ -14,7 +14,7 @@ export default function testElectionSample() {
     const voterStrategyList = [
         {
             actionCDF: [1],
-            actionList: [
+            strategy: [
                 {
                     actionName: 'normalize',
                     actionWeight: 1,

@@ -16,7 +16,7 @@ export default function getSamplingGeometry(voterShapeList, candidateDnList, sim
     const voterGeoms = voterShapeList.getGeoms(dimensions)
     const voterStrategyList = voterShapeList.getVoterStrategyList(voteCasterName)
     const usePolls = voterStrategyList.some(
-        (v) => v.actionList.some(
+        (v) => v.strategy.some(
             (a) => (a.actionName !== 'closest' && a.actionWeight !== 0),
         ),
     )

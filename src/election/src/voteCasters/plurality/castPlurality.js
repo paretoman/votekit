@@ -22,7 +22,7 @@ export default function castPlurality(geometry, castOptions) {
     const someGaussian2D = voterGeoms.some((v) => v.densityProfile === 'gaussian') && dimensions === 2
 
     const someStrategy = voterStrategyList.some(
-        (v) => v.actionList.some(
+        (v) => v.strategy.some(
             (a) => (a.actionName !== 'closest' && a.actionWeight !== 0),
         ),
     )

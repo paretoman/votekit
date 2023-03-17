@@ -45,7 +45,7 @@ export default function ViewVizOne(entities, screenMain, screenMini, menu, chang
 
         const voterStrategyList = voterShapeList.getVoterStrategyList(voteCasterName)
         const someStrategy = voterStrategyList.some(
-            (v) => v.actionList.some(
+            (v) => v.strategy.some(
                 (a) => (a.actionName !== 'closest' && a.actionWeight !== 0),
             ),
         )

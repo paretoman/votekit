@@ -13,7 +13,7 @@ export default function testElection() {
     const voterStrategyList = [
         {
             actionCDF: [1],
-            actionList: [
+            strategy: [
                 {
                     actionName: 'closest',
                     actionWeight: 1,

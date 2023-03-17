@@ -21,9 +21,9 @@ export default function VoterShapeList(changes, commander) {
         ['shape1w', 'shape1D-width', true],
         ['shape1densityProfile', 'shape1D-densityProfile', false],
         ['shape2densityProfile', 'shape2D-densityProfile', false],
-        ['actionWeight', 'actionList', true],
-        ['actionList', 'actionList', false],
-        ['actionOptionThreshold', 'actionList', true],
+        ['actionWeight', 'strategy', true],
+        ['strategy', 'strategy', false],
+        ['actionOptionThreshold', 'strategy', true],
     ]
     const registrar = new Registrar()
     EntityList.call(self, commander, prefix, registrar)
@@ -48,10 +48,10 @@ export default function VoterShapeList(changes, commander) {
         const entities = self.getEntities()
         for (let i = 0; i < entities.length; i += 1) {
             const entity = entities[i]
-            const actionList = getActionList(entity.strategyRules, voteCasterName)
-            const actionPDF = normalizePDF(actionList.map((a) => a.actionWeight))
+            const strategy = getActionList(entity.strategyRules, voteCasterName)
+            const actionPDF = normalizePDF(strategy.map((a) => a.actionWeight))
             const actionCDF = getCDF(actionPDF)
-            voterStrategyList.push({ actionList, actionCDF })
+            voterStrategyList.push({ strategy, actionCDF })
         }
         return voterStrategyList
     }
@@ -59,7 +59,7 @@ export default function VoterShapeList(changes, commander) {
         for (let i = 0; i < strategyRules.length; i += 1) {
             const s = strategyRules[i]
             if (s.condition.voteCasterName === voteCasterName) {
-                return s.actionList
+                return s.strategy
             }
         }
         return undefined

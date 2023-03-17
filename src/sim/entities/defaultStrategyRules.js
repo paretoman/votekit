@@ -3,7 +3,7 @@ const defaultStrategyRules = [
         condition: {
             voteCasterName: 'score',
         },
-        actionList:
+        strategy:
             [
                 {
                     actionName: 'normalize',
@@ -34,7 +34,7 @@ const defaultStrategyRules = [
         condition: {
             voteCasterName: 'plurality',
         },
-        actionList:
+        strategy:
             [
                 {
                     actionName: 'closest',
@@ -65,7 +65,7 @@ const defaultStrategyRules = [
         condition: {
             voteCasterName: 'ranking',
         },
-        actionList: [
+        strategy: [
             {
                 actionName: 'closest',
                 actionWeight: 1,
@@ -77,7 +77,7 @@ const defaultStrategyRules = [
         condition: {
             voteCasterName: 'pairwise',
         },
-        actionList: [
+        strategy: [
             {
                 actionName: 'closest',
                 actionWeight: 1,
@@ -89,7 +89,7 @@ const defaultStrategyRules = [
         condition: {
             voteCasterName: 'scoreFull',
         },
-        actionList: [
+        strategy: [
             {
                 actionName: 'normalize',
                 actionWeight: 1,

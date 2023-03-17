@@ -17,7 +17,7 @@ export default function getGeometry(voterShapeList, candidateList, simOptions, e
     const voterStrategyList = voterShapeList.getVoterStrategyList(voteCasterName)
     const information = null
     const usePolls = voterStrategyList.some(
-        (v) => v.actionList.some(
+        (v) => v.strategy.some(
             (a) => (a.actionName !== 'closest' && a.actionWeight !== 0),
         ),
     )
