@@ -48,14 +48,14 @@ export default function VoterShapeList(changes, commander) {
         const entities = self.getEntities()
         for (let i = 0; i < entities.length; i += 1) {
             const entity = entities[i]
-            const strategy = getActionList(entity.strategyRules, voteCasterName)
+            const strategy = getStrategy(entity.strategyRules, voteCasterName)
             const actionPDF = normalizePDF(strategy.map((a) => a.actionWeight))
             const actionCDF = getCDF(actionPDF)
             voterStrategyList.push({ strategy, actionCDF })
         }
         return voterStrategyList
     }
-    function getActionList(strategyRules, voteCasterName) {
+    function getStrategy(strategyRules, voteCasterName) {
         for (let i = 0; i < strategyRules.length; i += 1) {
             const s = strategyRules[i]
             if (s.condition.voteCasterName === voteCasterName) {

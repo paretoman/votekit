@@ -102,13 +102,13 @@ export default function tooltipForEntity(graphic, entity, screen, viewSettings, 
                 const actionPDF = [a0, a1]
 
                 const strategyRules = jcopy(entity.strategyRules)
-                const strategy = getActionList(strategyRules, voteCasterName)
+                const strategy = getStrategy(strategyRules, voteCasterName)
                 for (let i = 0; i < actionPDF.length; i += 1) {
                     strategy[i].actionWeight = actionPDF[i]
                 }
                 entity.doSetCommand.actionWeight(strategyRules)
             },
-            getActionList(entity.strategyRules, voteCasterName)[0].actionWeight,
+            getStrategy(entity.strategyRules, voteCasterName)[0].actionWeight,
             { min: 0, max: 1, step: 0.01 },
         )
         items.actionPDF2 = new Item(
@@ -123,13 +123,13 @@ export default function tooltipForEntity(graphic, entity, screen, viewSettings, 
                 const actionPDF = [a0, a1]
 
                 const strategyRules = jcopy(entity.strategyRules)
-                const strategy = getActionList(strategyRules, voteCasterName)
+                const strategy = getStrategy(strategyRules, voteCasterName)
                 for (let i = 0; i < actionPDF.length; i += 1) {
                     strategy[i].actionWeight = actionPDF[i]
                 }
                 entity.doSetCommand.actionWeight(strategyRules)
             },
-            getActionList(entity.strategyRules, voteCasterName)[1].actionWeight,
+            getStrategy(entity.strategyRules, voteCasterName)[1].actionWeight,
             { min: 0, max: 1, step: 0.01 },
         )
 
@@ -141,11 +141,11 @@ export default function tooltipForEntity(graphic, entity, screen, viewSettings, 
             'Strategy 1: ',
             (val) => {
                 const strategyRules = jcopy(entity.strategyRules)
-                const strategy = getActionList(strategyRules, voteCasterName)
+                const strategy = getStrategy(strategyRules, voteCasterName)
                 strategy[0].actionName = val
                 entity.doSetCommand.strategy(strategyRules)
             },
-            getActionList(entity.strategyRules, voteCasterName)[0].actionName,
+            getStrategy(entity.strategyRules, voteCasterName)[0].actionName,
             { choices },
         )
         items.actionName2 = new Item(
@@ -157,7 +157,7 @@ export default function tooltipForEntity(graphic, entity, screen, viewSettings, 
                 strategyRules[voteCasterName].strategy[1].actionName = val
                 entity.doSetCommand.strategy(strategyRules)
             },
-            getActionList(entity.strategyRules, voteCasterName)[1].actionName,
+            getStrategy(entity.strategyRules, voteCasterName)[1].actionName,
             { choices },
         )
         items.actionOptionThreshold = new Item(
@@ -166,12 +166,12 @@ export default function tooltipForEntity(graphic, entity, screen, viewSettings, 
             'Threshold: ',
             (val) => {
                 const strategyRules = jcopy(entity.strategyRules)
-                const strategy = getActionList(strategyRules, voteCasterName)
+                const strategy = getStrategy(strategyRules, voteCasterName)
                 strategy[0].actionOptions.threshold.mean = Number(val)
                 strategy[1].actionOptions.threshold.mean = Number(val)
                 entity.doSetCommand.actionOptionThreshold(strategyRules)
             },
-            getActionList(entity.strategyRules, voteCasterName)[0].actionOptions.threshold.mean,
+            getStrategy(entity.strategyRules, voteCasterName)[0].actionOptions.threshold.mean,
             { min: 0, max: 1, step: 0.01 },
         )
         box.appendChild(items.actionName1.div)
@@ -195,7 +195,7 @@ export default function tooltipForEntity(graphic, entity, screen, viewSettings, 
     screen.tooltips.appendChild(box)
 }
 
-function getActionList(strategyRules, voteCasterName) {
+function getStrategy(strategyRules, voteCasterName) {
     for (let i = 0; i < strategyRules.length; i += 1) {
         const s = strategyRules[i]
         if (s.condition.voteCasterName === voteCasterName) {
