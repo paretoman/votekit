@@ -10,16 +10,13 @@ export default function sampleElection(samplingGeometry, electionOptions, numSam
     if (voterGeoms.length === 0) return { pointsChanged: false }
     if (canDnGeoms.length === 0) return { pointsChanged: false }
 
-    // number of new points
-    const { socialChoiceOptions } = electionOptions
-
     const samplingPointsList = []
     const samplingPointsCount = []
     const partyWins = Array(10).fill(0) // TODO: Use number of parties
 
     for (let i = 0; i < numSamples; i++) {
         // choose a number of candidates
-        const { numSampleCandidates } = socialChoiceOptions
+        const { numSampleCandidates } = electionOptions
         const canPoints = []
         const sParties = []
         for (let k = 0; k < numSampleCandidates; k++) {

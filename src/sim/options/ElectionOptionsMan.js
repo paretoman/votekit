@@ -13,6 +13,7 @@ export default function ElectionOptionsMan(changes, simOptions, commander) {
 
     const electionOptions = {
         pollCount: 5,
+        numSampleCandidates: 5,
     }
     self.castOptionsMan = new CastOptionsMan(changes, simOptions, electionOptions)
     self.socialChoiceOptionsMan = new SocialChoiceOptionsMan(changes, electionOptions)
@@ -63,6 +64,17 @@ export default function ElectionOptionsMan(changes, simOptions, commander) {
     self.update = () => {
         self.castOptionsMan.update()
         self.socialChoiceOptionsMan.update()
+
+        if (changes.check(['socialChoiceMethod'])) {
+            const { socialChoiceType } = electionOptions
+            if (socialChoiceType === 'allocation') {
+                electionOptions.numSampleCandidates = 10
+            } else if (socialChoiceType === 'multiWinner') {
+                electionOptions.numSampleCandidates = 10
+            } else { // 'singleWinner'
+                electionOptions.numSampleCandidates = 5
+            }
+        }
     }
 
     self.getOptions = () => {

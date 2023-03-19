@@ -1,6 +1,7 @@
 export default {
     numTracts: 2,
     numDistricts: 3,
+    numSampleCandidates: 10,
     socialChoiceMethod: 'plurality',
     voteCasterName: 'plurality',
     socialChoiceType: 'singleWinner',
@@ -11,7 +12,6 @@ export default {
     socialChoiceOptions: {
         seats: 1,
         threshold: 0.1,
-        numSampleCandidates: 10,
     },
     pollCount: 5,
 }
