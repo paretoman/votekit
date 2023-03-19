@@ -41,8 +41,9 @@ export default function ElectionOptionsMan(changes, simOptions, commander) {
         currentValue: electionOptions.numDistricts,
         action(n) {
             electionOptions.numDistricts = n
-            electionOptions.useDistricts = n > 1
-            electionOptions.useGeography = electionOptions.useTracts || electionOptions.useDistricts
+            const useDistricts = n > 1
+            const useTracts = electionOptions.numTracts > 1
+            electionOptions.useGeography = useTracts || useDistricts
             changes.add(['numDistricts'])
         },
     }).go
@@ -52,8 +53,9 @@ export default function ElectionOptionsMan(changes, simOptions, commander) {
         currentValue: electionOptions.numTracts,
         action(n) {
             electionOptions.numTracts = n
-            electionOptions.useTracts = n > 1
-            electionOptions.useGeography = electionOptions.useTracts || electionOptions.useDistricts
+            const useTracts = n > 1
+            const useDistricts = electionOptions.numDistricts > 1
+            electionOptions.useGeography = useTracts || useDistricts
             changes.add(['numTracts'])
         },
     }).go
