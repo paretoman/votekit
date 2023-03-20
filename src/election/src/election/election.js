@@ -1,8 +1,6 @@
 /** @module */
 
-import districtElection from '../districtElection/districtElection.js'
-import electionCycle from './electionCycle.js'
-import electionRun from './electionRun.js'
+import electionGeneral from './electionGeneral.js'
 
 /**
  * Here we are in the context of a single election.
@@ -12,15 +10,6 @@ export default function election(geometry, electionOptions) {
     if (voterGeoms.length === 0) return { error: 'No Voters' }
     if (canPoints.length === 0) return { error: 'No Candidates' }
 
-    const { useGeography } = electionOptions
-    const { usePolls } = geometry
-
-    if (usePolls) {
-        return electionCycle(geometry, electionOptions)
-    }
-    if (useGeography) {
-        return districtElection(geometry, electionOptions)
-    }
-
-    return electionRun(geometry, electionOptions)
+    // sequence === 'general'
+    return electionGeneral(geometry, electionOptions)
 }

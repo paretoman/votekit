@@ -1,4 +1,4 @@
-export default function SocialChoiceOptionsMan(changes, electionOptions) {
+export default function SocialChoiceOptionsMan(changes, phaseOptions) {
     const self = this
 
     const socialChoiceOptions = {
@@ -8,7 +8,7 @@ export default function SocialChoiceOptionsMan(changes, electionOptions) {
 
     self.update = () => {
         if (changes.check(['socialChoiceMethod'])) {
-            const { socialChoiceType } = electionOptions
+            const { socialChoiceType } = phaseOptions
             if (socialChoiceType === 'allocation') {
                 socialChoiceOptions.seats = 5
             } else if (socialChoiceType === 'multiWinner') {

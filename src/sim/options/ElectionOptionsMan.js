@@ -1,8 +1,7 @@
 /** @module */
 
-import { socialChoiceMethodMetadataByFunctionName } from '../../election/src/socialChoiceMethods/socialChoiceMethods.js'
 import CastOptionsMan from './CastOptionsMan.js'
-import SocialChoiceOptionsMan from './SocialChoiceOptionsMan.js'
+import SequenceOptionsMan from './SequenceOptionsMan.js'
 
 /**
  * Here we are in the context of a single election.
@@ -16,26 +15,14 @@ export default function ElectionOptionsMan(changes, simOptions, commander) {
         numSampleCandidates: 5,
     }
     self.castOptionsMan = new CastOptionsMan(changes, simOptions, electionOptions)
-    self.socialChoiceOptionsMan = new SocialChoiceOptionsMan(changes, electionOptions)
+    self.sequenceOptionsMan = new SequenceOptionsMan(changes, commander)
 
     self.init = () => {
         // Defaults
-        self.setSocialChoiceMethod('plurality')
+        self.sequenceOptionsMan.init()
         self.setNumTracts(1)
         self.setNumDistricts(1)
     }
-
-    self.setSocialChoiceMethod = commander.addSender({
-        name: 'socialChoiceMethod',
-        currentValue: electionOptions.socialChoiceMethod,
-        action(functionName) {
-            electionOptions.socialChoiceMethod = functionName
-            const metadata = socialChoiceMethodMetadataByFunctionName[functionName]
-            electionOptions.voteCasterName = metadata.voteCasterName
-            electionOptions.socialChoiceType = metadata.socialChoiceType
-            changes.add(['socialChoiceMethod'])
-        },
-    }).go
 
     self.setNumDistricts = commander.addSender({
         name: 'numDistricts',
@@ -63,7 +50,7 @@ export default function ElectionOptionsMan(changes, simOptions, commander) {
 
     self.update = () => {
         self.castOptionsMan.update()
-        self.socialChoiceOptionsMan.update()
+        self.sequenceOptionsMan.update()
 
         if (changes.check(['socialChoiceMethod'])) {
             const { socialChoiceType } = electionOptions
@@ -80,7 +67,7 @@ export default function ElectionOptionsMan(changes, simOptions, commander) {
     self.getOptions = () => {
         const eo = { ...electionOptions }
         eo.castOptions = self.castOptionsMan.getOptions()
-        eo.socialChoiceOptions = self.socialChoiceOptionsMan.getOptions()
+        eo.sequenceOptions = self.sequenceOptionsMan.getOptions()
         return eo
     }
 
