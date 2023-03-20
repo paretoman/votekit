@@ -38,7 +38,7 @@ export default function olprA(votes, socialChoiceOptions) {
     // todo: change method
     const socialChoiceOptions3 = { ...socialChoiceOptions }
     socialChoiceOptions3.seatLimits = seatLimits
-    const votes3 = { candidateTallies: { voteFractionsByCan: partyVotes } }
+    const votes3 = { candidateTallies: { voteFractionsByCan: partyVotes }, numCans }
     const partyResults = sainteLague(votes3, socialChoiceOptions3)
     const partyAllocation = partyResults.allocation
 
@@ -53,7 +53,7 @@ export default function olprA(votes, socialChoiceOptions) {
         const totalTFInParty = tfWithinParty.reduce((p, c) => p + c, 0)
         const fractionTfWithinParty = tfWithinParty.map((x) => x / totalTFInParty)
         // Run sntv.
-        const votes2 = { candidateTallies: { voteFractionsByCan: fractionTfWithinParty } }
+        const votes2 = { candidateTallies: { voteFractionsByCan: fractionTfWithinParty }, numCans }
         const socialChoiceInParty = sntv(votes2, socialChoiceOptions2)
         const allocationInParty = socialChoiceInParty.allocation
         // Store sntv results in allocation list for all candidates.
