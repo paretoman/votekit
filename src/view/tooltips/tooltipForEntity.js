@@ -154,7 +154,8 @@ export default function tooltipForEntity(graphic, entity, screen, viewSettings, 
             'Strategy 2: ',
             (val) => {
                 const strategyRules = jcopy(entity.strategyRules)
-                strategyRules[voteCasterName].strategy[1].actionName = val
+                const strategy = getStrategy(strategyRules, voteCasterName)
+                strategy[1].actionName = val
                 entity.doSetCommand.strategy(strategyRules)
             },
             getStrategy(entity.strategyRules, voteCasterName)[1].actionName,
