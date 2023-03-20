@@ -31,6 +31,7 @@ export default function combineVotesByDistrict(votesByTract, canPoints, geograph
             votes.preferenceTallies = districtPreferenceTallies(votesByTract, cen)
         }
         votes.parties = votesByTract[0][0].parties
+        votes.numCans = numCans
         return votes
     })
     return votesByDistrict
