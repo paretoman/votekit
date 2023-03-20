@@ -7,7 +7,7 @@ export default function SequenceOptionsMan(changes, commander) {
         general: new PhaseOptionsMan(changes, commander),
         // More to come.
     }
-    const phases = self.phaseOptionsManList.keys()
+    const phases = Object.keys(self.phaseOptionsManList)
 
     const sequenceOptions = {
         sequenceName: 'general',
