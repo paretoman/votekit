@@ -16,7 +16,7 @@ export default function ViewVizBudget(screenCommon, layout, menu, changes, simOp
 
     function enterStrategy() {
         const electionOptions = electionOptionsMan.getOptions()
-        const { socialChoiceMethod, useGeography } = electionOptions
+        const { socialChoiceMethod, useGeography } = electionOptions.sequenceOptions.phases.general // todo: make this more general
         const { dimensions } = simOptions
         const VizExplanation = (socialChoiceMethod === 'methodOfEqualShares' && !useGeography && dimensions === 1)
             ? VizExplanationBudgetMES : BaseExplanation

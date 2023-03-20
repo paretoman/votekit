@@ -1,9 +1,9 @@
 // Show wins across all districts for each candidate
-export default function sumAllocationsStatewide(scResultsByDistrict, canPoints, electionOptions) {
+export default function sumAllocationsStatewide(scResultsByDistrict, canPoints, electionPhaseOptions) {
     // make a histogram of allocation
     const numCandidates = canPoints.length
     const allocationsSum = Array(numCandidates).fill(0)
-    if (electionOptions.socialChoiceType === 'singleWinner') {
+    if (electionPhaseOptions.socialChoiceType === 'singleWinner') {
         const iWinners = scResultsByDistrict.map((socialChoiceResults) => socialChoiceResults.iWinner)
         iWinners.forEach((iWinner) => {
             allocationsSum[iWinner] += 1

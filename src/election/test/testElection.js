@@ -1,6 +1,5 @@
 import makeGeography from '../src/geography/makeGeography.js'
 import election from '../src/election/election.js'
-import getCanBorders from '../src/voteCasters/voteCasters/getCanBorders.js'
 import electionOptions1 from './electionOptions1.js'
 
 export default function testElection() {
@@ -39,10 +38,9 @@ export default function testElection() {
 
     const electionOptions = electionOptions1
 
-    const canBorders = getCanBorders(canPoints, voterGeoms, dimensions, electionOptions)
     const geography = makeGeography(electionOptions, voterGeoms, dimensions)
     const strategySeed = 'pumpkin82000'
-    const geometry = { voterGeoms, canPoints, parties, dimensions, canBorders, geography, strategySeed, voterStrategyList, information, usePolls }
+    const geometry = { voterGeoms, canPoints, parties, dimensions, geography, strategySeed, voterStrategyList, information, usePolls }
 
     const electionResults = election(geometry, electionOptions)
 

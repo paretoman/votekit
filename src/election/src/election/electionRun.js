@@ -1,18 +1,26 @@
 /** @module */
 
+import getCanBorders from '../voteCasters/voteCasters/getCanBorders.js'
 import voteCasters from '../voteCasters/voteCasters/voteCasters.js'
 import socialChoiceRun from './socialChoiceRun.js'
 
 /**
  * Here we are in the context of a single election.
  */
-export default function electionRun(geometry, electionOptions) {
-    const { castOptions } = electionOptions
+export default function electionRun(geometry, electionPhaseOptions) {
+    const { castOptions } = electionPhaseOptions
 
-    const votes = voteCasters[electionOptions.voteCasterName].cast(geometry, castOptions)
-    const socialChoiceResults = socialChoiceRun(votes, electionOptions)
+    const { voteCasterName } = electionPhaseOptions.phaseOptions
+    const { canPoints, voterGeoms, dimensions } = geometry
+
+    const geometry2 = { ...geometry }
+    const canBorders = getCanBorders(canPoints, voterGeoms, dimensions, voteCasterName)
+    geometry2.canBorders = canBorders
+
+    const votes = voteCasters[voteCasterName].cast(geometry2, castOptions)
+    const socialChoiceResults = socialChoiceRun(votes, electionPhaseOptions)
     const electionResults = {
-        electionOptions, geometry, votes, socialChoiceResults,
+        electionPhaseOptions, geometry, votes, socialChoiceResults,
     }
     return electionResults
 }

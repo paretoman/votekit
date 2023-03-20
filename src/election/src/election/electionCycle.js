@@ -7,8 +7,8 @@ import electionRun from './electionRun.js'
 /**
  * Here we are in the context of an election cycle with polls followed by a single election.
  */
-export default function electionCycle(geometry, electionOptions) {
-    const { useGeography, pollCount } = electionOptions
+export default function electionCycle(geometry, electionPhaseOptions) {
+    const { useGeography, pollCount } = electionPhaseOptions
 
     // run several elections and store the results in electionResultsList
     // return the last one
@@ -19,9 +19,9 @@ export default function electionCycle(geometry, electionOptions) {
         const polling = calculatePolling(electionResults)
         geometry1.information = { polling }
         if (useGeography) {
-            electionResults = districtElection(geometry1, electionOptions)
+            electionResults = districtElection(geometry1, electionPhaseOptions)
         } else {
-            electionResults = electionRun(geometry1, electionOptions)
+            electionResults = electionRun(geometry1, electionPhaseOptions)
         }
     }
     return electionResults

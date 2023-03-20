@@ -45,9 +45,9 @@ export default function menuElectionOptions(electionOptionsMan, menu) {
             ),
         ),
         changeList: ['socialChoiceMethod'],
-        getValue: () => electionOptionsMan.getOptions().socialChoiceMethod,
+        getValue: () => electionOptionsMan.sequenceOptionsMan.phaseOptionsManList.general.getOptions().socialChoiceMethod, // todo: make this more general
         onChoose: (o) => {
-            electionOptionsMan.sequenceOptions.phases.general.setSocialChoiceMethod(o.value)
+            electionOptionsMan.sequenceOptionsMan.phaseOptionsManList.general.setSocialChoiceMethod(o.value) // todo: make this more general
         },
     })
 }

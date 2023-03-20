@@ -3,7 +3,7 @@
 import socialChoiceMethods from '../socialChoiceMethods/socialChoiceMethods.js'
 import makeAllocation from './makeAllocation.js'
 
-export default function socialChoiceRun(votes, electionOptions) {
+export default function socialChoiceRun(votes, electionPhaseOptions) {
     // why have two different kinds of results?
     // socialChoiceResults, the smaller one,
     //   is in the context of the social choice method,
@@ -11,9 +11,9 @@ export default function socialChoiceRun(votes, electionOptions) {
     // electionResults, the larger one,
     //   is in the context of candidate objects and voter objects.
 
-    const { socialChoiceOptions } = electionOptions
-    const socialChoiceMethod = socialChoiceMethods[electionOptions.socialChoiceMethod]
-    const socialChoiceResults = socialChoiceMethod(votes, socialChoiceOptions)
+    const { socialChoiceOptions, socialChoiceMethod } = electionPhaseOptions.phaseOptions
+    const socialChoice = socialChoiceMethods[socialChoiceMethod]
+    const socialChoiceResults = socialChoice(votes, socialChoiceOptions)
     if (socialChoiceResults.allocation === undefined) {
         socialChoiceResults.allocation = makeAllocation(votes, socialChoiceResults)
     }

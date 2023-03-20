@@ -1,6 +1,5 @@
 import election from '../election/election.js'
 import { randomIndexFromCDF } from '../election/mathHelpers.js'
-import getCanBorders from '../voteCasters/voteCasters/getCanBorders.js'
 import sampleCanDnGeom from './sampleCanDnGeom.js'
 
 export default function sampleElection(samplingGeometry, electionOptions, numSamples, rng) {
@@ -31,9 +30,8 @@ export default function sampleElection(samplingGeometry, electionOptions, numSam
             sParties.push(party0)
         }
 
-        const canBorders = getCanBorders(canPoints, voterGeoms, dimensions, electionOptions)
         const parties = { partiesByCan: sParties, numParties: 10 }
-        const geometry = { voterGeoms, canPoints, parties, dimensions, geography, canBorders, strategySeed, voterStrategyList, information, usePolls }
+        const geometry = { voterGeoms, canPoints, parties, dimensions, geography, strategySeed, voterStrategyList, information, usePolls }
 
         const electionResults = election(geometry, electionOptions)
         const { allocation } = electionResults.socialChoiceResults

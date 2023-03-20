@@ -2,7 +2,6 @@ import makeGeography, { makeTracts, updateCensus, updateDistricts, updateVoters 
 import makeCandidateDistributionCDF from '../sampleElection/makeCandidateDistributionCDF.js'
 import sampleElection from '../sampleElection/sampleElection.js'
 import socialChoiceMethods, { socialChoiceMethodMetadataByFunctionName } from '../socialChoiceMethods/socialChoiceMethods.js'
-import getCanBorders from '../voteCasters/voteCasters/getCanBorders.js'
 import voteCasters from '../voteCasters/voteCasters/voteCasters.js'
 import election from './election.js'
 
@@ -12,10 +11,6 @@ const geography = {
     updateCensus,
     updateDistricts,
     updateVoters,
-}
-const voting = {
-    getCanBorders,
-    voteCasters,
 }
 const socialChoice = {
     socialChoiceMethods,
@@ -28,7 +23,7 @@ const sampling = {
 
 const electionIndex = {
     geography,
-    voting,
+    voteCasters,
     socialChoice,
     election,
     sampling,
