@@ -13,6 +13,8 @@ Here's a big list of things I want in the future.
   * Perhaps judging on a universal scale is a strategy in some situation. 
   * Make a factor for compromise.
 * Clicking on a tooltip over another screen doesn't work.
+* Handle zero candidate distribution, zero voters edge case for sampler.
+* Needs labels.
 
 ## UI
 
@@ -20,7 +22,7 @@ Here's a big list of things I want in the future.
 
 ## Election Model
 
-* Could use computational geometry to make line arrangment.
+* Could use computational geometry to make line arrangement.
 * Need to make districts predictable. At least for squares.
 * Multi-phase elections.
 

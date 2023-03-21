@@ -44,6 +44,7 @@ export default function ElectionSampler() {
         const { samplingPointsList, samplingPointsCount, partyWins, error } = sampleResult
 
         if (error !== undefined) return { pointsChanged: false }
+        if (sampleResult.pointsChanged === false) return { pointsChanged: false }
 
         const numNewPoints = samplingPointsCount.reduce((p, c) => p + c)
         totalPoints += numNewPoints
