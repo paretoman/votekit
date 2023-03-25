@@ -5,7 +5,7 @@ import * as typesVotes from '../voteCasters/types/typesVotes.js'
 import * as typesSocialChoice from './typesSocialChoice.js'
 
 /**
- * Single Transferable Vote
+ * Single Non-Transferable Vote
  * @param {typesVotes.votes} votes - The object for vote data.
  * @param {typesSocialChoice.socialChoiceOptions} socialChoiceOptions - options to specify a social choice function.
  * @returns {typesSocialChoice.socialChoiceResults} - the results returned from a social choice function.
@@ -33,4 +33,14 @@ export default function sntv(votes, socialChoiceOptions) {
     }
     const socialChoiceResults = { allocation }
     return socialChoiceResults
+}
+
+/** @constant {object} - an object: this function and descriptions of its name, input, and output */
+export const sntvMetadata = {
+    name: 'Single Non-Transferable Vote',
+    shortName: 'SNTV',
+    functionName: 'sntv',
+    voteCasterName: 'plurality',
+    socialChoiceType: 'multiWinner',
+    elect: sntv,
 }
