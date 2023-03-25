@@ -2,6 +2,7 @@ import assert from 'assert'
 import { describe, it } from 'mocha'
 import testElection from './testElection.js'
 import testElectionClosedPrimary from './testElectionClosedPrimary.js'
+import testElectionNonpartisanOpenPrimary from './testElectionNonpartisanOpenPrimary.js'
 import testElectionSample from './testElectionSample.js'
 
 describe('The election', () => {
@@ -13,6 +14,12 @@ describe('The election', () => {
 describe('An election with a closed primary', () => {
     it('should elect the second candidate', () => {
         const allocation = testElectionClosedPrimary()
+        assert.equal(1, allocation[1])
+    })
+})
+describe('An election with a nonpartisan open primary', () => {
+    it('should elect the second candidate', () => {
+        const allocation = testElectionNonpartisanOpenPrimary()
         assert.equal(1, allocation[1])
     })
 })
