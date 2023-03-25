@@ -1,55 +1,13 @@
-import makeGeography from '../src/geography/makeGeography.js'
 import electionOptions1 from './electionOptions1.js'
-import makeCandidateDistributionCDF from '../src/sampleElection/makeCandidateDistributionCDF.js'
 import sampleElection from '../src/sampleElection/sampleElection.js'
 import seedrandom from '../src/lib/snowpack/build/snowpack/pkg/seedrandom.js'
+import testSamplingGeometry1 from './testSamplingGeometry1.js'
 
 export default function testElectionSample() {
-    const dimensions = 2
-
-    const voterGeoms = [
-        { x: 0, y: 0, w: 200, densityProfile: 'step' },
-    ]
-
-    const voterStrategyList = [
-        {
-            strategyCDF: [1],
-            strategy: [
-                {
-                    actionName: 'normalize',
-                    actionWeight: 1,
-                    actionOptions: { },
-                },
-            ],
-        },
-    ]
-
-    const usePolls = false
-
-    const canDnGeoms = [
-        { x: 0, y: 0, w: 200, densityProfile: 'step' },
-    ]
-
-    const parties = {
-        partiesByCan: [0, 1],
-        numParties: 2,
-    }
-
-    const electionOptions = electionOptions1
-
-    const { numTracts, numDistricts } = electionOptions
-    const geography = makeGeography(numTracts, numDistricts, voterGeoms, dimensions)
-
-    const canDnCDF = makeCandidateDistributionCDF(canDnGeoms, dimensions)
-
-    const samplingSeed = '670171517'
-    const strategySeed = 'pumpkin1114'
-
-    const samplingGeometry = { voterGeoms, canDnGeoms, parties, dimensions, geography, canDnCDF, samplingSeed, strategySeed, voterStrategyList, usePolls }
-
+    const { samplingSeed } = testSamplingGeometry1
     const numSamples = 2
     const rng = seedrandom(samplingSeed)
-    const { samplingPointsList } = sampleElection(samplingGeometry, electionOptions, numSamples, rng)
+    const { samplingPointsList } = sampleElection(testSamplingGeometry1, electionOptions1, numSamples, rng)
 
     return samplingPointsList[0]
 }
