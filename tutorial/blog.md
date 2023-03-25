@@ -39,3 +39,11 @@ Here's an interesting sourcemap visualizer: https://parceljs.org/plugin-system/s
 
 ## Codesandbox
 I had to get the babel package "@babel/plugin-proposal-class-properties" to get the codesandbox to work. This required a few changes, like adding a .babelrc and adding @babel/core as well. I only use babel for this, and I don't yet use babel for transpiling from the command line.
+
+## Debugging in VSCode
+
+Set nodejs debugging so we can set breakpoints when we're testing the election package in Node.
+
+"Use the **Toggle Auto Attach** command from the Command Palette (Ctrl+Shift+P) or, if it's already activated, use the **Auto Attach** Status bar item."
+
+https://code.visualstudio.com/docs/nodejs/nodejs-debugging

@@ -1,5 +1,6 @@
 /** @module */
 
+import electionClosedPrimary from './electionClosedPrimary.js'
 import electionGeneral from './electionGeneral.js'
 
 /**
@@ -10,6 +11,10 @@ export default function election(geometry, electionOptions) {
     if (voterGeoms.length === 0) return { error: 'No Voters' }
     if (canPoints.length === 0) return { error: 'No Candidates' }
 
+    const { sequenceName } = electionOptions.sequenceOptions
+    if (sequenceName === 'closed primary') {
+        return electionClosedPrimary(geometry, electionOptions)
+    }
     // sequence === 'general'
     return electionGeneral(geometry, electionOptions)
 }
