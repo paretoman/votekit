@@ -37,7 +37,8 @@ export default function testElectionSample() {
 
     const electionOptions = electionOptions1
 
-    const geography = makeGeography(electionOptions, voterGeoms, dimensions)
+    const { numTracts, numDistricts } = electionOptions
+    const geography = makeGeography(numTracts, numDistricts, voterGeoms, dimensions)
 
     const canDnCDF = makeCandidateDistributionCDF(canDnGeoms, dimensions)
 

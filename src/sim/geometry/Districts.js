@@ -10,9 +10,10 @@ export default function Districts(voterShapeList, changes, electionOptionsMan, s
 
     self.init = () => {
         const electionOptions = electionOptionsMan.getOptions()
+        const { numTracts, numDistricts } = electionOptions
         const { dimensions } = simOptions
         const voterGeoms = voterShapeList.getGeoms(dimensions)
-        self.geography = makeGeography(electionOptions, voterGeoms, dimensions)
+        self.geography = makeGeography(numTracts, numDistricts, voterGeoms, dimensions)
     }
 
     let firstRun = true

@@ -37,8 +37,9 @@ export default function testElection() {
     }
 
     const electionOptions = electionOptions1
+    const { numTracts, numDistricts } = electionOptions
 
-    const geography = makeGeography(electionOptions, voterGeoms, dimensions)
+    const geography = makeGeography(numTracts, numDistricts, voterGeoms, dimensions)
     const strategySeed = 'pumpkin82000'
     const geometry = { voterGeoms, canPoints, parties, dimensions, geography, strategySeed, voterStrategyList, information, usePolls }
 
