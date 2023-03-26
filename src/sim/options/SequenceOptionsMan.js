@@ -31,10 +31,7 @@ export default function SequenceOptionsMan(changes, commander) {
         })
     })
 
-    const sequenceOptions = {
-        sequenceName: 'general',
-        phases: {},
-    }
+    const sequenceOptions = {}
 
     self.init = () => {
         self.setSequenceName('general')
