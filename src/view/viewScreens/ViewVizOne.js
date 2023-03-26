@@ -6,6 +6,7 @@ import VizOneVoronoiRanking from '../viz/VizOneVoronoiRanking.js'
 import VizOneGrid from '../viz/VizOneGrid.js'
 import ViewBase from './ViewBase.js'
 import VoterRendererList from '../vizVoters/VoterRendererList.js'
+import checkSomeStrategy from '../../sim/geometry/checkSomeStrategy.js'
 
 /**
  * Simulate one election with
@@ -43,12 +44,10 @@ export default function ViewVizOne(entities, screenMain, screenMini, menu, chang
         const voterGeoms = voterShapeList.getGeoms(dimensions)
         const someGaussian2D = voterGeoms.some((v) => v.densityProfile === 'gaussian') && dimensions === 2
 
-        const voterStrategyList = voterShapeList.getVoterStrategyList(voteCasterName)
-        const someStrategy = voterStrategyList.some(
-            (v) => v.strategy.some(
-                (a) => (a.actionName !== 'closest' && a.actionWeight !== 0),
-            ),
-        )
+        const { sequenceOptions } = electionOptions
+        const voterStrategyListByPhase = voterShapeList.getVoterStrategyListByPhase(sequenceOptions)
+
+        const someStrategy = checkSomeStrategy(voterStrategyListByPhase)
         const doGrid = someGaussian2D || someStrategy || voteCasterName === 'score' || voteCasterName === 'scoreFull'
 
         const doRanking = voteCasterName === 'ranking' || voteCasterName === 'pairwise'

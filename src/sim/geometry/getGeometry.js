@@ -1,3 +1,5 @@
+import getUsePollsByPhase from './getUsePollsByPhase.js'
+
 /**
  * Get geometry inputs to election.
  * @param {*} voterShapeList
@@ -9,16 +11,12 @@
 export default function getGeometry(voterShapeList, candidateList, simOptions, electionOptions, districts) {
     const { dimensions, seeds } = simOptions
     const { geography } = districts
-    const { voteCasterName } = electionOptions.sequenceOptions.sequences.general.phases.general // todo: make this more general
+    const { sequenceOptions } = electionOptions
 
     const voterGeoms = voterShapeList.getGeoms(dimensions)
-    const voterStrategyList = voterShapeList.getVoterStrategyList(voteCasterName)
+    const voterStrategyListByPhase = voterShapeList.getVoterStrategyListByPhase(sequenceOptions)
     const information = null
-    const usePolls = voterStrategyList.some(
-        (v) => v.strategy.some(
-            (a) => (a.actionName !== 'closest' && a.actionWeight !== 0),
-        ),
-    )
+    const usePollsByPhase = getUsePollsByPhase(voterStrategyListByPhase)
 
     const canPoints = candidateList.getPoints(dimensions)
     const parties = candidateList.getParties()

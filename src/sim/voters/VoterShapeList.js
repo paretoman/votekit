@@ -43,24 +43,49 @@ export default function VoterShapeList(changes, commander) {
         })
     }
 
-    self.getVoterStrategyList = (voteCasterName) => {
+    self.getVoterStrategyListByPhase = (sequenceOptions) => {
+        // for each phase, we need a voterStrategyList entry
+        const { phases } = sequenceOptions
+
+        const voterStrategyListByPhase = {}
+
+        Object.keys(phases).forEach((phaseName) => {
+            const phase = phases[phaseName]
+            const { voteCasterName } = phase
+            const voterStrategyList = getStrategyList(voteCasterName, phaseName)
+            voterStrategyListByPhase[phaseName] = voterStrategyList
+        })
+        return voterStrategyListByPhase
+    }
+    function getStrategyList(voteCasterName, phaseName) {
         const voterStrategyList = []
         const entities = self.getEntities()
         for (let i = 0; i < entities.length; i += 1) {
             const entity = entities[i]
-            const strategy = getStrategy(entity.strategyRules, voteCasterName)
+            const strategy = getStrategy(entity.strategyRules, voteCasterName, phaseName)
             const actionPDF = normalizePDF(strategy.map((a) => a.actionWeight))
             const strategyCDF = getCDF(actionPDF)
             voterStrategyList.push({ strategy, strategyCDF })
         }
         return voterStrategyList
     }
-    function getStrategy(strategyRules, voteCasterName) {
+
+    // find the strategy that matches all the conditions, if there are conditions.
+    function getStrategy(strategyRules, voteCasterName, phaseName) {
         for (let i = 0; i < strategyRules.length; i += 1) {
             const s = strategyRules[i]
-            if (s.condition.voteCasterName === voteCasterName) {
-                return s.strategy
+            if (s.condition.phaseName !== undefined) {
+                if (s.condition.phaseName !== phaseName) {
+                    continue
+                }
             }
+            if (s.condition.voteCasterName !== undefined) {
+                if (s.condition.voteCasterName !== voteCasterName) {
+                    continue
+                }
+            }
+            // the strategy rule applies if we got through the previous two checks
+            return s.strategy
         }
         return undefined
     }
