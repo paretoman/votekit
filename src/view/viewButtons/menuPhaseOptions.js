@@ -1,8 +1,8 @@
 import { socialChoiceMethodMetadata } from '../../election/src/socialChoiceMethods/socialChoiceMethods.js'
 
-export default function menuPhaseOptions(sequenceName, phaseName, electionOptionsMan, menu) {
+export default function menuPhaseOptions(sequenceName, phaseName, phaseNameTitle, electionOptionsMan, menu) {
     menu.addMenuItem({
-        label: `Social Choice Method for ${phaseName} phase:`,
+        label: `Social Choice Method for ${phaseNameTitle} Phase:`,
         explain: 'The method of choosing winners from a set of prospective candidates.',
         options: socialChoiceMethodMetadata.map(
             ({ shortName, functionName, name, explain }) => (

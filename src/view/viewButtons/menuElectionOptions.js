@@ -36,5 +36,24 @@ export default function menuElectionOptions(electionOptionsMan, menu) {
         },
     })
 
-    menuPhaseOptions('general', 'general', electionOptionsMan, menu)
+    menu.addMenuItem({
+        label: 'Election Sequence:',
+        explain: 'An election may be composed of phases of casting votes and determining winners. '
+        + 'A primary may be closed or open. '
+        + 'A closed primary only allows voters of a party to vote. '
+        + 'A nonpartisan open primary allows any voter to vote for any candidate. '
+        + 'A general follows the primary. ',
+        options: [
+            { name: 'General', value: 'general', explain: 'One general phase.' },
+            { name: 'Closed P', value: 'closedPrimary', explain: 'A closed primary followed by a general phase.' },
+            { name: 'Nonp Open P', value: 'nonPartisanOpenPrimary', explain: 'A nonpartisan open primary followed by a general phase.' },
+        ],
+        changeList: ['sequenceName'],
+        getValue: () => electionOptionsMan.sequenceOptionsMan.getOptions().sequenceName,
+        onChoose: (o) => {
+            electionOptionsMan.sequenceOptionsMan.setSequenceName(o.value)
+        },
+    })
+
+    menuPhaseOptions('general', 'general', 'General', electionOptionsMan, menu)
 }
