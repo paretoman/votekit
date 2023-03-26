@@ -8,12 +8,12 @@ import getElectionPhaseOptions from './getPhaseOptions.js'
  */
 export default function electionNonpartisanPrimary(geometry, electionOptions) {
     // primary phase
-    const primaryOptions = getElectionPhaseOptions(electionOptions, 'nonpartisanOpenPrimary')
+    const primaryOptions = getElectionPhaseOptions('nonpartisanOpenPrimary', 'nonpartisanOpenPrimary', electionOptions)
     const primary = electionPhase(geometry, primaryOptions)
 
     // general phase
     const { generalGeometry, primaryWinners } = getGeneralGeometry(geometry, primary)
-    const generalOptions = getElectionPhaseOptions(electionOptions, 'general')
+    const generalOptions = getElectionPhaseOptions('nonpartisanOpenPrimary', 'general', electionOptions)
     const general = electionPhase(generalGeometry, generalOptions)
 
     // combine primary and general results

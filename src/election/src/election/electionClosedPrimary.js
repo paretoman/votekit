@@ -13,7 +13,7 @@ export default function electionClosedPrimary(geometry, electionOptions) {
 
     const primaryResults = []
     const partyCansLists = []
-    const primaryPhaseOptions = getElectionPhaseOptions(electionOptions, 'closedPrimary')
+    const primaryPhaseOptions = getElectionPhaseOptions('closedPrimary', 'closedPrimary', electionOptions)
     for (let i = 0; i < numParties; i++) {
         const { primaryGeometry, partyCans } = getPrimaryGeometry(geometry, i)
         const primary = electionPhase(primaryGeometry, primaryPhaseOptions)
@@ -22,7 +22,7 @@ export default function electionClosedPrimary(geometry, electionOptions) {
     }
 
     const { generalGeometry, primaryWinners } = getGeneralGeometry(geometry, primaryResults, numParties, partyCansLists)
-    const generalPhaseOptions = getElectionPhaseOptions(electionOptions, 'general')
+    const generalPhaseOptions = getElectionPhaseOptions('closedPrimary', 'general', electionOptions)
     const general = electionPhase(generalGeometry, generalPhaseOptions)
 
     const results = combineClosedPrimaryGeneral(primaryResults, general, primaryWinners, geometry, electionOptions)
