@@ -31,9 +31,17 @@ const voterStrategyList = [
     },
 ]
 
+const voterStrategyListByPhase = {
+    general: voterStrategyList,
+    closedPrimary: voterStrategyList,
+}
+
 const voterParties = [0, 1]
 
-const usePolls = false
+const usePollsByPhase = {
+    general: false,
+    closedPrimary: false,
+}
 
 const information = null
 
@@ -53,6 +61,6 @@ const { numTracts, numDistricts } = electionOptions1
 
 const geography = makeGeography(numTracts, numDistricts, voterGeoms, dimensions)
 const strategySeed = 'pumpkin82000'
-const testGeometry2Parties = { voterGeoms, voterParties, canPoints, parties, dimensions, geography, strategySeed, voterStrategyList, information, usePolls }
+const testGeometry2Parties = { voterGeoms, voterParties, canPoints, parties, dimensions, geography, strategySeed, voterStrategyListByPhase, information, usePollsByPhase }
 
 export default testGeometry2Parties

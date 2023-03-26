@@ -7,20 +7,39 @@ const voterGeoms = [
     { x: 0, y: 0, w: 200, densityProfile: 'step' },
 ]
 
-const voterStrategyList = [
-    {
-        strategyCDF: [1],
-        strategy: [
-            {
-                actionName: 'closest',
-                actionWeight: 1,
-                actionOptions: { },
-            },
-        ],
-    },
-]
+const voterStrategyListByPhase = {
+    general:
+    [
+        {
+            strategyCDF: [1],
+            strategy: [
+                {
+                    actionName: 'closest',
+                    actionWeight: 1,
+                    actionOptions: { },
+                },
+            ],
+        },
+    ],
+    nonpartisanOpenPrimary:
+    [
+        {
+            strategyCDF: [1],
+            strategy: [
+                {
+                    actionName: 'closest',
+                    actionWeight: 1,
+                    actionOptions: { },
+                },
+            ],
+        },
+    ],
+}
 
-const usePolls = false
+const usePollsByPhase = {
+    general: false,
+    nonpartisanOpenPrimary: false,
+}
 
 const information = null
 
@@ -39,6 +58,6 @@ const { numTracts, numDistricts } = electionOptions
 
 const geography = makeGeography(numTracts, numDistricts, voterGeoms, dimensions)
 const strategySeed = 'pumpkin82000'
-const testGeometry1 = { voterGeoms, canPoints, parties, dimensions, geography, strategySeed, voterStrategyList, information, usePolls }
+const testGeometry1 = { voterGeoms, canPoints, parties, dimensions, geography, strategySeed, voterStrategyListByPhase, information, usePollsByPhase }
 
 export default testGeometry1

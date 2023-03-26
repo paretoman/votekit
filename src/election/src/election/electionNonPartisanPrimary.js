@@ -1,6 +1,7 @@
 /** @module */
 
 import electionPhase from './electionPhase.js'
+import getGeometryForPhase from './getGeometryForPhase.js'
 import getElectionPhaseOptions from './getPhaseOptions.js'
 
 /**
@@ -8,8 +9,9 @@ import getElectionPhaseOptions from './getPhaseOptions.js'
  */
 export default function electionNonpartisanPrimary(geometry, electionOptions) {
     // primary phase
+    const primaryGeometry = getGeometryForPhase('primary', geometry)
     const primaryOptions = getElectionPhaseOptions('nonpartisanOpenPrimary', 'nonpartisanOpenPrimary', electionOptions)
-    const primary = electionPhase(geometry, primaryOptions)
+    const primary = electionPhase(primaryGeometry, primaryOptions)
 
     // general phase
     const { generalGeometry, primaryWinners } = getGeneralGeometry(geometry, primary)
@@ -23,7 +25,7 @@ export default function electionNonpartisanPrimary(geometry, electionOptions) {
 }
 /** Get the winners of the primary to be candidates in the general. */
 function getGeneralGeometry(geometry, primary) {
-    const generalGeometry = { ...geometry }
+    const generalGeometry = getGeometryForPhase('general', geometry)
 
     const { allocation } = primary.socialChoiceResults
     const primaryWinners = getWinnerList(allocation)
