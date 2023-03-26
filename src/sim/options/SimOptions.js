@@ -49,5 +49,14 @@ export default function SimOptions(changes, commander) {
         },
     }).go
 
+    self.resultsPhase = {
+        general: 'general',
+        closedPrimary: 'general',
+        nonpartisanOpenPrimary: 'general',
+    }
+    self.setResultsPhase = (sequence, val) => {
+        self.resultsPhase[sequence] = val
+    }
+
     self.init()
 }

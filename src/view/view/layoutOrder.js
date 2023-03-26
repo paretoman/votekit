@@ -10,6 +10,7 @@ const layoutOrder = [
     'maps',
     'budget',
     'name',
+    'resultsPhaseSelector',
     'saveConfigToLink',
     'saveConfigToShortLink',
     'saveConfigToText',
