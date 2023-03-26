@@ -9,23 +9,28 @@ export default {
     pollCount: 5,
     sequenceOptions: {
         sequenceName: 'nonpartisanOpenPrimary',
-        phases: {
+        sequences: {
             nonpartisanOpenPrimary: {
-                socialChoiceMethod: 'sntv',
-                voteCasterName: 'plurality',
-                socialChoiceType: 'singleWinner',
-                socialChoiceOptions: {
-                    seats: 2,
-                    threshold: 0.1,
-                },
-            },
-            general: {
-                socialChoiceMethod: 'plurality',
-                voteCasterName: 'plurality',
-                socialChoiceType: 'singleWinner',
-                socialChoiceOptions: {
-                    seats: 1,
-                    threshold: 0.1,
+
+                phases: {
+                    nonpartisanOpenPrimary: {
+                        socialChoiceMethod: 'sntv',
+                        voteCasterName: 'plurality',
+                        socialChoiceType: 'singleWinner',
+                        socialChoiceOptions: {
+                            seats: 2,
+                            threshold: 0.1,
+                        },
+                    },
+                    general: {
+                        socialChoiceMethod: 'plurality',
+                        voteCasterName: 'plurality',
+                        socialChoiceType: 'singleWinner',
+                        socialChoiceOptions: {
+                            seats: 1,
+                            threshold: 0.1,
+                        },
+                    },
                 },
             },
         },

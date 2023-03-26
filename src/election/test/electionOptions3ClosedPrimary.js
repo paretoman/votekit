@@ -9,23 +9,27 @@ export default {
     pollCount: 5,
     sequenceOptions: {
         sequenceName: 'closedPrimary',
-        phases: {
+        sequences: {
             closedPrimary: {
-                socialChoiceMethod: 'plurality',
-                voteCasterName: 'plurality',
-                socialChoiceType: 'singleWinner',
-                socialChoiceOptions: {
-                    seats: 1,
-                    threshold: 0.1,
-                },
-            },
-            general: {
-                socialChoiceMethod: 'plurality',
-                voteCasterName: 'plurality',
-                socialChoiceType: 'singleWinner',
-                socialChoiceOptions: {
-                    seats: 1,
-                    threshold: 0.1,
+                phases: {
+                    closedPrimary: {
+                        socialChoiceMethod: 'plurality',
+                        voteCasterName: 'plurality',
+                        socialChoiceType: 'singleWinner',
+                        socialChoiceOptions: {
+                            seats: 1,
+                            threshold: 0.1,
+                        },
+                    },
+                    general: {
+                        socialChoiceMethod: 'plurality',
+                        voteCasterName: 'plurality',
+                        socialChoiceType: 'singleWinner',
+                        socialChoiceOptions: {
+                            seats: 1,
+                            threshold: 0.1,
+                        },
+                    },
                 },
             },
         },

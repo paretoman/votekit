@@ -9,14 +9,18 @@ export default {
     pollCount: 5,
     sequenceOptions: {
         sequenceName: 'general',
-        phases: {
+        sequences: {
             general: {
-                socialChoiceMethod: 'plurality',
-                voteCasterName: 'plurality',
-                socialChoiceType: 'singleWinner',
-                socialChoiceOptions: {
-                    seats: 1,
-                    threshold: 0.1,
+                phases: {
+                    general: {
+                        socialChoiceMethod: 'plurality',
+                        voteCasterName: 'plurality',
+                        socialChoiceType: 'singleWinner',
+                        socialChoiceOptions: {
+                            seats: 1,
+                            threshold: 0.1,
+                        },
+                    },
                 },
             },
         },
