@@ -14,6 +14,6 @@ export default function menuPhaseOptions(sequenceName, phaseName, phaseNameTitle
         onChoose: (o) => {
             electionOptionsMan.sequenceOptionsMan.sequences[sequenceName].phases[phaseName].setSocialChoiceMethod(o.value) // todo: make this more general
         },
-        checkShow: () => (sequenceName === electionOptionsMan.getOptions().sequenceName),
+        checkShow: () => (sequenceName === electionOptionsMan.getOptions().sequenceOptions.sequenceName),
     })
 }

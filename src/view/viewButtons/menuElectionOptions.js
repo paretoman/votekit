@@ -46,7 +46,7 @@ export default function menuElectionOptions(electionOptionsMan, menu) {
         options: [
             { name: 'General', value: 'general', explain: 'One general phase.' },
             { name: 'Closed P', value: 'closedPrimary', explain: 'A closed primary followed by a general phase.' },
-            { name: 'Nonp Open P', value: 'nonPartisanOpenPrimary', explain: 'A nonpartisan open primary followed by a general phase.' },
+            { name: 'Nonp Open P', value: 'nonpartisanOpenPrimary', explain: 'A nonpartisan open primary followed by a general phase.' },
         ],
         changeList: ['sequenceName'],
         getValue: () => electionOptionsMan.sequenceOptionsMan.getOptions().sequenceName,
@@ -56,4 +56,8 @@ export default function menuElectionOptions(electionOptionsMan, menu) {
     })
 
     menuPhaseOptions('general', 'general', 'General', electionOptionsMan, menu)
+    menuPhaseOptions('closedPrimary', 'closedPrimary', 'Closed Primary', electionOptionsMan, menu)
+    menuPhaseOptions('closedPrimary', 'general', 'General', electionOptionsMan, menu)
+    menuPhaseOptions('nonpartisanOpenPrimary', 'nonpartisanOpenPrimary', 'Nonpartisan Open Primary', electionOptionsMan, menu)
+    menuPhaseOptions('nonpartisanOpenPrimary', 'general', 'General', electionOptionsMan, menu)
 }

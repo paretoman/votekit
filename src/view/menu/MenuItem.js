@@ -44,9 +44,9 @@ export default function MenuItem(pub, changes, choice) {
         if (checkShow !== undefined) {
             const show = checkShow()
             if (show) {
-                self.choose.hidden = false
+                self.choose.dom.hidden = false
             } else {
-                self.choose.hidden = true
+                self.choose.dom.hidden = true
             }
         }
     }
