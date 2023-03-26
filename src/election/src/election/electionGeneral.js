@@ -3,6 +3,7 @@
 import electionPhase from './electionPhase.js'
 import getGeometryForPhase from './getGeometryForPhase.js'
 import getElectionPhaseOptions from './getPhaseOptions.js'
+import { range } from './mathHelpers.js'
 
 /**
  * Here we are in the context of a single election with one general election phase.
@@ -12,9 +13,13 @@ export default function electionGeneral(geometry, electionOptions) {
     const generalOptions = getElectionPhaseOptions('general', 'general', electionOptions)
     const general = electionPhase(generalGeometry, generalOptions)
     const { socialChoiceResults } = general
+    const numCans = geometry.canPoints.length
     const results = {
         phases: {
             general,
+        },
+        indicesByPhase: {
+            general: range(numCans),
         },
         geometry,
         electionOptions,

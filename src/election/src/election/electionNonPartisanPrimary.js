@@ -3,6 +3,7 @@
 import electionPhase from './electionPhase.js'
 import getGeometryForPhase from './getGeometryForPhase.js'
 import getElectionPhaseOptions from './getPhaseOptions.js'
+import { range } from './mathHelpers.js'
 
 /**
  * Here we are in the context of a single election with two phases, a non-partisan primary, and a general.
@@ -54,6 +55,10 @@ function combinePrimaryGeneral(primary, general, primaryWinners, geometry, elect
         phases: {
             primary,
             general,
+        },
+        indicesByPhase: {
+            primary: range(numCans),
+            general: primaryWinners,
         },
         geometry,
         electionOptions,
