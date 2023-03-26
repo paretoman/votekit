@@ -17,6 +17,7 @@ export default function electionClosedPrimary(geometry, electionOptions) {
     const primaryPhaseOptions = getElectionPhaseOptions('closedPrimary', 'closedPrimary', electionOptions)
     for (let i = 0; i < numParties; i++) {
         const { primaryGeometry, partyCans } = getPrimaryGeometry(geometry, i)
+        if (partyCans.length === 0) continue // todo: think about this
         const primary = electionPhase(primaryGeometry, primaryPhaseOptions)
         primaryResults.push(primary)
         partyCansLists.push(partyCans)
@@ -65,9 +66,10 @@ function getGeneralGeometry(geometry, primaryResults, numParties, partyCansLists
 
     const primaryWinners = []
     for (let i = 0; i < numParties; i++) {
+        const partyCans = partyCansLists[i]
+        if (partyCans === undefined || partyCans.length === 0) continue
         const primaryResult = primaryResults[i]
         const { allocation } = primaryResult.socialChoiceResults
-        const partyCans = partyCansLists[i]
         for (let j = 0; j < allocation.length; j++) {
             if (allocation[j]) { // todo: consider allocation > 1
                 const iWinner = partyCans[j]
