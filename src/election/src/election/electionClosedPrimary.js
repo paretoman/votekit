@@ -95,11 +95,11 @@ function combineClosedPrimaryGeneral(primaryResults, general, primaryWinners, ge
 
     const results = {
         phases: {
-            primary: primaryResults,
+            closedPrimary: primaryResults,
             general,
         },
         indicesByPhase: {
-            primary: partyCansLists,
+            closedPrimary: partyCansLists,
             general: primaryWinners,
         },
         geometry,

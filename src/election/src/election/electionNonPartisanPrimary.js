@@ -53,11 +53,11 @@ function combinePrimaryGeneral(primary, general, primaryWinners, geometry, elect
 
     const results = {
         phases: {
-            primary,
+            nonpartisanOpenPrimary: primary,
             general,
         },
         indicesByPhase: {
-            primary: range(numCans),
+            nonpartisanOpenPrimary: range(numCans),
             general: primaryWinners,
         },
         geometry,

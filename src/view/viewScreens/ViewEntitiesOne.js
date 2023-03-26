@@ -62,7 +62,7 @@ export default function ViewEntitiesOne(entities, screen, menu, changes, simOpti
             const { allocation } = electionResults.socialChoiceResults
             candidateViewList.setCandidateWins(allocation)
 
-            const phaseToShow = 'general' // todo: allow user to select this option
+            const phaseToShow = 'general' // todo: allow user to select this option, e.g. nonpartisanOpenPrimary
             const { votes } = electionResults.phases[phaseToShow]
             const tallyFractions = getTallyFractions(votes)
 
