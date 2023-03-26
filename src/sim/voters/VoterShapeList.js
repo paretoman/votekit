@@ -45,7 +45,8 @@ export default function VoterShapeList(changes, commander) {
 
     self.getVoterStrategyListByPhase = (sequenceOptions) => {
         // for each phase, we need a voterStrategyList entry
-        const { phases } = sequenceOptions
+        const { sequenceName, sequences } = sequenceOptions
+        const { phases } = sequences[sequenceName]
 
         const voterStrategyListByPhase = {}
 
