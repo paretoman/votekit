@@ -1,4 +1,4 @@
-import { socialChoiceMethodMetadata } from '../../election/src/socialChoiceMethods/socialChoiceMethods.js'
+import menuPhaseOptions from './menuPhaseOptions.js'
 
 export default function menuElectionOptions(electionOptionsMan, menu) {
     menu.addMenuItem({
@@ -36,18 +36,5 @@ export default function menuElectionOptions(electionOptionsMan, menu) {
         },
     })
 
-    menu.addMenuItem({
-        label: 'Social Choice Method:',
-        explain: 'The method of choosing winners from a set of prospective candidates.',
-        options: socialChoiceMethodMetadata.map(
-            ({ shortName, functionName, name, explain }) => (
-                { name: shortName, value: functionName, explain: explain || name }
-            ),
-        ),
-        changeList: ['socialChoiceMethod'],
-        getValue: () => electionOptionsMan.sequenceOptionsMan.sequences.general.phases.general.getOptions().socialChoiceMethod, // todo: make this more general
-        onChoose: (o) => {
-            electionOptionsMan.sequenceOptionsMan.sequences.general.phases.general.setSocialChoiceMethod(o.value) // todo: make this more general
-        },
-    })
+    menuPhaseOptions('general', 'general', electionOptionsMan, menu)
 }
