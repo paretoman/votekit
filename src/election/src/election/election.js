@@ -13,10 +13,10 @@ export default function election(geometry, electionOptions) {
     if (canPoints.length === 0) return { error: 'No Candidates' }
 
     const { sequenceName } = electionOptions.sequenceOptions
-    if (sequenceName === 'closed primary') {
+    if (sequenceName === 'closedPrimary') {
         return electionClosedPrimary(geometry, electionOptions)
     }
-    if (sequenceName === 'nonpartisan open primary') {
+    if (sequenceName === 'nonpartisanOpenPrimary') {
         return electionNonpartisanPrimary(geometry, electionOptions)
     }
     // sequence === 'general'

@@ -8,7 +8,7 @@ export default {
     numSampleCandidates: 10,
     pollCount: 5,
     sequenceOptions: {
-        sequenceName: 'closed primary',
+        sequenceName: 'closedPrimary',
         phases: {
             closedPrimary: {
                 socialChoiceMethod: 'plurality',

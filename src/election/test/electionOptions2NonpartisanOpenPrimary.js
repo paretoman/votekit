@@ -8,7 +8,7 @@ export default {
     numSampleCandidates: 10,
     pollCount: 5,
     sequenceOptions: {
-        sequenceName: 'nonpartisan open primary',
+        sequenceName: 'nonpartisanOpenPrimary',
         phases: {
             nonpartisanOpenPrimary: {
                 socialChoiceMethod: 'sntv',
