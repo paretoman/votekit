@@ -23,6 +23,12 @@ export default function SequenceOptionsMan(changes, commander) {
         },
     }
 
+    self.finalPhaseBySequence = {
+        general: 'general',
+        closedPrimary: 'general',
+        nonpartisanOpenPrimary: 'general',
+    }
+
     const phaseOptionsManList = []
     Object.keys(self.sequences).forEach((sequenceName) => {
         const { phases } = self.sequences[sequenceName]
