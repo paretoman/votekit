@@ -54,7 +54,7 @@ export default function ElectionOptionsMan(changes, simOptions, commander) {
 
         if (changes.check(['socialChoiceMethod'])) {
             const sequenceOptions = self.sequenceOptionsMan.getOptions()
-            const { socialChoiceType } = sequenceOptions.phases.general // todo: make this more general
+            const { socialChoiceType } = sequenceOptions.sequences.general.phases.general // todo: make this more general
             if (socialChoiceType === 'allocation') {
                 electionOptions.numSampleCandidates = 10
             } else if (socialChoiceType === 'multiWinner') {

@@ -9,7 +9,7 @@
 export default function getGeometry(voterShapeList, candidateList, simOptions, electionOptions, districts) {
     const { dimensions, seeds } = simOptions
     const { geography } = districts
-    const { voteCasterName } = electionOptions.sequenceOptions.phases.general // todo: make this more general
+    const { voteCasterName } = electionOptions.sequenceOptions.sequences.general.phases.general // todo: make this more general
 
     const voterGeoms = voterShapeList.getGeoms(dimensions)
     const voterStrategyList = voterShapeList.getVoterStrategyList(voteCasterName)

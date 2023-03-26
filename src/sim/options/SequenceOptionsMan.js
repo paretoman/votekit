@@ -3,30 +3,69 @@ import PhaseOptionsMan from './PhaseOptionsMan.js'
 export default function SequenceOptionsMan(changes, commander) {
     const self = this
 
-    self.phaseOptionsManList = {
-        general: new PhaseOptionsMan(changes, commander),
-        // More to come.
+    self.sequences = {
+        general: {
+            phases: {
+                general: new PhaseOptionsMan('general', 'general', changes, commander),
+            },
+        },
+        closedPrimary: {
+            phases: {
+                closedPrimary: new PhaseOptionsMan('closedPrimary', 'closedPrimary', changes, commander),
+                general: new PhaseOptionsMan('closedPrimary', 'general', changes, commander),
+            },
+        },
+        nonpartisanOpenPrimary: {
+            phases: {
+                nonpartisanOpenPrimary: new PhaseOptionsMan('nonpartisanOpenPrimary', 'nonpartisanOpenPrimary', changes, commander),
+                general: new PhaseOptionsMan('nonpartisanOpenPrimary', 'general', changes, commander),
+            },
+        },
     }
-    const phases = Object.keys(self.phaseOptionsManList)
+
+    const phaseOptionsManList = []
+    Object.keys(self.sequences).forEach((sequenceName) => {
+        const { phases } = self.sequences[sequenceName]
+        Object.keys(phases).forEach((phaseName) => {
+            phaseOptionsManList.push(phases[phaseName])
+        })
+    })
 
     const sequenceOptions = {
         sequenceName: 'general',
         phases: {},
     }
+
     self.init = () => {
-        phases.forEach((phase) => {
-            self.phaseOptionsManList[phase].init()
+        self.setSequenceName('general')
+        phaseOptionsManList.forEach((phaseOptionsMan) => {
+            phaseOptionsMan.init()
         })
     }
+
+    self.setSequenceName = commander.addSender({
+        name: 'sequenceName',
+        currentValue: sequenceOptions.sequenceName,
+        action(n) {
+            sequenceOptions.sequenceName = n
+            changes.add(['sequenceName'])
+        },
+    }).go
+
     self.update = () => {
-        phases.forEach((phase) => {
-            self.phaseOptionsManList[phase].update()
+        phaseOptionsManList.forEach((phaseOptionsMan) => {
+            phaseOptionsMan.update()
         })
     }
     self.getOptions = () => {
         const s = { ...sequenceOptions }
-        phases.forEach((phase) => {
-            s.phases[phase] = self.phaseOptionsManList[phase].getOptions()
+        s.sequences = {}
+        Object.keys(self.sequences).forEach((sequenceName) => {
+            s.sequences[sequenceName] = { phases: {} }
+            const { phases } = self.sequences[sequenceName]
+            Object.keys(phases).forEach((phaseName) => {
+                s.sequences[sequenceName].phases[phaseName] = self.sequences[sequenceName].phases[phaseName].getOptions()
+            })
         })
         return s
     }

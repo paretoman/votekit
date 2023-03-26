@@ -8,7 +8,7 @@ import electionPhase from './electionPhase.js'
 export default function electionGeneral(geometry, electionOptions) {
     // choose the phase options from sequenceOptions
     const electionPhaseOptions = { ...electionOptions }
-    electionPhaseOptions.phaseOptions = electionPhaseOptions.sequenceOptions.phases.general
+    electionPhaseOptions.phaseOptions = electionPhaseOptions.sequenceOptions.sequences.general.phases.general
     delete electionPhaseOptions.sequenceOptions
 
     return electionPhase(geometry, electionPhaseOptions)

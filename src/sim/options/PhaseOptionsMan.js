@@ -1,7 +1,7 @@
 import { socialChoiceMethodMetadataByFunctionName } from '../../election/src/socialChoiceMethods/socialChoiceMethods.js'
 import SocialChoiceOptionsMan from './SocialChoiceOptionsMan.js'
 
-export default function PhaseOptionsMan(changes, commander) {
+export default function PhaseOptionsMan(sequenceName, phaseName, changes, commander) {
     const self = this
 
     const phaseOptions = {
@@ -17,7 +17,7 @@ export default function PhaseOptionsMan(changes, commander) {
     self.socialChoiceOptionsMan = new SocialChoiceOptionsMan(changes, phaseOptions)
 
     self.setSocialChoiceMethod = commander.addSender({
-        name: 'socialChoiceMethod',
+        name: `sequence-${sequenceName}-phase-${phaseName}-socialChoiceMethod`,
         currentValue: phaseOptions.socialChoiceMethod,
         action(functionName) {
             phaseOptions.socialChoiceMethod = functionName

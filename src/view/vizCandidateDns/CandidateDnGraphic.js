@@ -34,7 +34,7 @@ export default function CandidateDnGraphic(candidateDn, screen, wHandle, hHandle
         const color = (darkMode) ? '#fff' : '#222'
 
         const electionOptions = electionOptionsMan.getOptions()
-        const { socialChoiceMethod } = electionOptions.sequenceOptions.phases.general // todo: make this more general
+        const { socialChoiceMethod } = electionOptions.sequenceOptions.sequences.general.phases.general // todo: make this more general
         if (socialChoiceMethod === 'olprA') {
             const x3 = x + square.w * 0.1
             const y3 = y + 8

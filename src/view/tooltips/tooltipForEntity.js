@@ -89,7 +89,7 @@ export default function tooltipForEntity(graphic, entity, screen, viewSettings, 
         box.appendChild(items.party.div)
     }
     if (entity.doSetCommand.strategy !== undefined) {
-        const { voteCasterName } = electionOptionsMan.getOptions().sequenceOptions.phases.general // todo: make this more general
+        const { voteCasterName } = electionOptionsMan.getOptions().sequenceOptions.sequences.general.phases.general // todo: make this more general
         items.actionPDF1 = new Item(
             'range',
             'Action PDF 1',

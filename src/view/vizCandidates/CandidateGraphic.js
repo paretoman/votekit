@@ -51,7 +51,7 @@ export default function CandidateGraphic(candidate, screen, wHandle, hHandle, vi
             drawStrokedColor(self.wins, x, y2, 20, 2, color, 1, fctx)
         }
         const electionOptions = electionOptionsMan.getOptions()
-        const { socialChoiceMethod } = electionOptions.sequenceOptions.phases.general // todo: make this more general
+        const { socialChoiceMethod } = electionOptions.sequenceOptions.sequences.general.phases.general // todo: make this more general
         if (socialChoiceMethod === 'olprA') {
             const x3 = x + square.w * 0.1
             const y3 = y + 8
