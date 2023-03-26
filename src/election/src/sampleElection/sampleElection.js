@@ -3,7 +3,7 @@ import { randomIndexFromCDF } from '../election/mathHelpers.js'
 import sampleCanDnGeom from './sampleCanDnGeom.js'
 
 export default function sampleElection(samplingGeometry, electionOptions, numSamples, rng) {
-    const { voterGeoms, canDnGeoms, dimensions, geography, canDnCDF, strategySeed, voterStrategyList, information, usePolls } = samplingGeometry
+    const { voterGeoms, canDnGeoms, dimensions, geography, canDnCDF, strategySeed, voterStrategyListByPhase, information, usePollsByPhase } = samplingGeometry
     const { partiesByCan } = samplingGeometry.parties
 
     if (voterGeoms.length === 0) return { pointsChanged: false }
@@ -31,7 +31,7 @@ export default function sampleElection(samplingGeometry, electionOptions, numSam
         }
 
         const parties = { partiesByCan: sParties, numParties: 10 }
-        const geometry = { voterGeoms, canPoints, parties, dimensions, geography, strategySeed, voterStrategyList, information, usePolls }
+        const geometry = { voterGeoms, canPoints, parties, dimensions, geography, strategySeed, voterStrategyListByPhase, information, usePollsByPhase }
 
         const electionResults = election(geometry, electionOptions)
         const { allocation } = electionResults.socialChoiceResults

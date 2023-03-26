@@ -9,7 +9,8 @@ import getElectionPhaseOptions from './getPhaseOptions.js'
  */
 export default function electionNonpartisanPrimary(geometry, electionOptions) {
     // primary phase
-    const primaryGeometry = getGeometryForPhase('primary', geometry)
+    const primaryGeometry = getGeometryForPhase('nonpartisanOpenPrimary', geometry)
+
     const primaryOptions = getElectionPhaseOptions('nonpartisanOpenPrimary', 'nonpartisanOpenPrimary', electionOptions)
     const primary = electionPhase(primaryGeometry, primaryOptions)
 
@@ -25,14 +26,15 @@ export default function electionNonpartisanPrimary(geometry, electionOptions) {
 }
 /** Get the winners of the primary to be candidates in the general. */
 function getGeneralGeometry(geometry, primary) {
-    const generalGeometry = getGeometryForPhase('general', geometry)
+    const g0 = getGeometryForPhase('general', geometry)
+    const generalGeometry = { ...g0 }
 
     const { allocation } = primary.socialChoiceResults
     const primaryWinners = getWinnerList(allocation)
-    generalGeometry.canPoints = primaryWinners.map((iWinner) => geometry.canPoints[iWinner])
+    generalGeometry.canPoints = primaryWinners.map((iWinner) => g0.canPoints[iWinner])
 
-    generalGeometry.parties = { ...geometry.parties }
-    generalGeometry.parties.partiesByCan = primaryWinners.map((iWinner) => geometry.parties.partiesByCan[iWinner])
+    generalGeometry.parties = { ...g0.parties }
+    generalGeometry.parties.partiesByCan = primaryWinners.map((iWinner) => g0.parties.partiesByCan[iWinner])
 
     return { generalGeometry, primaryWinners }
 }
