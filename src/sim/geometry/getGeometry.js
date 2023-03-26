@@ -14,6 +14,7 @@ export default function getGeometry(voterShapeList, candidateList, simOptions, e
     const { sequenceOptions } = electionOptions
 
     const voterGeoms = voterShapeList.getGeoms(dimensions)
+    const voterParties = voterShapeList.getParties()
     const voterStrategyListByPhase = voterShapeList.getVoterStrategyListByPhase(sequenceOptions)
     const information = null
     const usePollsByPhase = getUsePollsByPhase(voterStrategyListByPhase)
@@ -22,6 +23,6 @@ export default function getGeometry(voterShapeList, candidateList, simOptions, e
     const parties = candidateList.getParties()
 
     const strategySeed = `pumpkin${seeds[0]}` // todo: use seeds[1] for strategySeed
-    const geometry = { voterGeoms, canPoints, parties, dimensions, geography, strategySeed, voterStrategyListByPhase, information, usePollsByPhase }
+    const geometry = { voterGeoms, voterParties, canPoints, parties, dimensions, geography, strategySeed, voterStrategyListByPhase, information, usePollsByPhase }
     return geometry
 }

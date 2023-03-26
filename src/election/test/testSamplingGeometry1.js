@@ -8,6 +8,8 @@ const voterGeoms = [
     { x: 0, y: 0, w: 200, densityProfile: 'step' },
 ]
 
+const voterParties = [0]
+
 const voterStrategyListByPhase = {
     general: [
         {
@@ -46,6 +48,6 @@ const canDnCDF = makeCandidateDistributionCDF(canDnGeoms, dimensions)
 const samplingSeed = '670171517'
 const strategySeed = 'pumpkin1114'
 
-const testSamplingGeometry1 = { voterGeoms, canDnGeoms, parties, dimensions, geography, canDnCDF, samplingSeed, strategySeed, voterStrategyListByPhase, usePollsByPhase }
+const testSamplingGeometry1 = { voterGeoms, voterParties, canDnGeoms, parties, dimensions, geography, canDnCDF, samplingSeed, strategySeed, voterStrategyListByPhase, usePollsByPhase }
 
 export default testSamplingGeometry1
