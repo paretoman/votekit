@@ -33,6 +33,12 @@ export default function PhaseOptionsMan(sequenceName, phaseName, changes, comman
     }
     self.update = () => {
         self.socialChoiceOptionsMan.update()
+        phaseOptions.socialChoiceOptions = self.socialChoiceOptionsMan.getOptions()
     }
-    self.getOptions = () => ({ ...phaseOptions })
+    self.getOptions = () => {
+        const po = { ...phaseOptions }
+        po.socialChoiceOptions = self.socialChoiceOptionsMan.getOptions()
+
+        return po
+    }
 }
