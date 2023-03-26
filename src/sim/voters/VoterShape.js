@@ -71,6 +71,10 @@ export default function VoterShape(
         actionWeight(a) {
             setStrategyRules(a)
         },
+        party(p) {
+            self.party = p
+            changes.add(['party'])
+        },
 
     }
     function setStrategyRules(a) {
@@ -105,6 +109,7 @@ export default function VoterShape(
         voterCommander.shape1densityProfile.command(id, shape1.densityProfile, shape1.densityProfile),
         voterCommander.shape2densityProfile.command(id, shape2.densityProfile, shape2.densityProfile),
         voterCommander.strategy.command(id, self.strategyRules, self.strategyRules),
+        voterCommander.party.command(id, [id], [id]),
     ]
     // Either load the commands because we don't want to create an item of history
     // Or do the commands because want to store an item in history, so that we can undo.

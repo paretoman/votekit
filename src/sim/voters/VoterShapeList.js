@@ -24,6 +24,7 @@ export default function VoterShapeList(changes, commander) {
         ['actionWeight', 'strategyRules', true],
         ['strategy', 'strategyRules', false],
         ['actionOptionThreshold', 'strategyRules', true],
+        ['party', 'party', false],
     ]
     const registrar = new Registrar()
     EntityList.call(self, commander, prefix, registrar)
@@ -89,5 +90,12 @@ export default function VoterShapeList(changes, commander) {
             return s.strategy
         }
         return undefined
+    }
+
+    self.getParties = () => {
+        // TODO: consider more than one party for a voterShape.
+        const entities = self.getEntities()
+        const voterParties = entities.map((voter) => voter.party[0])
+        return voterParties
     }
 }
