@@ -7,8 +7,8 @@
  * @param {Object} budgetDataMES
  * @returns chartDataMES
  */
-export default function vizMESChartsCalcShape(electionResults, screen, budgetDataMES) {
-    const { socialChoiceResults, votes } = electionResults
+export default function vizMESChartsCalcShape(phaseResults, screen, budgetDataMES) {
+    const { socialChoiceResults, votes } = phaseResults
     const { winnersByRound } = socialChoiceResults.explanation
 
     const { costsByGeom, budgetsByGeom, colorRGBAByGeom } = budgetDataMES

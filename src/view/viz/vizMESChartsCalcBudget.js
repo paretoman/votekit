@@ -5,8 +5,9 @@
  * @param {Object} electionResults - MES methodResults plus a little extra
  * @returns budgetDataMES
  */
-export default function vizMESChartsCalcBudget(electionResults) {
-    const { socialChoiceResults, votes, colorRGBAOfCandidates } = electionResults
+export default function vizMESChartsCalcBudget(electionResults, phaseResults) {
+    const { socialChoiceResults, votes } = phaseResults
+    const { colorRGBAOfCandidates } = electionResults
     const { winnersByRound, winnerMaxCostPerScoreByRound } = socialChoiceResults.explanation
 
     const { scoreVotes } = votes.preferenceLists
