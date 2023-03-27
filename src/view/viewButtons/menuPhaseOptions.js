@@ -10,9 +10,9 @@ export default function menuPhaseOptions(sequenceName, phaseName, phaseNameTitle
             ),
         ),
         changeList: ['socialChoiceMethod'],
-        getValue: () => electionOptionsMan.sequenceOptionsMan.sequences[sequenceName].phases[phaseName].getOptions().socialChoiceMethod, // todo: make this more general
+        getValue: () => electionOptionsMan.sequenceOptionsMan.sequences[sequenceName].phases[phaseName].getOptions().socialChoiceMethod,
         onChoose: (o) => {
-            electionOptionsMan.sequenceOptionsMan.sequences[sequenceName].phases[phaseName].setSocialChoiceMethod(o.value) // todo: make this more general
+            electionOptionsMan.sequenceOptionsMan.sequences[sequenceName].phases[phaseName].setSocialChoiceMethod(o.value)
         },
         checkShow: () => (sequenceName === electionOptionsMan.getOptions().sequenceOptions.sequenceName),
     })

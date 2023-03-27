@@ -9,7 +9,7 @@ import MapOfTracts from './MapOfTracts.js'
  * @param {Screen} screen
  * @constructor
  */
-export default function DistrictMapViz(candidateList, screen, electionOptionsMan, changes) {
+export default function DistrictMapViz(candidateList, screen, electionOptionsMan, simOptions, changes) {
     const self = this
 
     let districtMap
@@ -27,7 +27,7 @@ export default function DistrictMapViz(candidateList, screen, electionOptionsMan
         }
 
         const electionOptions = electionOptionsMan.getOptions()
-        const gc = districtColors(districtElectionResults, candidateList, electionOptions)
+        const gc = districtColors(districtElectionResults, candidateList, electionOptions, simOptions)
         const { colorByTract, colorOfVoteByDistrict, colorOfWinsByDistrict } = gc
         self.colorOfVoteByDistrict = colorOfVoteByDistrict
         self.winnerColors = colorOfWinsByDistrict

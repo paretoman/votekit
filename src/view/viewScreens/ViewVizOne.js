@@ -38,7 +38,13 @@ export default function ViewVizOne(entities, screenMain, screenMini, menu, chang
     let vizOne
     function enterStrategy() {
         const electionOptions = electionOptionsMan.getOptions()
-        const { voteCasterName } = electionOptions.sequenceOptions.sequences.general.phases.general // todo: make this more general
+
+        const { sequenceName, sequences } = electionOptions.sequenceOptions
+        const { resultsPhaseBySeq } = simOptions
+        const resultsPhase = resultsPhaseBySeq[sequenceName]
+        const resultsPhaseOptions = sequences[sequenceName].phases[resultsPhase]
+        const { voteCasterName } = resultsPhaseOptions
+
         const { dimensions } = simOptions
 
         const voterGeoms = voterShapeList.getGeoms(dimensions)

@@ -17,7 +17,7 @@ export default function ViewDistrictMaps(entities, screenCommon, layout, changes
     screen.setHeight(height / 3)
     screen.hide()
 
-    const districtMapViz = new DistrictMapViz(entities.candidateList, screen, electionOptionsMan, changes)
+    const districtMapViz = new DistrictMapViz(entities.candidateList, screen, electionOptionsMan, simOptions, changes)
     let flagNoRender = false
 
     self.enter = () => {

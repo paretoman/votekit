@@ -91,8 +91,13 @@ export default function ViewEntitiesOne(entities, screen, menu, changes, simOpti
     }
     self.testVoteView = () => {
         const electionOptions = electionOptionsMan.getOptions()
-        const { voteCasterName } = electionOptions.sequenceOptions.sequences.general.phases.general // todo: make this more general
+        const { sequenceName, sequences } = electionOptions.sequenceOptions
+        const { resultsPhaseBySeq } = simOptions
+        const resultsPhase = resultsPhaseBySeq[sequenceName]
+        const resultsPhaseOptions = sequences[sequenceName].phases[resultsPhase]
+        const { voteCasterName } = resultsPhaseOptions
 
+        // todo: check this to see if it is correct. I'm not sure if a closed primary would work well here.
         const testGeometry = getTestGeometry(self.testVoterView.testVoter, candidateList, simOptions)
         const { canPoints, voterPoint, dimensions } = testGeometry
         const verbosity = 3

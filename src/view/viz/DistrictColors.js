@@ -3,7 +3,7 @@
 import colorBlender, { rgbToString } from './colorBlender.js'
 import getTallyFractions from './getTallyFractions.js'
 
-export default function districtColors(districtElectionResults, candidateList, electionOptions) {
+export default function districtColors(districtElectionResults, candidateList, electionOptions, simOptions) {
     const {
         votesByTract,
         votesByDistrict,
@@ -13,7 +13,7 @@ export default function districtColors(districtElectionResults, candidateList, e
     const canList = candidateList.getEntities()
 
     const colorByTract = colorTracts(votesByTract, canList)
-    const colorOfWinsByDistrict = colorDistrictWins(scResultsByDistrict, canList, electionOptions)
+    const colorOfWinsByDistrict = colorDistrictWins(scResultsByDistrict, canList, electionOptions, simOptions)
     const colorOfVoteByDistrict = colorDistrictVote(votesByDistrict, canList)
 
     const gc = {
@@ -39,10 +39,16 @@ function colorTracts(votesByTract, canList) {
     return colorByTract
 }
 
-function colorDistrictWins(scResultsByDistrict, canList, electionOptions) {
+function colorDistrictWins(scResultsByDistrict, canList, electionOptions, simOptions) {
     // calculate color for win map
     let colorOfWinsByDistrict
-    const { socialChoiceType } = electionOptions.sequenceOptions.sequences.general.phases.general // todo: make this more general
+
+    const { sequenceName, sequences } = electionOptions.sequenceOptions
+    const { resultsPhaseBySeq } = simOptions
+    const resultsPhase = resultsPhaseBySeq[sequenceName]
+    const resultsPhaseOptions = sequences[sequenceName].phases[resultsPhase]
+    const { socialChoiceType } = resultsPhaseOptions
+
     if (socialChoiceType === 'singleWinner') {
         colorOfWinsByDistrict = scResultsByDistrict.map(
             (socialChoiceResults) => canList[socialChoiceResults.iWinner].color,

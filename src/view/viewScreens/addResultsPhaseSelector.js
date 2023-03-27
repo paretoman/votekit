@@ -34,6 +34,6 @@ function addResultsPhaseSelectorForSequence(sequenceName, simOptions, pub, layou
             choose.dom.hidden = true
         }
     }
-    choose.highlight('value', simOptions.resultsPhase[sequenceName])
+    choose.highlight('value', simOptions.resultsPhaseBySeq[sequenceName])
     return choose
 }
