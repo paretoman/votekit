@@ -45,8 +45,8 @@ function colorDistrictWins(scResultsByDistrict, canList, electionOptions, simOpt
 
     const { sequenceName, sequences } = electionOptions.sequenceOptions
     const { resultsPhaseBySeq } = simOptions
-    const resultsPhase = resultsPhaseBySeq[sequenceName]
-    const resultsPhaseOptions = sequences[sequenceName].phases[resultsPhase]
+    const resultsPhaseName = resultsPhaseBySeq[sequenceName]
+    const resultsPhaseOptions = sequences[sequenceName].phases[resultsPhaseName]
     const { socialChoiceType } = resultsPhaseOptions
 
     if (socialChoiceType === 'singleWinner') {

@@ -93,8 +93,8 @@ export default function ViewEntitiesOne(entities, screen, menu, changes, simOpti
         const electionOptions = electionOptionsMan.getOptions()
         const { sequenceName, sequences } = electionOptions.sequenceOptions
         const { resultsPhaseBySeq } = simOptions
-        const resultsPhase = resultsPhaseBySeq[sequenceName]
-        const resultsPhaseOptions = sequences[sequenceName].phases[resultsPhase]
+        const resultsPhaseName = resultsPhaseBySeq[sequenceName]
+        const resultsPhaseOptions = sequences[sequenceName].phases[resultsPhaseName]
         const { voteCasterName } = resultsPhaseOptions
 
         // todo: check this to see if it is correct. I'm not sure if a closed primary would work well here.

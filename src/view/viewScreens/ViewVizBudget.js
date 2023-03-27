@@ -19,8 +19,8 @@ export default function ViewVizBudget(screenCommon, layout, menu, changes, simOp
 
         const { sequenceName, sequences } = electionOptions.sequenceOptions
         const { resultsPhaseBySeq } = simOptions
-        const resultsPhase = resultsPhaseBySeq[sequenceName]
-        const resultsPhaseOptions = sequences[sequenceName].phases[resultsPhase]
+        const resultsPhaseName = resultsPhaseBySeq[sequenceName]
+        const resultsPhaseOptions = sequences[sequenceName].phases[resultsPhaseName]
         const { socialChoiceMethod, useGeography } = resultsPhaseOptions
 
         const { dimensions } = simOptions

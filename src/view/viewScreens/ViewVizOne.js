@@ -41,8 +41,8 @@ export default function ViewVizOne(entities, screenMain, screenMini, menu, chang
 
         const { sequenceName, sequences } = electionOptions.sequenceOptions
         const { resultsPhaseBySeq } = simOptions
-        const resultsPhase = resultsPhaseBySeq[sequenceName]
-        const resultsPhaseOptions = sequences[sequenceName].phases[resultsPhase]
+        const resultsPhaseName = resultsPhaseBySeq[sequenceName]
+        const resultsPhaseOptions = sequences[sequenceName].phases[resultsPhaseName]
         const { voteCasterName } = resultsPhaseOptions
 
         const { dimensions } = simOptions

@@ -37,8 +37,8 @@ export default function CandidateDnGraphic(candidateDn, screen, wHandle, hHandle
 
         const { sequenceName, sequences } = electionOptions.sequenceOptions
         const { resultsPhaseBySeq } = simOptions
-        const resultsPhase = resultsPhaseBySeq[sequenceName]
-        const resultsPhaseOptions = sequences[sequenceName].phases[resultsPhase]
+        const resultsPhaseName = resultsPhaseBySeq[sequenceName]
+        const resultsPhaseOptions = sequences[sequenceName].phases[resultsPhaseName]
         const { socialChoiceMethod } = resultsPhaseOptions
 
         if (socialChoiceMethod === 'olprA') {
