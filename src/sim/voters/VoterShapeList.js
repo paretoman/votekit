@@ -72,30 +72,30 @@ export default function VoterShapeList(changes, commander) {
         return voterStrategyList
     }
 
-    // find the strategy that matches all the conditions, if there are conditions.
-    function getStrategy(strategyRules, voteCasterName, phaseName) {
-        for (let i = 0; i < strategyRules.length; i += 1) {
-            const s = strategyRules[i]
-            if (s.condition.phaseName !== undefined) {
-                if (s.condition.phaseName !== phaseName) {
-                    continue
-                }
-            }
-            if (s.condition.voteCasterName !== undefined) {
-                if (s.condition.voteCasterName !== voteCasterName) {
-                    continue
-                }
-            }
-            // the strategy rule applies if we got through the previous two checks
-            return s.strategy
-        }
-        return undefined
-    }
-
     self.getParties = () => {
         // TODO: consider more than one party for a voterShape.
         const entities = self.getEntities()
         const voterParties = entities.map((voter) => voter.party[0])
         return voterParties
     }
+}
+
+// find the strategy that matches all the conditions, if there are conditions.
+export function getStrategy(strategyRules, voteCasterName, phaseName) {
+    for (let i = 0; i < strategyRules.length; i += 1) {
+        const s = strategyRules[i]
+        if (s.condition.phaseName !== undefined) {
+            if (s.condition.phaseName !== phaseName) {
+                continue
+            }
+        }
+        if (s.condition.voteCasterName !== undefined) {
+            if (s.condition.voteCasterName !== voteCasterName) {
+                continue
+            }
+        }
+        // the strategy rule applies if we got through the previous two checks
+        return s.strategy
+    }
+    return undefined
 }

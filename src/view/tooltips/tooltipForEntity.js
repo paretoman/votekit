@@ -1,3 +1,4 @@
+import { getStrategy } from '../../sim/voters/VoterShapeList.js'
 import { jcopy } from '../../utilities/jsHelpers.js'
 import tooltipBox from './tooltipBox.js'
 
@@ -89,97 +90,111 @@ export default function tooltipForEntity(graphic, entity, screen, viewSettings, 
         box.appendChild(items.party.div)
     }
     if (entity.doSetCommand.strategy !== undefined) {
-        const { voteCasterName } = electionOptionsMan.getOptions().sequenceOptions.sequences.general.phases.general // todo: make this more general
-        items.actionPDF1 = new Item(
-            'range',
-            'Action PDF 1',
-            '',
-            (val) => {
-                const a0 = Number(val)
-                const a1 = 1 - a0
-                items.actionPDF1.input.value = a0
-                items.actionPDF2.input.value = a1
-                const actionPDF = [a0, a1]
+        // for each phase, we need to set properties of the strategy
 
-                const strategyRules = jcopy(entity.strategyRules)
-                const strategy = getStrategy(strategyRules, voteCasterName)
-                for (let i = 0; i < actionPDF.length; i += 1) {
-                    strategy[i].actionWeight = actionPDF[i]
-                }
-                entity.doSetCommand.actionWeight(strategyRules)
-            },
-            getStrategy(entity.strategyRules, voteCasterName)[0].actionWeight,
-            { min: 0, max: 1, step: 0.01 },
-        )
-        items.actionPDF2 = new Item(
-            'range',
-            'Action PDF 2',
-            '',
-            (val) => {
-                const a1 = Number(val)
-                const a0 = 1 - a1
-                items.actionPDF1.input.value = a0
-                items.actionPDF2.input.value = a1
-                const actionPDF = [a0, a1]
+        const { sequenceName, sequences } = electionOptionsMan.getOptions().sequenceOptions
+        const { phases } = sequences[sequenceName]
 
-                const strategyRules = jcopy(entity.strategyRules)
-                const strategy = getStrategy(strategyRules, voteCasterName)
-                for (let i = 0; i < actionPDF.length; i += 1) {
-                    strategy[i].actionWeight = actionPDF[i]
-                }
-                entity.doSetCommand.actionWeight(strategyRules)
-            },
-            getStrategy(entity.strategyRules, voteCasterName)[1].actionWeight,
-            { min: 0, max: 1, step: 0.01 },
-        )
+        items.strategyByPhase = {}
 
-        const choices = (voteCasterName === 'score') ? ['normalize', 'normalizeOverFrontrunners'] : ['closest', 'lesserEvil']
+        Object.keys(phases).forEach((phaseName) => {
+            const phase = phases[phaseName]
+            const { voteCasterName } = phase
 
-        items.actionName1 = new Item(
-            'select',
-            'Action 1',
-            'Strategy 1: ',
-            (val) => {
-                const strategyRules = jcopy(entity.strategyRules)
-                const strategy = getStrategy(strategyRules, voteCasterName)
-                strategy[0].actionName = val
-                entity.doSetCommand.strategy(strategyRules)
-            },
-            getStrategy(entity.strategyRules, voteCasterName)[0].actionName,
-            { choices },
-        )
-        items.actionName2 = new Item(
-            'select',
-            'Action 2',
-            'Strategy 2: ',
-            (val) => {
-                const strategyRules = jcopy(entity.strategyRules)
-                const strategy = getStrategy(strategyRules, voteCasterName)
-                strategy[1].actionName = val
-                entity.doSetCommand.strategy(strategyRules)
-            },
-            getStrategy(entity.strategyRules, voteCasterName)[1].actionName,
-            { choices },
-        )
-        items.actionOptionThreshold = new Item(
-            'range',
-            'Threshold',
-            'Threshold: ',
-            (val) => {
-                const strategyRules = jcopy(entity.strategyRules)
-                const strategy = getStrategy(strategyRules, voteCasterName)
-                strategy[0].actionOptions.threshold.mean = Number(val)
-                strategy[1].actionOptions.threshold.mean = Number(val)
-                entity.doSetCommand.actionOptionThreshold(strategyRules)
-            },
-            getStrategy(entity.strategyRules, voteCasterName)[0].actionOptions.threshold.mean,
-            { min: 0, max: 1, step: 0.01 },
-        )
-        box.appendChild(items.actionName1.div)
-        box.appendChild(items.actionPDF1.div)
-        box.appendChild(items.actionName2.div)
-        box.appendChild(items.actionPDF2.div)
-        box.appendChild(items.actionOptionThreshold.div)
+            const itemsForPhase = {}
+            items.strategyByPhase[phaseName] = itemsForPhase
+
+            itemsForPhase.actionPDF1 = new Item(
+                'range',
+                'Action PDF 1',
+                '',
+                (val) => {
+                    const a0 = Number(val)
+                    const a1 = 1 - a0
+                    itemsForPhase.actionPDF1.input.value = a0
+                    itemsForPhase.actionPDF2.input.value = a1
+                    const actionPDF = [a0, a1]
+
+                    const strategyRules = jcopy(entity.strategyRules)
+                    const strategy = getStrategy(strategyRules, voteCasterName)
+                    for (let i = 0; i < actionPDF.length; i += 1) {
+                        strategy[i].actionWeight = actionPDF[i]
+                    }
+                    entity.doSetCommand.actionWeight(strategyRules)
+                },
+                getStrategy(entity.strategyRules, voteCasterName, phaseName)[0].actionWeight,
+                { min: 0, max: 1, step: 0.01 },
+            )
+            itemsForPhase.actionPDF2 = new Item(
+                'range',
+                'Action PDF 2',
+                '',
+                (val) => {
+                    const a1 = Number(val)
+                    const a0 = 1 - a1
+                    itemsForPhase.actionPDF1.input.value = a0
+                    itemsForPhase.actionPDF2.input.value = a1
+                    const actionPDF = [a0, a1]
+
+                    const strategyRules = jcopy(entity.strategyRules)
+                    const strategy = getStrategy(strategyRules, voteCasterName)
+                    for (let i = 0; i < actionPDF.length; i += 1) {
+                        strategy[i].actionWeight = actionPDF[i]
+                    }
+                    entity.doSetCommand.actionWeight(strategyRules)
+                },
+                getStrategy(entity.strategyRules, voteCasterName, phaseName)[1].actionWeight,
+                { min: 0, max: 1, step: 0.01 },
+            )
+
+            const choices = (voteCasterName === 'score') ? ['normalize', 'normalizeOverFrontrunners'] : ['closest', 'lesserEvil']
+
+            itemsForPhase.actionName1 = new Item(
+                'select',
+                'Action 1',
+                `${phaseName}: Strategy 1: `,
+                (val) => {
+                    const strategyRules = jcopy(entity.strategyRules)
+                    const strategy = getStrategy(strategyRules, voteCasterName)
+                    strategy[0].actionName = val
+                    entity.doSetCommand.strategy(strategyRules)
+                },
+                getStrategy(entity.strategyRules, voteCasterName, phaseName)[0].actionName,
+                { choices },
+            )
+            itemsForPhase.actionName2 = new Item(
+                'select',
+                'Action 2',
+                `${phaseName}: Strategy 2: `,
+                (val) => {
+                    const strategyRules = jcopy(entity.strategyRules)
+                    const strategy = getStrategy(strategyRules, voteCasterName)
+                    strategy[1].actionName = val
+                    entity.doSetCommand.strategy(strategyRules)
+                },
+                getStrategy(entity.strategyRules, voteCasterName, phaseName)[1].actionName,
+                { choices },
+            )
+            itemsForPhase.actionOptionThreshold = new Item(
+                'range',
+                'Threshold',
+                `${phaseName}: Threshold: `,
+                (val) => {
+                    const strategyRules = jcopy(entity.strategyRules)
+                    const strategy = getStrategy(strategyRules, voteCasterName)
+                    strategy[0].actionOptions.threshold.mean = Number(val)
+                    strategy[1].actionOptions.threshold.mean = Number(val)
+                    entity.doSetCommand.actionOptionThreshold(strategyRules)
+                },
+                getStrategy(entity.strategyRules, voteCasterName, phaseName)[0].actionOptions.threshold.mean,
+                { min: 0, max: 1, step: 0.01 },
+            )
+            box.appendChild(itemsForPhase.actionName1.div)
+            box.appendChild(itemsForPhase.actionPDF1.div)
+            box.appendChild(itemsForPhase.actionName2.div)
+            box.appendChild(itemsForPhase.actionPDF2.div)
+            box.appendChild(itemsForPhase.actionOptionThreshold.div)
+        })
     }
 
     items.showGhosts = new Item(
@@ -194,16 +209,6 @@ export default function tooltipForEntity(graphic, entity, screen, viewSettings, 
     // Append //
 
     screen.tooltips.appendChild(box)
-}
-
-function getStrategy(strategyRules, voteCasterName) {
-    for (let i = 0; i < strategyRules.length; i += 1) {
-        const s = strategyRules[i]
-        if (s.condition.voteCasterName === voteCasterName) {
-            return s.strategy
-        }
-    }
-    return undefined
 }
 
 function Item(type, name, text, onChange, defaultValue, options) {
