@@ -58,5 +58,14 @@ export default function SimOptions(changes, commander) {
         self.resultsPhaseBySeq[sequence] = val
     }
 
+    self.resultsPhaseIndexBySeq = {
+        general: undefined,
+        closedPrimary: 0,
+        nonpartisanOpenPrimary: undefined,
+    }
+    self.setResultsPhase = (sequence, val) => {
+        self.resultsPhaseIndexBySeq[sequence] = val
+    }
+
     self.init()
 }
