@@ -6,7 +6,7 @@ import VizOneVoronoiRanking from '../viz/VizOneVoronoiRanking.js'
 import VizOneGrid from '../viz/VizOneGrid.js'
 import ViewBase from './ViewBase.js'
 import VoterRendererList from '../vizVoters/VoterRendererList.js'
-import checkSomeStrategy from '../../sim/geometry/checkSomeStrategy.js'
+import { checkSomeStrategyForPhase } from '../../sim/geometry/checkSomeStrategy.js'
 
 /**
  * Simulate one election with
@@ -52,8 +52,9 @@ export default function ViewVizOne(entities, screenMain, screenMini, menu, chang
 
         const { sequenceOptions } = electionOptions
         const voterStrategyListByPhase = voterShapeList.getVoterStrategyListByPhase(sequenceOptions)
-
-        const someStrategy = checkSomeStrategy(voterStrategyListByPhase)
+        const voterStrategyList = voterStrategyListByPhase[resultsPhaseName]
+        // todo: consider party. Maybe one party is strategic in the primary and one is not.
+        const someStrategy = checkSomeStrategyForPhase(voterStrategyList)
         const doGrid = someGaussian2D || someStrategy || voteCasterName === 'score' || voteCasterName === 'scoreFull'
 
         const doRanking = voteCasterName === 'ranking' || voteCasterName === 'pairwise'

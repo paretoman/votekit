@@ -10,7 +10,7 @@ export default function checkSomeStrategy(voterStrategyListByPhase) {
     return someStrategy
 }
 
-function checkSomeStrategyForPhase(voterStrategyList) {
+export function checkSomeStrategyForPhase(voterStrategyList) {
     return voterStrategyList.some(
         (v) => v.strategy.some(
             (a) => (a.actionName !== 'closest' && a.actionWeight !== 0),
