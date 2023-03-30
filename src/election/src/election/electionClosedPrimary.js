@@ -17,7 +17,10 @@ export default function electionClosedPrimary(geometry, electionOptions) {
     const primaryPhaseOptions = getElectionPhaseOptions('closedPrimary', 'closedPrimary', electionOptions)
     for (let i = 0; i < numParties; i++) {
         const { primaryGeometry, partyCans } = getPrimaryGeometry(geometry, i)
-        if (partyCans.length === 0) continue // todo: think about this
+        const { voterGeoms, canPoints } = primaryGeometry
+        // todo: think about this
+        if (voterGeoms.length === 0) continue
+        if (canPoints.length === 0) continue
         const primary = electionPhase(primaryGeometry, primaryPhaseOptions)
         primaryResults.push(primary)
         partyCansLists.push(partyCans)
