@@ -2,7 +2,11 @@
 
 ## Try
 
-[Here is a simple example](https://www.howtofixtheelection.com/votekit/test) running the source code in the browser, so you can see how it works. This is what I run when I'm coding:
+[Here is a simple example](https://www.howtofixtheelection.com/votekit/) running the source code in the browser, so you can see how it works:
+
+* https://www.howtofixtheelection.com/votekit/
+
+[Here's the last example I was testing](https://www.howtofixtheelection.com/votekit/test):
 
 * https://www.howtofixtheelection.com/votekit/test
 
@@ -42,9 +46,9 @@ For any of these methods, the script will run and find any HTMLElements, such as
 
 ## Develop
 
-[Architecture](https://www.howtofixtheelection.com/votekit/tutorial/architecture): 
+[Tutorial](https://www.howtofixtheelection.com/votekit/tutorial/) for understanding the code: 
 
-* https://www.howtofixtheelection.com/votekit/tutorial/architecture
+* https://www.howtofixtheelection.com/votekit/tutorial/
 
 To make changes, use a good code editor and launch a web server to view ./test/index.html. 
 

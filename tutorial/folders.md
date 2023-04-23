@@ -3,67 +3,46 @@ title: Folders
 layout: default
 ---
 
-Folders are mainly divided into election, sim and view. 
+Folders are mainly divided into election, sim and view.
 
-* Parent page: [architecture](architecture.md) 
+* Parent page: [architecture](architecture.md)
 
-## Folders
+## Folders in src
 
-lib
-
-sandbox
-
-utilities
-
-election
-
-- voteCasters
-- election
-- districtElection
-- socialChoiceMethods
-
-sim
-
-- candidateDns
-
-- candidates
-
-- command
-
-- electionSample
-
-- entities
-- sim
-- voters
-
-view
-
-- environments
-
-- menu
-
-- save
-
-- screen
-
-- tooltips
-
-- view
-
-- viewButtons
-
-- viewScreens
-
-- viz
-
-- vizCandidateDns
-
-- vizCandidates
-
-- vizEntities
-
-- vizTestVoter
-
-- vizVoters
-
-
+* lib
+* sandbox
+* utilities
+* election
+  * src
+    * districtElection
+    * election
+    * geography
+    * lib
+    * sampleElection
+    * socialChoiceMethods
+    * voteCasters
+* sim
+  * candidateDns
+  * candidates
+  * command
+  * entities
+  * geometry
+  * modes
+  * options
+  * sim
+  * voters
+* view
+  * environments
+  * menu
+  * save
+  * screen
+  * tooltips
+  * view
+  * viewButtons
+  * viewScreens
+  * viz
+  * vizCandidateDns
+  * vizCandidates
+  * vizEntities
+  * vizTestVoter
+  * vizVoters
