@@ -56,6 +56,7 @@ export default function SimOptions(changes, commander) {
     }
     self.setResultsPhase = (sequence, val) => {
         self.resultsPhaseBySeq[sequence] = val
+        changes.add(['resultsPhase'])
     }
 
     self.resultsPhaseIndexBySeq = {
@@ -63,8 +64,9 @@ export default function SimOptions(changes, commander) {
         closedPrimary: 0,
         nonpartisanOpenPrimary: undefined,
     }
-    self.setResultsPhase = (sequence, val) => {
+    self.setResultsParty = (sequence, val) => {
         self.resultsPhaseIndexBySeq[sequence] = val
+        changes.add(['resultsParty'])
     }
 
     self.init()
