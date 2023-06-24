@@ -53,8 +53,19 @@ export default function ViewVizOne(entities, screenMain, screenMini, menu, chang
         const { sequenceOptions } = electionOptions
         const voterStrategyListByPhase = voterShapeList.getVoterStrategyListByPhase(sequenceOptions)
         const voterStrategyList = voterStrategyListByPhase[resultsPhaseName]
-        // todo: consider party. Maybe one party is strategic in the primary and one is not.
-        const someStrategy = checkSomeStrategyForPhase(voterStrategyList)
+
+        let someStrategy
+        if (sequenceName === 'closedPrimary') {
+            const { resultsPhaseIndexBySeq } = simOptions
+            const resultsPhaseIndex = resultsPhaseIndexBySeq[resultsPhaseName]
+
+            const voterStrategyListForParty = voterStrategyList.filter((v) => v.party === resultsPhaseIndex) // not right. need to use party index.
+            // todo: consider party. Maybe one primary has no strategic votes and another has some
+            someStrategy = checkSomeStrategyForPhase(voterStrategyListForParty)
+        } else {
+            someStrategy = checkSomeStrategyForPhase(voterStrategyList)
+        }
+
         const doGrid = someGaussian2D || someStrategy || voteCasterName === 'score' || voteCasterName === 'scoreFull'
 
         const doRanking = voteCasterName === 'ranking' || voteCasterName === 'pairwise'
