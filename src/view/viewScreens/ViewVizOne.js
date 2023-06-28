@@ -46,25 +46,10 @@ export default function ViewVizOne(entities, screenMain, screenMini, menu, chang
         const { voteCasterName } = resultsPhaseOptions
 
         const { dimensions } = simOptions
-
         const voterGeoms = voterShapeList.getGeoms(dimensions)
         const someGaussian2D = voterGeoms.some((v) => v.densityProfile === 'gaussian') && dimensions === 2
 
-        const { sequenceOptions } = electionOptions
-        const voterStrategyListByPhase = voterShapeList.getVoterStrategyListByPhase(sequenceOptions)
-        const voterStrategyList = voterStrategyListByPhase[resultsPhaseName]
-
-        let someStrategy
-        if (sequenceName === 'closedPrimary') {
-            const { resultsPhaseIndexBySeq } = simOptions
-            const resultsPhaseIndex = resultsPhaseIndexBySeq[resultsPhaseName]
-
-            const voterStrategyListForParty = voterStrategyList.filter((v) => v.party === resultsPhaseIndex) // not right. need to use party index.
-            // todo: consider party. Maybe one primary has no strategic votes and another has some
-            someStrategy = checkSomeStrategyForPhase(voterStrategyListForParty)
-        } else {
-            someStrategy = checkSomeStrategyForPhase(voterStrategyList)
-        }
+        const someStrategy = getSomeStrategy(electionOptions, voterShapeList, resultsPhaseName, sequenceName, simOptions)
 
         const doGrid = someGaussian2D || someStrategy || voteCasterName === 'score' || voteCasterName === 'scoreFull'
 
@@ -95,7 +80,8 @@ export default function ViewVizOne(entities, screenMain, screenMini, menu, chang
         }
 
         const { electionResults } = simData
-        vizOne.update(electionResults)
+        const phaseResults = getPhaseResults(electionResults, electionOptionsMan, simOptions)
+        vizOne.update(phaseResults)
 
         self.clear()
         self.render()
@@ -108,4 +94,41 @@ export default function ViewVizOne(entities, screenMain, screenMini, menu, chang
         screenMain.clear()
         screenMini.clear()
     }
+}
+
+function getSomeStrategy(electionOptions, voterShapeList, resultsPhaseName, sequenceName, simOptions) {
+    const { sequenceOptions } = electionOptions
+    const voterStrategyListByPhase = voterShapeList.getVoterStrategyListByPhase(sequenceOptions)
+    const voterStrategyList = voterStrategyListByPhase[resultsPhaseName]
+
+    let someStrategy
+    if (sequenceName === 'closedPrimary') {
+        const { resultsPhaseIndexBySeq } = simOptions
+        const resultsPhaseIndex = resultsPhaseIndexBySeq[resultsPhaseName]
+
+        const voterStrategyListForParty = voterStrategyList.filter((v) => v.party === resultsPhaseIndex) // not right. need to use party index.
+        // todo: consider party. Maybe one primary has no strategic votes and another has some
+        someStrategy = checkSomeStrategyForPhase(voterStrategyListForParty)
+    } else {
+        someStrategy = checkSomeStrategyForPhase(voterStrategyList)
+    }
+    return someStrategy
+}
+
+function getPhaseResults(electionResults, electionOptionsMan, simOptions) {
+    const electionOptions = electionOptionsMan.getOptions()
+    const { sequenceName } = electionOptions.sequenceOptions
+    const { resultsPhaseBySeq } = simOptions
+    const resultsPhaseName = resultsPhaseBySeq[sequenceName]
+
+    let phaseResults
+
+    if (sequenceName === 'closedPrimary' && resultsPhaseName === 'closedPrimary') {
+        const { resultsPhaseIndexBySeq } = simOptions
+        const resultsPhaseIndex = resultsPhaseIndexBySeq[resultsPhaseName]
+        phaseResults = electionResults.phases[resultsPhaseName][resultsPhaseIndex]
+    } else {
+        phaseResults = electionResults.phases[resultsPhaseName]
+    }
+    return phaseResults
 }
