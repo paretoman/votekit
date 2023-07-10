@@ -1,9 +1,9 @@
 /** @module */
 
-import electionPhase from './electionPhase.js'
+import electionPhase from '../election/electionPhase.js'
 import getGeometryForPhase from './getGeometryForPhase.js'
 import getElectionPhaseOptions from './getPhaseOptions.js'
-import { range } from './mathHelpers.js'
+import { range } from '../election/mathHelpers.js'
 
 /**
  * Here we are in the context of a single election with one general election phase.

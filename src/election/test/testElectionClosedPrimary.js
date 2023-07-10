@@ -1,4 +1,4 @@
-import election from '../src/election/election.js'
+import election from '../src/sequence/election.js'
 import electionOptions3ClosedPrimary from './electionOptions3ClosedPrimary.js'
 import testGeometry2Parties from './testGeometry2Parties.js'
 

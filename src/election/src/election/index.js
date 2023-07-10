@@ -3,7 +3,7 @@ import makeCandidateDistributionCDF from '../sampleElection/makeCandidateDistrib
 import sampleElection from '../sampleElection/sampleElection.js'
 import socialChoiceMethods, { socialChoiceMethodMetadataByFunctionName } from '../socialChoiceMethods/socialChoiceMethods.js'
 import voteCasters from '../voteCasters/voteCasters/voteCasters.js'
-import election from './election.js'
+import election from '../sequence/election.js'
 
 const geography = {
     makeGeography,

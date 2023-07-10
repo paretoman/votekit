@@ -1,4 +1,4 @@
-import election from '../election/election.js'
+import election from '../sequence/election.js'
 import { randomIndexFromCDF } from '../election/mathHelpers.js'
 import sampleCanDnGeom from './sampleCanDnGeom.js'
 
