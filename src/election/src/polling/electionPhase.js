@@ -2,7 +2,7 @@
 
 import districtElection from '../districtElection/districtElection.js'
 import electionCycle from './electionCycle.js'
-import election from './election.js'
+import election from '../election/election.js'
 
 /**
  * Here we are in the context of a single election phase.
