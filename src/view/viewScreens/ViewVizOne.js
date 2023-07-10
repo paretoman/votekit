@@ -103,10 +103,10 @@ function getSomeStrategy(electionOptions, voterShapeList, resultsPhaseName, sequ
 
     let someStrategy
     if (sequenceName === 'closedPrimary') {
-        const { resultsPhaseIndexBySeq } = simOptions
-        const resultsPhaseIndex = resultsPhaseIndexBySeq[resultsPhaseName]
+        const { resultsPartyBySeq } = simOptions
+        const resultsParty = resultsPartyBySeq[resultsPhaseName]
 
-        const voterStrategyListForParty = voterStrategyList.filter((v) => v.party === resultsPhaseIndex) // not right. need to use party index.
+        const voterStrategyListForParty = voterStrategyList.filter((v) => v.party === resultsParty) // not right. need to use party index.
         // todo: consider party. Maybe one primary has no strategic votes and another has some
         someStrategy = checkSomeStrategyForPhase(voterStrategyListForParty)
     } else {
@@ -124,9 +124,9 @@ function getPhaseResults(sequenceResults, electionOptionsMan, simOptions) {
     let phaseResults
 
     if (sequenceName === 'closedPrimary' && resultsPhaseName === 'closedPrimary') {
-        const { resultsPhaseIndexBySeq } = simOptions
-        const resultsPhaseIndex = resultsPhaseIndexBySeq[resultsPhaseName]
-        phaseResults = sequenceResults.phases[resultsPhaseName][resultsPhaseIndex]
+        const { resultsPartyBySeq } = simOptions
+        const resultsParty = resultsPartyBySeq[resultsPhaseName]
+        phaseResults = sequenceResults.phases[resultsPhaseName][resultsParty]
     } else {
         phaseResults = sequenceResults.phases[resultsPhaseName]
     }

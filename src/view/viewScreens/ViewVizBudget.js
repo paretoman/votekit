@@ -47,12 +47,12 @@ export default function ViewVizBudget(screenCommon, layout, menu, changes, simOp
 
         const { sequenceResults } = simData
         const { sequenceName } = sequenceResults.electionOptions.sequenceOptions
-        const { resultsPhaseBySeq, resultsPhaseIndexBySeq } = simOptions
+        const { resultsPhaseBySeq, resultsPartyBySeq } = simOptions
         const resultsPhaseName = resultsPhaseBySeq[sequenceName]
-        const resultsPhaseIndex = resultsPhaseIndexBySeq[resultsPhaseName]
+        const resultsParty = resultsPartyBySeq[resultsPhaseName]
 
         const phaseResults0 = sequenceResults.phases[resultsPhaseName]
-        const phaseResults = (resultsPhaseIndex !== undefined) ? phaseResults0[resultsPhaseIndex] : phaseResults0
+        const phaseResults = (resultsParty !== undefined) ? phaseResults0[resultsParty] : phaseResults0
 
         vizExplanation.update(sequenceResults, phaseResults)
         self.clear()

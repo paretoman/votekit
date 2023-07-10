@@ -62,6 +62,6 @@ function addResultsPartySelector(sequenceName, simOptions, pub, layout, election
             choose.dom.hidden = true
         }
     }
-    choose.highlight('value', simOptions.resultsPhaseIndexBySeq[sequenceName])
+    choose.highlight('value', simOptions.resultsPartyBySeq[sequenceName])
     return choose
 }

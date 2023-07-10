@@ -59,13 +59,13 @@ export default function SimOptions(changes, commander) {
         changes.add(['resultsPhase'])
     }
 
-    self.resultsPhaseIndexBySeq = {
+    self.resultsPartyBySeq = {
         general: undefined,
         closedPrimary: 0,
         nonpartisanOpenPrimary: undefined,
     }
     self.setResultsParty = (sequence, val) => {
-        self.resultsPhaseIndexBySeq[sequence] = val
+        self.resultsPartyBySeq[sequence] = val
         changes.add(['resultsParty'])
     }
 
