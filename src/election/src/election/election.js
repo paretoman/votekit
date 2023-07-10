@@ -7,7 +7,7 @@ import socialChoiceRun from './socialChoiceRun.js'
 /**
  * Here we are in the context of a single election.
  */
-export default function electionRun(geometry, electionPhaseOptions) {
+export default function election(geometry, electionPhaseOptions) {
     const { castOptions } = electionPhaseOptions
 
     const { voteCasterName } = electionPhaseOptions.phaseOptions

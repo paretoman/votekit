@@ -2,7 +2,7 @@
 
 import districtElection from '../districtElection/districtElection.js'
 import electionCycle from './electionCycle.js'
-import electionRun from './electionRun.js'
+import election from './election.js'
 
 /**
  * Here we are in the context of a single election phase.
@@ -18,5 +18,5 @@ export default function electionPhase(geometry, electionPhaseOptions) {
         return districtElection(geometry, electionPhaseOptions)
     }
 
-    return electionRun(geometry, electionPhaseOptions)
+    return election(geometry, electionPhaseOptions)
 }

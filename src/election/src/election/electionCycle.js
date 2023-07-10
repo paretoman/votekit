@@ -2,7 +2,7 @@
 
 import districtElection from '../districtElection/districtElection.js'
 import calculatePolling from './calculatePolling.js'
-import electionRun from './electionRun.js'
+import election from './election.js'
 
 /**
  * Here we are in the context of an election cycle with polls followed by a single election.
@@ -21,7 +21,7 @@ export default function electionCycle(geometry, electionPhaseOptions) {
         if (useGeography) {
             electionResults = districtElection(geometry1, electionPhaseOptions)
         } else {
-            electionResults = electionRun(geometry1, electionPhaseOptions)
+            electionResults = election(geometry1, electionPhaseOptions)
         }
     }
     return electionResults
