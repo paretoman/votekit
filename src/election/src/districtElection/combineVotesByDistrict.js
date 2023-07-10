@@ -1,4 +1,4 @@
-import { range } from '../election/mathHelpers.js'
+import { range } from '../util/mathHelpers.js'
 import districtPairwiseTallies from './districtPairwiseTallies.js'
 import districtCandidateTallies from './districtCandidateTallies.js'
 import districtPreferenceLists from './districtPreferenceLists.js'

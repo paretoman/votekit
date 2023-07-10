@@ -1,4 +1,4 @@
-import { normPDF, range } from '../../election/mathHelpers.js'
+import { normPDF, range } from '../../util/mathHelpers.js'
 import * as typesGeoms from '../types/typesGeoms.js'
 import * as typesGrid from '../types/typesGrid.js'
 import * as typesCast from '../types/typesCast.js'

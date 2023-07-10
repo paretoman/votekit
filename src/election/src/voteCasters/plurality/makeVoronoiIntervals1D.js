@@ -1,4 +1,4 @@
-import { range } from '../../election/mathHelpers.js'
+import { range } from '../../util/mathHelpers.js'
 
 /** Find boundary between candidates */
 export default function makeVoronoiIntervals1D(canPoints) {

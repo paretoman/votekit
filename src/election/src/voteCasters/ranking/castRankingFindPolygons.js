@@ -1,6 +1,6 @@
 /** @module */
 
-import { copyArrayShallow } from '../../election/jsHelpers.js'
+import { copyArrayShallow } from '../../util/jsHelpers.js'
 import equidistantLine from '../plurality/equidistantLine.js'
 import splitConvex from './splitConvex.js'
 

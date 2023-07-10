@@ -3,7 +3,7 @@
 import electionPhase from '../polling/electionPhase.js'
 import getGeometryForPhase from './getGeometryForPhase.js'
 import getElectionPhaseOptions from './getPhaseOptions.js'
-import { range } from '../election/mathHelpers.js'
+import { range } from '../util/mathHelpers.js'
 
 /**
  * Here we are in the context of a single election.

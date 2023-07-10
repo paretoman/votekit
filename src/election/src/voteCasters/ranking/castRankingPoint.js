@@ -1,6 +1,6 @@
 /** @module */
 
-import { range } from '../../election/mathHelpers.js'
+import { range } from '../../util/mathHelpers.js'
 import * as typesVote from '../types/typesVote.js'
 /**
  * Vote for the closest candidate.

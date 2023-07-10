@@ -1,5 +1,5 @@
 import electionSequence from '../sequence/electionSequence.js'
-import { randomIndexFromCDF } from '../election/mathHelpers.js'
+import { randomIndexFromCDF } from '../util/mathHelpers.js'
 import sampleCanDnGeom from './sampleCanDnGeom.js'
 
 export default function sampleElection(samplingGeometry, electionOptions, numSamples, rng) {

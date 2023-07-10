@@ -1,6 +1,6 @@
 /** @module */
 
-import { range } from '../election/mathHelpers.js'
+import { range } from '../util/mathHelpers.js'
 import sainteLague from './sainteLague.js'
 import sntv from './sntv.js'
 import * as typesVotes from '../voteCasters/types/typesVotes.js'

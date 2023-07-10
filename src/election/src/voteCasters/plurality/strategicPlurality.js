@@ -1,4 +1,4 @@
-import { minIndex, randomIndexFromCDF, range } from '../../election/mathHelpers.js'
+import { minIndex, randomIndexFromCDF, range } from '../../util/mathHelpers.js'
 
 export default function strategicPlurality(dist2, information, voterStrategy, strategyRngs) {
     if (voterStrategy === undefined) {
