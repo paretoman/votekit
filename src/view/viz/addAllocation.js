@@ -6,11 +6,11 @@ import getTallyFractions from './getTallyFractions.js'
  * When there is just one winner,
  * sometimes the allocation isn't included in the election results.
  * So we fill the gap, for now.
- * @param {Object} electionResults
- * @returns {Object} electionResults
+ * @param {Object} sequenceResults
+ * @returns {Object} sequenceResults
  */
-export default function addAllocation(electionResults) {
-    const { socialChoiceResults, votes } = electionResults
+export default function addAllocation(sequenceResults) {
+    const { socialChoiceResults, votes } = sequenceResults
     const { allocation } = socialChoiceResults
     if (allocation === undefined) {
         const tallyFractions = getTallyFractions(votes)

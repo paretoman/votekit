@@ -3,7 +3,7 @@ import electionOptions2NonpartisanOpenPrimary from './electionOptions2Nonpartisa
 import testGeometry1 from './testGeometry1.js'
 
 export default function testElectionNonpartisanOpenPrimary() {
-    const electionResults = electionSequence(testGeometry1, electionOptions2NonpartisanOpenPrimary)
+    const sequenceResults = electionSequence(testGeometry1, electionOptions2NonpartisanOpenPrimary)
 
-    return electionResults.socialChoiceResults.allocation
+    return sequenceResults.socialChoiceResults.allocation
 }

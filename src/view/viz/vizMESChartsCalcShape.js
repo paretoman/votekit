@@ -2,7 +2,7 @@
 
 /**
  * Calculate shape data for charts of budget for MES
- * @param {Object} electionResults - MES methodResults plus a little extra candidate data
+ * @param {Object} sequenceResults - MES methodResults plus a little extra candidate data
  * @param {Object} screen
  * @param {Object} budgetDataMES
  * @returns chartDataMES

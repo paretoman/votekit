@@ -19,8 +19,8 @@ export default function election(geometry, electionPhaseOptions) {
 
     const votes = voteCasters[voteCasterName].cast(geometry2, castOptions)
     const socialChoiceResults = socialChoiceRun(votes, electionPhaseOptions)
-    const electionResults = {
+    const sequenceResults = {
         electionPhaseOptions, geometry, votes, socialChoiceResults,
     }
-    return electionResults
+    return sequenceResults
 }

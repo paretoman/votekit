@@ -55,21 +55,21 @@ export default function ViewEntitiesOne(entities, screen, menu, changes, simOpti
             self.testVoterView.graphic.updateViewXY()
         }
 
-        const { electionResults } = simData
-        const { error } = electionResults
+        const { sequenceResults } = simData
+        const { error } = sequenceResults
         if (error === undefined) {
-            addAllocation(electionResults)
-            const { allocation } = electionResults.socialChoiceResults
+            addAllocation(sequenceResults)
+            const { allocation } = sequenceResults.socialChoiceResults
             candidateViewList.setCandidateWins(allocation)
 
             const phaseToShow = 'general' // todo: allow user to select this option, e.g. nonpartisanOpenPrimary
-            const { votes } = electionResults.phases[phaseToShow]
+            const { votes } = sequenceResults.phases[phaseToShow]
             const tallyFractions = getTallyFractions(votes)
 
             // map results to original candidate indices
-            const { indicesByPhase } = electionResults
+            const { indicesByPhase } = sequenceResults
             const indices = indicesByPhase[phaseToShow]
-            const numCans = electionResults.geometry.canPoints.length
+            const numCans = sequenceResults.geometry.canPoints.length
             const tf = Array(numCans).fill(0)
             for (let i = 0; i < indices.length; i++) {
                 const index = indices[i]

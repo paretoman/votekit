@@ -22,8 +22,8 @@ export default function VizOneVoronoi(voterRendererList, candidateList, screen, 
     self.enter = () => {}
     self.exit = () => { }
 
-    self.update = function (electionResults) {
-        const { error } = electionResults
+    self.update = function (sequenceResults) {
+        const { error } = sequenceResults
         if (error !== undefined) return
 
         voterRendererList.updateGraphic()

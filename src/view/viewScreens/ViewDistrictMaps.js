@@ -39,8 +39,8 @@ export default function ViewDistrictMaps(entities, screenCommon, layout, changes
                 screen.hide()
             }
         }
-        const { electionResults } = simData
-        const { error } = electionResults
+        const { sequenceResults } = simData
+        const { error } = sequenceResults
         if (error !== undefined) {
             flagNoRender = true
             return
@@ -48,7 +48,7 @@ export default function ViewDistrictMaps(entities, screenCommon, layout, changes
         flagNoRender = false
 
         if (electionOptions.useGeography) {
-            districtMapViz.update(electionResults)
+            districtMapViz.update(sequenceResults)
             self.clear()
             self.render()
         }

@@ -30,11 +30,11 @@ export default function SimModeOne(pub, entities, changes, districts, simOptions
 
         const geometry = getGeometry(voterShapeList, candidateList, simOptions, electionOptions, districts)
 
-        const electionResults = electionSequence(geometry, electionOptions)
+        const sequenceResults = electionSequence(geometry, electionOptions)
 
-        electionResults.colorRGBAOfCandidates = candidateList.getRGBAList()
+        sequenceResults.colorRGBAOfCandidates = candidateList.getRGBAList()
 
-        const simData = { electionResults }
+        const simData = { sequenceResults }
         pub.update(simData)
         changes.clear()
     }

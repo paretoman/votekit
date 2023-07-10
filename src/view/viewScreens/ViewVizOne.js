@@ -79,8 +79,8 @@ export default function ViewVizOne(entities, screenMain, screenMini, menu, chang
             self.enter()
         }
 
-        const { electionResults } = simData
-        const phaseResults = getPhaseResults(electionResults, electionOptionsMan, simOptions)
+        const { sequenceResults } = simData
+        const phaseResults = getPhaseResults(sequenceResults, electionOptionsMan, simOptions)
         vizOne.update(phaseResults)
 
         self.clear()
@@ -115,7 +115,7 @@ function getSomeStrategy(electionOptions, voterShapeList, resultsPhaseName, sequ
     return someStrategy
 }
 
-function getPhaseResults(electionResults, electionOptionsMan, simOptions) {
+function getPhaseResults(sequenceResults, electionOptionsMan, simOptions) {
     const electionOptions = electionOptionsMan.getOptions()
     const { sequenceName } = electionOptions.sequenceOptions
     const { resultsPhaseBySeq } = simOptions
@@ -126,9 +126,9 @@ function getPhaseResults(electionResults, electionOptionsMan, simOptions) {
     if (sequenceName === 'closedPrimary' && resultsPhaseName === 'closedPrimary') {
         const { resultsPhaseIndexBySeq } = simOptions
         const resultsPhaseIndex = resultsPhaseIndexBySeq[resultsPhaseName]
-        phaseResults = electionResults.phases[resultsPhaseName][resultsPhaseIndex]
+        phaseResults = sequenceResults.phases[resultsPhaseName][resultsPhaseIndex]
     } else {
-        phaseResults = electionResults.phases[resultsPhaseName]
+        phaseResults = sequenceResults.phases[resultsPhaseName]
     }
     return phaseResults
 }

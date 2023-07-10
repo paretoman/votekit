@@ -71,7 +71,7 @@ function colorDistrictWins(scResultsByDistrict, canList, electionOptions, simOpt
 /**
  * Update color for each district, based on votes for each candidate.
  * Blend candidate colors in proportion to their votes.
- * @param {Object[]} scResultsByDistrict - An array of electionResults, indexed by district.
+ * @param {Object[]} scResultsByDistrict - An array of sequenceResults, indexed by district.
  * @param {Candidate[]} canList - An array of Candidate objects.
  * @returns {String[]} - List of color strings indexed by district.
  */

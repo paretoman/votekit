@@ -23,7 +23,7 @@ Election may be called by [ElectionSampler](electionSampler.md) to run multiple 
 - If there is a geography, then votes from tracts are combined into districts.
 - A [social choice](socialChoice.md) function runs on the votes to determine winners.
 - Election results are assembled.
-- All the options, geometry, votes, and social choice outputs are combined into an electionResults data structure.
+- All the options, geometry, votes, and social choice outputs are combined into an sequenceResults data structure.
 
 ## Election Results
 

@@ -22,15 +22,15 @@ export default function VizExplanationBudgetMES(screen) {
         screen.hide()
     }
 
-    self.update = function (electionResults, phaseResults) {
-        const { error } = electionResults
+    self.update = function (sequenceResults, phaseResults) {
+        const { error } = sequenceResults
         if (error !== undefined) {
             flagNoRender = true
             return
         }
         flagNoRender = false
 
-        const budgetDataMES = vizMESChartsCalcBudget(electionResults, phaseResults)
+        const budgetDataMES = vizMESChartsCalcBudget(sequenceResults, phaseResults)
         chartDataMES = vizMESChartsCalcShape(phaseResults, screen, budgetDataMES)
     }
 
