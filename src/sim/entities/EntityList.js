@@ -1,3 +1,4 @@
+import { range } from '../../utilities/jsHelpers.js'
 import getGeoms from './getGeoms.js'
 import getPoints from './getPoints.js'
 
@@ -42,4 +43,8 @@ export default function EntityList(commander, prefix, registrar) {
     self.getEntities = () => registrar.getList().filter((c) => c.exists)
     self.getGeoms = (dimensions) => getGeoms(self.getEntities(), dimensions)
     self.getPoints = (dimensions) => getPoints(self.getEntities(), dimensions)
+    self.getLabels = () => {
+        const allEntities = registrar.getList()
+        return range(registrar.num()).filter((i) => allEntities[i].exists)
+    }
 }
