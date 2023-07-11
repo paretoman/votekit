@@ -103,10 +103,6 @@ function combineClosedPrimaryGeneral(primaryResults, general, primaryWinners, ge
             closedPrimary: primaryResults,
             general,
         },
-        indicesByPhase: {
-            closedPrimary: partyCansLists,
-            general: primaryWinners,
-        },
         geometry,
         electionOptions,
         socialChoiceResults: {

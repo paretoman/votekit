@@ -56,10 +56,6 @@ function combinePrimaryGeneral(primary, general, primaryWinners, geometry, elect
             nonpartisanOpenPrimary: primary,
             general,
         },
-        indicesByPhase: {
-            nonpartisanOpenPrimary: range(numCans),
-            general: primaryWinners,
-        },
         geometry,
         electionOptions,
         socialChoiceResults: {

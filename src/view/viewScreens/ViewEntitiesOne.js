@@ -67,12 +67,11 @@ export default function ViewEntitiesOne(entities, screen, menu, changes, simOpti
             const tallyFractions = getTallyFractions(votes)
 
             // map results to original candidate indices
-            const { indicesByPhase } = sequenceResults
-            const indices = indicesByPhase[phaseToShow]
+            const { canLabels } = sequenceResults.phases[phaseToShow].geometry
             const numCans = sequenceResults.geometry.canPoints.length
             const tf = Array(numCans).fill(0)
-            for (let i = 0; i < indices.length; i++) {
-                const index = indices[i]
+            for (let i = 0; i < canLabels.length; i++) {
+                const index = canLabels[i]
                 tf[index] = tallyFractions[i]
             }
 
