@@ -8,7 +8,7 @@ export default function socialChoiceRun(votes, electionPhaseOptions) {
     // socialChoiceResults, the smaller one,
     //   is in the context of the social choice method,
     //   which has tallies go in and analysis come out
-    // sequenceResults, the larger one,
+    // electionResults, the larger one,
     //   is in the context of candidate objects and voter objects.
 
     const { socialChoiceOptions, socialChoiceMethod } = electionPhaseOptions.phaseOptions

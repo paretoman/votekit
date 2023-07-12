@@ -24,10 +24,10 @@ export default function districtElection(geometry, electionPhaseOptions) {
     const allocation = sumAllocationsStatewide(scResultsByDistrict, canPoints, electionPhaseOptions)
     const socialChoiceResults = { allocation }
 
-    const sequenceResults = {
+    const electionResults = {
         electionPhaseOptions, geometry, votes: allVotes, votesByTract, votesByDistrict, scResultsByDistrict, socialChoiceResults,
     }
-    return sequenceResults
+    return electionResults
 }
 
 /** Run separate elections in each district. */

@@ -9,6 +9,6 @@ import socialChoiceRun from './socialChoiceRun.js'
 export default function election(geometry, electionPhaseOptions) {
     const votes = castVotesRun(geometry, electionPhaseOptions)
     const socialChoiceResults = socialChoiceRun(votes, electionPhaseOptions)
-    const sequenceResults = { geometry, electionPhaseOptions, votes, socialChoiceResults }
-    return sequenceResults
+    const electionResults = { geometry, electionPhaseOptions, votes, socialChoiceResults }
+    return electionResults
 }

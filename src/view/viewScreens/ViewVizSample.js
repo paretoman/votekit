@@ -61,7 +61,7 @@ export default function ViewVizSample(entities, screen, menu, changes, simOption
 
         // Update players. Run an election. Get result. Visualize result.
         // The election handles any changes.
-        // The sequenceResults communicates how to visualize the election.
+        // The samplingResult communicates how to visualize the election.
 
         const { samplingResult } = simData
         vizSample.update(samplingResult)

@@ -37,7 +37,7 @@ export default function ViewEntitiesSample(entities, screen, menu, changes, simO
         const { samplingResult } = simData
         // Update players. Run an election. Get result. Visualize result.
         // The election handles any changes.
-        // The sequenceResults communicates how to visualize the election.
+        // The samplingResult communicates how to visualize the election.
 
         if (changes.check(['draggables', 'dimensions', 'mode'])) {
             voterViewList.updateViewXY()

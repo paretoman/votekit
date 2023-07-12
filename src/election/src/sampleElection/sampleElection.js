@@ -1,4 +1,5 @@
 import electionSequence from '../sequence/electionSequence.js'
+import { last } from '../util/jsHelpers.js'
 import { randomIndexFromCDF } from '../util/mathHelpers.js'
 import sampleCanDnGeom from './sampleCanDnGeom.js'
 
@@ -34,7 +35,8 @@ export default function sampleElection(samplingGeometry, electionOptions, numSam
         const geometry = { voterGeoms, voterParties, canPoints, parties, dimensions, geography, strategySeed, voterStrategyListByPhase, information, usePollsByPhase }
 
         const sequenceResults = electionSequence(geometry, electionOptions)
-        const { allocation } = sequenceResults.socialChoiceResults
+        const { phaseNames } = sequenceResults
+        const { allocation } = sequenceResults[last(phaseNames)].socialChoiceResults
 
         for (let k = 0; k < allocation.length; k++) {
             const winCount = allocation[k]

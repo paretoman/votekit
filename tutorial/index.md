@@ -11,6 +11,7 @@ Here are some pages describing the architecture of Votekit. Also, see [votekit o
     * [VoteCasters](voteCasters.md)
     * [SocialChoice](socialChoice.md)
     * [ElectionSampler](electionSampler.md)
+    * [Sequence](sequence.md)
   * [Sim](sim.md)
     * [Commands](commands.md)
       * [commands detailed](code_commands.md) (old)

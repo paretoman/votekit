@@ -20,7 +20,7 @@ export default function SimModeSample(pub, entities, changes, districts, simOpti
     self.update = () => {
         // Update players. Run an election. Get result.
         // The election handles any changes.
-        // The sequenceResults communicates how to visualize the election.
+        // The samplingResult communicates how to visualize the election.
 
         electionOptionsMan.update()
         const electionOptions = electionOptionsMan.getOptions()

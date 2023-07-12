@@ -33,3 +33,8 @@ export function copyArrayShallow2(a) {
     }
     return b
 }
+
+export function last(a) {
+    const n = a.length
+    return a[n - 1]
+}
