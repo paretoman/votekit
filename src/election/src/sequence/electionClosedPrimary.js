@@ -53,6 +53,7 @@ function getPrimaryGeometry(geometry, partyIndex) {
     // candidates
     const { partiesByCan } = g0.parties
     primaryGeometry.canPoints = g0.canPoints.filter((c, i) => partiesByCan[i] === partyIndex)
+    primaryGeometry.canLabels = g0.canLabels.filter((c, i) => partiesByCan[i] === partyIndex)
     const partyCans = range(partiesByCan.length).filter((i) => partiesByCan[i] === partyIndex)
 
     // cleanup
@@ -81,8 +82,8 @@ function getGeneralGeometry(geometry, primaryResults, numParties, partyCansLists
         }
     }
 
-    const canPoints = primaryWinners.map((iWinner) => g0.canPoints[iWinner])
-    generalGeometry.canPoints = canPoints
+    generalGeometry.canPoints = primaryWinners.map((iWinner) => g0.canPoints[iWinner])
+    generalGeometry.canLabels = primaryWinners.map((iWinner) => g0.canLabels[iWinner])
 
     return { generalGeometry, primaryWinners }
 }
