@@ -9,8 +9,8 @@ export default function Districts(voterShapeList, changes, electionOptionsMan, s
     const self = this
 
     self.init = () => {
-        const electionOptions = electionOptionsMan.getOptions()
-        const { numTracts, numDistricts } = electionOptions
+        const optionsBag = electionOptionsMan.getOptions()
+        const { numTracts, numDistricts } = optionsBag
         const { dimensions } = simOptions
         const voterGeoms = voterShapeList.getGeoms(dimensions)
         self.geography = makeGeography(numTracts, numDistricts, voterGeoms, dimensions)
@@ -28,15 +28,15 @@ export default function Districts(voterShapeList, changes, electionOptionsMan, s
             return
         }
 
-        const electionOptions = electionOptionsMan.getOptions()
+        const optionsBag = electionOptionsMan.getOptions()
 
         if (changes.check(['numTracts'])) {
-            const { numTracts } = electionOptions
+            const { numTracts } = optionsBag
             self.geography = makeTracts(self.geography, numTracts)
         }
 
         if (changes.check(['numDistricts'])) {
-            const { numDistricts } = electionOptions
+            const { numDistricts } = optionsBag
             self.geography = updateDistricts(self.geography, numDistricts)
         }
 

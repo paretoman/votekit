@@ -27,9 +27,9 @@ Election may be called by [ElectionSampler](electionSampler.md) to run multiple 
 
 ## Election Results
 
-The election results are all the data you need for making explanations. They are output by the election step in the sim. They are input for the visualizers. They are composed of several parts:
+The election results are all the data that went into and came out of an election. The sim adds more information that helps with visualization and sends that to the visualizers. They are composed of several parts:
 
-* electionOptions
+* electionPhaseOptions
 * geometry
 * votes - see [VoteCasters](voteCasters.md) for more explanation.
   * preferencesLists
@@ -40,9 +40,11 @@ The election results are all the data you need for making explanations. They are
   * parties
 * socialChoiceResults
   * iWinner or allocation
-* colorRGBAofCandidates
 * error
   * An error message string or undefined.
+
+The sim provides more information
+* colorRGBAofCandidates
 * future
   * simOptions
   * voter labels

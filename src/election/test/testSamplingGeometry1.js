@@ -1,6 +1,6 @@
 import makeGeography from '../src/geography/makeGeography.js'
 import makeCandidateDistributionCDF from '../src/sampleElection/makeCandidateDistributionCDF.js'
-import electionOptions1 from './electionOptions1.js'
+import optionsBag1 from './optionsBag1.js'
 
 const dimensions = 2
 
@@ -38,9 +38,7 @@ const parties = {
     numParties: 2,
 }
 
-const electionOptions = electionOptions1
-
-const { numTracts, numDistricts } = electionOptions
+const { numTracts, numDistricts } = optionsBag1
 const geography = makeGeography(numTracts, numDistricts, voterGeoms, dimensions)
 
 const canDnCDF = makeCandidateDistributionCDF(canDnGeoms, dimensions)

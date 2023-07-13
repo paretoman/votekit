@@ -10,11 +10,11 @@ import SequenceOptionsMan from './SequenceOptionsMan.js'
 export default function ElectionOptionsMan(changes, simOptions, commander) {
     const self = this
 
-    const electionOptions = {
+    const optionsBag = {
         pollCount: 5,
         numSampleCandidates: 5,
     }
-    self.castOptionsMan = new CastOptionsMan(changes, simOptions, electionOptions)
+    self.castOptionsMan = new CastOptionsMan(changes, simOptions, optionsBag)
     self.sequenceOptionsMan = new SequenceOptionsMan(changes, commander)
 
     self.init = () => {
@@ -26,24 +26,24 @@ export default function ElectionOptionsMan(changes, simOptions, commander) {
 
     self.setNumDistricts = commander.addSender({
         name: 'numDistricts',
-        currentValue: electionOptions.numDistricts,
+        currentValue: optionsBag.numDistricts,
         action(n) {
-            electionOptions.numDistricts = n
+            optionsBag.numDistricts = n
             const useDistricts = n > 1
-            const useTracts = electionOptions.numTracts > 1
-            electionOptions.useGeography = useTracts || useDistricts
+            const useTracts = optionsBag.numTracts > 1
+            optionsBag.useGeography = useTracts || useDistricts
             changes.add(['numDistricts'])
         },
     }).go
 
     self.setNumTracts = commander.addSender({
         name: 'numTracts',
-        currentValue: electionOptions.numTracts,
+        currentValue: optionsBag.numTracts,
         action(n) {
-            electionOptions.numTracts = n
+            optionsBag.numTracts = n
             const useTracts = n > 1
-            const useDistricts = electionOptions.numDistricts > 1
-            electionOptions.useGeography = useTracts || useDistricts
+            const useDistricts = optionsBag.numDistricts > 1
+            optionsBag.useGeography = useTracts || useDistricts
             changes.add(['numTracts'])
         },
     }).go
@@ -60,20 +60,20 @@ export default function ElectionOptionsMan(changes, simOptions, commander) {
 
             const { socialChoiceType } = sequenceOptions.sequences[sequenceName].phases[finalPhaseName]
             if (socialChoiceType === 'allocation') {
-                electionOptions.numSampleCandidates = 10
+                optionsBag.numSampleCandidates = 10
             } else if (socialChoiceType === 'multiWinner') {
-                electionOptions.numSampleCandidates = 10
+                optionsBag.numSampleCandidates = 10
             } else { // 'singleWinner'
-                electionOptions.numSampleCandidates = 5
+                optionsBag.numSampleCandidates = 5
             }
         }
     }
 
     self.getOptions = () => {
-        const eo = { ...electionOptions }
-        eo.castOptions = self.castOptionsMan.getOptions()
-        eo.sequenceOptions = self.sequenceOptionsMan.getOptions()
-        return eo
+        const ob = { ...optionsBag }
+        ob.castOptions = self.castOptionsMan.getOptions()
+        ob.sequenceOptions = self.sequenceOptionsMan.getOptions()
+        return ob
     }
 
     self.init()

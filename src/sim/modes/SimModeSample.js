@@ -23,14 +23,14 @@ export default function SimModeSample(pub, entities, changes, districts, simOpti
         // The samplingResult communicates how to visualize the election.
 
         electionOptionsMan.update()
-        const electionOptions = electionOptionsMan.getOptions()
+        const optionsBag = electionOptionsMan.getOptions()
 
         districts.update()
         updateSeeds(simOptions, changes)
 
-        const samplingGeometry = getSamplingGeometry(voterShapeList, candidateDnList, simOptions, electionOptions, districts)
+        const samplingGeometry = getSamplingGeometry(voterShapeList, candidateDnList, simOptions, optionsBag, districts)
 
-        const samplingResult = electionSampler.update(samplingGeometry, changes, electionOptions)
+        const samplingResult = electionSampler.update(samplingGeometry, changes, optionsBag)
         const simData = { samplingResult }
 
         if (samplingResult.pointsChanged === true || changes.checkAny()) {

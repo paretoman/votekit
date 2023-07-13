@@ -21,8 +21,8 @@ export default function ViewDistrictMaps(entities, screenCommon, layout, changes
     let flagNoRender = false
 
     self.enter = () => {
-        const electionOptions = electionOptionsMan.getOptions()
-        if (electionOptions.useGeography) {
+        const optionsBag = electionOptionsMan.getOptions()
+        if (optionsBag.useGeography) {
             screen.show()
         }
     }
@@ -31,9 +31,9 @@ export default function ViewDistrictMaps(entities, screenCommon, layout, changes
     }
 
     self.update = function (simData) {
-        const electionOptions = electionOptionsMan.getOptions()
+        const optionsBag = electionOptionsMan.getOptions()
         if (changes.check(['numDistricts', 'numTracts'])) {
-            if (electionOptions.useGeography) {
+            if (optionsBag.useGeography) {
                 screen.show()
             } else {
                 screen.hide()
@@ -47,7 +47,7 @@ export default function ViewDistrictMaps(entities, screenCommon, layout, changes
         }
         flagNoRender = false
 
-        if (electionOptions.useGeography) {
+        if (optionsBag.useGeography) {
             districtMapViz.update(sequenceResults)
             self.clear()
             self.render()
@@ -57,8 +57,8 @@ export default function ViewDistrictMaps(entities, screenCommon, layout, changes
     self.render = function () {
         if (flagNoRender) return
 
-        const electionOptions = electionOptionsMan.getOptions()
-        if (electionOptions.useGeography) districtMapViz.render()
+        const optionsBag = electionOptionsMan.getOptions()
+        if (optionsBag.useGeography) districtMapViz.render()
     }
     self.clear = () => {
         screen.clear()

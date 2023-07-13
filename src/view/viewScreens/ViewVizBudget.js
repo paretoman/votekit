@@ -15,9 +15,9 @@ export default function ViewVizBudget(screenCommon, layout, menu, changes, simOp
     let vizExplanation
 
     function enterStrategy() {
-        const electionOptions = electionOptionsMan.getOptions()
+        const optionsBag = electionOptionsMan.getOptions()
 
-        const { sequenceName, sequences } = electionOptions.sequenceOptions
+        const { sequenceName, sequences } = optionsBag.sequenceOptions
         const { resultsPhaseBySeq } = simOptions
         const resultsPhaseName = resultsPhaseBySeq[sequenceName]
         const resultsPhaseOptions = sequences[sequenceName].phases[resultsPhaseName]
@@ -46,7 +46,7 @@ export default function ViewVizBudget(screenCommon, layout, menu, changes, simOp
         }
 
         const { sequenceResults } = simData
-        const { sequenceName } = sequenceResults.electionOptions.sequenceOptions
+        const { sequenceName } = sequenceResults.optionsBag.sequenceOptions
         const { resultsPhaseBySeq, resultsPartyBySeq } = simOptions
         const resultsPhaseName = resultsPhaseBySeq[sequenceName]
         const resultsParty = resultsPartyBySeq[resultsPhaseName]

@@ -9,12 +9,12 @@ import { range } from '../util/mathHelpers.js'
  * Here we are in the context of a single election.
  * Run a primary election for each party, then a general election.
  */
-export default function electionClosedPrimary(geometry, electionOptions) {
+export default function electionClosedPrimary(geometry, optionsBag) {
     const { numParties } = geometry.parties
 
     const primaryResults = []
     const partyCansLists = []
-    const primaryPhaseOptions = getElectionPhaseOptions('closedPrimary', 'closedPrimary', electionOptions)
+    const primaryPhaseOptions = getElectionPhaseOptions('closedPrimary', 'closedPrimary', optionsBag)
     for (let i = 0; i < numParties; i++) {
         const { primaryGeometry, partyCans } = getPrimaryGeometry(geometry, i)
         const { voterGeoms, canPoints } = primaryGeometry
@@ -27,10 +27,10 @@ export default function electionClosedPrimary(geometry, electionOptions) {
     }
 
     const { generalGeometry, primaryWinners } = getGeneralGeometry(geometry, primaryResults, numParties, partyCansLists)
-    const generalPhaseOptions = getElectionPhaseOptions('closedPrimary', 'general', electionOptions)
+    const generalPhaseOptions = getElectionPhaseOptions('closedPrimary', 'general', optionsBag)
     const general = electionPhase(generalGeometry, generalPhaseOptions)
 
-    const results = combineClosedPrimaryGeneral(primaryResults, general, primaryWinners, geometry, electionOptions, partyCansLists)
+    const results = combineClosedPrimaryGeneral(primaryResults, general, primaryWinners, geometry, optionsBag, partyCansLists)
     return results
 }
 
@@ -88,7 +88,7 @@ function getGeneralGeometry(geometry, primaryResults, numParties, partyCansLists
     return { generalGeometry, primaryWinners }
 }
 
-function combineClosedPrimaryGeneral(primaryResults, general, primaryWinners, geometry, electionOptions, partyCansLists) {
+function combineClosedPrimaryGeneral(primaryResults, general, primaryWinners, geometry, optionsBag, partyCansLists) {
     const generalAllocation = general.socialChoiceResults.allocation
     const generalWinnerList = getWinnerList(generalAllocation)
     const iWinners = generalWinnerList.map((i) => primaryWinners[i])
@@ -105,7 +105,7 @@ function combineClosedPrimaryGeneral(primaryResults, general, primaryWinners, ge
             general,
         },
         geometry,
-        electionOptions,
+        optionsBag,
         socialChoiceResults: {
             allocation,
         },

@@ -1,5 +1,5 @@
 import makeGeography from '../src/geography/makeGeography.js'
-import electionOptions1 from './electionOptions1.js'
+import electionOptions1 from './optionsBag1.js'
 
 const dimensions = 2
 

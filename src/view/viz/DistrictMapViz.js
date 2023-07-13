@@ -26,8 +26,8 @@ export default function DistrictMapViz(candidateList, screen, electionOptionsMan
             self.mapOfTracts = new MapOfTracts(geography.nx, geography.ny, screen)
         }
 
-        const electionOptions = electionOptionsMan.getOptions()
-        const gc = districtColors(districtElectionResults, candidateList, electionOptions, simOptions)
+        const optionsBag = electionOptionsMan.getOptions()
+        const gc = districtColors(districtElectionResults, candidateList, optionsBag, simOptions)
         const { colorByTract, colorOfVoteByDistrict, colorOfWinsByDistrict } = gc
         self.colorOfVoteByDistrict = colorOfVoteByDistrict
         self.winnerColors = colorOfWinsByDistrict

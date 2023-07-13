@@ -37,9 +37,9 @@ export default function ViewVizOne(entities, screenMain, screenMini, menu, chang
     // Strategies //
     let vizOne
     function enterStrategy() {
-        const electionOptions = electionOptionsMan.getOptions()
+        const optionsBag = electionOptionsMan.getOptions()
 
-        const { sequenceName, sequences } = electionOptions.sequenceOptions
+        const { sequenceName, sequences } = optionsBag.sequenceOptions
         const { resultsPhaseBySeq } = simOptions
         const resultsPhaseName = resultsPhaseBySeq[sequenceName]
         const resultsPhaseOptions = sequences[sequenceName].phases[resultsPhaseName]
@@ -49,7 +49,7 @@ export default function ViewVizOne(entities, screenMain, screenMini, menu, chang
         const voterGeoms = voterShapeList.getGeoms(dimensions)
         const someGaussian2D = voterGeoms.some((v) => v.densityProfile === 'gaussian') && dimensions === 2
 
-        const someStrategy = getSomeStrategy(electionOptions, voterShapeList, resultsPhaseName, sequenceName, simOptions)
+        const someStrategy = getSomeStrategy(optionsBag, voterShapeList, resultsPhaseName, sequenceName, simOptions)
 
         const doGrid = someGaussian2D || someStrategy || voteCasterName === 'score' || voteCasterName === 'scoreFull'
 
@@ -57,7 +57,7 @@ export default function ViewVizOne(entities, screenMain, screenMini, menu, chang
 
         const VizOneVoronoiGeneral = (doRanking) ? VizOneVoronoiRanking : VizOneVoronoi
         const VizNoDistricts = (doGrid) ? VizOneGrid : VizOneVoronoiGeneral
-        const VizOne = (electionOptions.useGeography === true) ? VizDistricts : VizNoDistricts
+        const VizOne = (optionsBag.useGeography === true) ? VizDistricts : VizNoDistricts
         vizOne = new VizOne(voterRendererList, candidateList, screenMain, screenMini, simOptions)
     }
     enterStrategy()
@@ -96,8 +96,8 @@ export default function ViewVizOne(entities, screenMain, screenMini, menu, chang
     }
 }
 
-function getSomeStrategy(electionOptions, voterShapeList, resultsPhaseName, sequenceName, simOptions) {
-    const { sequenceOptions } = electionOptions
+function getSomeStrategy(optionsBag, voterShapeList, resultsPhaseName, sequenceName, simOptions) {
+    const { sequenceOptions } = optionsBag
     const voterStrategyListByPhase = voterShapeList.getVoterStrategyListByPhase(sequenceOptions)
     const voterStrategyList = voterStrategyListByPhase[resultsPhaseName]
 
@@ -116,8 +116,8 @@ function getSomeStrategy(electionOptions, voterShapeList, resultsPhaseName, sequ
 }
 
 function getPhaseResults(sequenceResults, electionOptionsMan, simOptions) {
-    const electionOptions = electionOptionsMan.getOptions()
-    const { sequenceName } = electionOptions.sequenceOptions
+    const optionsBag = electionOptionsMan.getOptions()
+    const { sequenceName } = optionsBag.sequenceOptions
     const { resultsPhaseBySeq } = simOptions
     const resultsPhaseName = resultsPhaseBySeq[sequenceName]
 

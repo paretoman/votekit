@@ -3,7 +3,7 @@
 import colorBlender, { rgbToString } from './colorBlender.js'
 import getTallyFractions from './getTallyFractions.js'
 
-export default function districtColors(districtElectionResults, candidateList, electionOptions, simOptions) {
+export default function districtColors(districtElectionResults, candidateList, optionsBag, simOptions) {
     const {
         votesByTract,
         votesByDistrict,
@@ -13,7 +13,7 @@ export default function districtColors(districtElectionResults, candidateList, e
     const canList = candidateList.getEntities()
 
     const colorByTract = colorTracts(votesByTract, canList)
-    const colorOfWinsByDistrict = colorDistrictWins(scResultsByDistrict, canList, electionOptions, simOptions)
+    const colorOfWinsByDistrict = colorDistrictWins(scResultsByDistrict, canList, optionsBag, simOptions)
     const colorOfVoteByDistrict = colorDistrictVote(votesByDistrict, canList)
 
     const gc = {
@@ -39,11 +39,11 @@ function colorTracts(votesByTract, canList) {
     return colorByTract
 }
 
-function colorDistrictWins(scResultsByDistrict, canList, electionOptions, simOptions) {
+function colorDistrictWins(scResultsByDistrict, canList, optionsBag, simOptions) {
     // calculate color for win map
     let colorOfWinsByDistrict
 
-    const { sequenceName, sequences } = electionOptions.sequenceOptions
+    const { sequenceName, sequences } = optionsBag.sequenceOptions
     const { resultsPhaseBySeq } = simOptions
     const resultsPhaseName = resultsPhaseBySeq[sequenceName]
     const resultsPhaseOptions = sequences[sequenceName].phases[resultsPhaseName]

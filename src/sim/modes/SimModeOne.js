@@ -24,13 +24,13 @@ export default function SimModeOne(pub, entities, changes, districts, simOptions
         if (changes.checkNone()) return
 
         electionOptionsMan.update()
-        const electionOptions = electionOptionsMan.getOptions()
+        const optionsBag = electionOptionsMan.getOptions()
 
         districts.update()
 
-        const geometry = getGeometry(voterShapeList, candidateList, simOptions, electionOptions, districts)
+        const geometry = getGeometry(voterShapeList, candidateList, simOptions, optionsBag, districts)
 
-        const sequenceResults = electionSequence(geometry, electionOptions)
+        const sequenceResults = electionSequence(geometry, optionsBag)
 
         sequenceResults.colorRGBAOfCandidates = candidateList.getRGBAList()
 

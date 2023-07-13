@@ -7,20 +7,20 @@ import getElectionPhaseOptions from './getPhaseOptions.js'
 /**
  * Here we are in the context of a single election with two phases, a non-partisan primary, and a general.
  */
-export default function electionNonpartisanPrimary(geometry, electionOptions) {
+export default function electionNonpartisanPrimary(geometry, optionsBag) {
     // primary phase
     const primaryGeometry = getGeometryForPhase('nonpartisanOpenPrimary', geometry)
 
-    const primaryOptions = getElectionPhaseOptions('nonpartisanOpenPrimary', 'nonpartisanOpenPrimary', electionOptions)
+    const primaryOptions = getElectionPhaseOptions('nonpartisanOpenPrimary', 'nonpartisanOpenPrimary', optionsBag)
     const primary = electionPhase(primaryGeometry, primaryOptions)
 
     // general phase
     const { generalGeometry, primaryWinners } = getGeneralGeometry(geometry, primary)
-    const generalOptions = getElectionPhaseOptions('nonpartisanOpenPrimary', 'general', electionOptions)
+    const generalOptions = getElectionPhaseOptions('nonpartisanOpenPrimary', 'general', optionsBag)
     const general = electionPhase(generalGeometry, generalOptions)
 
     // combine primary and general results
-    const results = combinePrimaryGeneral(primary, general, primaryWinners, geometry, electionOptions)
+    const results = combinePrimaryGeneral(primary, general, primaryWinners, geometry, optionsBag)
 
     return results
 }
@@ -40,7 +40,7 @@ function getGeneralGeometry(geometry, primary) {
     return { generalGeometry, primaryWinners }
 }
 
-function combinePrimaryGeneral(primary, general, primaryWinners, geometry, electionOptions) {
+function combinePrimaryGeneral(primary, general, primaryWinners, geometry, optionsBag) {
     const generalAllocation = general.socialChoiceResults.allocation
     const generalWinnerList = getWinnerList(generalAllocation)
     const iWinners = generalWinnerList.map((i) => primaryWinners[i])
@@ -61,7 +61,7 @@ function combinePrimaryGeneral(primary, general, primaryWinners, geometry, elect
             'general',
         ],
         geometry,
-        electionOptions,
+        optionsBag,
         socialChoiceResults: {
             allocation,
         },

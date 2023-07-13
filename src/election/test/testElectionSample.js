@@ -1,4 +1,4 @@
-import electionOptions1 from './electionOptions1.js'
+import electionOptions1 from './optionsBag1.js'
 import sampleElection from '../src/sampleElection/sampleElection.js'
 import seedrandom from '../src/lib/snowpack/build/snowpack/pkg/seedrandom.js'
 import testSamplingGeometry1 from './testSamplingGeometry1.js'

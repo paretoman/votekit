@@ -50,9 +50,9 @@ export default function CandidateGraphic(candidate, screen, wHandle, hHandle, vi
             const y2 = y + square.h * 0.5 + 20 + 2
             drawStrokedColor(self.wins, x, y2, 20, 2, color, 1, fctx)
         }
-        const electionOptions = electionOptionsMan.getOptions()
+        const optionsBag = electionOptionsMan.getOptions()
 
-        const { sequenceName, sequences } = electionOptions.sequenceOptions
+        const { sequenceName, sequences } = optionsBag.sequenceOptions
         const { resultsPhaseBySeq } = simOptions
         const resultsPhaseName = resultsPhaseBySeq[sequenceName]
         const resultsPhaseOptions = sequences[sequenceName].phases[resultsPhaseName]

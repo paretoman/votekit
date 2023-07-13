@@ -3,7 +3,7 @@ import { last } from '../util/jsHelpers.js'
 import { randomIndexFromCDF } from '../util/mathHelpers.js'
 import sampleCanDnGeom from './sampleCanDnGeom.js'
 
-export default function sampleElection(samplingGeometry, electionOptions, numSamples, rng) {
+export default function sampleElection(samplingGeometry, optionsBag, numSamples, rng) {
     const { voterGeoms, voterParties, canDnGeoms, dimensions, geography, canDnCDF, strategySeed, voterStrategyListByPhase, information, usePollsByPhase } = samplingGeometry
     const { partiesByCan } = samplingGeometry.parties
 
@@ -16,7 +16,7 @@ export default function sampleElection(samplingGeometry, electionOptions, numSam
 
     for (let i = 0; i < numSamples; i++) {
         // choose a number of candidates
-        const { numSampleCandidates } = electionOptions
+        const { numSampleCandidates } = optionsBag
         const canPoints = []
         const sParties = []
         for (let k = 0; k < numSampleCandidates; k++) {
@@ -34,7 +34,7 @@ export default function sampleElection(samplingGeometry, electionOptions, numSam
         const parties = { partiesByCan: sParties, numParties: 10 }
         const geometry = { voterGeoms, voterParties, canPoints, parties, dimensions, geography, strategySeed, voterStrategyListByPhase, information, usePollsByPhase }
 
-        const sequenceResults = electionSequence(geometry, electionOptions)
+        const sequenceResults = electionSequence(geometry, optionsBag)
         const { phaseNames } = sequenceResults
         const { allocation } = sequenceResults[last(phaseNames)].socialChoiceResults
 

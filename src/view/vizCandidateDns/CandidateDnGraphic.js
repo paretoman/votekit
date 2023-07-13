@@ -33,9 +33,9 @@ export default function CandidateDnGraphic(candidateDn, screen, wHandle, hHandle
         const { darkMode } = screen.common
         const color = (darkMode) ? '#fff' : '#222'
 
-        const electionOptions = electionOptionsMan.getOptions()
+        const optionsBag = electionOptionsMan.getOptions()
 
-        const { sequenceName, sequences } = electionOptions.sequenceOptions
+        const { sequenceName, sequences } = optionsBag.sequenceOptions
         const { resultsPhaseBySeq } = simOptions
         const resultsPhaseName = resultsPhaseBySeq[sequenceName]
         const resultsPhaseOptions = sequences[sequenceName].phases[resultsPhaseName]

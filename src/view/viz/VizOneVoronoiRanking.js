@@ -27,7 +27,7 @@ export default function VizOneVoronoiRanking(voterRendererList, candidateList, s
         const { error } = sequenceResults
         if (error !== undefined) return
 
-        const { sequenceName } = sequenceResults.electionOptions.sequenceOptions
+        const { sequenceName } = sequenceResults.optionsBag.sequenceOptions
         const { resultsPhaseBySeq, resultsPartyBySeq } = simOptions
         const resultsPhaseName = resultsPhaseBySeq[sequenceName]
         const resultsParty = resultsPartyBySeq[resultsPhaseName]

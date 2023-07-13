@@ -7,9 +7,9 @@ import getElectionPhaseOptions from './getPhaseOptions.js'
 /**
  * Here we are in the context of a single election with one general election phase.
  */
-export default function electionGeneral(geometry, electionOptions) {
+export default function electionGeneral(geometry, optionsBag) {
     const generalGeometry = getGeometryForPhase('general', geometry)
-    const generalOptions = getElectionPhaseOptions('general', 'general', electionOptions)
+    const generalOptions = getElectionPhaseOptions('general', 'general', optionsBag)
     const general = electionPhase(generalGeometry, generalOptions)
     const { socialChoiceResults } = general
     const results = {
@@ -17,7 +17,7 @@ export default function electionGeneral(geometry, electionOptions) {
             general,
         },
         geometry,
-        electionOptions,
+        optionsBag,
         socialChoiceResults,
     }
     return results

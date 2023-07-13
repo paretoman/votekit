@@ -9,10 +9,10 @@ import getUsePollsByPhase from './getUsePollsByPhase.js'
  * @param {*} districts
  * @returns {Object} samplingGeometry is input for sampleElection
  */
-export default function getSamplingGeometry(voterShapeList, candidateDnList, simOptions, electionOptions, districts) {
+export default function getSamplingGeometry(voterShapeList, candidateDnList, simOptions, optionsBag, districts) {
     const { dimensions, seeds } = simOptions
     const { geography } = districts
-    const { sequenceOptions } = electionOptions
+    const { sequenceOptions } = optionsBag
 
     const voterGeoms = voterShapeList.getGeoms(dimensions)
     const voterParties = voterShapeList.getParties()

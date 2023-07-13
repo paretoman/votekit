@@ -17,7 +17,7 @@ Here are some pages describing the architecture of Votekit. Also, see [votekit o
       * [commands detailed](code_commands.md) (old)
     * [Entities](entities.md)
     * [SimMode](simMode.md)
-    * [ElectionOptions](electionOptions.md)
+    * [OptionsBag](optionsBag.md)
   * [View](view.md)
     * [viewMode](viewMode.md)
     * [viewButtons](viewButtons.md)

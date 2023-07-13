@@ -91,8 +91,8 @@ export default function ViewEntitiesOne(entities, screen, menu, changes, simOpti
         self.testVoterView.graphic.start(p)
     }
     self.testVoteView = () => {
-        const electionOptions = electionOptionsMan.getOptions()
-        const { sequenceName, sequences } = electionOptions.sequenceOptions
+        const optionsBag = electionOptionsMan.getOptions()
+        const { sequenceName, sequences } = optionsBag.sequenceOptions
         const { resultsPhaseBySeq } = simOptions
         const resultsPhaseName = resultsPhaseBySeq[sequenceName]
         const resultsPhaseOptions = sequences[sequenceName].phases[resultsPhaseName]

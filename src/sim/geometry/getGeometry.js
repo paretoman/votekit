@@ -8,10 +8,10 @@ import getUsePollsByPhase from './getUsePollsByPhase.js'
  * @param {*} districts
  * @returns {Object} geometry is input for an election
  */
-export default function getGeometry(voterShapeList, candidateList, simOptions, electionOptions, districts) {
+export default function getGeometry(voterShapeList, candidateList, simOptions, optionsBag, districts) {
     const { dimensions, seeds } = simOptions
     const { geography } = districts
-    const { sequenceOptions } = electionOptions
+    const { sequenceOptions } = optionsBag
 
     const voterGeoms = voterShapeList.getGeoms(dimensions)
     const voterParties = voterShapeList.getParties()

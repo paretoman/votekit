@@ -13,12 +13,12 @@ import sampleElection from '../../election/src/sampleElection/sampleElection.js'
 export default function ElectionSampler() {
     const self = this
 
-    self.update = function (samplingGeometry, changes, electionOptions) {
+    self.update = function (samplingGeometry, changes, optionsBag) {
         if (changes.checkAny()) {
             self.startSim(samplingGeometry)
         }
 
-        const samplingResult = self.addSim(samplingGeometry, electionOptions)
+        const samplingResult = self.addSim(samplingGeometry, optionsBag)
         return samplingResult
     }
 
@@ -36,11 +36,11 @@ export default function ElectionSampler() {
         rng = seedrandom(seed)
     }
 
-    self.addSim = function (samplingGeometry, electionOptions) {
+    self.addSim = function (samplingGeometry, optionsBag) {
         if (totalPoints > maxPoints) return { pointsChanged: false }
 
         const numSamples = 1
-        const sampleResult = sampleElection(samplingGeometry, electionOptions, numSamples, rng)
+        const sampleResult = sampleElection(samplingGeometry, optionsBag, numSamples, rng)
         const { samplingPointsList, samplingPointsCount, partyWins, error } = sampleResult
 
         if (error !== undefined) return { pointsChanged: false }
