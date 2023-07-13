@@ -7,16 +7,16 @@ import election from '../election/election.js'
 /**
  * Here we are in the context of a single election phase.
  */
-export default function electionPhase(geometry, electionPhaseOptions) {
-    const { useGeography } = electionPhaseOptions
+export default function electionPhase(geometry, electionOptions) {
+    const { useGeography } = electionOptions
     const { usePolls } = geometry
 
     if (usePolls) {
-        return electionCycle(geometry, electionPhaseOptions)
+        return electionCycle(geometry, electionOptions)
     }
     if (useGeography) {
-        return districtElection(geometry, electionPhaseOptions)
+        return districtElection(geometry, electionOptions)
     }
 
-    return election(geometry, electionPhaseOptions)
+    return election(geometry, electionOptions)
 }

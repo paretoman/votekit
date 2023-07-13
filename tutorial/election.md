@@ -29,7 +29,7 @@ Election may be called by [ElectionSampler](electionSampler.md) to run multiple 
 
 The election results are all the data that went into and came out of an election. The sim adds more information that helps with visualization and sends that to the visualizers. They are composed of several parts:
 
-* electionPhaseOptions
+* electionOptions
 * geometry
 * votes - see [VoteCasters](voteCasters.md) for more explanation.
   * preferencesLists

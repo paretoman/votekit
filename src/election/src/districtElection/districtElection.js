@@ -13,27 +13,27 @@ import sumAllocationsStatewide from './combineAllocationsStatewide.js'
  * The point is moved by simplex noise to create distinct districts.
  * All the voter groups share the same voter basis.
  */
-export default function districtElection(geometry, electionPhaseOptions) {
+export default function districtElection(geometry, electionOptions) {
     const { canPoints, geography } = geometry
 
-    const votesByTract = castVotesByTract(geometry, electionPhaseOptions)
+    const votesByTract = castVotesByTract(geometry, electionOptions)
     const allVotes = combineVotesStatewide(votesByTract, canPoints)
     const votesByDistrict = combineVotesByDistrict(votesByTract, canPoints, geography)
 
-    const scResultsByDistrict = countDistrictElections(votesByDistrict, electionPhaseOptions)
-    const allocation = sumAllocationsStatewide(scResultsByDistrict, canPoints, electionPhaseOptions)
+    const scResultsByDistrict = countDistrictElections(votesByDistrict, electionOptions)
+    const allocation = sumAllocationsStatewide(scResultsByDistrict, canPoints, electionOptions)
     const socialChoiceResults = { allocation }
 
     const electionResults = {
-        electionPhaseOptions, geometry, votes: allVotes, votesByTract, votesByDistrict, scResultsByDistrict, socialChoiceResults,
+        electionOptions, geometry, votes: allVotes, votesByTract, votesByDistrict, scResultsByDistrict, socialChoiceResults,
     }
     return electionResults
 }
 
 /** Run separate elections in each district. */
-function countDistrictElections(votesByDistrict, electionPhaseOptions) {
+function countDistrictElections(votesByDistrict, electionOptions) {
     const scResultsByDistrict = votesByDistrict.map(
-        (votes) => socialChoiceRun(votes, electionPhaseOptions),
+        (votes) => socialChoiceRun(votes, electionOptions),
     )
     return scResultsByDistrict
 }

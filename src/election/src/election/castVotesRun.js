@@ -1,10 +1,10 @@
 import getCanBorders from '../voteCasters/voteCasters/getCanBorders.js'
 import voteCasters from '../voteCasters/voteCasters/voteCasters.js'
 
-export default function castVotesRun(geometry, electionPhaseOptions) {
-    const { castOptions } = electionPhaseOptions
+export default function castVotesRun(geometry, electionOptions) {
+    const { castOptions } = electionOptions
 
-    const { voteCasterName } = electionPhaseOptions
+    const { voteCasterName } = electionOptions
     const { canPoints, voterGeoms, dimensions } = geometry
 
     const geometry2 = { ...geometry }
