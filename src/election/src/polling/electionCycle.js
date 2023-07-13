@@ -7,8 +7,8 @@ import election from '../election/election.js'
 /**
  * Here we are in the context of an election cycle with polls followed by a single election.
  */
-export default function electionCycle(geometry, electionOptions) {
-    const { useGeography, pollCount } = electionOptions
+export default function electionCycle(geometry, electionOptions, optionsBag) {
+    const { useGeography, pollCount } = optionsBag
 
     // run several elections and store the results in electionResultsList
     // return the last one

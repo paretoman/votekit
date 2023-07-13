@@ -10,7 +10,7 @@ import getElectionOptions from './getElectionOptions.js'
 export default function electionGeneral(geometry, optionsBag) {
     const generalGeometry = getGeometryForPhase('general', geometry)
     const generalOptions = getElectionOptions('general', 'general', optionsBag)
-    const general = electionPhase(generalGeometry, generalOptions)
+    const general = electionPhase(generalGeometry, generalOptions, optionsBag)
     const { socialChoiceResults } = general
     const results = {
         phases: {

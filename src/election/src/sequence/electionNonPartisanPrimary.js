@@ -12,12 +12,12 @@ export default function electionNonpartisanPrimary(geometry, optionsBag) {
     const primaryGeometry = getGeometryForPhase('nonpartisanOpenPrimary', geometry)
 
     const primaryOptions = getElectionOptions('nonpartisanOpenPrimary', 'nonpartisanOpenPrimary', optionsBag)
-    const primary = electionPhase(primaryGeometry, primaryOptions)
+    const primary = electionPhase(primaryGeometry, primaryOptions, optionsBag)
 
     // general phase
     const { generalGeometry, primaryWinners } = getGeneralGeometry(geometry, primary)
     const generalOptions = getElectionOptions('nonpartisanOpenPrimary', 'general', optionsBag)
-    const general = electionPhase(generalGeometry, generalOptions)
+    const general = electionPhase(generalGeometry, generalOptions, optionsBag)
 
     // combine primary and general results
     const results = combinePrimaryGeneral(primary, general, primaryWinners, geometry, optionsBag)
