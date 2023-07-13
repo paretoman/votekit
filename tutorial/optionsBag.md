@@ -6,10 +6,6 @@ layout: default
 
 - The optionsBag contains many options, including for sampling, geography, sequences, polling, and elections.
 
-The electionOptions are options inside the election such as socialChoiceMethod. There are two sub categories:
-  - The castOptions are options for the vote caster.
-  - The socialChoiceOptions are options for the social choice function.
-
 - Parent Page: [Sim](sim.md)
 
 ## ElectionOptions
