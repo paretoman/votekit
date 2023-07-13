@@ -11,7 +11,7 @@ export default function socialChoiceRun(votes, electionPhaseOptions) {
     // electionResults, the larger one,
     //   is in the context of candidate objects and voter objects.
 
-    const { socialChoiceOptions, socialChoiceMethod } = electionPhaseOptions.phaseOptions
+    const { socialChoiceOptions, socialChoiceMethod } = electionPhaseOptions
     const socialChoice = socialChoiceMethods[socialChoiceMethod]
     const socialChoiceResults = socialChoice(votes, socialChoiceOptions)
     if (socialChoiceResults.allocation === undefined) {

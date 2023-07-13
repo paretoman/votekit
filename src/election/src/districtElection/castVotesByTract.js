@@ -7,7 +7,7 @@ export default function castVotesByTract(geometry0, electionPhaseOptions) {
     const { voterGeomsByTract } = geography
 
     const voterGeoms00 = voterGeomsByTract[0][0]
-    const { voteCasterName } = electionPhaseOptions.phaseOptions
+    const { voteCasterName } = electionPhaseOptions
     const canBorders = getCanBorders(canPoints, voterGeoms00, dimensions, voteCasterName)
 
     const votesByTract = voterGeomsByTract.map(

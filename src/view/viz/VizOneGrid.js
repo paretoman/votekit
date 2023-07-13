@@ -32,7 +32,7 @@ export default function VizOneGrid(voterRendererList, candidateList, screenMain,
         const { error } = sequenceResults
         if (error !== undefined) return
 
-        const { sequenceName } = sequenceResults.electionPhaseOptions.sequenceOptions
+        const { sequenceName } = sequenceResults.optionsBag.sequenceOptions
         const { resultsPhaseBySeq, resultsPartyBySeq } = simOptions
         const resultsPhaseName = resultsPhaseBySeq[sequenceName]
         const resultsParty = resultsPartyBySeq[resultsPhaseName]

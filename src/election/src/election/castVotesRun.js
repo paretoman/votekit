@@ -4,7 +4,7 @@ import voteCasters from '../voteCasters/voteCasters/voteCasters.js'
 export default function castVotesRun(geometry, electionPhaseOptions) {
     const { castOptions } = electionPhaseOptions
 
-    const { voteCasterName } = electionPhaseOptions.phaseOptions
+    const { voteCasterName } = electionPhaseOptions
     const { canPoints, voterGeoms, dimensions } = geometry
 
     const geometry2 = { ...geometry }
