@@ -2,7 +2,7 @@
 
 import electionPhase from '../polling/electionPhase.js'
 import getGeometryForPhase from './getGeometryForPhase.js'
-import getElectionPhaseOptions from './getPhaseOptions.js'
+import getElectionOptions from './getElectionOptions.js'
 import { range } from '../util/mathHelpers.js'
 
 /**
@@ -14,7 +14,7 @@ export default function electionClosedPrimary(geometry, optionsBag) {
 
     const primaryResults = []
     const partyCansLists = []
-    const primaryPhaseOptions = getElectionPhaseOptions('closedPrimary', 'closedPrimary', optionsBag)
+    const primaryPhaseOptions = getElectionOptions('closedPrimary', 'closedPrimary', optionsBag)
     for (let i = 0; i < numParties; i++) {
         const { primaryGeometry, partyCans } = getPrimaryGeometry(geometry, i)
         const { voterGeoms, canPoints } = primaryGeometry
@@ -27,7 +27,7 @@ export default function electionClosedPrimary(geometry, optionsBag) {
     }
 
     const { generalGeometry, primaryWinners } = getGeneralGeometry(geometry, primaryResults, numParties, partyCansLists)
-    const generalPhaseOptions = getElectionPhaseOptions('closedPrimary', 'general', optionsBag)
+    const generalPhaseOptions = getElectionOptions('closedPrimary', 'general', optionsBag)
     const general = electionPhase(generalGeometry, generalPhaseOptions)
 
     const results = combineClosedPrimaryGeneral(primaryResults, general, primaryWinners, geometry, optionsBag, partyCansLists)

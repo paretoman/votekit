@@ -2,7 +2,7 @@
 
 import electionPhase from '../polling/electionPhase.js'
 import getGeometryForPhase from './getGeometryForPhase.js'
-import getElectionPhaseOptions from './getPhaseOptions.js'
+import getElectionOptions from './getElectionOptions.js'
 
 /**
  * Here we are in the context of a single election with two phases, a non-partisan primary, and a general.
@@ -11,12 +11,12 @@ export default function electionNonpartisanPrimary(geometry, optionsBag) {
     // primary phase
     const primaryGeometry = getGeometryForPhase('nonpartisanOpenPrimary', geometry)
 
-    const primaryOptions = getElectionPhaseOptions('nonpartisanOpenPrimary', 'nonpartisanOpenPrimary', optionsBag)
+    const primaryOptions = getElectionOptions('nonpartisanOpenPrimary', 'nonpartisanOpenPrimary', optionsBag)
     const primary = electionPhase(primaryGeometry, primaryOptions)
 
     // general phase
     const { generalGeometry, primaryWinners } = getGeneralGeometry(geometry, primary)
-    const generalOptions = getElectionPhaseOptions('nonpartisanOpenPrimary', 'general', optionsBag)
+    const generalOptions = getElectionOptions('nonpartisanOpenPrimary', 'general', optionsBag)
     const general = electionPhase(generalGeometry, generalOptions)
 
     // combine primary and general results

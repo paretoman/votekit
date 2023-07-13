@@ -3,7 +3,7 @@
  * @param {string} phaseName
  * @returns {object} election phase options
 */
-export default function getElectionPhaseOptions(sequenceName, phaseName, optionsBag) {
+export default function getElectionOptions(sequenceName, phaseName, optionsBag) {
     const epo = { ...optionsBag }
     epo.phaseOptions = epo.sequenceOptions.sequences[sequenceName].phases[phaseName]
     delete epo.sequenceOptions
