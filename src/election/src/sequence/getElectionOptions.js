@@ -4,8 +4,6 @@
  * @returns {object} election phase options
 */
 export default function getElectionOptions(sequenceName, phaseName, optionsBag) {
-    const epo = { ...optionsBag }
-    epo.phaseOptions = epo.sequenceOptions.sequences[sequenceName].phases[phaseName]
-    delete epo.sequenceOptions
-    return epo
+    const eo = optionsBag.sequenceOptions.sequences[sequenceName].phases[phaseName]
+    return eo
 }
