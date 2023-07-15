@@ -1,8 +1,7 @@
 import voteCasters from '../voteCasters/voteCasters/voteCasters.js'
 import getCanBorders from '../voteCasters/voteCasters/getCanBorders.js'
 
-export default function castVotesByTract(geometry0, electionOptions) {
-    const { castOptions } = electionOptions
+export default function castVotesByTract(geometry0, electionOptions, castOptions) {
     const { canPoints, parties, dimensions, geography, strategySeed, voterStrategyList, information } = geometry0
     const { voterGeomsByTract } = geography
 

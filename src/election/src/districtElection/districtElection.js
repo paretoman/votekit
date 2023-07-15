@@ -13,10 +13,10 @@ import sumAllocationsStatewide from './combineAllocationsStatewide.js'
  * The point is moved by simplex noise to create distinct districts.
  * All the voter groups share the same voter basis.
  */
-export default function districtElection(geometry, electionOptions) {
+export default function districtElection(geometry, electionOptions, castOptions) {
     const { canPoints, geography } = geometry
 
-    const votesByTract = castVotesByTract(geometry, electionOptions)
+    const votesByTract = castVotesByTract(geometry, electionOptions, castOptions)
     const allVotes = combineVotesStatewide(votesByTract, canPoints)
     const votesByDistrict = combineVotesByDistrict(votesByTract, canPoints, geography)
 

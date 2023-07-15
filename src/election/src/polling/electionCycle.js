@@ -21,7 +21,8 @@ export default function electionCycle(geometry, electionOptions, optionsBag) {
         if (useGeography) {
             electionResults = districtElection(geometry1, electionOptions)
         } else {
-            electionResults = election(geometry1, electionOptions)
+            const { castOptions } = optionsBag
+            electionResults = election(geometry1, electionOptions, castOptions)
         }
     }
     return electionResults
