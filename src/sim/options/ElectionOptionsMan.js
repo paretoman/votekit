@@ -4,7 +4,6 @@ import CastOptionsMan from './CastOptionsMan.js'
 import SequenceOptionsMan from './SequenceOptionsMan.js'
 
 /**
- * Here we are in the context of a single election.
  * @constructor
  */
 export default function ElectionOptionsMan(changes, simOptions, commander) {

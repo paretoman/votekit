@@ -5,7 +5,7 @@ import electionGeneral from './electionGeneral.js'
 import electionNonpartisanPrimary from './electionNonPartisanPrimary.js'
 
 /**
- * Here we are in the context of a single election.
+ * Here we are in the context of an election sequence.
  */
 export default function electionSequence(geometry, optionsBag) {
     const { canPoints, voterGeoms } = geometry

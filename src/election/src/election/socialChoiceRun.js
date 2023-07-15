@@ -9,7 +9,7 @@ export default function socialChoiceRun(votes, electionOptions) {
     //   is in the context of the social choice method,
     //   which has tallies go in and analysis come out
     // electionResults, the larger one,
-    //   is in the context of candidate objects and voter objects.
+    //   is in the context of candidate and voter geometries.
 
     const { socialChoiceOptions, socialChoiceMethod } = electionOptions
     const socialChoice = socialChoiceMethods[socialChoiceMethod]

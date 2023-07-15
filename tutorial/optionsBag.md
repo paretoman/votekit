@@ -8,17 +8,17 @@ layout: default
 
 - Parent Page: [Sim](sim.md)
 
-## ElectionOptions
+## OptionsBag
 
 optionsBag structure
 
 * numTracts
 * numDistricts
-* socialChoiceMethod
-* voteCasterName
-* socialChoiceType
 * numSampleCandidates
 * electionOptions
+  * socialChoiceMethod
+  * voteCasterName
+  * socialChoiceType
   * castOptions
     * usr: under-sampling ratio - how many pixels in length between sampling points
     * verbosity: how much data to store in votes data structure.

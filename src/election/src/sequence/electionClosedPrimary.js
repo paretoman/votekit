@@ -6,7 +6,7 @@ import getElectionOptions from './getElectionOptions.js'
 import { range } from '../util/mathHelpers.js'
 
 /**
- * Here we are in the context of a single election.
+ * Here we are in the context of an election sequence.
  * Run a primary election for each party, then a general election.
  */
 export default function electionClosedPrimary(geometry, optionsBag) {
