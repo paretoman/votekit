@@ -48,7 +48,7 @@ export default function ViewDistrictMaps(entities, screenCommon, layout, changes
         flagNoRender = false
 
         if (optionsBag.useGeography) {
-            districtMapViz.update(sequenceResults)
+            districtMapViz.update(sequenceResults.phases.general)
             self.clear()
             self.render()
         }
