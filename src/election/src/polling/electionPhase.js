@@ -1,6 +1,5 @@
 /** @module */
 
-import districtElection from '../districtElection/districtElection.js'
 import electionCycle from './electionCycle.js'
 import election from '../election/election.js'
 
@@ -8,14 +7,11 @@ import election from '../election/election.js'
  * Here we are in the context of a single election phase.
  */
 export default function electionPhase(geometry, electionOptions, optionsBag) {
-    const { useGeography, castOptions } = optionsBag
+    const { castOptions } = optionsBag
     const { usePolls } = geometry
 
     if (usePolls) {
         return electionCycle(geometry, electionOptions, optionsBag)
-    }
-    if (useGeography) {
-        return districtElection(geometry, electionOptions, castOptions)
     }
 
     return election(geometry, electionOptions, castOptions)

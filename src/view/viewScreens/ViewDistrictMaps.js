@@ -39,7 +39,7 @@ export default function ViewDistrictMaps(entities, screenCommon, layout, changes
                 screen.hide()
             }
         }
-        const { sequenceResults } = simData
+        const sequenceResults = simData.geoResults.scResultsByDistrict[0]
         const { error } = sequenceResults
         if (error !== undefined) {
             flagNoRender = true
@@ -48,7 +48,7 @@ export default function ViewDistrictMaps(entities, screenCommon, layout, changes
         flagNoRender = false
 
         if (optionsBag.useGeography) {
-            districtMapViz.update(sequenceResults.phases.general)
+            districtMapViz.update(simData.geoResults)
             self.clear()
             self.render()
         }

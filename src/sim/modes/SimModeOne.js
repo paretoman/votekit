@@ -1,7 +1,7 @@
 /** @module */
 
 import getGeometry from '../geometry/getGeometry.js'
-import electionSequence from '../../election/src/sequence/electionSequence.js'
+import geoElection from '../../election/src/geoElection/geoElection.js'
 
 /**
  * Simulate one election with
@@ -30,11 +30,11 @@ export default function SimModeOne(pub, entities, changes, districts, simOptions
 
         const geometry = getGeometry(voterShapeList, candidateList, simOptions, optionsBag, districts)
 
-        const sequenceResults = electionSequence(geometry, optionsBag)
+        const geoResults = geoElection(geometry, optionsBag)
 
-        sequenceResults.colorRGBAOfCandidates = candidateList.getRGBAList()
+        geoResults.colorRGBAOfCandidates = candidateList.getRGBAList()
 
-        const simData = { sequenceResults }
+        const simData = { geoResults }
         pub.update(simData)
         changes.clear()
     }

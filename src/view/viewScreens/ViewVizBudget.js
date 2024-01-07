@@ -45,7 +45,7 @@ export default function ViewVizBudget(screenCommon, layout, menu, changes, simOp
             self.enter()
         }
 
-        const { sequenceResults } = simData
+        const sequenceResults = simData.geoResults.scResultsByDistrict[0]
         const { sequenceName } = sequenceResults.optionsBag.sequenceOptions
         const { resultsPhaseBySeq, resultsPartyBySeq } = simOptions
         const resultsPhaseName = resultsPhaseBySeq[sequenceName]

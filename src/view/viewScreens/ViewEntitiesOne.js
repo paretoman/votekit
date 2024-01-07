@@ -55,7 +55,7 @@ export default function ViewEntitiesOne(entities, screen, menu, changes, simOpti
             self.testVoterView.graphic.updateViewXY()
         }
 
-        const { sequenceResults } = simData
+        const sequenceResults = simData.geoResults.scResultsByDistrict[0]
         const { error } = sequenceResults
         if (error === undefined) {
             const phaseToShow = 'general' // todo: allow user to select this option, e.g. nonpartisanOpenPrimary

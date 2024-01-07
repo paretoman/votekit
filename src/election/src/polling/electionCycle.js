@@ -1,6 +1,5 @@
 /** @module */
 
-import districtElection from '../districtElection/districtElection.js'
 import calculatePolling from './calculatePolling.js'
 import election from '../election/election.js'
 
@@ -8,7 +7,7 @@ import election from '../election/election.js'
  * Here we are in the context of an election cycle with polls followed by a single election.
  */
 export default function electionCycle(geometry, electionOptions, optionsBag) {
-    const { useGeography, pollCount } = optionsBag
+    const { pollCount } = optionsBag
 
     // run several elections and store the results in electionResultsList
     // return the last one
@@ -18,12 +17,8 @@ export default function electionCycle(geometry, electionOptions, optionsBag) {
         const geometry1 = { ...geometry }
         const polling = calculatePolling(electionResults)
         geometry1.information = { polling }
-        if (useGeography) {
-            electionResults = districtElection(geometry1, electionOptions)
-        } else {
-            const { castOptions } = optionsBag
-            electionResults = election(geometry1, electionOptions, castOptions)
-        }
+        const { castOptions } = optionsBag
+        electionResults = election(geometry1, electionOptions, castOptions)
     }
     return electionResults
 }
