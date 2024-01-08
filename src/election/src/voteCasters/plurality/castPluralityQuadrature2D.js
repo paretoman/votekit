@@ -9,7 +9,7 @@ import * as typesVotesForGeom from '../types/typesVotesForGeom.js'
  */
 export default function castPluralityQuadrature2D(voterGeom, geometry) {
     const lines = geometry.canBorders.voronoiLines2D
-
+    const { densityMax } = voterGeom
     // use lines drawn across shape of voterGeom to sum the area within
 
     const n = lines.length
@@ -19,8 +19,9 @@ export default function castPluralityQuadrature2D(voterGeom, geometry) {
         const lineSet = lines[i]
         // return area for each candidate
         const area = sumCircle(voterGeom, lineSet)
-        countByCan[i] = area
-        totalVotes += area
+        const voteCount = area * densityMax
+        countByCan[i] = voteCount
+        totalVotes += voteCount
     }
     return { countByCan, totalVotes }
 }

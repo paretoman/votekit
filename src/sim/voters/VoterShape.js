@@ -31,6 +31,8 @@ export default function VoterShape(
 
     self.color = '#88888888'
     self.strategyRules = strategyRules
+    self.shape1.densityMax = 1
+    self.shape2.densityMax = 1
 
     self.setAction = {
         exists(e) {

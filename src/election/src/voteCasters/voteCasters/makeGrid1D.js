@@ -36,15 +36,16 @@ function findGridX(voterGeom) {
 }
 
 function findDensity(voterGeom, gridX, gridPointLength) {
-    const { x, w, densityProfile } = voterGeom
+    const { x, w, densityProfile, densityMax } = voterGeom
     const isGauss = densityProfile === 'gaussian'
     const density = Array(gridX.length)
     const voteCounts = Array(gridX.length)
 
     if (!isGauss) {
-        density.fill(1)
-        voteCounts.fill(1)
-        const totalVotes = voteCounts.length
+        const d = densityMax
+        density.fill(d)
+        voteCounts.fill(d)
+        const totalVotes = voteCounts.length * d
         return { density, voteCounts, totalVotes }
     }
 
@@ -53,7 +54,7 @@ function findDensity(voterGeom, gridX, gridPointLength) {
     let totalVotes = 0
     for (let i = 0; i < gridX.length; i++) {
         const xi = gridX[i]
-        const d = normPDF(xi, x, sigma) * invNorm
+        const d = normPDF(xi, x, sigma) * invNorm * densityMax
         density[i] = d
         const voteCount = d * gridPointLength
         voteCounts[i] = voteCount

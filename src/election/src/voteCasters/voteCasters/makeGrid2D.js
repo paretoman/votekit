@@ -53,7 +53,7 @@ export default function makeGrid2D(voterGeom, castOptions) {
 }
 
 function findDensityCircle(voterGeom, gridX, gridY, gridPointArea) {
-    const { x, y, w } = voterGeom
+    const { x, y, w, densityMax } = voterGeom
 
     const ni = gridX.length
     const density = Array(ni).fill(0)
@@ -67,9 +67,10 @@ function findDensityCircle(voterGeom, gridX, gridY, gridPointArea) {
         const r2 = (0.5 * w) ** 2
         // TODO: for edges, determine how much of the area of the pixel is within the shape.
         if (d2 < r2) {
-            density[i] = 1
-            voteCounts[i] = gridPointArea
-            totalVotes += gridPointArea
+            density[i] = densityMax
+            const voteCount = gridPointArea * densityMax
+            voteCounts[i] = voteCount
+            totalVotes += voteCount
         }
 
         // const density = (d2 < r2) ? 1 : 0
@@ -82,7 +83,7 @@ function findDensityCircle(voterGeom, gridX, gridY, gridPointArea) {
 const invSqrt8 = 1 / Math.sqrt(8)
 
 function findDensityGauss(voterGeom, gridX, gridY, gridPointArea) {
-    const { x, y, w } = voterGeom
+    const { x, y, w, densityMax } = voterGeom
 
     // To compare a circle to a 2D normal distribution,
     // set the circle's density to the normal's density at 0.
@@ -104,7 +105,7 @@ function findDensityGauss(voterGeom, gridX, gridY, gridPointArea) {
     for (let i = 0; i < ni; i++) {
         const gx = gridX[i]
         const gy = gridY[i]
-        const d = normPDF(gx, x, sigma) * normPDF(gy, y, sigma) * invNorm2
+        const d = normPDF(gx, x, sigma) * normPDF(gy, y, sigma) * invNorm2 * densityMax
         density[i] = d
         const voteCount = d * gridPointArea
         voteCounts[i] = voteCount

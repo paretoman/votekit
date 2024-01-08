@@ -24,25 +24,25 @@ export default function castPluralityIntervals1D(voterGeom, geometry) {
     return { countByCan, totalVotes }
 }
 
-export function sumBlock(block, interval) {
+export function sumBlock(voterGeom, interval) {
     const { lower, upper } = interval
-    const { x, w } = block
+    const { x, w, densityMax } = voterGeom
     const r = 0.5 * w
     const lower2 = x - r
     const upper2 = x + r
     const lower3 = Math.max(lower, lower2)
     const upper3 = Math.min(upper, upper2)
-    const sum = Math.max(0, upper3 - lower3)
+    const sum = Math.max(0, upper3 - lower3) * densityMax
     return sum
 }
 
-export function sumGaussian(block, interval) {
+export function sumGaussian(voterGeom, interval) {
     const { lower, upper } = interval
-    const { x, w } = block
+    const { x, w, densityMax } = voterGeom
     const center = x
     const sigma = w / Math.sqrt(2 * Math.PI) // w = sigma * sqrt(2*pi)
     // evaluate integral of gaussian on interval
-    const sum = w * normCDF(upper, center, sigma) - w * normCDF(lower, center, sigma)
+    const sum = w * (normCDF(upper, center, sigma) - normCDF(lower, center, sigma)) * densityMax
 
     return sum
 }
