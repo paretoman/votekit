@@ -53,10 +53,19 @@ export function updateCensus(geography0) {
 }
 
 /** Update VoterGeoms for each Tract */
-export function updateVoters(geography0, voterGeoms, dimensions) {
+export function updateVotersByTract(geography0, voterGeoms, dimensions) {
     const geography = { ...geography0 }
 
     const { tractNoise } = geography
     geography.voterGeomsByTract = makeVoterGeomsByTract(voterGeoms, tractNoise, dimensions)
+    return geography
+}
+
+/** Update VoterGeoms for each Tract */
+export function updateVotersByDistrict(geography0) {
+    const geography = { ...geography0 }
+
+    const { census, voterGeomsByTract } = geography
+    geography.voterGeomsByDistrict = makeVoterGeomsByDistrict(census, voterGeomsByTract)
     return geography
 }

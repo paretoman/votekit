@@ -1,6 +1,6 @@
 /** @module */
 
-import makeGeography, { makeTracts, updateCensus, updateDistricts, updateVoters } from '../../election/src/geography/makeGeography.js'
+import makeGeography, { makeTracts, updateCensus, updateDistricts, updateVotersByDistrict, updateVotersByTract } from '../../election/src/geography/makeGeography.js'
 
 /**
  * @constructor
@@ -47,7 +47,12 @@ export default function Districts(voterShapeList, changes, electionOptionsMan, s
         if (changes.check(['voters', 'dimensions', 'numTracts'])) {
             const { dimensions } = simOptions
             const voterGeoms = voterShapeList.getGeoms(dimensions)
-            self.geography = updateVoters(self.geography, voterGeoms, dimensions)
+            self.geography = updateVotersByTract(self.geography, voterGeoms, dimensions)
+            // todo: maybe make this only trigger when voters change
+        }
+
+        if (changes.check(['voters', 'dimensions', 'numTracts', 'numDistricts'])) {
+            self.geography = updateVotersByDistrict(self.geography)
             // todo: maybe make this only trigger when voters change
         }
     }
