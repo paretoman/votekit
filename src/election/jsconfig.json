@@ -1,9 +1,14 @@
 {
     "compilerOptions": {
-        "module": "es6",
+        "module": "NodeNext",
         "target": "es6",
         "checkJs": true,
-        "forceConsistentCasingInFileNames": true           /* Ensure that casing is correct in imports. */
+        "forceConsistentCasingInFileNames": true,           /* Ensure that casing is correct in imports. */
+        "moduleResolution": "nodenext",
+        "baseUrl": ".",
+        "paths": {
+            "@paretoman/votekit-social-choice-methods": ["./src/socialChoiceMethods/socialChoiceMethods.js"]
+        }
     },
     "exclude": [
         "_site",

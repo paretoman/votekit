@@ -1,6 +1,6 @@
 /** @module */
 
-import socialChoiceMethods from '../socialChoiceMethods/socialChoiceMethods.js'
+import socialChoiceMethods from '@paretoman/votekit-social-choice-methods'
 import makeAllocation from './makeAllocation.js'
 
 export default function socialChoiceRun(votes, electionOptions) {
