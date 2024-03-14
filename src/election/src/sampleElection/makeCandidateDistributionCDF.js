@@ -1,4 +1,4 @@
-import { getCDF } from '../utilities/mathHelpers.js'
+import { getCDF } from '@paretoman/votekit-utilities'
 
 export default function makeCandidateDistributionCDF(canDnGeoms, dimensions) {
     const proportion = (dimensions === 1) ? canDnGeoms.map((cd) => cd.w) : canDnGeoms.map((cd) => cd.w ** 2)

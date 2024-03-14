@@ -1,4 +1,4 @@
-import { range } from '../utilities/mathHelpers.js'
+import { range } from '@paretoman/votekit-utilities'
 import districtPairwiseTallies from './districtPairwiseTallies.js'
 import districtCandidateTallies from './districtCandidateTallies.js'
 import districtPreferenceLists from './districtPreferenceLists.js'

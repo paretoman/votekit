@@ -1,9 +1,9 @@
 /** @module */
 
+import { range } from '@paretoman/votekit-utilities'
 import electionPhase from '../polling/electionPhase.js'
 import getGeometryForPhase from './getGeometryForPhase.js'
 import getElectionOptions from './getElectionOptions.js'
-import { range } from '../utilities/mathHelpers.js'
 
 /**
  * Here we are in the context of an election sequence.
