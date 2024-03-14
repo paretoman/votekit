@@ -1,4 +1,4 @@
-import { range } from '../../utilities/jsHelpers.js'
+import { range } from '../../util/jsHelpers.js'
 import ButtonGroup from '../menu/ButtonGroup.js'
 import { buttonWidth } from '../menu/MenuItem.js'
 

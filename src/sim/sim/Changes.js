@@ -1,6 +1,6 @@
 /** @module */
 
-import { jcopy } from '../../utilities/jsHelpers.js'
+import { jcopy } from '../../util/jsHelpers.js'
 
 /**
  * Keep track of changes that occur to a simulation's configuration.

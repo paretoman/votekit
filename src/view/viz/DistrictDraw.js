@@ -1,6 +1,6 @@
 /** @module */
 
-import { drawStrokedColor } from '../../utilities/graphicsUtilities.js'
+import { drawStrokedColor } from '../../util/graphicsUtilities.js'
 /**
  * Draws district boundaries.
  * Right now, just for a uniform square geography.

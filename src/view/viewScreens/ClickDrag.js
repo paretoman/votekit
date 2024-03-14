@@ -1,6 +1,6 @@
 /** @module */
 
-import { clamp, minIndex } from '../../utilities/jsHelpers.js'
+import { clamp, minIndex } from '../../util/jsHelpers.js'
 
 /**
  * ClickDrag gives draggable behavior to objects on a canvas.

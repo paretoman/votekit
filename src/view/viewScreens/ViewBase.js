@@ -1,6 +1,6 @@
 /** @module */
 
-import { drawStrokedColor } from '../../utilities/graphicsUtilities.js'
+import { drawStrokedColor } from '../../util/graphicsUtilities.js'
 import DraggableManager from './DraggableManager.js'
 import ClickDrag from './ClickDrag.js'
 

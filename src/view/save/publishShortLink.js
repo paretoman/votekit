@@ -1,5 +1,5 @@
-import ajaxLite from '../../utilities/ajaxLite.js'
-import { hashCode, orderedJsonStringify } from '../../utilities/jsHelpers.js'
+import ajaxLite from '../../util/ajaxLite.js'
+import { hashCode, orderedJsonStringify } from '../../util/jsHelpers.js'
 import getLink from './getLink.js'
 import linkFromParams from './linkFromParams.js'
 import shortLinkDatabaseUrl from './shortLinkDatabaseUrl.js'

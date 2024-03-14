@@ -1,4 +1,4 @@
-import { textPercent } from '../../utilities/graphicsUtilities.js'
+import { textPercent } from '../../util/graphicsUtilities.js'
 import getTallyFractionsNameForVote from '../viz/getTallyFractionsNameForVote.js'
 
 export default function TooltipVoteText(box) {

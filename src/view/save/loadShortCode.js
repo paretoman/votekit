@@ -1,4 +1,4 @@
-import ajaxLite from '../../utilities/ajaxLite.js'
+import ajaxLite from '../../util/ajaxLite.js'
 import configFromParams from './configFromParams.js'
 import shortLinkDatabaseUrl from './shortLinkDatabaseUrl.js'
 

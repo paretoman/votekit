@@ -1,5 +1,5 @@
 import tooltipForEntity from '../tooltips/tooltipForEntity.js'
-import { drawStrokedColor, textPercent } from '../../utilities/graphicsUtilities.js'
+import { drawStrokedColor, textPercent } from '../../util/graphicsUtilities.js'
 import EntityGraphic from '../vizEntities/EntityGraphic.js'
 import SquareGraphic from '../vizEntities/SquareGraphic.js'
 

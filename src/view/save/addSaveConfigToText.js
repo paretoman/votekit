@@ -1,6 +1,6 @@
 /** @module */
 
-import { orderedJsonStringify } from '../../utilities/jsHelpers.js'
+import { orderedJsonStringify } from '../../util/jsHelpers.js'
 import DownloadLink from './DownloadLink.js'
 import TextArea from './TextArea.js'
 

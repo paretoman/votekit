@@ -1,4 +1,4 @@
-import { range } from '../../utilities/jsHelpers.js'
+import { range } from '../../util/jsHelpers.js'
 import getGeoms from './getGeoms.js'
 import getPoints from './getPoints.js'
 
