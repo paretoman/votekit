@@ -2,7 +2,7 @@ import Registrar from '../entities/Registrar.js'
 import VoterShape from './VoterShape.js'
 import EntityCommander from '../entities/EntityCommander.js'
 import EntityList from '../entities/EntityList.js'
-import { getCDF, normalizePDF } from '../../election/src/util/mathHelpers.js'
+import { getCDF, normalizePDF } from '../../election/src/utilities/mathHelpers.js'
 import defaultStrategyRules from '../entities/defaultStrategyRules.js'
 
 /** A component of sim.js that deals with adding voters. */

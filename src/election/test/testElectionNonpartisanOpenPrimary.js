@@ -1,5 +1,5 @@
 import electionSequence from '../src/sequence/electionSequence.js'
-import { last } from '../src/util/jsHelpers.js'
+import { last } from '../src/utilities/jsHelpers.js'
 import electionOptions2NonpartisanOpenPrimary from './electionOptions2NonpartisanOpenPrimary.js'
 import testGeometry1 from './testGeometry1.js'
 

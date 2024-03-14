@@ -1,7 +1,7 @@
 /** @module */
 
-import { copyArrayShallow } from '../util/jsHelpers.js'
-import { maxIndex, minIndex, range } from '../util/mathHelpers.js'
+import { copyArrayShallow } from '../utilities/jsHelpers.js'
+import { maxIndex, minIndex, range } from '../utilities/mathHelpers.js'
 import * as typesVotes from '../types/typesVotes.js'
 import * as typesSocialChoice from './typesSocialChoice.js'
 

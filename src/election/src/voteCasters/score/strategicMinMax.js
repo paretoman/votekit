@@ -1,4 +1,4 @@
-import { minMax, randomIndexFromCDF } from '../../util/mathHelpers.js'
+import { minMax, randomIndexFromCDF } from '../../utilities/mathHelpers.js'
 
 /**
  * Decide how close a candidate needs to be to get the max score. Similar for min.

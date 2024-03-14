@@ -1,6 +1,6 @@
 /** @module */
 
-import { maxIndex } from '../util/mathHelpers.js'
+import { maxIndex } from '../utilities/mathHelpers.js'
 import * as typesVotes from '../types/typesVotes.js'
 import * as typesSocialChoice from './typesSocialChoice.js'
 
