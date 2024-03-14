@@ -1,0 +1,25 @@
+{
+  "name": "@paretoman/votekit-vote-casters",
+  "version": "0.0.0",
+  "description": "Run a spatial election model. Input geometry. Cast votes.",
+  "main": "voteCasters/voteCasters.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/paretoman/votekit.git"
+  },
+  "author": "paretoman (https://paretoman.github.io)",
+  "license": "MIT-0",
+  "bugs": {
+    "url": "https://github.com/paretoman/votekit/issues"
+  },
+  "homepage": "https://github.com/paretoman/votekit#readme",
+  "dependencies": {
+    "@paretoman/votekit-types": "^0.0.0",
+    "@paretoman/votekit-utilities": "^0.0.0",
+    "seedrandom": "^3.0.5",
+    "d3-polygon": "^3.0.1"
+  }
+}

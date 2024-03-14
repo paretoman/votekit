@@ -1,4 +1,4 @@
-import { minIndex, randomIndexFromCDF, range } from '../../utilities/mathHelpers.js'
+import { minIndex, randomIndexFromCDF, range } from '@paretoman/votekit-utilities'
 
 export default function strategicPlurality(dist2, information, voterStrategy, strategyRngs) {
     if (voterStrategy === undefined) {

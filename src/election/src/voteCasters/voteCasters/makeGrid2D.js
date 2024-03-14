@@ -1,12 +1,10 @@
-import { normPDF, range } from '../../utilities/mathHelpers.js'
-import * as typesGeoms from '../../types/typesGeoms.js'
-import * as typesGrid from '../../types/typesGrid.js'
-import * as typesCast from '../../types/typesCast.js'
+import { normPDF, range } from '@paretoman/votekit-utilities'
+import * as types from '@paretoman/votekit-types'
 /**
  * makes 2D grid data structure
- * @param {typesGeoms.voterGeom2D} voterGeom
- * @param {typesCast.castOptions} castOptions
- * @returns {typesGrid.grid2D}
+ * @param {types.typesGeoms.voterGeom2D} voterGeom
+ * @param {types.typesCast.castOptions} castOptions
+ * @returns {types.typesGrid.grid2D}
  */
 export default function makeGrid2D(voterGeom, castOptions) {
     const { x, y, w, densityProfile } = voterGeom

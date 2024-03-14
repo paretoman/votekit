@@ -1,10 +1,10 @@
 /** @module */
 
-import { range } from '../../utilities/mathHelpers.js'
-import * as typesVote from '../../types/typesVote.js'
+import { range } from '@paretoman/votekit-utilities'
+import * as types from '@paretoman/votekit-types'
 /**
  * Vote for the closest candidate.
- * @returns {typesVote.rankingVote}
+ * @returns {types.typesVote.rankingVote}
  */
 export default function castRankingPoint(canPoints, voterPoint, dimensions, verbosity) {
     const d2f = (dimensions === 1) ? d2f1 : d2f2

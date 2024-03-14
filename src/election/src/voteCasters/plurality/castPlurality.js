@@ -1,10 +1,10 @@
 /** @module */
 
 import * as types from '@paretoman/votekit-types'
+import seedrandom from 'seedrandom'
 import castPluralityIntervals1D from './castPluralityIntervals1D.js'
 import castPluralityQuadrature2D from './castPluralityQuadrature2D.js'
 import castPluralityGrid from './castPluralityGrid.js'
-import seedrandom from '../../lib/snowpack/build/snowpack/pkg/seedrandom.js'
 
 /**
  * Vote for one.

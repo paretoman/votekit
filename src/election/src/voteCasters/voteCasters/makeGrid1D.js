@@ -1,11 +1,10 @@
-import { normPDF } from '../../utilities/mathHelpers.js'
-import * as typesGeoms from '../../types/typesGeoms.js'
-import * as typesGrid from '../../types/typesGrid.js'
+import { normPDF } from '@paretoman/votekit-utilities'
+import * as types from '@paretoman/votekit-types'
 
 /**
  * makes 1D grid data structure
- * @param {typesGeoms.voterGeom1D} voterGeom
- * @returns {typesGrid.grid1D}
+ * @param {types.typesGeoms.voterGeom1D} voterGeom
+ * @returns {types.typesGrid.grid1D}
  */
 export default function makeGrid1D(voterGeom) {
     const { gridX, voterPoints, gridPointLength } = findGridX(voterGeom)
@@ -16,8 +15,8 @@ export default function makeGrid1D(voterGeom) {
 
 /**
  * get x coordinates for grid
- * @param {typesGeoms.voterGeom1D} voterGeom
- * @returns {typesGrid.gridX}
+ * @param {types.typesGeoms.voterGeom1D} voterGeom
+ * @returns {types.typesGrid.gridX}
  */
 function findGridX(voterGeom) {
     const isGauss = voterGeom.densityProfile === 'gaussian'

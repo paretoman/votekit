@@ -9,7 +9,11 @@
         "paths": {
             "@paretoman/votekit-social-choice-methods": ["./src/socialChoiceMethods/socialChoiceMethods.js"],
             "@paretoman/votekit-utilities": ["./src/utilities/utilities.js"],
-            "@paretoman/votekit-types": ["./src/types/types.js"]
+            "@paretoman/votekit-types": ["./src/types/types.js"],
+            "seedrandom": ["./src/lib/snowpack/build/snowpack/pkg/seedrandom.js"],
+            "d3-polygon": ["./src/lib/snowpack/build/snowpack/pkg/d3-polygon.js"],
+            "d3-delaunay": ["./src/lib/snowpack/build/snowpack/pkg/d3-delaunay.js"],
+            "simplex-noise": ["./src/lib/snowpack/build/snowpack/pkg/simplex-noise.js"]
         }
     },
     "exclude": [

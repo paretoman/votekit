@@ -1,10 +1,10 @@
 /** @module */
 
-import * as typesVote from '../../types/typesVote.js'
+import * as types from '@paretoman/votekit-types'
 import strategicPlurality from './strategicPlurality.js'
 /**
  * Vote for the closest candidate.
- * @returns {typesVote.pluralityVote}
+ * @returns {types.typesVote.pluralityVote}
  */
 export default function castPluralityPoint(canPoints, voterPoint, dimensions, verbosity, information, voterStrategy, strategyRngs) {
     const d2f = (dimensions === 1) ? d2f1 : d2f2

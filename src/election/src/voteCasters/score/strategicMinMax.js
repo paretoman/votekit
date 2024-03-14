@@ -1,4 +1,4 @@
-import { minMax, randomIndexFromCDF } from '../../utilities/mathHelpers.js'
+import { minMax, randomIndexFromCDF } from '@paretoman/votekit-utilities'
 
 /**
  * Decide how close a candidate needs to be to get the max score. Similar for min.

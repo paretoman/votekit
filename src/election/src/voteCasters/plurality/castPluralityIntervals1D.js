@@ -1,10 +1,10 @@
 /** @module */
 
-import { normCDF } from '../../utilities/mathHelpers.js'
-import * as typesVotesForGeom from '../../types/typesVotesForGeom.js'
+import { normCDF } from '@paretoman/votekit-utilities'
+import * as types from '@paretoman/votekit-types'
 /**
  * Sum area under voter distributions to tally the votes.
- * @returns {typesVotesForGeom.votesForGeomPlurality}
+ * @returns {types.typesVotesForGeom.votesForGeomPlurality}
  */
 export default function castPluralityIntervals1D(voterGeom, geometry) {
     const { canPoints, canBorders } = geometry

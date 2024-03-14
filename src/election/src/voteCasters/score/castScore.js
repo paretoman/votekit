@@ -1,6 +1,6 @@
 /** @module */
 
-import seedrandom from '../../lib/snowpack/build/snowpack/pkg/seedrandom.js'
+import seedrandom from 'seedrandom'
 import castScoreGrid from './castScoreGrid.js'
 
 // The main difference between this and plurality is we need to return a grid from here.

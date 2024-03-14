@@ -1,7 +1,6 @@
 /** @module */
 
-import { copyArrayShallow } from '../../utilities/jsHelpers.js'
-import { range } from '../../utilities/mathHelpers.js'
+import { copyArrayShallow, range } from '@paretoman/votekit-utilities'
 
 /**
  * Find the intervals over which voters share a ranking.

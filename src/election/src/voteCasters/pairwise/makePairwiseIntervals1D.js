@@ -1,10 +1,10 @@
-import * as typesCanBorders from '../../types/typesCanBorders.js'
+import * as types from '@paretoman/votekit-types'
 /**
  * divide voterGeom
  * compute the midpoints
  * identify which candidate is smaller in x value
  * @param {number[]} canPoints
- * @returns {typesCanBorders.pairwiseIntervals1D}
+ * @returns {types.typesCanBorders.pairwiseIntervals1D}
  */
 export default function makePairwiseIntervals1D(canPoints) {
     const n = canPoints.length

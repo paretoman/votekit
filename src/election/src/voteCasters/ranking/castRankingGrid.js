@@ -1,20 +1,16 @@
 /** @module */
 
+import * as types from '@paretoman/votekit-types'
 import castRankingPoint from './castRankingPoint.js'
 import makeGrid1D from '../voteCasters/makeGrid1D.js'
 import makeGrid2D from '../voteCasters/makeGrid2D.js'
 
-import * as typesGeoms from '../../types/typesGeoms.js'
-import * as typesGeometry from '../../types/typesGeometry.js'
-import * as typesCast from '../../types/typesCast.js'
-import * as typesVotesForGeomGrid from '../../types/typesVotesForGeomGrid.js'
-
 /**
  * Cast and tally votes on a grid of points.
- * @param {typesGeoms.voterGeom} voterGeom
- * @param {typesGeometry.geometry} geometry
- * @param {typesCast.castOptions} castOptions
- * @returns {typesVotesForGeomGrid.votesForGeomGridRanking} votesForGeom
+ * @param {types.typesGeoms.voterGeom} voterGeom
+ * @param {types.typesGeometry.geometry} geometry
+ * @param {types.typesCast.castOptions} castOptions
+ * @returns {types.typesVotesForGeomGrid.votesForGeomGridRanking} votesForGeom
  */
 export default function castRankingGrid(voterGeom, geometry, castOptions) {
     const { canPoints, dimensions } = geometry

@@ -1,11 +1,11 @@
-import * as typesMath from '../../types/typesMath.js'
+import * as types from '@paretoman/votekit-types'
 /**
  * Make line equidistant from two points.
  * The line can be used to determine if a new point c is closer to c1 or c2.
  * For the line [ax, ay, b] and point c = [x,y], ax * x + ay * y + b < 0 means the point c is closer to c1.
  * @param {number[]} c1
  * @param {number[]} c2
- * @returns {typesMath.lineHomogeneous}
+ * @returns {types.typesMath.lineHomogeneous}
  */
 export default function equidistantLine(c1, c2) {
     const [c1x, c1y] = c1
