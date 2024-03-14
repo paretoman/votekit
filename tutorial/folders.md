@@ -11,7 +11,7 @@ Folders are mainly divided into election, sim and view.
 
 * lib
 * sandbox
-* utilities
+* util
 * election
   * src
     * districtElection
