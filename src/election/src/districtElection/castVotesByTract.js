@@ -1,5 +1,4 @@
-import voteCasters from '../voteCasters/voteCasters/voteCasters.js'
-import getCanBorders from '../voteCasters/voteCasters/getCanBorders.js'
+import voteCasters, { getCanBorders } from '@paretoman/votekit-vote-casters'
 
 export default function castVotesByTract(geometry0, electionOptions, castOptions) {
     const { canPoints, parties, dimensions, geography, strategySeed, voterStrategyList, information } = geometry0

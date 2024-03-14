@@ -1,16 +1,17 @@
-import makeGeography, { makeTracts, updateCensus, updateDistricts, updateVoters } from '../geography/makeGeography.js'
+import socialChoiceMethods, { socialChoiceMethodMetadataByFunctionName } from '@paretoman/votekit-social-choice-methods'
+import voteCasters from '@paretoman/votekit-vote-casters'
+import makeGeography, { makeTracts, updateDistricts, updateCensus, updateVotersByTract, updateVotersByDistrict } from '../geography/makeGeography.js'
 import makeCandidateDistributionCDF from '../sampleElection/makeCandidateDistributionCDF.js'
 import sampleElection from '../sampleElection/sampleElection.js'
-import socialChoiceMethods, { socialChoiceMethodMetadataByFunctionName } from '../socialChoiceMethods/socialChoiceMethods.js'
-import voteCasters from '../voteCasters/voteCasters/voteCasters.js'
 import electionSequence from '../sequence/electionSequence.js'
 
 const geography = {
     makeGeography,
     makeTracts,
-    updateCensus,
     updateDistricts,
-    updateVoters,
+    updateCensus,
+    updateVotersByTract,
+    updateVotersByDistrict,
 }
 const socialChoice = {
     socialChoiceMethods,

@@ -25,4 +25,13 @@ const voteCasters = {
     pairwise: { cast: castPairwise, castPoint: castPairwisePoint, makeCanBorders: makeCanBordersPairwise },
 }
 
+export function getCanBorders(canPoints, voterGeoms, dimensions, voteCasterName) {
+    const { makeCanBorders } = voteCasters[voteCasterName]
+    if (makeCanBorders !== undefined) {
+        const canBorders = makeCanBorders(canPoints, voterGeoms, dimensions)
+        return canBorders
+    }
+    return {}
+}
+
 export default voteCasters

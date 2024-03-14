@@ -8,6 +8,7 @@
             "@paretoman/votekit-social-choice-methods": ["./src/election/src/socialChoiceMethods/socialChoiceMethods.js"],
             "@paretoman/votekit-utilities": ["./src/election/src/utilities/utilities.js"],
             "@paretoman/votekit-types": ["./src/election/src/types/types.js"],
+            "@paretoman/votekit-vote-casters": ["./src/election/src/voteCasters/voteCasters/voteCasters.js"],
             "seedrandom": ["./src/election/src/lib/snowpack/build/snowpack/pkg/seedrandom.js"],
             "d3-polygon": ["./src/election/src/lib/snowpack/build/snowpack/pkg/d3-polygon.js"],
             "d3-delaunay": ["./src/election/src/lib/snowpack/build/snowpack/pkg/d3-delaunay.js"],
