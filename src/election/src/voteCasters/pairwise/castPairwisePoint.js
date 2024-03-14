@@ -1,7 +1,7 @@
 /** @module */
 
 import { range } from '../../util/mathHelpers.js'
-import * as typesVote from '../types/typesVote.js'
+import * as typesVote from '../../types/typesVote.js'
 /**
  * Vote for the closest candidate.
  * @returns {typesVote.pairwiseVote}

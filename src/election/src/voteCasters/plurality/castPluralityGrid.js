@@ -3,7 +3,7 @@
 import castPluralityPoint from './castPluralityPoint.js'
 import makeGrid1D from '../voteCasters/makeGrid1D.js'
 import makeGrid2D from '../voteCasters/makeGrid2D.js'
-import * as typesVotesForGeomGrid from '../types/typesVotesForGeomGrid.js'
+import * as typesVotesForGeomGrid from '../../types/typesVotesForGeomGrid.js'
 
 /**
  * Tally votes.

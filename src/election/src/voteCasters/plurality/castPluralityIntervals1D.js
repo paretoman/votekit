@@ -1,7 +1,7 @@
 /** @module */
 
 import { normCDF } from '../../util/mathHelpers.js'
-import * as typesVotesForGeom from '../types/typesVotesForGeom.js'
+import * as typesVotesForGeom from '../../types/typesVotesForGeom.js'
 /**
  * Sum area under voter distributions to tally the votes.
  * @returns {typesVotesForGeom.votesForGeomPlurality}

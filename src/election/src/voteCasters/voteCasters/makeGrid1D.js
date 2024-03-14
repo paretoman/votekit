@@ -1,6 +1,6 @@
 import { normPDF } from '../../util/mathHelpers.js'
-import * as typesGeoms from '../types/typesGeoms.js'
-import * as typesGrid from '../types/typesGrid.js'
+import * as typesGeoms from '../../types/typesGeoms.js'
+import * as typesGrid from '../../types/typesGrid.js'
 
 /**
  * makes 1D grid data structure

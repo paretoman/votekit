@@ -3,7 +3,7 @@
 import { range } from '../util/mathHelpers.js'
 import sainteLague from './sainteLague.js'
 import sntv from './sntv.js'
-import * as typesVotes from '../voteCasters/types/typesVotes.js'
+import * as typesVotes from '../types/typesVotes.js'
 import * as typesSocialChoice from './typesSocialChoice.js'
 
 /**

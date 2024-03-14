@@ -3,9 +3,9 @@
 import castRankingGrid from './castRankingGrid.js'
 import castRankingIntervals1D from './castRankingIntervals1D.js'
 import castRankingPolygons2D from './castRankingPolygons2D.js'
-import * as typesGeometry from '../types/typesGeometry.js'
-import * as typesCast from '../types/typesCast.js'
-import * as typesVotes from '../types/typesVotes.js'
+import * as typesGeometry from '../../types/typesGeometry.js'
+import * as typesCast from '../../types/typesCast.js'
+import * as typesVotes from '../../types/typesVotes.js'
 
 /**
  * Voters cast votes for candidates.

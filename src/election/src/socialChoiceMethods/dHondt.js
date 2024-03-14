@@ -1,7 +1,7 @@
 /** @module */
 
 import divisorGeneral from './divisorGeneral.js'
-import * as typesVotes from '../voteCasters/types/typesVotes.js'
+import * as typesVotes from '../types/typesVotes.js'
 import * as typesSocialChoice from './typesSocialChoice.js'
 
 /**

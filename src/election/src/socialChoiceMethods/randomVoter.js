@@ -1,7 +1,7 @@
 /** @module */
 
 import { getCDF, randomIndexFromCDF } from '../util/mathHelpers.js'
-import * as typesVotes from '../voteCasters/types/typesVotes.js'
+import * as typesVotes from '../types/typesVotes.js'
 import * as typesSocialChoice from './typesSocialChoice.js'
 
 /**

@@ -1,6 +1,6 @@
 /** @module */
 
-import * as typesVote from '../types/typesVote.js'
+import * as typesVote from '../../types/typesVote.js'
 import strategicPlurality from './strategicPlurality.js'
 /**
  * Vote for the closest candidate.

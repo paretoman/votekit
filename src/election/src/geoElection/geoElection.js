@@ -1,3 +1,4 @@
+// import sumAllocationsStatewide from '../districtElection/combineAllocationsStatewide.js'
 import electionSequence from '../sequence/electionSequence.js'
 import { range } from '../util/mathHelpers.js'
 
@@ -23,6 +24,10 @@ export default function geoElection(geometry0, optionsBag) {
     // votesByTract,
     // votesByDistrict,
     // scResultsByDistrict,
+    votesByTractByDistrict
+    // const { electionOptions } = optionsBag
+    // const allocation = sumAllocationsStatewide(scResultsByDistrict, canPoints, electionOptions)
+    // const socialChoiceResults = { allocation }
 
     const electionResults = { scResultsByDistrict, geometry: geometry0 }
     return electionResults

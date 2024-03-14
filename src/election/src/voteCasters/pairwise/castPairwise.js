@@ -3,9 +3,9 @@
 import castPairwisePlanes2D from './castPairwisePlanes2D.js'
 import castPairwiseIntervals1D from './castPairwiseIntervals1D.js'
 import castPairwiseGrid from './castPairwiseGrid.js'
-import * as typesGeometry from '../types/typesGeometry.js'
-import * as typesCast from '../types/typesCast.js'
-import * as typesVotes from '../types/typesVotes.js'
+import * as typesGeometry from '../../types/typesGeometry.js'
+import * as typesCast from '../../types/typesCast.js'
+import * as typesVotes from '../../types/typesVotes.js'
 /**
  * Voters cast votes for candidates.
  * @param {typesGeometry.geometry} geometry - geometry for casting votes

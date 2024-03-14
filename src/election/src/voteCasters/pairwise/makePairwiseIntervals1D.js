@@ -1,4 +1,4 @@
-import * as typesCanBorders from '../types/typesCanBorders.js'
+import * as typesCanBorders from '../../types/typesCanBorders.js'
 /**
  * divide voterGeom
  * compute the midpoints

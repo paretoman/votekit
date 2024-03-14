@@ -4,10 +4,10 @@ import castRankingPoint from './castRankingPoint.js'
 import makeGrid1D from '../voteCasters/makeGrid1D.js'
 import makeGrid2D from '../voteCasters/makeGrid2D.js'
 
-import * as typesGeoms from '../types/typesGeoms.js'
-import * as typesGeometry from '../types/typesGeometry.js'
-import * as typesCast from '../types/typesCast.js'
-import * as typesVotesForGeomGrid from '../types/typesVotesForGeomGrid.js'
+import * as typesGeoms from '../../types/typesGeoms.js'
+import * as typesGeometry from '../../types/typesGeometry.js'
+import * as typesCast from '../../types/typesCast.js'
+import * as typesVotesForGeomGrid from '../../types/typesVotesForGeomGrid.js'
 
 /**
  * Cast and tally votes on a grid of points.

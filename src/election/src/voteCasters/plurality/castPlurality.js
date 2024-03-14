@@ -4,9 +4,9 @@ import castPluralityIntervals1D from './castPluralityIntervals1D.js'
 import castPluralityQuadrature2D from './castPluralityQuadrature2D.js'
 import castPluralityGrid from './castPluralityGrid.js'
 import seedrandom from '../../lib/snowpack/build/snowpack/pkg/seedrandom.js'
-import * as typesGeometry from '../types/typesGeometry.js'
-import * as typesCast from '../types/typesCast.js'
-import * as typesVotes from '../types/typesVotes.js'
+import * as typesGeometry from '../../types/typesGeometry.js'
+import * as typesCast from '../../types/typesCast.js'
+import * as typesVotes from '../../types/typesVotes.js'
 
 /**
  * Vote for one.

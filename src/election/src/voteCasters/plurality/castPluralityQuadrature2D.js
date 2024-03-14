@@ -1,7 +1,7 @@
 /** @module */
 
 import sumCircle from './sumCircle.js'
-import * as typesVotesForGeom from '../types/typesVotesForGeom.js'
+import * as typesVotesForGeom from '../../types/typesVotesForGeom.js'
 
 /**
  * Sum area of voter distributions to tally the votes.

@@ -1,4 +1,4 @@
-import * as typesMath from '../types/typesMath.js'
+import * as typesMath from '../../types/typesMath.js'
 /**
  * Make line equidistant from two points.
  * The line can be used to determine if a new point c is closer to c1 or c2.
