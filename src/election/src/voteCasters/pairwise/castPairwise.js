@@ -1,16 +1,14 @@
 /** @module */
 
+import * as types from '@paretoman/votekit-types'
 import castPairwisePlanes2D from './castPairwisePlanes2D.js'
 import castPairwiseIntervals1D from './castPairwiseIntervals1D.js'
 import castPairwiseGrid from './castPairwiseGrid.js'
-import * as typesGeometry from '../../types/typesGeometry.js'
-import * as typesCast from '../../types/typesCast.js'
-import * as typesVotes from '../../types/typesVotes.js'
 /**
  * Voters cast votes for candidates.
- * @param {typesGeometry.geometry} geometry - geometry for casting votes
- * @param {typesCast.castOptions} castOptions - options for how to cast votes.
- * @returns {typesVotes.votes} votes
+ * @param {types.typesGeometry.geometry} geometry - geometry for casting votes
+ * @param {types.typesCast.castOptions} castOptions - options for how to cast votes.
+ * @returns {types.typesVotes.votes} votes
  */
 export default function castPairwise(geometry, castOptions) {
     const { canPoints, voterGeoms, dimensions, parties } = geometry

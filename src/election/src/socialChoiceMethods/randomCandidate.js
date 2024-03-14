@@ -1,10 +1,9 @@
 /** @module */
-import * as typesVotes from '../types/typesVotes.js'
-import * as typesSocialChoice from './typesSocialChoice.js'
+import * as types from '@paretoman/votekit-types'
 /**
  * pick a random candidate as the winner
- * @param {typesVotes.votes} votes - The object for vote data.
- * @returns {typesSocialChoice.socialChoiceResults} - the results returned from a social choice function.
+ * @param {types.typesVotes.votes} votes - The object for vote data.
+ * @returns {types.typesSocialChoice.socialChoiceResults} - the results returned from a social choice function.
  */
 export default function randomCandidate(votes) {
     const { voteFractionsByCan } = votes.candidateTallies

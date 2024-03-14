@@ -1,17 +1,15 @@
 /** @module */
 
+import * as types from '@paretoman/votekit-types'
 import castRankingGrid from './castRankingGrid.js'
 import castRankingIntervals1D from './castRankingIntervals1D.js'
 import castRankingPolygons2D from './castRankingPolygons2D.js'
-import * as typesGeometry from '../../types/typesGeometry.js'
-import * as typesCast from '../../types/typesCast.js'
-import * as typesVotes from '../../types/typesVotes.js'
 
 /**
  * Voters cast votes for candidates.
- * @param {typesGeometry.geometry} geometry - geometry for casting votes
- * @param {typesCast.castOptions} castOptions - options for how to cast votes.
- * @returns {typesVotes.votes} votes
+ * @param {types.typesGeometry.geometry} geometry - geometry for casting votes
+ * @param {types.typesCast.castOptions} castOptions - options for how to cast votes.
+ * @returns {types.typesVotes.votes} votes
  */
 
 export default function castRanking(geometry, castOptions) {

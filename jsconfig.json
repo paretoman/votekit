@@ -5,7 +5,9 @@
         "moduleResolution": "nodenext",
         "baseUrl": ".",
         "paths": {
-            "@paretoman/votekit-social-choice-methods": ["./src/election/src/socialChoiceMethods/socialChoiceMethods.js"]
+            "@paretoman/votekit-social-choice-methods": ["./src/election/src/socialChoiceMethods/socialChoiceMethods.js"],
+            "@paretoman/votekit-utilities": ["./src/election/src/utilities/utilities.js"],
+            "@paretoman/votekit-types": ["./src/election/src/types/types.js"]
         }
     },
     "exclude": [

@@ -1,19 +1,17 @@
 /** @module */
 
+import * as types from '@paretoman/votekit-types'
 import castPluralityIntervals1D from './castPluralityIntervals1D.js'
 import castPluralityQuadrature2D from './castPluralityQuadrature2D.js'
 import castPluralityGrid from './castPluralityGrid.js'
 import seedrandom from '../../lib/snowpack/build/snowpack/pkg/seedrandom.js'
-import * as typesGeometry from '../../types/typesGeometry.js'
-import * as typesCast from '../../types/typesCast.js'
-import * as typesVotes from '../../types/typesVotes.js'
 
 /**
  * Vote for one.
  * Voters cast votes for candidates.
- * @param {typesGeometry.geometry} geometry - geometry for casting votes
- * @param {typesCast.castOptions} castOptions - options for how to cast votes.
- * @returns {typesVotes.votes} votes
+ * @param {types.typesGeometry.geometry} geometry - geometry for casting votes
+ * @param {types.typesCast.castOptions} castOptions - options for how to cast votes.
+ * @returns {types.typesVotes.votes} votes
  */
 export default function castPlurality(geometry, castOptions) {
     const { canPoints, voterGeoms, dimensions, parties, strategySeed, voterStrategyList } = geometry

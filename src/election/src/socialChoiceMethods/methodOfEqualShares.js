@@ -1,8 +1,7 @@
 /** @module */
 
-import { range } from '../utilities/mathHelpers.js'
-import * as typesVotes from '../types/typesVotes.js'
-import * as typesSocialChoice from './typesSocialChoice.js'
+import { range } from '@paretoman/votekit-utilities'
+import * as types from '@paretoman/votekit-types'
 
 /**
  * This method has rounds.
@@ -16,9 +15,9 @@ import * as typesSocialChoice from './typesSocialChoice.js'
  * Use this new groupCost like the old groupCost and do the steps above.
  * Do this 10 times. That should be enough, maybe.
  * If there is any deficit remaining, then subtract it from everybody.
- * @param {typesVotes.votes} votes - The object for vote data.
- * @param {typesSocialChoice.socialChoiceOptions} socialChoiceOptions - options to specify a social choice function.
- * @returns {typesSocialChoice.socialChoiceResults} - the results returned from a social choice function.
+ * @param {types.typesVotes.votes} votes - The object for vote data.
+ * @param {types.typesSocialChoice.socialChoiceOptions} socialChoiceOptions - options to specify a social choice function.
+ * @returns {types.typesSocialChoice.socialChoiceResults} - the results returned from a social choice function.
  */
 export default function methodOfEqualShares(votes, socialChoiceOptions) {
     const { voteFractions } = votes.preferenceTallies

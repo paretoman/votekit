@@ -1,15 +1,13 @@
 /** @module */
 
-import { copyArrayShallow } from '../utilities/jsHelpers.js'
-import { maxIndex, minIndex, range } from '../utilities/mathHelpers.js'
-import * as typesVotes from '../types/typesVotes.js'
-import * as typesSocialChoice from './typesSocialChoice.js'
+import { copyArrayShallow, maxIndex, minIndex, range } from '@paretoman/votekit-utilities'
+import * as types from '@paretoman/votekit-types'
 
 /**
  * Single Transferable Vote
- * @param {typesVotes.votes} votes - The object for vote data.
- * @param {typesSocialChoice.socialChoiceOptions} socialChoiceOptions - options to specify a social choice function.
- * @returns {typesSocialChoice.socialChoiceResults} - the results returned from a social choice function.
+ * @param {types.typesVotes.votes} votes - The object for vote data.
+ * @param {types.typesSocialChoice.socialChoiceOptions} socialChoiceOptions - options to specify a social choice function.
+ * @returns {types.typesSocialChoice.socialChoiceResults} - the results returned from a social choice function.
  */
 export default function stv(votes, socialChoiceOptions) {
     const { firstPreferenceFractions } = votes.candidateTallies

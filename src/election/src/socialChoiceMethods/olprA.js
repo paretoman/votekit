@@ -1,19 +1,18 @@
 /** @module */
 
-import { range } from '../utilities/mathHelpers.js'
+import * as types from '@paretoman/votekit-types'
+import { range } from '@paretoman/votekit-utilities'
 import sainteLague from './sainteLague.js'
 import sntv from './sntv.js'
-import * as typesVotes from '../types/typesVotes.js'
-import * as typesSocialChoice from './typesSocialChoice.js'
 
 /**
  * Run an Open List Proportional Representation method. Call this variant by the name "A".
  * Return a list of winning candidates and a list of allocated seats to parties.
  * A voter votes for a candidate. Party lists help candidates pool their votes.
  * Party lists are allocated seats. The most popular candidates in a party are elected.
- * @param {typesVotes.votes} votes - The object for vote data.
- * @param {typesSocialChoice.socialChoiceOptions} socialChoiceOptions - options to specify a social choice function.
- * @returns {typesSocialChoice.socialChoiceResults} - the results returned from a social choice function.
+ * @param {types.typesVotes.votes} votes - The object for vote data.
+ * @param {types.typesSocialChoice.socialChoiceOptions} socialChoiceOptions - options to specify a social choice function.
+ * @returns {types.typesSocialChoice.socialChoiceResults} - the results returned from a social choice function.
  */
 
 export default function olprA(votes, socialChoiceOptions) {

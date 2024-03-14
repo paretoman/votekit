@@ -1,13 +1,12 @@
 /** @module */
 
-import { range } from '../utilities/mathHelpers.js'
-import * as typesVotes from '../types/typesVotes.js'
-import * as typesSocialChoice from './typesSocialChoice.js'
+import { range } from '@paretoman/votekit-utilities'
+import * as types from '@paretoman/votekit-types'
 
 /**
  * Disregard the weakest pairwise defeat until one candidate is unbeaten.
- * @param {typesVotes.votes} votes - The object for vote data.
- * @returns {typesSocialChoice.socialChoiceResults} - the results returned from a social choice function.
+ * @param {types.typesVotes.votes} votes - The object for vote data.
+ * @returns {types.typesSocialChoice.socialChoiceResults} - the results returned from a social choice function.
  */
 export default function minimax(votes) {
     const { winFractionPairwise } = votes.pairwiseTallies
