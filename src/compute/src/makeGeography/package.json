@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "description": "Make geography data for census tracts and voting districts for an election.",
   "main": "makeGeography.js",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
