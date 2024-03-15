@@ -5,16 +5,16 @@
         "moduleResolution": "nodenext",
         "baseUrl": ".",
         "paths": {
-            "@paretoman/votekit-social-choice-methods": ["./src/election/src/socialChoiceMethods/socialChoiceMethods.js"],
-            "@paretoman/votekit-utilities": ["./src/election/src/utilities/utilities.js"],
-            "@paretoman/votekit-types": ["./src/election/src/types/types.js"],
-            "@paretoman/votekit-vote-casters": ["./src/election/src/voteCasters/voteCasters/voteCasters.js"],
-            "@paretoman/votekit-election": ["./src/election/src/election/election.js"],
-            "@paretoman/votekit-compute": ["./src/election/src/compute/compute.js"],
-            "seedrandom": ["./src/election/src/lib/snowpack/build/snowpack/pkg/seedrandom.js"],
-            "d3-polygon": ["./src/election/src/lib/snowpack/build/snowpack/pkg/d3-polygon.js"],
-            "d3-delaunay": ["./src/election/src/lib/snowpack/build/snowpack/pkg/d3-delaunay.js"],
-            "simplex-noise": ["./src/election/src/lib/snowpack/build/snowpack/pkg/simplex-noise.js"]
+            "@paretoman/votekit-social-choice-methods": ["./src/compute/src/socialChoiceMethods/socialChoiceMethods.js"],
+            "@paretoman/votekit-utilities": ["./src/compute/src/utilities/utilities.js"],
+            "@paretoman/votekit-types": ["./src/compute/src/types/types.js"],
+            "@paretoman/votekit-vote-casters": ["./src/compute/src/voteCasters/voteCasters/voteCasters.js"],
+            "@paretoman/votekit-election": ["./src/compute/src/election/election.js"],
+            "@paretoman/votekit-compute": ["./src/compute/src/compute/compute.js"],
+            "seedrandom": ["./src/compute/src/lib/snowpack/build/snowpack/pkg/seedrandom.js"],
+            "d3-polygon": ["./src/compute/src/lib/snowpack/build/snowpack/pkg/d3-polygon.js"],
+            "d3-delaunay": ["./src/compute/src/lib/snowpack/build/snowpack/pkg/d3-delaunay.js"],
+            "simplex-noise": ["./src/compute/src/lib/snowpack/build/snowpack/pkg/simplex-noise.js"]
         }
     },
     "exclude": [

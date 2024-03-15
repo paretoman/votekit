@@ -1,7 +1,7 @@
 /** @module */
 
-import seedrandom from '../../election/src/lib/snowpack/build/snowpack/pkg/seedrandom.js'
-import sampleElection from '../../election/src/sampleElection/sampleElection.js'
+import seedrandom from '../../compute/src/lib/snowpack/build/snowpack/pkg/seedrandom.js'
+import sampleElection from '../../compute/src/sampleElection/sampleElection.js'
 
 /**
  * Simulate winners from many sampled elections.

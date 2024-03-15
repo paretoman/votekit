@@ -7,6 +7,6 @@ dist
 test/jupyter/.ipynb_checkpoints
 _site
 .jekyll-cache
-src/election/node_modules
-src/election/docs
-src/election/dist
+src/compute/node_modules
+src/compute/docs
+src/compute/dist

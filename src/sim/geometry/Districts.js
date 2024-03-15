@@ -1,6 +1,6 @@
 /** @module */
 
-import makeGeography, { makeTracts, updateCensus, updateDistricts, updateVotersByDistrict, updateVotersByTract } from '../../election/src/geography/makeGeography.js'
+import makeGeography, { makeTracts, updateCensus, updateDistricts, updateVotersByDistrict, updateVotersByTract } from '../../compute/src/geography/makeGeography.js'
 
 /**
  * @constructor

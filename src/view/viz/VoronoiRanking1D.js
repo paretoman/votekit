@@ -1,6 +1,6 @@
 /** @module */
 
-import makeRankingIntervals1D from '../../election/src/voteCasters/ranking/makeRankingIntervals1D.js'
+import makeRankingIntervals1D from '../../compute/src/voteCasters/ranking/makeRankingIntervals1D.js'
 import colorBlender, { rgbToString } from './colorBlender.js'
 
 /**

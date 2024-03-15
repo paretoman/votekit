@@ -1,4 +1,4 @@
-import seedrandom from '../../election/src/lib/snowpack/build/snowpack/pkg/seedrandom.js'
+import seedrandom from '../../compute/src/lib/snowpack/build/snowpack/pkg/seedrandom.js'
 
 /**
  * Make a new random seed, if we want to.

@@ -1,4 +1,4 @@
-import { socialChoiceMethodMetadataByFunctionName } from '../../election/src/socialChoiceMethods/socialChoiceMethods.js'
+import { socialChoiceMethodMetadataByFunctionName } from '../../compute/src/socialChoiceMethods/socialChoiceMethods.js'
 import SocialChoiceOptionsMan from './SocialChoiceOptionsMan.js'
 
 export default function PhaseOptionsMan(sequenceName, phaseName, changes, commander) {

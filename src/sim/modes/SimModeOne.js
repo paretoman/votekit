@@ -1,7 +1,7 @@
 /** @module */
 
 import getGeometry from '../geometry/getGeometry.js'
-import geoElection from '../../election/src/geoElection/geoElection.js'
+import geoElection from '../../compute/src/geoElection/geoElection.js'
 
 /**
  * Simulate one election with

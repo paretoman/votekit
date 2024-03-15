@@ -1,4 +1,4 @@
-import makeCandidateDistributionCDF from '../../election/src/sampleElection/makeCandidateDistributionCDF.js'
+import makeCandidateDistributionCDF from '../../compute/src/sampleElection/makeCandidateDistributionCDF.js'
 import getUsePollsByPhase from './getUsePollsByPhase.js'
 
 /**
