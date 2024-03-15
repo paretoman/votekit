@@ -1,7 +1,7 @@
 /** @module */
 
+import election from '@paretoman/votekit-election'
 import calculatePolling from './calculatePolling.js'
-import election from '../election/election.js'
 
 /**
  * Here we are in the context of an election cycle with polls followed by a single election.
