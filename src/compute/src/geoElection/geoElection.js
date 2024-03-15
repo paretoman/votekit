@@ -1,6 +1,6 @@
 // import sumAllocationsStatewide from '../districtElection/combineAllocationsStatewide.js'
 import { range } from '@paretoman/votekit-utilities'
-import electionSequence from '../electionSequence/electionSequence.js'
+import electionSequence from '@paretoman/votekit-election-sequence'
 
 export default function geoElection(geometry0, optionsBag) {
     const { canPoints, canLabels, parties, voterParties, dimensions, geography, strategySeed, usePollsByPhase, voterStrategyListByPhase, information } = geometry0
