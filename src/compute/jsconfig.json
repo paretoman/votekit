@@ -7,22 +7,22 @@
         "moduleResolution": "nodenext",
         "baseUrl": ".",
         "paths": {
-            "@paretoman/votekit-social-choice-methods": ["./src/socialChoiceMethods/socialChoiceMethods.js"],
-            "@paretoman/votekit-utilities": ["./src/utilities/utilities.js"],
-            "@paretoman/votekit-types": ["./src/types/types.js"],
-            "@paretoman/votekit-vote-casters": ["./src/voteCasters/voteCasters/voteCasters.js"],
-            "@paretoman/votekit-election": ["./src/election/election.js"],
-            "@paretoman/votekit-election-phase": ["./src/electionPhase/electionPhase.js"],
-            "@paretoman/votekit-election-sequence": ["./src/electionSequence/electionSequence.js"],
-            "@paretoman/votekit-district-election": ["./src/districtElection/districtElection.js"],
-            "@paretoman/votekit-make-geography": ["./src/makeGeography/makeGeography.js"],
-            "@paretoman/votekit-sample-election": ["./src/sampleElection/sampleElection.js"],
-            "@paretoman/votekit-geographic-election": ["./src/geoElection/geoElection.js"],
-            "@paretoman/votekit-compute": ["./src/compute/compute.js"],
-            "seedrandom": ["./src/lib/snowpack/build/snowpack/pkg/seedrandom.js"],
-            "d3-polygon": ["./src/lib/snowpack/build/snowpack/pkg/d3-polygon.js"],
-            "d3-delaunay": ["./src/lib/snowpack/build/snowpack/pkg/d3-delaunay.js"],
-            "simplex-noise": ["./src/lib/snowpack/build/snowpack/pkg/simplex-noise.js"]
+            "@paretoman/votekit-social-choice-methods": ["./socialChoiceMethods/socialChoiceMethods.js"],
+            "@paretoman/votekit-utilities": ["./utilities/utilities.js"],
+            "@paretoman/votekit-types": ["./types/types.js"],
+            "@paretoman/votekit-vote-casters": ["./voteCasters/voteCasters/voteCasters.js"],
+            "@paretoman/votekit-election": ["./election/election.js"],
+            "@paretoman/votekit-election-phase": ["./electionPhase/electionPhase.js"],
+            "@paretoman/votekit-election-sequence": ["./electionSequence/electionSequence.js"],
+            "@paretoman/votekit-district-election": ["./districtElection/districtElection.js"],
+            "@paretoman/votekit-make-geography": ["./makeGeography/makeGeography.js"],
+            "@paretoman/votekit-sample-election": ["./sampleElection/sampleElection.js"],
+            "@paretoman/votekit-geographic-election": ["./geoElection/geoElection.js"],
+            "@paretoman/votekit-compute": ["./compute/compute.js"],
+            "seedrandom": ["./lib/snowpack/build/snowpack/pkg/seedrandom.js"],
+            "d3-polygon": ["./lib/snowpack/build/snowpack/pkg/d3-polygon.js"],
+            "d3-delaunay": ["./lib/snowpack/build/snowpack/pkg/d3-delaunay.js"],
+            "simplex-noise": ["./lib/snowpack/build/snowpack/pkg/simplex-noise.js"]
         }
     },
     "exclude": [
@@ -32,6 +32,6 @@
         "docs",
         "node_modules",
         "**/node_modules/*",
-        "src/lib"
+        "lib"
     ]
 }

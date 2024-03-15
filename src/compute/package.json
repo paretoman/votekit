@@ -10,7 +10,7 @@
     "lint": "eslint .",
     "doc": "jsdoc -c jsdoc.json",
     "check-types": "tsc --noEmit -p ./jsconfig.json",
-    "check-types-silent": "tsc-silent -p ./jsconfig.json --suppress @/src/lib @/snowpack.config.cjs @/test/test.js"
+    "check-types-silent": "tsc-silent -p ./jsconfig.json --suppress @/lib @/snowpack.config.cjs @/test/test.js"
   },
   "directories": {
     "doc": "docs",
