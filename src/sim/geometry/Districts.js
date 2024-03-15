@@ -1,6 +1,6 @@
 /** @module */
 
-import makeGeography, { makeTracts, updateCensus, updateDistricts, updateVotersByDistrict, updateVotersByTract } from '../../compute/src/makeGeography/makeGeography.js'
+import makeGeography, { makeTracts, updateCensus, updateDistricts, updateVotersByDistrict, updateVotersByTract } from '@paretoman/votekit-make-geography'
 
 /**
  * @constructor

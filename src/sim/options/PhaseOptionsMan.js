@@ -1,4 +1,4 @@
-import { socialChoiceMethodMetadataByFunctionName } from '../../compute/src/socialChoiceMethods/socialChoiceMethods.js'
+import { socialChoiceMethodMetadataByFunctionName } from '@paretoman/votekit-social-choice-methods'
 import SocialChoiceOptionsMan from './SocialChoiceOptionsMan.js'
 
 export default function PhaseOptionsMan(sequenceName, phaseName, changes, commander) {

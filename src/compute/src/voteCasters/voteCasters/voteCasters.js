@@ -12,6 +12,8 @@ import castPairwisePoint from '../pairwise/castPairwisePoint.js'
 import makeCanBordersPairwise from '../pairwise/makeCanBordersPairwise.js'
 import makeCanBordersPlurality from '../plurality/makeCanBordersPlurality.js'
 import makeCanBordersRanking from '../ranking/makeCanBordersRanking.js'
+import castRankingFindPolygons from '../ranking/castRankingFindPolygons.js'
+import makeRankingIntervals1D from '../ranking/makeRankingIntervals1D.js'
 
 /**
  * a collection of ways to cast votes
@@ -33,5 +35,7 @@ export function getCanBorders(canPoints, voterGeoms, dimensions, voteCasterName)
     }
     return {}
 }
+
+export { castRankingFindPolygons, makeRankingIntervals1D }
 
 export default voteCasters

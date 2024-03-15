@@ -1,6 +1,6 @@
 /** @module */
 
-import castRankingFindPolygons from '../../compute/src/voteCasters/ranking/castRankingFindPolygons.js'
+import { castRankingFindPolygons } from '@paretoman/votekit-vote-casters'
 import colorBlender, { rgbToString } from './colorBlender.js'
 
 /**

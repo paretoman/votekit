@@ -1,4 +1,4 @@
-import makeGeography from '../src/makeGeography/makeGeography.js'
+import makeGeography from '@paretoman/votekit-make-geography'
 import electionOptions1 from './optionsBag1.js'
 
 const dimensions = 2

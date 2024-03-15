@@ -1,4 +1,4 @@
-import makeGeography from '@paretoman/votekit-make-geography/makeGeography.js'
+import makeGeography from '@paretoman/votekit-make-geography'
 import { makeCandidateDistributionCDF } from '@paretoman/votekit-utilities'
 import optionsBag1 from './optionsBag1.js'
 

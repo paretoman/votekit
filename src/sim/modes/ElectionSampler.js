@@ -1,7 +1,7 @@
 /** @module */
 
 import sampleElection from '@paretoman/votekit-sample-election'
-import seedrandom from '../../compute/src/lib/snowpack/build/snowpack/pkg/seedrandom.js'
+import seedrandom from 'seedrandom'
 
 /**
  * Simulate winners from many sampled elections.
