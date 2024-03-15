@@ -1,7 +1,15 @@
 import { last, randomIndexFromCDF } from '@paretoman/votekit-utilities'
 import electionSequence from '@paretoman/votekit-election-sequence'
 import sampleCanDnGeom from './sampleCanDnGeom.js'
-
+/**
+ * Do a series of elections, differing in candidate positions with a shaped distribution.
+ * Each election may be a sequence of elections and may include polls. A spatial election model is used.
+ * @param {*} samplingGeometry
+ * @param {*} optionsBag
+ * @param {*} numSamples
+ * @param {*} rng
+ * @returns
+ */
 export default function sampleElection(samplingGeometry, optionsBag, numSamples, rng) {
     const { voterGeoms, voterParties, canDnGeoms, dimensions, geography, canDnCDF, strategySeed, voterStrategyListByPhase, information, usePollsByPhase } = samplingGeometry
     const { partiesByCan } = samplingGeometry.parties
