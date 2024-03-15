@@ -1,4 +1,4 @@
-import makeGeography from '../src/geography/makeGeography.js'
+import makeGeography from '../src/makeGeography/makeGeography.js'
 import optionsBag1 from './optionsBag1.js'
 
 const dimensions = 2
