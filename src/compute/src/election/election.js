@@ -16,3 +16,5 @@ export default function election(geometry, electionOptions, castOptions) {
     const electionResults = { geometry, electionOptions, votes, socialChoiceResults }
     return electionResults
 }
+
+export { socialChoiceRun }

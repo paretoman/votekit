@@ -1,8 +1,8 @@
 /** @module */
 
+import socialChoiceRun from '@paretoman/votekit-election'
 import combineVotesStatewide from './combineVotesStatewide.js'
 import combineVotesByDistrict from './combineVotesByDistrict.js'
-import socialChoiceRun from '../election/socialChoiceRun.js'
 import castVotesByTract from './castVotesByTract.js'
 import sumAllocationsStatewide from './combineAllocationsStatewide.js'
 

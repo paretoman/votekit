@@ -14,6 +14,7 @@
             "@paretoman/votekit-election": ["./src/election/election.js"],
             "@paretoman/votekit-election-phase": ["./src/electionPhase/electionPhase.js"],
             "@paretoman/votekit-election-sequence": ["./src/electionSequence/electionSequence.js"],
+            "@paretoman/votekit-district-election": ["./src/districtElection/districtElection.js"],
             "@paretoman/votekit-compute": ["./src/compute/compute.js"],
             "seedrandom": ["./src/lib/snowpack/build/snowpack/pkg/seedrandom.js"],
             "d3-polygon": ["./src/lib/snowpack/build/snowpack/pkg/d3-polygon.js"],

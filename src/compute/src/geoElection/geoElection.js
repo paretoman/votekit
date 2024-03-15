@@ -1,4 +1,4 @@
-// import sumAllocationsStatewide from '../districtElection/combineAllocationsStatewide.js'
+// import sumAllocationsStatewide from '@paretoman/votekit-district-election'
 import { range } from '@paretoman/votekit-utilities'
 import electionSequence from '@paretoman/votekit-election-sequence'
 
