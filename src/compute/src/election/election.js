@@ -5,6 +5,10 @@ import socialChoiceRun from './socialChoiceRun.js'
 
 /**
  * Here we are in the context of a single election.
+ * @param {*} geometry
+ * @param {*} electionOptions
+ * @param {*} castOptions
+ * @returns {*}
  */
 export default function election(geometry, electionOptions, castOptions) {
     const votes = castVotesRun(geometry, electionOptions, castOptions)

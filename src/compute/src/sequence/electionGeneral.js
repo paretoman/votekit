@@ -1,6 +1,6 @@
 /** @module */
 
-import electionPhase from '../polling/electionPhase.js'
+import electionPhase from '@paretoman/votekit-election-phase'
 import getGeometryForPhase from './getGeometryForPhase.js'
 import getElectionOptions from './getElectionOptions.js'
 
