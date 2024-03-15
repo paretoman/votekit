@@ -1,0 +1,23 @@
+{
+  "name": "@paretoman/votekit-sample-election",
+  "version": "0.0.0",
+  "description": "Do a series of elections, differing in candidate positions with a shaped distribution. Each election may be a sequence of elections and may include polls. A spatial election model is used.",
+  "main": "sampleElection.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/paretoman/votekit.git"
+  },
+  "author": "paretoman (https://paretoman.github.io)",
+  "license": "MIT-0",
+  "bugs": {
+    "url": "https://github.com/paretoman/votekit/issues"
+  },
+  "homepage": "https://github.com/paretoman/votekit#readme",
+  "dependencies": {
+    "@paretoman/votekit-election-sequence": "^0.0.0",
+    "@paretoman/votekit-utilities": "^0.0.0"
+  }
+}
