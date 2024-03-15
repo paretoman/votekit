@@ -1,5 +1,5 @@
-import makeGeography from '../src/makeGeography/makeGeography.js'
-import makeCandidateDistributionCDF from '../src/sampleElection/makeCandidateDistributionCDF.js'
+import makeGeography from '@paretoman/votekit-make-geography/makeGeography.js'
+import { makeCandidateDistributionCDF } from '@paretoman/votekit-utilities'
 import optionsBag1 from './optionsBag1.js'
 
 const dimensions = 2

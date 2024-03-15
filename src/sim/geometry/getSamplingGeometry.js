@@ -1,4 +1,4 @@
-import makeCandidateDistributionCDF from '../../compute/src/sampleElection/makeCandidateDistributionCDF.js'
+import { makeCandidateDistributionCDF } from '@paretoman/votekit-utilities'
 import getUsePollsByPhase from './getUsePollsByPhase.js'
 
 /**
