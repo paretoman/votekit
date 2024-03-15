@@ -2,8 +2,8 @@
 
 // import _ from 'https://cdn.skypack.dev/lodash@4.17.21'
 import { range, jcopy } from '@paretoman/votekit-utilities'
-import { polygonArea } from '../lib/snowpack/build/snowpack/pkg/d3-polygon.js'
-import polygonClip from '../lib/polygonClip.js'
+import { polygonArea } from 'd3-polygon'
+import polygonClip from './polygonClip.js'
 
 /**
  * What fraction of each tract lives in each district?

@@ -1,10 +1,12 @@
+// @ts-nocheck
+
 /**
  * Clips a polygon with another polygon to return a polygon.
  * Polygons must be counter-clockwise.
  * https://observablehq.com/@d3/polygonclip@1237
  * @param {number[][]} clip - polygon
- * @param {number[][]} subject - polygon, gets mutated
- * @returns {number[][]} - polygon
+ * @param {number[][]} subject0 - polygon, gets mutated
+ * @returns {[number,number][]} - polygon
  */
 export default function polygonClip(clip, subject0) {
     const closed = polygonClosed(subject0)
