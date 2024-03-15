@@ -5,6 +5,10 @@ import electionCycle from './electionCycle.js'
 
 /**
  * Here we are in the context of a single election phase.
+ * @param {*} geometry
+ * @param {*} electionOptions
+ * @param {*} optionsBag
+ * @returns
  */
 export default function electionPhase(geometry, electionOptions, optionsBag) {
     const { castOptions } = optionsBag

@@ -1,7 +1,7 @@
 {
   "name": "@paretoman/votekit-election-phase",
   "version": "0.0.0",
-  "description": "Do a series of polls. Each one runs a spatial election model.",
+  "description": "Do a series of polls. Each one runs a spatial election model and has information about the previous poll.",
   "main": "electionPhase.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

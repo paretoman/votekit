@@ -5,6 +5,10 @@ import calculatePolling from './calculatePolling.js'
 
 /**
  * Here we are in the context of an election cycle with polls followed by a single election.
+ * @param {*} geometry
+ * @param {*} electionOptions
+ * @param {*} optionsBag
+ * @returns
  */
 export default function electionCycle(geometry, electionOptions, optionsBag) {
     const { pollCount } = optionsBag

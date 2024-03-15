@@ -1,3 +1,10 @@
+/** @module */
+
+/**
+ * Get polling information from election results.
+ * @param {*} lastElectionResults
+ * @returns
+ */
 export default function calculatePolling(lastElectionResults) {
     if (lastElectionResults === null) {
         return {}
