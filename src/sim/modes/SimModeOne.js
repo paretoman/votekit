@@ -1,7 +1,7 @@
 /** @module */
 
+import geoElection from '@paretoman/votekit-geographic-election'
 import getGeometry from '../geometry/getGeometry.js'
-import geoElection from '../../compute/src/geoElection/geoElection.js'
 
 /**
  * Simulate one election with
