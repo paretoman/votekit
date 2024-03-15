@@ -8,6 +8,9 @@ import getElectionOptions from './getElectionOptions.js'
 /**
  * Here we are in the context of an election sequence.
  * Run a primary election for each party, then a general election.
+ * @param {*} geometry
+ * @param {*} optionsBag
+ * @returns
  */
 export default function electionClosedPrimary(geometry, optionsBag) {
     const { numParties } = geometry.parties

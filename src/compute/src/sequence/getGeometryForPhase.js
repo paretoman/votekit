@@ -1,3 +1,12 @@
+/** @module */
+
+/**
+ * Use phase description to get geometry. Geometry can differ by phase.
+ * e.g. voter strategy, use of polls
+ * @param {*} phaseName
+ * @param {*} geometry
+ * @returns {*} geometry
+ */
 export default function getGeometryForPhase(phaseName, geometry) {
     const phaseGeometry = { ...geometry }
 

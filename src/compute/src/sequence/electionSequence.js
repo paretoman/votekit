@@ -6,6 +6,9 @@ import electionNonpartisanPrimary from './electionNonPartisanPrimary.js'
 
 /**
  * Here we are in the context of an election sequence.
+ * @param {*} geometry
+ * @param {*} optionsBag
+ * @returns
  */
 export default function electionSequence(geometry, optionsBag) {
     const { canPoints, voterGeoms } = geometry

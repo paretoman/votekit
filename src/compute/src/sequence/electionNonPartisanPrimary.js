@@ -6,6 +6,9 @@ import getElectionOptions from './getElectionOptions.js'
 
 /**
  * Here we are in the context of an election sequence with two phases, a non-partisan primary, and a general.
+ * @param {*} geometry
+ * @param {*} optionsBag
+ * @returns
  */
 export default function electionNonpartisanPrimary(geometry, optionsBag) {
     // primary phase

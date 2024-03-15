@@ -6,6 +6,9 @@ import getElectionOptions from './getElectionOptions.js'
 
 /**
  * Here we are in the context of the simplest election sequence with one general election phase.
+ * @param {*} geometry
+ * @param {*} optionsBag
+ * @returns
  */
 export default function electionGeneral(geometry, optionsBag) {
     const generalGeometry = getGeometryForPhase('general', geometry)
