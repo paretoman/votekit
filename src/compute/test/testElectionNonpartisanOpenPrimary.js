@@ -1,5 +1,5 @@
 import { last } from '@paretoman/votekit-utilities'
-import electionSequence from '../src/sequence/electionSequence.js'
+import electionSequence from '../src/electionSequence/electionSequence.js'
 import electionOptions2NonpartisanOpenPrimary from './electionOptions2NonpartisanOpenPrimary.js'
 import testGeometry1 from './testGeometry1.js'
 

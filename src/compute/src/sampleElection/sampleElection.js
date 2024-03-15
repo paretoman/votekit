@@ -1,5 +1,5 @@
 import { last, randomIndexFromCDF } from '@paretoman/votekit-utilities'
-import electionSequence from '../sequence/electionSequence.js'
+import electionSequence from '../electionSequence/electionSequence.js'
 import sampleCanDnGeom from './sampleCanDnGeom.js'
 
 export default function sampleElection(samplingGeometry, optionsBag, numSamples, rng) {

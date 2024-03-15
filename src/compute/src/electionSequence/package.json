@@ -1,0 +1,22 @@
+{
+  "name": "@paretoman/votekit-election-sequence",
+  "version": "0.0.0",
+  "description": "Do a series of election phases. Phases may differ in candidates and voters. Each one runs a spatial election model and may include polls.",
+  "main": "electionSequence.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/paretoman/votekit.git"
+  },
+  "author": "paretoman (https://paretoman.github.io)",
+  "license": "MIT-0",
+  "bugs": {
+    "url": "https://github.com/paretoman/votekit/issues"
+  },
+  "homepage": "https://github.com/paretoman/votekit#readme",
+  "dependencies": {
+    "@paretoman/votekit-election-phase": "^0.0.0"
+  }
+}
