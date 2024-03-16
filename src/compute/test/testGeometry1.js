@@ -1,4 +1,5 @@
 import makeGeography from '@paretoman/votekit-make-geography'
+import { range } from '@paretoman/votekit-utilities'
 import optionsBag1 from './optionsBag1.js'
 
 const dimensions = 2
@@ -47,6 +48,7 @@ const canPoints = [
     [-50, 0],
     [50, 0],
 ]
+const canLabels = range(canPoints.length)
 
 const parties = {
     partiesByCan: [0, 1],
@@ -57,6 +59,6 @@ const { numTracts, numDistricts } = optionsBag1
 
 const geography = makeGeography(numTracts, numDistricts, voterGeoms, dimensions)
 const strategySeed = 'pumpkin82000'
-const testGeometry1 = { voterGeoms, canPoints, parties, dimensions, geography, strategySeed, voterStrategyListByPhase, information, usePollsByPhase }
+const testGeometry1 = { voterGeoms, canPoints, canLabels, parties, dimensions, geography, strategySeed, voterStrategyListByPhase, information, usePollsByPhase }
 
 export default testGeometry1
