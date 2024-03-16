@@ -10,7 +10,8 @@
     "lint": "eslint .",
     "doc": "jsdoc -c jsdoc.json",
     "check-types": "tsc --noEmit -p ./jsconfig.json",
-    "check-types-silent": "tsc-silent -p ./jsconfig.json --suppress @/lib @/snowpack.config.cjs @/test/test.js"
+    "check-types-silent": "tsc-silent -p ./jsconfig.json --suppress @/lib @/snowpack.config.cjs @/test/test.js",
+    "linkAll": "npm link ./types ./utilities ./socialChoiceMethods ./voteCasters ./election ./districtElection ./electionPhase ./electionSequence ./geoElection ./sampleElection ./makeGeography"
   },
   "directories": {
     "doc": "docs",
