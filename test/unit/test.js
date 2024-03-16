@@ -1,6 +1,6 @@
 /** @module */
 
-import { eq, assert, tests } from '../../src/lib/tinytest.js'
+import { eq, assert, tests } from './tinytest.js'
 import { testEquidistantLine } from '../../src/sim/voteCasters/CastPluralitySummer2DQuadrature.js'
 
 /**
