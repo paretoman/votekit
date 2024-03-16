@@ -7,5 +7,5 @@ export default function testElectionNonpartisanOpenPrimary() {
     const sequenceResults = electionSequence(testGeometry1, electionOptions2NonpartisanOpenPrimary)
 
     const { phaseNames } = sequenceResults
-    return sequenceResults[last(phaseNames)].socialChoiceResults.allocation
+    return sequenceResults.phases[last(phaseNames)].socialChoiceResults.allocation
 }
