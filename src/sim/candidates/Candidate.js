@@ -1,6 +1,6 @@
 /** @module */
 
-import { toRGBA } from '../../lib/colorBlendScript.js'
+import { toRGBA } from '../../util/colorBlendScript.js'
 
 /**
  * Candidate class on top of handle.

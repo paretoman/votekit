@@ -1,0 +1,23 @@
+{
+  "name": "@paretoman/votekit-sim",
+  "version": "0.0.0",
+  "description": "Model of user interaction to simulate an electoral process.",
+  "main": "sim/Sim.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/paretoman/votekit.git"
+  },
+  "author": "paretoman (https://paretoman.github.io)",
+  "license": "MIT-0",
+  "bugs": {
+    "url": "https://github.com/paretoman/votekit/issues"
+  },
+  "homepage": "https://github.com/paretoman/votekit#readme",
+  "dependencies": {
+    "@paretoman/votekit-geoElection": "^0.0.0"
+  }
+}
