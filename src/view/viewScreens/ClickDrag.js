@@ -1,6 +1,6 @@
 /** @module */
 
-import { clamp, minIndex } from '../../util/jsHelpers.js'
+import { minIndex } from '@paretoman/votekit-utilities'
 
 /**
  * ClickDrag gives draggable behavior to objects on a canvas.
@@ -201,4 +201,11 @@ export default function ClickDrag(dragm, viewEntities, screen, changes, viewSett
             }
         }
     }
+}
+
+/** https://stackoverflow.com/a/24719569 */
+function clamp(value, min, max) {
+    if (value < min) return min
+    if (value > max) return max
+    return value
 }

@@ -2,7 +2,7 @@
 
 // import { normal } from 'color-blend'
 
-import { blend, toRGBA } from '../../util/colorBlendScript.js'
+import { blend, toRGBA } from '@paretoman/votekit-graphics'
 
 /**
  * Blend colors in given proportions.

@@ -1,6 +1,6 @@
 /** @module */
 
-import { drawStrokedColor } from '../../util/graphicsUtilities.js'
+import { drawStrokedColor } from '@paretoman/votekit-graphics'
 import DraggableManager from './DraggableManager.js'
 import ClickDrag from './ClickDrag.js'
 

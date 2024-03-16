@@ -1,6 +1,6 @@
 /** @module */
 
-import { jcopy } from '../../util/jsHelpers.js'
+import { jcopy } from '@paretoman/votekit-utilities'
 
 /**
  * Keep track of changes that occur to a simulation's configuration.

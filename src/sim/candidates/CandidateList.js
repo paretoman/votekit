@@ -1,5 +1,5 @@
+import { standardizeColor } from '@paretoman/votekit-graphics'
 import Candidate from './Candidate.js'
-import { standardizeColor } from '../../util/jsHelpers.js'
 import Registrar from '../entities/Registrar.js'
 import EntityCommander from '../entities/EntityCommander.js'
 import EntityList from '../entities/EntityList.js'

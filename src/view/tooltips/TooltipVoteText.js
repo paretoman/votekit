@@ -1,4 +1,4 @@
-import { textPercent } from '../../util/graphicsUtilities.js'
+import { textPercent } from '@paretoman/votekit-graphics'
 import getTallyFractionsNameForVote from '../viz/getTallyFractionsNameForVote.js'
 
 export default function TooltipVoteText(box) {

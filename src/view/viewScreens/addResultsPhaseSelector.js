@@ -1,4 +1,4 @@
-import { range } from '../../util/jsHelpers.js'
+import { range } from '@paretoman/votekit-utilities'
 import ButtonGroup from '../menu/ButtonGroup.js'
 import { buttonWidth } from '../menu/MenuItem.js'
 

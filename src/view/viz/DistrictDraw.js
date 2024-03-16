@@ -1,6 +1,6 @@
 /** @module */
 
-import { drawStrokedColor } from '../../util/graphicsUtilities.js'
+import { drawStrokedColor } from '@paretoman/votekit-graphics'
 /**
  * Draws district boundaries.
  * Right now, just for a uniform square geography.

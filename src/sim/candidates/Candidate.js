@@ -1,6 +1,6 @@
 /** @module */
 
-import { toRGBA } from '../../util/colorBlendScript.js'
+import { toRGBA } from '@paretoman/votekit-graphics'
 
 /**
  * Candidate class on top of handle.

@@ -3,6 +3,8 @@
  * Just a few helpful functions that are self-contained and don't need much context.
  * @module */
 
+export * from './colorBlendScript.js'
+
 export function drawStrokedColor(text, x, y, textsize, lw, color, alpha, ctx, textAlign) {
     ctx.save()
     ctx.globalAlpha = alpha
@@ -17,4 +19,14 @@ export function drawStrokedColor(text, x, y, textsize, lw, color, alpha, ctx, te
 export function textPercent(f) {
     const a = (100 * f).toFixed(0)
     return a
+}
+
+/** https://stackoverflow.com/a/47355187 */
+export function standardizeColor(str) {
+    const canvas = document.createElement('canvas')
+    const ctx = canvas.getContext('2d')
+    ctx.fillStyle = str
+    const sColor = ctx.fillStyle
+    canvas.remove()
+    return sColor
 }

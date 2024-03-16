@@ -1,5 +1,5 @@
+import { jcopy } from '@paretoman/votekit-utilities'
 import { getStrategy } from '../../sim/voters/VoterShapeList.js'
-import { jcopy } from '../../util/jsHelpers.js'
 import tooltipBox from './tooltipBox.js'
 
 export default function tooltipForEntity(graphic, entity, screen, viewSettings, simOptions, electionOptionsMan) {

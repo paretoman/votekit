@@ -1,8 +1,8 @@
 /** @module */
 
-import { orderedJsonStringify } from '../../util/jsHelpers.js'
 import DownloadLink from './DownloadLink.js'
 import TextArea from './TextArea.js'
+import orderedJsonStringify from './orderedJsonStringify.js'
 
 /**
  * Add buttons for saving the configuration to a textbox.
