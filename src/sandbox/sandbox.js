@@ -1,7 +1,7 @@
 /** @module */
 
-import Sim from '../sim/sim/Sim.js'
-import View from '../view/view/View.js'
+import Sim from '@paretoman/votekit-sim'
+import View from '@paretoman/votekit-view'
 
 /**
  * Set up a user interface to run a simulation.
