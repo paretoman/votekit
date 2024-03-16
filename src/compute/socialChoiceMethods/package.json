@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "description": "Use a social choice method on votes to make a decision.",
   "main": "socialChoiceMethods.js",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

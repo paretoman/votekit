@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "description": "Do a series of polls. Each one runs a spatial election model and has information about the previous poll.",
   "main": "electionPhase.js",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
