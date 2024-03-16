@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 /**
  * Very simple in-browser unit-test library, with zero deps.
  *
