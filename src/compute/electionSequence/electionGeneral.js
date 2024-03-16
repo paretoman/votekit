@@ -19,6 +19,7 @@ export default function electionGeneral(geometry, optionsBag) {
         phases: {
             general,
         },
+        phaseNames: ['general'],
         geometry,
         optionsBag,
         socialChoiceResults,
