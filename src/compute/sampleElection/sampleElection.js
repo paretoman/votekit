@@ -42,8 +42,7 @@ export default function sampleElection(samplingGeometry, optionsBag, numSamples,
         const geometry = { voterGeoms, voterParties, canPoints, parties, dimensions, geography, strategySeed, voterStrategyListByPhase, information, usePollsByPhase }
 
         const sequenceResults = electionSequence(geometry, optionsBag)
-        const { phaseNames } = sequenceResults
-        const { allocation } = sequenceResults[last(phaseNames)].socialChoiceResults
+        const { allocation } = sequenceResults.socialChoiceResults
 
         for (let k = 0; k < allocation.length; k++) {
             const winCount = allocation[k]

@@ -5,6 +5,5 @@ import testGeometry1 from './testGeometry1.js'
 
 export default function testElection() {
     const sequenceResults = electionSequence(testGeometry1, optionsBag1)
-    const { phaseNames } = sequenceResults
-    return sequenceResults.phases[last(phaseNames)].socialChoiceResults.iWinner
+    return sequenceResults.socialChoiceResults.iWinner
 }

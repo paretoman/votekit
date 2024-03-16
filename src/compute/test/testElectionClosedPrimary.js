@@ -6,6 +6,5 @@ import testGeometry2Parties from './testGeometry2Parties.js'
 export default function testElectionClosedPrimary() {
     const sequenceResults = electionSequence(testGeometry2Parties, electionOptions3ClosedPrimary)
 
-    const { phaseNames } = sequenceResults
-    return sequenceResults.phases[last(phaseNames)].socialChoiceResults.allocation
+    return sequenceResults.socialChoiceResults.allocation
 }

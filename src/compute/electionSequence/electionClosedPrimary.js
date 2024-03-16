@@ -107,6 +107,7 @@ function combineClosedPrimaryGeneral(primaryResults, general, primaryWinners, ge
             closedPrimary: primaryResults,
             general,
         },
+        phaseNames: ['closedPrimary', 'general'],
         geometry,
         optionsBag,
         socialChoiceResults: {
