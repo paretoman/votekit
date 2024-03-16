@@ -1,6 +1,6 @@
 /** @module */
 
-import { Tween } from '@tweenjs/tweenjs.js'
+import { Tween } from '@tweenjs/tween.js'
 /**
  * Square is a graphic.
  * It displays itself on a parent object.
