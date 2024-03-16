@@ -1,9 +1,4 @@
 /**
- * Javascript Utilities
- * Just a few helpful functions that are self-contained and don't need much context.
- * @module */
-
-/**
  * Try to deepcopy an object.
  * @param {object} a - an object to copy.
  * @returns {object} A copy of a.
@@ -32,9 +27,4 @@ export function copyArrayShallow2(a) {
         }
     }
     return b
-}
-
-export function last(a) {
-    const n = a.length
-    return a[n - 1]
 }

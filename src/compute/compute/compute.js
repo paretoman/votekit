@@ -2,7 +2,7 @@ import socialChoiceMethods, { socialChoiceMethodMetadataByFunctionName } from '@
 import voteCasters from '@paretoman/votekit-vote-casters'
 import electionSequence from '@paretoman/votekit-election-sequence'
 import makeGeography, { makeTracts, updateDistricts, updateCensus, updateVotersByTract, updateVotersByDistrict } from '@paretoman/votekit-make-geography'
-import makeCandidateDistributionCDF from '@paretoman/votekit-utilities'
+import { makeCandidateDistributionCDF } from '@paretoman/votekit-utilities'
 import sampleElection from '@paretoman/votekit-sample-election'
 
 const geography = {

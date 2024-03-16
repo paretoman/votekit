@@ -1,16 +1,3 @@
-/**
- * List the indices of an array of length n.
- * @param {number} n - length of array
- * @returns {number[]} - A number array from 0 to n-1.
- */
-export function range(n) {
-    const a = Array(n)
-    for (let i = 0; i < n; i++) {
-        a[i] = i
-    }
-    return a
-}
-
 const coefInvSqrt2Pi = 1 / (Math.sqrt(2 * Math.PI))
 
 export function normPDF(x, mean, sd) {
@@ -82,49 +69,4 @@ export function randomIndexFromCDF(cdf, rng) {
     const random1 = rng()
     const index = cdf.findIndex((x) => x >= random1)
     return index
-}
-
-export function minIndex(a) {
-    let min = Infinity
-    let iClosest = null
-    for (let i = 0; i < a.length; i++) {
-        const d = a[i]
-        if (d < min) {
-            min = d
-            iClosest = i
-        }
-    }
-    return iClosest
-}
-
-export function maxIndex(a) {
-    let max = -Infinity
-    let iMax = null
-    for (let i = 0; i < a.length; i++) {
-        const d = a[i]
-        if (d > max) {
-            max = d
-            iMax = i
-        }
-    }
-    return iMax
-}
-
-export function minMax(a) {
-    let min = a[0]
-    let max = a[0]
-    for (let i = 0; i < a.length; i++) {
-        const d = a[i]
-        if (d < min) {
-            min = d
-        }
-        if (d > max) {
-            max = d
-        }
-    }
-    return [min, max]
-}
-
-export function sumArray(a) {
-    return a.reduce((p, c) => p + c)
 }
