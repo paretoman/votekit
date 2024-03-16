@@ -17,7 +17,7 @@
             "@paretoman/votekit-sample-election": ["./src/compute/sampleElection/sampleElection.js"],
             "@paretoman/votekit-geographic-election": ["./src/compute/geoElection/geoElection.js"],
             "@paretoman/votekit-compute": ["./src/compute/compute/compute.js"],
-            "@paretoman/votekit-sim": ["./src/sim/sim/Sim.js"],
+            "@paretoman/votekit-sim": ["./src/sim/sim-index.js"],
             "@paretoman/votekit-graphics": ["./src/graphics/graphics.js"],
             "@paretoman/votekit-view": ["./src/view/view/View.js"],
             "@paretoman/votekit-add-sandboxes": ["./src/addSandboxes/addSandboxes.js"],

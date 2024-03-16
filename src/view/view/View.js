@@ -1,4 +1,4 @@
-import Changes from '@paretoman/votekit-sim'
+import { Changes } from '@paretoman/votekit-sim'
 import layoutOrder from './layoutOrder.js'
 import Layout from './Layout.js'
 import ViewMode from './ViewMode.js'

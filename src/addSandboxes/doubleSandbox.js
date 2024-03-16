@@ -1,6 +1,6 @@
 /** @module */
 
-import ComMessenger from '@paretoman/votekit-sim'
+import { ComMessenger } from '@paretoman/votekit-sim'
 import sandbox from './sandbox.js'
 
 /**
