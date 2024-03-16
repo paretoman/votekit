@@ -4,8 +4,8 @@ import electionOptions1 from './optionsBag1.js'
 const dimensions = 2
 
 const voterGeoms = [
-    { x: -100, y: 0, w: 100, densityProfile: 'step' },
-    { x: 100, y: 0, w: 100, densityProfile: 'step' },
+    { x: -100, y: 0, w: 100, densityProfile: 'step', densityMax: 1 },
+    { x: 100, y: 0, w: 100, densityProfile: 'step', densityMax: 1 },
 ]
 
 const voterStrategyList = [

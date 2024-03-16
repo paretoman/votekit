@@ -5,7 +5,7 @@ import optionsBag1 from './optionsBag1.js'
 const dimensions = 2
 
 const voterGeoms = [
-    { x: 0, y: 0, w: 200, densityProfile: 'step' },
+    { x: 0, y: 0, w: 200, densityProfile: 'step', densityMax: 1 },
 ]
 
 const voterParties = [0]

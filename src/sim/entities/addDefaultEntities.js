@@ -30,8 +30,8 @@ export default function addDefaultEntities(entities) {
         doLoad,
     })
     entities.voterShapeList.addVoterCircle({
-        shape2: { x: 150, y: 150, w: 200, densityProfile: 'step' },
-        shape1: { x: 150, w: 200, densityProfile: 'gaussian' },
+        shape2: { x: 150, y: 150, w: 200, densityProfile: 'step', densityMax: 1 },
+        shape1: { x: 150, w: 200, densityProfile: 'gaussian', densityMax: 1 },
         strategyRules: defaultStrategyRules,
         doLoad,
     })
