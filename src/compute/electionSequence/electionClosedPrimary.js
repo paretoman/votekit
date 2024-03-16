@@ -33,7 +33,7 @@ export default function electionClosedPrimary(geometry, optionsBag) {
     const generalPhaseOptions = getElectionOptions('closedPrimary', 'general', optionsBag)
     const general = electionPhase(generalGeometry, generalPhaseOptions, optionsBag)
 
-    const results = combineClosedPrimaryGeneral(primaryResults, general, primaryWinners, geometry, optionsBag, partyCansLists)
+    const results = combineClosedPrimaryGeneral(primaryResults, general, primaryWinners, geometry, optionsBag)
     return results
 }
 
@@ -91,7 +91,7 @@ function getGeneralGeometry(geometry, primaryResults, numParties, partyCansLists
     return { generalGeometry, primaryWinners }
 }
 
-function combineClosedPrimaryGeneral(primaryResults, general, primaryWinners, geometry, optionsBag, partyCansLists) {
+function combineClosedPrimaryGeneral(primaryResults, general, primaryWinners, geometry, optionsBag) {
     const generalAllocation = general.socialChoiceResults.allocation
     const generalWinnerList = getWinnerList(generalAllocation)
     const iWinners = generalWinnerList.map((i) => primaryWinners[i])
