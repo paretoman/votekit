@@ -1,6 +1,6 @@
 /** @module */
 
-import socialChoiceRun from '@paretoman/votekit-election'
+import { socialChoiceRun } from '@paretoman/votekit-election'
 import combineVotesStatewide from './combineVotesStatewide.js'
 import combineVotesByDistrict from './combineVotesByDistrict.js'
 import castVotesByTract from './castVotesByTract.js'

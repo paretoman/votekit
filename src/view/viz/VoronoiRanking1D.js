@@ -1,6 +1,6 @@
 /** @module */
 
-import makeRankingIntervals1D from '@paretoman/votekit-vote-casters'
+import { makeRankingIntervals1D } from '@paretoman/votekit-vote-casters'
 import colorBlender, { rgbToString } from './colorBlender.js'
 
 /**
