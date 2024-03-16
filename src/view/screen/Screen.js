@@ -1,6 +1,6 @@
 /** @module */
 
-import * as TWEEN from '../../lib/snowpack/build/snowpack/pkg/@tweenjs/tweenjs.js'
+import * as TWEEN from '@tweenjs/tweenjs.js'
 import EventHandlers from './EventHandlers.js'
 
 import ScreenCanvas from './ScreenCanvas.js'

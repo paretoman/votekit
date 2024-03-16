@@ -1,6 +1,6 @@
 /** @module */
 
-import C2S from '../../lib/snowpack/build/snowpack/pkg/@mithrandirii/canvas2svg.js'
+import C2S from '@mithrandirii/canvas2svg'
 
 /**
  * Make the svg part of the screen.

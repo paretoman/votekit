@@ -22,6 +22,11 @@
     "@paretoman/votekit-utilities": "^0.0.0",
     "@paretoman/votekit-graphics": "^0.0.0",
     "@paretoman/votekit-social-choice-methods": "^0.0.0",
-    "@paretoman/votekit-vote-casters": "^0.0.0"
+    "@paretoman/votekit-vote-casters": "^0.0.0",
+    "@tweenjs/tween.js": "^18.6.4",
+    "@mithrandirii/canvas2svg": "^1.0.24",
+    "d3-contour": "^3.0.1",
+    "d3-geo": "^3.0.1",
+    "d3-delaunay": "^6.0.2"
   }
 }

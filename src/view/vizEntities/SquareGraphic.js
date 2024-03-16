@@ -1,6 +1,6 @@
 /** @module */
 
-import { Tween } from '../../lib/snowpack/build/snowpack/pkg/@tweenjs/tweenjs.js'
+import { Tween } from '@tweenjs/tweenjs.js'
 /**
  * Square is a graphic.
  * It displays itself on a parent object.

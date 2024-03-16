@@ -4,7 +4,7 @@
 // d3-select
 // d3-range
 
-import { Delaunay } from '../../lib/snowpack/build/snowpack/pkg/d3-delaunay.js'
+import { Delaunay } from 'd3-delaunay'
 // import { Delaunay } from 'd3-delaunay'
 // import { Delaunay } from 'https://cdn.skypack.dev/d3-delaunay@6'
 // https://github.com/d3/d3-delaunay

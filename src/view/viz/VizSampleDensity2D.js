@@ -1,8 +1,8 @@
 /** @module */
 
 import { range } from '@paretoman/votekit-utilities'
-import { contourDensity } from '../../lib/snowpack/build/snowpack/pkg/d3-contour.js'
-import { geoPath } from '../../lib/snowpack/build/snowpack/pkg/d3-geo.js'
+import { contourDensity } from 'd3-contour'
+import { geoPath } from 'd3-geo'
 
 import VoterRender1D from './VoterRender1D.js'
 import VoterRender2D from './VoterRender2D.js'
