@@ -2,6 +2,7 @@
 
 import VoronoiRanking1D from './VoronoiRanking1D.js'
 import VoronoiRanking2D from './VoronoiRanking2D.js'
+import selectPhaseResultsToDisplay from '../phase/selectPhaseResultsToDisplay.js'
 
 /**
  * Show votes
@@ -27,15 +28,9 @@ export default function VizOneVoronoiRanking(voterRendererList, candidateList, s
         const { error } = sequenceResults
         if (error !== undefined) return
 
-        const { sequenceName } = sequenceResults.optionsBag.sequenceOptions
-        const { resultsPhaseBySeq, resultsPartyBySeq } = simOptions
-        const resultsPhaseName = resultsPhaseBySeq[sequenceName]
-        const resultsParty = resultsPartyBySeq[resultsPhaseName]
-
-        const phaseResults0 = sequenceResults.phases[resultsPhaseName]
-        const phaseResults = (resultsParty !== undefined) ? phaseResults0[resultsParty] : phaseResults0
-
+        const phaseResults = selectPhaseResultsToDisplay(sequenceResults, simOptions)
         const { votesByGeom } = phaseResults.votes
+
         voterRendererList.updateGraphic(votesByGeom)
     }
 

@@ -8,6 +8,7 @@ import addAllocation from '../viz/addAllocation.js'
 import TestVoterView from '../vizTestVoter/TestVoterView.js'
 import getTestGeometry from '../../sim/geometry/getTestGeometry.js'
 import getTallyFractions from '../viz/getTallyFractions.js'
+import getResultsPhaseOptions from '../phase/getResultsPhaseOptions.js'
 
 /**
  * Draw entities: voters, candidates, test voters.
@@ -118,10 +119,8 @@ export default function ViewEntitiesOne(entities, screen, menu, changes, simOpti
     }
     self.testVoteView = () => {
         const optionsBag = electionOptionsMan.getOptions()
-        const { sequenceName, sequences } = optionsBag.sequenceOptions
-        const { resultsPhaseBySeq } = simOptions
-        const resultsPhaseName = resultsPhaseBySeq[sequenceName]
-        const resultsPhaseOptions = sequences[sequenceName].phases[resultsPhaseName]
+
+        const resultsPhaseOptions = getResultsPhaseOptions(optionsBag, simOptions)
         const { voteCasterName } = resultsPhaseOptions
 
         // todo: check this to see if it is correct. I'm not sure if a closed primary would work well here.

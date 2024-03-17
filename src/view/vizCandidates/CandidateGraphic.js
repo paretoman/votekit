@@ -2,6 +2,7 @@ import { drawStrokedColor, textPercent } from '@paretoman/votekit-graphics'
 import tooltipForEntity from '../tooltips/tooltipForEntity.js'
 import EntityGraphic from '../vizEntities/EntityGraphic.js'
 import SquareGraphic from '../vizEntities/SquareGraphic.js'
+import getResultsPhaseOptions from '../phase/getResultsPhaseOptions.js'
 
 // eslint-disable-next-line max-len
 export default function CandidateGraphic(candidate, screen, wHandle, hHandle, viewSettings, simOptions, electionOptionsMan) {
@@ -52,10 +53,7 @@ export default function CandidateGraphic(candidate, screen, wHandle, hHandle, vi
         }
         const optionsBag = electionOptionsMan.getOptions()
 
-        const { sequenceName, sequences } = optionsBag.sequenceOptions
-        const { resultsPhaseBySeq } = simOptions
-        const resultsPhaseName = resultsPhaseBySeq[sequenceName]
-        const resultsPhaseOptions = sequences[sequenceName].phases[resultsPhaseName]
+        const resultsPhaseOptions = getResultsPhaseOptions(optionsBag, simOptions)
         const { socialChoiceMethod } = resultsPhaseOptions
 
         if (socialChoiceMethod === 'olprA') {

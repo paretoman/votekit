@@ -1,6 +1,7 @@
 /** @module */
 
 import colorBlender, { rgbToString } from './colorBlender.js'
+import getResultsPhaseOptions from '../phase/getResultsPhaseOptions.js'
 import getTallyFractions from './getTallyFractions.js'
 
 export default function districtColors(districtElectionResults, candidateList, optionsBag, simOptions) {
@@ -43,10 +44,7 @@ function colorDistrictWins(scResultsByDistrict, canList, optionsBag, simOptions)
     // calculate color for win map
     let colorOfWinsByDistrict
 
-    const { sequenceName, sequences } = optionsBag.sequenceOptions
-    const { resultsPhaseBySeq } = simOptions
-    const resultsPhaseName = resultsPhaseBySeq[sequenceName]
-    const resultsPhaseOptions = sequences[sequenceName].phases[resultsPhaseName]
+    const resultsPhaseOptions = getResultsPhaseOptions(optionsBag, simOptions)
     const { socialChoiceType } = resultsPhaseOptions
 
     if (socialChoiceType === 'singleWinner') {

@@ -1,6 +1,8 @@
 import Screen from '../screen/Screen.js'
 import BaseExplanation from '../viz/BaseExplanation.js'
 import VizExplanationBudgetMES from '../viz/VizExplanationBudgetMES.js'
+import getResultsPhaseOptions from '../phase/getResultsPhaseOptions.js'
+import selectPhaseResultsToDisplay from '../phase/selectPhaseResultsToDisplay.js'
 
 export default function ViewVizBudget(screenCommon, layout, menu, changes, simOptions, electionOptionsMan, viewMode) {
     const self = this
@@ -17,10 +19,7 @@ export default function ViewVizBudget(screenCommon, layout, menu, changes, simOp
     function enterStrategy() {
         const optionsBag = electionOptionsMan.getOptions()
 
-        const { sequenceName, sequences } = optionsBag.sequenceOptions
-        const { resultsPhaseBySeq } = simOptions
-        const resultsPhaseName = resultsPhaseBySeq[sequenceName]
-        const resultsPhaseOptions = sequences[sequenceName].phases[resultsPhaseName]
+        const resultsPhaseOptions = getResultsPhaseOptions(optionsBag, simOptions)
         const { socialChoiceMethod, useGeography } = resultsPhaseOptions
 
         const { dimensions } = simOptions
@@ -46,14 +45,7 @@ export default function ViewVizBudget(screenCommon, layout, menu, changes, simOp
         }
 
         const sequenceResults = simData.geoResults.scResultsByDistrict[0]
-        const { sequenceName } = sequenceResults.optionsBag.sequenceOptions
-        const { resultsPhaseBySeq, resultsPartyBySeq } = simOptions
-        const resultsPhaseName = resultsPhaseBySeq[sequenceName]
-        const resultsParty = resultsPartyBySeq[resultsPhaseName]
-
-        const phaseResults0 = sequenceResults.phases[resultsPhaseName]
-        const phaseResults = (resultsParty !== undefined) ? phaseResults0[resultsParty] : phaseResults0
-
+        const phaseResults = selectPhaseResultsToDisplay(sequenceResults, simOptions)
         vizExplanation.update(sequenceResults, phaseResults)
         self.clear()
         self.render()
