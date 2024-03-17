@@ -13,10 +13,11 @@ import getElectionOptions from './getElectionOptions.js'
  */
 export default function electionGeneral(geometry, optionsBag) {
     const generalGeometry = getGeometryForPhase('general', geometry)
+    const allCanLabels = range(geometry.canPoints.length)
+    generalGeometry.canLabels = allCanLabels
+
     const generalOptions = getElectionOptions('general', 'general', optionsBag)
     const general = electionPhase(generalGeometry, generalOptions, optionsBag)
-    const allCanLabels = range(geometry.canPoints.length)
-    general.canLabels = allCanLabels
     const { socialChoiceResults } = general
     const results = {
         phases: {
