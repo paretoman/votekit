@@ -70,7 +70,7 @@ export default function ViewEntitiesOne(entities, screen, menu, changes, simOpti
 
             // map results to original candidate indices
             const { canLabels } = phaseResults.geometry
-            const numCans = phaseResults.geometry.canPoints.length
+            const numCans = sequenceResults.geometry.canPoints.length
             const tf = Array(numCans).fill(0)
             for (let i = 0; i < canLabels.length; i++) {
                 const index = canLabels[i]
