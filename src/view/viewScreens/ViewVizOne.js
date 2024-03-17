@@ -1,6 +1,5 @@
 /** @module */
 
-import { checkSomeStrategy } from '@paretoman/votekit-sim'
 import VizDistricts from '../viz/VizDistricts.js'
 import VizOneVoronoi from '../viz/VizOneVoronoi.js'
 import VizOneVoronoiRanking from '../viz/VizOneVoronoiRanking.js'
@@ -9,6 +8,7 @@ import ViewBase from './ViewBase.js'
 import VoterRendererList from '../vizVoters/VoterRendererList.js'
 import getResultsPhaseOptions from '../phase/getResultsPhaseOptions.js'
 import getPhaseResults from '../phase/getPhaseResults.js'
+import checkSomeStrategy from '../strategy/checkSomeStrategy.js'
 
 /**
  * Simulate one election with
