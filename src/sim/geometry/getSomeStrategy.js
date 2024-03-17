@@ -1,4 +1,4 @@
-import { checkSomeStrategyForPhase } from './checkSomeStrategy.js'
+import checkSomeStrategyForPhase from './checkSomeStrategyForPhase.js'
 
 export default function getSomeStrategy(optionsBag, voterShapeList, simOptions) {
     const { sequenceOptions } = optionsBag

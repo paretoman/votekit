@@ -1,4 +1,6 @@
-export default function checkSomeStrategy(voterStrategyListByPhase) {
+import checkSomeStrategyForPhase from './checkSomeStrategyForPhase.js'
+
+export default function oldCheckSomeStrategy(voterStrategyListByPhase) {
     let someStrategy = false
 
     Object.keys(voterStrategyListByPhase).forEach((phaseName) => {
@@ -8,12 +10,4 @@ export default function checkSomeStrategy(voterStrategyListByPhase) {
         someStrategy = someStrategy || someStrategyForPhase
     })
     return someStrategy
-}
-
-export function checkSomeStrategyForPhase(voterStrategyList) {
-    return voterStrategyList.some(
-        (v) => v.strategy.some(
-            (a) => (a.actionName !== 'closest' && a.actionWeight !== 0),
-        ),
-    )
 }
