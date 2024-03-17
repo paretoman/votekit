@@ -7,6 +7,9 @@ export default function getPhaseResults(sequenceResults, simOptions) {
         const { resultsPartyBySeq } = simOptions
         const resultsParty = resultsPartyBySeq[resultsPhaseName]
         const phaseResults = sequenceResults.phases[resultsPhaseName][resultsParty]
+        if (phaseResults === undefined) {
+            return { error: true }
+        }
         return phaseResults
     }
     // else
