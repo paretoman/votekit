@@ -1,6 +1,6 @@
 /** @module */
 
-import { getSomeStrategy } from '@paretoman/votekit-sim'
+import { checkSomeStrategy } from '@paretoman/votekit-sim'
 import VizDistricts from '../viz/VizDistricts.js'
 import VizOneVoronoi from '../viz/VizOneVoronoi.js'
 import VizOneVoronoiRanking from '../viz/VizOneVoronoiRanking.js'
@@ -48,7 +48,7 @@ export default function ViewVizOne(entities, screenMain, screenMini, menu, chang
         const voterGeoms = voterShapeList.getGeoms(dimensions)
         const someGaussian2D = voterGeoms.some((v) => v.densityProfile === 'gaussian') && dimensions === 2
 
-        const someStrategy = getSomeStrategy(optionsBag, voterShapeList, simOptions)
+        const someStrategy = checkSomeStrategy(optionsBag, voterShapeList, simOptions)
 
         const doGrid = someGaussian2D || someStrategy || voteCasterName === 'score' || voteCasterName === 'scoreFull'
 

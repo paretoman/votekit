@@ -1,6 +1,6 @@
 import checkSomeStrategyForPhase from './checkSomeStrategyForPhase.js'
 
-export default function getSomeStrategy(optionsBag, voterShapeList, simOptions) {
+export default function checkSomeStrategy(optionsBag, voterShapeList, simOptions) {
     const { sequenceOptions } = optionsBag
 
     const { sequenceName } = optionsBag.sequenceOptions
