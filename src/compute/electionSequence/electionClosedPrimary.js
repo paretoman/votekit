@@ -16,20 +16,18 @@ export default function electionClosedPrimary(geometry, optionsBag) {
     const { numParties } = geometry.parties
 
     const primaryResults = []
-    const partyCansLists = []
     const primaryPhaseOptions = getElectionOptions('closedPrimary', 'closedPrimary', optionsBag)
     for (let i = 0; i < numParties; i++) {
-        const { primaryGeometry, partyCans } = getPrimaryGeometry(geometry, i)
+        const { primaryGeometry } = getPrimaryGeometry(geometry, i)
         const { voterGeoms, canPoints } = primaryGeometry
         // todo: think about this
         if (voterGeoms.length === 0) continue
         if (canPoints.length === 0) continue
-        const primary = electionPhase(primaryGeometry, primaryPhaseOptions, optionsBag)
-        primaryResults.push(primary)
-        partyCansLists.push(partyCans)
+        const primaryResult = electionPhase(primaryGeometry, primaryPhaseOptions, optionsBag)
+        primaryResults[i] = primaryResult
     }
 
-    const { generalGeometry, primaryWinners } = getGeneralGeometry(geometry, primaryResults, numParties, partyCansLists)
+    const { generalGeometry, primaryWinners } = getGeneralGeometry(geometry, primaryResults, numParties)
     const generalPhaseOptions = getElectionOptions('closedPrimary', 'general', optionsBag)
     const general = electionPhase(generalGeometry, generalPhaseOptions, optionsBag)
 
@@ -55,38 +53,39 @@ function getPrimaryGeometry(geometry, partyIndex) {
 
     // candidates
     const { partiesByCan } = g0.parties
+    const allCanLabels = range(partiesByCan.length)
+    primaryGeometry.canLabels = allCanLabels.filter((c, i) => partiesByCan[i] === partyIndex)
     primaryGeometry.canPoints = g0.canPoints.filter((c, i) => partiesByCan[i] === partyIndex)
-    primaryGeometry.canLabels = g0.canLabels.filter((c, i) => partiesByCan[i] === partyIndex)
-    const partyCans = range(partiesByCan.length).filter((i) => partiesByCan[i] === partyIndex)
 
     // cleanup
     primaryGeometry.parties = { ...g0.parties }
     primaryGeometry.parties.numParties = 1
     primaryGeometry.parties.partiesByCan = primaryGeometry.parties.partiesByCan.filter((p, i) => partiesByCan[i] === partyIndex)
 
-    return { primaryGeometry, partyCans }
+    return { primaryGeometry }
 }
 
-function getGeneralGeometry(geometry, primaryResults, numParties, partyCansLists) {
+function getGeneralGeometry(geometry, primaryResults, numParties) {
     const g0 = getGeometryForPhase('general', geometry)
     const generalGeometry = { ...g0 }
 
     const primaryWinners = []
     for (let i = 0; i < numParties; i++) {
-        const partyCans = partyCansLists[i]
-        if (partyCans === undefined || partyCans.length === 0) continue
         const primaryResult = primaryResults[i]
+        if (primaryResult === undefined) continue
         const { allocation } = primaryResult.socialChoiceResults
+        const { canLabels } = primaryResult.geometry
+        if (canLabels === undefined || canLabels.length === 0) continue
         for (let j = 0; j < allocation.length; j++) {
             if (allocation[j]) { // todo: consider allocation > 1
-                const iWinner = partyCans[j]
+                const iWinner = canLabels[j]
                 primaryWinners.push(iWinner)
             }
         }
     }
 
     generalGeometry.canPoints = primaryWinners.map((iWinner) => g0.canPoints[iWinner])
-    generalGeometry.canLabels = primaryWinners.map((iWinner) => g0.canLabels[iWinner])
+    generalGeometry.canLabels = primaryWinners
 
     return { generalGeometry, primaryWinners }
 }

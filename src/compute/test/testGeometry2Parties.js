@@ -52,7 +52,6 @@ const canPoints = [
     [50, 10],
     [50, 0],
 ]
-const canLabels = range(canPoints.length)
 
 const parties = {
     partiesByCan: [0, 0, 1, 1],
@@ -63,6 +62,6 @@ const { numTracts, numDistricts } = electionOptions1
 
 const geography = makeGeography(numTracts, numDistricts, voterGeoms, dimensions)
 const strategySeed = 'pumpkin82000'
-const testGeometry2Parties = { voterGeoms, voterParties, canPoints, canLabels, parties, dimensions, geography, strategySeed, voterStrategyListByPhase, information, usePollsByPhase }
+const testGeometry2Parties = { voterGeoms, voterParties, canPoints, parties, dimensions, geography, strategySeed, voterStrategyListByPhase, information, usePollsByPhase }
 
 export default testGeometry2Parties

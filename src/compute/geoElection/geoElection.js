@@ -3,7 +3,7 @@ import { range } from '@paretoman/votekit-utilities'
 import electionSequence from '@paretoman/votekit-election-sequence'
 
 export default function geoElection(geometry0, optionsBag) {
-    const { canPoints, canLabels, parties, voterParties, dimensions, geography, strategySeed, usePollsByPhase, voterStrategyListByPhase, information } = geometry0
+    const { canPoints, parties, voterParties, dimensions, geography, strategySeed, usePollsByPhase, voterStrategyListByPhase, information } = geometry0
     const { voterGeomsByDistrict } = geography
     const { nd } = geography.districtMap
 
@@ -14,7 +14,7 @@ export default function geoElection(geometry0, optionsBag) {
 
     const scResultsByDistrict = range(nd).map((iDistrict) => {
         const voterGeoms = voterGeomsByDistrict[iDistrict]
-        const geometry = { voterGeoms, voterParties, canPoints, canLabels, parties, dimensions, strategySeed, information, usePollsByPhase, voterStrategyListByPhase }
+        const geometry = { voterGeoms, voterParties, canPoints, parties, dimensions, strategySeed, information, usePollsByPhase, voterStrategyListByPhase }
 
         const sequenceResults = electionSequence(geometry, optionsBag)
         return sequenceResults

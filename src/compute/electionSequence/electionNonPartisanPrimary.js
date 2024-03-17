@@ -35,7 +35,7 @@ function getGeneralGeometry(geometry, primary) {
     const { allocation } = primary.socialChoiceResults
     const primaryWinners = getWinnerList(allocation)
     generalGeometry.canPoints = primaryWinners.map((iWinner) => g0.canPoints[iWinner])
-    generalGeometry.canLabels = primaryWinners.map((iWinner) => g0.canLabels[iWinner])
+    generalGeometry.canLabels = primaryWinners
 
     generalGeometry.parties = { ...g0.parties }
     generalGeometry.parties.partiesByCan = primaryWinners.map((iWinner) => g0.parties.partiesByCan[iWinner])
