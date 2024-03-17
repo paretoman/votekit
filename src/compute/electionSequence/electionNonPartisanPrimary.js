@@ -1,6 +1,7 @@
 /** @module */
 
 import electionPhase from '@paretoman/votekit-election-phase'
+import { range } from '@paretoman/votekit-utilities'
 import getGeometryForPhase from './getGeometryForPhase.js'
 import getElectionOptions from './getElectionOptions.js'
 
@@ -13,6 +14,9 @@ import getElectionOptions from './getElectionOptions.js'
 export default function electionNonpartisanPrimary(geometry, optionsBag) {
     // primary phase
     const primaryGeometry = getGeometryForPhase('nonpartisanOpenPrimary', geometry)
+
+    const allCanLabels = range(geometry.canPoints.length)
+    primaryGeometry.canLabels = allCanLabels
 
     const primaryOptions = getElectionOptions('nonpartisanOpenPrimary', 'nonpartisanOpenPrimary', optionsBag)
     const primary = electionPhase(primaryGeometry, primaryOptions, optionsBag)

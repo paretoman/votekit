@@ -1,6 +1,7 @@
 /** @module */
 
 import electionPhase from '@paretoman/votekit-election-phase'
+import { range } from '@paretoman/votekit-utilities'
 import getGeometryForPhase from './getGeometryForPhase.js'
 import getElectionOptions from './getElectionOptions.js'
 
@@ -14,6 +15,8 @@ export default function electionGeneral(geometry, optionsBag) {
     const generalGeometry = getGeometryForPhase('general', geometry)
     const generalOptions = getElectionOptions('general', 'general', optionsBag)
     const general = electionPhase(generalGeometry, generalOptions, optionsBag)
+    const allCanLabels = range(geometry.canPoints.length)
+    general.canLabels = allCanLabels
     const { socialChoiceResults } = general
     const results = {
         phases: {

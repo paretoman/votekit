@@ -58,26 +58,52 @@ export default function ViewEntitiesOne(entities, screen, menu, changes, simOpti
         const sequenceResults = simData.geoResults.scResultsByDistrict[0]
         const { error } = sequenceResults
         if (error === undefined) {
-            const phaseToShow = 'general' // todo: allow user to select this option, e.g. nonpartisanOpenPrimary
+            // todo: allow user to select this option, e.g. nonpartisanOpenPrimary
+            // const phaseToShow = 'nonpartisanOpenPrimary'
+            const phaseToShow = 'general'
 
-            const phaseResults = sequenceResults.phases[phaseToShow]
-            addAllocation(phaseResults)
-            const { allocation } = phaseResults.socialChoiceResults
-            candidateViewList.setCandidateWins(allocation)
-
-            const { votes } = phaseResults
-            const tallyFractions = getTallyFractions(votes)
-
-            // map results to original candidate indices
-            const { canLabels } = phaseResults.geometry
             const numCans = sequenceResults.geometry.canPoints.length
             const tf = Array(numCans).fill(0)
-            for (let i = 0; i < canLabels.length; i++) {
-                const index = canLabels[i]
-                tf[index] = tallyFractions[i]
-            }
+            const al = Array(numCans).fill(0)
 
+            if (phaseToShow === 'closedPrimary') {
+                const arrayOfPhaseResults = sequenceResults.phases[phaseToShow]
+                for (let k = 0; k < arrayOfPhaseResults.length; k++) {
+                    const phaseResults = arrayOfPhaseResults[k]
+                    if (phaseResults === undefined) continue
+
+                    addAllocation(phaseResults)
+                    const { allocation } = phaseResults.socialChoiceResults
+
+                    const { votes } = phaseResults
+                    const tallyFractions = getTallyFractions(votes)
+
+                    // map results to original candidate indices
+                    const { canLabels } = phaseResults.geometry
+                    for (let i = 0; i < canLabels.length; i++) {
+                        const index = canLabels[i]
+                        tf[index] = tallyFractions[i]
+                        al[index] = allocation[i]
+                    }
+                }
+            } else {
+                const phaseResults = sequenceResults.phases[phaseToShow]
+                addAllocation(phaseResults)
+                const { allocation } = phaseResults.socialChoiceResults
+
+                const { votes } = phaseResults
+                const tallyFractions = getTallyFractions(votes)
+
+                // map results to original candidate indices
+                const { canLabels } = phaseResults.geometry
+                for (let i = 0; i < canLabels.length; i++) {
+                    const index = canLabels[i]
+                    tf[index] = tallyFractions[i]
+                    al[index] = allocation[i]
+                }
+            }
             candidateViewList.setCandidateFractions(tf)
+            candidateViewList.setCandidateWins(al)
         }
 
         self.testVoteView()
