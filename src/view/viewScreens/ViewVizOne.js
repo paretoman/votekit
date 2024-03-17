@@ -7,8 +7,8 @@ import VizOneGrid from '../viz/VizOneGrid.js'
 import ViewBase from './ViewBase.js'
 import VoterRendererList from '../vizVoters/VoterRendererList.js'
 import getResultsPhaseOptions from '../phase/getResultsPhaseOptions.js'
-import getPhaseResults from '../phase/getPhaseResults.js'
 import checkSomeStrategy from '../strategy/checkSomeStrategy.js'
+import getPhaseResults from '../phase/getPhaseResults.js'
 
 /**
  * Simulate one election with
@@ -83,11 +83,12 @@ export default function ViewVizOne(entities, screenMain, screenMini, menu, chang
         const { geoResults } = simData
         const sequenceResults = simData.geoResults.scResultsByDistrict[0]
         const optionsBag = electionOptionsMan.getOptions()
-        const phaseResults = getPhaseResults(sequenceResults, optionsBag, simOptions)
+
+        const phaseResults = getPhaseResults(sequenceResults, simOptions)
         if (optionsBag.useGeography === true) {
             vizOne.update(geoResults)
         } else {
-            vizOne.update(sequenceResults)
+            vizOne.update(phaseResults)
         }
 
         self.clear()

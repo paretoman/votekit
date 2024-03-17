@@ -2,7 +2,7 @@ import Screen from '../screen/Screen.js'
 import BaseExplanation from '../viz/BaseExplanation.js'
 import VizExplanationBudgetMES from '../viz/VizExplanationBudgetMES.js'
 import getResultsPhaseOptions from '../phase/getResultsPhaseOptions.js'
-import selectPhaseResultsToDisplay from '../phase/selectPhaseResultsToDisplay.js'
+import getPhaseResults from '../phase/getPhaseResults.js'
 
 export default function ViewVizBudget(screenCommon, layout, menu, changes, simOptions, electionOptionsMan, viewMode) {
     const self = this
@@ -45,7 +45,7 @@ export default function ViewVizBudget(screenCommon, layout, menu, changes, simOp
         }
 
         const sequenceResults = simData.geoResults.scResultsByDistrict[0]
-        const phaseResults = selectPhaseResultsToDisplay(sequenceResults, simOptions)
+        const phaseResults = getPhaseResults(sequenceResults, simOptions)
         vizExplanation.update(sequenceResults, phaseResults)
         self.clear()
         self.render()

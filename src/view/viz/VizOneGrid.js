@@ -2,7 +2,6 @@
 
 import Grid1D from './Grid1D.js'
 import Grid2D from './Grid2D.js'
-import selectPhaseResultsToDisplay from '../phase/selectPhaseResultsToDisplay.js'
 
 /**
  * Show votes
@@ -29,10 +28,9 @@ export default function VizOneGrid(voterRendererList, candidateList, screenMain,
         screenMini.hide()
     }
 
-    self.update = function (sequenceResults) {
-        const { error } = sequenceResults
+    self.update = function (phaseResults) {
+        const { error } = phaseResults
         if (error !== undefined) return
-        const phaseResults = selectPhaseResultsToDisplay(sequenceResults, simOptions)
         const { votesByGeom } = phaseResults.votes
         voterRendererList.updateGraphic(votesByGeom)
     }
