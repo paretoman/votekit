@@ -4,12 +4,12 @@ import voteCasters from '@paretoman/votekit-vote-casters'
 import CandidateViewList from '../vizCandidates/CandidateViewList.js'
 import VoterViewList from '../vizVoters/VoterViewList.js'
 import ViewBase from './ViewBase.js'
-import addAllocation from '../viz/addAllocation.js'
 import TestVoterView from '../vizTestVoter/TestVoterView.js'
 import getTestGeometry from '../../sim/geometry/getTestGeometry.js'
 import getTallyFractions from '../viz/getTallyFractions.js'
 import getResultsPhaseOptions from '../phase/getResultsPhaseOptions.js'
 import getPhaseResults from '../phase/getPhaseResults.js'
+import getAllocation from '../viz/getAllocation.js'
 
 /**
  * Draw entities: voters, candidates, test voters.
@@ -66,8 +66,7 @@ export default function ViewEntitiesOne(entities, screen, menu, changes, simOpti
                 const tf = Array(numCans)
                 const al = Array(numCans)
 
-                addAllocation(phaseResults)
-                const { allocation } = phaseResults.socialChoiceResults
+                const allocation = getAllocation(phaseResults)
 
                 const { votes } = phaseResults
                 const tallyFractions = getTallyFractions(votes)
