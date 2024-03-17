@@ -17,6 +17,7 @@ export function drawStrokedColor(text, x, y, textsize, lw, color, alpha, ctx, te
 }
 
 export function textPercent(f) {
+    if (f === undefined) return ''
     const a = (100 * f).toFixed(0)
     return a
 }

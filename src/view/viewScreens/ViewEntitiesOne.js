@@ -63,8 +63,8 @@ export default function ViewEntitiesOne(entities, screen, menu, changes, simOpti
             const phaseResults = getPhaseResults(sequenceResults, simOptions)
             if (phaseResults.error === undefined) {
                 const numCans = sequenceResults.geometry.canPoints.length
-                const tf = Array(numCans).fill(0)
-                const al = Array(numCans).fill(0)
+                const tf = Array(numCans)
+                const al = Array(numCans)
 
                 addAllocation(phaseResults)
                 const { allocation } = phaseResults.socialChoiceResults
