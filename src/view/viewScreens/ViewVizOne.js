@@ -8,6 +8,7 @@ import VizOneGrid from '../viz/VizOneGrid.js'
 import ViewBase from './ViewBase.js'
 import VoterRendererList from '../vizVoters/VoterRendererList.js'
 import getResultsPhaseOptions from '../phase/getResultsPhaseOptions.js'
+import getPhaseResults from '../phase/getPhaseResults.js'
 
 /**
  * Simulate one election with
@@ -79,8 +80,8 @@ export default function ViewVizOne(entities, screenMain, screenMini, menu, chang
 
         const { geoResults } = simData
         const sequenceResults = simData.geoResults.scResultsByDistrict[0]
-        const phaseResults = getPhaseResults(sequenceResults, electionOptionsMan, simOptions)
         const optionsBag = electionOptionsMan.getOptions()
+        const phaseResults = getPhaseResults(sequenceResults, optionsBag, simOptions)
         if (optionsBag.useGeography === true) {
             vizOne.update(geoResults)
         } else {
@@ -122,22 +123,4 @@ function getSomeStrategy(optionsBag, voterShapeList, simOptions) {
         someStrategy = checkSomeStrategyForPhase(voterStrategyList)
     }
     return someStrategy
-}
-
-function getPhaseResults(sequenceResults, electionOptionsMan, simOptions) {
-    const optionsBag = electionOptionsMan.getOptions()
-    const { sequenceName } = optionsBag.sequenceOptions
-    const { resultsPhaseBySeq } = simOptions
-    const resultsPhaseName = resultsPhaseBySeq[sequenceName]
-
-    let phaseResults
-
-    if (sequenceName === 'closedPrimary' && resultsPhaseName === 'closedPrimary') {
-        const { resultsPartyBySeq } = simOptions
-        const resultsParty = resultsPartyBySeq[resultsPhaseName]
-        phaseResults = sequenceResults.phases[resultsPhaseName][resultsParty]
-    } else {
-        phaseResults = sequenceResults.phases[resultsPhaseName]
-    }
-    return phaseResults
 }
