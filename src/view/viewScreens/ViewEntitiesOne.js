@@ -6,10 +6,8 @@ import VoterViewList from '../vizVoters/VoterViewList.js'
 import ViewBase from './ViewBase.js'
 import TestVoterView from '../vizTestVoter/TestVoterView.js'
 import getTestGeometry from '../../sim/geometry/getTestGeometry.js'
-import getTallyFractions from '../viz/getTallyFractions.js'
 import getResultsPhaseOptions from '../phase/getResultsPhaseOptions.js'
-import getPhaseResults from '../phase/getPhaseResults.js'
-import getAllocation from '../viz/getAllocation.js'
+import updateCandidateStatistics from './updateCandidateStatistics.js'
 
 /**
  * Draw entities: voters, candidates, test voters.
@@ -57,31 +55,8 @@ export default function ViewEntitiesOne(entities, screen, menu, changes, simOpti
             self.testVoterView.graphic.updateViewXY()
         }
 
-        const sequenceResults = simData.geoResults.scResultsByDistrict[0]
-        const { error } = sequenceResults
-        if (error === undefined) {
-            const phaseResults = getPhaseResults(sequenceResults, simOptions)
-            if (phaseResults.error === undefined) {
-                const numCans = sequenceResults.geometry.canPoints.length
-                const tf = Array(numCans)
-                const al = Array(numCans)
-
-                const allocation = getAllocation(phaseResults)
-
-                const { votes } = phaseResults
-                const tallyFractions = getTallyFractions(votes)
-
-                // map results to original candidate indices
-                const { canLabels } = phaseResults.geometry
-                for (let i = 0; i < canLabels.length; i++) {
-                    const index = canLabels[i]
-                    tf[index] = tallyFractions[i]
-                    al[index] = allocation[i]
-                }
-                candidateViewList.setCandidateFractions(tf)
-                candidateViewList.setCandidateWins(al)
-            }
-        }
+        const optionsBag = electionOptionsMan.getOptions()
+        updateCandidateStatistics(candidateViewList, simData, simOptions, optionsBag)
 
         self.testVoteView()
 

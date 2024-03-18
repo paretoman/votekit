@@ -18,9 +18,10 @@ export default function ViewVizBudget(screenCommon, layout, menu, changes, simOp
 
     function enterStrategy() {
         const optionsBag = electionOptionsMan.getOptions()
+        const { useGeography } = optionsBag
 
         const resultsPhaseOptions = getResultsPhaseOptions(optionsBag, simOptions)
-        const { socialChoiceMethod, useGeography } = resultsPhaseOptions
+        const { socialChoiceMethod } = resultsPhaseOptions
 
         const { dimensions } = simOptions
         const VizExplanation = (socialChoiceMethod === 'methodOfEqualShares' && !useGeography && dimensions === 1)
@@ -44,9 +45,16 @@ export default function ViewVizBudget(screenCommon, layout, menu, changes, simOp
             self.enter()
         }
 
-        const sequenceResults = simData.geoResults.scResultsByDistrict[0]
-        const phaseResults = getPhaseResults(sequenceResults, simOptions)
-        vizExplanation.update(sequenceResults, phaseResults)
+        const optionsBag = electionOptionsMan.getOptions()
+
+        if (optionsBag.useGeography === true) {
+            // skip
+        } else {
+            const sequenceResults = simData.geoResults.scResultsByDistrict[0]
+            const phaseResults = getPhaseResults(sequenceResults, simOptions)
+            vizExplanation.update(sequenceResults, phaseResults)
+        }
+
         self.clear()
         self.render()
     }

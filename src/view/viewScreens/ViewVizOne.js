@@ -80,14 +80,14 @@ export default function ViewVizOne(entities, screenMain, screenMini, menu, chang
             self.enter()
         }
 
-        const { geoResults } = simData
-        const sequenceResults = simData.geoResults.scResultsByDistrict[0]
         const optionsBag = electionOptionsMan.getOptions()
 
-        const phaseResults = getPhaseResults(sequenceResults, simOptions)
         if (optionsBag.useGeography === true) {
+            const { geoResults } = simData
             vizOne.update(geoResults)
         } else {
+            const sequenceResults = simData.geoResults.scResultsByDistrict[0]
+            const phaseResults = getPhaseResults(sequenceResults, simOptions)
             vizOne.update(phaseResults)
         }
 

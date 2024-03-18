@@ -1,7 +1,9 @@
 /** @module */
 
 import geoElection from '@paretoman/votekit-geographic-election'
+import districtElection from '@paretoman/votekit-district-election'
 import getGeometry from '../geometry/getGeometry.js'
+import getGeometryForPhase from '../../compute/electionSequence/getGeometryForPhase.js'
 
 /**
  * Simulate one election with
@@ -30,7 +32,7 @@ export default function SimModeOne(pub, entities, changes, districts, simOptions
 
         const geometry = getGeometry(voterShapeList, candidateList, simOptions, optionsBag, districts)
 
-        const geoResults = geoElection(geometry, optionsBag)
+        const geoResults = districtPatch(geometry, optionsBag)
 
         geoResults.colorRGBAOfCandidates = candidateList.getRGBAList()
 
@@ -38,4 +40,19 @@ export default function SimModeOne(pub, entities, changes, districts, simOptions
         pub.update(simData)
         changes.clear()
     }
+}
+
+function districtPatch(geometry, optionsBag) {
+    if (optionsBag.useGeography === true) {
+        const { sequenceName } = optionsBag.sequenceOptions
+        const phaseName = 'general'
+        const electionOptions = optionsBag.sequenceOptions.sequences[sequenceName].phases[phaseName]
+        const { castOptions } = optionsBag
+        const geometry2 = getGeometryForPhase(phaseName, geometry)
+        const deResults = districtElection(geometry2, electionOptions, castOptions)
+        const geoResults = deResults
+        return geoResults
+    }
+    // else
+    return geoElection(geometry, optionsBag)
 }
