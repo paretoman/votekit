@@ -50,9 +50,10 @@ export default function ViewVizBudget(screenCommon, layout, menu, changes, simOp
         if (optionsBag.useGeography === true) {
             // skip
         } else {
-            const sequenceResults = simData.geoResults.scResultsByDistrict[0]
+            const { geoResults } = simData
+            const sequenceResults = geoResults.scResultsByDistrict[0]
             const phaseResults = getPhaseResults(sequenceResults, simOptions)
-            vizExplanation.update(sequenceResults, phaseResults)
+            vizExplanation.update(geoResults, sequenceResults, phaseResults)
         }
 
         self.clear()

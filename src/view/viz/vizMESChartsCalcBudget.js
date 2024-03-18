@@ -2,12 +2,12 @@
 
 /**
  * Calculate data for charts of budget for MES
- * @param {Object} sequenceResults - MES methodResults plus a little extra
+ * @param {Object} phaseResults - MES methodResults plus a little extra
  * @returns budgetDataMES
  */
-export default function vizMESChartsCalcBudget(sequenceResults, phaseResults) {
+export default function vizMESChartsCalcBudget(geoResults, phaseResults) {
     const { socialChoiceResults, votes } = phaseResults
-    const { colorRGBAOfCandidates } = sequenceResults
+    const { colorRGBAOfCandidates } = geoResults
     const { winnersByRound, winnerMaxCostPerScoreByRound } = socialChoiceResults.explanation
 
     const { scoreVotes } = votes.preferenceLists
