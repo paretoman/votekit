@@ -51,6 +51,11 @@ function districtPatch(geometry, optionsBag) {
         const geometry2 = getGeometryForPhase(phaseName, geometry)
         const deResults = districtElection(geometry2, electionOptions, castOptions)
         const geoResults = deResults
+        if (sequenceName !== 'general') {
+            const message = 'Elections with both geographic components and sequence components are not yet implemented. Change number of districts to 1 and number of tracts to 1 or change election sequence to general.'
+            console.warn(message)
+            window.alert(message)
+        }
         return geoResults
     }
     // else
