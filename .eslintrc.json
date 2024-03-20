@@ -10,7 +10,7 @@
       "ecmaVersion": "latest",
       "sourceType": "module"
     },
-    "ignorePatterns": [ "dev", "lib", "dist", "_site", "docs" ],
+    "ignorePatterns": [ "dev", "**/lib", "**/dist", "_site", "**/docs" ],
     "rules": {
       "semi": [ "error", "never" ],
       "indent": [ "error", 4 ],
@@ -24,6 +24,11 @@
       "no-bitwise": "off",
       "max-len": "off",
       "object-curly-newline": [ "error", { "ObjectPattern": { "consistent": true } } ],
-      "import/no-relative-packages": "off"
-    }
+      "import/no-extraneous-dependencies": ["error", {"devDependencies": ["**/test.js"]}],
+      "jsdoc/no-undefined-types": 0
+    },
+    "root":true,
+    "plugins": [
+      "jsdoc"
+    ]
   }
