@@ -1,4 +1,3 @@
-import { range } from '@paretoman/votekit-utilities'
 import getGeoms from './getGeoms.js'
 import getPoints from './getPoints.js'
 
