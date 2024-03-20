@@ -9,6 +9,7 @@
     "test": "test"
   },
   "scripts": {
+    "test": "cd src/compute/compute && npm run test",
     "doc": "jsdoc -c jsdoc.json",
     "build": "npm run parcel-build && npm run copy1 && npm run copy2 && npm run copy3",
     "parcel-build": "parcel build src/addSandboxes/addSandboxes.js --dist-dir dist/src/sandbox",
@@ -47,6 +48,7 @@
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-plugin-import": "^2.25.4",
     "jsdoc": "^3.6.10",
+    "mocha": "^10.3.0",
     "parcel": "^2.4.1",
     "process": "^0.11.10",
     "simplex-noise": "^3.0.1",

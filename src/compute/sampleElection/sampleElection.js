@@ -1,4 +1,4 @@
-import { last, randomIndexFromCDF } from '@paretoman/votekit-utilities'
+import { randomIndexFromCDF } from '@paretoman/votekit-utilities'
 import electionSequence from '@paretoman/votekit-election-sequence'
 import sampleCanDnGeom from './sampleCanDnGeom.js'
 /**

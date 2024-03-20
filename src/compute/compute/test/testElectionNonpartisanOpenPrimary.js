@@ -1,4 +1,3 @@
-import { last } from '@paretoman/votekit-utilities'
 import electionSequence from '@paretoman/votekit-election-sequence'
 import electionOptions2NonpartisanOpenPrimary from './electionOptions2NonpartisanOpenPrimary.js'
 import testGeometry1 from './testGeometry1.js'
