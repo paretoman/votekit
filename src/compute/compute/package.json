@@ -6,15 +6,9 @@
   "type": "module",
   "scripts": {
     "test": "mocha --reporter list",
-    "snowpack": "snowpack build",
-    "lint": "eslint .",
-    "doc": "jsdoc -c jsdoc.json",
-    "check-types": "tsc --noEmit -p ./jsconfig.json",
-    "check-types-silent": "tsc-silent -p ./jsconfig.json --suppress @/lib @/snowpack.config.cjs @/test/test.js",
-    "linkAll": "npm link ./types ./utilities ./socialChoiceMethods ./voteCasters ./election ./districtElection ./electionPhase ./electionSequence ./geoElection ./sampleElection ./makeGeography"
+    "linkAll": "npm link ../types ../utilities ../socialChoiceMethods ../voteCasters ../election ../districtElection ../electionPhase ../electionSequence ../geoElection ../sampleElection ../makeGeography"
   },
   "directories": {
-    "doc": "docs",
     "test": "test"
   },
   "repository": {
@@ -60,26 +54,16 @@
     "OLPR"
   ],
   "devDependencies": {
-    "d3-delaunay": "^6.0.2",
-    "d3-polygon": "^3.0.1",
-    "eslint": "^8.7.0",
-    "eslint-config-airbnb-base": "^15.0.0",
-    "eslint-plugin-import": "^2.25.4",
-    "eslint-plugin-jsdoc": "^40.0.0",
-    "mocha": "^10.2.0",
-    "seedrandom": "^3.0.5",
-    "simplex-noise": "^3.0.1",
-    "snowpack": "^3.8.8",
-    "tsc-silent": "^1.2.2",
-    "typescript": "^4.9.5"
+    "assert": "^2.1.0",
+    "mocha": "^10.2.0"
   },
   "dependencies": {
-    "seedrandom": "^3.0.5",
-    "@paretoman/votekit-utilities": "^0.0.0",
     "@paretoman/votekit-election-sequence": "^0.0.0",
+    "@paretoman/votekit-make-geography": "^0.0.0",
     "@paretoman/votekit-sample-election": "^0.0.0",
     "@paretoman/votekit-social-choice-methods": "^0.0.0",
+    "@paretoman/votekit-utilities": "^0.0.0",
     "@paretoman/votekit-vote-casters": "^0.0.0",
-    "@paretoman/votekit-make-geography": "^0.0.0"    
+    "seedrandom": "^3.0.5"
   }
 }

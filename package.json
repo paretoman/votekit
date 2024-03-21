@@ -20,7 +20,9 @@
     "publish-docs": "cd docs && git add . && git commit && git push -u",
     "snowpack": "snowpack build",
     "lint-compute": "eslint ./src/compute",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "check-types": "tsc --noEmit -p ./src/compute/jsconfig.json",
+    "check-types-silent": "tsc-silent ./src/compute/** -p ./jsconfig.json --suppress @/lib @/snowpack.config.cjs @/test/test.js"
   },
   "repository": {
     "type": "git",
@@ -56,7 +58,9 @@
     "seedrandom": "^3.0.5",
     "simplex-noise": "^3.0.1",
     "snowpack": "^3.8.8",
-    "split-polygon": "^1.0.0"
+    "split-polygon": "^1.0.0",
+    "tsc-silent": "^1.2.2",
+    "typescript": "^5.4.2"
   },
   "keywords": [
     "explorable",

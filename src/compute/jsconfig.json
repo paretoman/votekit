@@ -26,12 +26,6 @@
         }
     },
     "exclude": [
-        "_site",
-        "dev",
-        "dist",
-        "docs",
-        "node_modules",
-        "**/node_modules/*",
-        "lib"
+        "**/node_modules/*"
     ]
 }
