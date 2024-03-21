@@ -5,8 +5,7 @@
   "main": "compute.js",
   "type": "module",
   "scripts": {
-    "test": "mocha --reporter list",
-    "linkAll": "npm link ../types ../utilities ../socialChoiceMethods ../voteCasters ../election ../districtElection ../electionPhase ../electionSequence ../geoElection ../sampleElection ../makeGeography"
+    "test": "mocha --reporter list"
   },
   "directories": {
     "test": "test"

@@ -95,5 +95,10 @@
     "Sainte-Lague",
     "MMP",
     "OLPR"
+  ],
+  "workspaces": [
+    "src/*", 
+    "src/compute/*"
   ]
+  
 }
