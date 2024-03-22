@@ -4,6 +4,7 @@
         "target": "es6",
         "moduleResolution": "nodenext",
         "baseUrl": ".",
+        "forceConsistentCasingInFileNames": true,           /* Ensure that casing is correct in imports. */
     },
     "exclude": [
         "_site",
