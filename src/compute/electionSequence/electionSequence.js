@@ -3,6 +3,9 @@
 import electionClosedPrimary from './electionClosedPrimary.js'
 import electionGeneral from './electionGeneral.js'
 import electionNonpartisanPrimary from './electionNonPartisanPrimary.js'
+import getGeometryForPhase from './getGeometryForPhase.js'
+
+export { getGeometryForPhase }
 
 /**
  * Here we are in the context of an election sequence.

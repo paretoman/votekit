@@ -1,3 +1,6 @@
+/* eslint-disable guard-for-in */
+/* eslint-disable no-restricted-syntax */
+/* eslint-disable no-param-reassign */
 /** @module */
 
 import Button from './Button.js'
@@ -170,10 +173,7 @@ export default function ButtonGroup(config) {
             }
         } else {
             // Find the one...
-            const theButton = self.buttons.filter((button) => {
-                const { config } = button
-                return (config[propName] === propValue)
-            })[0]
+            const theButton = self.buttons.filter((button) => (button.config[propName] === propValue))[0]
             if (theButton !== undefined) {
                 theButton.turnOn()
             }

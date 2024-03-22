@@ -22,6 +22,7 @@
     "snowpack": "snowpack build",
     "lint-compute": "eslint ./src/compute",
     "lint": "eslint .",
+    "lint:fix": "eslint --fix --ext .js,.jsx .",
     "check-types": "tsc --noEmit -p ./src/compute/jsconfig.json",
     "check-types-silent": "tsc-silent -p ./src/compute/jsconfig.json --suppress @/node_modules",
     "check-types-silent-all": "tsc-silent -p ./jsconfig.json --suppress @/node_modules"

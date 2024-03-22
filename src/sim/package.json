@@ -18,11 +18,14 @@
   },
   "homepage": "https://github.com/paretoman/votekit#readme",
   "dependencies": {
+    "@paretoman/votekit-district-election": "^0.0.0",
     "@paretoman/votekit-geographic-election": "^0.0.0",
-    "@paretoman/votekit-utilities": "^0.0.0",
+    "@paretoman/votekit-election-sequence": "^0.0.0",
     "@paretoman/votekit-graphics": "^0.0.0",
     "@paretoman/votekit-make-geography": "^0.0.0",
     "@paretoman/votekit-sample-election": "^0.0.0",
-    "@paretoman/votekit-social-choice-methods": "^0.0.0"
+    "@paretoman/votekit-social-choice-methods": "^0.0.0",
+    "@paretoman/votekit-utilities": "^0.0.0",
+    "seedrandom": "^3.0.5"
   }
 }

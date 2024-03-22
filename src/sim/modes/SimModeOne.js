@@ -2,8 +2,8 @@
 
 import geoElection from '@paretoman/votekit-geographic-election'
 import districtElection from '@paretoman/votekit-district-election'
+import { getGeometryForPhase } from '@paretoman/votekit-election-sequence'
 import getGeometry from '../geometry/getGeometry.js'
-import getGeometryForPhase from '../../compute/electionSequence/getGeometryForPhase.js'
 
 /**
  * Simulate one election with
@@ -53,7 +53,9 @@ function districtPatch(geometry, optionsBag) {
         const geoResults = deResults
         if (sequenceName !== 'general') {
             const message = 'Elections with both geographic components and sequence components are not yet implemented. Change number of districts to 1 and number of tracts to 1 or change election sequence to general.'
+            // eslint-disable-next-line no-console
             console.warn(message)
+            // eslint-disable-next-line no-alert
             window.alert(message)
         }
         return geoResults

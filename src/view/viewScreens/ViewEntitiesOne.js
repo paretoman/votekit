@@ -1,11 +1,11 @@
 /** @module */
 
 import voteCasters from '@paretoman/votekit-vote-casters'
+import { getTestGeometry } from '@paretoman/votekit-sim'
 import CandidateViewList from '../vizCandidates/CandidateViewList.js'
 import VoterViewList from '../vizVoters/VoterViewList.js'
 import ViewBase from './ViewBase.js'
 import TestVoterView from '../vizTestVoter/TestVoterView.js'
-import getTestGeometry from '../../sim/geometry/getTestGeometry.js'
 import getResultsPhaseOptions from '../phase/getResultsPhaseOptions.js'
 import updateCandidateStatistics from './updateCandidateStatistics.js'
 
