@@ -23,7 +23,8 @@
     "lint-compute": "eslint ./src/compute",
     "lint": "eslint .",
     "check-types": "tsc --noEmit -p ./src/compute/jsconfig.json",
-    "check-types-silent": "tsc-silent ./src/compute/** -p ./jsconfig.json --suppress @/lib @/snowpack.config.cjs @/test/test.js"
+    "check-types-silent": "tsc-silent -p ./src/compute/jsconfig.json --suppress @/node_modules",
+    "check-types-silent-all": "tsc-silent -p ./jsconfig.json --suppress @/node_modules"
   },
   "repository": {
     "type": "git",
