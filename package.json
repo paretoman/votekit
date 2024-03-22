@@ -9,7 +9,8 @@
     "test": "test"
   },
   "scripts": {
-    "test": "cd src/compute/compute && npm run test",
+    "test": "npm run test -ws",
+    "test-compute": "npm run test -w src/compute/compute",
     "doc": "jsdoc -c jsdoc.json",
     "build": "npm run parcel-build && npm run copy1 && npm run copy2 && npm run copy3",
     "parcel-build": "parcel build src/addSandboxes/addSandboxes.js --dist-dir dist/src/sandbox",
