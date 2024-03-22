@@ -23,6 +23,20 @@
 			"problemMatcher": [],
 			"label": "npm: test - src/compute",
 			"detail": "mocha --reporter list"
+		},
+		{
+			"type": "npm",
+			"script": "check-types",
+			"problemMatcher": [],
+			"label": "npm: check-types",
+			"detail": "tsc --noEmit -p ./src/compute/jsconfig.json"
+		},
+		{
+			"type": "npm",
+			"script": "check-types-silent",
+			"problemMatcher": [],
+			"label": "npm: check-types-silent",
+			"detail": "tsc-silent ./src/compute/** -p ./jsconfig.json --suppress @/lib @/snowpack.config.cjs @/test/test.js"
 		}
 	]
 }
