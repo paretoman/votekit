@@ -6,26 +6,5 @@
         "forceConsistentCasingInFileNames": true,           /* Ensure that casing is correct in imports. */
         "moduleResolution": "nodenext",
         "baseUrl": ".",
-        "paths": {
-            "@paretoman/votekit-social-choice-methods": ["./socialChoiceMethods/socialChoiceMethods.js"],
-            "@paretoman/votekit-utilities": ["./utilities/utilities.js"],
-            "@paretoman/votekit-types": ["./types/types.js"],
-            "@paretoman/votekit-vote-casters": ["./voteCasters/voteCasters/voteCasters.js"],
-            "@paretoman/votekit-election": ["./election/election.js"],
-            "@paretoman/votekit-election-phase": ["./electionPhase/electionPhase.js"],
-            "@paretoman/votekit-election-sequence": ["./electionSequence/electionSequence.js"],
-            "@paretoman/votekit-district-election": ["./districtElection/districtElection.js"],
-            "@paretoman/votekit-make-geography": ["./makeGeography/makeGeography.js"],
-            "@paretoman/votekit-sample-election": ["./sampleElection/sampleElection.js"],
-            "@paretoman/votekit-geographic-election": ["./geoElection/geoElection.js"],
-            "@paretoman/votekit-compute": ["./compute/compute.js"],
-            "seedrandom": ["./lib/snowpack/build/snowpack/pkg/seedrandom.js"],
-            "d3-polygon": ["./lib/snowpack/build/snowpack/pkg/d3-polygon.js"],
-            "d3-delaunay": ["./lib/snowpack/build/snowpack/pkg/d3-delaunay.js"],
-            "simplex-noise": ["./lib/snowpack/build/snowpack/pkg/simplex-noise.js"]
-        }
-    },
-    "exclude": [
-        "**/node_modules/*"
-    ]
+    }
 }
