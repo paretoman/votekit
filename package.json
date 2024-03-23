@@ -1,6 +1,6 @@
 {
   "name": "@paretoman/votekit",
-  "version": "1.0.0",
+  "version": "0.0.0",
   "description": "An explorable sandbox that shows how different voting methods work using a spatial opinion model.",
   "type": "module",
   "directories": {
