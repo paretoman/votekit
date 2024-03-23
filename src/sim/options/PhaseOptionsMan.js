@@ -17,7 +17,7 @@ export default function PhaseOptionsMan(sequenceName, phaseName, changes, comman
     self.socialChoiceOptionsMan = new SocialChoiceOptionsMan(changes, phaseOptions)
 
     self.setSocialChoiceMethod = commander.addSender({
-        name: `sequence-${sequenceName}-phase-${phaseName}-socialChoiceMethod`,
+        name: `socialChoiceMethod-sequence-${sequenceName}-phase-${phaseName}`,
         currentValue: phaseOptions.socialChoiceMethod,
         action(functionName) {
             phaseOptions.socialChoiceMethod = functionName
