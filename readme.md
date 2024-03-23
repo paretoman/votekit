@@ -4,7 +4,7 @@
 
 The homepage has a simple [example](https://www.howtofixtheelection.com/votekit/) running the source code in the browser, so you can see how it works:
 
-I run tests like this [one](https://www.howtofixtheelection.com/votekit/test) while I am developing the code.
+I run tests like this [one](https://www.howtofixtheelection.com/votekit/dist/test) while I am developing the code.
 
 Press F12 to get the browser's dev tools. They're great for stepping through the code. Pause the code with F8 and step through with F10 and F11.
 
@@ -48,4 +48,4 @@ There are also auto-generated [docs](https://www.howtofixtheelection.com/votekit
 
 ## Build
 
-If you really get into developing the code, you'll probably like to know that I use development tools like eslint, parcel, jsdoc, snowpack, and jekyll.
+If you really get into developing the code, you'll probably like to know that I use development tools like eslint, parcel, jsdoc, snowpack, and jekyll. Just check package.json for all the scripts.
