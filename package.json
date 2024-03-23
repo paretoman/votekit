@@ -11,10 +11,10 @@
     "test": "npm run test -ws",
     "test:compute": "npm run test -w src/compute/compute",
     "doc": "jsdoc -c jsdoc.json",
-    "build": "npm run parcel-build && npm run copy1 && npm run copy2 && npm run copy4",
+    "build": "npm run parcel-build && npm run copy1 && npm run copy2",
     "parcel-build": "parcel build src/addSandboxes/addSandboxes.js --dist-dir dist/src/addSandboxes",
-    "copy1": "copyfiles -u 1 \"src/**/*.{css,html}\" \"dist/src/\"",
-    "copy2": "copyfiles -u 1 \"test/**/*.*\" \"dist/test/\"",
+    "copy1": "copyfiles src/**/*.{css,html} dist -e src/demo/**/*",
+    "copy2": "copyfiles test/**/*.* dist",
     "publish-docs": "cd docs && git add . && git commit && git push -u",
     "snowpack": "snowpack build",
     "lint:compute": "eslint ./src/compute",
@@ -28,8 +28,10 @@
     "copy5": "copyfiles dist/**/* tutorial/**/* docs/**/* src/demo",
     "site:local": "npm run copy5 && npm run jekyll:local",
     "jekyll:local": "cd src/demo && bundle exec jekyll build --config _config.yml,_config_local.yml",
-    "all": "npm run build && npm run doc && npm run site && npm run site:local",
-    "clean": "rimraf dist docs src/demo/tutorial src/demo/docs src/demo/_site src/demo/_site_local src/demo/dist"
+    "all": "npm run clean && npm run build && npm run doc && npm run site && npm run site:local",
+    "clean": "rimraf dist docs src/demo/tutorial src/demo/docs src/demo/_site src/demo/_site_local src/demo/dist",
+    "push:prepare": "cd src/demo/_site && git init && git checkout -b gh-pages && git add . && git commit -m localPush && git remote add origin https://github.com/paretoman/votekit.git",
+    "push": "npm run push:prepare && cd src/demo/_site && git push -u origin gh-pages"
   },
   "repository": {
     "type": "git",
