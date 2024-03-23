@@ -28,7 +28,8 @@
     "copy5": "copyfiles dist/**/* tutorial/**/* docs/**/* src/demo",
     "site:local": "npm run copy5 && npm run jekyll:local",
     "jekyll:local": "cd src/demo && bundle exec jekyll build --config _config.yml,_config_local.yml",
-    "all": "npm run build && npm run doc && npm run site && npm run site:local"
+    "all": "npm run build && npm run doc && npm run site && npm run site:local",
+    "clean": "rimraf dist docs src/demo/tutorial src/demo/docs src/demo/_site src/demo/_site_local src/demo/dist"
   },
   "repository": {
     "type": "git",
@@ -61,6 +62,7 @@
     "mocha": "^10.3.0",
     "parcel": "^2.4.1",
     "process": "^0.11.10",
+    "rimraf": "^5.0.5",
     "seedrandom": "^3.0.5",
     "simplex-noise": "^3.0.1",
     "snowpack": "^3.8.8",
@@ -103,8 +105,7 @@
     "OLPR"
   ],
   "workspaces": [
-    "src/*", 
+    "src/*",
     "src/compute/*"
   ]
-  
 }
