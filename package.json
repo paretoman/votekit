@@ -31,7 +31,8 @@
     "all": "npm run clean && npm run build && npm run doc && npm run site && npm run site:local",
     "clean": "rimraf dist docs src/demo/tutorial src/demo/docs src/demo/_site src/demo/_site_local src/demo/dist",
     "push:prepare": "cd src/demo/_site && git init && git checkout -b gh-pages && git add . && git commit -m localPush && git remote add origin https://github.com/paretoman/votekit.git",
-    "push": "npm run push:prepare && cd src/demo/_site && git push -u origin gh-pages"
+    "push": "npm run push:prepare && cd src/demo/_site && git push -u origin gh-pages",
+    "publish": "npm publish -ws --access public"
   },
   "repository": {
     "type": "git",
