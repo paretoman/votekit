@@ -37,12 +37,12 @@ thumbnail: "/img/VoteKit_Thumbnail.png"
 production: true
 
 # Build settings
-markdown: kramdown
 theme: minima
 plugins:
-  - jekyll-feed
+  - jekyll-relative-links
 header_pages:
   - tutorial/index.md
+  - s/index.md
   - index.md
 
 # Exclude from processing.
