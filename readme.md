@@ -2,66 +2,50 @@
 
 ## Try
 
-[Here is a simple example](https://www.howtofixtheelection.com/votekit/) running the source code in the browser, so you can see how it works:
+The homepage has a simple [example](https://www.howtofixtheelection.com/votekit/) running the source code in the browser, so you can see how it works:
 
-* https://www.howtofixtheelection.com/votekit/
+I run tests like this [one](https://www.howtofixtheelection.com/votekit/test) while I am developing the code.
 
-[Here's the last example I was testing](https://www.howtofixtheelection.com/votekit/test):
+Press F12 to get the browser's dev tools. They're great for stepping through the code. Pause the code with F8 and step through with F10 and F11.
 
-* https://www.howtofixtheelection.com/votekit/test
-
-[Make edits and save as a fork on codesandbox](https://codesandbox.io/s/github/paretoman/votekit). This is pretty cool, you can just jump right into the code and make new things and save them. Much better than F12.
-
-* https://codesandbox.io/s/github/paretoman/votekit
-
-[Here is the votekit library being included as a submodule](https://www.howtofixtheelection.com/votekit-example) as part of a github-pages site.
-
-* https://www.howtofixtheelection.com/votekit-example.
+Codesandbox is an interactive code editor so you can make a copy and make your own [edits](https://codesandbox.io/s/github/paretoman/votekit) to see how things work. There's a little troubleshooting you have to do in loading packages, though. It's not the most foolproof.
 
 ## Use
 
 One way to include this library in your project is to use it as a submodule. You can use any directory or path instead of "votekit".
+
 ```
 git submodule add https://github.com/paretoman/votekit.git votekit
 ```
+
 Then add this script tag in your code.
+
 ```
 <script src="votekit/src/addSandboxes/addSandboxes.js"></script>
 ```
 
-Another way is to copy and paste the [distribution bundle](https://github.com/paretoman/votekit-example-src/tree/main/lib/votekit/dist) to your project: 
-
-* https://github.com/paretoman/votekit-example-src/tree/main/lib/votekit/dist
-
+Another way is to copy and paste the distribution [bundle](https://github.com/paretoman/votekit/tree/gh-pages/dist) to your project.
 
 Another way to add this distribution bundle is to put this script tag and these css tags in your code:
 
 ```
-<script src="https://raw.githubusercontent.com/paretoman/votekit-example-src/main/lib/votekit/dist/src/addSandboxes/addSandboxes.js"></script>
-<link href="https://raw.githubusercontent.com/paretoman/votekit-example-src/main/lib/votekit/dist/src/addSandboxes/sandbox.css" rel="stylesheet">
-<link href="https://raw.githubusercontent.com/paretoman/votekit-example-src/main/lib/votekit/dist/src/view/menu/button.css" rel="stylesheet">
+<script src="https://raw.githubusercontent.com/paretoman/votekit/gh-pages/dist/src/addSandboxes/addSandboxes.js"></script>
+<link href="https://raw.githubusercontent.com/paretoman/votekit/gh-pages/dist/src/addSandboxes/sandbox.css" rel="stylesheet">
+<link href="https://raw.githubusercontent.com/paretoman/votekit/gh-pages/dist/src/view/menu/button.css" rel="stylesheet">
 ```
 
 For any of these methods, the script will run and find any HTMLElements, such as a div, with the class "sandbox" and insert a simulation sandbox as its neighbor under the same parent. You can use the data- attributes to pass data to the sandbox to configure it.
 
 ## Develop
 
-[Tutorial](https://www.howtofixtheelection.com/votekit/tutorial/) for understanding the code: 
+The [Tutorial](https://www.howtofixtheelection.com/votekit/tutorial/) explains the architecture of the code, for those who want to develop it.
 
-* https://www.howtofixtheelection.com/votekit/tutorial/
-
-To make changes, use a good code editor and launch a web server to view ./test/index.html. 
+I wanted the code to be easy to download and edit. All you have to do is find the "code/download" button above, download the code, and start a webserver. Then you make changes and see results. You don't need node or npm. You'll get to those later. For now, you'll just need to start a local web server and that's it.
 
 I suggest VSCode as an editor. Use an extension in VSCode to launch a web server. Specifically, use Ritwick Dey's Live Server. Also, you'll need to do a few steps to get fully into development mode. Use F5 to do debugging. For the first time hitting F5 in VSCode, choose to attach to Chrome, save the file, then hit F5 again.
 
-Read [the documentation](https://votekit.netlify.app/docs/):
-
-* https://votekit.netlify.app/docs/
+There are also auto-generated [docs](https://www.howtofixtheelection.com/votekit/docs/), but I'm not sure they are really helpful.
 
 ## Build
 
-There are a few more things you can do. Use JSDoc to make the documentation. Use Parcel to bundle the javascript into one file, like in the top link.
-
-Here's an example [netlify deploy](https://votekit.netlify.app/):
-
-* https://votekit.netlify.app/
+If you really get into developing the code, you'll probably like to know that I use development tools like eslint, parcel, jsdoc, snowpack, and jekyll.
