@@ -1,4 +1,7 @@
 _site
+_site_local
+test
+tutorial
 .sass-cache
 .jekyll-cache
 .jekyll-metadata

@@ -18,21 +18,32 @@
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
 
-title: Your awesome title
-email: your-email@example.com
+title: VoteKit Demo
+email: smartvotingsimulator1@gmail.com
 description: >- # this means to ignore newlines until "baseurl:"
-  Write an awesome description for your new site here. You can edit this
-  line in _config.yml. It will appear in your document head meta (for
-  Google search results) and in your feed.xml site description.
-baseurl: "" # the subpath of your site, e.g. /blog
-url: "" # the base hostname & protocol for your site, e.g. http://example.com
-twitter_username: jekyllrb
-github_username:  jekyll
+  Here's a demo site that uses votekit. Votekit is an explorable sandbox that shows how different voting methods work. Single elections are presented visually using a spatial opinion model. Ensembles of elections are also presented with distributions of winning positions. (The rest of this description will become more accurate with time.) Some consideration of strategy is performed. Voting methods include single-winner systems like plurality, approval, condorcet methods, instant runoff, score, star, etc. Electoral methods also include proportional multi-member district methods like the Single Transferable Vote, Monroe, Thiele's Proportional Approval Voting, Phragmen's method, etc. Electoral methods also include party-list proportional methods like d'Hondt, Huntington-Hill, Webster, etc. Additional electoral methods include MMP and OLPR.
+baseurl: "/votekit" # the subpath of your site, e.g. /blog
+url: "https://paretoman.github.io" # the base hostname & protocol for your site, e.g. http://example.com
+twitter_username: paretoman1
+github_username:  paretoman
+author: Paretoman
+minima:
+  social_links:
+    github: Paretoman
+    twitter: Paretoman1
+    youtube_channel: UCrwpT8YjxePjH0RxSCwbTlQ
+    youtube_channel_name: Paretoman
+thumbnail: "/img/VoteKit_Thumbnail.png"
+production: true
 
 # Build settings
+markdown: kramdown
 theme: minima
 plugins:
   - jekyll-feed
+header_pages:
+  - tutorial/index.md
+  - index.md
 
 # Exclude from processing.
 # The following items will not be processed, by default.

@@ -1,0 +1,10 @@
+
+<div class="sim-sandbox">
+    <div class="sim-container">
+        <div class="sandbox" 
+            {%- if include.config -%}
+            data-config="{{ include.config }}"
+            {%- endif %} data-sandboxurl="{{ include.sandboxurl }}">
+        </div>
+	</div>
+</div>

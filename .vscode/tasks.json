@@ -7,10 +7,7 @@
 			"problemMatcher": [],
 			"label": "npm: doc",
 			"detail": "jsdoc -c jsdoc.json",
-			"group": {
-				"kind": "build",
-				"isDefault": true
-			}
+			"group": "build"
 		},
 		{
 			"type": "npm",
@@ -37,6 +34,17 @@
 			"problemMatcher": [],
 			"label": "npm: check-types-silent",
 			"detail": "tsc-silent ./src/compute/** -p ./jsconfig.json --suppress @/lib @/snowpack.config.cjs @/test/test.js"
+		},
+		{
+			"type": "npm",
+			"script": "jekyll:local",
+			"problemMatcher": [],
+			"label": "npm: jekyll:local",
+			"detail": "cd src/demo && bundle exec jekyll build --config _config.yml,_config_local.yml",
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			}
 		}
 	]
 }
