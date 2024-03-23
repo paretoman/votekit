@@ -12,26 +12,32 @@ Codesandbox is an interactive code editor so you can make a copy and make your o
 
 ## Use
 
-One way to include this library in your project is to use it as a submodule. You can use any directory or path instead of "votekit".
+The easy way is to copy and paste the distribution [bundle](https://github.com/paretoman/votekit/tree/gh-pages/dist) to your project.
 
+Another way to add this distribution bundle is to put this script tag and these css tags in your code:
+
+```html
+<script src="https://raw.githubusercontent.com/paretoman/votekit/gh-pages/dist/src/addSandboxes/addSandboxes.js"></script>
+<link href="https://raw.githubusercontent.com/paretoman/votekit/gh-pages/dist/src/addSandboxes/sandbox.css" rel="stylesheet">
+<link href="https://raw.githubusercontent.com/paretoman/votekit/gh-pages/dist/src/view/menu/button.css" rel="stylesheet">
 ```
+
+If you want to use npm, I made an npm package, so you can get the js stuff above (but I'm still figuring out the css):
+
+```bash
+npm install @paretoman/votekit-add-sandboxes
+```
+
+If you really want the latest updates, maybe you could include this library as a submodule. You can use any directory or path instead of "votekit".
+
+```bash
 git submodule add https://github.com/paretoman/votekit.git votekit
 ```
 
 Then add this script tag in your code.
 
-```
+```html
 <script src="votekit/src/addSandboxes/addSandboxes.js"></script>
-```
-
-Another way is to copy and paste the distribution [bundle](https://github.com/paretoman/votekit/tree/gh-pages/dist) to your project.
-
-Another way to add this distribution bundle is to put this script tag and these css tags in your code:
-
-```
-<script src="https://raw.githubusercontent.com/paretoman/votekit/gh-pages/dist/src/addSandboxes/addSandboxes.js"></script>
-<link href="https://raw.githubusercontent.com/paretoman/votekit/gh-pages/dist/src/addSandboxes/sandbox.css" rel="stylesheet">
-<link href="https://raw.githubusercontent.com/paretoman/votekit/gh-pages/dist/src/view/menu/button.css" rel="stylesheet">
 ```
 
 For any of these methods, the script will run and find any HTMLElements, such as a div, with the class "sandbox" and insert a simulation sandbox as its neighbor under the same parent. You can use the data- attributes to pass data to the sandbox to configure it.
