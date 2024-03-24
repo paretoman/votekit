@@ -1,9 +1,15 @@
+body {
+	background: #F5F5F5;
+	color: #222;
+}
+
 div.screenWrap {
 	position:relative;
+	background: white;
 }
 
 div.screenWrap, canvas.maps, div.svgDiv, div.mSvgDiv {
-    border: solid black 1px;
+    border: solid #888 1px;
 	margin: 4px;
 }
 
@@ -79,6 +85,9 @@ ul.top-links {
 
 .darkMode div.screenWrap, canvas.maps, div.svgDiv, div.mSvgDiv {
 	border-color: white;
+}
+.darkMode div.screenWrap {
+	background: #222;
 }
 
 /* jekyll site */
