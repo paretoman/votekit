@@ -11,7 +11,7 @@ export { getGeometryForPhase }
  * Here we are in the context of an election sequence.
  * @param {*} geometry
  * @param {*} optionsBag
- * @returns
+ * @returns {*} sequenceResults
  */
 export default function electionSequence(geometry, optionsBag) {
     const { canPoints, voterGeoms } = geometry

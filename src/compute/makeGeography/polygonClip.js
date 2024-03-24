@@ -6,7 +6,7 @@
  * https://observablehq.com/@d3/polygonclip@1237
  * @param {number[][]} clip - polygon
  * @param {number[][]} subject0 - polygon, gets mutated
- * @returns {[number,number][]} - polygon
+ * @returns {number[][]} - polygon
  */
 export default function polygonClip(clip, subject0) {
     const closed = polygonClosed(subject0)

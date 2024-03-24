@@ -3,7 +3,7 @@
 /**
  * Get polling information from election results.
  * @param {*} lastElectionResults
- * @returns
+ * @returns {*}
  */
 export default function calculatePolling(lastElectionResults) {
     if (lastElectionResults === null) {

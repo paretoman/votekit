@@ -8,7 +8,7 @@ import sampleCanDnGeom from './sampleCanDnGeom.js'
  * @param {*} optionsBag
  * @param {*} numSamples
  * @param {*} rng
- * @returns
+ * @returns {*} sampleResult
  */
 export default function sampleElection(samplingGeometry, optionsBag, numSamples, rng) {
     const { voterGeoms, voterParties, canDnGeoms, dimensions, geography, canDnCDF, strategySeed, voterStrategyListByPhase, information, usePollsByPhase } = samplingGeometry

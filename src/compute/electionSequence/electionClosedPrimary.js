@@ -10,7 +10,7 @@ import getElectionOptions from './getElectionOptions.js'
  * Run a primary election for each party, then a general election.
  * @param {*} geometry
  * @param {*} optionsBag
- * @returns
+ * @returns {*} sequenceResults
  */
 export default function electionClosedPrimary(geometry, optionsBag) {
     const { numParties } = geometry.parties
@@ -39,7 +39,7 @@ export default function electionClosedPrimary(geometry, optionsBag) {
  * Get the geometry for a primary election.
  * @param {*} geometry
  * @param {*} partyIndex
- * @returns
+ * @returns {*} primaryGeometry
  */
 function getPrimaryGeometry(geometry, partyIndex) {
     const g0 = getGeometryForPhase('closedPrimary', geometry)

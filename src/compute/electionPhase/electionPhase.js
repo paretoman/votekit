@@ -8,7 +8,7 @@ import electionCycle from './electionCycle.js'
  * @param {*} geometry
  * @param {*} electionOptions
  * @param {*} optionsBag
- * @returns
+ * @returns {*} electionResults
  */
 export default function electionPhase(geometry, electionOptions, optionsBag) {
     const { castOptions } = optionsBag

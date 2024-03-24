@@ -8,7 +8,7 @@ import calculatePolling from './calculatePolling.js'
  * @param {*} geometry
  * @param {*} electionOptions
  * @param {*} optionsBag
- * @returns
+ * @returns {*} electionResults
  */
 export default function electionCycle(geometry, electionOptions, optionsBag) {
     const { pollCount } = optionsBag
