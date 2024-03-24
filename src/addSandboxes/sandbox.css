@@ -62,10 +62,11 @@ ul.top-links {
 
 
 .darkMode body { 
-	background:  #222; color: white; 
+	background:  #222;
+	color: #ddd; 
 }
 .darkMode div.sim-container { 
-	background:  #222; color: white; 
+	background:  #222; 
 }
 .darkMode a:link {
 	color: #dde;
@@ -75,12 +76,10 @@ ul.top-links {
 }
 .darkMode input {
 	background:  #222; 
-	color: white;
     border: 1px solid #888;
 }
 .darkMode textarea {
 	background:  #222; 
-	color: white;
 }
 
 .darkMode div.screenWrap, canvas.maps, div.svgDiv, div.mSvgDiv {

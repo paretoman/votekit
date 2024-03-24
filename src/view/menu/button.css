@@ -98,7 +98,7 @@
 
 
 .darkMode .sim-sandbox .button:hover{
-    background: #222;
+    background: #ddd;
     border-color: #777;
 }
 .darkMode .sim-sandbox .button:active{
@@ -108,9 +108,6 @@
 .darkMode .sim-sandbox .button[on=yes]{
     background: #444;
     color: #fff;
-}
-.darkMode .sim-sandbox .button[on=yes]:hover{
-    background: #222;
 }
 .darkMode .button[on=yes]:active{
     background: #eee;
