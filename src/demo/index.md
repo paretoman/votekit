@@ -1,6 +1,7 @@
 ---
 title: Home
-layout: default-1-sandboxes
+layout: default-sandboxes
+head: head-1.html
 ---
 
 * [Tutorial](./tutorial/)

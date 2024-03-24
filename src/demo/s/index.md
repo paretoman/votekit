@@ -1,5 +1,6 @@
 ---
 title: Sandbox
-layout: default-2-sandboxes
+layout: default-sandboxes
+head: head-2.html
 ---
 {% include sandbox.html sandboxurl='' %}

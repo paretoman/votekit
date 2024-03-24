@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "description": "Add a sandbox election to a page with a placeholder.",
   "main": "addSandboxes.js",
+  "style": "sandbox.css",
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

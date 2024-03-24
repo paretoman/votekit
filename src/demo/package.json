@@ -1,0 +1,30 @@
+{
+  "name": "@paretoman/votekit-demo",
+  "version": "0.0.0",
+  "description": "Demo site showing use of votekit",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "parcel-build-2": "npm run parcel-build-js && npm run parcel-build-css",
+    "parcel-build-js": "parcel build src/addSandboxes.js --dist-dir dist-b/src/addSandboxes",
+    "parcel-build-css": "parcel build src/sandbox.css --dist-dir dist-b/src/addSandboxes",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/paretoman/votekit.git"
+  },
+  "author": "paretoman (https://paretoman.github.io)",
+  "license": "MIT-0",
+  "bugs": {
+    "url": "https://github.com/paretoman/votekit/issues"
+  },
+  "homepage": "https://github.com/paretoman/votekit#readme",
+  "dependencies": {
+    "@paretoman/votekit-add-sandboxes": "^0.0.0"
+  },
+  "devDependencies": {
+    "parcel": "^2.12.0"
+  }
+}

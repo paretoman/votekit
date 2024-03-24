@@ -33,7 +33,7 @@ minima:
     twitter: Paretoman1
     youtube_channel: UCrwpT8YjxePjH0RxSCwbTlQ
     youtube_channel_name: Paretoman
-thumbnail: "/img/VoteKit_Thumbnail.png"
+thumbnail: "/src/VoteKit_Thumbnail.png"
 production: true
 
 # Build settings

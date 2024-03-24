@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="{{ page.lang | default: site.lang | default: "en" }}">
 
-  {%- include head-1-sandboxes.html -%}
-
+  {%- include {{ page.head }} -%}
+  
   <body>
 
     {%- include header.html -%}
