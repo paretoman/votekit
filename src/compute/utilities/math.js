@@ -1,3 +1,5 @@
+/** @module */
+
 /**
  * List the indices of an array of length n.
  * @param {number} n - length of array

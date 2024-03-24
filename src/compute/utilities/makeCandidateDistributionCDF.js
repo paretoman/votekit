@@ -1,3 +1,5 @@
+/** @module */
+
 import { getCDF } from './statistics.js'
 
 export default function makeCandidateDistributionCDF(canDnGeoms, dimensions) {

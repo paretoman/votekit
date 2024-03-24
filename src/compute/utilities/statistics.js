@@ -1,3 +1,5 @@
+/** @module */
+
 const coefInvSqrt2Pi = 1 / (Math.sqrt(2 * Math.PI))
 
 export function normPDF(x, mean, sd) {

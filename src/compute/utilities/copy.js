@@ -1,3 +1,5 @@
+/** @module */
+
 /**
  * Try to deepcopy an object.
  * @param {object} a - an object to copy.

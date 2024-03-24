@@ -1,3 +1,5 @@
+/** @module */
+
 export function minIndex(a) {
     let min = Infinity
     let iClosest = null

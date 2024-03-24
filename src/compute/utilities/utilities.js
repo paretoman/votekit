@@ -1,5 +1,5 @@
 /**
- * Javascript Utilities
+ * Javascript Utilities.
  * Just a few helpful functions that are self-contained and don't need much context.
  * @module */
 
