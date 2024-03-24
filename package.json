@@ -24,7 +24,7 @@
     "check-types-silent": "tsc-silent -p ./src/compute/jsconfig.json --suppress @/node_modules",
     "check-types-silent-all": "tsc-silent -p ./jsconfig.json --suppress @/node_modules",
     "jekyll": "cd src/demo && bundle exec jekyll build",
-    "site": "npm run copy5 && npm run-parcel-build-3 && npm run jekyll",
+    "site": "npm run copy5 && npm run parcel-build-3 && npm run jekyll",
     "copy5": "copyfiles dist/**/* tutorial/**/* docs/**/* src/demo",
     "parcel-build-3": "npm run parcel-build-2 --workspace=@paretoman/votekit-demo",
     "site:local": "npm run copy5 && npm run-parcel-build-3 && npm run jekyll:local",
