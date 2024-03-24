@@ -33,7 +33,8 @@
     "clean": "rimraf dist docs src/demo/tutorial src/demo/docs src/demo/_site src/demo/_site_local src/demo/dist",
     "push:prepare": "cd src/demo/_site && git init && git checkout -b gh-pages && git add . && git commit -m localPush && git remote add origin https://github.com/paretoman/votekit.git && git status",
     "push": "cd src/demo/_site && git push -u origin gh-pages -f",
-    "publish": "npm publish -ws --access public"
+    "publish": "npm publish -ws --access public",
+    "patch": "npm version patch --workspaces"
   },
   "repository": {
     "type": "git",

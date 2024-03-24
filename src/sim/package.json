@@ -1,6 +1,6 @@
 {
   "name": "@paretoman/votekit-sim",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Model of user interaction to simulate an electoral process.",
   "main": "sim-index.js",
   "type": "module",

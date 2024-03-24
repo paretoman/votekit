@@ -1,6 +1,6 @@
 {
   "name": "@paretoman/votekit-graphics",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Just a few helpful graphics functions that are self-contained and don't need much context.",
   "main": "graphics.js",
   "type": "module",
