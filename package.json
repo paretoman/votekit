@@ -34,7 +34,8 @@
     "push:prepare": "cd src/demo/_site && git init && git checkout -b gh-pages && git add . && git commit -m localPush && git remote add origin https://github.com/paretoman/votekit.git && git status",
     "push": "cd src/demo/_site && git push -u origin gh-pages -f",
     "publish": "npm publish -ws --access public",
-    "patch": "npm version patch --workspaces"
+    "patch": "npm version patch --workspaces",
+    "all:push": "npm run all && npm run push:prepare && npm run push && git push"
   },
   "repository": {
     "type": "git",
