@@ -12,6 +12,18 @@ Codesandbox is an interactive code editor so you can make a copy and make your o
 
 ## Use
 
+For any of these methods, the script will run and find any HTMLElements, such as a div, with the class "sandbox" and insert a simulation sandbox as its neighbor under the same parent. You can use the data- attributes to pass data to the sandbox to configure it.
+
+```html
+<div class="sim-sandbox">
+    <div class="sim-container">
+        <div class="sandbox" data-sandboxurl="test/s/" data-config='{"mode": "sample","dimensions": 1}'></div>
+    </div>
+</div>
+```
+
+## Use: Html
+
 The easy way is to copy and paste the distribution [bundle](https://github.com/paretoman/votekit/tree/gh-pages/dist) to your project.
 
 Another way to add this distribution bundle is to put this script tag and these css tags in your code:
@@ -22,11 +34,28 @@ Another way to add this distribution bundle is to put this script tag and these 
 <link href="https://raw.githubusercontent.com/paretoman/votekit/gh-pages/dist/src/view/menu/button.css" rel="stylesheet">
 ```
 
-If you want to use npm, I made an npm package, so you can get the js stuff above (but I'm still figuring out the css):
+## Use: Bundler
+
+If you want to use npm, I made an npm package, so you can get the js stuff above:
 
 ```bash
 npm install @paretoman/votekit-add-sandboxes
 ```
+
+If you use parcel to bundle your js, then add this to your js files for bundling:
+
+```js
+import '@paretoman/votekit-add-sandboxes'
+```
+
+If you use parcel to bundle your css, then you can add this to your css files for bundling:
+
+```css
+@import "npm:@paretoman/votekit-view/menu/button.css";
+@import "npm:@paretoman/votekit-add-sandboxes/sandbox.css";
+```
+
+## Use: Git Repo
 
 If you really want the latest updates, maybe you could include this library as a submodule. You can use any directory or path instead of "votekit".
 
@@ -40,8 +69,6 @@ Then add this script tag in your code.
 <script src="votekit/src/addSandboxes/addSandboxes.js"></script>
 ```
 
-For any of these methods, the script will run and find any HTMLElements, such as a div, with the class "sandbox" and insert a simulation sandbox as its neighbor under the same parent. You can use the data- attributes to pass data to the sandbox to configure it.
-
 ## Develop
 
 The [Tutorial](https://www.howtofixtheelection.com/votekit/tutorial/) explains the architecture of the code, for those who want to develop it.
@@ -54,4 +81,4 @@ There are also auto-generated [docs](https://www.howtofixtheelection.com/votekit
 
 ## Build
 
-If you really get into developing the code, you'll probably like to know that I use development tools like eslint, parcel, jsdoc, snowpack, and jekyll. Just check package.json for all the scripts.
+If you really get into developing the code, you'll probably like to know that I use development tools like eslint, parcel, jsdoc, snowpack, and jekyll. Just check [package.json](https://github.com/paretoman/votekit/blob/main/package.json) for all the scripts.
