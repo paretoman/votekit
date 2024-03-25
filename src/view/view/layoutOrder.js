@@ -5,6 +5,7 @@ const layoutOrder = [
     'addEntities',
     'undo',
     'redo',
+    'warning',
     'viz',
     'vizMini',
     'maps',

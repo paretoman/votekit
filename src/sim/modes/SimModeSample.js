@@ -30,14 +30,6 @@ export default function SimModeSample(pub, entities, changes, districts, simOpti
 
         const samplingGeometry = getSamplingGeometry(voterShapeList, candidateDnList, simOptions, optionsBag, districts)
 
-        if (optionsBag.useGeography === true && optionsBag.sequenceOptions.sequenceName !== 'general') {
-            const message = 'Elections with both geographic components and sequence components are not yet implemented. Change number of districts to 1 and number of tracts to 1 or change election sequence to general.'
-            // eslint-disable-next-line no-console
-            console.warn(message)
-            // eslint-disable-next-line no-alert
-            window.alert(message)
-        }
-
         const samplingResult = electionSampler.update(samplingGeometry, changes, optionsBag)
         const simData = { samplingResult }
 
