@@ -1,6 +1,6 @@
 {
   "name": "@paretoman/votekit-view",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "View of user interaction to simulate an electoral process.",
   "main": "view/View.js",
   "style": "menu/button.css",

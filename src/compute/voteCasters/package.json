@@ -1,6 +1,6 @@
 {
   "name": "@paretoman/votekit-vote-casters",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Run a spatial election model. Input geometry. Cast votes.",
   "main": "voteCasters/voteCasters.js",
   "type": "module",

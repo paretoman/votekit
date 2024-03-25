@@ -1,6 +1,6 @@
 {
   "name": "@paretoman/votekit-utilities",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Just a few helpful functions that are self-contained and don't need much context.",
   "main": "utilities.js",
   "type": "module",

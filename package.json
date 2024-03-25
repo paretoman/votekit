@@ -1,6 +1,6 @@
 {
   "name": "@paretoman/votekit",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "An explorable sandbox that shows how different voting methods work using a spatial opinion model.",
   "type": "module",
   "directories": {
@@ -35,7 +35,8 @@
     "push": "cd src/demo/_site && git push -u origin gh-pages -f",
     "publish": "npm publish -ws --access public",
     "patch": "npm version patch --workspaces",
-    "all:push": "npm run all && npm run push:prepare && npm run push && git push"
+    "all:push": "npm run all && npm run push:prepare && npm run push && git push",
+    "push:tags": "git push --tags"
   },
   "repository": {
     "type": "git",
