@@ -134,3 +134,18 @@
     background-color:#555;
     border:1px solid white;
 }
+
+
+.warning {
+    width: 292px;
+    margin: 10px auto;
+    padding: 4px;
+    background-color:#fdd;
+    border:1px solid #888;
+}
+
+.darkMode .warning {
+    background-color:#755;
+    border:1px solid white;
+}
+
