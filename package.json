@@ -35,6 +35,7 @@
     "push": "cd src/demo/_site && git push -u origin gh-pages -f",
     "publish": "npm publish -ws --access public",
     "patch": "npm version patch --workspaces",
+    "patch:mono": "npm version patch",
     "all:push": "npm run all && npm run push:prepare && npm run push && git push",
     "push:tags": "git push --tags"
   },
