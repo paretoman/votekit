@@ -7,8 +7,8 @@
   },
   "scripts": {
     "parcel-build-2": "npm run parcel-build-js && npm run parcel-build-css",
-    "parcel-build-js": "parcel build src/addSandboxes.js --dist-dir dist-b/src/addSandboxes",
-    "parcel-build-css": "parcel build src/sandbox.css --dist-dir dist-b/src/addSandboxes",
+    "parcel-build-js": "parcel build src/demo.js --dist-dir dist-b",
+    "parcel-build-css": "parcel build src/demo.css --dist-dir dist-b",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
