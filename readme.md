@@ -29,9 +29,8 @@ The easy way is to copy and paste the distribution [bundle](https://github.com/p
 Another way to add this distribution bundle is to put this script tag and these css tags in your code:
 
 ```html
-<script src="https://raw.githubusercontent.com/paretoman/votekit/gh-pages/dist/src/addSandboxes/addSandboxes.js"></script>
-<link href="https://raw.githubusercontent.com/paretoman/votekit/gh-pages/dist/src/addSandboxes/sandbox.css" rel="stylesheet">
-<link href="https://raw.githubusercontent.com/paretoman/votekit/gh-pages/dist/src/view/menu/button.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@paretoman/votekit-add-sandboxes@latest/dist/addSandboxes.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/@paretoman/votekit-add-sandboxes@latest/dist/addSandboxes.css" rel="stylesheet">
 ```
 
 ## Use: Bundler
