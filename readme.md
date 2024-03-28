@@ -51,8 +51,7 @@ import '@paretoman/votekit-add-sandboxes'
 If you use parcel to bundle your css, then you can add this to your css files for bundling:
 
 ```css
-@import "npm:@paretoman/votekit-view/menu/button.css";
-@import "npm:@paretoman/votekit-add-sandboxes/sandbox.css";
+@import "npm:@paretoman/votekit-add-sandboxes/addSandboxes.css";
 ```
 
 ## Use: Git Repo
