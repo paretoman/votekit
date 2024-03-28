@@ -1,6 +1,6 @@
 {
   "name": "@paretoman/votekit-sample-election",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Do a series of elections, differing in candidate positions with a shaped distribution. Each election may be a sequence of elections and may include polls. A spatial election model is used.",
   "main": "sampleElection.js",
   "type": "module",
