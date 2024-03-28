@@ -35,9 +35,10 @@
     "push-site-prep": "cd src/demo/_site && git init && git checkout -b gh-pages && git add . && git commit -m localPush && git remote add origin https://github.com/paretoman/votekit.git && git status",
     "push-site": "cd src/demo/_site && git push -u origin gh-pages -f",
     "patch": "npm version patch --workspaces && git add . && git commit -m versionPatch && npm version patch",
-    "push:tags": "git push --follow-tags && git push",
+    "push-main": "git push --follow-tags && git push",
     "publish": "npm publish -ws --access public",
-    "all": "npm run build-all && npm run push-site-prep && npm run push-site && npm run patch && npm run push:tags && npm run publish"
+    "all-after-build": "npm run push-site-prep && npm run push-site && npm run patch && npm run push-main && npm run publish",
+    "all": "npm run build-all && npm run all-after-build"
   },
   "repository": {
     "type": "git",
