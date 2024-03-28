@@ -4,9 +4,20 @@
   "description": "Add a sandbox election to a page with a placeholder.",
   "main": "addSandboxes.js",
   "style": "sandbox.css",
+  "css": "dist/addSandboxes.css",
+  "bundle": "dist/addSandboxes.js",
+  "targets": {
+    "css": {
+      "source": "addSandboxes.css"
+    },
+    "bundle": {
+      "source": "addSandboxes.js"
+    }
+  },
   "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "parcel build --no-cache && rimraf .parcel-cache"
   },
   "repository": {
     "type": "git",
@@ -21,5 +32,8 @@
   "dependencies": {
     "@paretoman/votekit-view": "^0.0.0",
     "@paretoman/votekit-sim": "^0.0.0"
+  },
+  "devDependencies": {
+    "parcel": "^2.4.1"
   }
 }
