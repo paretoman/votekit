@@ -1,6 +1,6 @@
 {
   "name": "@paretoman/votekit-geographic-election",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Do a series of elections, differing in voter positions. Voters are shifted all together according to some simplex noise in 2D to simulate geographic differences. Each election may be a sequence of elections and may include polls. A spatial election model is used.",
   "main": "geoElection.js",
   "type": "module",
