@@ -6,9 +6,14 @@
     "doc": "docs"
   },
   "scripts": {
-    "parcel-build-2": "npm run parcel-build-js && npm run parcel-build-css",
+    "build": "npm run parcel-build-js && npm run parcel-build-css && npm run jekyll && npm run jekyll:local",
     "parcel-build-js": "parcel build src/demo.js --dist-dir dist-b",
     "parcel-build-css": "parcel build src/demo.css --dist-dir dist-b",
+    "jekyll": "bundle exec jekyll build",
+    "jekyll:local": "bundle exec jekyll build --config _config.yml,_config_local.yml",
+    "clean": "rimraf tutorial docs _site _site_local dist",
+    "push-site-prep": "cd _site && git init && git checkout -b gh-pages && git add . && git commit -m localPush && git remote add origin https://github.com/paretoman/votekit.git && git status",
+    "push-site": "npm run push-site-prep && cd _site && git push -u origin gh-pages -f",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
