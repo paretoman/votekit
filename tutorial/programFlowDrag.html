@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Program Flow Dragging a Voter | VoteKit Demo</title>
+<meta name="generator" content="Jekyll v4.1.1" />
+<meta property="og:title" content="Program Flow Dragging a Voter" />
+<meta name="author" content="Paretoman" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Here’s a demo site that uses votekit. Votekit is an explorable sandbox that shows how different voting methods work. Single elections are presented visually using a spatial opinion model. Ensembles of elections are also presented with distributions of winning positions. (The rest of this description will become more accurate with time.) Some consideration of strategy is performed. Voting methods include single-winner systems like plurality, approval, condorcet methods, instant runoff, score, star, etc. Electoral methods also include proportional multi-member district methods like the Single Transferable Vote, Monroe, Thiele’s Proportional Approval Voting, Phragmen’s method, etc. Electoral methods also include party-list proportional methods like d’Hondt, Huntington-Hill, Webster, etc. Additional electoral methods include MMP and OLPR." />
+<meta property="og:description" content="Here’s a demo site that uses votekit. Votekit is an explorable sandbox that shows how different voting methods work. Single elections are presented visually using a spatial opinion model. Ensembles of elections are also presented with distributions of winning positions. (The rest of this description will become more accurate with time.) Some consideration of strategy is performed. Voting methods include single-winner systems like plurality, approval, condorcet methods, instant runoff, score, star, etc. Electoral methods also include proportional multi-member district methods like the Single Transferable Vote, Monroe, Thiele’s Proportional Approval Voting, Phragmen’s method, etc. Electoral methods also include party-list proportional methods like d’Hondt, Huntington-Hill, Webster, etc. Additional electoral methods include MMP and OLPR." />
+<link rel="canonical" href="https://paretoman.github.io/votekit/tutorial/programFlowDrag.html" />
+<meta property="og:url" content="https://paretoman.github.io/votekit/tutorial/programFlowDrag.html" />
+<meta property="og:site_name" content="VoteKit Demo" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Program Flow Dragging a Voter" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","author":{"@type":"Person","name":"Paretoman"},"description":"Here’s a demo site that uses votekit. Votekit is an explorable sandbox that shows how different voting methods work. Single elections are presented visually using a spatial opinion model. Ensembles of elections are also presented with distributions of winning positions. (The rest of this description will become more accurate with time.) Some consideration of strategy is performed. Voting methods include single-winner systems like plurality, approval, condorcet methods, instant runoff, score, star, etc. Electoral methods also include proportional multi-member district methods like the Single Transferable Vote, Monroe, Thiele’s Proportional Approval Voting, Phragmen’s method, etc. Electoral methods also include party-list proportional methods like d’Hondt, Huntington-Hill, Webster, etc. Additional electoral methods include MMP and OLPR.","headline":"Program Flow Dragging a Voter","url":"https://paretoman.github.io/votekit/tutorial/programFlowDrag.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/votekit/assets/main.css"><link type="application/atom+xml" rel="alternate" href="https://paretoman.github.io/votekit/feed.xml" title="VoteKit Demo" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/votekit/">VoteKit Demo</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/votekit/tutorial/">Tutorial</a><a class="page-link" href="/votekit/s/">Sandbox</a><a class="page-link" href="/votekit/">Home</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <p>todo: update</p>
+
+<p>Here are some call stacks to illustrate what happens when the user moves a voter shape.</p>
+
+<p>Mouse Move to Config change.</p>
+
+<p>ConfigKeeper.self.execute (command\ConfigKeeper.js:53)
+Commander.self.execute (command\Commander.js:90)
+History.self.passDo (command\History.js:28)</p>
+<anonymous> (command\ComMessenger.js:27)
+broadcastDo (command\ComMessenger.js:27)
+Commander.self.do (command\Commander.js:120)
+go (command\CommandStore.js:50)
+VoterShape.self.setXY (voters\VoterShape.js:94)
+move (ui\ClickDrag.js:75)
+Screen.self.wrap.onmousemove (ui\Screen.js:149)
+
+Mouse Move to Sim change.
+
+VoterShape.self.setAction.shape2p (voters\VoterShape.js:72)
+action (voters\VoterCommander.js:25)
+CommandStore.self.execute (command\CommandStore.js:63)
+Commander.self.execute (command\Commander.js:91)
+History.self.passDo (command\History.js:28)
+<anonymous> (command\ComMessenger.js:27)
+broadcastDo (command\ComMessenger.js:27)
+Commander.self.do (command\Commander.js:120)
+go (command\CommandStore.js:50)
+VoterShape.self.setXY (voters\VoterShape.js:94)
+move (ui\ClickDrag.js:75)
+Screen.self.wrap.onmousemove (ui\Screen.js:149)
+
+In summary, the mouse move tells the VoterShape to move. VoterShape asks the Commander to call it back to move the shape. Commander passes the message along to ComMessenger. Commessenger calls back to Commander. Commander calls back to VoterShape.
+
+Now, we still have to run the election and draw the visuals. That only happens when we get to the next animation frame.
+
+First we get to the vote casting phase, which for plurality is just finding the area of a geometric shape.
+
+sumCircle (voteCasters\CastPluralitySummer2DQuadrature.js:113)
+sumArea (voteCasters\CastPluralitySummer2DQuadrature.js:23)
+<anonymous> (voteCasters\castPlurality.js:25)
+castPlurality (voteCasters\castPlurality.js:24)
+Election.self.voteCasters (election\Election.js:64)
+Election.self.runElection (election\Election.js:52)
+ElectionOne.self.runElectionSim (election\ElectionOne.js:27)
+SimModeOne.self.update (sim\states\SimModeOne.js:38)
+Sim.self.update (sim\Sim.js:76)
+update (ui\sandbox.js:89)
+gameLoop (ui\sandbox.js:83)
+requestAnimationFrame (Unknown Source:0)
+
+Then we get to the counting of the votes, which is easy for plurality.
+
+plurality (socialChoiceMethods\plurality.js:14)
+SocialChoice.self.run (election\SocialChoice.js:39)
+Election.self.runElection (election\Election.js:53)
+ElectionOne.self.runElectionSim (election\ElectionOne.js:27)
+SimModeOne.self.update (sim\states\SimModeOne.js:38)
+Sim.self.update (sim\Sim.js:76)
+update (ui\sandbox.js:89)
+gameLoop (ui\sandbox.js:83)
+requestAnimationFrame (Unknown Source:0)
+gameLoop (ui\sandbox.js:85)
+requestAnimationFrame (Unknown Source:0)
+
+The sim passes the election results to the View. The View then calculates the voronoi shapes that plurality uses. This is the View's update step.
+
+voronoi (lib\snowpack\build\snowpack\pkg\d3-delaunay.js:1227)
+Voronoi2D.self.update (viz\Voronoi2D.js:28)
+<anonymous> (voters\VoterViewList.js:50)
+VoterViewList.self.updateGraphic (voters\VoterViewList.js:50)
+VizOneVoronoi.self.update (viz\VizOneVoronoi.js:36)
+ViewEntitiesOne.self.update (sim\states\ViewEntitiesOne.js:92)
+View.self.update (sim\View.js:50)
+<anonymous> (sim\Sim.js:58)
+updateObservers (sim\Sim.js:58)
+Sim.self.update (sim\Sim.js:78)
+update (ui\sandbox.js:89)
+gameLoop (ui\sandbox.js:83)
+requestAnimationFrame (Unknown Source:0)
+
+Then the view update step then also renders the diagram.
+
+Voronoi2D.self.render (viz\Voronoi2D.js:32)
+<anonymous> (voters\VoterViewList.js:58)
+VoterViewList.self.render (voters\VoterViewList.js:58)
+VizOneVoronoi.self.render (viz\VizOneVoronoi.js:40)
+ViewEntitiesOne.self.render (sim\states\ViewEntitiesOne.js:109)
+ViewEntitiesOne.self.update (sim\states\ViewEntitiesOne.js:99)
+View.self.update (sim\View.js:50)
+<anonymous> (sim\Sim.js:58)
+updateObservers (sim\Sim.js:58)
+Sim.self.update (sim\Sim.js:78)
+update (ui\sandbox.js:89)
+gameLoop (ui\sandbox.js:83)
+requestAnimationFrame (Unknown Source:0)
+
+The foreground is drawn on every animation frame.
+
+CircleGraphic.self.render (vizEntities\CircleGraphic.js:37)
+VoterGraphic.self.renderForeground (vizEntities\VoterGraphic.js:12)
+<anonymous> (voters\VoterViewList.js:68)
+VoterViewList.self.renderForegroundExisting (voters\VoterViewList.js:68)
+VoterViewList.self.renderForeground (voters\VoterViewList.js:64)
+ViewEntitiesOne.self.renderForeground (sim\states\ViewEntitiesOne.js:113)
+View.self.renderForeground (sim\View.js:52)
+drawForeground (ui\sandbox.js:95)
+gameLoop (ui\sandbox.js:84)
+requestAnimationFrame (Unknown Source:0)
+</anonymous></anonymous></anonymous></anonymous></anonymous></anonymous></anonymous></anonymous>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/votekit/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">VoteKit Demo</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">Paretoman</li><li><a class="u-email" href="mailto:smartvotingsimulator1@gmail.com">smartvotingsimulator1@gmail.com</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/paretoman"><svg class="svg-icon"><use xlink:href="/votekit/assets/minima-social-icons.svg#github"></use></svg> <span class="username">paretoman</span></a></li><li><a href="https://www.twitter.com/paretoman1"><svg class="svg-icon"><use xlink:href="/votekit/assets/minima-social-icons.svg#twitter"></use></svg> <span class="username">paretoman1</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>Here&#39;s a demo site that uses votekit. Votekit is an explorable sandbox that shows how different voting methods work. Single elections are presented visually using a spatial opinion model. Ensembles of elections are also presented with distributions of winning positions. (The rest of this description will become more accurate with time.) Some consideration of strategy is performed. Voting methods include single-winner systems like plurality, approval, condorcet methods, instant runoff, score, star, etc. Electoral methods also include proportional multi-member district methods like the Single Transferable Vote, Monroe, Thiele&#39;s Proportional Approval Voting, Phragmen&#39;s method, etc. Electoral methods also include party-list proportional methods like d&#39;Hondt, Huntington-Hill, Webster, etc. Additional electoral methods include MMP and OLPR.</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>
