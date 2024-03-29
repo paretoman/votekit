@@ -79,4 +79,4 @@ There are also auto-generated [docs](https://www.howtofixtheelection.com/votekit
 
 ## Build
 
-If you really get into developing the code, you'll probably like to know that I use development tools like eslint, parcel, jsdoc, snowpack, and jekyll. Just check [package.json](https://github.com/paretoman/votekit/blob/main/package.json) for all the scripts.
+If you really get into developing the code, you'll probably like to know that I use development tools like eslint, parcel, jsdoc, esinstall, and jekyll. Just check [package.json](https://github.com/paretoman/votekit/blob/main/package.json) for all the scripts.

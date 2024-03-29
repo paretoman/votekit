@@ -30,7 +30,7 @@ Tests are examples of how a client could use this program. They are used during 
 
 In the future, unit tests for the sim will be added.
 
-Also, there are libraries, utilities, and documentation. Npm libraries are copied here using snowpack. Tutorial pages explain the architecture. JsDoc generates docs for js files and functions, but this can be harder to read.
+Also, there are libraries, utilities, and documentation. Npm libraries are copied here using esinstall. Tutorial pages explain the architecture. JsDoc generates docs for js files and functions, but this can be harder to read.
 
 For a reference on model-view division and Model-View-Controller architecture, see Pattern-Oriented Software Architecture by Buschmann in 1996. Really, all you need to know is the observer pattern.
 
