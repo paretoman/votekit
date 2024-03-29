@@ -3,8 +3,8 @@
 
 /** @type {import("snowpack").SnowpackUserConfig } */
 module.exports = {
-    root: 'src/lib/snowpack/',
+    root: 'snowpack',
     buildOptions: {
-        metaUrlPath: 'snowpack',
+        metaUrlPath: '.',
     },
 }
