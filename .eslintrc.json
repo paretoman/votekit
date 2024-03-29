@@ -10,7 +10,7 @@
       "ecmaVersion": "latest",
       "sourceType": "module"
     },
-    "ignorePatterns": [ "dev", "snowpack", "**/dist", "_site", "**/docs" ],
+    "ignorePatterns": [ "dev", "web_modules", "**/dist", "_site", "**/docs" ],
     "rules": {
       "semi": [ "error", "never" ],
       "indent": [ "error", 4 ],
