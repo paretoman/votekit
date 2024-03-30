@@ -5,7 +5,7 @@
   "main": "compute.js",
   "type": "module",
   "scripts": {
-    "test": "mocha --reporter list"
+    "test": "mocha **/*.test.js --parallel"
   },
   "directories": {
     "test": "test"
