@@ -1,6 +1,6 @@
 {
   "name": "@paretoman/votekit",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "An explorable sandbox that shows how different voting methods work using a spatial opinion model.",
   "type": "module",
   "directories": {
@@ -51,7 +51,7 @@
   },
   "homepage": "https://paretoman.github.io/votekit",
   "dependencies": {
-    "@paretoman/votekit-add-sandboxes" : "^0.0.0"
+    "@paretoman/votekit-add-sandboxes": "^0.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.17.8",
