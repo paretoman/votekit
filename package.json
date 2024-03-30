@@ -4,7 +4,6 @@
   "description": "An explorable sandbox that shows how different voting methods work using a spatial opinion model.",
   "type": "module",
   "directories": {
-    "doc": "docs",
     "test": "test"
   },
   "scripts": {
