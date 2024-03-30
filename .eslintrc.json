@@ -24,7 +24,7 @@
       "no-bitwise": "off",
       "max-len": "off",
       "object-curly-newline": [ "error", { "ObjectPattern": { "consistent": true } } ],
-      "import/no-extraneous-dependencies": ["error"],
+      "import/no-extraneous-dependencies": ["error", {"devDependencies": ["**/*.test.js"]}],
       "jsdoc/no-undefined-types": 0
     },
     "root":true,
