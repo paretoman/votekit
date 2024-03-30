@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>VoteCasters | VoteKit Demo</title>
+<meta name="generator" content="Jekyll v4.1.1" />
+<meta property="og:title" content="VoteCasters" />
+<meta name="author" content="Paretoman" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Here’s a demo site that uses votekit. Votekit is an explorable sandbox that shows how different voting methods work. Single elections are presented visually using a spatial opinion model. Ensembles of elections are also presented with distributions of winning positions. (The rest of this description will become more accurate with time.) Some consideration of strategy is performed. Voting methods include single-winner systems like plurality, approval, condorcet methods, instant runoff, score, star, etc. Electoral methods also include proportional multi-member district methods like the Single Transferable Vote, Monroe, Thiele’s Proportional Approval Voting, Phragmen’s method, etc. Electoral methods also include party-list proportional methods like d’Hondt, Huntington-Hill, Webster, etc. Additional electoral methods include MMP and OLPR." />
+<meta property="og:description" content="Here’s a demo site that uses votekit. Votekit is an explorable sandbox that shows how different voting methods work. Single elections are presented visually using a spatial opinion model. Ensembles of elections are also presented with distributions of winning positions. (The rest of this description will become more accurate with time.) Some consideration of strategy is performed. Voting methods include single-winner systems like plurality, approval, condorcet methods, instant runoff, score, star, etc. Electoral methods also include proportional multi-member district methods like the Single Transferable Vote, Monroe, Thiele’s Proportional Approval Voting, Phragmen’s method, etc. Electoral methods also include party-list proportional methods like d’Hondt, Huntington-Hill, Webster, etc. Additional electoral methods include MMP and OLPR." />
+<link rel="canonical" href="https://paretoman.github.io/votekit/tutorial/voteCasters.html" />
+<meta property="og:url" content="https://paretoman.github.io/votekit/tutorial/voteCasters.html" />
+<meta property="og:site_name" content="VoteKit Demo" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="VoteCasters" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","author":{"@type":"Person","name":"Paretoman"},"description":"Here’s a demo site that uses votekit. Votekit is an explorable sandbox that shows how different voting methods work. Single elections are presented visually using a spatial opinion model. Ensembles of elections are also presented with distributions of winning positions. (The rest of this description will become more accurate with time.) Some consideration of strategy is performed. Voting methods include single-winner systems like plurality, approval, condorcet methods, instant runoff, score, star, etc. Electoral methods also include proportional multi-member district methods like the Single Transferable Vote, Monroe, Thiele’s Proportional Approval Voting, Phragmen’s method, etc. Electoral methods also include party-list proportional methods like d’Hondt, Huntington-Hill, Webster, etc. Additional electoral methods include MMP and OLPR.","headline":"VoteCasters","url":"https://paretoman.github.io/votekit/tutorial/voteCasters.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/votekit/assets/main.css"><link type="application/atom+xml" rel="alternate" href="https://paretoman.github.io/votekit/feed.xml" title="VoteKit Demo" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/votekit/">VoteKit Demo</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/votekit/tutorial/">Tutorial</a><a class="page-link" href="/votekit/s/">Sandbox</a><a class="page-link" href="/votekit/">Home</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <p>VoteCasters: Votes are cast.</p>
+
+<ul>
+  <li>Parent Page: <a href="/votekit/tutorial/election.html">Election</a></li>
+</ul>
+
+<h2 id="votecasters">VoteCasters</h2>
+
+<ul>
+  <li>Voter geometries cast their votes.</li>
+  <li>A density of a population of voters is summed. A 1D or 2D spatial model is used to make the decision of how to vote or who to vote for.</li>
+  <li>The vote is aggregated into a set that contains the information needed to elect, explain, and visualize.</li>
+  <li>There are two ways to cast.
+    <ol>
+      <li>By points.</li>
+      <li>By regions. This is more complicated.</li>
+    </ol>
+  </li>
+  <li>The “votes” output data structure is described below. You can skip to that part.</li>
+</ul>
+
+<h2 id="preferences">Preferences</h2>
+
+<h3 id="a-single-preference">A single Preference</h3>
+
+<p>: also called a single vote.</p>
+
+<p>These are the three ways to state a preference.</p>
+
+<ul>
+  <li>Plurality: a choice of a candidate.</li>
+  <li>Scores: a score for each candidate.</li>
+  <li>Ranking: a rank for each candidate.</li>
+</ul>
+
+<p>A preference is stored as data in the following ways:</p>
+
+<ul>
+  <li>Plurality
+    <ul>
+      <li>pluralityVote: the chosen candidate.
+        <ul>
+          <li>A candidate is represented as an integer from 0 to a max. The max is the number of candidates minus 1.</li>
+          <li>type: Number</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>Scores
+    <ul>
+      <li>scoreVote: an array of scores, indexed by candidate.
+        <ul>
+          <li>A score is a number between 0 and 1. In the future, maybe integers between 0 and a maximum score.</li>
+          <li>type: Number[], Number array</li>
+          <li>length: number of candidates</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>Ranking
+    <ul>
+      <li>ranking: an array of ranks, indexed by candidate.
+        <ul>
+          <li>A rank of 0 is the best ranking, then 1, 2, and so on. No rankings are skipped, but skipping is allowed. Equal ranks are allowed.</li>
+          <li>type: Number[], Number array</li>
+          <li>length: number of candidates</li>
+        </ul>
+      </li>
+      <li>cansByRank: an array of candidates lists, indexed by rank. Candidates can share a rank. Number[][]..</li>
+      <li>indexInOrder: an array of candidates in order of rank. Only one candidate is listed per rank. Number[].</li>
+      <li>netWinsPairwise: The number of wins minus number of losses for the first of a pair of candidates. Number[][]</li>
+      <li>bordaScores: The borda scores for each candidate for one vote. Number[]</li>
+      <li>bordaFractions: Fractional borda scores, between 0 and 1. Number[]</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="preference-lists">Preference Lists</h3>
+
+<ul>
+  <li>Plurality
+    <ul>
+      <li>There is no “pluralityVotes” list of preferences because it isn’t needed.</li>
+    </ul>
+  </li>
+  <li>Scores
+    <ul>
+      <li>scoreVotes: a list of scoreVote preferences, Number[][]. Each preference has a score for each candidate.</li>
+    </ul>
+  </li>
+  <li>Ranking
+    <ul>
+      <li>rankings: a list of preferences. Each preference has a rank for each candidate. Number[][]. 0 is the best ranking, then 1, 2, etc.</li>
+      <li>cansByRankList: a list of preferences. Each preference is a list indexed by rank. Each entry is a list of candidates at that ranking. Candidates are represented by index. Number[][][].</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="counting">Counting</h2>
+
+<p>Ways to say how many votes.</p>
+
+<ul>
+  <li>area: number of pixels.</li>
+  <li>density: votes per pixel. From 0 to 1.</li>
+  <li>voteCount: a number of votes.</li>
+  <li>totalVotes: total number of votes.</li>
+  <li>All of these are non-negative real numbers.</li>
+</ul>
+
+<h3 id="preference-tallies">Preference Tallies</h3>
+
+<p>Preference tallies tell how many votes have a listed preference.</p>
+
+<ul>
+  <li>voteCounts: a list of numbers of votes for a list of preferences.
+    <ul>
+      <li>Also used for “grid” of votes.</li>
+    </ul>
+  </li>
+  <li>voteFractions: a list of fractions for a list of preferences. voteCounts as a fraction of the total number of votes.  From 0 to 1.</li>
+</ul>
+
+<h3 id="candidate-tallies">Candidate Tallies</h3>
+
+<p>Candidate tallies are just tallies indexed by candidate. This is a way to combine preferences. We have defined tallies for each type of preference:</p>
+
+<ul>
+  <li>plurality
+    <ul>
+      <li>countByCan: The number of plurality votes for a candidate.</li>
+      <li>voteFractionByCan: The fraction of plurality votes for a candidate.</li>
+    </ul>
+  </li>
+  <li>score
+    <ul>
+      <li>scoreSumByCan: number of votes times score, summed for each candidate.</li>
+      <li>scoreAverageByCan: average score for each candidate. = scoreSumByCan / totalVotes. number of votes times score divided by max score, summed for each candidate. (not used)</li>
+      <li>scoreFractionAverageByCan: average fractional score for each candidate.</li>
+    </ul>
+  </li>
+  <li>ranking
+    <ul>
+      <li>bordaScoreSumByCan: sum of borda scores for a candidate.</li>
+      <li>bordaFractionSumByCan: The sum of fractional borda scores for a candidate. (not used)</li>
+      <li>bordaFractionAverageByCan: The average fractional borda score for a candidate.</li>
+      <li>firstPreferences: a sum of ranking votes for each candidate, counting the vote only by the first preference.</li>
+    </ul>
+  </li>
+</ul>
+
+<p>Outside of voteCasters, we sometimes use a loosely defined tally. It changes its definition depending on the type of vote.</p>
+
+<ul>
+  <li>
+    <p>tallyFractions: A general term that should only be used when we don’t need to know what type of vote was being used but instead just want to give each candidate a number between 0 and 1.</p>
+  </li>
+  <li>
+    <p>Uses of tallyFractions</p>
+    <ul>
+      <li>tooltip uses tallyFractions and ranking</li>
+      <li>TestVoterGraphic uses tallyFractions</li>
+      <li>A general representation of a vote as a vector.</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="pairwise-tallies">Pairwise Tallies</h3>
+
+<p>Pairwise tallies are indexed by a pair of candidates. The winning candidate is first and the losing candidate is second. This is another way to combine preferences.</p>
+
+<ul>
+  <li>ranking
+    <ul>
+      <li>winsPairwise: The number of wins for the first of a pair of candidates.</li>
+      <li>winFractionPairwise: The fraction of wins for the first of a pair of candidates.</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="votes">Votes</h2>
+
+<p>Some of the following object is output from a vote caster as the “votes” data structure.</p>
+
+<ul>
+  <li>preferencesLists:
+    <ul>
+      <li>scoreVotes - Each preference has a score for each candidate.</li>
+      <li>rankings - Each preference has a rank for each candidate.</li>
+      <li>cansByRankList - Each preference is a list indexed by ranking. A list of candidates is at each ranking.</li>
+      <li>There is no “pluralityVotes” list of preferences because it isn’t needed. It would be an identity matrix.</li>
+    </ul>
+  </li>
+  <li>preferenceTallies:
+    <ul>
+      <li>voteFractions - the fraction of the voters who share the same preference.</li>
+    </ul>
+  </li>
+  <li>candidateTallies:
+    <ul>
+      <li>voteFractionsByCan - the fraction of plurality votes for each candidate.</li>
+      <li>scoreFractionAverageByCan - the average fractional score for each candidate.</li>
+      <li>firstPreferenceFractions - a list of fractions of voters who ranked a candidate first, indexed by candidate.</li>
+    </ul>
+  </li>
+  <li>pairwiseTallies:
+    <ul>
+      <li>winFractionPairwise - the fraction of wins for the first of a pair of candidates.</li>
+    </ul>
+  </li>
+  <li>votesByGeom:
+    <ul>
+      <li>Vote data for each voter geometry. A list of votesForGeom.</li>
+      <li>votesForGeom: Vote data for just one voter geometry. votesForGeom parts may include one of the following, depending on the vote caster:
+        <ul>
+          <li>votesForGeomCells: { ranking, cells }</li>
+          <li>votesForGeomIntervals: { ranking, intervalBorders }</li>
+          <li>votesForGeomGrid: { grid, voteSet, voterGeom }
+            <ul>
+              <li>This varies as well, depending on voteCaster.</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>parties: { partiesByCan, numParties }</li>
+  <li>numCans: the number of candidates</li>
+</ul>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/votekit/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">VoteKit Demo</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">Paretoman</li><li><a class="u-email" href="mailto:smartvotingsimulator1@gmail.com">smartvotingsimulator1@gmail.com</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/paretoman"><svg class="svg-icon"><use xlink:href="/votekit/assets/minima-social-icons.svg#github"></use></svg> <span class="username">paretoman</span></a></li><li><a href="https://www.twitter.com/paretoman1"><svg class="svg-icon"><use xlink:href="/votekit/assets/minima-social-icons.svg#twitter"></use></svg> <span class="username">paretoman1</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>Here&#39;s a demo site that uses votekit. Votekit is an explorable sandbox that shows how different voting methods work. Single elections are presented visually using a spatial opinion model. Ensembles of elections are also presented with distributions of winning positions. (The rest of this description will become more accurate with time.) Some consideration of strategy is performed. Voting methods include single-winner systems like plurality, approval, condorcet methods, instant runoff, score, star, etc. Electoral methods also include proportional multi-member district methods like the Single Transferable Vote, Monroe, Thiele&#39;s Proportional Approval Voting, Phragmen&#39;s method, etc. Electoral methods also include party-list proportional methods like d&#39;Hondt, Huntington-Hill, Webster, etc. Additional electoral methods include MMP and OLPR.</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

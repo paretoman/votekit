@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Examples | VoteKit Demo</title>
+<meta name="generator" content="Jekyll v4.1.1" />
+<meta property="og:title" content="Examples" />
+<meta name="author" content="Paretoman" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Here’s a demo site that uses votekit. Votekit is an explorable sandbox that shows how different voting methods work. Single elections are presented visually using a spatial opinion model. Ensembles of elections are also presented with distributions of winning positions. (The rest of this description will become more accurate with time.) Some consideration of strategy is performed. Voting methods include single-winner systems like plurality, approval, condorcet methods, instant runoff, score, star, etc. Electoral methods also include proportional multi-member district methods like the Single Transferable Vote, Monroe, Thiele’s Proportional Approval Voting, Phragmen’s method, etc. Electoral methods also include party-list proportional methods like d’Hondt, Huntington-Hill, Webster, etc. Additional electoral methods include MMP and OLPR." />
+<meta property="og:description" content="Here’s a demo site that uses votekit. Votekit is an explorable sandbox that shows how different voting methods work. Single elections are presented visually using a spatial opinion model. Ensembles of elections are also presented with distributions of winning positions. (The rest of this description will become more accurate with time.) Some consideration of strategy is performed. Voting methods include single-winner systems like plurality, approval, condorcet methods, instant runoff, score, star, etc. Electoral methods also include proportional multi-member district methods like the Single Transferable Vote, Monroe, Thiele’s Proportional Approval Voting, Phragmen’s method, etc. Electoral methods also include party-list proportional methods like d’Hondt, Huntington-Hill, Webster, etc. Additional electoral methods include MMP and OLPR." />
+<link rel="canonical" href="https://paretoman.github.io/votekit/dist/test/examples.html" />
+<meta property="og:url" content="https://paretoman.github.io/votekit/dist/test/examples.html" />
+<meta property="og:site_name" content="VoteKit Demo" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Examples" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","author":{"@type":"Person","name":"Paretoman"},"description":"Here’s a demo site that uses votekit. Votekit is an explorable sandbox that shows how different voting methods work. Single elections are presented visually using a spatial opinion model. Ensembles of elections are also presented with distributions of winning positions. (The rest of this description will become more accurate with time.) Some consideration of strategy is performed. Voting methods include single-winner systems like plurality, approval, condorcet methods, instant runoff, score, star, etc. Electoral methods also include proportional multi-member district methods like the Single Transferable Vote, Monroe, Thiele’s Proportional Approval Voting, Phragmen’s method, etc. Electoral methods also include party-list proportional methods like d’Hondt, Huntington-Hill, Webster, etc. Additional electoral methods include MMP and OLPR.","headline":"Examples","url":"https://paretoman.github.io/votekit/dist/test/examples.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/votekit/assets/main.css"><link type="application/atom+xml" rel="alternate" href="https://paretoman.github.io/votekit/feed.xml" title="VoteKit Demo" /><!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-P1H0XL5TZZ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-P1H0XL5TZZ');
+</script><link href="../src/nav.css" rel="stylesheet">
+  <link href="../dist/src/addSandboxes/sandbox.css" rel="stylesheet">
+  <link href="../dist/src/view/menu/button.css" rel="stylesheet">
+  <script type="module" src="../dist/src/addSandboxes/addSandboxes.js"></script>
+</head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/votekit/">VoteKit Demo</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/votekit/tutorial/">Tutorial</a><a class="page-link" href="/votekit/s/">Sandbox</a><a class="page-link" href="/votekit/">Home</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="../src/addSandboxes/sandbox.css" rel="stylesheet">
+        <link href="../src/view/menu/button.css" rel="stylesheet">
+        <script type="importmap">
+            {
+                "imports": {
+                    "@paretoman/votekit-social-choice-methods": "/src/compute/socialChoiceMethods/socialChoiceMethods.js",
+                    "@paretoman/votekit-utilities": "/src/compute/utilities/utilities.js",
+                    "@paretoman/votekit-types": "/src/compute/types/types.js",
+                    "@paretoman/votekit-vote-casters": "/src/compute/voteCasters/voteCasters/voteCasters.js",
+                    "@paretoman/votekit-election": "/src/compute/election/election.js",
+                    "@paretoman/votekit-election-phase": "/src/compute/electionPhase/electionPhase.js",
+                    "@paretoman/votekit-election-sequence": "/src/compute/electionSequence/electionSequence.js",
+                    "@paretoman/votekit-district-election": "/src/compute/districtElection/districtElection.js",
+                    "@paretoman/votekit-make-geography": "/src/compute/makeGeography/makeGeography.js",
+                    "@paretoman/votekit-sample-election": "/src/compute/sampleElection/sampleElection.js",
+                    "@paretoman/votekit-geographic-election": "/src/compute/geoElection/geoElection.js",
+                    "@paretoman/votekit-compute": "/src/compute/compute/compute.js",
+                    "@paretoman/votekit-sim": "/src/sim/sim-index.js",
+                    "@paretoman/votekit-graphics": "/src/graphics/graphics.js",
+                    "@paretoman/votekit-view": "/src/view/view/View.js",
+                    "@paretoman/votekit-add-sandboxes": "/src/addSandboxes/addSandboxes.js",
+                    "seedrandom": "/web_modules/seedrandom.js",
+                    "d3-polygon": "/web_modules/d3-polygon.js",
+                    "d3-delaunay": "/web_modules/d3-delaunay.js",
+                    "simplex-noise": "/web_modules/simplex-noise.js",
+                    "@tweenjs/tween.js": "/web_modules/@tweenjs/tweenjs.js",
+                    "@mithrandirii/canvas2svg": "/web_modules/@mithrandirii/canvas2svg.js",
+                    "d3-contour": "/web_modules/d3-contour.js",
+                    "d3-geo": "/web_modules/d3-geo.js"
+                }
+            }
+        </script>
+        <script type="module" src="../src/addSandboxes/addSandboxes.js"></script>
+    </head>
+    <body>  
+        <p>
+            Links:
+        </p>
+        <ul>
+            <li>Olpr edge case: 0 votes for some. <a href ="s/?a=%257B%2522socialChoiceMethod-sequence-general-phase-general%2522%253A%2522olprA%2522%252C%2522voters-exists%2522%253A%255B1%252C1%255D%252C%2522voters-shape2D-point%2522%253A%255B%257B%2522x%2522%253A220%252C%2522y%2522%253A179%257D%252C%257B%2522x%2522%253A250%252C%2522y%2522%253A150%257D%255D%252C%2522voters-shape1D-x%2522%253A%255B50%252C250%255D%252C%2522voters-shape2D-width%2522%253A%255B200%252C200%255D%252C%2522voters-shape1D-width%2522%253A%255B200%252C200%255D%252C%2522voters-shape1D-densityProfile%2522%253A%255B%2522gaussian%2522%252C%2522gaussian%2522%255D%252C%2522voters-setNumberAtLeast%2522%253A1%252C%2522candidates-exists%2522%253A%255B1%252C1%252C1%252C1%255D%252C%2522candidates-shape2D-point%2522%253A%255B%257B%2522x%2522%253A62%252C%2522y%2522%253A109%257D%252C%257B%2522x%2522%253A100%252C%2522y%2522%253A50%257D%252C%257B%2522x%2522%253A35%252C%2522y%2522%253A45%257D%252C%257B%2522x%2522%253A18%252C%2522y%2522%253A103%257D%255D%252C%2522candidates-shape1D-x%2522%253A%255B50%252C100%252C200%252C50%255D%252C%2522candidates-color%2522%253A%255B%2522%2523e05020%2522%252C%2522%252350e020%2522%252C%2522%25232050e0%2522%252C%2522%2523ffff00%2522%255D%252C%2522candidates-party%2522%253A%255B%255B0%255D%252C%255B1%255D%252C%255B2%255D%252C%255B2%255D%255D%252C%2522candidates-setNumberAtLeast%2522%253A1%252C%2522candidateDns-exists%2522%253A%255B1%255D%252C%2522candidateDns-shape2D-point%2522%253A%255B%257B%2522x%2522%253A150%252C%2522y%2522%253A150%257D%255D%252C%2522candidateDns-shape1D-x%2522%253A%255B150%255D%252C%2522candidateDns-shape2D-width%2522%253A%255B200%255D%252C%2522candidateDns-shape1D-width%2522%253A%255B200%255D%252C%2522candidateDns-shape1D-densityProfile%2522%253A%255B%2522gaussian%2522%255D%252C%2522candidateDns-party%2522%253A%255B%255B0%255D%255D%252C%2522candidateDns-setNumberAtLeast%2522%253A1%252C%2522mode%2522%253A%2522one%2522%252C%2522dimensions%2522%253A2%257D">link</a></li>
+            <li>OLPR Skipping parties<a href="s/?a=%257B%2522socialChoiceMethod-sequence-general-phase-general%2522%253A%2522olprA%2522%252C%2522voters-exists%2522%253A%255B1%252C1%255D%252C%2522voters-shape2D-point%2522%253A%255B%257B%2522x%2522%253A50%252C%2522y%2522%253A150%257D%252C%257B%2522x%2522%253A250%252C%2522y%2522%253A151%257D%255D%252C%2522voters-shape1D-x%2522%253A%255B50%252C250%255D%252C%2522voters-shape2D-width%2522%253A%255B200%252C200%255D%252C%2522voters-shape1D-width%2522%253A%255B200%252C200%255D%252C%2522voters-shape1D-densityProfile%2522%253A%255B%2522gaussian%2522%252C%2522gaussian%2522%255D%252C%2522voters-setNumberAtLeast%2522%253A2%252C%2522candidates-exists%2522%253A%255B1%252C1%252C1%252C1%255D%252C%2522candidates-shape2D-point%2522%253A%255B%257B%2522x%2522%253A94%252C%2522y%2522%253A210%257D%252C%257B%2522x%2522%253A111%252C%2522y%2522%253A134%257D%252C%257B%2522x%2522%253A184%252C%2522y%2522%253A203%257D%252C%257B%2522x%2522%253A185%252C%2522y%2522%253A125%257D%255D%252C%2522candidates-shape1D-x%2522%253A%255B50%252C100%252C200%252C50%255D%252C%2522candidates-color%2522%253A%255B%2522%2523e05020%2522%252C%2522%252350e020%2522%252C%2522%25232050e0%2522%252C%2522%2523ffff00%2522%255D%252C%2522candidates-party%2522%253A%255B%255B0%255D%252C%255B0%255D%252C%255B2%255D%252C%255B2%255D%255D%252C%2522candidates-setNumberAtLeast%2522%253A4%252C%2522candidateDns-exists%2522%253A%255B1%255D%252C%2522candidateDns-shape2D-point%2522%253A%255B%257B%2522x%2522%253A150%252C%2522y%2522%253A150%257D%255D%252C%2522candidateDns-shape1D-x%2522%253A%255B150%255D%252C%2522candidateDns-shape2D-width%2522%253A%255B200%255D%252C%2522candidateDns-shape1D-width%2522%253A%255B200%255D%252C%2522candidateDns-shape1D-densityProfile%2522%253A%255B%2522gaussian%2522%255D%252C%2522candidateDns-party%2522%253A%255B%255B0%255D%255D%252C%2522candidateDns-setNumberAtLeast%2522%253A1%252C%2522mode%2522%253A%2522one%2522%252C%2522dimensions%2522%253A2%257D">link</a></li>
+            <li>1D MES<a href="s/?a=%257B%2522socialChoiceMethod-sequence-general-phase-general%2522%253A%2522methodOfEqualShares%2522%252C%2522voters-exists%2522%253A%255B1%252C0%252C0%252C0%255D%252C%2522voters-shape2D-point%2522%253A%255B%257B%2522x%2522%253A50%252C%2522y%2522%253A150%257D%252C%257B%2522x%2522%253A250%252C%2522y%2522%253A150%257D%252C%257B%2522x%2522%253A50%252C%2522y%2522%253A50%257D%252C%257B%2522x%2522%253A50%252C%2522y%2522%253A50%257D%255D%252C%2522voters-shape1D-x%2522%253A%255B144%252C250%252C50%252C50%255D%252C%2522voters-shape2D-width%2522%253A%255B200%252C200%252C200%252C200%255D%252C%2522voters-shape1D-width%2522%253A%255B200%252C200%252C200%252C200%255D%252C%2522voters-shape1D-densityProfile%2522%253A%255B%2522step%2522%252C%2522gaussian%2522%252C%2522gaussian%2522%252C%2522gaussian%2522%255D%252C%2522voters-setNumberAtLeast%2522%253A1%252C%2522candidates-exists%2522%253A%255B1%252C1%252C1%252C1%252C1%252C1%255D%252C%2522candidates-shape2D-point%2522%253A%255B%257B%2522x%2522%253A50%252C%2522y%2522%253A100%257D%252C%257B%2522x%2522%253A100%252C%2522y%2522%253A50%257D%252C%257B%2522x%2522%253A200%252C%2522y%2522%253A250%257D%252C%257B%2522x%2522%253A50%252C%2522y%2522%253A50%257D%252C%257B%2522x%2522%253A50%252C%2522y%2522%253A50%257D%252C%257B%2522x%2522%253A50%252C%2522y%2522%253A50%257D%255D%252C%2522candidates-shape1D-x%2522%253A%255B77%252C223%252C235%252C95%252C85%252C250%255D%252C%2522candidates-color%2522%253A%255B%2522%2523e05020%2522%252C%2522%252350e020%2522%252C%2522%25232050e0%2522%252C%2522%2523ffff00%2522%252C%2522%2523ff7b00%2522%252C%2522%25238c00ff%2522%255D%252C%2522candidates-party%2522%253A%255B%255B0%255D%252C%255B1%255D%252C%255B2%255D%252C%255B3%255D%252C%255B4%255D%252C%255B5%255D%255D%252C%2522candidates-setNumberAtLeast%2522%253A6%252C%2522candidateDns-exists%2522%253A%255B1%255D%252C%2522candidateDns-shape2D-point%2522%253A%255B%257B%2522x%2522%253A150%252C%2522y%2522%253A150%257D%255D%252C%2522candidateDns-shape1D-x%2522%253A%255B150%255D%252C%2522candidateDns-shape2D-width%2522%253A%255B200%255D%252C%2522candidateDns-shape1D-width%2522%253A%255B200%255D%252C%2522candidateDns-shape1D-densityProfile%2522%253A%255B%2522gaussian%2522%255D%252C%2522candidateDns-party%2522%253A%255B%255B0%255D%255D%252C%2522candidateDns-setNumberAtLeast%2522%253A1%252C%2522mode%2522%253A%2522one%2522%252C%2522dimensions%2522%253A1%257D">link</a></li>
+            <li>Ten Sandboxes<a href="ten.html">link</a></li>
+            <li>A Page<a href="page.html">link</a></li>
+        </ul>
+    </body>
+</html>
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/votekit/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">VoteKit Demo</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">Paretoman</li><li><a class="u-email" href="mailto:smartvotingsimulator1@gmail.com">smartvotingsimulator1@gmail.com</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/paretoman"><svg class="svg-icon"><use xlink:href="/votekit/assets/minima-social-icons.svg#github"></use></svg> <span class="username">paretoman</span></a></li><li><a href="https://www.twitter.com/paretoman1"><svg class="svg-icon"><use xlink:href="/votekit/assets/minima-social-icons.svg#twitter"></use></svg> <span class="username">paretoman1</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>Here&#39;s a demo site that uses votekit. Votekit is an explorable sandbox that shows how different voting methods work. Single elections are presented visually using a spatial opinion model. Ensembles of elections are also presented with distributions of winning positions. (The rest of this description will become more accurate with time.) Some consideration of strategy is performed. Voting methods include single-winner systems like plurality, approval, condorcet methods, instant runoff, score, star, etc. Electoral methods also include proportional multi-member district methods like the Single Transferable Vote, Monroe, Thiele&#39;s Proportional Approval Voting, Phragmen&#39;s method, etc. Electoral methods also include party-list proportional methods like d&#39;Hondt, Huntington-Hill, Webster, etc. Additional electoral methods include MMP and OLPR.</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

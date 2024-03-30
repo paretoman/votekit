@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Architecture | VoteKit Demo</title>
+<meta name="generator" content="Jekyll v4.1.1" />
+<meta property="og:title" content="Architecture" />
+<meta name="author" content="Paretoman" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Here’s a demo site that uses votekit. Votekit is an explorable sandbox that shows how different voting methods work. Single elections are presented visually using a spatial opinion model. Ensembles of elections are also presented with distributions of winning positions. (The rest of this description will become more accurate with time.) Some consideration of strategy is performed. Voting methods include single-winner systems like plurality, approval, condorcet methods, instant runoff, score, star, etc. Electoral methods also include proportional multi-member district methods like the Single Transferable Vote, Monroe, Thiele’s Proportional Approval Voting, Phragmen’s method, etc. Electoral methods also include party-list proportional methods like d’Hondt, Huntington-Hill, Webster, etc. Additional electoral methods include MMP and OLPR." />
+<meta property="og:description" content="Here’s a demo site that uses votekit. Votekit is an explorable sandbox that shows how different voting methods work. Single elections are presented visually using a spatial opinion model. Ensembles of elections are also presented with distributions of winning positions. (The rest of this description will become more accurate with time.) Some consideration of strategy is performed. Voting methods include single-winner systems like plurality, approval, condorcet methods, instant runoff, score, star, etc. Electoral methods also include proportional multi-member district methods like the Single Transferable Vote, Monroe, Thiele’s Proportional Approval Voting, Phragmen’s method, etc. Electoral methods also include party-list proportional methods like d’Hondt, Huntington-Hill, Webster, etc. Additional electoral methods include MMP and OLPR." />
+<link rel="canonical" href="https://paretoman.github.io/votekit/tutorial/architecture.html" />
+<meta property="og:url" content="https://paretoman.github.io/votekit/tutorial/architecture.html" />
+<meta property="og:site_name" content="VoteKit Demo" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Architecture" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","author":{"@type":"Person","name":"Paretoman"},"description":"Here’s a demo site that uses votekit. Votekit is an explorable sandbox that shows how different voting methods work. Single elections are presented visually using a spatial opinion model. Ensembles of elections are also presented with distributions of winning positions. (The rest of this description will become more accurate with time.) Some consideration of strategy is performed. Voting methods include single-winner systems like plurality, approval, condorcet methods, instant runoff, score, star, etc. Electoral methods also include proportional multi-member district methods like the Single Transferable Vote, Monroe, Thiele’s Proportional Approval Voting, Phragmen’s method, etc. Electoral methods also include party-list proportional methods like d’Hondt, Huntington-Hill, Webster, etc. Additional electoral methods include MMP and OLPR.","headline":"Architecture","url":"https://paretoman.github.io/votekit/tutorial/architecture.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/votekit/assets/main.css"><link type="application/atom+xml" rel="alternate" href="https://paretoman.github.io/votekit/feed.xml" title="VoteKit Demo" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/votekit/">VoteKit Demo</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/votekit/tutorial/">Tutorial</a><a class="page-link" href="/votekit/s/">Sandbox</a><a class="page-link" href="/votekit/">Home</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <ul>
+  <li>Parent page: <a href="/votekit/tutorial/">index</a></li>
+  <li>Child pages:  <a href="/votekit/tutorial/folders.html">folders</a>, <a href="/votekit/tutorial/election.html">Election</a>. <a href="/votekit/tutorial/sim.html">Sim</a>, <a href="/votekit/tutorial/view.html">View</a>, <a href="/votekit/tutorial/sandbox.html">sandbox</a>, <a href="/votekit/tutorial/programFlow.html">Program flow</a></li>
+</ul>
+
+<p>There is a central model-view division that follows the observer pattern. Source <a href="/votekit/tutorial/folders.html">folders</a> are loosely divided between election, sim, view, and sandbox. The tests folder is for the client.</p>
+
+<p><a href="/votekit/tutorial/sim.html">Sim</a> is the main model. It stores inputs and processes them into outputs. Inputs are spatial election model geometries and election options. Processing is holding one or multiple elections. Outputs are the election results.</p>
+
+<p><a href="/votekit/tutorial/election.html">Election</a> handles casting votes and applying a social choice function. This part is more general than Sim and could more likely be used as a library for other projects.</p>
+
+<p><a href="/votekit/tutorial/view.html">View</a> sends browser inputs into the Sim and displays visualizations of Sim’s outputs. Browser input controls include menus, tooltips, and screens.</p>
+
+<p>A <a href="/votekit/tutorial/sandbox.html">sandbox</a> adds the Sim and View to a page. The addSandboxes script adds a sandbox to any element of the HTML page with class ‘sandbox’.</p>
+
+<p>The components roughly depend on each other like so:</p>
+
+<p>sandbox -&gt; view -&gt; sim -&gt; election</p>
+
+<ul>
+  <li>sandbox imports: sim, view</li>
+  <li>view imports: sim, election</li>
+  <li>sim imports: election</li>
+</ul>
+
+<p><a href="/votekit/tutorial/programFlow.html">Program flow</a> is triggered by loading the page and accepting program inputs from the HTML and URL.</p>
+
+<p>Tests are examples of how a client could use this program. They are used during development to test the program. To use this program, copy index.html and s/index.html to where you want to in your own site. Use “s/index.html” as a standalone sandbox page to link to when saving the configuration to a link.</p>
+
+<p>In the future, unit tests for the sim will be added.</p>
+
+<p>Also, there are libraries, utilities, and documentation. Npm libraries are copied here using esinstall. Tutorial pages explain the architecture. JsDoc generates docs for js files and functions, but this can be harder to read.</p>
+
+<p>For a reference on model-view division and Model-View-Controller architecture, see Pattern-Oriented Software Architecture by Buschmann in 1996. Really, all you need to know is the observer pattern.</p>
+
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/votekit/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">VoteKit Demo</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">Paretoman</li><li><a class="u-email" href="mailto:smartvotingsimulator1@gmail.com">smartvotingsimulator1@gmail.com</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/paretoman"><svg class="svg-icon"><use xlink:href="/votekit/assets/minima-social-icons.svg#github"></use></svg> <span class="username">paretoman</span></a></li><li><a href="https://www.twitter.com/paretoman1"><svg class="svg-icon"><use xlink:href="/votekit/assets/minima-social-icons.svg#twitter"></use></svg> <span class="username">paretoman1</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>Here&#39;s a demo site that uses votekit. Votekit is an explorable sandbox that shows how different voting methods work. Single elections are presented visually using a spatial opinion model. Ensembles of elections are also presented with distributions of winning positions. (The rest of this description will become more accurate with time.) Some consideration of strategy is performed. Voting methods include single-winner systems like plurality, approval, condorcet methods, instant runoff, score, star, etc. Electoral methods also include proportional multi-member district methods like the Single Transferable Vote, Monroe, Thiele&#39;s Proportional Approval Voting, Phragmen&#39;s method, etc. Electoral methods also include party-list proportional methods like d&#39;Hondt, Huntington-Hill, Webster, etc. Additional electoral methods include MMP and OLPR.</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>
