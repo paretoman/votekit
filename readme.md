@@ -8,7 +8,7 @@ I run tests like this [one](https://www.howtofixtheelection.com/votekit/dist/tes
 
 Press F12 to get the browser's dev tools. They're great for stepping through the code. Pause the code with F8 and step through with F10 and F11.
 
-Codesandbox is an interactive code editor so you can make a copy and make your own [edits](https://codesandbox.io/s/github/paretoman/votekit) to see how things work. There's a little troubleshooting you have to do in loading packages, though. It's not the most foolproof.
+Codesandbox is an interactive code editor so you can make a copy and make your own [edits](https://codesandbox.io/s/github/paretoman/votekit) to see how things work. It seems to work in firefox but not in chrome.
 
 ## Use
 
