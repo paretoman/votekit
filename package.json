@@ -26,7 +26,7 @@
     "copy-3": "copyfiles test/**/*.* src/demo/dist",
     "copy-4": "copyfiles tutorial/**/* src/demo",
     "clean": "npm run clean -w @paretoman/votekit-demo",
-    "build-clean": "npm run clean && npm run doc && npm run build",
+    "build-clean": "npm run clean && npm run prepare && npm run doc && npm run build",
     "push-site": "npm run push-site -w @paretoman/votekit-demo",
     "patch": "npm version patch --workspaces && git add . && git commit -m versionPatch && npm version patch",
     "push-main": "git push --follow-tags && git push",
