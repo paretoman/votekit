@@ -19,7 +19,7 @@
     "check-types": "tsc --noEmit -p ./src/compute/jsconfig.json",
     "check-types-silent": "tsc-silent -p ./src/compute/jsconfig.json --suppress @/node_modules",
     "check-types-silent-all": "tsc-silent -p ./jsconfig.json --suppress @/node_modules",
-    "doc": "jsdoc -c jsdoc.json -d src/demo",
+    "doc": "jsdoc -c jsdoc.json -d src/demo/docs",
     "build": "npm run build-1 && npm run build-2 && npm run build-3",
     "build-1": "npm run build -w @paretoman/votekit-add-sandboxes",
     "build-2": "npm run copy-1 && npm run copy-2 && npm run copy-3 && npm run copy-4",
