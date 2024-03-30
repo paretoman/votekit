@@ -1,6 +1,6 @@
 import makeGeography from '@paretoman/votekit-make-geography'
 import { makeCandidateDistributionCDF } from '@paretoman/votekit-utilities'
-import optionsBag1 from './optionsBag1.js'
+import { optionsBag1 } from '@paretoman/votekit-election-sequence'
 
 const dimensions = 2
 

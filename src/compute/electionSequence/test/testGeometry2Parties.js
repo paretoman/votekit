@@ -1,5 +1,5 @@
 import makeGeography from '@paretoman/votekit-make-geography'
-import electionOptions1 from './optionsBag1.js'
+import optionsBag1 from './optionsBag1.js'
 
 const dimensions = 2
 
@@ -57,7 +57,7 @@ const parties = {
     numParties: 2,
 }
 
-const { numTracts, numDistricts } = electionOptions1
+const { numTracts, numDistricts } = optionsBag1
 
 const geography = makeGeography(numTracts, numDistricts, voterGeoms, dimensions)
 const strategySeed = 'pumpkin82000'

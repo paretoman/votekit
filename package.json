@@ -11,6 +11,7 @@
     "test": "mocha src/**/*.test.js --parallel",
     "test-compute": "npm run test -w @paretoman/votekit-compute",
     "test-vote-casters": "npm run test -w @paretoman/votekit-vote-casters",
+    "test-sample-election": "npm run test -w @paretoman/votekit-sample-election",
     "test-ws": "npm run test -ws",
     "lint": "eslint .",
     "lint-fix": "eslint --fix --ext .js,.jsx .",

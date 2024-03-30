@@ -1,4 +1,4 @@
-import electionSequence from '@paretoman/votekit-election-sequence'
+import electionSequence from '../electionSequence.js'
 import optionsBag1 from './optionsBag1.js'
 import testGeometry1 from './testGeometry1.js'
 
