@@ -1,6 +1,6 @@
 {
   "name": "@paretoman/votekit-social-choice-methods",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Use a social choice method on votes to make a decision.",
   "main": "socialChoiceMethods.js",
   "type": "module",

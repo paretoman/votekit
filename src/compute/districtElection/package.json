@@ -1,6 +1,6 @@
 {
   "name": "@paretoman/votekit-district-election",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Do a series of elections, differing in voter positions. Voters are shifted all together according to some simplex noise in 2D to simulate geographic differences. Each one runs a spatial election model and may include polls.",
   "main": "districtElection.js",
   "type": "module",

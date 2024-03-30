@@ -1,6 +1,6 @@
 {
   "name": "@paretoman/votekit-compute",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Run a spatial election model. Input geometry. Cast votes. Use a social choice function. Collect results. Also combine multiple elections across geography, districts, samplings, and polling.",
   "main": "compute.js",
   "type": "module",
