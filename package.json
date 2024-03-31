@@ -24,9 +24,9 @@
     "build-1": "npm run build -w @paretoman/votekit-add-sandboxes",
     "build-2": "npm run copy-1 && npm run copy-2 && npm run copy-3",
     "build-3": "npm run build -w @paretoman/votekit-demo",
-    "copy-1": "copyfiles -u 3 src/addSandboxes/dist/addSandboxes*.js src/demo/dist/src/addSandboxes/",
-    "copy-2": "copyfiles src/**/*.{css,html} src/demo/dist -e src/demo/**/* -e **/dist/**/*",
-    "copy-3": "copyfiles test/**/*.* src/demo/dist",
+    "copy-1": "copyfiles -u 3 \"src/addSandboxes/dist/addSandboxes*.js\" src/demo/dist/src/addSandboxes/",
+    "copy-2": "copyfiles \"src/**/*.{css,html}\" -e \"src/demo/**/*\" -e \"**/dist/**/*\" src/demo/dist",
+    "copy-3": "copyfiles \"test/**/*.*\" src/demo/dist",
     "clean": "npm run clean -w @paretoman/votekit-demo",
     "build-clean": "npm run clean && npm run prepare && npm run doc && npm run build",
     "push-site": "npm run push-site -w @paretoman/votekit-demo",
@@ -116,5 +116,9 @@
   "workspaces": [
     "src/*",
     "src/compute/*"
-  ]
+  ],
+    "engines" : { 
+      "node" : ">=16.0.0" 
+    }
+  
 }
