@@ -258,8 +258,6 @@ function orient2d(ax, ay, bx, by, cx, cy) {
     const detright = (ax - cx) * (by - cy);
     const det = detleft - detright;
 
-    if (detleft === 0 || detright === 0 || (detleft > 0) !== (detright > 0)) return det;
-
     const detsum = Math.abs(detleft + detright);
     if (Math.abs(det) >= ccwerrboundA * detsum) return det;
 
@@ -300,7 +298,7 @@ class Delaunator {
         this._hullPrev = new Uint32Array(n); // edge to prev edge
         this._hullNext = new Uint32Array(n); // edge to next edge
         this._hullTri = new Uint32Array(n); // edge to adjacent triangle
-        this._hullHash = new Int32Array(this._hashSize).fill(-1); // angular edge hash
+        this._hullHash = new Int32Array(this._hashSize); // angular edge hash
 
         // temporary arrays for sorting points
         this._ids = new Uint32Array(n);
@@ -331,11 +329,10 @@ class Delaunator {
         const cx = (minX + maxX) / 2;
         const cy = (minY + maxY) / 2;
 
-        let minDist = Infinity;
         let i0, i1, i2;
 
         // pick a seed point close to the center
-        for (let i = 0; i < n; i++) {
+        for (let i = 0, minDist = Infinity; i < n; i++) {
             const d = dist(cx, cy, coords[2 * i], coords[2 * i + 1]);
             if (d < minDist) {
                 i0 = i;
@@ -345,10 +342,8 @@ class Delaunator {
         const i0x = coords[2 * i0];
         const i0y = coords[2 * i0 + 1];
 
-        minDist = Infinity;
-
         // find the point closest to the seed
-        for (let i = 0; i < n; i++) {
+        for (let i = 0, minDist = Infinity; i < n; i++) {
             if (i === i0) continue;
             const d = dist(i0x, i0y, coords[2 * i], coords[2 * i + 1]);
             if (d < minDist && d > 0) {
@@ -384,9 +379,10 @@ class Delaunator {
             let j = 0;
             for (let i = 0, d0 = -Infinity; i < n; i++) {
                 const id = this._ids[i];
-                if (this._dists[id] > d0) {
+                const d = this._dists[id];
+                if (d > d0) {
                     hull[j++] = id;
-                    d0 = this._dists[id];
+                    d0 = d;
                 }
             }
             this.hull = hull.subarray(0, j);
@@ -819,6 +815,7 @@ class Voronoi {
   }
   _init() {
     const {delaunay: {points, hull, triangles}, vectors} = this;
+    let bx, by; // lazily computed barycenter of the hull
 
     // Compute circumcenters.
     const circumcenters = this.circumcenters = this._circumcenters.subarray(0, triangles.length / 3 * 2);
@@ -840,17 +837,15 @@ class Voronoi {
       const ab = (dx * ey - dy * ex) * 2;
 
       if (Math.abs(ab) < 1e-9) {
-        // degenerate case (collinear diagram)
-        // almost equal points (degenerate triangle)
-        // the circumcenter is at the infinity, in a
-        // direction that is:
-        // 1. orthogonal to the halfedge.
-        let a = 1e9;
-        // 2. points away from the center; since the list of triangles starts
-        // in the center, the first point of the first triangle
-        // will be our reference
-        const r = triangles[0] * 2;
-        a *= Math.sign((points[r] - x1) * ey - (points[r + 1] - y1) * ex);
+        // For a degenerate triangle, the circumcenter is at the infinity, in a
+        // direction orthogonal to the halfedge and away from the “center” of
+        // the diagram <bx, by>, defined as the hull’s barycenter.
+        if (bx === undefined) {
+          bx = by = 0;
+          for (const i of hull) bx += points[i * 2], by += points[i * 2 + 1];
+          bx /= hull.length, by /= hull.length;
+        }
+        const a = 1e9 * Math.sign((bx - x1) * ey - (by - y1) * ex);
         x = (x1 + x3) / 2 - a * ey;
         y = (y1 + y3) / 2 + a * ex;
       } else {
@@ -959,11 +954,10 @@ class Voronoi {
       // find the common edge
       if (cj) loop: for (let ai = 0, li = ci.length; ai < li; ai += 2) {
         for (let aj = 0, lj = cj.length; aj < lj; aj += 2) {
-          if (ci[ai] == cj[aj]
-          && ci[ai + 1] == cj[aj + 1]
-          && ci[(ai + 2) % li] == cj[(aj + lj - 2) % lj]
-          && ci[(ai + 3) % li] == cj[(aj + lj - 1) % lj]
-          ) {
+          if (ci[ai] === cj[aj]
+              && ci[ai + 1] === cj[aj + 1]
+              && ci[(ai + 2) % li] === cj[(aj + lj - 2) % lj]
+              && ci[(ai + 3) % li] === cj[(aj + lj - 1) % lj]) {
             yield j;
             break loop;
           }
@@ -995,9 +989,9 @@ class Voronoi {
     if (points === null) return null;
     const {vectors: V} = this;
     const v = i * 4;
-    return V[v] || V[v + 1]
+    return this._simplify(V[v] || V[v + 1]
         ? this._clipInfinite(i, points, V[v], V[v + 1], V[v + 2], V[v + 3])
-        : this._clipFinite(i, points);
+        : this._clipFinite(i, points));
   }
   _clipFinite(i, points) {
     const n = points.length;
@@ -1040,8 +1034,11 @@ class Voronoi {
     return P;
   }
   _clipSegment(x0, y0, x1, y1, c0, c1) {
+    // for more robustness, always consider the segment in the same order
+    const flip = c0 < c1;
+    if (flip) [x0, y0, x1, y1, c0, c1] = [x1, y1, x0, y0, c1, c0];
     while (true) {
-      if (c0 === 0 && c1 === 0) return [x0, y0, x1, y1];
+      if (c0 === 0 && c1 === 0) return flip ? [x1, y1, x0, y0] : [x0, y0, x1, y1];
       if (c0 & c1) return null;
       let x, y, c = c0 || c1;
       if (c & 0b1000) x = x0 + (x1 - x0) * (this.ymax - y0) / (y1 - y0), y = this.ymax;
@@ -1085,14 +1082,6 @@ class Voronoi {
         P.splice(j, 0, x, y), j += 2;
       }
     }
-    if (P.length > 4) {
-      for (let i = 0; i < P.length; i+= 2) {
-        const j = (i + 2) % P.length, k = (i + 4) % P.length;
-        if (P[i] === P[j] && P[j] === P[k]
-        || P[i + 1] === P[j + 1] && P[j + 1] === P[k + 1])
-          P.splice(j, 2), i -= 2;
-      }
-    }
     return j;
   }
   _project(x0, y0, vx, vy) {
@@ -1124,6 +1113,18 @@ class Voronoi {
         : x > this.xmax ? 0b0010 : 0b0000)
         | (y < this.ymin ? 0b0100
         : y > this.ymax ? 0b1000 : 0b0000);
+  }
+  _simplify(P) {
+    if (P && P.length > 4) {
+      for (let i = 0; i < P.length; i+= 2) {
+        const j = (i + 2) % P.length, k = (i + 4) % P.length;
+        if (P[i] === P[j] && P[j] === P[k] || P[i + 1] === P[j + 1] && P[j + 1] === P[k + 1]) {
+          P.splice(j, 2), i -= 2;
+        }
+      }
+      if (!P.length) P = null;
+    }
+    return P;
   }
 }
 
