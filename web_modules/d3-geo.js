@@ -50,7 +50,7 @@ function merge(arrays) {
   return Array.from(flatten(arrays));
 }
 
-function range(start, stop, step) {
+function range$1(start, stop, step) {
   start = +start, stop = +stop, step = (n = arguments.length) < 2 ? (stop = start, start = 0, 1) : n < 3 ? 1 : +step;
 
   var i = -1,
@@ -172,76 +172,76 @@ function geoStream(object, stream) {
   }
 }
 
-var areaRingSum = new Adder();
+var areaRingSum$1 = new Adder();
 
 // hello?
 
-var areaSum = new Adder(),
-    lambda00,
-    phi00,
-    lambda0,
-    cosPhi0,
-    sinPhi0;
+var areaSum$1 = new Adder(),
+    lambda00$2,
+    phi00$2,
+    lambda0$2,
+    cosPhi0$1,
+    sinPhi0$1;
 
-var areaStream = {
+var areaStream$1 = {
   point: noop,
   lineStart: noop,
   lineEnd: noop,
   polygonStart: function() {
-    areaRingSum = new Adder();
-    areaStream.lineStart = areaRingStart;
-    areaStream.lineEnd = areaRingEnd;
+    areaRingSum$1 = new Adder();
+    areaStream$1.lineStart = areaRingStart$1;
+    areaStream$1.lineEnd = areaRingEnd$1;
   },
   polygonEnd: function() {
-    var areaRing = +areaRingSum;
-    areaSum.add(areaRing < 0 ? tau + areaRing : areaRing);
+    var areaRing = +areaRingSum$1;
+    areaSum$1.add(areaRing < 0 ? tau + areaRing : areaRing);
     this.lineStart = this.lineEnd = this.point = noop;
   },
   sphere: function() {
-    areaSum.add(tau);
+    areaSum$1.add(tau);
   }
 };
 
-function areaRingStart() {
-  areaStream.point = areaPointFirst;
+function areaRingStart$1() {
+  areaStream$1.point = areaPointFirst$1;
 }
 
-function areaRingEnd() {
-  areaPoint(lambda00, phi00);
+function areaRingEnd$1() {
+  areaPoint$1(lambda00$2, phi00$2);
 }
 
-function areaPointFirst(lambda, phi) {
-  areaStream.point = areaPoint;
-  lambda00 = lambda, phi00 = phi;
+function areaPointFirst$1(lambda, phi) {
+  areaStream$1.point = areaPoint$1;
+  lambda00$2 = lambda, phi00$2 = phi;
   lambda *= radians, phi *= radians;
-  lambda0 = lambda, cosPhi0 = cos(phi = phi / 2 + quarterPi), sinPhi0 = sin(phi);
+  lambda0$2 = lambda, cosPhi0$1 = cos(phi = phi / 2 + quarterPi), sinPhi0$1 = sin(phi);
 }
 
-function areaPoint(lambda, phi) {
+function areaPoint$1(lambda, phi) {
   lambda *= radians, phi *= radians;
   phi = phi / 2 + quarterPi; // half the angular distance from south pole
 
   // Spherical excess E for a spherical triangle with vertices: south pole,
   // previous point, current point.  Uses a formula derived from Cagnoli’s
   // theorem.  See Todhunter, Spherical Trig. (1871), Sec. 103, Eq. (2).
-  var dLambda = lambda - lambda0,
+  var dLambda = lambda - lambda0$2,
       sdLambda = dLambda >= 0 ? 1 : -1,
       adLambda = sdLambda * dLambda,
       cosPhi = cos(phi),
       sinPhi = sin(phi),
-      k = sinPhi0 * sinPhi,
-      u = cosPhi0 * cosPhi + k * cos(adLambda),
+      k = sinPhi0$1 * sinPhi,
+      u = cosPhi0$1 * cosPhi + k * cos(adLambda),
       v = k * sdLambda * sin(adLambda);
-  areaRingSum.add(atan2(v, u));
+  areaRingSum$1.add(atan2(v, u));
 
   // Advance the previous points.
-  lambda0 = lambda, cosPhi0 = cosPhi, sinPhi0 = sinPhi;
+  lambda0$2 = lambda, cosPhi0$1 = cosPhi, sinPhi0$1 = sinPhi;
 }
 
 function area(object) {
-  areaSum = new Adder();
-  geoStream(object, areaStream);
-  return areaSum * 2;
+  areaSum$1 = new Adder();
+  geoStream(object, areaStream$1);
+  return areaSum$1 * 2;
 }
 
 function spherical(cartesian) {
@@ -282,36 +282,36 @@ var lambda0$1, phi0, lambda1, phi1, // bounds
     p0, // previous 3D point
     deltaSum,
     ranges,
-    range$1;
+    range;
 
-var boundsStream = {
-  point: boundsPoint,
+var boundsStream$2 = {
+  point: boundsPoint$1,
   lineStart: boundsLineStart,
   lineEnd: boundsLineEnd,
   polygonStart: function() {
-    boundsStream.point = boundsRingPoint;
-    boundsStream.lineStart = boundsRingStart;
-    boundsStream.lineEnd = boundsRingEnd;
+    boundsStream$2.point = boundsRingPoint;
+    boundsStream$2.lineStart = boundsRingStart;
+    boundsStream$2.lineEnd = boundsRingEnd;
     deltaSum = new Adder();
-    areaStream.polygonStart();
+    areaStream$1.polygonStart();
   },
   polygonEnd: function() {
-    areaStream.polygonEnd();
-    boundsStream.point = boundsPoint;
-    boundsStream.lineStart = boundsLineStart;
-    boundsStream.lineEnd = boundsLineEnd;
-    if (areaRingSum < 0) lambda0$1 = -(lambda1 = 180), phi0 = -(phi1 = 90);
+    areaStream$1.polygonEnd();
+    boundsStream$2.point = boundsPoint$1;
+    boundsStream$2.lineStart = boundsLineStart;
+    boundsStream$2.lineEnd = boundsLineEnd;
+    if (areaRingSum$1 < 0) lambda0$1 = -(lambda1 = 180), phi0 = -(phi1 = 90);
     else if (deltaSum > epsilon) phi1 = 90;
     else if (deltaSum < -epsilon) phi0 = -90;
-    range$1[0] = lambda0$1, range$1[1] = lambda1;
+    range[0] = lambda0$1, range[1] = lambda1;
   },
   sphere: function() {
     lambda0$1 = -(lambda1 = 180), phi0 = -(phi1 = 90);
   }
 };
 
-function boundsPoint(lambda, phi) {
-  ranges.push(range$1 = [lambda0$1 = lambda, lambda1 = lambda]);
+function boundsPoint$1(lambda, phi) {
+  ranges.push(range = [lambda0$1 = lambda, lambda1 = lambda]);
   if (phi < phi0) phi0 = phi;
   if (phi > phi1) phi1 = phi;
 }
@@ -358,7 +358,7 @@ function linePoint(lambda, phi) {
       }
     }
   } else {
-    ranges.push(range$1 = [lambda0$1 = lambda, lambda1 = lambda]);
+    ranges.push(range = [lambda0$1 = lambda, lambda1 = lambda]);
   }
   if (phi < phi0) phi0 = phi;
   if (phi > phi1) phi1 = phi;
@@ -366,12 +366,12 @@ function linePoint(lambda, phi) {
 }
 
 function boundsLineStart() {
-  boundsStream.point = linePoint;
+  boundsStream$2.point = linePoint;
 }
 
 function boundsLineEnd() {
-  range$1[0] = lambda0$1, range$1[1] = lambda1;
-  boundsStream.point = boundsPoint;
+  range[0] = lambda0$1, range[1] = lambda1;
+  boundsStream$2.point = boundsPoint$1;
   p0 = null;
 }
 
@@ -382,19 +382,19 @@ function boundsRingPoint(lambda, phi) {
   } else {
     lambda00$1 = lambda, phi00$1 = phi;
   }
-  areaStream.point(lambda, phi);
+  areaStream$1.point(lambda, phi);
   linePoint(lambda, phi);
 }
 
 function boundsRingStart() {
-  areaStream.lineStart();
+  areaStream$1.lineStart();
 }
 
 function boundsRingEnd() {
   boundsRingPoint(lambda00$1, phi00$1);
-  areaStream.lineEnd();
+  areaStream$1.lineEnd();
   if (abs(deltaSum) > epsilon) lambda0$1 = -(lambda1 = 180);
-  range$1[0] = lambda0$1, range$1[1] = lambda1;
+  range[0] = lambda0$1, range[1] = lambda1;
   p0 = null;
 }
 
@@ -418,7 +418,7 @@ function bounds(feature) {
 
   phi1 = lambda1 = -(lambda0$1 = phi0 = Infinity);
   ranges = [];
-  geoStream(feature, boundsStream);
+  geoStream(feature, boundsStream$2);
 
   // First, sort ranges by their minimum longitudes.
   if (n = ranges.length) {
@@ -443,7 +443,7 @@ function bounds(feature) {
     }
   }
 
-  ranges = range$1 = null;
+  ranges = range = null;
 
   return lambda0$1 === Infinity || phi0 === Infinity
       ? [[NaN, NaN], [NaN, NaN]]
@@ -451,29 +451,29 @@ function bounds(feature) {
 }
 
 var W0, W1,
-    X0, Y0, Z0,
-    X1, Y1, Z1,
-    X2, Y2, Z2,
-    lambda00$2, phi00$2, // first point
-    x0, y0, z0; // previous point
+    X0$1, Y0$1, Z0$1,
+    X1$1, Y1$1, Z1$1,
+    X2$1, Y2$1, Z2$1,
+    lambda00, phi00, // first point
+    x0$4, y0$4, z0; // previous point
 
-var centroidStream = {
+var centroidStream$1 = {
   sphere: noop,
-  point: centroidPoint,
-  lineStart: centroidLineStart,
-  lineEnd: centroidLineEnd,
+  point: centroidPoint$1,
+  lineStart: centroidLineStart$1,
+  lineEnd: centroidLineEnd$1,
   polygonStart: function() {
-    centroidStream.lineStart = centroidRingStart;
-    centroidStream.lineEnd = centroidRingEnd;
+    centroidStream$1.lineStart = centroidRingStart$1;
+    centroidStream$1.lineEnd = centroidRingEnd$1;
   },
   polygonEnd: function() {
-    centroidStream.lineStart = centroidLineStart;
-    centroidStream.lineEnd = centroidLineEnd;
+    centroidStream$1.lineStart = centroidLineStart$1;
+    centroidStream$1.lineEnd = centroidLineEnd$1;
   }
 };
 
 // Arithmetic mean of Cartesian vectors.
-function centroidPoint(lambda, phi) {
+function centroidPoint$1(lambda, phi) {
   lambda *= radians, phi *= radians;
   var cosPhi = cos(phi);
   centroidPointCartesian(cosPhi * cos(lambda), cosPhi * sin(lambda), sin(phi));
@@ -481,23 +481,23 @@ function centroidPoint(lambda, phi) {
 
 function centroidPointCartesian(x, y, z) {
   ++W0;
-  X0 += (x - X0) / W0;
-  Y0 += (y - Y0) / W0;
-  Z0 += (z - Z0) / W0;
+  X0$1 += (x - X0$1) / W0;
+  Y0$1 += (y - Y0$1) / W0;
+  Z0$1 += (z - Z0$1) / W0;
 }
 
-function centroidLineStart() {
-  centroidStream.point = centroidLinePointFirst;
+function centroidLineStart$1() {
+  centroidStream$1.point = centroidLinePointFirst;
 }
 
 function centroidLinePointFirst(lambda, phi) {
   lambda *= radians, phi *= radians;
   var cosPhi = cos(phi);
-  x0 = cosPhi * cos(lambda);
-  y0 = cosPhi * sin(lambda);
+  x0$4 = cosPhi * cos(lambda);
+  y0$4 = cosPhi * sin(lambda);
   z0 = sin(phi);
-  centroidStream.point = centroidLinePoint;
-  centroidPointCartesian(x0, y0, z0);
+  centroidStream$1.point = centroidLinePoint;
+  centroidPointCartesian(x0$4, y0$4, z0);
 }
 
 function centroidLinePoint(lambda, phi) {
@@ -506,38 +506,38 @@ function centroidLinePoint(lambda, phi) {
       x = cosPhi * cos(lambda),
       y = cosPhi * sin(lambda),
       z = sin(phi),
-      w = atan2(sqrt((w = y0 * z - z0 * y) * w + (w = z0 * x - x0 * z) * w + (w = x0 * y - y0 * x) * w), x0 * x + y0 * y + z0 * z);
+      w = atan2(sqrt((w = y0$4 * z - z0 * y) * w + (w = z0 * x - x0$4 * z) * w + (w = x0$4 * y - y0$4 * x) * w), x0$4 * x + y0$4 * y + z0 * z);
   W1 += w;
-  X1 += w * (x0 + (x0 = x));
-  Y1 += w * (y0 + (y0 = y));
-  Z1 += w * (z0 + (z0 = z));
-  centroidPointCartesian(x0, y0, z0);
+  X1$1 += w * (x0$4 + (x0$4 = x));
+  Y1$1 += w * (y0$4 + (y0$4 = y));
+  Z1$1 += w * (z0 + (z0 = z));
+  centroidPointCartesian(x0$4, y0$4, z0);
 }
 
-function centroidLineEnd() {
-  centroidStream.point = centroidPoint;
+function centroidLineEnd$1() {
+  centroidStream$1.point = centroidPoint$1;
 }
 
 // See J. E. Brock, The Inertia Tensor for a Spherical Triangle,
 // J. Applied Mechanics 42, 239 (1975).
-function centroidRingStart() {
-  centroidStream.point = centroidRingPointFirst;
+function centroidRingStart$1() {
+  centroidStream$1.point = centroidRingPointFirst;
 }
 
-function centroidRingEnd() {
-  centroidRingPoint(lambda00$2, phi00$2);
-  centroidStream.point = centroidPoint;
+function centroidRingEnd$1() {
+  centroidRingPoint(lambda00, phi00);
+  centroidStream$1.point = centroidPoint$1;
 }
 
 function centroidRingPointFirst(lambda, phi) {
-  lambda00$2 = lambda, phi00$2 = phi;
+  lambda00 = lambda, phi00 = phi;
   lambda *= radians, phi *= radians;
-  centroidStream.point = centroidRingPoint;
+  centroidStream$1.point = centroidRingPoint;
   var cosPhi = cos(phi);
-  x0 = cosPhi * cos(lambda);
-  y0 = cosPhi * sin(lambda);
+  x0$4 = cosPhi * cos(lambda);
+  y0$4 = cosPhi * sin(lambda);
   z0 = sin(phi);
-  centroidPointCartesian(x0, y0, z0);
+  centroidPointCartesian(x0$4, y0$4, z0);
 }
 
 function centroidRingPoint(lambda, phi) {
@@ -546,41 +546,41 @@ function centroidRingPoint(lambda, phi) {
       x = cosPhi * cos(lambda),
       y = cosPhi * sin(lambda),
       z = sin(phi),
-      cx = y0 * z - z0 * y,
-      cy = z0 * x - x0 * z,
-      cz = x0 * y - y0 * x,
+      cx = y0$4 * z - z0 * y,
+      cy = z0 * x - x0$4 * z,
+      cz = x0$4 * y - y0$4 * x,
       m = hypot(cx, cy, cz),
       w = asin(m), // line weight = angle
       v = m && -w / m; // area weight multiplier
-  X2.add(v * cx);
-  Y2.add(v * cy);
-  Z2.add(v * cz);
+  X2$1.add(v * cx);
+  Y2$1.add(v * cy);
+  Z2$1.add(v * cz);
   W1 += w;
-  X1 += w * (x0 + (x0 = x));
-  Y1 += w * (y0 + (y0 = y));
-  Z1 += w * (z0 + (z0 = z));
-  centroidPointCartesian(x0, y0, z0);
+  X1$1 += w * (x0$4 + (x0$4 = x));
+  Y1$1 += w * (y0$4 + (y0$4 = y));
+  Z1$1 += w * (z0 + (z0 = z));
+  centroidPointCartesian(x0$4, y0$4, z0);
 }
 
 function centroid(object) {
   W0 = W1 =
-  X0 = Y0 = Z0 =
-  X1 = Y1 = Z1 = 0;
-  X2 = new Adder();
-  Y2 = new Adder();
-  Z2 = new Adder();
-  geoStream(object, centroidStream);
+  X0$1 = Y0$1 = Z0$1 =
+  X1$1 = Y1$1 = Z1$1 = 0;
+  X2$1 = new Adder();
+  Y2$1 = new Adder();
+  Z2$1 = new Adder();
+  geoStream(object, centroidStream$1);
 
-  var x = +X2,
-      y = +Y2,
-      z = +Z2,
+  var x = +X2$1,
+      y = +Y2$1,
+      z = +Z2$1,
       m = hypot(x, y, z);
 
   // If the area-weighted ccentroid is undefined, fall back to length-weighted ccentroid.
   if (m < epsilon2) {
-    x = X1, y = Y1, z = Z1;
+    x = X1$1, y = Y1$1, z = Z1$1;
     // If the feature has zero length, fall back to arithmetic mean of point vectors.
-    if (W1 < epsilon) x = X0, y = Y0, z = Z0;
+    if (W1 < epsilon) x = X0$1, y = Y0$1, z = Z0$1;
     m = hypot(x, y, z);
     // If the feature still has an undefined ccentroid, then return.
     if (m < epsilon2) return [NaN, NaN];
@@ -1582,12 +1582,12 @@ function extent() {
   };
 }
 
-var lengthSum,
-    lambda0$2,
-    sinPhi0$1,
-    cosPhi0$1;
+var lengthSum$1,
+    lambda0,
+    sinPhi0,
+    cosPhi0;
 
-var lengthStream = {
+var lengthStream$1 = {
   sphere: noop,
   point: noop,
   lineStart: lengthLineStart,
@@ -1597,38 +1597,38 @@ var lengthStream = {
 };
 
 function lengthLineStart() {
-  lengthStream.point = lengthPointFirst;
-  lengthStream.lineEnd = lengthLineEnd;
+  lengthStream$1.point = lengthPointFirst$1;
+  lengthStream$1.lineEnd = lengthLineEnd;
 }
 
 function lengthLineEnd() {
-  lengthStream.point = lengthStream.lineEnd = noop;
+  lengthStream$1.point = lengthStream$1.lineEnd = noop;
 }
 
-function lengthPointFirst(lambda, phi) {
+function lengthPointFirst$1(lambda, phi) {
   lambda *= radians, phi *= radians;
-  lambda0$2 = lambda, sinPhi0$1 = sin(phi), cosPhi0$1 = cos(phi);
-  lengthStream.point = lengthPoint;
+  lambda0 = lambda, sinPhi0 = sin(phi), cosPhi0 = cos(phi);
+  lengthStream$1.point = lengthPoint$1;
 }
 
-function lengthPoint(lambda, phi) {
+function lengthPoint$1(lambda, phi) {
   lambda *= radians, phi *= radians;
   var sinPhi = sin(phi),
       cosPhi = cos(phi),
-      delta = abs(lambda - lambda0$2),
+      delta = abs(lambda - lambda0),
       cosDelta = cos(delta),
       sinDelta = sin(delta),
       x = cosPhi * sinDelta,
-      y = cosPhi0$1 * sinPhi - sinPhi0$1 * cosPhi * cosDelta,
-      z = sinPhi0$1 * sinPhi + cosPhi0$1 * cosPhi * cosDelta;
-  lengthSum.add(atan2(sqrt(x * x + y * y), z));
-  lambda0$2 = lambda, sinPhi0$1 = sinPhi, cosPhi0$1 = cosPhi;
+      y = cosPhi0 * sinPhi - sinPhi0 * cosPhi * cosDelta,
+      z = sinPhi0 * sinPhi + cosPhi0 * cosPhi * cosDelta;
+  lengthSum$1.add(atan2(sqrt(x * x + y * y), z));
+  lambda0 = lambda, sinPhi0 = sinPhi, cosPhi0 = cosPhi;
 }
 
 function length(object) {
-  lengthSum = new Adder();
-  geoStream(object, lengthStream);
-  return +lengthSum;
+  lengthSum$1 = new Adder();
+  geoStream(object, lengthStream$1);
+  return +lengthSum$1;
 }
 
 var coordinates = [null, null],
@@ -1735,12 +1735,12 @@ function contains(object, point) {
 }
 
 function graticuleX(y0, y1, dy) {
-  var y = range(y0, y1 - epsilon, dy).concat(y1);
+  var y = range$1(y0, y1 - epsilon, dy).concat(y1);
   return function(x) { return y.map(function(y) { return [x, y]; }); };
 }
 
 function graticuleY(x0, x1, dx) {
-  var x = range(x0, x1 - epsilon, dx).concat(x1);
+  var x = range$1(x0, x1 - epsilon, dx).concat(x1);
   return function(y) { return x.map(function(x) { return [x, y]; }); };
 }
 
@@ -1756,10 +1756,10 @@ function graticule() {
   }
 
   function lines() {
-    return range(ceil(X0 / DX) * DX, X1, DX).map(X)
-        .concat(range(ceil(Y0 / DY) * DY, Y1, DY).map(Y))
-        .concat(range(ceil(x0 / dx) * dx, x1, dx).filter(function(x) { return abs(x % DX) > epsilon; }).map(x))
-        .concat(range(ceil(y0 / dy) * dy, y1, dy).filter(function(y) { return abs(y % DY) > epsilon; }).map(y));
+    return range$1(ceil(X0 / DX) * DX, X1, DX).map(X)
+        .concat(range$1(ceil(Y0 / DY) * DY, Y1, DY).map(Y))
+        .concat(range$1(ceil(x0 / dx) * dx, x1, dx).filter(function(x) { return abs(x % DX) > epsilon; }).map(x))
+        .concat(range$1(ceil(y0 / dy) * dy, y1, dy).filter(function(y) { return abs(y % DY) > epsilon; }).map(y));
   }
 
   graticule.lines = function() {
@@ -1872,60 +1872,62 @@ function interpolate(a, b) {
   return interpolate;
 }
 
-var identity = x => x;
+var identity$1 = x => x;
 
-var areaSum$1 = new Adder(),
-    areaRingSum$1 = new Adder(),
-    x00,
-    y00,
-    x0$1,
-    y0$1;
+var areaSum = new Adder(),
+    areaRingSum = new Adder(),
+    x00$2,
+    y00$2,
+    x0$3,
+    y0$3;
 
-var areaStream$1 = {
+var areaStream = {
   point: noop,
   lineStart: noop,
   lineEnd: noop,
   polygonStart: function() {
-    areaStream$1.lineStart = areaRingStart$1;
-    areaStream$1.lineEnd = areaRingEnd$1;
+    areaStream.lineStart = areaRingStart;
+    areaStream.lineEnd = areaRingEnd;
   },
   polygonEnd: function() {
-    areaStream$1.lineStart = areaStream$1.lineEnd = areaStream$1.point = noop;
-    areaSum$1.add(abs(areaRingSum$1));
-    areaRingSum$1 = new Adder();
+    areaStream.lineStart = areaStream.lineEnd = areaStream.point = noop;
+    areaSum.add(abs(areaRingSum));
+    areaRingSum = new Adder();
   },
   result: function() {
-    var area = areaSum$1 / 2;
-    areaSum$1 = new Adder();
+    var area = areaSum / 2;
+    areaSum = new Adder();
     return area;
   }
 };
 
-function areaRingStart$1() {
-  areaStream$1.point = areaPointFirst$1;
+function areaRingStart() {
+  areaStream.point = areaPointFirst;
 }
 
-function areaPointFirst$1(x, y) {
-  areaStream$1.point = areaPoint$1;
-  x00 = x0$1 = x, y00 = y0$1 = y;
+function areaPointFirst(x, y) {
+  areaStream.point = areaPoint;
+  x00$2 = x0$3 = x, y00$2 = y0$3 = y;
 }
 
-function areaPoint$1(x, y) {
-  areaRingSum$1.add(y0$1 * x - x0$1 * y);
-  x0$1 = x, y0$1 = y;
+function areaPoint(x, y) {
+  areaRingSum.add(y0$3 * x - x0$3 * y);
+  x0$3 = x, y0$3 = y;
 }
 
-function areaRingEnd$1() {
-  areaPoint$1(x00, y00);
+function areaRingEnd() {
+  areaPoint(x00$2, y00$2);
 }
+
+var pathArea = areaStream;
 
 var x0$2 = Infinity,
     y0$2 = x0$2,
     x1 = -x0$2,
     y1 = x1;
 
-var boundsStream$1 = {
-  point: boundsPoint$1,
+var boundsStream = {
+  point: boundsPoint,
   lineStart: noop,
   lineEnd: noop,
   polygonStart: noop,
@@ -1937,109 +1939,113 @@ var boundsStream$1 = {
   }
 };
 
-function boundsPoint$1(x, y) {
+function boundsPoint(x, y) {
   if (x < x0$2) x0$2 = x;
   if (x > x1) x1 = x;
   if (y < y0$2) y0$2 = y;
   if (y > y1) y1 = y;
 }
 
+var boundsStream$1 = boundsStream;
+
 // TODO Enforce positive area for exterior, negative area for interior?
 
-var X0$1 = 0,
-    Y0$1 = 0,
-    Z0$1 = 0,
-    X1$1 = 0,
-    Y1$1 = 0,
-    Z1$1 = 0,
-    X2$1 = 0,
-    Y2$1 = 0,
-    Z2$1 = 0,
+var X0 = 0,
+    Y0 = 0,
+    Z0 = 0,
+    X1 = 0,
+    Y1 = 0,
+    Z1 = 0,
+    X2 = 0,
+    Y2 = 0,
+    Z2 = 0,
     x00$1,
     y00$1,
-    x0$3,
-    y0$3;
+    x0$1,
+    y0$1;
 
-var centroidStream$1 = {
-  point: centroidPoint$1,
-  lineStart: centroidLineStart$1,
-  lineEnd: centroidLineEnd$1,
+var centroidStream = {
+  point: centroidPoint,
+  lineStart: centroidLineStart,
+  lineEnd: centroidLineEnd,
   polygonStart: function() {
-    centroidStream$1.lineStart = centroidRingStart$1;
-    centroidStream$1.lineEnd = centroidRingEnd$1;
+    centroidStream.lineStart = centroidRingStart;
+    centroidStream.lineEnd = centroidRingEnd;
   },
   polygonEnd: function() {
-    centroidStream$1.point = centroidPoint$1;
-    centroidStream$1.lineStart = centroidLineStart$1;
-    centroidStream$1.lineEnd = centroidLineEnd$1;
+    centroidStream.point = centroidPoint;
+    centroidStream.lineStart = centroidLineStart;
+    centroidStream.lineEnd = centroidLineEnd;
   },
   result: function() {
-    var centroid = Z2$1 ? [X2$1 / Z2$1, Y2$1 / Z2$1]
-        : Z1$1 ? [X1$1 / Z1$1, Y1$1 / Z1$1]
-        : Z0$1 ? [X0$1 / Z0$1, Y0$1 / Z0$1]
+    var centroid = Z2 ? [X2 / Z2, Y2 / Z2]
+        : Z1 ? [X1 / Z1, Y1 / Z1]
+        : Z0 ? [X0 / Z0, Y0 / Z0]
         : [NaN, NaN];
-    X0$1 = Y0$1 = Z0$1 =
-    X1$1 = Y1$1 = Z1$1 =
-    X2$1 = Y2$1 = Z2$1 = 0;
+    X0 = Y0 = Z0 =
+    X1 = Y1 = Z1 =
+    X2 = Y2 = Z2 = 0;
     return centroid;
   }
 };
 
-function centroidPoint$1(x, y) {
-  X0$1 += x;
-  Y0$1 += y;
-  ++Z0$1;
+function centroidPoint(x, y) {
+  X0 += x;
+  Y0 += y;
+  ++Z0;
 }
 
-function centroidLineStart$1() {
-  centroidStream$1.point = centroidPointFirstLine;
+function centroidLineStart() {
+  centroidStream.point = centroidPointFirstLine;
 }
 
 function centroidPointFirstLine(x, y) {
-  centroidStream$1.point = centroidPointLine;
-  centroidPoint$1(x0$3 = x, y0$3 = y);
+  centroidStream.point = centroidPointLine;
+  centroidPoint(x0$1 = x, y0$1 = y);
 }
 
 function centroidPointLine(x, y) {
-  var dx = x - x0$3, dy = y - y0$3, z = sqrt(dx * dx + dy * dy);
-  X1$1 += z * (x0$3 + x) / 2;
-  Y1$1 += z * (y0$3 + y) / 2;
-  Z1$1 += z;
-  centroidPoint$1(x0$3 = x, y0$3 = y);
+  var dx = x - x0$1, dy = y - y0$1, z = sqrt(dx * dx + dy * dy);
+  X1 += z * (x0$1 + x) / 2;
+  Y1 += z * (y0$1 + y) / 2;
+  Z1 += z;
+  centroidPoint(x0$1 = x, y0$1 = y);
 }
 
-function centroidLineEnd$1() {
-  centroidStream$1.point = centroidPoint$1;
+function centroidLineEnd() {
+  centroidStream.point = centroidPoint;
 }
 
-function centroidRingStart$1() {
-  centroidStream$1.point = centroidPointFirstRing;
+function centroidRingStart() {
+  centroidStream.point = centroidPointFirstRing;
 }
 
-function centroidRingEnd$1() {
+function centroidRingEnd() {
   centroidPointRing(x00$1, y00$1);
 }
 
 function centroidPointFirstRing(x, y) {
-  centroidStream$1.point = centroidPointRing;
-  centroidPoint$1(x00$1 = x0$3 = x, y00$1 = y0$3 = y);
+  centroidStream.point = centroidPointRing;
+  centroidPoint(x00$1 = x0$1 = x, y00$1 = y0$1 = y);
 }
 
 function centroidPointRing(x, y) {
-  var dx = x - x0$3,
-      dy = y - y0$3,
+  var dx = x - x0$1,
+      dy = y - y0$1,
       z = sqrt(dx * dx + dy * dy);
 
-  X1$1 += z * (x0$3 + x) / 2;
-  Y1$1 += z * (y0$3 + y) / 2;
-  Z1$1 += z;
+  X1 += z * (x0$1 + x) / 2;
+  Y1 += z * (y0$1 + y) / 2;
+  Z1 += z;
 
-  z = y0$3 * x - x0$3 * y;
-  X2$1 += z * (x0$3 + x);
-  Y2$1 += z * (y0$3 + y);
-  Z2$1 += z * 3;
-  centroidPoint$1(x0$3 = x, y0$3 = y);
+  z = y0$1 * x - x0$1 * y;
+  X2 += z * (x0$1 + x);
+  Y2 += z * (y0$1 + y);
+  Z2 += z * 3;
+  centroidPoint(x0$1 = x, y0$1 = y);
 }
+
+var pathCentroid = centroidStream;
 
 function PathContext(context) {
   this._context = context;
@@ -2084,21 +2090,21 @@ PathContext.prototype = {
   result: noop
 };
 
-var lengthSum$1 = new Adder(),
+var lengthSum = new Adder(),
     lengthRing,
-    x00$2,
-    y00$2,
-    x0$4,
-    y0$4;
+    x00,
+    y00,
+    x0,
+    y0;
 
-var lengthStream$1 = {
+var lengthStream = {
   point: noop,
   lineStart: function() {
-    lengthStream$1.point = lengthPointFirst$1;
+    lengthStream.point = lengthPointFirst;
   },
   lineEnd: function() {
-    if (lengthRing) lengthPoint$1(x00$2, y00$2);
-    lengthStream$1.point = noop;
+    if (lengthRing) lengthPoint(x00, y00);
+    lengthStream.point = noop;
   },
   polygonStart: function() {
     lengthRing = true;
@@ -2107,22 +2113,24 @@ var lengthStream$1 = {
     lengthRing = null;
   },
   result: function() {
-    var length = +lengthSum$1;
-    lengthSum$1 = new Adder();
+    var length = +lengthSum;
+    lengthSum = new Adder();
     return length;
   }
 };
 
-function lengthPointFirst$1(x, y) {
-  lengthStream$1.point = lengthPoint$1;
-  x00$2 = x0$4 = x, y00$2 = y0$4 = y;
+function lengthPointFirst(x, y) {
+  lengthStream.point = lengthPoint;
+  x00 = x0 = x, y00 = y0 = y;
 }
 
-function lengthPoint$1(x, y) {
-  x0$4 -= x, y0$4 -= y;
-  lengthSum$1.add(sqrt(x0$4 * x0$4 + y0$4 * y0$4));
-  x0$4 = x, y0$4 = y;
+function lengthPoint(x, y) {
+  x0 -= x, y0 -= y;
+  lengthSum.add(sqrt(x0 * x0 + y0 * y0));
+  x0 = x, y0 = y;
 }
+
+var pathMeasure = lengthStream;
 
 // Simple caching for constant-radius points.
 let cacheDigits, cacheAppend, cacheRadius, cacheCircle;
@@ -2226,13 +2234,13 @@ function index(projection, context) {
   }
 
   path.area = function(object) {
-    geoStream(object, projectionStream(areaStream$1));
-    return areaStream$1.result();
+    geoStream(object, projectionStream(pathArea));
+    return pathArea.result();
   };
 
   path.measure = function(object) {
-    geoStream(object, projectionStream(lengthStream$1));
-    return lengthStream$1.result();
+    geoStream(object, projectionStream(pathMeasure));
+    return pathMeasure.result();
   };
 
   path.bounds = function(object) {
@@ -2241,13 +2249,13 @@ function index(projection, context) {
   };
 
   path.centroid = function(object) {
-    geoStream(object, projectionStream(centroidStream$1));
-    return centroidStream$1.result();
+    geoStream(object, projectionStream(pathCentroid));
+    return pathCentroid.result();
   };
 
   path.projection = function(_) {
     if (!arguments.length) return projection;
-    projectionStream = _ == null ? (projection = null, identity) : (projection = _).stream;
+    projectionStream = _ == null ? (projection = null, identity$1) : (projection = _).stream;
     return path;
   };
 
@@ -2510,7 +2518,7 @@ function projectionMutator(projectAt) {
       sx = 1, // reflectX
       sy = 1, // reflectX
       theta = null, preclip = clipAntimeridian, // pre-clip angle
-      x0 = null, y0, x1, y1, postclip = identity, // post-clip extent
+      x0 = null, y0, x1, y1, postclip = identity$1, // post-clip extent
       delta2 = 0.5, // precision
       projectResample,
       projectTransform,
@@ -2544,7 +2552,7 @@ function projectionMutator(projectAt) {
   };
 
   projection.clipExtent = function(_) {
-    return arguments.length ? (postclip = _ == null ? (x0 = y0 = x1 = y1 = null, identity) : clipRectangle(x0 = +_[0][0], y0 = +_[0][1], x1 = +_[1][0], y1 = +_[1][1]), reset()) : x0 == null ? null : [[x0, y0], [x1, y1]];
+    return arguments.length ? (postclip = _ == null ? (x0 = y0 = x1 = y1 = null, identity$1) : clipRectangle(x0 = +_[0][0], y0 = +_[0][1], x1 = +_[1][0], y1 = +_[1][1]), reset()) : x0 == null ? null : [[x0, y0], [x1, y1]];
   };
 
   projection.scale = function(_) {
@@ -3015,7 +3023,7 @@ function gnomonic() {
       .clipAngle(60);
 }
 
-function identity$1() {
+function identity() {
   var k = 1, tx = 0, ty = 0, sx = 1, sy = 1, // scale, translate and reflect
       alpha = 0, ca, sa, // angle
       x0 = null, y0, x1, y1, // clip extent
@@ -3026,7 +3034,7 @@ function identity$1() {
           this.stream.point(p[0], p[1]);
         }
       }),
-      postclip = identity,
+      postclip = identity$1,
       cache,
       cacheStream;
 
@@ -3062,7 +3070,7 @@ function identity$1() {
     return arguments.length ? (postclip = _, x0 = y0 = x1 = y1 = null, reset()) : postclip;
   };
   projection.clipExtent = function(_) {
-    return arguments.length ? (postclip = _ == null ? (x0 = y0 = x1 = y1 = null, identity) : clipRectangle(x0 = +_[0][0], y0 = +_[0][1], x1 = +_[1][0], y1 = +_[1][1]), reset()) : x0 == null ? null : [[x0, y0], [x1, y1]];
+    return arguments.length ? (postclip = _ == null ? (x0 = y0 = x1 = y1 = null, identity$1) : clipRectangle(x0 = +_[0][0], y0 = +_[0][1], x1 = +_[1][0], y1 = +_[1][1]), reset()) : x0 == null ? null : [[x0, y0], [x1, y1]];
   };
   projection.scale = function(_) {
     return arguments.length ? (k = +_, reset()) : k;
@@ -3173,4 +3181,4 @@ function transverseMercator() {
       .scale(159.155);
 }
 
-export { albers as geoAlbers, albersUsa as geoAlbersUsa, area as geoArea, azimuthalEqualArea as geoAzimuthalEqualArea, azimuthalEqualAreaRaw as geoAzimuthalEqualAreaRaw, azimuthalEquidistant as geoAzimuthalEquidistant, azimuthalEquidistantRaw as geoAzimuthalEquidistantRaw, bounds as geoBounds, centroid as geoCentroid, circle as geoCircle, clipAntimeridian as geoClipAntimeridian, clipCircle as geoClipCircle, extent as geoClipExtent, clipRectangle as geoClipRectangle, conicConformal as geoConicConformal, conicConformalRaw as geoConicConformalRaw, conicEqualArea as geoConicEqualArea, conicEqualAreaRaw as geoConicEqualAreaRaw, conicEquidistant as geoConicEquidistant, conicEquidistantRaw as geoConicEquidistantRaw, contains as geoContains, distance as geoDistance, equalEarth as geoEqualEarth, equalEarthRaw as geoEqualEarthRaw, equirectangular as geoEquirectangular, equirectangularRaw as geoEquirectangularRaw, gnomonic as geoGnomonic, gnomonicRaw as geoGnomonicRaw, graticule as geoGraticule, graticule10 as geoGraticule10, identity$1 as geoIdentity, interpolate as geoInterpolate, length as geoLength, mercator as geoMercator, mercatorRaw as geoMercatorRaw, naturalEarth1 as geoNaturalEarth1, naturalEarth1Raw as geoNaturalEarth1Raw, orthographic as geoOrthographic, orthographicRaw as geoOrthographicRaw, index as geoPath, projection as geoProjection, projectionMutator as geoProjectionMutator, rotation as geoRotation, stereographic as geoStereographic, stereographicRaw as geoStereographicRaw, geoStream, transform as geoTransform, transverseMercator as geoTransverseMercator, transverseMercatorRaw as geoTransverseMercatorRaw };
+export { albers as geoAlbers, albersUsa as geoAlbersUsa, area as geoArea, azimuthalEqualArea as geoAzimuthalEqualArea, azimuthalEqualAreaRaw as geoAzimuthalEqualAreaRaw, azimuthalEquidistant as geoAzimuthalEquidistant, azimuthalEquidistantRaw as geoAzimuthalEquidistantRaw, bounds as geoBounds, centroid as geoCentroid, circle as geoCircle, clipAntimeridian as geoClipAntimeridian, clipCircle as geoClipCircle, extent as geoClipExtent, clipRectangle as geoClipRectangle, conicConformal as geoConicConformal, conicConformalRaw as geoConicConformalRaw, conicEqualArea as geoConicEqualArea, conicEqualAreaRaw as geoConicEqualAreaRaw, conicEquidistant as geoConicEquidistant, conicEquidistantRaw as geoConicEquidistantRaw, contains as geoContains, distance as geoDistance, equalEarth as geoEqualEarth, equalEarthRaw as geoEqualEarthRaw, equirectangular as geoEquirectangular, equirectangularRaw as geoEquirectangularRaw, gnomonic as geoGnomonic, gnomonicRaw as geoGnomonicRaw, graticule as geoGraticule, graticule10 as geoGraticule10, identity as geoIdentity, interpolate as geoInterpolate, length as geoLength, mercator as geoMercator, mercatorRaw as geoMercatorRaw, naturalEarth1 as geoNaturalEarth1, naturalEarth1Raw as geoNaturalEarth1Raw, orthographic as geoOrthographic, orthographicRaw as geoOrthographicRaw, index as geoPath, projection as geoProjection, projectionMutator as geoProjectionMutator, rotation as geoRotation, stereographic as geoStereographic, stereographicRaw as geoStereographicRaw, geoStream, transform as geoTransform, transverseMercator as geoTransverseMercator, transverseMercatorRaw as geoTransverseMercatorRaw };

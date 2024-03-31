@@ -1026,5 +1026,4 @@ var exports = {
     update: update,
 };
 
-export default exports;
-export { Easing, Group, Interpolation, Sequence, Tween, VERSION, add, getAll, nextId, now$1 as now, remove, removeAll, update };
+export { Easing, Group, Interpolation, Sequence, Tween, VERSION, add, exports as default, getAll, nextId, now$1 as now, remove, removeAll, update };

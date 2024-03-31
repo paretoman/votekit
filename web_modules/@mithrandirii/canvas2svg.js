@@ -1288,4 +1288,4 @@
 
     var ctx$1 = ctx;
 
-export default ctx$1;
+export { ctx$1 as default };

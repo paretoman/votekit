@@ -1,6 +1,6 @@
-const epsilon = 1.1102230246251565e-16;
+const epsilon$1 = 1.1102230246251565e-16;
 const splitter = 134217729;
-const resulterrbound = (3 + 8 * epsilon) * epsilon;
+const resulterrbound = (3 + 8 * epsilon$1) * epsilon$1;
 
 // fast_expansion_sum_zeroelim routine from oritinal code
 function sum(elen, e, flen, f, h) {
@@ -85,9 +85,9 @@ function vec(n) {
     return new Float64Array(n);
 }
 
-const ccwerrboundA = (3 + 16 * epsilon) * epsilon;
-const ccwerrboundB = (2 + 12 * epsilon) * epsilon;
-const ccwerrboundC = (9 + 64 * epsilon) * epsilon * epsilon;
+const ccwerrboundA = (3 + 16 * epsilon$1) * epsilon$1;
+const ccwerrboundB = (2 + 12 * epsilon$1) * epsilon$1;
+const ccwerrboundC = (9 + 64 * epsilon$1) * epsilon$1 * epsilon$1;
 
 const B = vec(4);
 const C1 = vec(8);
@@ -742,7 +742,7 @@ function defaultGetY(p) {
     return p[1];
 }
 
-const epsilon$1 = 1e-6;
+const epsilon = 1e-6;
 
 class Path {
   constructor() {
@@ -768,7 +768,7 @@ class Path {
     const y0 = y;
     if (r < 0) throw new Error("negative radius");
     if (this._x1 === null) this._ += `M${x0},${y0}`;
-    else if (Math.abs(this._x1 - x0) > epsilon$1 || Math.abs(this._y1 - y0) > epsilon$1) this._ += "L" + x0 + "," + y0;
+    else if (Math.abs(this._x1 - x0) > epsilon || Math.abs(this._y1 - y0) > epsilon) this._ += "L" + x0 + "," + y0;
     if (!r) return;
     this._ += `A${r},${r},0,1,1,${x - r},${y}A${r},${r},0,1,1,${this._x1 = x0},${this._y1 = y0}`;
   }

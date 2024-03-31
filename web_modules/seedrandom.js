@@ -128,7 +128,7 @@ if (module && module.exports) {
 
 })(
   commonjsGlobal,
-   module,    // present in node.js
+  module,    // present in node.js
   (typeof undefined) == 'function'    // present with an AMD loader
 );
 });
@@ -210,7 +210,7 @@ if (module && module.exports) {
 
 })(
   commonjsGlobal,
-   module,    // present in node.js
+  module,    // present in node.js
   (typeof undefined) == 'function'    // present with an AMD loader
 );
 });
@@ -297,7 +297,7 @@ if (module && module.exports) {
 
 })(
   commonjsGlobal,
-   module,    // present in node.js
+  module,    // present in node.js
   (typeof undefined) == 'function'    // present with an AMD loader
 );
 });
@@ -344,7 +344,7 @@ function XorGen(seed) {
     // Enforce an array length of 8, not all zeroes.
     while (X.length < 8) X.push(0);
     for (j = 0; j < 8 && X[j] === 0; ++j);
-    if (j == 8) X[7] = -1;
+    if (j == 8) X[7] = -1; else X[j];
 
     me.x = X;
     me.i = 0;
@@ -396,7 +396,7 @@ if (module && module.exports) {
 
 })(
   commonjsGlobal,
-   module,    // present in node.js
+  module,    // present in node.js
   (typeof undefined) == 'function'    // present with an AMD loader
 );
 });
@@ -544,7 +544,7 @@ if (module && module.exports) {
 
 })(
   commonjsGlobal,                                     // window object or global
-   module,    // present in node.js
+  module,    // present in node.js
   (typeof undefined) == 'function'    // present with an AMD loader
 );
 });
@@ -647,7 +647,7 @@ if (module && module.exports) {
 
 })(
   commonjsGlobal,
-   module,    // present in node.js
+  module,    // present in node.js
   (typeof undefined) == 'function'    // present with an AMD loader
 );
 });
@@ -661,7 +661,7 @@ var _nodeResolve_empty$1 = /*#__PURE__*/Object.freeze({
 
 var require$$0 = /*@__PURE__*/getDefaultExportFromNamespaceIfNotNamed(_nodeResolve_empty$1);
 
-var seedrandom = createCommonjsModule(function (module) {
+var seedrandom$1 = createCommonjsModule(function (module) {
 /*
 Copyright 2019 David Bau.
 
@@ -892,7 +892,7 @@ mixkey(math.random(), pool);
 // Nodejs and AMD support: export the implementation as a module using
 // either convention.
 //
-if ( module.exports) {
+if (module.exports) {
   module.exports = seedrandom;
   // When in node.js, try using crypto package for autoseeding.
   try {
@@ -966,20 +966,13 @@ if ( module.exports) {
 // Period: ~2^1600
 
 
-seedrandom.alea = alea;
-seedrandom.xor128 = xor128;
-seedrandom.xorwow = xorwow;
-seedrandom.xorshift7 = xorshift7;
-seedrandom.xor4096 = xor4096;
-seedrandom.tychei = tychei;
+seedrandom$1.alea = alea;
+seedrandom$1.xor128 = xor128;
+seedrandom$1.xorwow = xorwow;
+seedrandom$1.xorshift7 = xorshift7;
+seedrandom$1.xor4096 = xor4096;
+seedrandom$1.tychei = tychei;
 
-var seedrandom$1 = seedrandom;
+var seedrandom = seedrandom$1;
 
-var alea$1 = seedrandom$1.alea;
-export default seedrandom$1;
-var tychei$1 = seedrandom$1.tychei;
-var xor128$1 = seedrandom$1.xor128;
-var xor4096$1 = seedrandom$1.xor4096;
-var xorshift7$1 = seedrandom$1.xorshift7;
-var xorwow$1 = seedrandom$1.xorwow;
-export { seedrandom$1 as __moduleExports, alea$1 as alea, tychei$1 as tychei, xor128$1 as xor128, xor4096$1 as xor4096, xorshift7$1 as xorshift7, xorwow$1 as xorwow };
+export { seedrandom as default };

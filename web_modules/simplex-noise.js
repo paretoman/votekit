@@ -485,5 +485,4 @@ function masher() {
     };
 }
 
-export default SimplexNoise;
-export { SimplexNoise, buildPermutationTable };
+export { SimplexNoise, buildPermutationTable, SimplexNoise as default };
