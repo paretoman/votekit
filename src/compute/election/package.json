@@ -18,7 +18,7 @@
   },
   "homepage": "https://github.com/paretoman/votekit#readme",
   "dependencies": {
-    "@paretoman/votekit-social-choice-methods": "^0.0.0",
-    "@paretoman/votekit-vote-casters": "^0.0.0"
+    "@paretoman/votekit-social-choice-methods": "^0.0.5",
+    "@paretoman/votekit-vote-casters": "^0.0.5"
   }
 }

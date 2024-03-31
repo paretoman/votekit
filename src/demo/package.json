@@ -27,7 +27,7 @@
   },
   "homepage": "https://github.com/paretoman/votekit#readme",
   "dependencies": {
-    "@paretoman/votekit-add-sandboxes": "^0.0.0"
+    "@paretoman/votekit-add-sandboxes": "^0.0.5"
   },
   "devDependencies": {
     "parcel": "^2.12.0"

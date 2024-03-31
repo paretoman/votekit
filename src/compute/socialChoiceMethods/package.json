@@ -18,7 +18,7 @@
   },
   "homepage": "https://github.com/paretoman/votekit#readme",
   "dependencies": {
-    "@paretoman/votekit-types": "^0.0.0",
-    "@paretoman/votekit-utilities": "^0.0.0"
+    "@paretoman/votekit-types": "^0.0.5",
+    "@paretoman/votekit-utilities": "^0.0.5"
   }
 }

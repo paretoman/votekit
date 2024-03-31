@@ -18,7 +18,7 @@
   },
   "homepage": "https://github.com/paretoman/votekit#readme",
   "dependencies": {
-    "@paretoman/votekit-utilities": "^0.0.0",
+    "@paretoman/votekit-utilities": "^0.0.5",
     "d3-delaunay": "^6.0.2",
     "d3-polygon": "^3.0.1",
     "simplex-noise": "^3.0.1"

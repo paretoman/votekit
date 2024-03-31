@@ -50,7 +50,7 @@
   },
   "homepage": "https://paretoman.github.io/votekit",
   "dependencies": {
-    "@paretoman/votekit-add-sandboxes": "^0.0.0"
+    "@paretoman/votekit-add-sandboxes": "^0.0.5"
   },
   "devDependencies": {
     "@babel/core": "^7.17.8",

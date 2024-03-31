@@ -18,6 +18,6 @@
   },
   "homepage": "https://github.com/paretoman/votekit#readme",
   "dependencies": {
-    "@paretoman/votekit-election": "^0.0.0"
+    "@paretoman/votekit-election": "^0.0.5"
   }
 }

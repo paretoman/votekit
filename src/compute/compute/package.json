@@ -53,11 +53,11 @@
     "OLPR"
   ],
   "dependencies": {
-    "@paretoman/votekit-election-sequence": "^0.0.0",
-    "@paretoman/votekit-make-geography": "^0.0.0",
-    "@paretoman/votekit-sample-election": "^0.0.0",
-    "@paretoman/votekit-social-choice-methods": "^0.0.0",
-    "@paretoman/votekit-utilities": "^0.0.0",
-    "@paretoman/votekit-vote-casters": "^0.0.0"
+    "@paretoman/votekit-election-sequence": "^0.0.5",
+    "@paretoman/votekit-make-geography": "^0.0.5",
+    "@paretoman/votekit-sample-election": "^0.0.5",
+    "@paretoman/votekit-social-choice-methods": "^0.0.5",
+    "@paretoman/votekit-utilities": "^0.0.5",
+    "@paretoman/votekit-vote-casters": "^0.0.5"
   }
 }
