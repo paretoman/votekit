@@ -1,6 +1,5 @@
 dev
 node_modules
-package-lock.json
 docs
 .parcel-cache
 dist
