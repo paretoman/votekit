@@ -22,7 +22,6 @@
     "@paretoman/votekit-election-phase": "^0.0.5"
   },
   "devDependencies": {
-    "assert": "^2.1.0",
     "mocha": "^10.2.0",
     "@paretoman/votekit-make-geography": "^0.0.5"
   }

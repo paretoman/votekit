@@ -1,4 +1,4 @@
-import assert from 'assert'
+import * as assert from 'node:assert'
 import { describe, it } from 'mocha'
 import testElection from './test/testElection.js'
 import testElectionClosedPrimary from './test/testElectionClosedPrimary.js'
