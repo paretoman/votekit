@@ -104,6 +104,10 @@ export default function tooltipForEntity(graphic, entity, screen, viewSettings, 
             const itemsForPhase = {}
             items.strategyByPhase[phaseName] = itemsForPhase
 
+            const strategyList = getStrategy(entity.strategyRules, voteCasterName, phaseName)
+            const onlyOneStrategy = (strategyList.length === 1)
+            if (onlyOneStrategy) return
+
             itemsForPhase.actionPDF1 = new Item(
                 'range',
                 'Action PDF 1',
@@ -122,7 +126,7 @@ export default function tooltipForEntity(graphic, entity, screen, viewSettings, 
                     }
                     entity.doSetCommand.actionWeight(strategyRules)
                 },
-                getStrategy(entity.strategyRules, voteCasterName, phaseName)[0].actionWeight,
+                strategyList[0].actionWeight,
                 { min: 0, max: 1, step: 0.01 },
             )
             itemsForPhase.actionPDF2 = new Item(
@@ -143,7 +147,7 @@ export default function tooltipForEntity(graphic, entity, screen, viewSettings, 
                     }
                     entity.doSetCommand.actionWeight(strategyRules)
                 },
-                getStrategy(entity.strategyRules, voteCasterName, phaseName)[1].actionWeight,
+                strategyList[1].actionWeight,
                 { min: 0, max: 1, step: 0.01 },
             )
 
@@ -159,7 +163,7 @@ export default function tooltipForEntity(graphic, entity, screen, viewSettings, 
                     strategy[0].actionName = val
                     entity.doSetCommand.strategy(strategyRules)
                 },
-                getStrategy(entity.strategyRules, voteCasterName, phaseName)[0].actionName,
+                strategyList[0].actionName,
                 { choices },
             )
             itemsForPhase.actionName2 = new Item(
@@ -172,7 +176,7 @@ export default function tooltipForEntity(graphic, entity, screen, viewSettings, 
                     strategy[1].actionName = val
                     entity.doSetCommand.strategy(strategyRules)
                 },
-                getStrategy(entity.strategyRules, voteCasterName, phaseName)[1].actionName,
+                strategyList[1].actionName,
                 { choices },
             )
             itemsForPhase.actionOptionThreshold = new Item(
@@ -186,7 +190,7 @@ export default function tooltipForEntity(graphic, entity, screen, viewSettings, 
                     strategy[1].actionOptions.threshold.mean = Number(val)
                     entity.doSetCommand.actionOptionThreshold(strategyRules)
                 },
-                getStrategy(entity.strategyRules, voteCasterName, phaseName)[0].actionOptions.threshold.mean,
+                strategyList[0].actionOptions.threshold.mean,
                 { min: 0, max: 1, step: 0.01 },
             )
             box.appendChild(itemsForPhase.actionName1.div)
