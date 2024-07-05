@@ -15,9 +15,10 @@ export default function updateCandidateStatistics(candidateViewList, simData, si
     const al = Array(numCans)
 
     const allocation = getAllocation(phaseResults)
-
+    
     const { votes } = phaseResults
-    const tallyFractions = getTallyFractions(votes)
+    const { socialChoiceMethod } = phaseResults.electionOptions
+    const tallyFractions = getTallyFractions(votes, socialChoiceMethod)
 
     // map results to original candidate indices
     const canLabels = canLabelsDistrictPatch(phaseResults, optionsBag)

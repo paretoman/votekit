@@ -1,5 +1,6 @@
 /** @module */
 
+import BeatMap from '../vizBeatMap/BeatMap.js'
 import Grid1D from './Grid1D.js'
 import Grid2D from './Grid2D.js'
 
@@ -19,6 +20,9 @@ export default function VizOneGrid(voterRendererList, candidateList, screenMain,
     const rendererMaker = () => new Grid(candidateList, screenMain, screenMini)
     voterRendererList.setRenderer(rendererMaker)
 
+    const beatMap = new BeatMap()
+    let doBeatMap
+
     self.enter = function () {
         if (dimensions === 2) {
             screenMini.show()
@@ -32,13 +36,25 @@ export default function VizOneGrid(voterRendererList, candidateList, screenMain,
         const { error } = phaseResults
         if (error !== undefined) return
         const { votesByGeom } = phaseResults.votes
-        voterRendererList.updateGraphic(votesByGeom)
+        voterRendererList.updateGraphic(votesByGeom)        
+        
+        const {socialChoiceMethod} = phaseResults.electionOptions
+        doBeatMap = (socialChoiceMethod === 'minimax')
+        if ( doBeatMap) {
+            const canList = candidateList.getEntities()
+            beatMap.update(phaseResults, canList)
+        }
     }
     self.render = function () {
         if (dimensions === 1) {
             voterRendererList.renderBackground()
         }
-
+        if (dimensions === 2) {  
+            if (doBeatMap) {        
+                const { ctx } = screenMain
+                beatMap.render(ctx)
+            }
+        }
         voterRendererList.render()
     }
 }
