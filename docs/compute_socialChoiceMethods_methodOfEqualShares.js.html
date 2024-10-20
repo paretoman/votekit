@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: compute/socialChoiceMethods/methodOfEqualShares.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: compute/socialChoiceMethods/methodOfEqualShares.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/** @module */
+
+import { range } from '@paretoman/votekit-utilities'
+import * as types from '@paretoman/votekit-types'
+
+/**
+ * This method has rounds.
+ * groupCost is 1/seats.
+ * Add up scores.
+ * Divide groupCost by total to get factor to multiply scores by.
+ * For each voter, multiply scores by factor to get cost.
+ * Subtract cost from budget.
+ * If remaining budget is negative, add that amount to the deficit and set budget to 0.
+ * Check deficit to see if there is more groupCost to spend.
+ * Use this new groupCost like the old groupCost and do the steps above.
+ * Do this 10 times. That should be enough, maybe.
+ * If there is any deficit remaining, then subtract it from everybody.
+ * @param {types.typesVotes.votes} votes - The object for vote data.
+ * @param {types.typesSocialChoice.socialChoiceOptions} socialChoiceOptions - options to specify a social choice function.
+ * @returns {types.typesSocialChoice.socialChoiceResults} - the results returned from a social choice function.
+ */
+export default function methodOfEqualShares(votes, socialChoiceOptions) {
+    const { voteFractions } = votes.preferenceTallies
+    const { scoreVotes } = votes.preferenceLists
+
+    const { seats } = socialChoiceOptions
+
+    const nk = scoreVotes[0].length // number of candidates
+    const nv = scoreVotes.length // number of votes
+    const groupCost = 1 / seats // fraction of voters in a groupCost
+
+    const budget = Array(nv).fill(1)
+    const allocation = Array(nk).fill(0)
+
+    const winnersByRound = []
+    const winnerMaxCostPerScoreByRound = []
+
+    const small = 10 ** -4
+
+    let nw = 0 // number of winners
+    for (let r = 0; r &lt; nk; r++) {
+        if (nw >= seats) break
+
+        // Select Winner //
+        // add up number of votes for each candidate and choose the one with the most
+
+        // import math
+
+        // def leq(a, b):
+        //     return a &lt; b or math.isclose(a, b)
+
+        // # N:     a list of voters.
+        // # C:     a list of projects (candidates).
+        // # cost:  a dictionary that assigns each project its cost.
+        // # b:     the total available budget.
+        // # u:     a dictionary; u[c][i] is the value that voter i assigns to candidate c.
+        // #        an empty entry means that the corresponding value u[c][i] equals 0.
+
+        // def complete_utilitarian(N, C, cost, u, b, W):
+        //     util = {c: sum([u[c][i] for i in N]) for c in C}
+        //     committee_cost = sum([cost[c] for c in W])
+        //     while True:
+        //         next_candidate = None
+        //         highest_util = float("-inf")
+        //         for c in C.difference(W):
+        //             if leq(committee_cost + cost[c], b):
+        //                 if util[c] / cost[c] > highest_util:
+        //                     next_candidate = c
+        //                     highest_util = util[c] / cost[c]
+        //         if next_candidate is None:
+        //             break
+        //         W.add(next_candidate)
+        //         committee_cost += cost[next_candidate]
+        //     return W
+
+        // def method_of_equal_shares(N, C, cost, u, b):
+        //     W = set()
+        //     total_utility = {c: sum(u[c].values()) for c in C}
+
+        const tally = Array(nk).fill(0)
+        for (let k = 0; k &lt; nk; k++) {
+            if (allocation[k] === 1) continue // no clones
+            for (let i = 0; i &lt; nv; i++) {
+                tally[k] += voteFractions[i] * scoreVotes[i][k]
+            }
+        }
+
+        // put candidate indices in descending order from most points to least
+        const cansSorted = range(nk).sort((a, b) => tally[b] - tally[a])
+
+        // Sort the voters so we can add one voter at a time.
+        // Each voter has a maximum costPerScore that is within their budget.
+        // Start with the voter with the smallest maxCostPerScore,
+        // and calculate how much voters will spend if they all pay that costPerScore.
+
+        //     supporters = {c: set([i for i in N if u[c][i] > 0]) for c in C}
+        //     budget = {i: b / len(N) for i in N}
+        //     while True:
+        //         next_candidate = None
+        let bestCandidate = null
+        //         lowest_rho = float("inf")
+        let lowestMaxCostPerScore = Infinity
+        //         for c in C.difference(W):
+        //             if leq(cost[c], sum([budget[i] for i in supporters[c]])):
+
+        for (let k = 0; k &lt; nk; k++) {
+            const can = cansSorted[k]
+
+            if (allocation[can] === 1) continue // no clones
+
+            // check if candidate's lowest possible costPerScore is smaller than current lowest
+
+            // See if this candidate is within every voter's budget.
+            const groupCostPerScore = groupCost / tally[can]
+            let withinBudget = true
+            for (let i = 0; i &lt; nv; i++) {
+                const score = scoreVotes[i][can]
+                if (budget[i] &lt; groupCostPerScore * score) {
+                    withinBudget = false
+                    break
+                }
+            }
+
+            // If the candidate is within every voter's budget, then select the candidate.
+            if (withinBudget &amp;&amp; groupCostPerScore &lt; lowestMaxCostPerScore) {
+                lowestMaxCostPerScore = groupCostPerScore
+                bestCandidate = can
+                break
+            }
+
+            // If the candidate is outside of some voter's budget,
+            // then there might be a better choice of candidate.
+            // We will have to do the more complex process of "masking"
+            // the scores within the budget.
+
+            //                 supporters_sorted = sorted(supporters[c], key=lambda i: budget[i] / u[c][i])
+
+            const maxCostPerScore = []
+            let totalBudget = 0
+            const supporters = []
+            for (let i = 0, j = 0; i &lt; nv; i++) {
+                const bud = budget[i]
+                const score = scoreVotes[i][can]
+                maxCostPerScore[i] = bud / score
+                if (score > 0) {
+                    totalBudget += bud * voteFractions[i]
+                    supporters[j] = i
+                    j += 1
+                }
+            }
+
+            // is there room in the budget for this candidate?
+            // within rounding error
+            if (totalBudget + small - groupCost &lt; 0) {
+                continue
+            }
+
+            // ascending order
+            const supportersSorted = supporters.sort((a, b) => maxCostPerScore[a] - maxCostPerScore[b])
+            const ns = supportersSorted.length
+            //                 price = cost[c]
+            let costLeft = groupCost
+            //                 util = total_utility[c]
+            let scoreLeft = tally[can]
+            //                 for i in supporters_sorted:
+
+            // increase the max cost per score until the cost is met
+            let curMaxCostPerScore = null
+            for (let j = 0; j &lt; ns; j++) {
+                const i = supportersSorted[j]
+                //                     if leq(price * u[c][i], budget[i] * util):
+                //                         break
+                //                     price -= budget[i]
+                //                     util -= u[c][i]
+
+                // maxCostPerScore = budget / score   for each voter
+                // console.log({costLeft,scoreLeft,maxCostPerScore[i]})
+                curMaxCostPerScore = maxCostPerScore[i]
+                if (costLeft &lt; scoreLeft * curMaxCostPerScore) {
+                    break
+                }
+                // remove voter
+                costLeft -= voteFractions[i] * budget[i]
+                scoreLeft -= voteFractions[i] * scoreVotes[i][can]
+                // if (scoreLeft &lt; 0) {
+                //     console.log(Math.round(scoreLeft * 100))
+                // }
+            }
+            // console.log(scoreLeft)
+            //                 rho = price / util \
+            //                         if not math.isclose(util, 0) and not math.isclose(price, 0) \
+            //                         else budget[supporters_sorted[-1]] / u[c][supporters_sorted[-1]]
+
+            // get a more accurate estimate, possibly, if there isn't an issue of rounding error
+            if (costLeft > small &amp;&amp; scoreLeft > small) {
+                curMaxCostPerScore = costLeft / scoreLeft
+            }
+            // const curMaxCostPerScore = (nearZero(scoreLeft) || nearZero(costLeft))
+            //     ? budget[supportersSorted[ns - 1]] / scoreVotes[supportersSorted[ns - 1]][can]
+            //     : costLeft / scoreLeft
+
+            // const maxCostPerScore = price / util
+            //                 if rho &lt; lowest_rho:
+            //                     next_candidate = c
+            //                     lowest_rho = rho
+            if (curMaxCostPerScore &lt; lowestMaxCostPerScore) {
+                bestCandidate = can
+                lowestMaxCostPerScore = curMaxCostPerScore
+            }
+        }
+
+        // If no candidate is within the budget,
+        // pick the candidate with the highest score,
+        // and keep going until we have all the candidates selected.
+        if (bestCandidate === null) {
+            for (let k = 0; k &lt; nk; k++) {
+                const can = cansSorted[k]
+
+                if (allocation[can] === 1) continue // no clones
+
+                allocation[can] = 1
+                nw += 1
+                if (nw >= seats) break
+            }
+            break
+        }
+
+        //         if next_candidate is None:
+        //             break
+        //         W.add(next_candidate)
+        allocation[bestCandidate] = 1
+        nw += 1
+        winnersByRound[r] = bestCandidate
+        winnerMaxCostPerScoreByRound[r] = lowestMaxCostPerScore
+
+        //         for i in N:
+        //             budget[i] -= min(budget[i], lowest_rho * u[next_candidate][i])
+        // console.log(lowestMaxCostPerScore)
+        for (let i = 0; i &lt; nv; i++) {
+            const score = scoreVotes[i][bestCandidate]
+            const cost = lowestMaxCostPerScore * score
+            budget[i] = Math.max(0, budget[i] - cost)
+        }
+        //     return complete_utilitarian(N, C, cost, u, b, W)  # one of the possible completions
+    }
+
+    const explanation = { winnersByRound, winnerMaxCostPerScoreByRound, socialChoiceOptions }
+    const socialChoiceResults = { allocation, explanation }
+    return socialChoiceResults
+}
+
+// function nearZero(a) {
+//     return Math.abs(a) &lt; 10 ** -7
+// }
+
+/** @constant {object} - an object: this function and descriptions of its name, input, and output */
+export const methodOfEqualSharesMetadata = {
+    name: 'Method of Equal Shares',
+    shortName: 'MES',
+    functionName: 'methodOfEqualShares',
+    voteCasterName: 'scoreFull', // for input
+    socialChoiceType: 'multiWinner',
+    elect: methodOfEqualShares,
+}
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-addSandboxes_addDoubleSandboxes.html">addSandboxes/addDoubleSandboxes</a></li><li><a href="module-addSandboxes_addSingleSandboxes.html">addSandboxes/addSingleSandboxes</a></li><li><a href="module-addSandboxes_doubleSandbox.html">addSandboxes/doubleSandbox</a></li><li><a href="module-addSandboxes_sandbox.html">addSandboxes/sandbox</a></li><li><a href="module-compute_districtElection_districtElection.html">compute/districtElection/districtElection</a></li><li><a href="module-compute_election_election.html">compute/election/election</a></li><li><a href="module-compute_election_socialChoiceRun.html">compute/election/socialChoiceRun</a></li><li><a href="module-compute_electionPhase_calculatePolling.html">compute/electionPhase/calculatePolling</a></li><li><a href="module-compute_electionPhase_electionCycle.html">compute/electionPhase/electionCycle</a></li><li><a href="module-compute_electionPhase_electionPhase.html">compute/electionPhase/electionPhase</a></li><li><a href="module-compute_electionSequence_electionClosedPrimary.html">compute/electionSequence/electionClosedPrimary</a></li><li><a href="module-compute_electionSequence_electionGeneral.html">compute/electionSequence/electionGeneral</a></li><li><a href="module-compute_electionSequence_electionNonPartisanPrimary.html">compute/electionSequence/electionNonPartisanPrimary</a></li><li><a href="module-compute_electionSequence_electionSequence.html">compute/electionSequence/electionSequence</a></li><li><a href="module-compute_electionSequence_getElectionOptions.html">compute/electionSequence/getElectionOptions</a></li><li><a href="module-compute_electionSequence_getGeometryForPhase.html">compute/electionSequence/getGeometryForPhase</a></li><li><a href="module-compute_makeGeography_lloydVoronoi.html">compute/makeGeography/lloydVoronoi</a></li><li><a href="module-compute_makeGeography_makeCensus.html">compute/makeGeography/makeCensus</a></li><li><a href="module-compute_makeGeography_makeDistrictMap.html">compute/makeGeography/makeDistrictMap</a></li><li><a href="module-compute_makeGeography_makeGeography.html">compute/makeGeography/makeGeography</a></li><li><a href="module-compute_makeGeography_makeTractNoise.html">compute/makeGeography/makeTractNoise</a></li><li><a href="module-compute_sampleElection_sampleCanDnGeom1D.html">compute/sampleElection/sampleCanDnGeom1D</a></li><li><a href="module-compute_sampleElection_sampleCanDnGeom2D.html">compute/sampleElection/sampleCanDnGeom2D</a></li><li><a href="module-compute_socialChoiceMethods_allocatedScore.html">compute/socialChoiceMethods/allocatedScore</a></li><li><a href="module-compute_socialChoiceMethods_dHondt.html">compute/socialChoiceMethods/dHondt</a></li><li><a href="module-compute_socialChoiceMethods_divisorGeneral.html">compute/socialChoiceMethods/divisorGeneral</a></li><li><a href="module-compute_socialChoiceMethods_huntingtonHill.html">compute/socialChoiceMethods/huntingtonHill</a></li><li><a href="module-compute_socialChoiceMethods_methodOfEqualShares.html">compute/socialChoiceMethods/methodOfEqualShares</a></li><li><a href="module-compute_socialChoiceMethods_minimax.html">compute/socialChoiceMethods/minimax</a></li><li><a href="module-compute_socialChoiceMethods_olprA.html">compute/socialChoiceMethods/olprA</a></li><li><a href="module-compute_socialChoiceMethods_plurality.html">compute/socialChoiceMethods/plurality</a></li><li><a href="module-compute_socialChoiceMethods_randomCandidate.html">compute/socialChoiceMethods/randomCandidate</a></li><li><a href="module-compute_socialChoiceMethods_randomVoter.html">compute/socialChoiceMethods/randomVoter</a></li><li><a href="module-compute_socialChoiceMethods_sainteLague.html">compute/socialChoiceMethods/sainteLague</a></li><li><a href="module-compute_socialChoiceMethods_score.html">compute/socialChoiceMethods/score</a></li><li><a href="module-compute_socialChoiceMethods_sntv.html">compute/socialChoiceMethods/sntv</a></li><li><a href="module-compute_socialChoiceMethods_socialChoiceMethods.html">compute/socialChoiceMethods/socialChoiceMethods</a></li><li><a href="module-compute_socialChoiceMethods_stv.html">compute/socialChoiceMethods/stv</a></li><li><a href="module-compute_utilities_copy.html">compute/utilities/copy</a></li><li><a href="module-compute_utilities_makeCandidateDistributionCDF.html">compute/utilities/makeCandidateDistributionCDF</a></li><li><a href="module-compute_utilities_math.html">compute/utilities/math</a></li><li><a href="module-compute_utilities_minmax.html">compute/utilities/minmax</a></li><li><a href="module-compute_utilities_statistics.html">compute/utilities/statistics</a></li><li><a href="module-compute_utilities_utilities.html">compute/utilities/utilities</a></li><li><a href="module-compute_voteCasters_pairwise_castPairwise.html">compute/voteCasters/pairwise/castPairwise</a></li><li><a href="module-compute_voteCasters_pairwise_castPairwiseGrid.html">compute/voteCasters/pairwise/castPairwiseGrid</a></li><li><a href="module-compute_voteCasters_pairwise_castPairwiseIntervals1D.html">compute/voteCasters/pairwise/castPairwiseIntervals1D</a></li><li><a href="module-compute_voteCasters_pairwise_castPairwisePlanes2D.html">compute/voteCasters/pairwise/castPairwisePlanes2D</a></li><li><a href="module-compute_voteCasters_pairwise_castPairwisePoint.html">compute/voteCasters/pairwise/castPairwisePoint</a></li><li><a href="module-compute_voteCasters_plurality_castPlurality.html">compute/voteCasters/plurality/castPlurality</a></li><li><a href="module-compute_voteCasters_plurality_castPluralityGrid.html">compute/voteCasters/plurality/castPluralityGrid</a></li><li><a href="module-compute_voteCasters_plurality_castPluralityIntervals1D.html">compute/voteCasters/plurality/castPluralityIntervals1D</a></li><li><a href="module-compute_voteCasters_plurality_castPluralityPoint.html">compute/voteCasters/plurality/castPluralityPoint</a></li><li><a href="module-compute_voteCasters_plurality_castPluralityQuadrature2D.html">compute/voteCasters/plurality/castPluralityQuadrature2D</a></li><li><a href="module-compute_voteCasters_ranking_castRanking.html">compute/voteCasters/ranking/castRanking</a></li><li><a href="module-compute_voteCasters_ranking_castRankingFindPolygons.html">compute/voteCasters/ranking/castRankingFindPolygons</a></li><li><a href="module-compute_voteCasters_ranking_castRankingGrid.html">compute/voteCasters/ranking/castRankingGrid</a></li><li><a href="module-compute_voteCasters_ranking_castRankingIntervals1D.html">compute/voteCasters/ranking/castRankingIntervals1D</a></li><li><a href="module-compute_voteCasters_ranking_castRankingPoint.html">compute/voteCasters/ranking/castRankingPoint</a></li><li><a href="module-compute_voteCasters_ranking_castRankingPolygons2D.html">compute/voteCasters/ranking/castRankingPolygons2D</a></li><li><a href="module-compute_voteCasters_ranking_makeRankingIntervals1D.html">compute/voteCasters/ranking/makeRankingIntervals1D</a></li><li><a href="module-compute_voteCasters_ranking_splitConvex.html">compute/voteCasters/ranking/splitConvex</a></li><li><a href="module-compute_voteCasters_score_castScore.html">compute/voteCasters/score/castScore</a></li><li><a href="module-compute_voteCasters_score_castScoreGrid.html">compute/voteCasters/score/castScoreGrid</a></li><li><a href="module-compute_voteCasters_score_castScorePoint.html">compute/voteCasters/score/castScorePoint</a></li><li><a href="module-compute_voteCasters_scoreFull_castScoreFull.html">compute/voteCasters/scoreFull/castScoreFull</a></li><li><a href="module-compute_voteCasters_scoreFull_castScoreFullGrid.html">compute/voteCasters/scoreFull/castScoreFullGrid</a></li><li><a href="module-compute_voteCasters_voteCasters_voteCasters.html">compute/voteCasters/voteCasters/voteCasters</a></li><li><a href="module-graphics_graphics.html">graphics/graphics</a></li><li><a href="module-sim_candidateDns_CandidateDn.html">sim/candidateDns/CandidateDn</a></li><li><a href="module-sim_candidates_Candidate.html">sim/candidates/Candidate</a></li><li><a href="module-sim_command_ComMessenger.html">sim/command/ComMessenger</a></li><li><a href="module-sim_command_Commander.html">sim/command/Commander</a></li><li><a href="module-sim_entities_Entities.html">sim/entities/Entities</a></li><li><a href="module-sim_entities_EntityCommander.html">sim/entities/EntityCommander</a></li><li><a href="module-sim_entities_Registrar.html">sim/entities/Registrar</a></li><li><a href="module-sim_geometry_Districts.html">sim/geometry/Districts</a></li><li><a href="module-sim_modes_ElectionSampler.html">sim/modes/ElectionSampler</a></li><li><a href="module-sim_modes_SimMode.html">sim/modes/SimMode</a></li><li><a href="module-sim_modes_SimModeOne.html">sim/modes/SimModeOne</a></li><li><a href="module-sim_modes_SimModeSample.html">sim/modes/SimModeSample</a></li><li><a href="module-sim_options_ElectionOptionsMan.html">sim/options/ElectionOptionsMan</a></li><li><a href="module-sim_sim_Changes.html">sim/sim/Changes</a></li><li><a href="module-sim_voters_VoterShape.html">sim/voters/VoterShape</a></li><li><a href="module-view_menu_Button.html">view/menu/Button</a></li><li><a href="module-view_menu_ButtonGroup.html">view/menu/ButtonGroup</a></li><li><a href="module-view_menu_Menu.html">view/menu/Menu</a></li><li><a href="module-view_menu_MenuItem.html">view/menu/MenuItem</a></li><li><a href="module-view_save_addLoadConfigText.html">view/save/addLoadConfigText</a></li><li><a href="module-view_save_addSaveConfigToLink.html">view/save/addSaveConfigToLink</a></li><li><a href="module-view_save_addSaveConfigToShortLink.html">view/save/addSaveConfigToShortLink</a></li><li><a href="module-view_save_addSaveConfigToText.html">view/save/addSaveConfigToText</a></li><li><a href="module-view_save_addSaveData.html">view/save/addSaveData</a></li><li><a href="module-view_save_checkURL.html">view/save/checkURL</a></li><li><a href="module-view_screen_EventHandlers.html">view/screen/EventHandlers</a></li><li><a href="module-view_screen_Screen.html">view/screen/Screen</a></li><li><a href="module-view_screen_ScreenCanvas.html">view/screen/ScreenCanvas</a></li><li><a href="module-view_screen_ScreenDownload.html">view/screen/ScreenDownload</a></li><li><a href="module-view_screen_ScreenSvg.html">view/screen/ScreenSvg</a></li><li><a href="module-view_view_Layout.html">view/view/Layout</a></li><li><a href="module-view_view_ViewMode.html">view/view/ViewMode</a></li><li><a href="module-view_viewButtons_addUndo.html">view/viewButtons/addUndo</a></li><li><a href="module-view_viewButtons_candidateAddMakeButton.html">view/viewButtons/candidateAddMakeButton</a></li><li><a href="module-view_viewButtons_candidateDnAddMakeButton.html">view/viewButtons/candidateDnAddMakeButton</a></li><li><a href="module-view_viewButtons_voterShapeAddMakeButton.html">view/viewButtons/voterShapeAddMakeButton</a></li><li><a href="module-view_viewScreens_ClickDrag.html">view/viewScreens/ClickDrag</a></li><li><a href="module-view_viewScreens_DraggableManager.html">view/viewScreens/DraggableManager</a></li><li><a href="module-view_viewScreens_ViewBase.html">view/viewScreens/ViewBase</a></li><li><a href="module-view_viewScreens_ViewDistrictMaps.html">view/viewScreens/ViewDistrictMaps</a></li><li><a href="module-view_viewScreens_ViewEntitiesOne.html">view/viewScreens/ViewEntitiesOne</a></li><li><a href="module-view_viewScreens_ViewEntitiesSample.html">view/viewScreens/ViewEntitiesSample</a></li><li><a href="module-view_viewScreens_ViewSettings.html">view/viewScreens/ViewSettings</a></li><li><a href="module-view_viewScreens_ViewVizOne.html">view/viewScreens/ViewVizOne</a></li><li><a href="module-view_viewScreens_ViewVizSample.html">view/viewScreens/ViewVizSample</a></li><li><a href="module-view_viz_BaseExplanation.html">view/viz/BaseExplanation</a></li><li><a href="module-view_viz_DistrictColors.html">view/viz/DistrictColors</a></li><li><a href="module-view_viz_DistrictDraw.html">view/viz/DistrictDraw</a></li><li><a href="module-view_viz_DistrictMapViz.html">view/viz/DistrictMapViz</a></li><li><a href="module-view_viz_Grid1D.html">view/viz/Grid1D</a></li><li><a href="module-view_viz_Grid2D.html">view/viz/Grid2D</a></li><li><a href="module-view_viz_MapOfTracts.html">view/viz/MapOfTracts</a></li><li><a href="module-view_viz_VizDistricts.html">view/viz/VizDistricts</a></li><li><a href="module-view_viz_VizExplanationBudgetMES.html">view/viz/VizExplanationBudgetMES</a></li><li><a href="module-view_viz_VizOneGrid.html">view/viz/VizOneGrid</a></li><li><a href="module-view_viz_VizOneVoronoi.html">view/viz/VizOneVoronoi</a></li><li><a href="module-view_viz_VizOneVoronoiRanking.html">view/viz/VizOneVoronoiRanking</a></li><li><a href="module-view_viz_VizSample.html">view/viz/VizSample</a></li><li><a href="module-view_viz_VizSampleDensity1D.html">view/viz/VizSampleDensity1D</a></li><li><a href="module-view_viz_VizSampleDensity2D.html">view/viz/VizSampleDensity2D</a></li><li><a href="module-view_viz_Voronoi1D.html">view/viz/Voronoi1D</a></li><li><a href="module-view_viz_Voronoi2D.html">view/viz/Voronoi2D</a></li><li><a href="module-view_viz_VoronoiRanking1D.html">view/viz/VoronoiRanking1D</a></li><li><a href="module-view_viz_VoronoiRanking2D.html">view/viz/VoronoiRanking2D</a></li><li><a href="module-view_viz_VoterRender1D.html">view/viz/VoterRender1D</a></li><li><a href="module-view_viz_VoterRender2D.html">view/viz/VoterRender2D</a></li><li><a href="module-view_viz_colorBlend.html">view/viz/colorBlend</a></li><li><a href="module-view_viz_colorBlender.html">view/viz/colorBlender</a></li><li><a href="module-view_viz_getAllocation.html">view/viz/getAllocation</a></li><li><a href="module-view_viz_vizMESChartsCalcBudget.html">view/viz/vizMESChartsCalcBudget</a></li><li><a href="module-view_viz_vizMESChartsCalcShape.html">view/viz/vizMESChartsCalcShape</a></li><li><a href="module-view_viz_vizMESChartsRender.html">view/viz/vizMESChartsRender</a></li><li><a href="module-view_vizBeatMap_BeatMap.html">view/vizBeatMap/BeatMap</a></li><li><a href="module-view_vizCandidateDns_CandidateDnRendererList.html">view/vizCandidateDns/CandidateDnRendererList</a></li><li><a href="module-view_vizCandidateDns_CandidateDnView.html">view/vizCandidateDns/CandidateDnView</a></li><li><a href="module-view_vizCandidateDns_CandidateDnViewList.html">view/vizCandidateDns/CandidateDnViewList</a></li><li><a href="module-view_vizCandidates_CandidateView.html">view/vizCandidates/CandidateView</a></li><li><a href="module-view_vizCandidates_CandidateViewList.html">view/vizCandidates/CandidateViewList</a></li><li><a href="module-view_vizEntities_CircleGraphic.html">view/vizEntities/CircleGraphic</a></li><li><a href="module-view_vizEntities_SquareGraphic.html">view/vizEntities/SquareGraphic</a></li><li><a href="module-view_vizVoters_VoterRendererList.html">view/vizVoters/VoterRendererList</a></li><li><a href="module-view_vizVoters_VoterView.html">view/vizVoters/VoterView</a></li><li><a href="module-view_vizVoters_VoterViewList.html">view/vizVoters/VoterViewList</a></li></ul><h3>Namespaces</h3><ul><li><a href="typesCanBorders.html">typesCanBorders</a></li><li><a href="typesCast.html">typesCast</a></li><li><a href="typesGeometry.html">typesGeometry</a></li><li><a href="typesGeoms.html">typesGeoms</a></li><li><a href="typesGrid.html">typesGrid</a></li><li><a href="typesMath.html">typesMath</a></li><li><a href="typesPoints.html">typesPoints</a></li><li><a href="typesSocialChoice.html">typesSocialChoice</a></li><li><a href="typesVote.html">typesVote</a></li><li><a href="typesVoteArrays.html">typesVoteArrays</a></li><li><a href="typesVotes.html">typesVotes</a></li><li><a href="typesVotesForGeom.html">typesVotesForGeom</a></li><li><a href="typesVotesForGeomGrid.html">typesVotesForGeomGrid</a></li></ul><h3>Classes</h3><ul><li><a href="module-sim_candidateDns_CandidateDn.html">sim/candidateDns/CandidateDn</a></li><li><a href="module-sim_candidates_Candidate.html">sim/candidates/Candidate</a></li><li><a href="module-sim_command_ComMessenger.html">sim/command/ComMessenger</a></li><li><a href="module-sim_command_Commander.html">sim/command/Commander</a></li><li><a href="module-sim_entities_EntityCommander.html">sim/entities/EntityCommander</a></li><li><a href="module-sim_entities_Registrar.html">sim/entities/Registrar</a></li><li><a href="module-sim_geometry_Districts.html">sim/geometry/Districts</a></li><li><a href="module-sim_modes_ElectionSampler.html">sim/modes/ElectionSampler</a></li><li><a href="module-sim_modes_SimModeOne.html">sim/modes/SimModeOne</a></li><li><a href="module-sim_modes_SimModeSample.html">sim/modes/SimModeSample</a></li><li><a href="module-sim_options_ElectionOptionsMan.html">sim/options/ElectionOptionsMan</a></li><li><a href="module-sim_sim_Changes.html">sim/sim/Changes</a></li><li><a href="module-sim_voters_VoterShape.html">sim/voters/VoterShape</a></li><li><a href="module-view_menu_Button.html">view/menu/Button</a></li><li><a href="module-view_menu_ButtonGroup.html">view/menu/ButtonGroup</a></li><li><a href="module-view_menu_Menu.html">view/menu/Menu</a></li><li><a href="module-view_menu_MenuItem.html">view/menu/MenuItem</a></li><li><a href="module-view_screen_EventHandlers.html">view/screen/EventHandlers</a></li><li><a href="module-view_screen_Screen.html">view/screen/Screen</a></li><li><a href="module-view_view_Layout.html">view/view/Layout</a></li><li><a href="module-view_viewScreens_ClickDrag.html">view/viewScreens/ClickDrag</a></li><li><a href="module-view_viewScreens_DraggableManager.html">view/viewScreens/DraggableManager</a></li><li><a href="module-view_viewScreens_ViewBase.html">view/viewScreens/ViewBase</a></li><li><a href="module-view_viewScreens_ViewDistrictMaps.html">view/viewScreens/ViewDistrictMaps</a></li><li><a href="module-view_viewScreens_ViewEntitiesOne.html">view/viewScreens/ViewEntitiesOne</a></li><li><a href="module-view_viewScreens_ViewEntitiesSample.html">view/viewScreens/ViewEntitiesSample</a></li><li><a href="module-view_viewScreens_ViewVizOne.html">view/viewScreens/ViewVizOne</a></li><li><a href="module-view_viewScreens_ViewVizSample.html">view/viewScreens/ViewVizSample</a></li><li><a href="module-view_viz_BaseExplanation.html">view/viz/BaseExplanation</a></li><li><a href="module-view_viz_DistrictDraw.html">view/viz/DistrictDraw</a></li><li><a href="module-view_viz_DistrictMapViz.html">view/viz/DistrictMapViz</a></li><li><a href="module-view_viz_Grid1D.html">view/viz/Grid1D</a></li><li><a href="module-view_viz_Grid2D.html">view/viz/Grid2D</a></li><li><a href="module-view_viz_MapOfTracts.html">view/viz/MapOfTracts</a></li><li><a href="module-view_viz_VizDistricts.html">view/viz/VizDistricts</a></li><li><a href="module-view_viz_VizExplanationBudgetMES.html">view/viz/VizExplanationBudgetMES</a></li><li><a href="module-view_viz_VizOneGrid.html">view/viz/VizOneGrid</a></li><li><a href="module-view_viz_VizOneVoronoi.html">view/viz/VizOneVoronoi</a></li><li><a href="module-view_viz_VizOneVoronoiRanking.html">view/viz/VizOneVoronoiRanking</a></li><li><a href="module-view_viz_VizSample.html">view/viz/VizSample</a></li><li><a href="module-view_viz_VizSampleDensity1D.html">view/viz/VizSampleDensity1D</a></li><li><a href="module-view_viz_VizSampleDensity2D.html">view/viz/VizSampleDensity2D</a></li><li><a href="module-view_viz_Voronoi1D.html">view/viz/Voronoi1D</a></li><li><a href="module-view_viz_Voronoi2D.html">view/viz/Voronoi2D</a></li><li><a href="module-view_viz_VoronoiRanking1D.html">view/viz/VoronoiRanking1D</a></li><li><a href="module-view_viz_VoronoiRanking2D.html">view/viz/VoronoiRanking2D</a></li><li><a href="module-view_vizBeatMap_BeatMap.html">view/vizBeatMap/BeatMap</a></li><li><a href="module-view_vizCandidateDns_CandidateDnView.html">view/vizCandidateDns/CandidateDnView</a></li><li><a href="module-view_vizCandidateDns_CandidateDnViewList.html">view/vizCandidateDns/CandidateDnViewList</a></li><li><a href="module-view_vizCandidates_CandidateView.html">view/vizCandidates/CandidateView</a></li><li><a href="module-view_vizCandidates_CandidateViewList.html">view/vizCandidates/CandidateViewList</a></li><li><a href="module-view_vizEntities_CircleGraphic.html">view/vizEntities/CircleGraphic</a></li><li><a href="module-view_vizEntities_SquareGraphic.html">view/vizEntities/SquareGraphic</a></li><li><a href="module-view_vizVoters_VoterView.html">view/vizVoters/VoterView</a></li><li><a href="module-view_vizVoters_VoterViewList.html">view/vizVoters/VoterViewList</a></li></ul><h3>Global</h3><ul><li><a href="global.html#findGridX">findGridX</a></li><li><a href="global.html#sortObjByKey">sortObjByKey</a></li><li><a href="global.html#usingIPython">usingIPython</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Sun Oct 20 2024 11:01:49 GMT-0400 (Eastern Daylight Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

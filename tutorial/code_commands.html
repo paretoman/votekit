@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>CommandsDetailed | VoteKit Demo</title>
+<meta name="generator" content="Jekyll v4.1.1" />
+<meta property="og:title" content="CommandsDetailed" />
+<meta name="author" content="Paretoman" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Here’s a demo site that uses votekit. Votekit is an explorable sandbox that shows how different voting methods work. Single elections are presented visually using a spatial opinion model. Ensembles of elections are also presented with distributions of winning positions. (The rest of this description will become more accurate with time.) Some consideration of strategy is performed. Voting methods include single-winner systems like plurality, approval, condorcet methods, instant runoff, score, star, etc. Electoral methods also include proportional multi-member district methods like the Single Transferable Vote, Monroe, Thiele’s Proportional Approval Voting, Phragmen’s method, etc. Electoral methods also include party-list proportional methods like d’Hondt, Huntington-Hill, Webster, etc. Additional electoral methods include MMP and OLPR." />
+<meta property="og:description" content="Here’s a demo site that uses votekit. Votekit is an explorable sandbox that shows how different voting methods work. Single elections are presented visually using a spatial opinion model. Ensembles of elections are also presented with distributions of winning positions. (The rest of this description will become more accurate with time.) Some consideration of strategy is performed. Voting methods include single-winner systems like plurality, approval, condorcet methods, instant runoff, score, star, etc. Electoral methods also include proportional multi-member district methods like the Single Transferable Vote, Monroe, Thiele’s Proportional Approval Voting, Phragmen’s method, etc. Electoral methods also include party-list proportional methods like d’Hondt, Huntington-Hill, Webster, etc. Additional electoral methods include MMP and OLPR." />
+<link rel="canonical" href="https://paretoman.github.io/votekit/tutorial/code_commands.html" />
+<meta property="og:url" content="https://paretoman.github.io/votekit/tutorial/code_commands.html" />
+<meta property="og:site_name" content="VoteKit Demo" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="CommandsDetailed" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","author":{"@type":"Person","name":"Paretoman"},"description":"Here’s a demo site that uses votekit. Votekit is an explorable sandbox that shows how different voting methods work. Single elections are presented visually using a spatial opinion model. Ensembles of elections are also presented with distributions of winning positions. (The rest of this description will become more accurate with time.) Some consideration of strategy is performed. Voting methods include single-winner systems like plurality, approval, condorcet methods, instant runoff, score, star, etc. Electoral methods also include proportional multi-member district methods like the Single Transferable Vote, Monroe, Thiele’s Proportional Approval Voting, Phragmen’s method, etc. Electoral methods also include party-list proportional methods like d’Hondt, Huntington-Hill, Webster, etc. Additional electoral methods include MMP and OLPR.","headline":"CommandsDetailed","url":"https://paretoman.github.io/votekit/tutorial/code_commands.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/votekit/assets/main.css"><link type="application/atom+xml" rel="alternate" href="https://paretoman.github.io/votekit/feed.xml" title="VoteKit Demo" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/votekit/">VoteKit Demo</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/votekit/tutorial/">Tutorial</a><a class="page-link" href="/votekit/s/">Sandbox</a><a class="page-link" href="/votekit/">Home</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <h1 id="command-pattern-and-uses">Command Pattern and Uses</h1>
+
+<p>Parent page: <a href="/votekit/tutorial/commands.html">Commands</a></p>
+
+<h2 id="commanderjs">Commander.js</h2>
+
+<p>Both the command pattern and the memento pattern are used here.</p>
+<ul>
+  <li>Commands are performed to make changes to the mementos.</li>
+</ul>
+
+<p>Memento Pattern:</p>
+<ul>
+  <li>Caretaker: this class. It keeps config as a list of mementos.</li>
+  <li>Originator: menuItem.</li>
+  <li>Mementos: Config is a list of mementos. It’s not a strict pattern.</li>
+</ul>
+
+<p>Command Pattern:</p>
+<ul>
+  <li>Client: this class. It asks a sender to execute commands.</li>
+  <li>Command: a name-value pair. Actions are listed by name. Commands are stored in history.</li>
+  <li>Invoker: actions, execute(). The sender keeps a list of actions to execute.</li>
+  <li>Receiver: menuItem. The receiver calls commander.addAction(…) to add to the sender’s actions.</li>
+</ul>
+
+<p>References:</p>
+<ul>
+  <li><a href="https://home.csulb.edu/~pnguyen/cecs277/lecnotes/Command%20Pattern%201.pdf">First google result for “invoker command pattern”. It has a classic example of a stock broker.</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Memento_pattern">Memento Pattern on Wikipedia</a></li>
+  <li><a href="https://refactoring.guru/design-patterns/memento">Memento Tutorial from refractoring.guru</a></li>
+</ul>
+
+<h2 id="commessengerjs">ComMessenger.js</h2>
+
+<p>ComMessenger is a messenger that passes commands from one to another. To decide whether to pass commands, it checks whether the sandboxes are linked. If they are, it will pass the commands on to all the other commanders. ComMessenger is a man in the middle between the command being sent with do() and the do() command actually executing.</p>
+
+<p>Undo and Redo are not linked.</p>
+
+<h2 id="commanding-non-instantiated-entities">Commanding Non-instantiated Entities</h2>
+
+<h3 id="old-way">Old Way</h3>
+<p>Tell commander how to create new entities when they haven’t been instantiated yet. Without being instantiated, they don’t have command senders yet, so the commander will get a command that it doesn’t know how to handle.
+commander.newCreator(creator = sim.addVoterPressed, creatorName = “addVoter”)</p>
+
+<p>If there is no action for a command, then call the creator that is referenced by its name.</p>
+
+<h3 id="new-way">New Way</h3>
+<p>A new way of handling this problem was created because we want to be able to load a sim configuration from a config file. The commander needed a list of all commands before the entities are created, so we created a CandidateCommander class and similar for voters and candidateDistributions.</p>
+
+<p>For the Commander class, we made new methods like Commander.addListSender for creating command senders that deal with lists of entities. Instead of passing a currentValue when creating a command sender, we pass a currentValue when instantiating an entity. The values are stored in arrays inside config[name].</p>
+
+<p>We created a command property that specifies to not add it to the history. This was needed for setNumberCandidates because the command needed to be broadcast to the other commanders but not stored in the history. We don’t want to undo setNumberCandidates because we don’t actually undo creating entities, we just set their exists property to false.</p>
+
+<p>Config is stored differently too. config[‘voter-setE’][id] is the setE property for a voter with an id (serial number).</p>
+
+<p>In the future, I might add currentValue as a property of all commands.</p>
+
+<h2 id="details">Details</h2>
+<p>When we’re unlinked, we might end up having an entity that is only in one sandbox. If we become linked and start to move the sole entities, we want to create entities on the other side in order to catch up.</p>
+
+<ul>
+  <li>Test: unlink, add candidate, link, move the new candidate.</li>
+  <li>
+    <p>Assert: When the candidate is moved, a new candidate is created in the other sandbox and moves with it.</p>
+  </li>
+  <li>Test: Undo creation of a candidate in one sandbox. Move the candidate in the other sandbox.</li>
+  <li>Assert: The undone candidate doesn’t get come back into existence.</li>
+</ul>
+
+<p>Future: Right now, we can get into a state where we don’t have any way to bring a specific entity back into existence. Maybe I should make a way to toggle the existence of entities. Or maybe I could show entities that don’t exist as ghosts (using transparency). They could still be moved and clicked on for editing properties. And there could be a “show deleted entities” button to avoid clutter. I haven’t implemented clicking and editing properties yet.</p>
+
+<h2 id="loading-commands">Loading Commands</h2>
+<p>When initially loading a sandbox, a config can be passed in. The commander takes this with commander.loadConfig, then broadcasts to other sandboxes. When we are setting the initial config, we clear the history so no undo is available initially.</p>
+
+<p>We prioritized loading the commands that have to do with creating candidates, voters, and candidateDistributions.</p>
+
+<h2 id="things-to-delete">Things to Delete</h2>
+<p>The creator property can be deleted. We solved this problem another way by prioritizing commands. The noUndo property can be deleted. We solved this by loading commands instead of doing them.</p>
+
+<h2 id="update---mediator">Update - Mediator</h2>
+<p>I separated the original Commander.js into three component classes. Commander is now a mediator between the three.</p>
+
+<ol>
+  <li>
+    <p>The CommandStore class provides the ability to execute commands. Commands here are different than the usual command pattern because CommandStore is providing their ability to execute, instead of encapsulating execute in the command. The command, here, is just a description of how to execute. Maybe a better name would be a commandNote.</p>
+  </li>
+  <li>
+    <p>The Config class keeps a list of command objects that would need to be executed in order to return the sim to its current state. We use this list to load a configuration into a new sandbox. We also use the list to know the currentValue of a setting so we can undo.</p>
+  </li>
+  <li>
+    <p>The History class keeps a list of all command objects that were executed. Well almost. It only stores those that we would like the user to be able to undo. So, when we want to load an example, we erase any history that is generated by the process of loading a configuration.</p>
+  </li>
+</ol>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/votekit/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">VoteKit Demo</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">Paretoman</li><li><a class="u-email" href="mailto:smartvotingsimulator1@gmail.com">smartvotingsimulator1@gmail.com</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/paretoman"><svg class="svg-icon"><use xlink:href="/votekit/assets/minima-social-icons.svg#github"></use></svg> <span class="username">paretoman</span></a></li><li><a href="https://www.twitter.com/paretoman1"><svg class="svg-icon"><use xlink:href="/votekit/assets/minima-social-icons.svg#twitter"></use></svg> <span class="username">paretoman1</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>Here&#39;s a demo site that uses votekit. Votekit is an explorable sandbox that shows how different voting methods work. Single elections are presented visually using a spatial opinion model. Ensembles of elections are also presented with distributions of winning positions. (The rest of this description will become more accurate with time.) Some consideration of strategy is performed. Voting methods include single-winner systems like plurality, approval, condorcet methods, instant runoff, score, star, etc. Electoral methods also include proportional multi-member district methods like the Single Transferable Vote, Monroe, Thiele&#39;s Proportional Approval Voting, Phragmen&#39;s method, etc. Electoral methods also include party-list proportional methods like d&#39;Hondt, Huntington-Hill, Webster, etc. Additional electoral methods include MMP and OLPR.</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

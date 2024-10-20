@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: compute/socialChoiceMethods/divisorGeneral.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: compute/socialChoiceMethods/divisorGeneral.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/** @module */
+
+import { copyArrayShallow, range } from '@paretoman/votekit-utilities'
+import * as types from '@paretoman/votekit-types'
+
+/**
+ * Run a general divisor method of apportionment and return an allocation of seats.
+ * @param {types.typesVotes.votes} votes - The object for vote data.
+ * @param {types.typesSocialChoice.socialChoiceOptions} socialChoiceOptions - options to specify a social choice function.
+ * @returns {types.typesSocialChoice.socialChoiceResults} - the results returned from a social choice function.
+ */
+
+export default function divisorGeneral(votes, socialChoiceOptions, typeOfDivisor) {
+    const { seats, threshold, seatLimits } = socialChoiceOptions
+    const { voteFractionsByCan } = votes.candidateTallies
+
+    // find out how many parties pass the threshold
+    let populations = voteFractionsByCan.map(
+        (p) => ((p &lt; threshold) ? 0 : p),
+    )
+    let positivePopulations = Array(populations.length)
+    for (let i = 0; i &lt; populations.length; i++) {
+        positivePopulations[i] = ((populations[i] === 0) ? 0 : 1)
+    }
+
+    let nPositiveParties = positivePopulations.reduce(
+        (p, c) => p + c,
+    )
+
+    let makeAdjustment = nPositiveParties === 0
+
+    // Do we have limits to how many candidates are available in a party?
+    if (seatLimits !== undefined) {
+        // count how many candidates are available to fill seats
+        const candidatesAvailable = positivePopulations.map(
+            (p, i) => p * seatLimits[i],
+        ).reduce(
+            (p, c) => p + c,
+        )
+        if (candidatesAvailable &lt; seats) {
+            makeAdjustment = true
+        }
+    }
+
+    // Make an adjustment.
+    // Remove the threshold if there are no parties past the threshold.
+    // Count the number of parties with positive populations.
+    if (makeAdjustment) {
+        populations = copyArrayShallow(voteFractionsByCan)
+        positivePopulations = populations.map(
+            (p) => ((p === 0) ? 0 : 1),
+        )
+        nPositiveParties = positivePopulations.reduce(
+            (p, c) => p + c,
+        )
+    }
+
+    // When there are more parties above the threshold than seats,
+    // we have to give each party a seat in order
+    // instead of continuing with the algorithm.
+    // This is because Huntington Hill has the first signpost at 0.
+    // This is just sntv.
+    // Also, in the edge case where no votes are cast for any parties,
+    // Just assign a default order however javascript sorts the list of presumably 0s.
+    if (typeOfDivisor === 'Huntington-Hill' &amp;&amp; (nPositiveParties > seats || nPositiveParties === 0)) {
+        // sort parties by population
+        // sort decreasing
+        const populationsSorted = [...populations].sort(
+            (a, b) => b - a,
+        )
+        const minPopulation = populationsSorted[seats - 1]
+        const pops2 = voteFractionsByCan
+
+        // todo: consider ties
+        const allocation = pops2.map(
+            (p) => ((p >= minPopulation) ? 1 : 0),
+        )
+        const socialChoiceResults = { allocation }
+        return socialChoiceResults
+    }
+
+    // make a list of break points / divisors, independent of vote totals
+    let genDivisors
+    if (typeOfDivisor === 'huntingtonHill') {
+        genDivisors = (_, i) => Math.sqrt((i) * (i + 1))
+    } else if (typeOfDivisor === 'sainteLague') {
+        genDivisors = (_, i) => i + 0.5
+    } else if (typeOfDivisor === 'dHondt') {
+        genDivisors = (_, i) => i + 1
+    }
+    const divisorPattern = Array(seats).fill().map(genDivisors)
+
+    // Scale the divisor pattern for each party.
+    // Call them signposts, like Balinski and Young.
+    // Ref: Balinski and Young 1982, pages 60-66, Chapter 7, Overview of Methods.
+    // Really, these are the divisors for each party.
+    // They are also a ratio of the representatives to the population
+    // except that the divisorPattern is used to substitute a slightly different number
+    // than the number of respresentatives.
+
+    const signposts = []
+    const ids = []
+    let o = 0
+    for (let i = 0; i &lt; populations.length; i++) {
+        const pop = populations[i]
+        if (pop === 0) continue
+
+        const numPosts = (seatLimits === undefined) ? seats : Math.min(seatLimits[i], seats)
+        for (let k = 0; k &lt; numPosts; k++) {
+            signposts[o] = divisorPattern[k] / pop
+            ids[o] = i
+            o += 1
+        }
+    }
+
+    const doOld = false
+    if (doOld) {
+        return oldWay(seats, populations, signposts)
+    }
+
+    const order = range(ids.length).sort(
+        (a, b) => signposts[a] - signposts[b],
+    )
+
+    const allocation = Array(populations.length).fill(0)
+    for (let i = 0; i &lt; seats; i++) {
+        const iId = order[i]
+        const iCan = ids[iId]
+        allocation[iCan] += 1
+    }
+
+    // Todo: consider if there is a tie.
+    // Right now, we give extra seats to all the tied parties if there is a tie.
+    const socialChoiceResults = { allocation }
+    return socialChoiceResults
+}
+
+function oldWay(seats, populations, signposts) {
+    // find last signpost to fill all seats
+    // sort increasing
+    const sortedSignposts = signposts.sort(
+        (a, b) => a - b,
+    )
+
+    const tolerance = 0.00000001 // add a little bit of tolerance for machine-accuracy
+    // hopefully there will not be any exact ties.
+    const lastSignpost = sortedSignposts[seats - 1] + tolerance
+
+    // In the jargon:
+    //   Divide by populations by the divisors to get the quotients.
+    // Or, more clearly:
+    //   Count how many signposts each party has passed.
+
+    // lastSignpost = d/p
+    // d = p * lastSignpost
+    // sqrt(i*(i+1)) = d
+    // i=0 is one seat
+    // n = i + 1
+    // sqrt(n*(n-1)) = d
+    // n**2 - n = d**2
+    // n = (-b + sqrt(b-4ac) ) / 2a
+    // a = 1, b = -1, c = -d**2
+    // n = (1 + sqrt(1+4d**2) ) / 2
+    const quotients = populations.map(
+        (p) => ((p === 0) ? 0 : (1 + Math.sqrt(1 + 4 * (p * lastSignpost) ** 2)) * 0.5),
+    )
+    const allocation = quotients.map(
+        (p) => Math.floor(p),
+    )
+    const socialChoiceResults = { allocation }
+    return socialChoiceResults
+}
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-addSandboxes_addDoubleSandboxes.html">addSandboxes/addDoubleSandboxes</a></li><li><a href="module-addSandboxes_addSingleSandboxes.html">addSandboxes/addSingleSandboxes</a></li><li><a href="module-addSandboxes_doubleSandbox.html">addSandboxes/doubleSandbox</a></li><li><a href="module-addSandboxes_sandbox.html">addSandboxes/sandbox</a></li><li><a href="module-compute_districtElection_districtElection.html">compute/districtElection/districtElection</a></li><li><a href="module-compute_election_election.html">compute/election/election</a></li><li><a href="module-compute_election_socialChoiceRun.html">compute/election/socialChoiceRun</a></li><li><a href="module-compute_electionPhase_calculatePolling.html">compute/electionPhase/calculatePolling</a></li><li><a href="module-compute_electionPhase_electionCycle.html">compute/electionPhase/electionCycle</a></li><li><a href="module-compute_electionPhase_electionPhase.html">compute/electionPhase/electionPhase</a></li><li><a href="module-compute_electionSequence_electionClosedPrimary.html">compute/electionSequence/electionClosedPrimary</a></li><li><a href="module-compute_electionSequence_electionGeneral.html">compute/electionSequence/electionGeneral</a></li><li><a href="module-compute_electionSequence_electionNonPartisanPrimary.html">compute/electionSequence/electionNonPartisanPrimary</a></li><li><a href="module-compute_electionSequence_electionSequence.html">compute/electionSequence/electionSequence</a></li><li><a href="module-compute_electionSequence_getElectionOptions.html">compute/electionSequence/getElectionOptions</a></li><li><a href="module-compute_electionSequence_getGeometryForPhase.html">compute/electionSequence/getGeometryForPhase</a></li><li><a href="module-compute_makeGeography_lloydVoronoi.html">compute/makeGeography/lloydVoronoi</a></li><li><a href="module-compute_makeGeography_makeCensus.html">compute/makeGeography/makeCensus</a></li><li><a href="module-compute_makeGeography_makeDistrictMap.html">compute/makeGeography/makeDistrictMap</a></li><li><a href="module-compute_makeGeography_makeGeography.html">compute/makeGeography/makeGeography</a></li><li><a href="module-compute_makeGeography_makeTractNoise.html">compute/makeGeography/makeTractNoise</a></li><li><a href="module-compute_sampleElection_sampleCanDnGeom1D.html">compute/sampleElection/sampleCanDnGeom1D</a></li><li><a href="module-compute_sampleElection_sampleCanDnGeom2D.html">compute/sampleElection/sampleCanDnGeom2D</a></li><li><a href="module-compute_socialChoiceMethods_allocatedScore.html">compute/socialChoiceMethods/allocatedScore</a></li><li><a href="module-compute_socialChoiceMethods_dHondt.html">compute/socialChoiceMethods/dHondt</a></li><li><a href="module-compute_socialChoiceMethods_divisorGeneral.html">compute/socialChoiceMethods/divisorGeneral</a></li><li><a href="module-compute_socialChoiceMethods_huntingtonHill.html">compute/socialChoiceMethods/huntingtonHill</a></li><li><a href="module-compute_socialChoiceMethods_methodOfEqualShares.html">compute/socialChoiceMethods/methodOfEqualShares</a></li><li><a href="module-compute_socialChoiceMethods_minimax.html">compute/socialChoiceMethods/minimax</a></li><li><a href="module-compute_socialChoiceMethods_olprA.html">compute/socialChoiceMethods/olprA</a></li><li><a href="module-compute_socialChoiceMethods_plurality.html">compute/socialChoiceMethods/plurality</a></li><li><a href="module-compute_socialChoiceMethods_randomCandidate.html">compute/socialChoiceMethods/randomCandidate</a></li><li><a href="module-compute_socialChoiceMethods_randomVoter.html">compute/socialChoiceMethods/randomVoter</a></li><li><a href="module-compute_socialChoiceMethods_sainteLague.html">compute/socialChoiceMethods/sainteLague</a></li><li><a href="module-compute_socialChoiceMethods_score.html">compute/socialChoiceMethods/score</a></li><li><a href="module-compute_socialChoiceMethods_sntv.html">compute/socialChoiceMethods/sntv</a></li><li><a href="module-compute_socialChoiceMethods_socialChoiceMethods.html">compute/socialChoiceMethods/socialChoiceMethods</a></li><li><a href="module-compute_socialChoiceMethods_stv.html">compute/socialChoiceMethods/stv</a></li><li><a href="module-compute_utilities_copy.html">compute/utilities/copy</a></li><li><a href="module-compute_utilities_makeCandidateDistributionCDF.html">compute/utilities/makeCandidateDistributionCDF</a></li><li><a href="module-compute_utilities_math.html">compute/utilities/math</a></li><li><a href="module-compute_utilities_minmax.html">compute/utilities/minmax</a></li><li><a href="module-compute_utilities_statistics.html">compute/utilities/statistics</a></li><li><a href="module-compute_utilities_utilities.html">compute/utilities/utilities</a></li><li><a href="module-compute_voteCasters_pairwise_castPairwise.html">compute/voteCasters/pairwise/castPairwise</a></li><li><a href="module-compute_voteCasters_pairwise_castPairwiseGrid.html">compute/voteCasters/pairwise/castPairwiseGrid</a></li><li><a href="module-compute_voteCasters_pairwise_castPairwiseIntervals1D.html">compute/voteCasters/pairwise/castPairwiseIntervals1D</a></li><li><a href="module-compute_voteCasters_pairwise_castPairwisePlanes2D.html">compute/voteCasters/pairwise/castPairwisePlanes2D</a></li><li><a href="module-compute_voteCasters_pairwise_castPairwisePoint.html">compute/voteCasters/pairwise/castPairwisePoint</a></li><li><a href="module-compute_voteCasters_plurality_castPlurality.html">compute/voteCasters/plurality/castPlurality</a></li><li><a href="module-compute_voteCasters_plurality_castPluralityGrid.html">compute/voteCasters/plurality/castPluralityGrid</a></li><li><a href="module-compute_voteCasters_plurality_castPluralityIntervals1D.html">compute/voteCasters/plurality/castPluralityIntervals1D</a></li><li><a href="module-compute_voteCasters_plurality_castPluralityPoint.html">compute/voteCasters/plurality/castPluralityPoint</a></li><li><a href="module-compute_voteCasters_plurality_castPluralityQuadrature2D.html">compute/voteCasters/plurality/castPluralityQuadrature2D</a></li><li><a href="module-compute_voteCasters_ranking_castRanking.html">compute/voteCasters/ranking/castRanking</a></li><li><a href="module-compute_voteCasters_ranking_castRankingFindPolygons.html">compute/voteCasters/ranking/castRankingFindPolygons</a></li><li><a href="module-compute_voteCasters_ranking_castRankingGrid.html">compute/voteCasters/ranking/castRankingGrid</a></li><li><a href="module-compute_voteCasters_ranking_castRankingIntervals1D.html">compute/voteCasters/ranking/castRankingIntervals1D</a></li><li><a href="module-compute_voteCasters_ranking_castRankingPoint.html">compute/voteCasters/ranking/castRankingPoint</a></li><li><a href="module-compute_voteCasters_ranking_castRankingPolygons2D.html">compute/voteCasters/ranking/castRankingPolygons2D</a></li><li><a href="module-compute_voteCasters_ranking_makeRankingIntervals1D.html">compute/voteCasters/ranking/makeRankingIntervals1D</a></li><li><a href="module-compute_voteCasters_ranking_splitConvex.html">compute/voteCasters/ranking/splitConvex</a></li><li><a href="module-compute_voteCasters_score_castScore.html">compute/voteCasters/score/castScore</a></li><li><a href="module-compute_voteCasters_score_castScoreGrid.html">compute/voteCasters/score/castScoreGrid</a></li><li><a href="module-compute_voteCasters_score_castScorePoint.html">compute/voteCasters/score/castScorePoint</a></li><li><a href="module-compute_voteCasters_scoreFull_castScoreFull.html">compute/voteCasters/scoreFull/castScoreFull</a></li><li><a href="module-compute_voteCasters_scoreFull_castScoreFullGrid.html">compute/voteCasters/scoreFull/castScoreFullGrid</a></li><li><a href="module-compute_voteCasters_voteCasters_voteCasters.html">compute/voteCasters/voteCasters/voteCasters</a></li><li><a href="module-graphics_graphics.html">graphics/graphics</a></li><li><a href="module-sim_candidateDns_CandidateDn.html">sim/candidateDns/CandidateDn</a></li><li><a href="module-sim_candidates_Candidate.html">sim/candidates/Candidate</a></li><li><a href="module-sim_command_ComMessenger.html">sim/command/ComMessenger</a></li><li><a href="module-sim_command_Commander.html">sim/command/Commander</a></li><li><a href="module-sim_entities_Entities.html">sim/entities/Entities</a></li><li><a href="module-sim_entities_EntityCommander.html">sim/entities/EntityCommander</a></li><li><a href="module-sim_entities_Registrar.html">sim/entities/Registrar</a></li><li><a href="module-sim_geometry_Districts.html">sim/geometry/Districts</a></li><li><a href="module-sim_modes_ElectionSampler.html">sim/modes/ElectionSampler</a></li><li><a href="module-sim_modes_SimMode.html">sim/modes/SimMode</a></li><li><a href="module-sim_modes_SimModeOne.html">sim/modes/SimModeOne</a></li><li><a href="module-sim_modes_SimModeSample.html">sim/modes/SimModeSample</a></li><li><a href="module-sim_options_ElectionOptionsMan.html">sim/options/ElectionOptionsMan</a></li><li><a href="module-sim_sim_Changes.html">sim/sim/Changes</a></li><li><a href="module-sim_voters_VoterShape.html">sim/voters/VoterShape</a></li><li><a href="module-view_menu_Button.html">view/menu/Button</a></li><li><a href="module-view_menu_ButtonGroup.html">view/menu/ButtonGroup</a></li><li><a href="module-view_menu_Menu.html">view/menu/Menu</a></li><li><a href="module-view_menu_MenuItem.html">view/menu/MenuItem</a></li><li><a href="module-view_save_addLoadConfigText.html">view/save/addLoadConfigText</a></li><li><a href="module-view_save_addSaveConfigToLink.html">view/save/addSaveConfigToLink</a></li><li><a href="module-view_save_addSaveConfigToShortLink.html">view/save/addSaveConfigToShortLink</a></li><li><a href="module-view_save_addSaveConfigToText.html">view/save/addSaveConfigToText</a></li><li><a href="module-view_save_addSaveData.html">view/save/addSaveData</a></li><li><a href="module-view_save_checkURL.html">view/save/checkURL</a></li><li><a href="module-view_screen_EventHandlers.html">view/screen/EventHandlers</a></li><li><a href="module-view_screen_Screen.html">view/screen/Screen</a></li><li><a href="module-view_screen_ScreenCanvas.html">view/screen/ScreenCanvas</a></li><li><a href="module-view_screen_ScreenDownload.html">view/screen/ScreenDownload</a></li><li><a href="module-view_screen_ScreenSvg.html">view/screen/ScreenSvg</a></li><li><a href="module-view_view_Layout.html">view/view/Layout</a></li><li><a href="module-view_view_ViewMode.html">view/view/ViewMode</a></li><li><a href="module-view_viewButtons_addUndo.html">view/viewButtons/addUndo</a></li><li><a href="module-view_viewButtons_candidateAddMakeButton.html">view/viewButtons/candidateAddMakeButton</a></li><li><a href="module-view_viewButtons_candidateDnAddMakeButton.html">view/viewButtons/candidateDnAddMakeButton</a></li><li><a href="module-view_viewButtons_voterShapeAddMakeButton.html">view/viewButtons/voterShapeAddMakeButton</a></li><li><a href="module-view_viewScreens_ClickDrag.html">view/viewScreens/ClickDrag</a></li><li><a href="module-view_viewScreens_DraggableManager.html">view/viewScreens/DraggableManager</a></li><li><a href="module-view_viewScreens_ViewBase.html">view/viewScreens/ViewBase</a></li><li><a href="module-view_viewScreens_ViewDistrictMaps.html">view/viewScreens/ViewDistrictMaps</a></li><li><a href="module-view_viewScreens_ViewEntitiesOne.html">view/viewScreens/ViewEntitiesOne</a></li><li><a href="module-view_viewScreens_ViewEntitiesSample.html">view/viewScreens/ViewEntitiesSample</a></li><li><a href="module-view_viewScreens_ViewSettings.html">view/viewScreens/ViewSettings</a></li><li><a href="module-view_viewScreens_ViewVizOne.html">view/viewScreens/ViewVizOne</a></li><li><a href="module-view_viewScreens_ViewVizSample.html">view/viewScreens/ViewVizSample</a></li><li><a href="module-view_viz_BaseExplanation.html">view/viz/BaseExplanation</a></li><li><a href="module-view_viz_DistrictColors.html">view/viz/DistrictColors</a></li><li><a href="module-view_viz_DistrictDraw.html">view/viz/DistrictDraw</a></li><li><a href="module-view_viz_DistrictMapViz.html">view/viz/DistrictMapViz</a></li><li><a href="module-view_viz_Grid1D.html">view/viz/Grid1D</a></li><li><a href="module-view_viz_Grid2D.html">view/viz/Grid2D</a></li><li><a href="module-view_viz_MapOfTracts.html">view/viz/MapOfTracts</a></li><li><a href="module-view_viz_VizDistricts.html">view/viz/VizDistricts</a></li><li><a href="module-view_viz_VizExplanationBudgetMES.html">view/viz/VizExplanationBudgetMES</a></li><li><a href="module-view_viz_VizOneGrid.html">view/viz/VizOneGrid</a></li><li><a href="module-view_viz_VizOneVoronoi.html">view/viz/VizOneVoronoi</a></li><li><a href="module-view_viz_VizOneVoronoiRanking.html">view/viz/VizOneVoronoiRanking</a></li><li><a href="module-view_viz_VizSample.html">view/viz/VizSample</a></li><li><a href="module-view_viz_VizSampleDensity1D.html">view/viz/VizSampleDensity1D</a></li><li><a href="module-view_viz_VizSampleDensity2D.html">view/viz/VizSampleDensity2D</a></li><li><a href="module-view_viz_Voronoi1D.html">view/viz/Voronoi1D</a></li><li><a href="module-view_viz_Voronoi2D.html">view/viz/Voronoi2D</a></li><li><a href="module-view_viz_VoronoiRanking1D.html">view/viz/VoronoiRanking1D</a></li><li><a href="module-view_viz_VoronoiRanking2D.html">view/viz/VoronoiRanking2D</a></li><li><a href="module-view_viz_VoterRender1D.html">view/viz/VoterRender1D</a></li><li><a href="module-view_viz_VoterRender2D.html">view/viz/VoterRender2D</a></li><li><a href="module-view_viz_colorBlend.html">view/viz/colorBlend</a></li><li><a href="module-view_viz_colorBlender.html">view/viz/colorBlender</a></li><li><a href="module-view_viz_getAllocation.html">view/viz/getAllocation</a></li><li><a href="module-view_viz_vizMESChartsCalcBudget.html">view/viz/vizMESChartsCalcBudget</a></li><li><a href="module-view_viz_vizMESChartsCalcShape.html">view/viz/vizMESChartsCalcShape</a></li><li><a href="module-view_viz_vizMESChartsRender.html">view/viz/vizMESChartsRender</a></li><li><a href="module-view_vizBeatMap_BeatMap.html">view/vizBeatMap/BeatMap</a></li><li><a href="module-view_vizCandidateDns_CandidateDnRendererList.html">view/vizCandidateDns/CandidateDnRendererList</a></li><li><a href="module-view_vizCandidateDns_CandidateDnView.html">view/vizCandidateDns/CandidateDnView</a></li><li><a href="module-view_vizCandidateDns_CandidateDnViewList.html">view/vizCandidateDns/CandidateDnViewList</a></li><li><a href="module-view_vizCandidates_CandidateView.html">view/vizCandidates/CandidateView</a></li><li><a href="module-view_vizCandidates_CandidateViewList.html">view/vizCandidates/CandidateViewList</a></li><li><a href="module-view_vizEntities_CircleGraphic.html">view/vizEntities/CircleGraphic</a></li><li><a href="module-view_vizEntities_SquareGraphic.html">view/vizEntities/SquareGraphic</a></li><li><a href="module-view_vizVoters_VoterRendererList.html">view/vizVoters/VoterRendererList</a></li><li><a href="module-view_vizVoters_VoterView.html">view/vizVoters/VoterView</a></li><li><a href="module-view_vizVoters_VoterViewList.html">view/vizVoters/VoterViewList</a></li></ul><h3>Namespaces</h3><ul><li><a href="typesCanBorders.html">typesCanBorders</a></li><li><a href="typesCast.html">typesCast</a></li><li><a href="typesGeometry.html">typesGeometry</a></li><li><a href="typesGeoms.html">typesGeoms</a></li><li><a href="typesGrid.html">typesGrid</a></li><li><a href="typesMath.html">typesMath</a></li><li><a href="typesPoints.html">typesPoints</a></li><li><a href="typesSocialChoice.html">typesSocialChoice</a></li><li><a href="typesVote.html">typesVote</a></li><li><a href="typesVoteArrays.html">typesVoteArrays</a></li><li><a href="typesVotes.html">typesVotes</a></li><li><a href="typesVotesForGeom.html">typesVotesForGeom</a></li><li><a href="typesVotesForGeomGrid.html">typesVotesForGeomGrid</a></li></ul><h3>Classes</h3><ul><li><a href="module-sim_candidateDns_CandidateDn.html">sim/candidateDns/CandidateDn</a></li><li><a href="module-sim_candidates_Candidate.html">sim/candidates/Candidate</a></li><li><a href="module-sim_command_ComMessenger.html">sim/command/ComMessenger</a></li><li><a href="module-sim_command_Commander.html">sim/command/Commander</a></li><li><a href="module-sim_entities_EntityCommander.html">sim/entities/EntityCommander</a></li><li><a href="module-sim_entities_Registrar.html">sim/entities/Registrar</a></li><li><a href="module-sim_geometry_Districts.html">sim/geometry/Districts</a></li><li><a href="module-sim_modes_ElectionSampler.html">sim/modes/ElectionSampler</a></li><li><a href="module-sim_modes_SimModeOne.html">sim/modes/SimModeOne</a></li><li><a href="module-sim_modes_SimModeSample.html">sim/modes/SimModeSample</a></li><li><a href="module-sim_options_ElectionOptionsMan.html">sim/options/ElectionOptionsMan</a></li><li><a href="module-sim_sim_Changes.html">sim/sim/Changes</a></li><li><a href="module-sim_voters_VoterShape.html">sim/voters/VoterShape</a></li><li><a href="module-view_menu_Button.html">view/menu/Button</a></li><li><a href="module-view_menu_ButtonGroup.html">view/menu/ButtonGroup</a></li><li><a href="module-view_menu_Menu.html">view/menu/Menu</a></li><li><a href="module-view_menu_MenuItem.html">view/menu/MenuItem</a></li><li><a href="module-view_screen_EventHandlers.html">view/screen/EventHandlers</a></li><li><a href="module-view_screen_Screen.html">view/screen/Screen</a></li><li><a href="module-view_view_Layout.html">view/view/Layout</a></li><li><a href="module-view_viewScreens_ClickDrag.html">view/viewScreens/ClickDrag</a></li><li><a href="module-view_viewScreens_DraggableManager.html">view/viewScreens/DraggableManager</a></li><li><a href="module-view_viewScreens_ViewBase.html">view/viewScreens/ViewBase</a></li><li><a href="module-view_viewScreens_ViewDistrictMaps.html">view/viewScreens/ViewDistrictMaps</a></li><li><a href="module-view_viewScreens_ViewEntitiesOne.html">view/viewScreens/ViewEntitiesOne</a></li><li><a href="module-view_viewScreens_ViewEntitiesSample.html">view/viewScreens/ViewEntitiesSample</a></li><li><a href="module-view_viewScreens_ViewVizOne.html">view/viewScreens/ViewVizOne</a></li><li><a href="module-view_viewScreens_ViewVizSample.html">view/viewScreens/ViewVizSample</a></li><li><a href="module-view_viz_BaseExplanation.html">view/viz/BaseExplanation</a></li><li><a href="module-view_viz_DistrictDraw.html">view/viz/DistrictDraw</a></li><li><a href="module-view_viz_DistrictMapViz.html">view/viz/DistrictMapViz</a></li><li><a href="module-view_viz_Grid1D.html">view/viz/Grid1D</a></li><li><a href="module-view_viz_Grid2D.html">view/viz/Grid2D</a></li><li><a href="module-view_viz_MapOfTracts.html">view/viz/MapOfTracts</a></li><li><a href="module-view_viz_VizDistricts.html">view/viz/VizDistricts</a></li><li><a href="module-view_viz_VizExplanationBudgetMES.html">view/viz/VizExplanationBudgetMES</a></li><li><a href="module-view_viz_VizOneGrid.html">view/viz/VizOneGrid</a></li><li><a href="module-view_viz_VizOneVoronoi.html">view/viz/VizOneVoronoi</a></li><li><a href="module-view_viz_VizOneVoronoiRanking.html">view/viz/VizOneVoronoiRanking</a></li><li><a href="module-view_viz_VizSample.html">view/viz/VizSample</a></li><li><a href="module-view_viz_VizSampleDensity1D.html">view/viz/VizSampleDensity1D</a></li><li><a href="module-view_viz_VizSampleDensity2D.html">view/viz/VizSampleDensity2D</a></li><li><a href="module-view_viz_Voronoi1D.html">view/viz/Voronoi1D</a></li><li><a href="module-view_viz_Voronoi2D.html">view/viz/Voronoi2D</a></li><li><a href="module-view_viz_VoronoiRanking1D.html">view/viz/VoronoiRanking1D</a></li><li><a href="module-view_viz_VoronoiRanking2D.html">view/viz/VoronoiRanking2D</a></li><li><a href="module-view_vizBeatMap_BeatMap.html">view/vizBeatMap/BeatMap</a></li><li><a href="module-view_vizCandidateDns_CandidateDnView.html">view/vizCandidateDns/CandidateDnView</a></li><li><a href="module-view_vizCandidateDns_CandidateDnViewList.html">view/vizCandidateDns/CandidateDnViewList</a></li><li><a href="module-view_vizCandidates_CandidateView.html">view/vizCandidates/CandidateView</a></li><li><a href="module-view_vizCandidates_CandidateViewList.html">view/vizCandidates/CandidateViewList</a></li><li><a href="module-view_vizEntities_CircleGraphic.html">view/vizEntities/CircleGraphic</a></li><li><a href="module-view_vizEntities_SquareGraphic.html">view/vizEntities/SquareGraphic</a></li><li><a href="module-view_vizVoters_VoterView.html">view/vizVoters/VoterView</a></li><li><a href="module-view_vizVoters_VoterViewList.html">view/vizVoters/VoterViewList</a></li></ul><h3>Global</h3><ul><li><a href="global.html#findGridX">findGridX</a></li><li><a href="global.html#sortObjByKey">sortObjByKey</a></li><li><a href="global.html#usingIPython">usingIPython</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Sun Oct 20 2024 11:01:49 GMT-0400 (Eastern Daylight Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

@@ -1,0 +1,98 @@
+body {
+	background: #F5F5F5;
+	color: #222;
+}
+
+div.screenWrap {
+	position:relative;
+	background: white;
+}
+
+div.screenWrap, canvas.maps, div.svgDiv, div.mSvgDiv {
+    border: solid #888 1px;
+	margin: 4px;
+}
+
+.background {	
+	position:absolute;
+	z-index:0;
+}
+
+div.tooltips {
+	position:absolute;
+	z-index:2;
+}
+
+.foreground {
+	position:absolute;
+	z-index:1;
+}
+
+div.tooltips[data-cursor=grab]{
+	cursor: -webkit-grab;
+	cursor: -moz-grab;
+	cursor: grab;
+}
+div.tooltips[data-cursor=grabbing]{
+	cursor: -webkit-grabbing;
+	cursor: -moz-grabbing;
+	cursor: grabbing;
+}
+div.tooltipBox{
+	user-select: none;
+}
+button {
+	margin: 2px;
+}
+textarea {
+	width: 302px;
+	margin: 4px;
+    -moz-tab-size : 4;
+    -o-tab-size : 4;
+    tab-size : 4;
+}
+div.sandbox {
+	width: 311px;
+	margin: auto;
+}
+ul.top-links {
+	text-align: center;
+}
+
+
+
+.darkMode body { 
+	background:  #222;
+	color: #ddd; 
+}
+.darkMode div.sim-container { 
+	background:  #222; 
+}
+.darkMode a:link {
+	color: #dde;
+}
+.darkMode a:visited {
+	color: #bbe;
+}
+.darkMode input {
+	background:  #222; 
+    border: 1px solid #888;
+}
+.darkMode textarea {
+	background:  #222; 
+}
+
+.darkMode div.screenWrap, canvas.maps, div.svgDiv, div.mSvgDiv {
+	border-color: white;
+}
+.darkMode div.screenWrap {
+	background: #222;
+}
+
+/* jekyll site */
+.site-nav {z-index: 3;}
+.site-nav label[for="nav-trigger"] { z-index: 4;  }
+.darkMode .site-nav {
+	background:  #222; color: white; 
+}
+.u-email {overflow-wrap: break-word;}
