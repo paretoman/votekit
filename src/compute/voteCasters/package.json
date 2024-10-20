@@ -1,6 +1,6 @@
 {
   "name": "@paretoman/votekit-vote-casters",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "Run a spatial election model. Input geometry. Cast votes.",
   "main": "voteCasters/voteCasters.js",
   "type": "module",
@@ -18,8 +18,8 @@
   },
   "homepage": "https://github.com/paretoman/votekit#readme",
   "dependencies": {
-    "@paretoman/votekit-types": "^0.0.5",
-    "@paretoman/votekit-utilities": "^0.0.5",
+    "@paretoman/votekit-types": "^0.0.7",
+    "@paretoman/votekit-utilities": "^0.0.7",
     "seedrandom": "^3.0.5",
     "d3-polygon": "^3.0.1"
   },

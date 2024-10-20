@@ -1,6 +1,6 @@
 {
   "name": "@paretoman/votekit-geographic-election",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "Do a series of elections, differing in voter positions. Voters are shifted all together according to some simplex noise in 2D to simulate geographic differences. Each election may be a sequence of elections and may include polls. A spatial election model is used.",
   "main": "geoElection.js",
   "type": "module",
@@ -18,7 +18,7 @@
   },
   "homepage": "https://github.com/paretoman/votekit#readme",
   "dependencies": {
-    "@paretoman/votekit-election-sequence": "^0.0.5",
-    "@paretoman/votekit-utilities": "^0.0.5"
+    "@paretoman/votekit-election-sequence": "^0.0.7",
+    "@paretoman/votekit-utilities": "^0.0.7"
   }
 }

@@ -1,6 +1,6 @@
 {
   "name": "@paretoman/votekit-compute",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "Run a spatial election model. Input geometry. Cast votes. Use a social choice function. Collect results. Also combine multiple elections across geography, districts, samplings, and polling.",
   "main": "compute.js",
   "type": "module",
@@ -53,11 +53,11 @@
     "OLPR"
   ],
   "dependencies": {
-    "@paretoman/votekit-election-sequence": "^0.0.5",
-    "@paretoman/votekit-make-geography": "^0.0.5",
-    "@paretoman/votekit-sample-election": "^0.0.5",
-    "@paretoman/votekit-social-choice-methods": "^0.0.5",
-    "@paretoman/votekit-utilities": "^0.0.5",
-    "@paretoman/votekit-vote-casters": "^0.0.5"
+    "@paretoman/votekit-election-sequence": "^0.0.7",
+    "@paretoman/votekit-make-geography": "^0.0.7",
+    "@paretoman/votekit-sample-election": "^0.0.7",
+    "@paretoman/votekit-social-choice-methods": "^0.0.7",
+    "@paretoman/votekit-utilities": "^0.0.7",
+    "@paretoman/votekit-vote-casters": "^0.0.7"
   }
 }

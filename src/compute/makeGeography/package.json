@@ -1,6 +1,6 @@
 {
   "name": "@paretoman/votekit-make-geography",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "Make geography data for census tracts and voting districts for an election.",
   "main": "makeGeography.js",
   "type": "module",
@@ -18,7 +18,7 @@
   },
   "homepage": "https://github.com/paretoman/votekit#readme",
   "dependencies": {
-    "@paretoman/votekit-utilities": "^0.0.5",
+    "@paretoman/votekit-utilities": "^0.0.7",
     "d3-delaunay": "^6.0.2",
     "d3-polygon": "^3.0.1",
     "simplex-noise": "^3.0.1"

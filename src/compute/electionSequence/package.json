@@ -1,6 +1,6 @@
 {
   "name": "@paretoman/votekit-election-sequence",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "Do a series of election phases. Phases may differ in candidates and voters. Each one runs a spatial election model and may include polls.",
   "main": "electionSequence.js",
   "type": "module",
@@ -18,11 +18,11 @@
   },
   "homepage": "https://github.com/paretoman/votekit#readme",
   "dependencies": {
-    "@paretoman/votekit-utilities": "^0.0.5",
-    "@paretoman/votekit-election-phase": "^0.0.5"
+    "@paretoman/votekit-utilities": "^0.0.7",
+    "@paretoman/votekit-election-phase": "^0.0.7"
   },
   "devDependencies": {
     "mocha": "^10.2.0",
-    "@paretoman/votekit-make-geography": "^0.0.5"
+    "@paretoman/votekit-make-geography": "^0.0.7"
   }
 }

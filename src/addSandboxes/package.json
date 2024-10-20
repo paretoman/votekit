@@ -1,6 +1,6 @@
 {
   "name": "@paretoman/votekit-add-sandboxes",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "Add a sandbox election to a page with a placeholder.",
   "main": "addSandboxes.js",
   "style": "sandbox.css",
@@ -30,8 +30,8 @@
   },
   "homepage": "https://github.com/paretoman/votekit#readme",
   "dependencies": {
-    "@paretoman/votekit-view": "^0.0.5",
-    "@paretoman/votekit-sim": "^0.0.5"
+    "@paretoman/votekit-view": "^0.0.7",
+    "@paretoman/votekit-sim": "^0.0.7"
   },
   "devDependencies": {
     "parcel": "^2.4.1"
