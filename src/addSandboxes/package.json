@@ -1,6 +1,6 @@
 {
   "name": "@paretoman/votekit-add-sandboxes",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "Add a sandbox election to a page with a placeholder.",
   "main": "addSandboxes.js",
   "style": "sandbox.css",

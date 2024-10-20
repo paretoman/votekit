@@ -1,6 +1,6 @@
 {
   "name": "@paretoman/votekit-election-sequence",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "Do a series of election phases. Phases may differ in candidates and voters. Each one runs a spatial election model and may include polls.",
   "main": "electionSequence.js",
   "type": "module",
