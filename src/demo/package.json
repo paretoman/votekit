@@ -12,8 +12,10 @@
     "jekyll": "bundle exec jekyll build",
     "jekyll:local": "bundle exec jekyll build --config _config.yml,_config_local.yml",
     "clean": "rimraf docs _site _site_local dist",
-    "push-site-prep": "cd _site && git init && git checkout -b gh-pages && git add . && git commit -m localPush && git remote add origin https://github.com/paretoman/votekit.git && git status",
-    "push-site": "npm run push-site-prep && cd _site && git push -u origin gh-pages -f",
+    "site-init" : "cd _site && git init && git checkout -b gh-pages &&  git remote add origin https://github.com/paretoman/votekit.git",
+    "site-commit": "cd _site && git add . && git commit -m localPush && git status",
+    "site-push": "cd _site && git push -u origin gh-pages -f",
+    "push-site": "npm run site-init || npm run site-commit && npm run site-push",
     "test": "mocha **/*.test.js --parallel"
   },
   "repository": {
