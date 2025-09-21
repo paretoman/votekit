@@ -11,20 +11,26 @@ export default function publishShortLink(config, sandboxPath, nameInput, afterPu
     const shortcode = hashCode(configString)
 
     ajaxLite.get(shortLinkDatabaseUrl, { shortcode, link }, (res) => {
-        if (res !== '') {
-            const resObj = JSON.parse(res)
-            if (resObj.result === 'success') {
-                const name = nameInput.value
-                const b = shortcode
-                const params = (name === '') ? { b } : { b, name }
-                const shortLink = linkFromParams(params, sandboxPath)
-                afterPublish(shortLink)
-                return
-            }
+        const justGo = 1
+        const success = checkResponse(res)
+        if (justGo || success) {
+            const name = nameInput.value
+            const b = shortcode
+            const params = (name === '') ? { b } : { b, name }
+            const shortLink = linkFromParams(params, sandboxPath)
+            afterPublish(shortLink)
+            return
         }
         const shortLink = "Bad. The link didn't publish. The short link won't work."
         afterPublish(shortLink)
     })
+}
+
+function checkResponse(res) {
+    if (res === '') return 0
+    const resObj = JSON.parse(res)
+    if (resObj.result !== 'success') return 0
+    return 1
 }
 
 export function hashCode(s) { // https://stackoverflow.com/a/7616484

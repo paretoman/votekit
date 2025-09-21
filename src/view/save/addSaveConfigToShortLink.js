@@ -32,11 +32,12 @@ export default function addSaveConfigToShortLink(layout, commander, sandboxPath,
     }
     button2.onclick = () => {
         text.show()
-        const config = commander.getConfig()
-        text.setText(requesting)
-        publishShortLink(config, sandboxPath, nameInput, (link) => {
+        const link = text.value
+        if (link === '') {
+            text.setText('Nothing Copied')
+        } else {
             navigator.clipboard.writeText(link)
-        })
+        }
     }
 
     const clearDiv = document.createElement('div')
