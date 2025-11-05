@@ -68,7 +68,7 @@ export default function VizSampleDensity2D(voterRendererList, canDnRendererList,
     const nThresholds = 20
     let densityData
     self.updateDensity = () => {
-        const btw = totalCount / 10000
+        const btw = totalCount / 100000
         const thresholds = range(nThresholds).map((x) => x * btw)
         const cd = contourDensity()
             .x((d) => d[0])
