@@ -1,22 +1,4 @@
-var commonjsGlobal = typeof globalThis !== 'undefined' ? globalThis : typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : {};
-
-function createCommonjsModule(fn, basedir, module) {
-	return module = {
-		path: basedir,
-		exports: {},
-		require: function (path, base) {
-			return commonjsRequire(path, (base === undefined || base === null) ? module.path : base);
-		}
-	}, fn(module, module.exports), module.exports;
-}
-
-function getDefaultExportFromNamespaceIfNotNamed (n) {
-	return n && Object.prototype.hasOwnProperty.call(n, 'default') && Object.keys(n).length === 1 ? n['default'] : n;
-}
-
-function commonjsRequire () {
-	throw new Error('Dynamic requires are not currently supported by @rollup/plugin-commonjs');
-}
+import { c as createCommonjsModule, a as commonjsGlobal, g as getDefaultExportFromNamespaceIfNotNamed } from './common/_commonjsHelpers-798ad6a7.js';
 
 var alea = createCommonjsModule(function (module) {
 // A port of an algorithm by Johannes Baagøe <baagoe@baagoe.com>, 2010
@@ -655,8 +637,8 @@ if (module && module.exports) {
 var _nodeResolve_empty = {};
 
 var _nodeResolve_empty$1 = /*#__PURE__*/Object.freeze({
-	__proto__: null,
-	'default': _nodeResolve_empty
+  __proto__: null,
+  'default': _nodeResolve_empty
 });
 
 var require$$0 = /*@__PURE__*/getDefaultExportFromNamespaceIfNotNamed(_nodeResolve_empty$1);

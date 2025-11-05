@@ -13,5 +13,5 @@ await install([
     '@mithrandirii/canvas2svg',
     'd3-contour',
     'd3-geo',
-
+    'lz-string',
 ])
