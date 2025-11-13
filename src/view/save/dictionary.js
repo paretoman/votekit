@@ -1,43 +1,110 @@
-import parsedObject1 from './configExample.js'
-
 // Define the Decoding Dictionary
+// Only add to the end of the list to ensure consistency.
+export const decodingDictionary = [
+    // candidateDns
+    'candidateDns-exists',
+    'candidateDns-party',
+    'candidateDns-setNumberAtLeast',
+    'candidateDns-shape1D-densityProfile',
+    'gaussian',
+    'step',
 
-function findAndSortStrings(parsedObject) {
-    const strings = getUniqueSortedStringsFromJson(parsedObject)
-    strings.sort()
-    return strings
-}
+    'candidateDns-shape1D-width',
+    'candidateDns-shape1D-x',
+    'candidateDns-shape2D-densityProfile',
+    'candidateDns-shape2D-point',
+    'x',
+    'y',
 
-function getUniqueSortedStringsFromJson(jsonObject) {
-    const uniqueStrings = new Set()
+    'candidateDns-shape2D-width',
 
-    function traverse(obj) {
-        if (typeof obj === 'object' && obj !== null) {
-            const keys = Object.keys(obj)
-            for (let i = 0; i < keys.length; i++) {
-                const key = keys[i]
-                // Add key if it's a string
-                if (typeof key === 'string') {
-                    uniqueStrings.add(key)
-                }
-                // Recursively traverse the value
-                traverse(obj[key])
-            }
-        } else if (typeof obj === 'string') {
-            // Add value if it's a string
-            uniqueStrings.add(obj)
-        }
-    }
+    // candidates
+    'candidates-color',
+    '#e05020',
+    '#50e020',
+    '#2050e0',
 
-    traverse(jsonObject)
+    'candidates-exists',
+    'candidates-party',
+    'candidates-setNumberAtLeast',
+    'candidates-shape1D-x',
+    'candidates-shape2D-point',
 
-    // Convert Set to Array and sort alphabetically
-    const sortedStrings = Array.from(uniqueStrings).sort()
-    return sortedStrings
-}
+    // voters
+    'voters-exists',
+    'voters-party',
+    'voters-setNumberAtLeast',
+    'voters-shape1D-densityProfile',
+    'voters-shape1D-width',
+    'voters-shape1D-x',
+    'voters-shape2D-densityProfile',
+    'voters-shape2D-point',
+    'voters-shape2D-width',
+    'voters-strategyRules',
 
-const sortedStrings = findAndSortStrings(parsedObject1)
-export const decodingDictionary = sortedStrings
+    // options
+    'dimensions',
+
+    'mode',
+    'one',
+    'sample',
+
+    'numDistricts',
+    'numTracts',
+    'seedRandom',
+    'seeds',
+
+    'sequenceName',
+    'general',
+    'closedPrimary',
+
+    'socialChoiceMethod-sequence-closedPrimary-phase-closedPrimary',
+    'socialChoiceMethod-sequence-closedPrimary-phase-general',
+    'socialChoiceMethod-sequence-general-phase-general',
+    'socialChoiceMethod-sequence-nonpartisanOpenPrimary-phase-general',
+    'socialChoiceMethod-sequence-nonpartisanOpenPrimary-phase-nonpartisanOpenPrimary',
+
+    // social Choice Methods
+    'allocatedScore',
+    'dHondt',
+    'huntingtonHill',
+    'methodOfEqualShares',
+    'minimax',
+    'olprA',
+    'plurality',
+    'randomCandidate',
+    'randomVoter',
+    'sainteLague',
+    'score',
+    'sntv',
+    'stv',
+
+    // voters strategy rules
+    'condition',
+
+    'voteCasterName',
+    'score',
+    'ranking',
+    'pairwise',
+    'scoreFull',
+
+    'strategy',
+
+    'actionName',
+    'normalize',
+    'normalizeOverFrontrunners',
+    'closest',
+    'lesserEvil',
+
+    'actionOptions',
+    'threshold',
+    'mean',
+    'radius',
+    'type',
+
+    'actionWeight',
+
+]
 
 // Create an Encoding Dictionary:
 // Create a reverse mapping
