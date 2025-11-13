@@ -6,8 +6,10 @@ const { compressToEncodedURIComponent, decompressFromEncodedURIComponent } = def
 // maybe just use vite in the future and build a hack-friendly site separately
 
 export function compress(jsonString2) {
-    return compressToEncodedURIComponent(jsonString2).replace(/\+/g, '~')
+    const mid = compressToEncodedURIComponent(jsonString2)
+    return mid.replace(/\+/g, '.').replace(/-/g, '_')
 }
 export function decompress(compressedUrlString) {
-    return decompressFromEncodedURIComponent(compressedUrlString.replace(/~/g, '+'))
+    const mid = compressedUrlString.replace(/\./g, '+').replace(/_/g, '-')
+    return decompressFromEncodedURIComponent(mid)
 }
