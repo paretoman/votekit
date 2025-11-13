@@ -23,6 +23,7 @@ export const decodingDictionary = [
     '#e05020',
     '#50e020',
     '#2050e0',
+    '#e0e020',
 
     'candidates-exists',
     'candidates-party',

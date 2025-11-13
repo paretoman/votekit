@@ -32,7 +32,7 @@ export default function CandidateList(changes, commander) {
         self.addCandidate({
             shape2: { x: 50, y: 50 },
             shape1: { x: 50 },
-            color: standardizeColor('yellow'),
+            color: '#e0e020',
             doLoad: false,
         })
     }
