@@ -10,8 +10,8 @@ export default function menuSeedRandom(menu, simOptions) {
         + 'is if the size of the candidate distributions change '
         + 'or if the number of candidate distributions change.',
         options: [
-            { name: 'Random', value: true, explain: 'New seed for each sampling run.' },
-            { name: 'Constant', value: false, explain: 'Same seed for each sampling run.' },
+            { name: 'Random', value: 1, explain: 'New seed for each sampling run.' },
+            { name: 'Constant', value: 0, explain: 'Same seed for each sampling run.' },
         ],
         changeList: ['seedRandom'],
         getValue: () => simOptions.seedRandom,
