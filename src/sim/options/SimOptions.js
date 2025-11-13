@@ -10,7 +10,7 @@ export default function SimOptions(changes, commander) {
         self.setMode('one')
         self.setDimensions(2)
         self.seeds = [0]
-        self.setSeedRandom(true)
+        self.setSeedRandom(1)
     }
 
     self.setMode = commander.addSender({
